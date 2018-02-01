@@ -1288,8 +1288,8 @@ def test_nextread_should_display_date_last_published_semantic(testbrowser):
 def test_article_contains_zeit_clickcounter(testbrowser, togglepatch):
     togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/article/simple')
-    counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
-    assert ("img.src = 'http://cc.zeit.de/cc.gif?banner-channel="
+    counter = browser.cssselect('body noscript img[src^="https://cc.zeit.de"]')
+    assert ("img.src = 'https://cc.zeit.de/cc.gif?banner-channel="
             "sport/article") in browser.contents
     assert len(counter) == 1
     assert ('cc.zeit.de/cc.gif?banner-channel=sport/article'
@@ -1306,6 +1306,13 @@ def test_fbia_article_contains_correct_webtrekk_platform(httpbrowser):
     browser = httpbrowser('/fbia/zeit-online/article/simple',
                           headers={'Host': 'fbia.zeit.de'})
     assert '25: "instant article"' in browser.contents
+
+
+def test_fbia_article_contains_correct_webtrekk_contentid(httpbrowser):
+    browser = httpbrowser('/fbia/zeit-online/article/simple',
+                          headers={'Host': 'fbia.zeit.de'})
+    assert 'wt.contentId = "redaktion.sport...article.sid|www.zeit.de\
+/zeit-online/article/simple";' in browser.contents
 
 
 def test_cannot_access_content_on_fbia_host(testserver):

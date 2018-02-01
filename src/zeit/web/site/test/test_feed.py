@@ -48,10 +48,10 @@ def test_newsfeed_should_render_some_rss(testserver):
 
     xml = lxml.etree.fromstring(res.content)
     assert xml.tag == 'rss'
-    assert xml.find('channel').find('link').text == 'http://www.zeit.de/index'
+    assert xml.find('channel').find('link').text == 'https://www.zeit.de/index'
     assert (
         xml.find('channel').find('image').find('link').text ==
-        'http://www.zeit.de/index')
+        'https://www.zeit.de/index')
 
 
 def test_newsfeed_should_render_some_rss_cp(testserver):
@@ -63,10 +63,10 @@ def test_newsfeed_should_render_some_rss_cp(testserver):
     assert xml.tag == 'rss'
     assert (
         xml.find('channel').find('link').text ==
-        'http://www.zeit.de/campus/feedindex')
+        'https://www.zeit.de/campus/feedindex')
     assert (
         xml.find('channel').find('image').find('link').text ==
-        'http://www.zeit.de/campus/feedindex')
+        'https://www.zeit.de/campus/feedindex')
 
 
 def test_newsfeed_should_have_custom_max_age_header(testserver):
@@ -95,7 +95,7 @@ def test_newsfeed_should_render_an_authorfeed(testserver):
 
     xml = lxml.etree.fromstring(res.content)
     assert xml.xpath('//item/title/text()')[0].startswith(
-        'Gentrifizierung: Mei, is des traurig!')
+        'Mei, is des traurig!')
 
 
 def test_socialflow_feed_contains_social_fields(testserver):
@@ -107,7 +107,7 @@ def test_socialflow_feed_contains_social_fields(testserver):
     assert res.headers['Content-Type'].startswith('application/rss+xml')
     feed = res.text
     assert '<atom:link href="http://newsfeed.zeit.de%s"' % feed_path in feed
-    assert ('<link>http://www.zeit.de/zeit-magazin/'
+    assert ('<link>https://www.zeit.de/zeit-magazin/'
             'centerpage/article_image_asset</link>' in feed)
     assert '<content:encoded>Twitter-Text' in feed
     assert '<content:encoded>Facebook-Text' not in feed
@@ -149,19 +149,7 @@ def test_socialflow_feed_contains_social_fields(testserver):
     assert '<content:encoded>FB-ZCO' in feed
 
 
-def test_instant_article_feed_should_be_rendered(testserver, togglepatch):
-    res = requests.get(
-        '{}/zeit-magazin/centerpage/index/rss-instantarticle'
-        .format(testserver.url),
-        headers={'Host': 'newsfeed.zeit.de'})
-    parser = lxml.etree.XMLParser(strip_cdata=False)
-    xml = lxml.etree.fromstring(res.content, parser)
-    source = xml.xpath('./channel/*[local-name()="include"]/@src')[0]
-    assert source == ('http://www.zeit.de/'
-                      'instantarticle-item/zeit-magazin/'
-                      'centerpage/article_image_asset')
-
-    togglepatch({'https': True})
+def test_instant_article_feed_should_be_rendered(testserver):
     res = requests.get(
         '{}/zeit-magazin/centerpage/index/rss-instantarticle'
         .format(testserver.url),
@@ -174,8 +162,12 @@ def test_instant_article_feed_should_be_rendered(testserver, togglepatch):
                       'centerpage/article_image_asset')
 
 
-def test_roost_feed_contains_mobile_override_text(testserver):
+def test_roost_feed_contains_mobile_override_text(testserver,
+                                                  preserve_settings):
     feed_path = '/zeit-magazin/centerpage/index/rss-roost'
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['transform_to_secure_links_for'] = []
+
     res = requests.get(
         testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
 
@@ -274,6 +266,10 @@ def test_yahoo_feed_contains_expected_fields(testserver):
     assert len(xml.xpath('//item//pubDate')) == 16
     assert len(xml.xpath('//item//guid')) == 16
     assert len(xml.xpath('//item//category')) == 16
+
+    # check if long articles are cut off
+    assert res.content.count('Lesen Sie hier weiter!') == 4
+    assert res.content.count('Nancy kennt sich.') == 1
 
 
 def test_msn_feed_contains_expected_fields(testserver):

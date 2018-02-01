@@ -271,7 +271,7 @@ def images_from_nextread(context):
         raise zope.component.interfaces.ComponentLookupError(
             'Could not adapt', context, zeit.content.image.interfaces.IImages)
     else:
-        return zeit.content.image.interfaces.IImages(context[0])
+        return zeit.content.image.interfaces.IImages(context[0], None)
 
 
 class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):

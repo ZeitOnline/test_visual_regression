@@ -1,3 +1,4 @@
+import collections
 import logging
 import os
 import os.path
@@ -6,20 +7,17 @@ import random
 import urllib
 import urlparse
 
-import grokcore.component
-import mock
 import pyramid.threadlocal
 import pysolr
 import requests.sessions
 import zope.component
+import zope.component.globalregistry
+import zope.interface.adapter
 import zope.site.site
 
 import zeit.cms.workflow.interfaces
 import zeit.solr.interfaces
-import zeit.retresco.connection
-import zeit.retresco.convert
-import zeit.retresco.interfaces
-import zeit.retresco.search
+import zeit.solr.connection
 
 import zeit.web.core.interfaces
 
@@ -80,13 +78,45 @@ class SitemapSolrConnection(zeit.solr.connection.SolrConnection):
         pass
 
 
+class AdapterRegistry(zope.component.globalregistry.GlobalAdapterRegistry):
+    """Accepts both Local and Global AdapterRegistry objects as bases, so it
+    works both for published and preview mode (since the latter makes use of
+    zodb-persisted local registries).
+
+    It's not entirely clear where the actual mismatch occurs between
+    zope.component/zope.interface/zope.site, and whether it would be
+    resolveable generically, but at least for our specific use case this
+    workaround turns out just fine.
+    """
+
+    def _setBases(self, bases):
+        old = self.__dict__.get('__bases__', ())
+        for r in old:
+            if r not in bases:
+                if hasattr(r, '_removeSubregistry'):
+                    r._removeSubregistry(self)
+        for r in bases:
+            if r not in old:
+                if hasattr(r, '_addSubregistry'):
+                    r._addSubregistry(self)
+        # Skip direct superclass, whose method we have copied&patched here.
+        super(zope.interface.adapter.AdapterRegistry, self)._setBases(bases)
+
+
+class SiteManager(zope.component.globalregistry.BaseGlobalComponents):
+
+    def _init_registries(self):
+        self.adapters = AdapterRegistry(self, 'adapters')
+        self.utilities = AdapterRegistry(self, 'utilities')
+
+
 def register_sitemap_solr_utility():
     """
     Register the ISitemapSolrConnection utility as ISolr utility.
     """
     # Dont use the gsm
     site = zope.site.site.SiteManagerContainer()
-    registry = zope.component.globalregistry.BaseGlobalComponents(
+    registry = SiteManager(
         name='sitemaps_manager',
         bases=(zope.component.getSiteManager(),))
     sitemap_solr = zope.component.getUtility(ISitemapSolrConnection)
@@ -187,90 +217,3 @@ class DataSolr(RandomContent):
 
     def update_raw(self, xml, **kw):
         pass
-
-
-@zope.interface.implementer(zeit.retresco.interfaces.ITMS)
-class DataTMS(zeit.retresco.connection.TMS, RandomContent):
-    """Fake TMS implementation that is used for local development."""
-
-    def __init__(self):
-        self._response = {}
-
-    def _request(self, request, **kw):
-        return self._response
-
-    def get_topicpage_documents(self, id, start=0, rows=25):
-        log.debug(
-            'Mocking TMS request id=%s, start=%s, rows=%s', id, start, rows)
-        result = []
-        for content in self._get_content():
-            data = zeit.retresco.interfaces.ITMSRepresentation(content)()
-            if data is not None:
-                # Ensure we always have an image
-                data['payload'].setdefault(
-                    'teaser_image',
-                    'http://xml.zeit.de/zeit-online/'
-                    'image/filmstill-hobbit-schlacht-fuenf-hee/')
-                # XXX LazyProxy cannot support liveblogs, and we don't want to
-                # expose those in tests.
-                data['payload']['is_live'] = False
-                result.append(data)
-        self._response = {
-            'num_found': len(result),
-            'docs': [random.choice(result) for x in range(rows)],
-        }
-        result = super(DataTMS, self).get_topicpage_documents(id, start, rows)
-        self._response = {}
-        print result
-        return result
-
-
-@zope.interface.implementer(zeit.retresco.interfaces.IElasticsearch)
-class DataES(zeit.retresco.search.Elasticsearch, RandomContent):
-    """Fake elasticsearch implementation that is used for local development."""
-
-    def __init__(self):
-        self._response = {}
-        self.client = mock.Mock()
-        self.client.search = self._search
-        self.index = None
-
-    def search(
-            self, query, sort_order, start=0, rows=25, include_payload=False):
-        result = []
-        for content in self._get_content():
-            data = zeit.retresco.interfaces.ITMSRepresentation(content)()
-            if data is not None:
-                # Ensure we always have an image
-                data['payload'].setdefault(
-                    'teaser_image',
-                    'http://xml.zeit.de/zeit-online/'
-                    'image/filmstill-hobbit-schlacht-fuenf-hee/')
-                # XXX LazyProxy cannot support liveblogs, and we don't want to
-                # expose those in tests.
-                data['payload']['is_live'] = False
-                if not include_payload:
-                    del data['payload']
-                result.append({'_source': data})
-
-        self._response = {'hits': {
-            'total': len(result),
-            'hits': [random.choice(result) for x in range(rows)],
-        }}
-        result = super(DataES, self).search(
-            query, sort_order, start, rows, include_payload)
-        self._response = {}
-        return result
-
-    def _search(self, *args, **kw):
-        return self._response
-
-
-class CMSSearch(zeit.retresco.convert.Converter):
-
-    interface = zeit.cms.interfaces.ICMSContent
-    grokcore.component.name('zeit.find')
-
-    def __call__(self):
-        # Disable vivi-specific Converter, as it does not work without Zope.
-        return {}

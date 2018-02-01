@@ -7,16 +7,129 @@ POSTDEPLOY
 - Nothing
 
 
-3.115 (unreleased)
+3.121 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.120 (2018-02-01)
+------------------
+
+- SSL-119: Use https for scripts.zeit.de
+
+- TMS-28: Enable TMS for tagging+topicpages
+
+- FEM-73: Remove code related to D17 navigation badge
+
+- ZON-4296: Implement liveblog version 3
+
+- FIX: Be defensive about missing nextread meta files
+
+- MAINT: Make selenium test stable
+
+- FIX: Make registering different solr for sitemaps work in preview, too
+
+
+3.119 (2018-01-24)
+------------------
+
+- SSL-56: Set Surrogate-Key header for purging is fastly
+
+- ZON-4432: Remove ZMO navigation in D17 toggle
+
+
+- ZON-3994: Fall back to vivi-stored keywords on TMS failure
+
+- ZON-4431: Do not let min-width grow with fontsize via rem
+
+- FEM-71: Stop comment-count when overlay is visible
+
+- PERF: Set default values for fields that are optional in vivi and so may well be missing in solr
+
+- FIX: Don't use dates earlier than 1970 in index sitemap
+
+
+3.118 (2018-01-18)
+------------------
+
+- ZON-3200: Set author name as alt for author images
+
+- ZON-4383: Load lead teaser as responsive image
+
+- ZON-3386: Add default alt-tag to teaser-pictures
+
+- ZON-4385: Adjust contact form
+
+- ZON-4392: Set webtrekk contentId for FBIA to www.zeit.de
+
+- ZON-4408: Style infographics for ZEIT Arbeit
+
+- ZON-4413: Add flipboard to followbar
+
+- SSL-66: Create https link in sitemaps
+
+- BUG-828: Add shadow to packshot in ZAR
+
+- BUG-807: Fix width of infographics on ZMO/longform
+
+- BUG-831: Disable advertising for UserDashboard
+
+- FIX: Iterate correctly when truncating Yahoo feed articles
+
+- FIX: Add Hafenstadt-Lotse to servicebox
+
+- MAINT: Send nested jinja errors to bugsnag, too, not just toplevel
+
+- PERF: Fill code holes that lead to unnecessary "proxy exposed" content lookups
+
+
+3.117 (2018-01-10)
+------------------
+
+- SSL-84: Use https for cc.zeit.de
+
+- SSL-85: Video sitemap does not create empty publication_date field
+
+- SSL-79: Remove lastmod field from index sitemap, if no date is given
+
+- TMS-134: Move ICMSContent traversal monkeypatches to zeit.cms
+
+- BUG-829: Add repr for Image objects to aid debugging/log reading
+
+- FIX: Add margin to zmo-follow-us title in mobile view
+
+- FIX: Use immutable guids for feeds
+
+- MAINT:  Record performance issues in bugsnag when teaser wants more than is available from solr
+
+
+3.116 (2018-01-03)
+------------------
+
+- ZON-4237: Adtransformation for tablets
+
+
+3.115 (2018-01-02)
 ------------------
 
 - ZON-3729: Display series for ZMO teaser and article
 
 - ZON-3762: DPA articles with images
 
+- ZON-4252: Followbar for ZMO
+
+- SSL-65: Remove https feature toggle when producing links
+
 - FEM-45: Drop CSS support for IE lte 8
 
 - FEM-68: Lazyload nextread images
+
+- BUG-785: Fix parquet for teasers w little content
+
+- BUG-832: Video must not cover article lineage
+
+- BUG-810: Improve font contrast on imageless nextread
 
 
 3.114.1 (2017-12-21)

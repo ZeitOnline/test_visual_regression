@@ -54,14 +54,31 @@ class Converter(object):
             for x in doc.get('authorships', ())]
         return doc
 
-    def _set_defaults(self, doc):
+    TEASER_FIELDS = {
+        'teaserSupertitle': 'supertitle',
+        'teaserTitle': 'title',
+        'teaserText': 'subtitle',
+    }
+
+    @classmethod
+    def _set_defaults(cls, doc):
         # XXX These asset badges and classification flags are not indexed
         #     in Solr, so we lie about them.
         for name in ['gallery', 'genre', 'template', 'video', 'video_2']:
             doc.setdefault(name, None)
-        doc.setdefault('lead_candidate', False)
-        doc.setdefault('commentSectionEnable', True)
         doc.setdefault('access', 'free')
+        doc.setdefault('commentsAllowed', True)
+        doc.setdefault('commentSectionEnable', True)
+        doc.setdefault('date_last_published_semantic', None)
+        doc.setdefault('lead_candidate', False)
+        doc.setdefault('sub_ressort', None)
+        doc.setdefault('supertitle', None)
+        doc.setdefault('tldr_title', None)
+        doc.setdefault('tldr_date', None)
+        # Imported news articles don't have a teaser section
+        for teaser, fallback in cls.TEASER_FIELDS.items():
+            if not doc.get(teaser):
+                doc[teaser] = doc.get(fallback)
         return doc
 
 
@@ -91,9 +108,11 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         'product_id': '',
         'serie': '',
         'show_commentthread': 'commentSectionEnable',
+        'supertitle': '',
         'teaser_supertitle': 'teaserSupertitle',
         'teaser_text': 'teaserText',
         'teaser_title': 'teaserTitle',
+        'title': '',
         'type': 'doc_type',
         'uniqueId': '',
     }

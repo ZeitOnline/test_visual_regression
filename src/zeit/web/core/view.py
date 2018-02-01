@@ -49,7 +49,8 @@ def known_content(resource):
 
 
 def is_advertorial(context, request):
-    return getattr(context, 'product_text', None) == 'Advertorial'
+    product = getattr(context, 'product', None)
+    return getattr(product, 'title', None) == 'Advertorial'
 
 
 def is_paginated(context, request):
@@ -126,6 +127,9 @@ class Base(object):
         try:
             self.request.response.headers.add(
                 'X-Version', self.request.registry.settings.version)
+            self.request.response.headers.add(
+                'Surrogate-Key',
+                self.context.uniqueId.encode("iso-8859-1", "replace"))
         except AttributeError:
             pass
 
@@ -254,9 +258,6 @@ class Base(object):
             return False
         else:
             return True
-
-    def banner_toggles(self, name):
-        return None
 
     @zeit.web.reify
     def adcontroller_handle(self):
@@ -425,11 +426,21 @@ class Base(object):
                 uuid = zeit.cms.content.interfaces.IUUID(self.context).id
                 timeout = conf.get('retresco_timeout', 0.1)
                 return tms.get_article_keywords(uuid, timeout=timeout)
-            except:
+            except Exception:
                 log.warning(
                     'Retresco keywords failed for %s', self.context.uniqueId,
                     exc_info=True)
-                return []
+                # Fall back to the vivi-stored keywords, i.e. without any links
+                # since only the TMS knows about those.
+                if not hasattr(self.context, 'keywords'):
+                    return []
+                result = []
+                for keyword in self.context.keywords:
+                    if not keyword.label:
+                        continue
+                    keyword.link = None
+                    result.append(keyword)
+                return result
         else:
             if not hasattr(self.context, 'keywords'):
                 return []

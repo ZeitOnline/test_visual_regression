@@ -1,34 +1,35 @@
-{%- set keywords = teaser.keywords | map(attribute='label') -%}
-{%- set keywords_extra = [teaser.ressort, teaser.sub_ressort] -%}
-<url>
-    <loc>{{ teaser.uniqueId | create_url }}</loc>
-    <n:news>
-        <n:publication>
-            <n:name>ZEIT ONLINE</n:name>
-            <n:language>de</n:language>
-        </n:publication>
-        <n:title>{{ teaser.supertitle }}: {{ teaser.title }}</n:title>
-        <n:publication_date>{{ teaser | mod_date | format_date('iso8601') }}</n:publication_date>
-        <n:keywords>
-            {%- for keyword in keywords | list + keywords_extra | list -%}
-                {%- if loop.index > 1 -%}{{ ', ' }}{%- endif -%}{{ keyword | trim }}
-            {%- endfor -%}
-        </n:keywords>
-    </n:news>
-    {% require image = get_image(module, variant_id='wide', fallback=False) %}
-        {%- set source = request.image_host + image.path + '__1300x731' -%}
-        {%- set copyright = image.copyrights | map(attribute='text') | join(', ') -%}
-        {%- if copyright -%}
-            {%- set copyright = '(' ~ copyright ~ ')' -%}
-        {%- endif -%}
-        {%- if image.copyrights and image.copyrights[0] -%}
-            {%- set copyright_url = image.copyrights[0]['url'] -%}
-        {%- endif -%}
-        <image:image>
-            <image:loc>{{ source }}</image:loc>
-            <image:caption>{{ [image.caption, copyright] | reject('none') | join(' ') }}</image:caption>
-            <image:title>{{ image.title }}</image:title>
-            <image:license>{{ copyright_url }}</image:license>
-        </image:image>
-    {% endrequire %}
-</url>
+{%- set keywords = teaser.keywords | map(attribute='label') | list + [teaser.ressort, teaser.sub_ressort] | list -%}
+{%- require date = teaser | mod_date | format_date('iso8601') -%}
+    <url>
+        <loc>{{ teaser.uniqueId | create_url }}</loc>
+        <n:news>
+            <n:publication>
+                <n:name>ZEIT ONLINE</n:name>
+                <n:language>de</n:language>
+            </n:publication>
+            <n:title>{{ teaser.supertitle }}: {{ teaser.title }}</n:title>
+            <n:publication_date>{{ date }}</n:publication_date>
+            <n:keywords>
+                {%- for keyword in keywords if keyword -%}
+                    {%- if loop.index > 1 -%}{{ ', ' }}{%- endif -%}{{ keyword | trim }}
+                {%- endfor -%}
+            </n:keywords>
+        </n:news>
+        {% require image = get_image(module, variant_id='wide', fallback=False) %}
+            {%- set source = request.image_host + image.path + '__1300x731' -%}
+            {%- set copyright = image.copyrights | map(attribute='text') | join(', ') -%}
+            {%- if copyright -%}
+                {%- set copyright = '(' ~ copyright ~ ')' -%}
+            {%- endif -%}
+            {%- if image.copyrights and image.copyrights[0] -%}
+                {%- set copyright_url = image.copyrights[0]['url'] -%}
+            {%- endif -%}
+            <image:image>
+                <image:loc>{{ source }}</image:loc>
+                <image:caption>{{ [image.caption, copyright] | reject('none') | join(' ') }}</image:caption>
+                <image:title>{{ image.title }}</image:title>
+                <image:license>{{ copyright_url }}</image:license>
+            </image:image>
+        {% endrequire %}
+    </url>
+{%- endrequire -%}

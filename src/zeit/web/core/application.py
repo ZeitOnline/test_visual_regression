@@ -32,6 +32,7 @@ import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.repository  # activate monkeypatches
+import zeit.web.core.retresco  # activate monkeypatches
 import zeit.web.core.routing
 import zeit.web.core.security
 import zeit.web.core.solr  # activate monkeypatches
@@ -55,7 +56,7 @@ class Application(object):
             None, settings['app_servers'].split(','))
         self.settings['transform_to_secure_links_for'] = (
             settings.get(
-                'transform_to_secure_links_for', 'www.zeit.de')).split(',')
+                'transform_to_secure_links_for', '')).split(',')
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             settings.get('linkreach_host', ''))
         self.settings['sso_key'] = self.load_sso_key(

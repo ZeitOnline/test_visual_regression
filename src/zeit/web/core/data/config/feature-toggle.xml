@@ -9,7 +9,6 @@
   <article_lineage>true</article_lineage>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
   <campus_toolbox>true</campus_toolbox>
-  <d17_navigation>true</d17_navigation>
   <dummy>false</dummy>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
@@ -20,6 +19,7 @@
   <https>false</https>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
+  <iqd_tablet_transformation>true</iqd_tablet_transformation>
   <iqd_touchpoint>true</iqd_touchpoint>
   <keywords_from_tms>false</keywords_from_tms>
   <podlove_button>true</podlove_button>
@@ -28,9 +28,11 @@
   <reader_revenue_handle_celeraone_login_inconsistency>true</reader_revenue_handle_celeraone_login_inconsistency>
   <reader_revenue_registered_with_comments>true</reader_revenue_registered_with_comments>
   <render_404>true</render_404>
+  <responsive_image_leadteaser>true</responsive_image_leadteaser>
   <share_blocks_via_screenshot>true</share_blocks_via_screenshot>
   <tag_logos>true</tag_logos>
   <third_party_modules>false</third_party_modules>
+  <topicpages_tms>true</topicpages_tms>
   <tracking>false</tracking>
   <track_gate_visibility>true</track_gate_visibility>
   <update_signals>true</update_signals>

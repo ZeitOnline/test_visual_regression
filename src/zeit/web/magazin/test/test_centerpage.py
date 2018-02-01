@@ -470,3 +470,10 @@ def test_teaser_image_link_titles(testbrowser):
         if len(linked_image):
             links = article.cssselect('a:not([itemprop="url"])')
             assert links[0].get('title') == links[1].get('title')
+
+
+def test_if_all_followbox_elements_present(testbrowser):
+    select = testbrowser('/zeit-magazin/centerpage/follow-us').cssselect
+    buttons = select('.follow-us__link')
+
+    assert len(buttons) == 3
