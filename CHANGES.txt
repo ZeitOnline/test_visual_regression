@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.121 (unreleased)
+3.121 (2018-02-01)
 ------------------
 
 - ZON-4296: Refactor liveblog version 3 implementation.
