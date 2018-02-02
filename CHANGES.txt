@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - TMS-4: Fix TMS health check URL
 
+- ZON-4414: Add flipboard share button for articles
+
 
 3.121 (2018-02-01)
 ------------------
