@@ -367,7 +367,7 @@ class Liveblog(Module):
                 conf = zope.component.getUtility(
                     zeit.web.core.interfaces.ISettings)
                 theme_name = conf.get('liveblog_amp_theme_v3')
-                regex = '/[^/]*{}[^/]*/([^/]*)/index.html'.format(theme_name)
+                regex = '/([^/]*{}[^/]*/[^/]*)/index.html'.format(theme_name)
                 for channel in channels.values():
                     match = re.search(regex, channel)
                     if match is not None:
