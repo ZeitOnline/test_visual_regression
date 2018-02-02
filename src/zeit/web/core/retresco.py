@@ -37,7 +37,7 @@ def is_healthy(self):
         with zeit.web.core.metrics.timer(
                 'zeit.retresco.connection.health_check.tms.reponse_time'):
             response = requests.get(
-                self.url + '/_system/check', timeout=timeout)
+                self.url + '/health-check', timeout=timeout)
         response.raise_for_status()
         return True
     except Exception:

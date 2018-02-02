@@ -10,7 +10,7 @@ POSTDEPLOY
 3.122 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- TMS-4: Fix TMS health check URL
 
 
 3.121 (2018-02-01)
