@@ -1,31 +1,3 @@
-{% block headerseries %}
-    {% include "zeit.web.site:templates/inc/article/series.tpl" %}
-{% endblock %}
-
-{% set template_suffix = '-zplus' if view.zplus_label and view.page_nr == 1 else '' %}
-
-<div class="dpa-header">
-    {% block heading %}
-        <div class="dpa-header__headline {% if not view.header_module and view.page_nr == 1 %}dpa-header__headline--fulldpahl{% endif %}">{% include "zeit.web.site:templates/inc/article/heading{}.tpl".format(template_suffix) %}</div>
-    {% endblock %}
-    {% block headermodule %}
-        {# This only applies to core:templates/inc/block/headerimage.html, but the
-           requirement is that the header determines the image layout, so we have
-           to do it here. #}
-        {% set article_header_image_figure_modifiers = 'article__item' | with_mods('wide', 'rimless', 'apart') %}
-        {% if view.header_module and view.page_nr == 1 %}
-        {% set block = view.header_module -%}
-        {% set type = block | block_type -%}
-            <div class="dpa-header__image" data-ct-row="{{ type }}">
-                {% include [
-                    "{0}:templates/inc/blocks/{1}_{2}.html".format(view.package, type, block.layout),
-                    "{0}:templates/inc/blocks/{1}.html".format(view.package, type),
-                    "zeit.web.core:templates/inc/blocks/{0}_{1}.html".format(type, block.layout),
-                    "zeit.web.core:templates/inc/blocks/{0}.html".format(type)] ignore missing -%}
-            </div>
-    {% endif %}
-    {% endblock %}
-    {% block metadata %}
-        <div class="dpa-header__metadata">{% include "zeit.web.site:templates/inc/article/metadata{}.tpl".format(template_suffix) %}</div>
-    {% endblock %}
+<div class="dpa-header article__item">
+    {% include "zeit.web.site:templates/inc/article-header/dpa-header.html" %}
 </div>
