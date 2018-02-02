@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4414: Add flipboard share button for articles
 
+- BUG-840: Add automatic hyphenation and wrap long words on mobile devices
+
 
 3.121 (2018-02-01)
 ------------------
