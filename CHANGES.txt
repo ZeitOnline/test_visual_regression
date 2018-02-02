@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - BUG-840: Add automatic hyphenation and wrap long words on mobile devices
 
+- Fix: Fix width of DPA article headline
+
 
 3.121 (2018-02-01)
 ------------------
