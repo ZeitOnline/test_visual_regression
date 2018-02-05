@@ -260,7 +260,7 @@ class Centerpage(AreaProvidingPaginationMixin,
             'serienseite',
             'ins_serienseite']
         if self.context.type in allowed_cp_types:
-            item_list_element = []
+            item_list_element = {}
             item_list_element_counter = 0
             article_interface = zeit.content.article.interfaces.IArticle
             for region in self.regions:
@@ -268,19 +268,20 @@ class Centerpage(AreaProvidingPaginationMixin,
                     for module in area.values():
                         teaser = zeit.web.core.template.first_child(module)
                         if article_interface.providedBy(teaser):
-                            item_list_element_counter += 1
                             url = zeit.web.core.template.create_url(
                                 None, teaser, self.request)
-                            item_list_element.append({
-                                "@type": "ListItem",
-                                "position": item_list_element_counter,
-                                "url": url,
-                            })
+                            if url not in item_list_element:
+                                item_list_element_counter += 1
+                                item_list_element[url] = {
+                                    "@type": "ListItem",
+                                    "position": item_list_element_counter,
+                                    "url": url,
+                                }
             if len(item_list_element) > 0:
                 return {
                     "@context": "http://schema.org",
                     "@type": "ItemList",
-                    "itemListElement": item_list_element,
+                    "itemListElement": item_list_element.values(),
                 }
 
 
