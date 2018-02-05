@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="21px" height="21px" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Flipboard</title>
+    <g>
+        <rect x="0" y="0" width="7" height="21" />
+        <rect x="7" y="0" width="14" height="7" opacity="0.8" />
+        <rect x="7" y="7" width="7" height="7" opacity="0.6" />
+    </g>
+</svg>

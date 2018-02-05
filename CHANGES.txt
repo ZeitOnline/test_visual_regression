@@ -7,8 +7,28 @@ POSTDEPLOY
 - Nothing
 
 
-3.120 (unreleased)
+3.122 (unreleased)
 ------------------
+
+- TMS-4: Fix TMS health check URL
+
+- ZON-4414: Add flipboard share button for articles
+
+- BUG-840: Add automatic hyphenation and wrap long words on mobile devices
+
+- Fix: Fix width of DPA article headline
+
+
+3.121 (2018-02-01)
+------------------
+
+- ZON-4296: Refactor liveblog version 3 implementation.
+
+
+3.120 (2018-02-01)
+------------------
+
+- SSL-119: Use https for scripts.zeit.de
 
 - TMS-28: Enable TMS for tagging+topicpages
 
@@ -16,7 +36,11 @@ POSTDEPLOY
 
 - ZON-4296: Implement liveblog version 3
 
+- FIX: Be defensive about missing nextread meta files
+
 - MAINT: Make selenium test stable
+
+- FIX: Make registering different solr for sitemaps work in preview, too
 
 
 3.119 (2018-01-24)

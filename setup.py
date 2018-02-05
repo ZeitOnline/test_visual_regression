@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='3.120.dev0',
+    version='3.122.dev0',
     author=(
         'Thomas Baumann, Nico Bruenjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -104,6 +104,7 @@ setup(
             'pytest>=3.3.0.dev0',
             'pytest-pep8',
             'pytest-timeout',
+            'requests-mock',
             'selenium',
             'transaction',
             'waitress',

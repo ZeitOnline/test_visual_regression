@@ -11,6 +11,7 @@ import pyramid.testing
 import pytest
 import requests
 import requests.exceptions
+import requests_mock
 import zope.interface.declarations
 
 import zeit.cms.interfaces
@@ -326,16 +327,20 @@ def test_block_liveblog_instance_causing_timeouts(
     assert liveblog.last_modified is None
 
 
-def test_liveblog_auth(application, mockserver):
+@pytest.fixture
+def liveblog():
     model_block = mock.Mock()
     model_block.blog_id = '59fc6d316aa4f500e80f119b'
     model_block.version = '3'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
+    return zeit.web.core.block.Liveblog(model_block)
+
+
+def test_liveblog_auth(application, liveblog):
     token = liveblog.api_auth_token()
     assert token == u'3b4b508e-66e4-4977-910c-c8bd5b985d09'
 
 
-def test_liveblog_auth_fail(application, mockserver, monkeypatch):
+def test_liveblog_auth_fail(application, liveblog, monkeypatch):
     def post(url, data, headers):
         response = requests.Response()
         response.status_code = 401
@@ -345,28 +350,37 @@ def test_liveblog_auth_fail(application, mockserver, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.block.Liveblog, 'set_blog_info', lambda x: [])
 
-    model_block = mock.Mock()
-    model_block.blog_id = '59fc6d316aa4f500e80f119b'
-    model_block.version = '3'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
     with pytest.raises(requests.exceptions.HTTPError):
         liveblog.api_auth_token()
 
 
-def test_liveblog_get_info(application):
-    model_block = mock.Mock()
-    model_block.blog_id = '59fc6d316aa4f500e80f119b'
-    model_block.version = '3'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
+def test_liveblog_api_request_renews_expired_cache_token(
+        application, liveblog, monkeypatch):
+    new_cache = zeit.web.core.cache.get_region('long_term')
+    new_cache.set('liveblog_api_auth_token', '12345')
+    monkeypatch.setattr(zeit.web.core.block, 'LONG_TERM_CACHE', new_cache)
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    api_url = conf.get('liveblog_api_url_v3')
+    api_url = '{}/{}'.format(api_url, liveblog.blog_id)
+    auth_url = conf.get('liveblog_api_auth_url_v3')
+
+    with requests_mock.Mocker() as m:
+        # set up responses to have the first GET fail, the POST return a
+        # fresh token and the subsequent GET "validate" the token...
+        m.get(api_url, [dict(status_code=401), dict(json={}, status_code=200)])
+        m.post(auth_url, json={"token": "78901"}, status_code=200)
+        liveblog.api_blog_request()
+        # the (new) token ends up in the cache...
+        assert '78901' == new_cache.get('liveblog_api_auth_token')
+
+
+def test_liveblog_get_info(application, liveblog):
     assert liveblog.last_modified == u'2017-12-22T13:17:23+00:00'
     assert liveblog.is_live is True
 
 
-def test_liveblog_get_amp_id(application):
-    model_block = mock.Mock()
-    model_block.blog_id = '59fc6d316aa4f500e80f119b'
-    model_block.version = '3'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
+def test_liveblog_get_amp_id(application, liveblog):
     amp_id = liveblog.get_amp_themed_id(liveblog.blog_id)
     assert amp_id == u'59fc6d566aa4f500e7c68bd7'
 

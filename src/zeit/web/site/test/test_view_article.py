@@ -1970,30 +1970,38 @@ def test_share_buttons_are_present(testbrowser):
     assert query.get('via').pop(0) == 'zeitonline'
     assert 'share' in query.get('url').pop(0)
 
-    #  whatsapp
+    #  flipboard
     parts = urlparse.urlparse(links[2].get('href'))
+    query = urlparse.parse_qs(parts.query)
+    assert query.get('title').pop(0) == (
+        'Williams wackelt weiter, steht aber im Viertelfinale')
+    assert 'share' in query.get('url').pop(0)
+
+    #  whatsapp
+    parts = urlparse.urlparse(links[3].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE: ') in query.get('text').pop(0)
 
     #  facebook messenger
-    parts = urlparse.urlparse(links[3].get('href'))
+    parts = urlparse.urlparse(links[4].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert query.get('link').pop(0).startswith(canonical)
     assert query.get('app_id').pop(0) == '638028906281625'
 
     #  mail
-    parts = urlparse.urlparse(links[4].get('href'))
+    parts = urlparse.urlparse(links[5].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
     assert 'Artikel auf ZEIT ONLINE lesen:' in query.get('body').pop(0)
 
-    assert labels[0].text == 'Auf Facebook teilen'
+    assert labels[0].text == 'Facebook'
     assert labels[1].text == 'Twittern'
-    assert labels[2].text == 'WhatsApp'
-    assert labels[3].text == 'Facebook Messenger'
-    assert labels[4].text == 'Mailen'
+    assert labels[2].text == 'Flippen'
+    assert labels[3].text == 'WhatsApp'
+    assert labels[4].text == 'Facebook Messenger'
+    assert labels[5].text == 'Mailen'
 
 
 def test_merian_link_has_nofollow(testbrowser, dummy_request):
