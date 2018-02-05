@@ -2999,8 +2999,9 @@ def test_responsive_image_teaser_only_in_first_region(testbrowser):
 
 
 def test_topicpage_has_jsonld(testbrowser, datasolr):
-    sel = testbrowser('/thema/jurastudium').cssselect
-    assert len(sel('script[type="application/ld+json"]')) > 0
+    browser = testbrowser('/thema/jurastudium')
+    assert browser.cssselect('script[type="application/ld+json"]')
+    assert '"@type": "ItemList"' in browser.contents
 
 
 def test_centerpage_has_no_jsonld(testbrowser, datasolr):
