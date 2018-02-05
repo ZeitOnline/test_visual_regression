@@ -254,7 +254,11 @@ class Centerpage(AreaProvidingPaginationMixin,
 
     @zeit.web.reify
     def jsonld_listing(self):
-        allowed_cp_types = ['topicpage', 'keywordpage', 'ins_serienseite']
+        allowed_cp_types = [
+            'topicpage',
+            'keywordpage',
+            'serienseite',
+            'ins_serienseite']
         if self.context.type in allowed_cp_types:
             item_list_element = []
             item_list_element_counter = 0
