@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - Fix: Fix width of DPA article headline
 
+- Fix: Fix amp liveblog ESI template
+
 
 3.121 (2018-02-01)
 ------------------
