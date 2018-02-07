@@ -921,19 +921,15 @@ def test_buzz_box_provides_expected_webtrekk_string(
         assert tracking_data == pattern.format(key)
 
 
-def test_check_product_id_campaign_paywall_webtrekk(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get(
-        '%s/zeit-online/article/01?C1-Meter-Status=paywall' % testserver.url)
+def test_check_product_id_campaign_paywall_webtrekk(testbrowser):
+    browser = testbrowser('/zeit-online/article/01?C1-Meter-Status=paywall')
 
-    wt_zmc = driver.find_element_by_name('wt_zmc').get_attribute(
-        'value')
-    wt_val = 'fix.int.zonaudev.diezeit.wall_abo.premium.bar_metered.link.zede'
+    wt_zmc = browser.cssselect('form input[name="wt_zmc"]')[0]
+    wt_val = wt_zmc.get('value')
+    wt_ck = 'fix.int.zonaudev.diezeit.wall_abo.premium.bar_metered.link.zede'
+    assert wt_val == wt_ck
 
-    utm_content = driver.find_element_by_name('utm_content').get_attribute(
-        'value')
-    utm_val = 'premium_bar_metered_link_zede'
-
-    assert wt_zmc == wt_val
-    assert utm_content == utm_val
+    utm_content = browser.cssselect('form input[name="utm_content"]')[0]
+    utm_val = utm_content.get('value')
+    utm_ck = 'premium_bar_metered_link_zede'
+    assert utm_val == utm_ck
