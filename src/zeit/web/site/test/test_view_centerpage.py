@@ -1657,7 +1657,7 @@ def test_studiumbox_interessentest_works(selenium_driver, testserver):
     button = (box.find_element_by_class_name('studiumbox__content--clone')
               .find_element_by_class_name('studiumbox__button'))
     button.click()
-    assert ('http://studiengaenge.zeit.de/sit'
+    assert ('https://studiengaenge.zeit.de/sit'
             '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.sit.teaser.'
             'button.&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
@@ -1680,7 +1680,7 @@ def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
     input_element = (form.find_element_by_class_name('studiumbox__input'))
     input_element.send_keys('test')
     form.submit()
-    assert ('http://studiengaenge.zeit.de/studienangebote'
+    assert ('https://studiengaenge.zeit.de/studienangebote'
             '?suche=test&wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium'
             '.suma.teaser.button.&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
