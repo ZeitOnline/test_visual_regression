@@ -382,7 +382,7 @@ def test_liveblog_get_info(application, liveblog):
 
 def test_liveblog_get_amp_id(application, liveblog):
     amp_id = liveblog.get_amp_themed_id(liveblog.blog_id)
-    assert amp_id == u'59fc6d566aa4f500e7c68bd7'
+    assert amp_id == u'amp/59fc6d566aa4f500e7c68bd7'
 
 
 def test_block_breaking_news_has_correct_date(application):

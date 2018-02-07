@@ -382,3 +382,14 @@ def test_cardstack_teaser_produces_correct_html(testbrowser):
     browser = testbrowser('/campus/centerpage/cardstack')
     teaser = browser.cssselect('.cp-cardstack')
     assert len(teaser) == 1
+
+
+def test_campus_topicpage_has_jsonld(testbrowser, datasolr):
+    browser = testbrowser('/campus/centerpage/thema')
+    assert browser.cssselect('script[type="application/ld+json"]')
+    assert '"@type": "ItemList"' in browser.contents
+
+
+def test_campus_centerpage_has_no_jsonld(testbrowser, datasolr):
+    browser = testbrowser('/campus/index')
+    assert 'ld+json' not in browser.contents

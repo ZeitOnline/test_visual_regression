@@ -202,3 +202,14 @@ def test_zar_advertorial_teaser_has_modifier(testbrowser):
     select = testbrowser('/arbeit/centerpage/teaser-advertorial').cssselect
     assert len(select('.teaser-small--advertorial')) == 3
     assert len(select('.teaser-duo--advertorial')) == 2
+
+
+def test_zar_topicpage_has_jsonld(testbrowser, datasolr):
+    browser = testbrowser('/arbeit/centerpage/thema-automatic')
+    assert browser.cssselect('script[type="application/ld+json"]')
+    assert '"@type": "ItemList"' in browser.contents
+
+
+def test_zar_centerpage_has_no_jsonld(testbrowser, datasolr):
+    browser = testbrowser('/arbeit/index')
+    assert 'ld+json' not in browser.contents

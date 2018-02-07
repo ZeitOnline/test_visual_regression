@@ -103,7 +103,7 @@ class DataTMS(
             pass
         return result
 
-    def get_topicpage_documents(self, id, start=0, rows=25):
+    def get_topicpage_documents(self, id, start=0, rows=25, filter=None):
         log.debug(
             'Mocking TMS request id=%s, start=%s, rows=%s', id, start, rows)
         result = []
