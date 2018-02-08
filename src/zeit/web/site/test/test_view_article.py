@@ -1350,7 +1350,8 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
 @pytest.mark.parametrize(
     'parameter', [
         ('/amp/zeit-online/article/cardstack'),
-        ('/amp/zeit-online/article/quiz')
+        ('/amp/zeit-online/article/quiz'),
+        ('/amp/zeit-online/article/raw_code')
     ])
 def test_amp_article_placeholder(testbrowser, parameter):
     select = testbrowser(parameter).cssselect
