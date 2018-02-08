@@ -215,6 +215,20 @@ def varnish_caching_time_rawxml(context):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
+@grokcore.component.adapter(zeit.cms.repository.interfaces.IFile)
+def caching_time_unknown(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('caching_time_file', '3600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
+@grokcore.component.adapter(zeit.cms.repository.interfaces.IFile)
+def varnish_caching_time_unknown(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('varnish_caching_time_file', '3600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
 @grokcore.component.adapter(zeit.cms.repository.interfaces.IUnknownResource)
 def caching_time_unknown(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
