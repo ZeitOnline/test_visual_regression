@@ -24,6 +24,8 @@ POSTDEPLOY
 
 - Fix: Fix amp liveblog ESI template
 
+- HOTFIX: Support setting cache headers for "file" content
+
 
 3.121 (2018-02-01)
 ------------------

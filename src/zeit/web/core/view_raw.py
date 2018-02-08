@@ -74,8 +74,7 @@ class RawFile(zeit.web.core.view.Base):
 
     def __call__(self):
         super(RawFile, self).__call__()
-        response = Response(
-            app_iter=FileIter(IResource(self.context).data),
-            content_type=self.context.mimeType)
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        return response
+        self.request.response.app_iter = FileIter(IResource(self.context).data)
+        self.request.response.content_type = self.context.mimeType
+        self.request.response.headers.add('Access-Control-Allow-Origin', '*')
+        return self.request.response
