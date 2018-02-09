@@ -14,6 +14,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments_premoderate">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2018-02-09T12:54:28.917073+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2018-02-09T12:00:00.547857+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-02-09T12:55:08.530440+00:00</attribute>
     <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
