@@ -23,7 +23,7 @@
             {%- include "zeit.web.static:css/web.site/amp.css" -%}
         {%- endblock style -%}
         {%- if view.liveblog and view.liveblog.liveblog -%}
-            {%- if view.liveblog.liveblog.version == 3 -%}
+            {%- if view.liveblog.liveblog.version == '3' -%}
                 {%- include "zeit.web.static:css/web.core/amp/liveblog.3.css" -%}
             {%- else -%}
                 {%- include "zeit.web.static:css/web.core/amp/liveblog.2.css" -%}
