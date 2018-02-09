@@ -41,14 +41,18 @@ def test_amp_liveblog_article_contains_required_liveblog_addition(testbrowser):
 
 def test_amp_liveblog_v2_article_contains_required_styles(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/liveblog')
-    assert '#livedesk-root' in browser.contents
-    assert '.lb-timeline' not in browser.contents
+    styles = browser.cssselect('style[amp-custom]')
+    assert len(styles) == 1
+    assert '#livedesk-root' in styles[0].text
+    assert '.lb-timeline' not in styles[0].text
 
 
 def test_amp_liveblog_v3_article_contains_required_styles(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/liveblog3')
-    assert '#livedesk-root' not in browser.contents
-    assert '.lb-timeline' in browser.contents
+    styles = browser.cssselect('style[amp-custom]')
+    assert len(styles) == 1
+    assert '#livedesk-root' not in styles[0].text
+    assert '.lb-timeline' in styles[0].text
 
 
 def test_amp_liveblog_v3_article_contains_required_markup(testbrowser):
