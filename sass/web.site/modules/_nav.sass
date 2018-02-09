@@ -291,8 +291,10 @@
 			padding: 0
 			position: relative
 			top: remify(4px)
-			a:hover
-				box-shadow: none
+			a
+				&:hover,
+				&:focus
+					box-shadow: none
 
 		&__dropdown-item--has-label
 			background-color: #FAFAF3
