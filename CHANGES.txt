@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - ZON-4440: Track Product-ID to WT on paywall forms
 
+- ZON-4451: Add #D18 to teaser and parquet
+
 - BUG-840: Add automatic hyphenation and wrap long words on mobile devices
 
 - Fix: Fix width of DPA article headline
