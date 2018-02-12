@@ -1347,6 +1347,17 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
     assert amp_url.endswith('amp/zeit-online/article/zeit')
 
 
+@pytest.mark.parametrize(
+    'parameter', [
+        ('/amp/zeit-online/article/cardstack'),
+        ('/amp/zeit-online/article/quiz'),
+        ('/amp/zeit-online/article/raw_code')
+    ])
+def test_amp_article_placeholder(testbrowser, parameter):
+    select = testbrowser(parameter).cssselect
+    assert len(select('.article__placeholder')) >= 1
+
+
 def test_newsletter_optin_page_has_webtrekk_ecommerce(
         testbrowser, togglepatch):
     togglepatch({'third_party_modules': True})
