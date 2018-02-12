@@ -101,7 +101,7 @@ setup(
             'gocept.httpserverlayer',
             'mock',
             'plone.testing [zca,zodb]',
-            'pytest>=3.3.0.dev0',
+            'pytest>=3.4.0.dev0',
             'pytest-pep8',
             'pytest-timeout',
             'requests-mock',
