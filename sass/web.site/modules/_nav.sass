@@ -39,14 +39,6 @@
 		padding: remify(0 8px)
 		transition: background-color .15s linear
 
-	&__ressorts-item--featured
-		a
-			background-color: $zon-dark-grey
-			@extend %ressort-feature-background
-			+on-interaction
-				background-color: $zon-grey
-				color: #fff
-
 	// hide advertorial links in 1st level navigation, enable for mobile view only
 	&__ressorts-item--has-label,
 	// hide more ressorts link, enable for script enabled desktop view only
@@ -284,17 +276,10 @@
 			display: list-item
 		.js &__ressorts-item--featured
 			margin-left: auto // align right @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
-
-		.js &__ressorts-item--featured-dtag
-			height: remify(30px)
-			margin-left: auto
+			//height: remify(30px)
 			padding: 0
 			position: relative
 			top: remify(4px)
-			a
-				&:hover,
-				&:focus
-					box-shadow: none
 
 		&__dropdown-item--has-label
 			background-color: #FAFAF3
