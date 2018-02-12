@@ -161,7 +161,8 @@ def tag_with_logo_content(content, area_kind=None):
         # - Tag String (keyword on the article)
         # - File name of the SVG logo (returned here and used in template)
         # - Area where the taglogo should not be shown
-        logotags = [('D17', 'tag-d17', 'd17-parquet')]
+        logotags = [('D17', 'tag-d17', 'd17-parquet'),
+                    ('D18', 'tag-d18', 'd18-parquet')]
         try:
             for keyword in content.keywords:
                 for label, logo, exclude_logo_from_area in logotags:

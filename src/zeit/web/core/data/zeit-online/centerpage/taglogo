@@ -73,6 +73,13 @@
     <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e082d" kind="solo">
         <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5ce" kind="solo">
             <container cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3" cp:type="teaser" module="zon-fullwidth">
+                <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d18-tag"  uniqueId="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d18-tag"/>
+            </container>
+        </region>
+    </cluster>
+     <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e082d455" kind="solo">
+        <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5ce5445" kind="solo">
+            <container cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def35454" cp:type="teaser" module="zon-fullwidth">
                 <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d17-tag"  uniqueId="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d17-tag"/>
             </container>
         </region>
@@ -80,6 +87,9 @@
     <cluster area="feature" visible="True">
         <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
             <container cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def2" cp:type="teaser" module="zon-small">
+                <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d18-tag"  uniqueId="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d18-tag"/>
+            </container>
+            <container cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def2555" cp:type="teaser" module="zon-small">
                 <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d17-tag"  uniqueId="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d17-tag"/>
             </container>
             <container cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def1" cp:type="teaser" module="zon-small">
