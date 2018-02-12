@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.122 (unreleased)
+3.122 (2018-02-12)
 ------------------
 
 - TMS-4: Fix TMS health check URL
