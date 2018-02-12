@@ -10,7 +10,8 @@ POSTDEPLOY
 3.123 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4430: Do no longer remove episodes from podcast data,
+  podigee already omits them
 
 
 3.122 (2018-02-12)
