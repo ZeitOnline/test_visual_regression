@@ -125,6 +125,23 @@
 				</container>
 			</region>
 		</cluster>
+		<cluster area="id-d4af0585-6430-416c-8365-20cfed3c5b162" kind="parquet" kind_title="d18 Parkett-Region" title="Parkett" read_more="mehr #D18" read_more_url="http://www.zeit.de/thema/d18">
+			<region hide-dupes="True" area="id-ccad0132-fcf1-4062-ae78-dde95d7f716e2" kind="d18-parquet" title="#d18">
+				<referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
+				<container cp:type="teaser" module="zon-large" cp:__name__="id-b2f737ac-eb65-4dc3-b31c-fbd8986270e9">
+					<block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d18-tag"  uniqueId="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d18-tag"/>
+				</container>
+				<container cp:type="teaser" module="zon-small" cp:__name__="id-9fb0b54d-94cf-44bb-8b38-37a22ab150fa">
+					<block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
+				</container>
+				<container cp:type="teaser" module="zon-small" cp:__name__="id-2f58b6f6-f83a-4c9d-a87a-4a0d10da054f">
+					<block href="http://xml.zeit.de/zeit-online/article/02"/>
+				</container>
+				<container cp:__name__="id-d976a64d-1589-4b49-a765-12bdcdf94d1g" cp:type="cpextra" module="adplace13" visible="True">
+					<cp_extra for="zeit.content.cp.interfaces.IArea" id="adplace13" />
+				</container>
+			</region>
+		</cluster>
 		<cluster area="id-28063a7f-8af3-480b-ab08-12e3611c5324" kind="parquet" kind_title="Spektrum Parkett-Region">
 			<region hide-dupes="True" area="id-f8fd8512-f9b3-445e-8fdf-e6f647392848" kind="spektrum"/>
 		</cluster>

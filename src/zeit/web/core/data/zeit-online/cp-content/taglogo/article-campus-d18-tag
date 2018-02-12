@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/B/Jochen_Bittner/index.xml" publication-date="" expires="">
+      <display_name>Jochen Bittner</display_name>
+    </author>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/campus/article/01-countdown-studium" contenttype="article" />
+    </references>
+    <rankedTags>
+          <tag type="topic" score="10" uuid="6d2eb253-f131-4181-b667-8a9033ac2a9e" url_value="d18">D18</tag>
+          <tag type="topic" score="9" uuid="c151f61d-da76-4f38-95c6-6f04f4a41c1f" url_value="wirtschaftspolitik">Wirtschaftspolitik</tag>
+          <tag type="Organization" score="5" uuid="0599bca7-37f0-4ad1-9281-66c1efe41d20" url_value="europaeische-zentralbank">Europäische Zentralbank</tag>
+          <tag type="Organization" score="5" uuid="3ca2d609-188c-459d-9461-4ad025482ba4" url_value="oecd">OECD</tag>
+          <tag type="free" score="4" uuid="3294ba09-e9a0-4e97-a2ac-6f3bf617b48a" url_value="deflation">Deflation</tag>
+          <tag type="free" score="4" uuid="4b2d29a1-d9d6-4b6c-968a-e4d636858fce" url_value="europapolitik">Europapolitik</tag>
+          <tag type="free" score="4" uuid="242bd103-9c34-436a-b498-5c3b3b1ed8ca" url_value="stabilitaetspakt">Stabilitätspakt</tag>
+        </rankedTags>
+    <image base-id="http://xml.zeit.de/campus/image/testbild/" type="jpg" title="Selfie-Stick Gadgets Zeitgeist" alt="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." align="left" publication-date="" expires="">
+      <bu>Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto.</bu>
+      <copyright>© Michael Reynolds/dpa</copyright>
+    </image>
+    <topic type="intern" href="http://xml.zeit.de/thema/test">
+        <label>Science</label>
+    </topic>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">2938314</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Jochen Bittner</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Karriere</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-02-20T18:47:12.491363+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-02-20T18:21:27.802679+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-02-20T18:47:15.407959+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-02-20T18:47:15.177443+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-02-20T18:21:27.194991+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-02-20T18:21:44.010621+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">01.12.2015</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZTCS-2016-01-leben-gadgets</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">leben_gadgets</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-02-20T18:21:18.257836+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.hille</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">leben_gadgets</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">78</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/campus/2016/01/leben-gadgets</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2015-12-01T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZTCS</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Campus</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">9868caa6b9bf496caf165be29c1a9fff</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367934839535</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Campus</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZTCS-2016-01</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">In der Mensa mit</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Kennen Sie diese 10 Geräte? Glückwunsch, dann sind Sie hiermit offiziell cool. (tgr)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">10991</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:19e07a98-6a4b-450b-bf47-d8012c47cc64}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">01</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZCOContent" module="zeit.campus.interfaces"/&gt;
+        &lt;global name="IZCOArticle" module="zeit.campus.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Der Gadget-Kanon</title>
+    <subtitle>Bücher? Filme? Kunstwerke? Nö: Wer unsere Zeit wirklich verstehen will, muss diese zehn Geräte kennen.</subtitle>
+    <byline>von Jochen Bittner,  Oskar Piegsa</byline>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" title="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." alt="Technik: Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." align="left" publication-date="2016-01-14T16:04:40+00:00" expires="2016-04-14T15:04:42+00:00" layout="large" is_empty="False" alt_local="Technik: Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." title_local="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto.">
+        <bu>Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto.</bu>
+        <copyright>© Michael Reynolds/dpa</copyright>
+      </image>
+      <intertitle>1. Die Apple Watch</intertitle>
+      <p>
+        Bald werden wir alle <a class="" href="http://www.zeit.de/digital/internet/2012-08/cyborg-neil-harbisson-biohacking-campus-party" target="_blank">Cyborgs</a> sein, Mischwesen aus Mensch und Maschine. Anzeichen dafür gibt es nicht nur im Kino (etwa in
+<a class="" href="http://www.zeit.de/kultur/film/2014-02/robocop-film-jose-padilhas" target="_blank"><em>RoboCop</em></a>
+        oder
+        <a class="" href="http://www.zeit.de/kultur/film/2015-07/terminator-genisys-arnold-schwarzenegger-film" target="_blank"><em>Terminator: Genisys</em></a>), sondern in jedem Altersheim. Ohren, die ohne technische Hilfe nicht mehr hören, und Herzen, die nicht mehr schlagen würden, Körper, die sich nur noch durch Rollatoren bewegen lassen:
+        <em>Das</em>
+        ist die schleichende <a class="" href="http://www.zeit.de/wissen/2015-03/neue-technologien-sxsw-bionik-cyborgs" target="_blank">Cyborgisierung der Menschheit</a>. Sogenannte Wearables wie die <a class="" href="http://www.zeit.de/digital/mobil/2015-05/apple-watch-test" target="_blank">Apple Watch</a>, die <a class="" href="http://www.zeit.de/digital/mobil/2015-01/google-glass-datenbrille-neuanfang-fadell" target="_blank">Google Glass</a> oder <a class="" href="http://www.zeit.de/digital/mobil/2014-07/runtastic-orbit-fitness-tracker-test" target="_blank">digitale Fitnessarmbänder</a> bieten einen Vorgeschmack auf unsere Zukunft als technisch hochgerüstete Mischwesen. Sie rücken das Internet ganz dicht an unsere Körper. Und anders als Herzschrittmacher kann man sie ausziehen. Gut für alle, die das Cyborgsein erst mal nur testen wollen.
+      </p>
+      <intertitle>2. Der Selfie-Stick</intertitle>
+      <p>In analogen Zeiten waren Urlaubsfotos ein Wagnis. Wer selbst aufs Bild wollte, musste auf der Straße einen Fremden ansprechen und ihm seinen Fotoapparat anvertrauen. Das verlangte deutschen Touristen viel Mut ab: Würde der Ausländer mit der teuren Kamera abhauen? Wenn alles gut ging, konnte man zu Hause beim Dia-Abend erzählen: "Schaut mal: Ich vor dem Petersdom. Übrigens ganz reizende Leute, diese Italiener." Jedes Foto war ein kleiner Fortschritt für die Völkerverständigung.</p>
+      <p>Kein Wunder, dass manche Leute nostalgisch werden, wenn sie daran zurückdenken. Mit Selfie-Sticks kann man heute durch die Fremde reisen und das dokumentieren, ohne je mit Einheimischen ins Gespräch zu kommen. Dass <a class="" href="http://www.zeit.de/2015/01/selfie-stick-tourismus-selbstportraet">in vielen Museen die Egostäbchen verboten wurden</a>, aus Angst, sie könnten die Ausstellungsgegenstände beschädigen, kommt noch dazu. Haben die Kulturpessimisten also recht? Ist der Selfie-Stick ein zivilisatorischer Rückschritt?</p>
+      <p>Nein. Viele behaupten zwar, Selfies (mit oder ohne Stick) machten narzisstisch und dumm. Belegt ist das aber nicht. Man wird nicht zu <a class="" href="http://www.zeit.de/2015/20/kim-kardashian-selfie-buch-selfish" target="_blank">Kim Kardashian</a>,  bloß weil man Selfies schießt – genauso wenig wie man zu Cristiano Ronaldo wird, bloß weil man mal gegen einen Ball getreten hat. Und die reizenden Italiener lernt man zwar nicht mehr vor dem Petersdom kennen – dafür aber bei ihnen zu Hause, dank <a class="" href="http://www.zeit.de/thema/airbnb" target="_blank">Airbnb</a>.</p>
+      <intertitle>3. Telefone mit Ideologie</intertitle>
+      <p><a class="" href="http://www.zeit.de/digital/mobil/2014-02/blackphone-beim-mwc-vorgestellt" target="_blank">Blackphone</a> hat Verschlüsselung direkt ins Betriebssystem eingebaut, <a class="" href="http://www.zeit.de/digital/mobil/2015-07/fairphone-2-prototyp-hands-on" target="_blank">Fairphone</a> ist aus Bauteilen hergestellt, die nachhaltig produziert sein sollen und Marshall, die Gitarrenverstärker bauen, <a class="" href="http://www.zeit.de/digital/mobil/2015-09/android-turing-phone-blackberry-vertu-nextbit" target="_blank">hat ein Smartphone entwickelt</a>, das auf  Bedürfnisse von Musikern zugeschnitten ist.</p>
+      <image base-id="http://xml.zeit.de/campus/2016/01/cover/" type="jpg" title="ZEIT Campus 1/2016" alt="ZEIT Campus 1/2016" align="left" href="https://premium.zeit.de/zeit-campus-ausgabenseite?wt_zmc=fix.int.zonpme.zeitde.artikelbox.zcampusausgseite.bildtext.cover.cover&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=artikelbox&amp;utm_content=zcampusausgseite_bildtext_cover_cover" publication-date="" expires="" layout="portrait" is_empty="False" set-manually="True">
+        <bu>Dieser Text stammt aus dem ZEIT Campus Magazin 1/16. </bu>
+        <copyright link="https://premium.zeit.de/zeit-campus-ausgabenseite?wt_zmc=fix.int.zonpme.zeitde.artikelbox.zcampusausgseite.bildtext.cover.cover&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=artikelbox&amp;utm_content=zcampusausgseite_bildtext_cover_cover">Das aktuelle Heft können Sie am Kiosk oder hier erwerben. </copyright>
+      </image>
+      <p>Die Zeiten, in denen alle dasselbe Handy haben wollten (nämlich <a class="" href="http://www.zeit.de/digital/mobil/2015-09/iphone-6s-plus-test-apple" target="_blank">das neueste iPhone</a>), sind vorbei. Smartphones sind heute für ihre Nutzer angepasst. Nicht nur durch Apps, die sich jeder runterladen kann – auch durch die Hardware. Die passende Ideologie für Crypto-Freaks, technophile Ökos und Hosentaschen-Rocker gibt es heute werkseitig vorinstalliert.</p>
+      <intertitle>4. Die Kampfdrohne</intertitle>
+      <p>Vergesst Schach und Counterstrike! Das neue Ding für Leute, die Sport treiben, ohne sich dabei bewegen zu wollen, heißt "Game of Drones". Bei den Matches der amerikanischen  Aerial Sports League fliegen Nerds mit kleinen, ferngesteuerten Propellerdrohnen nicht nur Rennen, sondern greifen sich damit auch gegenseitig an. Ein  etwas befremdliches Hobby, aber bedeutend cooler als Drachensteigenlassen.</p>
+      <intertitle>5. Die neue Barbie</intertitle>
+      <p>Barbie ist dumm. Das ist die Standardkritik, die man zu hören kriegt, egal, ob man Pädagogen nach ihrer Meinung fragt, Feministinnen oder Akademiker-Eltern. Jetzt soll Barbie klug werden. Und die Kritiker? Sind entsetzt.</p>
+      <p><a class="" href="http://www.zeit.de/zeit-magazin/leben/2015-10/barbie-sprache-puppe" target="_blank">Die neue Hello Barbie</a> ist mit Spracherkennungssoftware und künstlicher Intelligenz ausgestattet. Sie kann Fragen beantworten und sich mit ihrem Besitzer unterhalten. Der Haken dabei: Die Hello Barbie ist per WLAN mit dem Hersteller Mattel verbunden.</p>
+      <p>Die Firma sagt, dass die Puppe über das Internet Updates bekommt und dadurch als Gesprächspartnerin "relevant" bleibt. Doch Datenschützer warnen bereits vor "akustischer Überwachung im Kinderzimmer" und davor, dass Geheimnisse, die Kinder ihrem Spielzeug anvertrauen, für Werbung missbraucht werden. Oder von pädophilen Hackern.</p>
+    </division>
+    <image-credits>Illustrationen: Hedi Lusser</image-credits>
+    <caption>In der Fernsehsendung "Das Literarische Quartett" stritten die Kritiker Marcel
+      Reich-Ranicki (1920 – 2013) und Hellmuth Karasek (1934 – 2015) über Romane. Was sie wohl zu
+      Virtual-Reality-Pornos gesagt hätten?</caption>
+    <caption>Philosoph Jean-Paul Sartre (1905–1980) posierte so eitel in Ägypten – er hätte den
+      Selfie-Stick geliebt</caption>
+    <caption>"Drunk Texting" gab’s noch nicht: Die Autoren Martin Walser (*1927), Heinrich Böll
+      (1917–1985) und Ingeborg Bachmann (1926–1973)</caption>
+    <image-credits>Foto: Corbis</image-credits>
+    <image-credits>Foto: Ullstein Bild</image-credits>
+    <image-credits>Foto: ZDF/Renate Schäfer</image-credits>
+    <supertitle>Technik</supertitle>
+    <division type="page" teaser="Polaroid-Drucker, VR-Brillen, E-Reader, DJ-Kabel und das Hoverboard">
+      <p>Es ist immer das alte Dilemma: Je "klüger" unsere Geräte werden, desto mehr Informationen benötigen sie, um zu funktionieren. Und je mehr Informationen sie bekommen, desto größer ist die Gefahr, dass diese missbraucht werden.</p>
+      <p>Das betrifft nicht nur Barbie: Mit <a class="" href="http://www.zeit.de/kultur/2011-11/siri-glosse" target="_blank">Siri</a> (von Apple), Echo (von Amazon), Cortana (von Microsoft) und Google Now arbeiten alle großen Technik-firmen an digitalen Assistenten, denen Nutzer sich anvertrauen sollen. Mit WLAN-Verbindung zum Mutterkonzern.</p>
+      <intertitle>6. Der Polaroid-Drucker</intertitle>
+      <p>Print ist tot? Quatsch, Prynt lebt! So heißt der tragbare Mini-Drucker, mit dem man bald <a class="" href="http://www.zeit.de/zeit-magazin/2015/40/handy-drucker-zip-polaroid-unter-strom" target="_blank">direkt vom Smartphone aus Fotos drucken</a> können soll.</p>
+      <p>Mit ihrer Idee haben die Erfinder von Prynt euphorische Reaktionen ausgelöst und bei einer Crowdfunding-Aktion in diesem Jahr mehr als eine Million Euro gesammelt. Erstaunlich, denn ihre Idee ist gar nicht neu: Einen ähnlichen Drucker gibt es bereits zu kaufen, den ZIP Instant Photoprinter von Polaroid.</p>
+      <p>So praktisch Fotos auf Instagram auch sind – das Bedürfnis ist offenbar groß, zumindest die besten von ihnen aus der digitalen Bilderschwemme zu reißen und in der Hand zu halten. Und zwar bitte sofort, nicht irgendwann später am Fototerminal im Drogeriemarkt.</p>
+      <intertitle>7. Die Virtual-Reality-Brille</intertitle>
+      <p>Es ist nicht lange her, da mussten die Menschen zum Pornogucken ins Kino, wo sie neben Fremden in Sesseln saßen, von denen niemand sagen konnte, wann sie das letzte Mal gereinigt worden waren. Dann wurde die VHS-Kassette erfunden. Fortan gingen die Menschen zum Pornogucken erst in die Videothek und dann in ihr Wohnzimmer. Eine Verbesserung, aber immer noch peinlich, wenn man an der Kasse Bekannte traf. Als HTML erfunden wurde, war auch das Problem gelöst: Seitdem geht’s zum Pornogucken ins Internet, das ist diskret und unkompliziert wie nie. Es gibt Medientheoretiker, die sagen, der Erfolg von neuer Technik stehe und falle mit ihrer Tauglichkeit für Pornografie. Die "Killer-Application-These".</p>
+      <p>Wenn diese Theoretiker recht haben, ist es eine riskante Strategie, dass für <a class="" href="http://www.zeit.de/digital/games/2014-01/virtual-reality-brille-oculus-rift" target="_blank">die Oculus Rift</a>, die 2016 auf den Markt kommen soll, offiziell keine Pornos verkauft werden dürfen. Denn was wäre ein besserer Nutzen für eine <a class="" href="http://www.zeit.de/digital/games/2015-06/virtual-reality-the-void-freizeitpark" target="_blank">Virtual-Reality-Brille</a>? (Wer an dieser Aussage zweifelt, möge sich die "VR Porn Reactions" auf YouTube ansehen, die Rapper, Rentner und andere "First-Time Virtual Reality Viewers" beim Pornogucken zeigt).</p>
+      <p>Aber gut, die Oculus Rift gehört Facebook. Und das hat sich auch durchgesetzt, trotz strengem Brustwarzenverbot. Kein Wunder: Pornos sind heute so allgegenwärtig, dass man keine neue Technik braucht, um sie zu gucken.</p>
+      <intertitle>8. Der E-Reader</intertitle>
+      <p>
+        Im Herbst wurde das <a class="" href="http://www.zeit.de/thema/e-book" target="_blank">E-Book</a> totgesagt. Mal wieder. Das Wachstum des digitalen Markts sei abgeschwächt, hieß es zur Frankfurter Buchmesse im Oktober. Viele feiern das Lesen zudem als sinnliches Erlebnis, schwärmen vom Papiergeruch und lehnen die kalten Displays der digitalen Lesegeräte ab. Fest steht aber: Die Technik der <a class="" href="http://www.zeit.de/thema/e-book-reader" target="_blank">E-Reader</a> wird besser. Nicht nur für Leser, auch für Autoren bietet das neue Möglichkeiten. Das E-Book
+        <em>Wie man mit einem Mann glücklich wird</em>
+        von Ruth Herzog enthält zum Beispiel von der Autorin gezeichnete Gifs. Der Bestseller
+        <em>American Sniper</em>
+        wird als E-Book mit vielen Zusatzinfos für Waffenfetischisten ausgeliefert. Und wer T. S. Eliots
+        <em>The Waste Land</em>
+        als App kauft, bekommt Audiofiles mit Lesungen des Dichters.
+      </p>
+      <p>Und auch, wenn man gedruckte Bücher liebt: Es ist einfach praktisch, eine kleine bis mittelgroße Handbibliothek mit Volltextsuche immer in der Tasche zu haben. Die Zahl der Mischleser, die mal zu gedruckten Büchern, mal zu E-Readern greifen, dürfte also weiter wachsen. Auch der E-Reader wird das Buch nicht abschaffen. Aber verändern.</p>
+      <intertitle>9. Das DJ-Kabel</intertitle>
+      <p>Wir leben in entfesselten Zeiten: Als Erstes verschwand das Telefonkabel. Dann das Datenkabel, WLAN sei Dank. Forscher arbeiten daran, auch Netzkabel überflüssig zu machen. Wenn ihnen das gelingt, laden wir unsere Akkus bald per Ultraschall auf. Ein Kabel ist aber unverzichtbar: das DJ-Kabel, wie es etwa Native Instruments herstellt.</p>
+      <p>Seit auf Partys immer öfter nur eine Anlage steht, aber niemand, der sie bedient, droht eine alte Kulturtechnik auszusterben: das Mixen. Heute stöpselt jeder sein Handy an, spielt sein Lieblingslied und stöpselt es wieder ab. Das Ergebnis klingt nicht wie ein gutes DJ-Set, das zum Tanzen einlädt, sondern wie "Reise nach Jerusalem": Song – Krrrrrk – Pause – nächster Song.</p>
+      <p>Das DJ-Kabel ist eine Lösung für dieses Problem. Es wird in den Kopfhörerausgang von Smartphone oder Tablet gestöpselt und splittet den Ton in zwei. Der Effekt: Man kann das Handy zugleich an die Anlage und an Kopfhörer stöpseln und, während ein Song durchs Zimmer dröhnt, den nächsten schon mal vorhören und ihn dann – mit etwas Übung – elegant überblenden.</p>
+      <p>
+        Ein DJ-Set zu mixen, dass die Illusion erzeugt, die Musik werde niemals, wirklich niemals enden: Das kann auch mit Apps wie
+        <em>djay 2</em>
+        und Spotify gelingen. Aber man braucht ein Kabel dafür.
+      </p>
+      <intertitle>10. Das Hoverboard</intertitle>
+      <p>
+        Im Film
+        <a class="" href="http://www.zeit.de/wissen/2015-10/marty-mcfly-film-zurueck-in-die-zukunft-fiktion-zeitreise" target="_blank"><em>Zurück in die Zukunft 2</em></a>, der 1989 in die Kinos kam, reist Marty McFly mit einer Zeitmaschine ins Jahr 2015. Während einige Vorhersagen, die der Film über unsere Zeit machte, erstaunlich korrekt waren (sprachgesteuerte Fernseher, gestenkontrollierte Videospiele, Achtziger-Jahre-Revival), erwiesen sich andere als falsch, was aber niemand bedauert (<em>Der weiße Hai 19</em>, ein Faxgerät in jedem Raum). Eine Erfindung ist jedoch unerreicht und wird schmerzlich vermisst: das Hoverboard.
+      </p>
+      <p>In den letzten Jahren gab es mindestens vier Versuche, das fliegende Skateboard aus der Zukunft von gestern nachzubauen. Keiner davon gelang so richtig – entweder schwebte das <a class="" href="http://www.zeit.de/video/2015-10/4569960091001/hoverboard-die-zukunft-ist-jetzt" target="_blank">Hoverboard</a> nur auf einem speziellen Untergrund, nur auf Schienen oder mittels Filmtricktechnik und Drähten.</p>
+      <p>
+        Trotzdem: Die Hoffnung bleibt. Wie bei den Raketenrucksäcken (aus
+        <em>Thunderball</em>), Beam-Geräten (aus
+        <em>Star Trek</em>) und Laserschwertern (aus
+        <em>Star Wars</em>).
+      </p>
+    </division>
+    <division type="page" teaser="Die dritte Seite">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </division>
+    <division type="page" teaser="Die vierte Seite">
+      <p>Necessitatibus tempore totam quo error, odit quasi obcaecati facilis rem a optio labore doloribus culpa, neque, eum laudantium corrupti et reiciendis dolorem quaerat dicta officiis maxime asperiores fugiat!</p>
+    </division>
+    <division type="page" teaser="Die fünfte Seite">
+      <p>Porro perferendis modi accusantium et, cum aut, enim aliquid, harum blanditiis recusandae perspiciatis fuga suscipit odit praesentium laboriosam sed nisi assumenda tenetur necessitatibus repellendus.</p>
+    </division>
+    <division type="page" teaser="Die sechste Seite">
+      <p>Nulla enim blanditiis, voluptatem ipsam expedita sed atque aperiam, ad deserunt temporibus? Incidunt saepe praesentium illo aperiam laboriosam nemo assumenda consectetur eligendi commodi iste.</p>
+    </division>
+    <division type="page" teaser="Die siebte Seite">
+      <p>Laborum numquam, dolore dignissimos voluptate temporibus deserunt pariatur labore eos aut tenetur vitae nihil in consequuntur, facilis impedit. Aliquam iusto, aut vel itaque obcaecati?</p>
+    </division>
+    <division type="page" teaser="Die achte Seite">
+      <p>Quod aut, nemo illum perspiciatis, nobis distinctio similique. Explicabo quis, nostrum nam recusandae, totam tempore esse temporibus iusto architecto magnam consequatur labore vitae. Ex.</p>
+    </division>
+    <division type="page" teaser="Die neunte Seite">
+      <p>Commodi, cum minus quis laudantium recusandae, itaque quaerat cumque. Eos nobis veniam autem corporis repellat voluptate! Molestias amet repellat, expedita, quod adipisci incidunt necessitatibus.</p>
+    </division>
+    <division type="page" teaser="Nun sind wir aber gespannt">
+      <p>Commodi, cum minus quis laudantium recusandae, itaque quaerat cumque. Eos nobis veniam autem corporis repellat voluptate! Molestias amet repellat, expedita, quod adipisci incidunt necessitatibus.</p>
+    </division>
+  </body>
+  <teaser>
+    <title>Selfiestick trifft DJ-Kabel</title>
+    <text>Früher war das Handy ein Statussymbol. Heute sind es Gadgets, die auch bei der Arbeit den Unterschied machen. Zehn Geräte, die unseren Zeitgeist bestimmen</text>
+    <supertitle>Gadgets</supertitle>
+  </teaser>
+</article>
