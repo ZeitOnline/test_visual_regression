@@ -529,3 +529,12 @@ def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
     header_date = browser.cssselect('.nav__date')
 
     assert len(header_date) == 0
+
+
+def test_d18_link_exists(testbrowser, togglepatch):
+    togglepatch({'dtag_navigation': True})
+    browser = testbrowser('/zeit-online/zeitonline')
+    select = browser.cssselect
+    d18_navigation_badge = select('nav a[href$="thema/d18"]')
+
+    assert len(d18_navigation_badge) == 1
