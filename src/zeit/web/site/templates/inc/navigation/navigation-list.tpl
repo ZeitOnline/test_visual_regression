@@ -40,5 +40,12 @@
         <ul class="nav__dropdown-list" id="more-ressorts" aria-hidden="true" data-ct-column>
         </ul>
     </li>
+    {% if toggles('dtag_navigation') -%}
+    <li class="{{ class }}-item--featured">
+        <a itemprop="url" href="{{ request.route_url('home') }}thema/d18">
+           {{ lama.use_svg_icon('logo-d18-yellow', 'nav__ressorts-item--icon-featured-d18', view.package) }}
+        </a>
+    </li>
+    {% endif %}
 {% endif %}
 </ul>

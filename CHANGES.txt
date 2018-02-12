@@ -7,7 +7,13 @@ POSTDEPLOY
 - Nothing
 
 
-3.122 (unreleased)
+3.123 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.122 (2018-02-12)
 ------------------
 
 - TMS-4: Fix TMS health check URL
@@ -21,6 +27,8 @@ POSTDEPLOY
 - ZON-4440: Track Product-ID to WT on paywall forms
 
 - ZON-4451: Add #D18 to teaser and parquet
+
+- ZON-4452: Add #d18 to navigation
 
 - BUG-840: Add automatic hyphenation and wrap long words on mobile devices
 
