@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - ZON-4451: Add #D18 to teaser and parquet
 
+- ZON-4452: Add #d18 to navigation
+
 - BUG-840: Add automatic hyphenation and wrap long words on mobile devices
 
 - Fix: Fix width of DPA article headline
