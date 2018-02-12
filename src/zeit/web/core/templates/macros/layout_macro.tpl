@@ -13,6 +13,7 @@
 {%- endmacro %}
 
 {% macro insert_esi(src, error_text='') %}
+    {% set src = src | replace_https_on_esi_include %}
     {% if settings('use_wesgi') %}
         <!-- [esi-debug] src="{{ src | safe }}" error_text="{{ error_text }}" -->
         <esi:include src="{{ src | safe }}" onerror="continue" />
