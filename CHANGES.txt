@@ -10,6 +10,8 @@ POSTDEPLOY
 3.123 (unreleased)
 ------------------
 
+- SSL-83: Replace https protocol on `<esi:include>`
+
 - ZON-4430: Do no longer remove episodes from podcast data,
   podigee already omits them
 
