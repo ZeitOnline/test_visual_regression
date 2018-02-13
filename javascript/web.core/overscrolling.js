@@ -41,9 +41,6 @@ define([
                 isActive: $( document ).height() >= config.documentMinHeight,
                 message: 'documentMinHeight not matched'
             }, {
-                isActive: Modernizr.svg,
-                message: 'no svg available'
-            }, {
                 isActive: Zeit.breakpoint.get() === 'desktop',
                 message: 'only on desktop'
             }, {
