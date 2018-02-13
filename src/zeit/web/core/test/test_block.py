@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import copy
-import json
 
 import dogpile.cache
 import lxml.etree
@@ -687,14 +686,3 @@ def test_podcast_should_show_podcast_links(testbrowser):
     assert podcast_links[1].get('href') == 'http://xml.zeit.de/spotify_url'
     # There's only two links, since no deezer url has been provided.
     assert len(podcast_links) == 2
-
-
-def test_podcast_should_remove_episodes_from_player_config(testbrowser):
-    browser = testbrowser('/zeit-online/article/podcast')
-    script = browser.cssselect('.podcast.article__item script')[0]
-    # poor man's kludgy JS-eval()
-    data = script.text.replace(
-        'window.podigee_player_8111 = ', '').strip()[:-1]
-    data = data.replace(r'\script', 'script')
-    data = json.loads(data)
-    assert 'episodes' not in data['podcast']
