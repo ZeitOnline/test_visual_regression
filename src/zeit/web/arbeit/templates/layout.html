@@ -18,7 +18,12 @@
     {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
     {% block schemaorg_data %}{% endblock %}
 
-    <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+    {% if toggles('modernizr_js_file') -%}
+        <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+    {% else -%}
+        {% include "zeit.web.core:templates/inc/inline_js/modernizr-replacement.tpl" %}
+    {% endif -%}
+
     {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
     {% if toggles('third_party_modules') -%}
         <script src="https://script.ioam.de/iam.js"></script>
