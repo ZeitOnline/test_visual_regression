@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4445: Change imagesize of Spektrum-Feed
 
+- SSL-133: Rewrite topiclinks in navigation
+
 - MAINT: Remove feature toggle for ZEIT Arbeit vertical
 
 
@@ -44,8 +46,6 @@ POSTDEPLOY
 - ZON-4452: Add #d18 to navigation
 
 - BUG-840: Add automatic hyphenation and wrap long words on mobile devices
-
-- SSL-133: Rewrite topiclinks in navigation
 
 - Fix: Fix width of DPA article headline
 
