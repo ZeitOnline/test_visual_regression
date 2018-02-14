@@ -431,12 +431,8 @@ class VerticalPredicate(object):
             return True
 
         vertical = zeit.web.core.interfaces.IVertical(context)
-        toggles = zeit.web.core.application.FEATURE_TOGGLES
         if vertical == 'zett':
             # zett is not a vertical in the sense of this predicate.
-            vertical = 'zon'
-        # XXX Maybe think of a more generic way to handle feature toggles?
-        if vertical == 'zar' and not toggles.find('arbeit'):
             vertical = 'zon'
 
         return vertical == self.value
