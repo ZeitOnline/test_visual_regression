@@ -531,3 +531,9 @@ def test_remove_tags_from_xml():
     filtered_block = zeit.web.core.template.remove_tags_from_xml(block, 'a')
     assert unicode(
         filtered_block) == 'Ich esse <em>ein</em> leckeres Wurstbrot.\n'
+
+
+def test_replace_https_on_esi_include():
+    url = "https://www.zeit.de/test/esi/include?foo=batz#baa"
+    new_url = zeit.web.core.template.replace_https_on_esi_include(url)
+    assert new_url == "http://www.zeit.de/test/esi/include?foo=batz#baa"

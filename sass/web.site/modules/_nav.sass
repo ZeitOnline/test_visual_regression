@@ -32,13 +32,6 @@
 		> li:nth-child(n+6)
 			display: none
 
-	%ressort-feature-background
-		border-radius: 3px
-		display: inline-block
-		line-height: 2
-		padding: remify(0 8px)
-		transition: background-color .15s linear
-
 	// hide advertorial links in 1st level navigation, enable for mobile view only
 	&__ressorts-item--has-label,
 	// hide more ressorts link, enable for script enabled desktop view only
@@ -452,13 +445,3 @@
 			// hide advertorial links in 1st level navigation
 			li.nav__ressorts-item--has-label
 				display: none
-
-// must be written explicitly and down here to win the specificity wars
-a.nav__ressorts-link--arbeit-highlighted
-	border: 2px solid $color-zar-accent
-	@extend %ressort-feature-background
-	+respond-max($break-tablet-min)
-		display: inline !important // this is a temporary element, so I dont care
-	+on-interaction
-		background-color: $color-zar-accent
-		box-shadow: none
