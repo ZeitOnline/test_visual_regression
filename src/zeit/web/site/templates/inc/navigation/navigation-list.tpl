@@ -9,9 +9,6 @@
     {% if id in (view.ressort, view.sub_ressort) %}
         {% set link_css_class = '{}-link--current'.format(class) %}
     {% endif %}
-    {% if class == 'nav__ressorts' and id == 'arbeit' and toggles('arbeit_hightlight_ressortnav') %}
-        {% set link_css_class = '{}-link--arbeit-highlighted'.format(class) %}
-    {% endif %}
 
     <li {%- if item.label %} class="{{ class }}-item--has-label" data-label="{{ item.label }}"{% endif %}
         {%- if item | length %} class="{{ class }}-item--has-dropdown"{% endif %}>
