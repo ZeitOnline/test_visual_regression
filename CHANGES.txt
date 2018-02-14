@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - BUG-840: Add automatic hyphenation and wrap long words on mobile devices
 
+- SSL-133: Rewrite topiclinks in navigation
+
 - Fix: Fix width of DPA article headline
 
 - Fix: Fix amp liveblog ESI template
