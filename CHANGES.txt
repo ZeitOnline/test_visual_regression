@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4445: Change imagesize of Spektrum-Feed
 
+- MAINT: Remove feature toggle for ZEIT Arbeit vertical
+
 
 3.123 (2018-02-13)
 ------------------
