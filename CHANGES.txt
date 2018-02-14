@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4466: Remove yellow border from Arbeit in ressort navigation
 
+- ZON-4445: Change imagesize of Spektrum-Feed
+
 
 3.123 (2018-02-13)
 ------------------

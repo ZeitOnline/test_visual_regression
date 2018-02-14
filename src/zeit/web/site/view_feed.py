@@ -409,9 +409,9 @@ class SpektrumFeed(Base):
                                                          fallback=False)
                 if image:
                     item.append(E.enclosure(
-                        url='{}{}__180x120'.format(
+                        url='{}{}__640x360'.format(
                             self.request.image_host, image.path),
-                        length='10240',  # ¯\_(ツ)_/¯
+                        length='20480',  # ¯\_(ツ)_/¯
                         type='image/jpeg'))  # ¯\_(ツ)_/¯
 
                 channel.append(item)
