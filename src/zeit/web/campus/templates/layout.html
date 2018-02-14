@@ -21,7 +21,7 @@
     {% if toggles('modernizr_js_file') -%}
         <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
     {% else -%}
-        {% include "zeit.web.core:templates/inc/inline_js/modernizr-replacement.tpl" %}
+        <script>{% include "zeit.web.core:templates/inc/inline_js/modernizr-replacement.js" %}</script>
     {% endif -%}
 
     {% include "zeit.web.core:templates/inc/inline_js/print.html" %}

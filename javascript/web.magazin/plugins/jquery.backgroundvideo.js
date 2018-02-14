@@ -3,7 +3,7 @@
  * @author anika.szuppa@zeit.de
  * @version  0.1
  */
-( function( $, Modernizr ) {
+( function( $ ) {
 
     /**
      * See (http://jquery.com/).
