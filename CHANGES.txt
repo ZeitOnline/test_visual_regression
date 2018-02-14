@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- Nothing
+- "arbeit" aus den feature-toggle(-preview).xml aller Vivis entfernen
 
 
 3.124 (unreleased)
@@ -13,6 +13,8 @@ POSTDEPLOY
 - ZON-4466: Remove yellow border from Arbeit in ressort navigation
 
 - ZON-4445: Change imagesize of Spektrum-Feed
+
+- MAINT: Remove feature toggle for ZEIT Arbeit vertical
 
 
 3.123 (2018-02-13)
