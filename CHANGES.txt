@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4445: Change imagesize of Spektrum-Feed
 
+- SSL-133: Rewrite topiclinks in navigation
+
 - FIX: Change tracking for Flipboard
 
 - MAINT: Remove feature toggle for ZEIT Arbeit vertical

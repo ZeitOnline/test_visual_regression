@@ -189,7 +189,8 @@ class TopicLink(zeit.web.core.utils.nslist):
         self.title = getattr(context, 'topiclink_title', '') or 'Schwerpunkte'
         for i in xrange(1, 4):
             label = getattr(self.context, 'topiclink_label_%s' % i, None)
-            link = getattr(self.context, 'topiclink_url_%s' % i, None)
+            link = zeit.web.core.utils.maybe_convert_http_to_https(
+                getattr(self.context, 'topiclink_url_%s' % i, None))
             if label is not None and link is not None:
                 self.append((label, link))
 
