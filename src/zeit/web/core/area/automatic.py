@@ -69,10 +69,13 @@ class Converter(object):
         doc.setdefault('access', 'free')
         doc.setdefault('commentsAllowed', True)
         doc.setdefault('commentSectionEnable', True)
+        doc.setdefault('date_first_released', None)
         doc.setdefault('date_last_published_semantic', None)
         doc.setdefault('lead_candidate', False)
+        doc.setdefault('ressort', None)
         doc.setdefault('sub_ressort', None)
         doc.setdefault('supertitle', None)
+        doc.setdefault('title', None)
         doc.setdefault('tldr_title', None)
         doc.setdefault('tldr_date', None)
         # Imported news articles don't have a teaser section
