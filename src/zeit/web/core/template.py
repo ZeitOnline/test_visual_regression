@@ -700,7 +700,7 @@ def format_iqd(string):
 def get_clicktracking_identifier(area):
     if area.kind == 'parquet' and area.title:
         return 'parquet-{}'.format(format_webtrekk(area.title))
-    elif area.kind in ['zett', 'spektrum']:
+    elif area.kind in ['zett', 'spektrum', 'brandeins']:
         return 'parquet-{}'.format(area.kind)
     elif area.kind.endswith('-parquet'):
         return 'parquet-{}'.format(area.kind.rsplit('-', 1).pop(0))

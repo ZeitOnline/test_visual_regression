@@ -151,8 +151,8 @@
         id="zon-small"
         title="Kleiner Teaser"
         image_pattern="wide"
-        areas="duo major minor ranking tube print-ressort exclusive-ressort parquet spektrum zett zar-parquet zmo-parquet d17-parquet d18-parquet zplus-parquet zco-parquet author-favourite-content author-articles author-list"
-        default="major minor parquet zmo-parquet zplus-parquet zco-parquet ranking tube print-ressort exclusive-ressort spektrum zett author-favourite-content author-articles author-list"
+        areas="duo major minor ranking tube print-ressort exclusive-ressort parquet spektrum brandeins zett zar-parquet zmo-parquet d17-parquet d18-parquet zplus-parquet zco-parquet author-favourite-content author-articles author-list"
+        default="major minor parquet zmo-parquet zplus-parquet zco-parquet ranking tube print-ressort exclusive-ressort spektrum brandeins zett author-favourite-content author-articles author-list"
         available="zeit.cms.section.interfaces.IZONContent"
         />
     <layout
