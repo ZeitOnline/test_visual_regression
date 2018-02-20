@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - SSL-133: Rewrite topiclinks in navigation
 
+- BUG-847: Font-Rendering in Safari
+
 - FIX: Change tracking for Flipboard
 
 - MAINT: Remove feature toggle for ZEIT Arbeit vertical
