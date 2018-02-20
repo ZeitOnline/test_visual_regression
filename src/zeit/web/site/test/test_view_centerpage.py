@@ -303,24 +303,26 @@ def test_responsive_image_should_have_noscript(testbrowser):
     assert len(noscript) == 3
 
 
-def test_topic_links_title_schould_have_a_value_and_default_value():
-    context = mock.Mock()
-    context.topic_links = mock.Mock()
+def test_topic_links_title_schould_have_a_value_and_default_value(application):
+    context = zeit.content.cp.centerpage.CenterPage()
+
     context.topiclink_title = 'My Title'
     topic_links = zeit.web.core.centerpage.TopicLink(context)
-
     assert topic_links.title == 'My Title'
 
     context.topiclink_title = None
     topic_links = zeit.web.core.centerpage.TopicLink(context)
-
     assert topic_links.title == 'Schwerpunkte'
 
 
-def test_centerpage_view_should_have_topic_links():
-    mycp = mock.Mock()
+def test_centerpage_view_should_have_topic_links(
+        application, preserve_settings):
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['transform_to_secure_links_for'] = ['www.zeit.de']
+
+    mycp = zeit.content.cp.centerpage.CenterPage()
     mycp.topiclink_label_1 = 'Label 1'
-    mycp.topiclink_url_1 = 'http://link_1'
+    mycp.topiclink_url_1 = 'http://www.zeit.de/thema/foo'
     mycp.topiclink_label_2 = 'Label 2'
     mycp.topiclink_url_2 = 'http://link_2'
     mycp.topiclink_label_3 = 'Label 3'
@@ -328,7 +330,7 @@ def test_centerpage_view_should_have_topic_links():
 
     topic_links = list(zeit.web.core.centerpage.TopicLink(mycp))
 
-    assert topic_links == [('Label 1', 'http://link_1'),
+    assert topic_links == [('Label 1', 'https://www.zeit.de/thema/foo'),
                            ('Label 2', 'http://link_2'),
                            ('Label 3', 'http://link_3')]
 
