@@ -303,24 +303,26 @@ def test_responsive_image_should_have_noscript(testbrowser):
     assert len(noscript) == 3
 
 
-def test_topic_links_title_schould_have_a_value_and_default_value():
-    context = mock.Mock()
-    context.topic_links = mock.Mock()
+def test_topic_links_title_schould_have_a_value_and_default_value(application):
+    context = zeit.content.cp.centerpage.CenterPage()
+
     context.topiclink_title = 'My Title'
     topic_links = zeit.web.core.centerpage.TopicLink(context)
-
     assert topic_links.title == 'My Title'
 
     context.topiclink_title = None
     topic_links = zeit.web.core.centerpage.TopicLink(context)
-
     assert topic_links.title == 'Schwerpunkte'
 
 
-def test_centerpage_view_should_have_topic_links():
-    mycp = mock.Mock()
+def test_centerpage_view_should_have_topic_links(
+        application, preserve_settings):
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['transform_to_secure_links_for'] = ['www.zeit.de']
+
+    mycp = zeit.content.cp.centerpage.CenterPage()
     mycp.topiclink_label_1 = 'Label 1'
-    mycp.topiclink_url_1 = 'http://link_1'
+    mycp.topiclink_url_1 = 'http://www.zeit.de/thema/foo'
     mycp.topiclink_label_2 = 'Label 2'
     mycp.topiclink_url_2 = 'http://link_2'
     mycp.topiclink_label_3 = 'Label 3'
@@ -328,7 +330,7 @@ def test_centerpage_view_should_have_topic_links():
 
     topic_links = list(zeit.web.core.centerpage.TopicLink(mycp))
 
-    assert topic_links == [('Label 1', 'http://link_1'),
+    assert topic_links == [('Label 1', 'https://www.zeit.de/thema/foo'),
                            ('Label 2', 'http://link_2'),
                            ('Label 3', 'http://link_3')]
 
@@ -2870,6 +2872,74 @@ def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
 
 
 def test_d17_icon_is_display_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-taglogo')
+    assert browser.cssselect('article.nextread .nextread__kicker-logo--tag')
+
+
+def test_d18_icon_feature_toggle_is_working(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': False}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
+    assert not browser.cssselect('*[data-taglogo="true"]')
+
+
+def test_d18_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
+    assert browser.cssselect('*[data-taglogo="true"]')
+    assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--tag')) == 1
+    assert len(browser.cssselect('.teaser-small__kicker-logo--tag')) == 3
+    assert len(browser.cssselect(
+        '.teaser-fullwidth-column__kicker-logo--tag')) == 1
+    assert len(browser.cssselect(
+        '.teaser-small-column__kicker-logo--tag')) == 1
+    assert browser.cssselect(
+        '.teaser-small__kicker-logo--tag')
+    text = 'Freier Teaser Kicker'
+    uid = 'http://xml.zeit.de/zeit-online/cp-content/taglogo/link-d18-tag'
+    attr = 'data-unique-id="{}"'.format(uid)
+    selector = 'article[{}] .teaser-small__kicker-logo--tag'.format(attr)
+    assert text in browser.cssselect(selector)[0].getparent().text_content()
+
+
+def test_d18_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
+    assert not browser.cssselect(
+        'teaser-small__kicker-logo--zplus + .teaser-small__kicker-logo--tag')
+    assert not browser.cssselect(
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zplus')
+
+
+def test_d18_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
+    assert not browser.cssselect(
+        'teaser-small__kicker-logo--zmo + .teaser-small__kicker-logo--tag')
+    assert not browser.cssselect(
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zmo')
+
+
+def test_d18_icon_is_not_display_on_d18_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/parquet')
+    assert not browser.cssselect(
+        '.cp-area--d18-parquet .teaser-large__kicker-logo--tag')
+
+
+def test_d18_icon_is_display_on_auto_area(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
+    query = ('.cp-region--solo + .cp-region--duo article:first-child')
+    assert browser.cssselect(query)
+
+
+def test_d18_icon_is_display_on_nextread(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-taglogo')
     assert browser.cssselect('article.nextread .nextread__kicker-logo--tag')
 

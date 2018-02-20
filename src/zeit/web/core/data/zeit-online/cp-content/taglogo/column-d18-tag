@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2014-10/frankreich-verlangt-milliardeninvestitionen" year="2014" issue="41" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" genre="nachricht">
+        <supertitle>Konjunktur</supertitle>
+        <title>Frankreich fordert Milliardeninvestitionen von Deutschland</title>
+        <text>Frankreich soll sparen und Deutschland investieren. Mit diesem Vorschlag treffen heute Frankreichs Finanz- und Wirtschaftsminister auf ihre Kollegen Schäuble und Gabriel.</text>
+        <description>Frankreich soll sparen und Deutschland investieren. Mit diesem Vorschlag treffen heute Frankreichs Finanz- und Wirtschaftsminister auf ihre Kollegen Schäuble und Gabriel.</description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/wirtschaft/2014-10/sapin-macron/" type="jpg" title="Frankreichs Finanzminister Michel Sapin (links) mit dem neuen Wirtschaftsminister Emmanuel Macron." align="left" publication-date="" expires="">
+          <bu>Frankreichs Finanzminister Michel Sapin (links) mit dem neuen Wirtschaftsminister Emmanuel Macron</bu>
+          <copyright>© Philippe Wojazer/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2014-10/konjunktur-wirtschaft-deutschland-prognose-rueckgang" year="2014" issue="41" ressort="Wirtschaft" contenttype="article" publication-date="" expires="">
+        <supertitle>Konjunktur</supertitle>
+        <title>Bundesregierung senkt Wachstumsprognose deutlich</title>
+        <text>Statt einem Plus von 1,8 Prozent geht die Regierung nur noch von einem Wirtschaftswachstum von 1,2 Prozent aus. Grund seien die vielen internationalen Krisen.</text>
+        <description>Statt einem Plus von 1,8 Prozent geht die Regierung nur noch von einem Wirtschaftswachstum von 1,2 Prozent aus. Grund seien die vielen internationalen Krisen.</description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/politik/deutschland/2014-10/gabriel-konjunktur/" type="jpg" title="Gabriel Konjunktur" align="left" publication-date="" expires="">
+          <bu>Bundeswirtschaftsminister Sigmar Gabriel</bu>
+          <copyright>© Axel Schmidt/Reuters</copyright>
+        </image>
+      </reference>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2014-10/haushalt-schwarze-null-schaeuble" year="2014" issue="41" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" genre="kommentar" author="Marcus Gatzke">
+        <supertitle>Wachstumsprogramm</supertitle>
+        <title>Herr Schäuble, geben Sie nach</title>
+        <text>Die Konjunktur schwächelt. Braucht Deutschland deshalb eine neue Reformagenda? Nein, vielmehr sollte sich der Finanzminister von seiner schwarzen Null verabschieden.</text>
+        <description>Die Konjunktur schwächelt. Braucht Deutschland deshalb eine neue Reformagenda? Nein, vielmehr sollte sich der Finanzminister von seiner schwarzen Null verabschieden.</description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/wirtschaft/2014-10/schaeuble-2/" type="jpg" title="Bundesfinanzminister Wolfgang Schäuble" alt="Bundesfinanzminister Wolfgang Schäuble" align="left" publication-date="" expires="">
+          <bu>Bundesfinanzminister Wolfgang Schäuble</bu>
+          <copyright>© dpa</copyright>
+        </image>
+      </reference>
+    </references>
+    <rankedTags>
+      <tag type="topic" score="10" uuid="6d2eb253-f131-4181-b667-8a9033ac2a9e" url_value="d18">D18</tag>
+      <tag type="topic" score="9" uuid="c151f61d-da76-4f38-95c6-6f04f4a41c1f" url_value="wirtschaftspolitik">Wirtschaftspolitik</tag>
+      <tag type="Organization" score="5" uuid="0599bca7-37f0-4ad1-9281-66c1efe41d20" url_value="europaeische-zentralbank">Europäische Zentralbank</tag>
+      <tag type="Organization" score="5" uuid="3ca2d609-188c-459d-9461-4ad025482ba4" url_value="oecd">OECD</tag>
+      <tag type="free" score="4" uuid="3294ba09-e9a0-4e97-a2ac-6f3bf617b48a" url_value="deflation">Deflation</tag>
+      <tag type="free" score="4" uuid="4b2d29a1-d9d6-4b6c-968a-e4d636858fce" url_value="europapolitik">Europapolitik</tag>
+      <tag type="free" score="4" uuid="242bd103-9c34-436a-b498-5c3b3b1ed8ca" url_value="stabilitaetspakt">Stabilitätspakt</tag>
+    </rankedTags>
+    <author href="http://xml.zeit.de/autoren/author3" publication-date="" expires="">
+      <display_name>Anne Mustermann</display_name>
+      <location>Berlin</location>
+    </author>
+    <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-2" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+      <bu>Die ist der image sub text</bu>
+      <copyright link="http://foo.de">©foo</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Theo Sommer</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Politik Deutschland</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-10-21T05:06:51.262661+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-10-21T05:07:53.619066+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-10-21T05:06:53.764284+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-10-21T05:07:53.619066+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-10-21T05:06:49.245555+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwabe</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Deutschlands Wirtschaftspolitik ist international in der Kritik. Nicht zu Unrecht: Was nützt es etwa, einen orthodoxen Wirtschaftsgrundsatz wider alle Einwände und Widerstände durchzupauken, wenn darüber die Basis der Europapolitik zerbricht – die Zustimmung der Völker zum europäischen Projekt? Wir Deutschen haben seit 35 Jahren keinen ausgeglichenen Haushalt mehr gehabt. Und in einer Zeit, in der die Europhoben allenthalben Zulauf haben, wäre mitleidsloser ökonomischer Purismus der Tod des politischen Europas. (tis)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">80969ebecc494a52a0a0226e5c881c8b</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Fünf vor acht</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Deutschland sollte weniger orthodox Wirtschaftspolitik betreiben und mehr Nachsicht mit den Nachbarn haben. (tis)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Deutschland</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">5702</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ba8de262-3438-42c3-9f55-ed824f8849b0}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">43</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Wirtschaftspolitik</supertitle>
+    <title>Mitleidsloser ökonomischer Purismus schadet Europa</title>
+    <subtitle>Deutschland sollte weniger orthodox Wirtschaftspolitik betreiben und mehr Nachsicht mit den Nachbarn haben. Rigides Sparen allein hilft nicht und nützt den Europhoben.</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-3" type="png" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+        <bu>Die ist der image sub text</bu>
+        <copyright link="http://foo.de">©foo</copyright>
+      </image>
+      <p>Derzeit macht es wenig Freude, in internationalen Zeitungen die Urteile über Deutschland und seine Wirtschaftspolitik zu lesen. "Globaler Wirtschaftsterrorismus"
+wird da dem Bundesfinanzminister Wolfgang Schäuble vorgeworfen. "Fiskalischer
+Kolonialismus" lautet ein anderer Vorwurf. Die <em>Financial Times</em> stellt die Bundesregierung in eine Reihe mit den
+Sparfanatikern der amerikanischen Tea Party. Und nicht nur die Nobelpreisträger
+Joseph Stiglitz und Paul Krugman fordern einen Schuldenerlass und kräftige
+öffentliche und private Investitionen in die Zukunft. Auch der frühere
+US-Finanzminister Larry Summers warnt vor einer Fortsetzung des jetzigen
+Berliner Kurses: Er hält Schäubles Rezept für den direkten Weg in japanische
+Verhältnisse – eine fatale Kombination also aus ökonomischem Abschwung,
+Deflation und Stagnation. </p>
+      <p>In vielen ähnlichen Kommentaren
+mischen sich Neid, Verzweiflung und ökonomischer Sachverstand in
+unterschiedlichen Proportionen. Im Kern spitzen sie sich auf drei Kritikpunkte
+zu: </p>
+      <p>1. Die Deutschen predigen den
+anderen Wasser und schenken sich selbst großzügig Wein ein. Sie drängen die
+Euro- und EU-Partner zu einschneidenden Sparprogrammen, nehmen selbst aber die
+Reformen von Schröders Agenda 2000 zurück und streuen eine milde Gabe nach der
+anderen unters Volk. Die Stichworte sind <a class="" href="http://www.zeit.de/2014/23/muetterrente-anerkennung-leistung" target="_blank">Mütterrente</a>, <a class="" href="http://www.zeit.de/politik/deutschland/2014-05/rentenpaket-rente-mit-63-muetterrente-reha-leistungen" target="_blank">vorgezogene Rente für 45
+Jahre lang Beschäftigte</a>, <a class="" href="http://www.zeit.de/wirtschaft/2014-07/bundestag-mindestlohn-entscheidung" target="_blank">Mindestlohn</a>, <a class="" href="http://www.zeit.de/2014/23/zweimonatsvaeter-elternzeit" target="_blank">Elterngeld plus</a>, Pflegezeit-Zuschüsse,
+dazu weitere Arbeitsmarktregulierungen wie die geplante Frauenquote oder eine
+Antistress-Verordnung. So viel auch für diese Maßnahmen sprechen mag – Berlins Wähler-Wohltaten
+kommen nicht gut an bei den Partnern, denen zur gleichen Zeit mit barscher
+Unerbittlichkeit eingeschärft wird, die Riemen enger zu schnallen. </p>
+      <p>Wäre es nicht ein
+versöhnliches Signal, wenigstens einige dieser Maßnahmen auszusetzen, bis die
+"schwarze Null" erreicht ist: der ausgeglichene Staatshaushalt?</p>
+      <p>2. <a class="" href="http://www.zeit.de/wirtschaft/2014-10/investition-wachstum-verkehr-bildung-gebaeudesanierung" target="_blank">Die Deutschen investieren zu
+wenig</a>. Darüber sind sich alle einig: die Weltbank, der Internationale
+Währungsfonds, die OECD und die Europäische Zentralbank. Seit 1995 sind die
+Investitionen von 23 auf 17 Prozent des Bruttoinlandsprodukts gesunken. Das
+Ergebnis sind verkommende Schulen und Universitäten, geschlossene Schwimmbäder,
+<a class="" href="http://www.zeit.de/mobilitaet/2014-09/deutsche-bahn-bruecken-zustand" target="_blank">verfallende Brücken</a>, Straßen, Kanäle und Schleusen. In der Bildungspolitik wie
+bei Instandhaltung und Modernisierung der öffentlichen Infrastruktur ist ein
+enormer Investitionsbedarf entstanden. 
+
+</p>
+      <p>Bisher hat sich die Bundesregierung
+gescheut, hier eine zukunftsweisende Initiative zu ergreifen; das gedankenlose
+Abarbeiten des Koalitionsvertrages erschien ihr offenbar wichtiger. <a class="" href="http://www.zeit.de/wirtschaft/2014-10/konjunktur-wirtschaft-deutschland-prognose-rueckgang" target="_blank">Jetzt aber
+schwächelt die deutsche Wirtschaft</a>. Die Weltwirtschaftskrise holt uns ein: Die
+Aufträge sind eingebrochen, die Produktion lahmt, der Export verzeichnet einen
+Rückgang. Die Wachstumserwartung musste zurückgestutzt werden – für 2014 auf
+1,2, für 2015 auf 1,3 Prozent. Das hat immerhin zu einem Umdenken geführt.
+Bestimmte Dinge müsse man jetzt angehen, sagt der Finanzminister: "Die
+europäische Digital-Union, die Energie-Union oder den dauerhaften Erhalt
+unserer Infrastruktur." Die Bundeskanzlerin ließ sich im gleichen Sinne
+vernehmen. </p>
+      <raw>
+        <form action="http://community.zeit.de/newsletter-signup?email=" method="get">
+          <div class="newsletter-teaser">
+            <input type="hidden" value="5vor8" name="nl"/>
+            <input type="hidden" name="mode" value="2click"/>
+            <img src="http://img.zeit.de/bilder/newsletter/Anmeldeseite/nl_5vor8.jpg" alt="Fünf vor 8:00" class="left"/>
+            <div class="title">Fünf vor 8:00</div>
+            <p class="teaser">Abonnieren Sie die Morgenkolumne von ZEIT ONLINE – von Montag bis Freitag per E-Mail.</p>
+            <label for="emailadresse" class="hideme">Ihre E-Mail-Adresse:</label>
+            <input type="text" placeholder="Ihre E-Mail-Adresse" name="email"/>
+            <button type="submit" class="submitbutton">Jetzt anmelden</button>
+          </div>
+        </form>
+      </raw>
+      <p>Helmut Schmidt äußerte sich
+beifällig: "Als ehemaliger Finanzminister verstehe ich zwar, dass sich der
+Kollege Schäuble <a class="" href="http://www.zeit.de/politik/deutschland/2014-10/haushalt-schwarze-null-spd-konflikt" target="_blank">über die schwarze Null</a> freut, aber nun ist eine höhere
+staatliche Investitionsquote nötig." Auch die europäischen Nachbarn werden
+aufatmen, dass Deutschland hier endlich vorangeht. Der Akzent verschiebt sich
+vom Budgetausgleich ein Stück weit auf Wachstum. Krugmans Hoffnung scheint
+aufzugehen, dass eine – drohende – Rezession die Herrschaft fiskalischer
+Tugendhaftigkeit beenden werde. </p>
+      <p>3. Der dritte Kritikpunkt ist ein
+politischer. Er lautet: Die Deutschen denken viel zu engstirnig ökonomisch.
+Italiens Ministerpräsident <a class="" href="http://www.zeit.de/2014/38/matteo-renzi-italien-reformen" target="_blank">Matteo Renzi</a> hat dies am deutlichsten formuliert.
+Nicht nur wehrte er sich gegen fortdauernde Belehrungen aus Berlin: "Europa ist
+kein Platz von Lehrern und Schülern." Er will selber <a class="" href="http://www.zeit.de/politik/ausland/2014-10/italien-matteo-renzi-steuererleichterungen-wirtschaft-18-milliarden" target="_blank">die Drei-Prozent-Defizitregel
+einhalten</a> – als "eine Botschaft der Stabilität und der Glaubwürdigkeit". Er
+verteidigt zugleich Frankreichs Recht, diese "Regel der Vergangenheit" zu brechen und
+den Haushaltsausgleich zu verschieben. Seine Begründung: "Ich habe heute lieber
+ein Frankreich mit 4,4 Prozent Budgetdefizit als morgen <a class="" href="http://www.zeit.de/2014/36/frankreich-regierungskrise-le-pen" target="_blank">ein Frankreich mit
+einer Präsidentin Marie Le Pen</a>."</p>
+      <p>Renzo hat Recht. Was nützte es
+schon, einen orthodoxen Wirtschaftsgrundsatz wider alle Einwände und Widerstände
+durchzupauken, wenn darüber die Basis der Europapolitik zerbricht – die
+Zustimmung der Völker zum europäischen Projekt? Wir Deutschen haben seit 35
+Jahren keinen ausgeglichenen Haushalt mehr gehabt – und wir waren es auch, die
+nach dem Abschluss des Stabilitätspaktes mit der Drei-Prozent-Regel diese
+zusammen mit Frankreich in den Wind geschlagen haben. In einer Zeit, in der die
+Europhoben allenthalben Zulauf haben, wäre mitleidsloser ökonomischer Purismus
+der Tod des politischen Europas. 
+
+</p>
+      <p>"Politische Stabilität ist eine
+Voraussetzung für nachhaltiges Wachstum", hat Wolfgang Schäuble der <em>Welt</em> erklärt. Richtig. Aber umgekehrt
+wird ebenso ein Schuh daraus: Nachhaltiges Wachstum ist eine Voraussetzung für
+politische Stabilität. </p>
+      <infobox is_empty="False" href="http://xml.zeit.de/politik/deutschland/2014-10/box-sommer-wirtschaftspolitik" publication-date="" expires=""/>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Wirtschaftspolitik</supertitle>
+    <text>Deutschland sollte weniger orthodox Wirtschaftspolitik betreiben und mehr Nachsicht mit den Nachbarn haben.</text>
+    <title>Mitleidsloser ökonomischer Purismus</title>
+  </teaser>
+</article>

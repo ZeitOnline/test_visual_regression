@@ -4,10 +4,35 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- Nothing
+- "arbeit" aus den feature-toggle(-preview).xml aller Vivis entfernen
 
 
-3.122 (unreleased)
+3.124 (unreleased)
+------------------
+
+- ZON-4466: Remove yellow border from Arbeit in ressort navigation
+
+- ZON-4445: Change imagesize of Spektrum-Feed
+
+- SSL-133: Rewrite topiclinks in navigation
+
+- BUG-847: Font-Rendering in Safari
+
+- FIX: Change tracking for Flipboard
+
+- MAINT: Remove feature toggle for ZEIT Arbeit vertical
+
+
+3.123 (2018-02-13)
+------------------
+
+- SSL-83: Replace https protocol on `<esi:include>`
+
+- ZON-4430: Do no longer remove episodes from podcast data,
+  podigee already omits them
+
+
+3.122 (2018-02-12)
 ------------------
 
 - TMS-4: Fix TMS health check URL
@@ -16,7 +41,13 @@ POSTDEPLOY
 
 - ZON-4414: Add flipboard share button for articles
 
+- ZON-4415: Show placeholder for non provided content in AMP
+
 - ZON-4440: Track Product-ID to WT on paywall forms
+
+- ZON-4451: Add #D18 to teaser and parquet
+
+- ZON-4452: Add #d18 to navigation
 
 - BUG-840: Add automatic hyphenation and wrap long words on mobile devices
 

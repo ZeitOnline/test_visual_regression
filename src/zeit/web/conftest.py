@@ -366,30 +366,6 @@ def set_loglevel():
     logging.getLogger('zeit.cms.repository').setLevel(logging.INFO)
 
 
-# Copy&paste monkey-patch pytest to be able to globally set a loglevel, see
-# <https://github.com/pytest-dev/pytest/issues/2977>.
-@contextmanager
-def catching_logs(handler, formatter=None, level=logging.NOTSET):
-    root_logger = logging.getLogger()
-    if formatter is not None:
-        handler.setFormatter(formatter)
-    handler.setLevel(level)
-    add_new_handler = handler not in root_logger.handlers
-
-    if add_new_handler:
-        root_logger.addHandler(handler)
-    # PATCHED to remove this nonsense
-    # orig_level = root_logger.level
-    # root_logger.setLevel(min(orig_level, level))
-    try:
-        yield handler
-    finally:
-        # root_logger.setLevel(orig_level)
-        if add_new_handler:
-            root_logger.removeHandler(handler)
-_pytest.logging.catching_logs = catching_logs
-
-
 @pytest.fixture
 def preserve_settings(application_session, request):
     def restore_settings():

@@ -40,6 +40,7 @@
     <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="genre" ns="http://namespaces.zeit.de/CMS/document">glosse</attribute>
     <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="is_amp" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-12-05T17:11:22.109311+00:00</attribute>

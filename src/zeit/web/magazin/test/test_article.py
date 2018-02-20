@@ -952,7 +952,7 @@ def test_share_buttons_are_present(testbrowser):
     parts = urlparse.urlparse(links[2].get('href'))
     query = urlparse.parse_qs(parts.query)
     url = query.get('url').pop(0)
-    assert 'wt_zmc=sm.ext.zonaudev.flipboard.ref.zeitde.share.link' in url
+    assert 'wt_zmc=soref.ext.zonaudev.flipboard.ref.zeitde.share.link' in url
     assert query.get('title').pop(0) == (
         'Der Chianti hat eine zweite Chance verdient')
 

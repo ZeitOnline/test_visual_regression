@@ -97,6 +97,14 @@
                         "actionName": "amp.articlebottom.publisher-nextread...button|premium.zeit.de/aktuelle-zeit"
                     }
                 },
+                 "trackPlaceholderClick": {
+                    "on": "click",
+                    "selector": ".article__placeholder > a",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.0.0.0.article.placeholder|${canonicalUrl}"
+                    }
+                },
                 "trackFooterLogoClick": {
                     "on": "click",
                     "selector": ".footer > a:first-child",

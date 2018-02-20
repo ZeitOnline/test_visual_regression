@@ -32,21 +32,6 @@
 		> li:nth-child(n+6)
 			display: none
 
-	%ressort-feature-background
-		border-radius: 3px
-		display: inline-block
-		line-height: 2
-		padding: remify(0 8px)
-		transition: background-color .15s linear
-
-	&__ressorts-item--featured
-		a
-			background-color: $zon-dark-grey
-			@extend %ressort-feature-background
-			+on-interaction
-				background-color: $zon-grey
-				color: #fff
-
 	// hide advertorial links in 1st level navigation, enable for mobile view only
 	&__ressorts-item--has-label,
 	// hide more ressorts link, enable for script enabled desktop view only
@@ -284,6 +269,10 @@
 			display: list-item
 		.js &__ressorts-item--featured
 			margin-left: auto // align right @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
+			//height: remify(30px)
+			padding: 0
+			position: relative
+			top: remify(4px)
 
 		&__dropdown-item--has-label
 			background-color: #FAFAF3
@@ -296,10 +285,14 @@
 		&__ressorts-link--current
 			font-weight: bold
 
-		&__ressorts-item--featured
-			a
-				+on-interaction
-					box-shadow: none
+		&__ressorts-item
+			&--featured
+				a
+					height: remify(30px)
+					+on-interaction
+						box-shadow: none
+			&--icon-featured-d18
+				height: 100%
 
 		// dropdown menues
 		&__dropdown-list,
@@ -452,13 +445,3 @@
 			// hide advertorial links in 1st level navigation
 			li.nav__ressorts-item--has-label
 				display: none
-
-// must be written explicitly and down here to win the specificity wars
-a.nav__ressorts-link--arbeit-highlighted
-	border: 2px solid $color-zar-accent
-	@extend %ressort-feature-background
-	+respond-max($break-tablet-min)
-		display: inline !important // this is a temporary element, so I dont care
-	+on-interaction
-		background-color: $color-zar-accent
-		box-shadow: none
