@@ -132,47 +132,25 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
 
 
-class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery,
-                      Converter):
-
-    # XXX Can we generate this from zeit.retresco.convert somehow?
-    FIELD_MAP = collections.OrderedDict((
-        ('authors', 'authorships'),
-        ('author_names', 'authors'),
-        ('date_last_semantic_change', 'last_semantic_change'),
-        ('allow_comments', 'commentsAllowed'),
-        ('show_comments', 'commentSectionEnable'),
-        ('print_ressort', 'printRessort'),
-        ('teaser_text', 'teaserText'),
-        ('teaser_title', 'teaserTitle'),
-        ('teaser_supertitle', 'teaserSupertitle'),
-        ('article_genre', 'genre'),
-        ('article_template', 'template'),
-    ))
-
-    def _convert(self, doc):
-        doc = super(TMSContentQuery, self)._convert(doc)
-        doc = self._convert_authorships(doc)
-        return doc
+class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery):
 
     def _resolve(self, doc):
-        return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
+        content = zeit.retresco.interfaces.ITMSContent(doc)
+        zeit.web.core.repository.add_marker_interfaces(
+            content, in_repository=False)
+        return content
 
 
 class ElasticsearchContentQuery(
-        zeit.content.cp.automatic.ElasticsearchContentQuery,
-        Converter):
+        zeit.content.cp.automatic.ElasticsearchContentQuery):
 
     include_payload = True
-    FIELD_MAP = TMSContentQuery.FIELD_MAP
-
-    def _convert(self, doc):
-        doc = super(ElasticsearchContentQuery, self)._convert(doc)
-        doc = self._convert_authorships(doc)
-        return doc
 
     def _resolve(self, doc):
-        return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
+        content = zeit.retresco.interfaces.ITMSContent(doc)
+        zeit.web.core.repository.add_marker_interfaces(
+            content, in_repository=False)
+        return content
 
 
 class TopicsitemapContentQuery(zeit.content.cp.automatic.ContentQuery):

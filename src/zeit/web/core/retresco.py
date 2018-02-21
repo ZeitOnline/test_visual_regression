@@ -111,13 +111,10 @@ class DataTMS(
             data = zeit.retresco.interfaces.ITMSRepresentation(content)()
             if data is not None:
                 # Ensure we always have an image
-                data['payload'].setdefault(
+                data['payload'].setdefault('head', {}).setdefault(
                     'teaser_image',
                     'http://xml.zeit.de/zeit-online/'
                     'image/filmstill-hobbit-schlacht-fuenf-hee/')
-                # XXX LazyProxy cannot support liveblogs, and we don't want to
-                # expose those in tests.
-                data['payload']['is_live'] = False
                 result.append(data)
         self._response = {
             'num_found': len(result),
@@ -148,13 +145,10 @@ class DataES(
             data = zeit.retresco.interfaces.ITMSRepresentation(content)()
             if data is not None:
                 # Ensure we always have an image
-                data['payload'].setdefault(
+                data['payload'].setdefault('head', {}).setdefault(
                     'teaser_image',
                     'http://xml.zeit.de/zeit-online/'
                     'image/filmstill-hobbit-schlacht-fuenf-hee/')
-                # XXX LazyProxy cannot support liveblogs, and we don't want to
-                # expose those in tests.
-                data['payload']['is_live'] = False
                 if not include_payload:
                     del data['payload']
                 result.append({'_source': data})
