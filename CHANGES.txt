@@ -10,6 +10,8 @@ POSTDEPLOY
 3.125 (unreleased)
 ------------------
 
+- ZON-4480: Fontsize API for Apps
+
 - BUG-858: Fix Campus debatebox infiltration by banner
 
 
