@@ -7,7 +7,15 @@ POSTDEPLOY
 - "arbeit" aus den feature-toggle(-preview).xml aller Vivis entfernen
 
 
-3.124 (unreleased)
+3.125 (unreleased)
+------------------
+
+- ZON-4480: Fontsize API for Apps
+
+- BUG-858: Fix Campus debatebox infiltration by banner
+
+
+3.124 (2018-02-22)
 ------------------
 
 - ZON-4466: Remove yellow border from Arbeit in ressort navigation
