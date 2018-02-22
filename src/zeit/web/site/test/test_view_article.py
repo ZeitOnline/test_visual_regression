@@ -2371,3 +2371,6 @@ def test_font_sizing_via_js_api_from_app(selenium_driver, testserver):
 
     html_elem = driver.find_element_by_css_selector('html')
     assert html_elem.get_attribute('style') == 'font-size: 200%;'
+
+    # clean up to not harm the next tests
+    driver.execute_script("window.localStorage.clear()")
