@@ -10,7 +10,7 @@ POSTDEPLOY
 3.125 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-858: Fix Campus debatebox infiltration by banner
 
 
 3.124 (2018-02-22)
