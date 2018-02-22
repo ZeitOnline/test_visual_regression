@@ -7,7 +7,7 @@ POSTDEPLOY
 - "arbeit" aus den feature-toggle(-preview).xml aller Vivis entfernen
 
 
-3.124 (unreleased)
+3.124 (2018-02-22)
 ------------------
 
 - ZON-4466: Remove yellow border from Arbeit in ressort navigation
