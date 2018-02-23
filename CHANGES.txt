@@ -10,6 +10,8 @@ POSTDEPLOY
 3.125 (unreleased)
 ------------------
 
+- ZON-4479: Show logo on brandeins teasers
+
 - ZON-4480: Fontsize API for Apps
 
 - BUG-858: Fix Campus debatebox infiltration by banner
