@@ -343,7 +343,7 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def webtrekk_assets(self):
         assets = []
-
+        url = self.request.path_url
         block_type = zeit.web.core.template.block_type(self.header_module)
         if block_type in self.WEBTREKK_ASSETS:
             assets.append('{}.header/seite-1'.format(block_type))
@@ -358,7 +358,12 @@ class Article(zeit.web.core.view.Content):
                             continue
                 if block_type == 'paragraph':
                     p += 1
-                if block_type in self.WEBTREKK_ASSETS:
+                if block_type in ('cardstack', 'quiz', 'raw', 'rawtext') \
+                        and '/amp/' in url:
+                    assets.append(
+                        'amp_platzhalter.' + str(nr) + '/seite-' + str(nr)
+                        .format(block_type, p, nr))
+                elif block_type in self.WEBTREKK_ASSETS:
                     assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
         return assets
 
