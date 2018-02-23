@@ -3077,3 +3077,27 @@ def test_topicpage_has_jsonld(testbrowser, datasolr):
 def test_centerpage_has_no_jsonld(testbrowser, datasolr):
     browser = testbrowser('/zeit-online/index')
     assert 'ld+json' not in browser.contents
+
+
+def test_brandeins_teaser_kicker_should_contain_logo(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/teasers-to-brandeins')
+
+    teaser_fullwidth_logo = browser.cssselect(
+        '.teaser-fullwidth__kicker-logo--brandeins')
+    teaser_classic_logo = browser.cssselect(
+        '.teaser-classic__kicker-logo--brandeins')
+    teaser_large_logo = browser.cssselect(
+        '.teaser-large__kicker-logo--brandeins')
+    teaser_small_logo = browser.cssselect(
+        '.teaser-small__kicker-logo--brandeins')
+    teaser_small_minor_logo = browser.cssselect(
+        '.teaser-small-minor__kicker-logo--brandeins')
+    teaser_square_logo = browser.cssselect(
+        '.teaser-square__kicker-logo--brandeins')
+
+    assert len(teaser_fullwidth_logo) == 1
+    assert len(teaser_classic_logo) == 1
+    assert len(teaser_large_logo) == 2
+    assert len(teaser_small_logo) == 4
+    assert len(teaser_small_minor_logo) == 2
+    assert len(teaser_square_logo) == 2
