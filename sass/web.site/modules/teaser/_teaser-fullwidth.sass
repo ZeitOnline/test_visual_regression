@@ -59,6 +59,8 @@
 		+respond-min($break-tablet-min)
 			color: $white
 			font-size: em(14px)
+		&--brandeins
+			@extend %teaser-kicker--brandeins
 		&--zmo
 			@extend %teaser-kicker--zmo
 			font-size: remify(17px)
@@ -79,6 +81,9 @@
 		&--zar
 			@extend %teaser-kicker--zar
 	&__kicker-logo
+		&--brandeins
+			@extend %teaser-kicker-logo--brandeins
+			color: inherit
 		&--zmo
 			@extend %teaser-kicker-logo--zmo
 			+respond-min($break-tablet-min)
