@@ -63,6 +63,11 @@
 	article[data-zplus] &__kicker
 		display: flex
 	&__kicker-logo
+		&--brandeins
+			@extend %teaser-kicker-logo--brandeins
+			color: inherit
+			vertical-align: bottom
+			margin-right: em(3px, 13px) // smaller because of uppercase and letter-spacing
 		&--zmo
 			@extend %teaser-kicker-logo--zmo
 			+respond-min($break-tablet-min)

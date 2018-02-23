@@ -46,6 +46,8 @@ $layout: ".teaser-square"
 		margin-bottom: .5em
 		text-transform: uppercase
 		&--zco
+			@extend %teaser-kicker--brandeins
+		&--zco
 			@extend %teaser-kicker--zco
 			color: #fff
 		&--zar
@@ -56,6 +58,11 @@ $layout: ".teaser-square"
 		align-items: center
 		display: flex
 	&__kicker-logo
+		&--brandeins
+			@extend %teaser-kicker-logo--brandeins
+			color: inherit
+			margin-right: em(3px, 13px) // smaller because of uppercase and letter-spacing
+			vertical-align: bottom
 		&--zett
 			@extend %teaser-kicker-logo--zett
 			height: remify(24px)
