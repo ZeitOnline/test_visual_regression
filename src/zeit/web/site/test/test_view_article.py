@@ -1376,6 +1376,22 @@ def test_no_webtrekk_ecommerce_without_newsletter_optin(testbrowser):
     assert 'wt.customEcommerceParameter' not in browser.contents
 
 
+def test_amp_article_contains_webtrekk_parameter_asset(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    assert 'amp_platzhalter.1/seite-1;video.3/seite-1;video.5/seite-1' \
+        in browser.contents
+
+    select = testbrowser('/amp/zeit-online/article/amp').cssselect
+    assert len(select('.article__placeholder')) >= 1
+
+    browser = testbrowser('/zeit-online/article/amp')
+    assert 'amp_platzhalter.1/seite-1;video.3/seite-1;video.5/seite-1' \
+        not in browser.contents
+
+    select = testbrowser('/zeit-online/article/amp').cssselect
+    assert len(select('.article__placeholder')) == 0
+
+
 def test_article_contains_webtrekk_parameter_asset(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/cardstack')
