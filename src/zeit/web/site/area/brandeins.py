@@ -19,8 +19,8 @@ class ImageGroup(zeit.web.core.image.RemoteImageGroup):
     @zeit.web.reify
     def uniqueId(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return u'http://xml.zeit.de/zett-image{}'.format(
-            self.image_url.replace(conf.get('zett_img_host'), u''))
+        return u'http://xml.zeit.de/brandeins{}'.format(
+            self.image_url.replace(conf.get('brandeins_img_host'), u''))
 
 
 @grokcore.component.implementer(zeit.web.site.area.rss.IRSSLink)
@@ -33,4 +33,4 @@ class Link(zeit.web.site.area.rss.RSSLink):
 @zeit.web.register_area('brandeins')
 class Brandeins(zeit.web.site.area.rss.RSSArea):
 
-    feed_key = 'zett_hp_feed'
+    feed_key = 'brandeins_hp_feed'
