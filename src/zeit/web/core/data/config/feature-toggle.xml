@@ -6,7 +6,7 @@
   <arbeit_quote_sharing>true</arbeit_quote_sharing>
   <article_lineage>true</article_lineage>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
-  <dtag_navigation>false</dtag_navigation>
+  <dtag_navigation>true</dtag_navigation>
   <campus_toolbox>true</campus_toolbox>
   <dummy>false</dummy>
   <enable_intext_links>false</enable_intext_links>
