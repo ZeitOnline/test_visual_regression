@@ -1376,22 +1376,6 @@ def test_no_webtrekk_ecommerce_without_newsletter_optin(testbrowser):
     assert 'wt.customEcommerceParameter' not in browser.contents
 
 
-def test_amp_article_contains_webtrekk_parameter_asset(testbrowser):
-    browser = testbrowser('/amp/zeit-online/article/amp')
-    assert 'amp_platzhalter.1/seite-1;video.3/seite-1;video.5/seite-1' \
-        in browser.contents
-
-    select = testbrowser('/amp/zeit-online/article/amp').cssselect
-    assert len(select('.article__placeholder')) >= 1
-
-    browser = testbrowser('/zeit-online/article/amp')
-    assert 'amp_platzhalter.1/seite-1;video.3/seite-1;video.5/seite-1' \
-        not in browser.contents
-
-    select = testbrowser('/zeit-online/article/amp').cssselect
-    assert len(select('.article__placeholder')) == 0
-
-
 def test_article_contains_webtrekk_parameter_asset(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/cardstack')
@@ -1423,6 +1407,13 @@ def test_article_contains_webtrekk_parameter_asset(dummy_request):
         'http://xml.zeit.de/zeit-online/article/video-expired')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp27'] == ''
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/amp-invalid')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp27'] == \
+        'cardstack.2/seite-1;' \
+        'quiz.3/seite-1;raw.4/seite-1;rawtext.5/seite-1'
 
 
 def test_advertorial_article_contains_correct_webtrekk_param(dummy_request):
