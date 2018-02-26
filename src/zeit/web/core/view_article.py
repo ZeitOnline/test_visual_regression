@@ -361,8 +361,7 @@ class Article(zeit.web.core.view.Content):
                 if block_type in ('cardstack', 'quiz', 'raw', 'rawtext') \
                         and '/amp/' in url:
                     assets.append(
-                        'amp_platzhalter.' + str(nr) + '/seite-' + str(nr)
-                        .format(block_type, p, nr))
+                        'amp_platzhalter.{0}/seite-{0}'.format(nr))
                 elif block_type in self.WEBTREKK_ASSETS:
                     assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
         return assets
