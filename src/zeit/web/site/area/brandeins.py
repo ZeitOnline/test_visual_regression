@@ -19,7 +19,7 @@ class ImageGroup(zeit.web.core.image.RemoteImageGroup):
     @zeit.web.reify
     def uniqueId(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return u'http://xml.zeit.de/brandeins{}'.format(
+        return u'http://xml.zeit.de/brandeins-image{}'.format(
             self.image_url.replace(conf.get('brandeins_img_host'), u''))
 
 
