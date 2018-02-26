@@ -151,7 +151,7 @@ def test_parquet_meta_provides_expected_webtrekk_strings(
         links[x].click()
         track_str = driver.execute_script("return window.trackingData")
         identifier = 'stationaer.parquet-titel.3.0.{}.topiclink|{}'.format(
-            x + 2, links[x].get_attribute('href').replace('http://', ''))
+            x + 2, links[x].get_attribute('href').replace('https://', ''))
         assert identifier == track_str
 
     title = driver.find_element_by_css_selector('.parquet-meta__more-link')

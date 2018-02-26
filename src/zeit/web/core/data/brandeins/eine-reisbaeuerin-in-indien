@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<link>
+  <head>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-online/cp-content/ig-5" type="jpg" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright link="http://www.photocase.com/user.asp?u=427969">© simonthon.com/photocase.com</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-10-16T20:07:55.715503+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-10-16T20:08:34.009139+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-10-16T20:08:34.355247+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-10-16T20:08:34.009139+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-10-16T20:08:32.934222+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-10-16T20:07:55+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.rvd-spaet-ersatz</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Digital</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Internet</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">link</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:8d9a3163-6c7e-4b39-b534-57318b4a149e}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">41</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Link" module="zeit.content.link.link"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Mikroökonomie</supertitle>
+    <title>Eine Reisbäuerin in Indien</title>
+    <subtitle>Lakshmi Venugopal, 58, gehört einer Kaste an, die einmal bekannt war für Finanzgeschäfte und Gastfreundschaft. Im Laufe der Jahrzehnte hat sich ihre Stellung verändert, ihre Mitglieder sind nicht mehr wohlhabend.</subtitle>
+    <url>https://www.brandeins.de/magazine/brand-eins-wirtschaftsmagazin/2018/marketing/mikrooekonomie-eine-reisbaeuerin-in-indien</url>
+    <nofollow>false</nofollow>
+  <teaser>
+    <text>Lakshmi Venugopal, 58, gehört einer Kaste an, die einmal bekannt war für Finanzgeschäfte und Gastfreundschaft. Im Laufe der Jahrzehnte hat sich ihre Stellung verändert, ihre Mitglieder sind nicht mehr wohlhabend.</text>
+  </teaser>
+  </body>
+</link>
