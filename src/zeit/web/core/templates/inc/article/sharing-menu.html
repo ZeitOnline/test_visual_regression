@@ -18,7 +18,7 @@
             </a>
         </li>
         <li class="{{ self.layout() }}__item">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('flipboard') }}" href="https://share.flipboard.com/bookmarklet/popout?v=2&title={{ view.title | urlencode }}&url={{ content_url.format('flipboard') | urlencode }}" target="_blank" data-ct-label="flipboard">
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('flipboard') }}" href="https://share.flipboard.com/bookmarklet/popout?v=2&title={{ view.title | urlencode }}&url={{ content_url.format('flipboard') | urlencode | replace('sm.ext', 'soref.ext') }}" target="_blank" data-ct-label="flipboard">
                 {{ lama.use_svg_icon('sharing-flipboard', '%s__icon' | format(self.layout()) | with_mods('flipboard'), view.package) }}
                 <span class="{{ self.layout() }}__text">{% block sharing_menu_text_flipboard %}Flippen{% endblock %}</span>
             </a>

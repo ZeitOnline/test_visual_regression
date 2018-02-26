@@ -4,15 +4,35 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- "arbeit" aus den feature-toggle(-preview).xml aller Vivis entfernen
+
+3.126 (unreleased)
+------------------
+
+- Nothing changed yet.
 
 
-3.124 (unreleased)
+3.125 (2018-02-26)
+------------------
+
+- ZON-4479: Show logo on brandeins teasers
+
+- ZON-4480: Fontsize API for Apps
+
+- BUG-858: Fix Campus debatebox infiltration by banner
+
+
+3.124 (2018-02-22)
 ------------------
 
 - ZON-4466: Remove yellow border from Arbeit in ressort navigation
 
 - ZON-4445: Change imagesize of Spektrum-Feed
+
+- SSL-133: Rewrite topiclinks in navigation
+
+- BUG-847: Font-Rendering in Safari
+
+- FIX: Change tracking for Flipboard
 
 - MAINT: Remove feature toggle for ZEIT Arbeit vertical
 
