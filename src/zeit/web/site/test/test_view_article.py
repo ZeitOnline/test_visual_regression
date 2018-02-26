@@ -2364,3 +2364,29 @@ def test_dpa_article_should_have_correct_header(testbrowser):
     browser = testbrowser('/zeit-online/article/dpa-image')
     assert len(browser.cssselect('.dpa-header')) == 1
     assert len(browser.cssselect('.dpa-header__image')) == 1
+
+
+def test_font_sizing_via_js_api_from_app(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    html_elem = driver.find_element_by_css_selector('html')
+
+    driver.execute_script("window.Zeit.setFontSize(0)")
+    assert not html_elem.get_attribute('style')
+
+    driver.execute_script("window.Zeit.setFontSize('Wurstbrot')")
+    assert not html_elem.get_attribute('style')
+
+    driver.execute_script("window.Zeit.setFontSize(200)")
+    assert html_elem.get_attribute('style') == 'font-size: 200%;'
+
+    driver.get('%s/zeit-online/article/simple' % testserver.url)
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, '.main--article'))
+    assert WebDriverWait(selenium_driver, 1).until(condition)
+
+    html_elem = driver.find_element_by_css_selector('html')
+    assert html_elem.get_attribute('style') == 'font-size: 200%;'
+
+    # clean up to not harm the next tests
+    driver.execute_script("window.localStorage.clear()")
