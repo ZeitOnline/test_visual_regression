@@ -4,8 +4,6 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- "arbeit" aus den feature-toggle(-preview).xml aller Vivis entfernen
-
 
 3.126 (unreleased)
 ------------------
