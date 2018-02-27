@@ -210,6 +210,9 @@ def logo_icon(teaser, area_kind=None, zplus=None):
     if vertical == 'zett':
         templates.append('logo-zett-small')
         return templates
+    if vertical == 'brandeins':
+        templates.append('logo-brandeins')
+        return templates
 
     # inclusive icons may appear both
     if tag_with_logo_content(teaser, area_kind) and not zplus_icon:

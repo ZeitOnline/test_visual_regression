@@ -4,15 +4,23 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- "arbeit" aus den feature-toggle(-preview).xml aller Vivis entfernen
 
-
-3.125 (unreleased)
+3.126 (unreleased)
 ------------------
+
+- Nothing changed yet.
+
+
+3.125 (2018-02-26)
+------------------
+
+- ZON-4479: Show logo on brandeins teasers
 
 - ZON-4480: Fontsize API for Apps
 
 - BUG-858: Fix Campus debatebox infiltration by banner
+
+- FIX: Fix color of brandeins teaser badge and ZAR logo
 
 
 3.124 (2018-02-22)

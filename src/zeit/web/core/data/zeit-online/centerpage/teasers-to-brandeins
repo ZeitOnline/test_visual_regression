@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="homepage">
+  <head>
+    <topiclinks>
+      <topiclink>
+        <topiclink_label_1>Griechenland</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/schlagworte/orte/griechenland/index</topiclink_url_1>
+        <topiclink_label_2>Flüchtlinge</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/schlagworte/themen/fluechtling/index</topiclink_url_2>
+        <topiclink_label_3>Tunesien</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/schlagworte/orte/tunesien/index</topiclink_url_3>
+      </topiclink>
+    </topiclinks>
+    <header_image xsi:nil="true"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-30T15:14:05.054438+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-09T15:03:34.218852+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-30T15:16:56.121621+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-30T14:13:24.911349+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-06-30T14:12:57.703609+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-06-30T14:12:57.779765+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-30T14:13:07.149702+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.brightcove</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">homepage</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:3986a9c2-154d-4076-97ef-08aca764cb37}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Teaser auf brand eins (Linkobjekte)</title>
+
+    <!-- Fullwidth Teaser -->
+    <cluster area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
+      <region area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
+        <container cp:type="teaser" module="zon-fullwidth" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead1c">
+      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+    </container>
+      </region>
+    </cluster>
+
+    <!-- Fullwidth Teaser Classic -->
+    <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" kind="solo" title="AufmacherClassic">
+      <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" kind="solo">
+        <container cp:type="teaser" module="zon-classic" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead2c">
+      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+    </container>
+      </region>
+    </cluster>
+
+    <!-- Major/Minor Duo -->
+    <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
+      <region area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
+
+        <container cp:type="teaser" module="zon-large" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead3c">
+      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+    </container>
+
+    <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead4c">
+      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+    </container>
+
+     <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead5f">
+      <block href="http://xml.zeit.de/brandeins/der-besessene"/>
+    </container>
+
+      </region>
+
+      <region area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
+
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead1b">
+      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+    </container>
+
+    <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead8f">
+      <block href="http://xml.zeit.de/brandeins/der-besessene"/>
+    </container>
+
+      </region>
+    </cluster>
+
+    <!-- Topic -->
+    <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924ef86" kind="topic">
+      <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d52" kind="topic" title="Dossierteaser Titel" supertitle="Dossier" xread_more_url="http://xml.zeit.de/zeit-online/index">
+        <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
+        <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e6">
+          <block href="http://xml.zeit.de/brandeins/der-besessene"/>
+        </container>
+        <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
+          <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+        </container>
+        <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
+          <block href="http://xml.zeit.de/brandeins/der-besessene"/>
+        </container>
+      </region>
+    </cluster>
+    <!-- Square -->
+    <cluster area="id-7e329214-665f-457d-a624-94c47850f956" kind="duo">
+        <region area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
+            <container cp:type="teaser" module="zon-square" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152572a">
+        <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+      </container>
+        </region>
+        <region area="id-0e98c5c2-2b95-42b7-9ccc-83e684fa87bb" kind="duo">
+            <container cp:type="teaser" module="zon-square" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152573a">
+        <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+      </container>
+        </region>
+    </cluster>
+
+    <!-- brand eins Teaser in Standard Parkett -->
+    <cluster area="id-bdfb0156-4df4-4bcd-bf1e-68609ef1a109" kind="parquet" title="Parquet">
+      <region area="id-1ac0ac50-fe94-4431-baac-435cc2a934dd" kind="parquet" title="Parkett: brand eins Teaser">
+
+    <container cp:type="teaser" module="zon-large" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
+      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+    </container>
+
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
+      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+    </container>
+
+    <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b">
+      <block href="http://xml.zeit.de/brandeins/der-besessene"/>
+    </container>
+      </region>
+    </cluster>
+
+  <!-- TODO: brand eins Parkett -->
+  <!--
+  <cluster area="id-e2f9e2c4-2700-4c62-8701-9f914e653123" kind="parquet" title="Zett Parkett" visible="True" visible_mobile="True">
+    <region area="id-663bd0f8-dab4-4388-97d4-e83a9d177123" hide-dupes="True" kind="zett" title="Zett" visible="True" visible_mobile="True"/>
+  </cluster>
+  -->
+
+  </body>
+  <feed />
+  <teaser>
+    <title>Teaser auf brand eins (Linkobjekte)</title>
+  </teaser>
+</centerpage>
