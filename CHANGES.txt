@@ -8,6 +8,8 @@ POSTDEPLOY
 3.126 (unreleased)
 ------------------
 
+- ZON-4487: Track placeholders in AMP articles
+
 - ZON-4442: Consider liveblog version in AMP styles
 
 
