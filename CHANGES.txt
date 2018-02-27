@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - BUG-858: Fix Campus debatebox infiltration by banner
 
+- FIX: Fix color of brandeins teaser badge and ZAR logo
+
 
 3.124 (2018-02-22)
 ------------------
