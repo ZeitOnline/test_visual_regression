@@ -8,7 +8,7 @@ POSTDEPLOY
 3.126 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4442: Consider liveblog version in AMP styles
 
 
 3.125 (2018-02-26)
