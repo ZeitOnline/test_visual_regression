@@ -1,5 +1,6 @@
 import os.path
 import logging
+import urllib
 
 import pyramid.httpexceptions
 import pyramid.response
@@ -141,6 +142,7 @@ class RSSImage(Image):
 
         file_name, variant = segments[-2:]
         path = u'/'.join(segments[:-1])
+        path = urllib.unquote_plus(path)
         image_url = u'{}/{}'.format(self.remote_host, path)
 
         context.image_url = image_url

@@ -1,7 +1,9 @@
 import logging
 
+import urllib
+import urlparse
+
 import grokcore.component
-import zope.component
 
 import zeit.content.image.interfaces
 
@@ -18,9 +20,9 @@ class ImageGroup(zeit.web.core.image.RemoteImageGroup):
 
     @zeit.web.reify
     def uniqueId(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return u'http://xml.zeit.de/brandeins-image{}'.format(
-            self.image_url.replace(conf.get('brandeins_img_host'), u''))
+        parts = urlparse.urlparse(self.image_url)
+        return u'http://xml.zeit.de/brandeins-image{}{}'.format(
+            parts.path, urllib.quote_plus('?' + parts.query))
 
 
 @grokcore.component.implementer(zeit.web.site.area.rss.IRSSLink)
