@@ -375,7 +375,7 @@ def test_liveblog_api_request_renews_expired_cache_token(
 
 
 def test_liveblog_get_info(application, liveblog):
-    assert liveblog.last_modified == u'2017-12-22T13:17:23+00:00'
+    assert liveblog.last_modified.isoformat() == u'2017-12-22T14:17:23+01:00'
     assert liveblog.is_live is True
 
 

@@ -14,6 +14,8 @@ POSTDEPLOY
 3.125 (2018-02-26)
 ------------------
 
+- ZON-4442: Consider liveblog version in AMP styles
+
 - ZON-4479: Show logo on brandeins teasers
 
 - ZON-4480: Fontsize API for Apps

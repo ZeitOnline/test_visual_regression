@@ -288,7 +288,7 @@ class Liveblog(Module):
     def set_blog_info(self):
         json = self.api_blog_request()
         self.is_live = json.get('blog_status') == u'open'
-        self.last_modified = json.get('_updated')
+        self.last_modified = self.format_date(json.get('_updated'))
 
     def api_auth_token(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -335,6 +335,8 @@ class Liveblog(Module):
         date_format = '%d.%m.%y %H:%M'
         if '/' in date:
             date_format = '%m/%d/%y %I:%M %p'
+        elif '+00:00' in date:
+            date_format = '%Y-%m-%dT%H:%M:%S+00:00'
         elif '-' in date:
             date_format = '%Y-%m-%dT%H:%M:%SZ'
         return datetime.datetime.strptime(
