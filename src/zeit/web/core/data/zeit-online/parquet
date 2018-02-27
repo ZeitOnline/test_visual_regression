@@ -145,6 +145,9 @@
 		<cluster area="id-28063a7f-8af3-480b-ab08-12e3611c5324" kind="parquet" kind_title="Spektrum Parkett-Region">
 			<region hide-dupes="True" area="id-f8fd8512-f9b3-445e-8fdf-e6f647392848" kind="spektrum"/>
 		</cluster>
+		<cluster area="id-28063a7f-8af3-480b-ab08-12e3611c532422" kind="parquet" kind_title="brand eins Parkett-Region">
+			<region hide-dupes="True" area="id-f8fd8512-f9b3-445e-8fdf-e6f64739284822" kind="brandeins"/>
+		</cluster>
 		<cluster area="id-169a7b31-11e3-4bb0-a529-92f888d73941" kind="parquet" kind_title="ZE.TT Parkett-Region">
 			<region hide-dupes="True" area="id-3c8d3436-b485-4d0d-ae3d-9e536bc5d30b" kind="zett"/>
 		</cluster>

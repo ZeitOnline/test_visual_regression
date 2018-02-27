@@ -164,6 +164,7 @@ class Application(object):
         # XXX align-route-config-uris: Ensure downward compatibility until
         # corresponding varnish changes have been deployed. Remove afterwards.
         config.add_route('health_check_XXX', '/health_check')  # XXX remove
+        config.add_route('brandeins-image', '/brandeins-image/*path')
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route('zett-image', '/zett-image/*path')
         config.add_route('blacklist', '/-blacklist', factory=lambda x: None)
