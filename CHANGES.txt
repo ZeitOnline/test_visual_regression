@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - TMS-162: Use ITMSContent instead of LazyProxy for TMS and ES query results
 
+- FIX: Request `ressort` as solr result so LazyProxy can use it
+
 
 3.126 (2018-02-27)
 ------------------
