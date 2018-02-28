@@ -4,10 +4,42 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- "arbeit" aus den feature-toggle(-preview).xml aller Vivis entfernen
+
+3.127 (unreleased)
+------------------
+
+- TMS-162: Use ITMSContent instead of LazyProxy for TMS and ES query results
+
+- FIX: Request `ressort` and `id` as solr result so LazyProxy can use it
 
 
-3.124 (unreleased)
+3.126 (2018-02-27)
+------------------
+
+- ZON-4487: Track placeholders in AMP articles
+
+- ZON-4442: Consider liveblog version in AMP styles
+
+- ZON-4465: Add brandeins feed to parquet
+
+- ZON-4479: Change color of brandeins badge
+
+- FIX: Move D18 badge styling from svg to css
+
+
+3.125 (2018-02-26)
+------------------
+
+- ZON-4479: Show logo on brandeins teasers
+
+- ZON-4480: Fontsize API for Apps
+
+- BUG-858: Fix Campus debatebox infiltration by banner
+
+- FIX: Fix color of brandeins teaser badge and ZAR logo
+
+
+3.124 (2018-02-22)
 ------------------
 
 - ZON-4466: Remove yellow border from Arbeit in ressort navigation

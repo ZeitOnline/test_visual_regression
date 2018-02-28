@@ -57,6 +57,9 @@
     <region kind="parquet" title="Spektrum Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="spektrum"/>
     </region>
+    <region kind="parquet" title="brand eins Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
+        <area kind="brandeins"/>
+    </region>
     <region kind="parquet" title="ZE.TT Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="zett"/>
     </region>

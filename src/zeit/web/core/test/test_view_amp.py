@@ -283,3 +283,26 @@ def test_amp_article_shows_amp_accordion_for_infobox(testbrowser):
     assert len(accordion.cssselect('section > h3:first-child')) == 6
     # the second child (of the section) can be any tag allowed in AMP HTML
     assert len(accordion.cssselect('section > h3 + div')) == 6
+
+
+def test_amp_article_has_placeholders_for_invalid_elements(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp-invalid')
+    json_source = browser.cssselect(
+        'amp-analytics[type="webtrekk"] script'
+    )[0].text
+
+    select = testbrowser('/amp/zeit-online/article/amp-invalid').cssselect
+    assert len(select('.article__placeholder')) == 4
+
+    try:
+        webtrekk = json.loads(json_source)
+        assert True
+    except ValueError:
+        assert False
+
+    page_vars = webtrekk['triggers']['trackPageview']['vars']
+    assert page_vars['cp27'] == \
+        "amp_platzhalter.2/seite-1;" \
+        "amp_platzhalter.3/seite-1;" \
+        "amp_platzhalter.4/seite-1;" \
+        "amp_platzhalter.5/seite-1"
