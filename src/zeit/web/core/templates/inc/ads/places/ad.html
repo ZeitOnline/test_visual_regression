@@ -9,7 +9,7 @@
                 elem.id = 'iqadtile{{ self.tile() }}';
                 elem.className = "ad ad-{{ self.type() }} ad-{{ self.type() }}--{{ self.tile() }} ad-{{ self.type() }}--{{ self.tile() }}-on-{{ pagetype }}{{ package_banner }}";
                 elem.setAttribute('data-banner-type', '{{ self.type() }}');
-                {% block adtile_label %}{% endblock %}
+                {% if toggles('zon_admark') -%}{% block adtile_label %}{% endblock %}{% endif %}
                 document.getElementById('ad-{{ self.type() }}-{{ self.tile() }}').parentNode.appendChild(elem);
                 AdController.render('iqadtile{{ self.tile() }}');
                 if ( window.console && typeof window.console.info === 'function' ) {

@@ -1,3 +1,3 @@
 {% extends "zeit.web.core:templates/inc/ads/places/desktop/ad.html" %}
 {% block tile %}1{% endblock %}
-{% block adtile_label %}{% endblock %}
+{% if toggles('zon_admark') -%}{% block adtile_label %}{% endblock %}{% endif %}
