@@ -146,7 +146,8 @@ def test_mobile_ad_place_right_behind_the_first_teaser(
 def test_adplaces_have_banner_label_data_attribute(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
-        'iqd': True
+        'iqd': True,
+        'zon_admark': True
     }.get)
 
     browser = testbrowser('/zeit-online/article/zeit')
