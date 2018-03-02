@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block headermodule %}
-    <div class="dpa-header__image">
-        {{ super() }}
-    </div>
+    {% set article_header_image_figure_modifiers = 'article__item' | with_mods('wide', 'rimless', 'apart') %}
+    <div class="dpa-header__image">{% include "zeit.web.core:templates/inc/article/header-module.tpl" %}</div>
 {% endblock %}
