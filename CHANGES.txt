@@ -5,8 +5,8 @@ POSTDEPLOY
 ----------
 
 
-3.128 (unreleased)
-------------------
+3.127.1 (2018-03-02)
+--------------------
 
 - HOTFIX: Do not use default param in JS function (because of IE11)
 
