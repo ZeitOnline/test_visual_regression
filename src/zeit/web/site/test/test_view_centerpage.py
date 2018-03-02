@@ -715,7 +715,7 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
             round((main_width - gutter_width) / 3.0) - gutter_width))
 
 
-def test_canonical_ruleset_on_cps(testbrowser, datasolr):
+def test_canonical_ruleset_on_cps(testbrowser, data_solr):
     browser = testbrowser('/dynamic/ukraine')
 
     # no param
@@ -739,7 +739,7 @@ def test_canonical_ruleset_on_article_pages(testbrowser):
     assert link[0].get('href') == 'http://localhost/zeit-online/index'
 
 
-def test_canonical_ruleset_on_ranking_pages(testbrowser, datasolr):
+def test_canonical_ruleset_on_ranking_pages(testbrowser, data_solr):
     browser = testbrowser('/suche/index')
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == 'http://localhost/suche/index'
@@ -860,7 +860,7 @@ def test_meta_rules_for_keyword_paths(application):
         'von ZEIT ONLINE zu dem Thema Ausdauersport.')
 
 
-def test_newsticker_should_have_expected_dom(testbrowser, datasolr):
+def test_newsticker_should_have_expected_dom(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/news-teaser')
 
     cols = browser.cssselect('.cp-area--newsticker .newsticker__column')
@@ -876,7 +876,7 @@ def test_newsticker_should_have_expected_dom(testbrowser, datasolr):
         teaser[0].cssselect('a .newsteaser__text .newsteaser__product')) == 1
 
 
-def test_newspage_has_expected_elements(testbrowser, datasolr):
+def test_newspage_has_expected_elements(testbrowser, data_solr):
     browser = testbrowser('/news/index')
     area = browser.cssselect('.cp-area--overview')[0]
     assert len(area.cssselect('.pager--overview')) == 1
@@ -2138,7 +2138,7 @@ def test_centerpage_page_should_require_ranking(application, dummy_request):
         list(view.regions)
 
 
-def test_centerpage_page_integration(testbrowser, datasolr):
+def test_centerpage_page_integration(testbrowser, data_solr):
     browser = testbrowser('/dynamic/umbrien?p=2')
     # Curated content is not shown
     assert 'Ich bin nicht intellektuell' not in browser.contents
@@ -2675,20 +2675,20 @@ def test_register_teaser_has_zplus_register_badge(testbrowser):
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus-register')
 
 
-def test_zplus_teaser_has_no_badge_in_ressort_area(testbrowser, datasolr):
+def test_zplus_teaser_has_no_badge_in_ressort_area(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     teaser = browser.cssselect(
         '.cp-region--solo:nth-child(3) article.teaser-large')[0]
     assert not teaser.cssselect('.teaser-large__kicker-logo--zplus')
 
 
-def test_campus_teaser_has_no_badge_in_ressort_area(testbrowser, datasolr):
+def test_campus_teaser_has_no_badge_in_ressort_area(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort-with-campus')
     assert not browser.cssselect('.teaser-small__kicker-logo--zco')
     assert not browser.cssselect('.teaser-large__kicker-logo--zco')
 
 
-def test_ressort_areas_have_ressort_title(testbrowser, datasolr):
+def test_ressort_areas_have_ressort_title(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     areas = browser.cssselect('.cp-area--print-ressort')
     assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
@@ -3068,13 +3068,13 @@ def test_responsive_image_teaser_only_in_first_region(testbrowser):
     assert len(sel('div.teaser-classic__media-container')) == 2
 
 
-def test_topicpage_has_jsonld(testbrowser, datasolr):
+def test_topicpage_has_jsonld(testbrowser, data_solr):
     browser = testbrowser('/thema/jurastudium')
     assert browser.cssselect('script[type="application/ld+json"]')
     assert '"@type": "ItemList"' in browser.contents
 
 
-def test_centerpage_has_no_jsonld(testbrowser, datasolr):
+def test_centerpage_has_no_jsonld(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/index')
     assert 'ld+json' not in browser.contents
 

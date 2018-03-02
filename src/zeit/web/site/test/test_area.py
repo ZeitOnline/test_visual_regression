@@ -132,7 +132,7 @@ def test_overview_should_render_cover_image_from_solr_result(testbrowser):
 
 
 def test_default_teaser_should_not_expose_ranking_area_proxies(
-        testbrowser, datasolr, monkeypatch):
+        testbrowser, data_solr, monkeypatch):
     log = mock.Mock()
     monkeypatch.setattr(zeit.web.core.solr, 'log', log)
 

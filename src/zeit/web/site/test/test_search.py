@@ -235,7 +235,7 @@ def test_successful_search_result_should_produce_valid_resultset(search_area):
 
 
 def test_successful_search_result_should_render_in_browser(
-        testbrowser, datasolr):
+        testbrowser, data_es):
     browser = testbrowser('/suche/index')
     assert browser.cssselect('.cp-area--ranking .teaser-small')
 

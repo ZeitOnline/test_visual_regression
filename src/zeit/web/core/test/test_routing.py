@@ -65,7 +65,7 @@ def test_dynamic_folder_traversal_should_rewrite_traversal_dictionary(
 
 
 def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
-        application, dummy_request, datasolr):
+        application, dummy_request, data_solr):
     dummy_request.GET['p'] = '2'
 
     tdict = zeit.web.core.routing.RepositoryTraverser.invoke(

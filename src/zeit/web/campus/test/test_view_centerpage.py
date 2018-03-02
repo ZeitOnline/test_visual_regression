@@ -209,7 +209,7 @@ def test_campus_teasers_to_leserartikel_have_kicker_modifiers(testbrowser):
     assert len(select('.nextread-teaser__kicker--leserartikel')) == 1
 
 
-def test_campus_cp_page_integration(testbrowser, datasolr):
+def test_campus_cp_page_integration(testbrowser, data_solr):
     browser = testbrowser('/campus/centerpage/paginierung?p=2')
     # Curated content is not shown
     assert 'Ich bin nicht intellektuell' not in browser.contents
@@ -384,12 +384,12 @@ def test_cardstack_teaser_produces_correct_html(testbrowser):
     assert len(teaser) == 1
 
 
-def test_campus_topicpage_has_jsonld(testbrowser, datasolr):
+def test_campus_topicpage_has_jsonld(testbrowser, data_solr):
     browser = testbrowser('/campus/centerpage/thema')
     assert browser.cssselect('script[type="application/ld+json"]')
     assert '"@type": "ItemList"' in browser.contents
 
 
-def test_campus_centerpage_has_no_jsonld(testbrowser, datasolr):
+def test_campus_centerpage_has_no_jsonld(testbrowser, data_solr):
     browser = testbrowser('/campus/index')
     assert 'ld+json' not in browser.contents

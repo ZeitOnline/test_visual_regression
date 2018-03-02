@@ -344,7 +344,7 @@ def test_invisible_module_should_not_be_rendered(application, testbrowser):
 
 
 def test_centerpage_should_update_webtrekk_content_id_for_search_results(
-        application, dummy_request, datasolr):
+        application, dummy_request, data_solr):
     dummy_request.GET['q'] = 'test'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
