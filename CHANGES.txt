@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.127 (unreleased)
+3.127 (2018-03-02)
 ------------------
 
 - TMS-162: Use ITMSContent instead of LazyProxy for TMS and ES query results
