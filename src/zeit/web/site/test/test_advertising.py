@@ -163,6 +163,22 @@ def test_adplaces_have_banner_label_data_attribute(testbrowser, monkeypatch):
     assert labelstring not in browser.cssselect('#ad-mobile-4')[0].text
 
 
+def test_adplaces_have_no_banner_label_data_attribute(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True
+    }.get)
+
+    labelstring = "elem.setAttribute('data-banner-label', 'Anzeige');"
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert labelstring not in browser.contents
+
+    browser = testbrowser('/zeit-online/index')
+    assert labelstring not in browser.contents
+
+
 def test_iqd_adtile2_should_not_be_inserted_on_small_screens(
         selenium_driver, testserver, monkeypatch):
 
