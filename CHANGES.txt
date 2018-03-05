@@ -5,10 +5,26 @@ POSTDEPLOY
 ----------
 
 
-3.127 (unreleased)
+3.128 (unreleased)
+------------------
+
+- BUG-864: Support Gallery in ZAR
+
+- MAINT: Remove unused referrerCount script 
+
+
+3.127.1 (2018-03-02)
+--------------------
+
+- HOTFIX: Do not use default param in JS function (because of IE11)
+
+
+3.127 (2018-03-02)
 ------------------
 
 - TMS-162: Use ITMSContent instead of LazyProxy for TMS and ES query results
+
+- FIX: Request `ressort` and `id` as solr result so LazyProxy can use it
 
 
 3.126 (2018-02-27)
