@@ -295,6 +295,9 @@
         <cluster visible="True" area="id-d976a64d-0409-4b49-a153-12bdcdf94d1e" kind="parquet">
             <region visible="True" hide-dupes="True" area="id-fab3ebde-2ea6-423c-87ab-39ea2c6e3c19" kind="spektrum" count="3"/>
         </cluster>
+        <cluster visible="True" area="id-d976a64d-0409-4b49-a153-12bdcdf94d1e2" kind="parquet">
+            <region visible="True" hide-dupes="True" area="id-fab3ebde-2ea6-423c-87ab-39ea2c6e3c192" kind="brandeins" count="3"/>
+        </cluster>
         <cluster visible="True" area="id-d976a64d-1589-4b49-a153-12bdcdf94d1e" kind="solo">
             <region visible="True" hide-dupes="True" kind="newsticker" area="id-7c964ac7-6bc7-41aa-bd0b-44237e187c24" count="8" automatic="True" automatic_type="query" title="Schlagzeilen">
                 <raw_query>merkel</raw_query>

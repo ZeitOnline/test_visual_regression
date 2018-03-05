@@ -210,6 +210,9 @@ def logo_icon(teaser, area_kind=None, zplus=None):
     if vertical == 'zett':
         templates.append('logo-zett-small')
         return templates
+    if vertical == 'brandeins':
+        templates.append('logo-brandeins')
+        return templates
 
     # inclusive icons may appear both
     if tag_with_logo_content(teaser, area_kind) and not zplus_icon:
@@ -700,7 +703,7 @@ def format_iqd(string):
 def get_clicktracking_identifier(area):
     if area.kind == 'parquet' and area.title:
         return 'parquet-{}'.format(format_webtrekk(area.title))
-    elif area.kind in ['zett', 'spektrum']:
+    elif area.kind in ['zett', 'spektrum', 'brandeins']:
         return 'parquet-{}'.format(area.kind)
     elif area.kind.endswith('-parquet'):
         return 'parquet-{}'.format(area.kind.rsplit('-', 1).pop(0))

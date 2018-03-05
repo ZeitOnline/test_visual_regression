@@ -39,11 +39,9 @@ require( 'web.core/plugins/jquery.toggleRegions' );
 require( 'web.core/plugins/jquery.infobox' );
 require( 'web.core/plugins/jquery.inlinegallery' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
-require( 'web.core/plugins/jquery.referrerCount' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.notifications' );
 
-$( window ).referrerCount();
 $.notifications();
 $( '.js-scroll' ).animateScroll();
 

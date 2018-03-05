@@ -1408,6 +1408,13 @@ def test_article_contains_webtrekk_parameter_asset(dummy_request):
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp27'] == ''
 
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/amp-invalid')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp27'] == \
+        'cardstack.2/seite-1;' \
+        'quiz.3/seite-1;raw.4/seite-1;rawtext.5/seite-1'
+
 
 def test_advertorial_article_contains_correct_webtrekk_param(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
@@ -2348,3 +2355,29 @@ def test_dpa_article_should_have_correct_header(testbrowser):
     browser = testbrowser('/zeit-online/article/dpa-image')
     assert len(browser.cssselect('.dpa-header')) == 1
     assert len(browser.cssselect('.dpa-header__image')) == 1
+
+
+def test_font_sizing_via_js_api_from_app(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    html_elem = driver.find_element_by_css_selector('html')
+
+    driver.execute_script("window.Zeit.setFontSize(0)")
+    assert not html_elem.get_attribute('style')
+
+    driver.execute_script("window.Zeit.setFontSize('Wurstbrot')")
+    assert not html_elem.get_attribute('style')
+
+    driver.execute_script("window.Zeit.setFontSize(200)")
+    assert html_elem.get_attribute('style') == 'font-size: 200%;'
+
+    driver.get('%s/zeit-online/article/simple' % testserver.url)
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, '.main--article'))
+    assert WebDriverWait(selenium_driver, 1).until(condition)
+
+    html_elem = driver.find_element_by_css_selector('html')
+    assert html_elem.get_attribute('style') == 'font-size: 200%;'
+
+    # clean up to not harm the next tests
+    driver.execute_script("window.localStorage.clear()")

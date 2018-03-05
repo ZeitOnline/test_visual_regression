@@ -118,8 +118,31 @@
         queue: [],
         require: function() {
             this.queue.push( arguments );
+        },
+        setFontSize: function(size, updateStorage) {
+            updateStorage = (typeof updateStorage !== 'undefined') ?  updateStorage : true;
+            size = parseInt(size, 10);
+            if (size >= 30 && size <= 300 && window.localStorage) {
+                document.querySelector('html').style.fontSize = size + '%';
+                if (updateStorage) window.localStorage.setItem( 'fontsize', size );
+                return size;
+            }
+        },
+        getFontSize: function() {
+            if (window.localStorage) {
+                var size = window.localStorage.getItem( 'fontsize' );
+                size = parseInt(size, 10);
+                if (size >= 30 && size <= 300) {
+                    return size;
+                }
+            }
         }
     };
+
+    var storedFontSize = window.Zeit.getFontSize();
+    if ( storedFontSize ) {
+        window.Zeit.setFontSize( storedFontSize, false );
+    }
 
 {%- if view.advertising_enabled %}
     {% if toggles('iqd_tablet_transformation') -%}

@@ -3,7 +3,7 @@
     <time itemprop="dateModified" datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="metadata__date"></time>
 {% endif -%}
 
-{% if view.context is liveblog -%}
+{% if view.liveblog and view.liveblog.liveblog -%}
     <meta itemprop="coverageStartTime" content="{{ view.date_first_released | format_date('iso8601') }}">
     <meta itemprop="coverageEndTime" content="{{ (view.liveblog.last_modified or view.date_last_modified) | format_date('iso8601') }}">
 {% endif -%}

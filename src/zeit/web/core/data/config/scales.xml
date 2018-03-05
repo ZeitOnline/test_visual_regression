@@ -23,6 +23,7 @@
   <scale name="brightcove-still" width="580" height="326" title="Brightcove video still" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="brightcove-thumbnail" width="120" height="67" title="Brightcove thumbnail" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="spektrum" width="220" height="124" title="Spektrum feed image" available="zeit.web.core.interfaces.IInternalUse"/>
+  <scale name="brandeins" width="220" height="124" title="brand eins feed image" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zmo-large-center" widht="225" height="125" title="ZMO: Large center" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zmo-large-left" widht="225" height="125" title="ZMO: Large left" available="zeit.web.core.interfaces.IInternalUse"/>
   <scale name="zmo-large-right" widht="225" height="125" title="ZMO: Large right" available="zeit.web.core.interfaces.IInternalUse"/>

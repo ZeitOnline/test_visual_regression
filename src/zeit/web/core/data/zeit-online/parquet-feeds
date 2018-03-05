@@ -55,6 +55,9 @@
         <cluster area="id-e2f9e2c4-2700-4c62-8701-9f914e653435" kind="parquet" title="Spektrum Parkett" visible="True" visible_mobile="True">
             <region area="id-663bd0f8-dab4-4388-97d4-e83a9d1774eb" hide-dupes="True" kind="spektrum" title="Spektrum" visible="True" visible_mobile="True"/>
         </cluster>
+        <cluster area="id-e2f9e2c4-2700-4c62-8701-9f914e6534352" kind="parquet" title="brand eins Parkett" visible="True" visible_mobile="True">
+            <region area="id-663bd0f8-dab4-4388-97d4-e83a9d1774eb2" hide-dupes="True" kind="brandeins" title="brand eins" visible="True" visible_mobile="True"/>
+        </cluster>
         <cluster area="id-e2f9e2c4-2700-4c62-8701-9f914e653123" kind="parquet" title="Zett Parkett" visible="True" visible_mobile="True">
             <region area="id-663bd0f8-dab4-4388-97d4-e83a9d177123" hide-dupes="True" kind="zett" title="Zett" visible="True" visible_mobile="True"/>
         </cluster>

@@ -1,5 +1,6 @@
 import os.path
 import logging
+import urllib
 
 import pyramid.httpexceptions
 import pyramid.response
@@ -12,6 +13,7 @@ import zeit.web
 import zeit.web.core.image
 import zeit.web.core.view
 import zeit.web.site.area
+import zeit.web.site.area.brandeins
 import zeit.web.site.area.spektrum
 import zeit.web.site.area.zett
 
@@ -140,6 +142,7 @@ class RSSImage(Image):
 
         file_name, variant = segments[-2:]
         path = u'/'.join(segments[:-1])
+        path = urllib.unquote_plus(path)
         image_url = u'{}/{}'.format(self.remote_host, path)
 
         context.image_url = image_url
@@ -168,6 +171,18 @@ class Spektrum(RSSImage):
 
     host_key = 'spektrum_img_host'
     ig_class = zeit.web.site.area.spektrum.ImageGroup
+
+
+@zeit.web.view_defaults(
+    route_name='brandeins-image')
+@zeit.web.view_config(
+    host_restriction='img')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_not_in_production,))
+class Brandeins(RSSImage):
+
+    host_key = 'brandeins_img_host'
+    ig_class = zeit.web.site.area.brandeins.ImageGroup
 
 
 @zeit.web.view_defaults(

@@ -9,6 +9,11 @@
 		width: 25%
 
 	&__logo
+		&--brandeins
+			color: $white
+			height: remify(30px)
+			max-width: remify(150px)
+			width: 100%
 		&--spektrum
 			height: remify(26px)
 			width: remify(125px)
@@ -78,6 +83,18 @@
 				content: none
 		+respond-min($break-desktop-min)
 			font-size: remify(24px)
+
+		&--brandeins
+			background-color: $primary-color-zmo
+			color: $white
+			padding-bottom: remify(14px)
+			padding-top: remify(20px)
+			&:after
+				color: $zon-light-grey
+				line-height: inherit
+			+respond-max($break-areas)
+				padding: remify(17px)
+
 		&--spektrum
 			+font-smoothing
 			+link
