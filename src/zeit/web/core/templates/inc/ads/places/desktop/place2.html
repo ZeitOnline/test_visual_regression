@@ -1,4 +1,4 @@
 {% extends "zeit.web.core:templates/inc/ads/places/desktop/ad.html" %}
 {% block tile %}2{% endblock %}
 {% block adtile_minimal_width %}&& window.Zeit.getClientWidth() > window.Zeit.sideAdMinWidth{% endblock %}
-{% if toggles('zon_admark') -%}{% block adtile_label %}{% endblock %}{% endif %}
+{% block adtile_label %}{% endblock %}
