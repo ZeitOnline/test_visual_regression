@@ -192,7 +192,10 @@ def test_gsitemap_news_does_not_contain_none_in_keywords(
 def test_gsitemap_video(testbrowser):
     set_sitemap_solr_results([{
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001',
-        'title': 'Foto-Momente: Die stille Schönheit der Polarlichter',
+        'title': u'Foto-Momente: Die stille Schönheit der Polarlichter',
+        'subtitle': 'Sie sind eines der faszinierendsten Schauspiele, die '
+        'die Natur zu bieten hat: Polarlichter, auch als Aurora borealis '
+        'bekannt, illuminieren den Himmel in atemberaubenden Farben.',
         'ressort': 'Wissen'
     }])
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
