@@ -34,7 +34,8 @@ def test_nav_markup_should_match_css_selectors(tplbrowser, dummy_request):
     assert len(html('ul.nav__ressorts-list')) == 1
 
 
-def test_nav_ressorts_should_produce_markup(tplbrowser, dummy_request):
+def test_nav_ressorts_should_produce_markup(
+        tplbrowser, dummy_request, togglepatch):
     view = mock.MagicMock()
     view.request = dummy_request
     nav = zeit.web.core.navigation.NavigationItem('top', '', '')
@@ -48,6 +49,11 @@ def test_nav_ressorts_should_produce_markup(tplbrowser, dummy_request):
             'hp.global.topnav.links.partnersuche',
             'Partnersuche',
             'http://www.zeit.de/angebote/partnersuche/index?pscode=01_100'))
+
+    # cowardish workaround, because tplbrowser cannot render macros,
+    # which are needed for D18 tag (lama.render_svg)
+    togglepatch({'dtag_navigation': False})
+
     browser = tplbrowser(
         'zeit.web.site:templates/inc/navigation/navigation-list.tpl',
         view=view, request=dummy_request, navigation=nav,
@@ -121,7 +127,12 @@ def test_nav_contains_essential_elements(tplbrowser, dummy_request):
         'Search input must be present')
 
 
-def test_nav_should_contain_schema_org_markup(testbrowser):
+def test_nav_should_contain_schema_org_markup(testbrowser, togglepatch):
+
+    # cowardish workaround, because tplbrowser cannot render macros,
+    # which are needed for D18 tag (lama.render_svg)
+    togglepatch({'dtag_navigation': False})
+
     browser = testbrowser('/zeit-online/zeitonline')
     select = browser.cssselect
     site_nav_element = select(

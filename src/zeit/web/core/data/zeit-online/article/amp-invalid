@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/thema/fluechtlinge-in-europa" year="2016" issue="1" ressort="Gesellschaft" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/thema/fluechtling">
+        <supertitle>Flüchtlinge</supertitle>
+        <title>Hoffnung Europa</title>
+        <text/>
+        <description/>
+        <byline/>
+        <breadcrumb_title/>
+        <image base-id="http://xml.zeit.de/politik/2015-12/fluechtlinge-dossier-teaser/" type="jpg" title="Flüchtlinge Dossier" align="left" publication-date="" expires="">
+          <bu>A woman waves a life jacket to direct a migrant boat ashore as it makes the crossing from Turkey to the Greek island of Lesbos on November 12, 2015 in Sikaminias, Greece.</bu>
+          <copyright>© Carl Court/Getty Images</copyright>
+        </image>
+      </reference>
+    </references>
+    <rankedTags>
+      <tag type="free" url_value="fluechtling" uuid="d7c98935-f4bf-43b5-bf38-5307a4d3ed4e">Flüchtling</tag>
+      <tag type="Organization" url_value="weltwirtschaftsforum-davos" uuid="611fd80a-8a38-43b8-b280-b8d982d2de7f">Weltwirtschaftsforum Davos</tag>
+      <tag type="free" url_value="arbeitsmarkt" uuid="de762a10-49a9-4b42-af13-8c29bea570f4">Arbeitsmarkt</tag>
+      <tag type="free" url_value="migration" uuid="312de135-2e1f-452e-9f87-4c0a36842878">Migration</tag>
+      <tag type="Organization" url_value="europaeische-union" uuid="f7f8e748-cc2e-40b0-b065-267e6113e8a2">Europäische Union</tag>
+    </rankedTags>
+    <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="Flüchtlinge Davos Europa" alt="In Davos" align="left" publication-date="" expires="">
+      <bu>In Davos</bu>
+      <copyright>© Jean-Christophe Bott/EPA/dpa</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Wirtschaft</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-01-22T12:14:36.677206+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-01-22T10:55:46.556878+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-22T12:14:49.209756+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-01-22T12:14:48.450437+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-01-22T10:55:45.564569+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-01-22T11:41:19.677273+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-01-22T09:42:04.601603+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.brandenburger</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/wirtschaft/2016-01/dbf5b59e-5370-4c02-ad98-8565984711bf.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">83345c37eb704e86960f8abd1719463f</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wirtschaft</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Wie Flüchtlinge aufhören, Flüchtlinge zu sein. @jochen über den Geist von #davos (cb)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">7583</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:def048c9-2d75-4a20-89eb-9c746f1a530c}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">4</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>AMP-Platzhalter</supertitle>
+    <title>AMP-invalide Elemente im AMP-Artikel</title>
+    <subtitle>Wird der Artikel über die Route 'amp/zeit-online/article/amp-invalid' aufgerufen, werden Platzhalter gerendert und in Webtrekk cp27 als 'amp_platzhalter' reportet.</subtitle>
+    <division type="page">
+    <p>
+Klick auf einen der Platzhalter führt zu '/zeit-online/article/amp-invalid', also zur canonical URL des Artikels. Dort gibt's kein AMP-HTML und die in AMP verbotenen Elemente werden gerendert. Wir haben also für die Indexierung im AMP-Cache valides AMP-HTML und profitieren von der bevorzugten Platzierung in den Google-Suchergebnissen, es gibt dort nur nix invalides zu sehen. 
+</p>
+<p><strong>Cardstack</strong></p>
+<cardstack card_id="erkaeltung-hausmittel-wirkung"/>
+<p><strong>Quiz</strong></p>
+<quiz quiz_id="104" adreload_enabled="False"/>
+<p><strong>Raw</strong></p>
+<raw alldevices="true">
+  <hr/>
+  <h2>R.A.W.</h2>
+  <hr/>
+</raw>
+<p><strong>Rawtext</strong></p>
+<rawtext>
+        <text>&lt;code&gt;code&lt;/code&gt;</text>
+      </rawtext>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>AMP-Platzhalter</supertitle>
+    <title>AMP-invalide Elemente im AMP-Artikel</title>
+    <text>Invalide Elemente in AMP brauchen Platzhalter</text>
+  </teaser>
+</article>

@@ -102,6 +102,8 @@ def app_settings(mockserver):
         'app_servers': '',
         'health_check_with_fs': True,
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
+        'brandeins_hp_feed': mockserver.url + '/brandeins/feed.xml',
+        'brandeins_img_host': mockserver.url + '/brandeins',
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
         'spektrum_img_host': mockserver.url + '/spektrum',
         'brandeins_host': 'https://www.brandeins.de',

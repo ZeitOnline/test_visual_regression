@@ -1,0 +1,32 @@
+{% if area.values() | length == 0 %}
+<!-- BrandEins-Parquet not shown because empty or timed out. -->
+{% else %}
+
+    {% extends "zeit.web.site:templates/inc/area/parquet.html" %}
+
+    {% block area_title %}
+        <a class="parquet-meta__title parquet-meta__title--brandeins" href="https://www.brandeins.de">
+            {{ lama.use_svg_icon('logo-brandeins', 'parquet-meta__logo parquet-meta__logo--brandeins', view.package) }}
+        </a>
+    {% endblock area_title %}
+
+    {% block area_links %}
+        <div class="parquet-meta__links">
+            <ul class="parquet-meta__topic-links parquet-meta__topic-links--brandeins">
+                <li>
+                    <a href="https://www.brandeins.de/zugabe/rubriken/die-welt-in-zahlen" class="parquet-meta__topic-link">Die Welt in Zahlen</a>
+                </li>
+                <li>
+                    <a href="https://www.brandeins.de/zugabe/rubriken/gute-frage" class="parquet-meta__topic-link">Gute Frage</a>
+                </li>
+                <li>
+                    <a href="https://www.brandeins.de/zugabe/rubriken/mikrooekonomie" class="parquet-meta__topic-link">Mikroökonomie</a>
+                </li>
+            </ul>
+            <div class="parquet-meta__more parquet-meta__more--brandeins">
+                <a href="http://www.brandeins.de" class="parquet-meta__more-link parquet-meta__more-link--brandeins">Mehr von brand eins</a>
+            </div>
+        </div>
+    {% endblock area_links %}
+
+{% endif %}
