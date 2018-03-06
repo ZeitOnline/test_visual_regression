@@ -8,9 +8,13 @@ POSTDEPLOY
 3.128 (unreleased)
 ------------------
 
+- ZON-4398: Do not render Adlabel (it is served by IQD now)
+
 - BUG-864: Support Gallery in ZAR
 
-- MAINT: Remove unused referrerCount script 
+- MAINT: Remove unused referrerCount script
+
+- MAINT: Hide titles from servicebox icons
 
 
 3.127.1 (2018-03-02)
