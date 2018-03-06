@@ -157,7 +157,6 @@ def test_adplaces_have_banner_label_data_attribute(testbrowser, monkeypatch):
     assert labelstring not in browser.cssselect('#ad-desktop-1')[0].text
     assert labelstring not in browser.cssselect('#ad-desktop-2')[0].text
     assert labelstring in browser.cssselect('#ad-desktop-3')[0].text
-    assert labelstring in browser.cssselect('#ad-desktop-5')[0].text
     assert labelstring not in browser.cssselect('#ad-mobile-1')[0].text
     assert labelstring not in browser.cssselect('#ad-mobile-3')[0].text
     assert labelstring not in browser.cssselect('#ad-mobile-4')[0].text
@@ -177,6 +176,28 @@ def test_adplaces_have_no_banner_label_data_attribute(
 
     browser = testbrowser('/zeit-online/index')
     assert labelstring not in browser.contents
+
+
+def test_adplace5_can_be_toggled_off(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'adtile5': False
+    }.get)
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert not browser.cssselect('#ad-desktop-5')
+
+
+def test_adplace5_can_be_toggled_on(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'adtile5': True
+    }.get)
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert browser.cssselect('#ad-desktop-5')
 
 
 def test_iqd_adtile2_should_not_be_inserted_on_small_screens(
@@ -351,6 +372,11 @@ def test_iqd_adtile8_on_article_new_placement_alternative(
     assert body[2].cssselect('script')[0].get('id') == 'ad-desktop-8'
 
 
-def test_p5_not_displayed_when_there_are_no_comments(testbrowser):
+def test_p5_not_displayed_when_there_are_no_comments(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'adplace5': True
+    }.get)
     browser = testbrowser('/zeit-online/article/quiz')
     assert not browser.cssselect('#ad-desktop-5')

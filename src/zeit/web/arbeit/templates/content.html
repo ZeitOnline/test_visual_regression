@@ -50,7 +50,7 @@
     {% endblock %}
 
     {% block article_google_ad %}
-        {% if view.has_comment_area -%}
+        {% if toggles('adtile5') and view.has_comment_area -%}
             <!-- P5 -->
             {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
         {% endif %}

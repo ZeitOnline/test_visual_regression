@@ -124,3 +124,25 @@ def test_adplace4_on_articles(testbrowser):
 def test_adplace16_on_articles(testbrowser):
     browser = testbrowser('/zeit-magazin/article/01')
     assert len(browser.cssselect('#ad-desktop-16')) == 1
+
+
+def test_zmo_adplace5_can_be_toggled_off(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'adtile5': False
+    }.get)
+
+    browser = testbrowser('/zeit-magazin/article/03')
+    assert not browser.cssselect('#ad-desktop-5')
+
+
+def test_zmo_adplace5_can_be_toggled_on(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'adtile5': True
+    }.get)
+
+    browser = testbrowser('/zeit-magazin/article/03')
+    assert browser.cssselect('#ad-desktop-5')

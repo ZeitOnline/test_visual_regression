@@ -205,3 +205,25 @@ def test_zar_adcontroller_values_return_values_on_advertorial_article(
         ('tma', '')]
     view = zeit.web.arbeit.view_article.Article(content, dummy_request)
     assert adcv == view.adcontroller_values
+
+
+def test_zar_adplace5_can_be_toggled_off(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'adtile5': False
+    }.get)
+
+    browser = testbrowser('/arbeit/article/01-digitale-nomaden')
+    assert not browser.cssselect('#ad-desktop-5')
+
+
+def test_zar_adplace5_can_be_toggled_on(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'adtile5': True
+    }.get)
+
+    browser = testbrowser('/arbeit/article/01-digitale-nomaden')
+    assert browser.cssselect('#ad-desktop-5')
