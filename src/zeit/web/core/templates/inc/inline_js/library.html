@@ -119,7 +119,8 @@
         require: function() {
             this.queue.push( arguments );
         },
-        setFontSize: function(size, updateStorage = true) {
+        setFontSize: function(size, updateStorage) {
+            updateStorage = (typeof updateStorage !== 'undefined') ?  updateStorage : true;
             size = parseInt(size, 10);
             if (size >= 30 && size <= 300 && window.localStorage) {
                 document.querySelector('html').style.fontSize = size + '%';
