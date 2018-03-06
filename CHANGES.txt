@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - MAINT: Hide titles from servicebox icons
 
+- MAINT: Add default values for (solr) proxy
+
 
 3.127.1 (2018-03-02)
 --------------------
