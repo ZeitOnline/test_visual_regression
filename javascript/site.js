@@ -45,7 +45,6 @@ require( 'web.core/plugins/jquery.animatescroll' );
 require( 'web.core/plugins/jquery.infobox' );
 require( 'web.core/plugins/jquery.inlinegallery' );
 require( 'web.core/plugins/jquery.picturefill' );
-require( 'web.core/plugins/jquery.referrerCount' );
 require( 'web.core/plugins/jquery.toggleRegions' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
@@ -68,7 +67,6 @@ require( 'web.site/plugins/jquery.tabs' );
 require( 'web.site/plugins/jquery.togglesearch' );
 require( 'web.site/plugins/jquery.updateSignals' );
 
-$( window ).referrerCount();
 // global and "above the fold"
 $( '.nav__search' ).toggleSearch();
 $( '.nav__ressorts-list' ).adaptToSpace();

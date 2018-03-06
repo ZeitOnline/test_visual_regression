@@ -146,7 +146,8 @@ def test_mobile_ad_place_right_behind_the_first_teaser(
 def test_adplaces_have_banner_label_data_attribute(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
-        'iqd': True
+        'iqd': True,
+        'zon_admark': True
     }.get)
 
     browser = testbrowser('/zeit-online/article/zeit')
@@ -160,6 +161,22 @@ def test_adplaces_have_banner_label_data_attribute(testbrowser, monkeypatch):
     assert labelstring not in browser.cssselect('#ad-mobile-1')[0].text
     assert labelstring not in browser.cssselect('#ad-mobile-3')[0].text
     assert labelstring not in browser.cssselect('#ad-mobile-4')[0].text
+
+
+def test_adplaces_have_no_banner_label_data_attribute(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True
+    }.get)
+
+    labelstring = "elem.setAttribute('data-banner-label', 'Anzeige');"
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert labelstring not in browser.contents
+
+    browser = testbrowser('/zeit-online/index')
+    assert labelstring not in browser.contents
 
 
 def test_iqd_adtile2_should_not_be_inserted_on_small_screens(
