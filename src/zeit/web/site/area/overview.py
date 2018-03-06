@@ -100,8 +100,7 @@ class DateContentQuery(zeit.web.core.area.automatic.SolrContentQuery):
 
     def __init__(self, context):
         super(DateContentQuery, self).__init__(context)
-        self.query_string = zeit.solr.query.and_(
-            self.query_string, self._range_query())
+        self.query = zeit.solr.query.and_(self.query, self._range_query())
 
     def __call__(self):
         result = super(DateContentQuery, self).__call__()

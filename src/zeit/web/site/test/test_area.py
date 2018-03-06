@@ -170,13 +170,7 @@ def test_tms_query_should_not_expose_ranking_area_proxies(
 
 
 def test_elasticsearch_query_should_not_expose_ranking_area_proxies(
-        testbrowser, monkeypatch, request):
-    previous = zope.component.queryUtility(
-        zeit.retresco.interfaces.IElasticsearch)
-    if previous:
-        request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.retresco.DataES())
-
+        testbrowser, monkeypatch, data_es):
     log = mock.Mock()
     monkeypatch.setattr(zeit.web.core.solr, 'log', log)
 
