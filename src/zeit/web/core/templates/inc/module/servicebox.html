@@ -10,7 +10,7 @@
         {% set row_loop = loop %}
         <a class="servicebox__link" href="{{ service.href }}" data-id="
             {{- 'servicebox.{}.{}.{}.{}'.format(region_loop.index, column_loop.index, row_loop.index, service.id) }}">
-            {{ lama.use_svg_icon('servicebox-{}'.format(service.id), 'servicebox__icon servicebox__icon--{}'.format(service.id), view.package) }}
+            {{ lama.use_svg_icon('servicebox-{}'.format(service.id), 'servicebox__icon servicebox__icon--{}'.format(service.id), view.package, a11y=False) }}
             <span>{{ service.title }}</span>
         </a>
         {% endfor %}
