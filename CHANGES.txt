@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - BUG-864: Support Gallery in ZAR
 
+- BUG-860: Fix dpa-articles w/o images
+
 - MAINT: Remove unused referrerCount script
 
 - MAINT: Hide titles from servicebox icons
