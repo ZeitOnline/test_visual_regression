@@ -113,11 +113,17 @@ class LazyProxy(object):
                 return self.__proxy__[key]
             except KeyError:
                 exc_info = sys.exc_info()
-                bugsnag.notify(
-                    exc_info[1],
-                    traceback=exc_info[2],
-                    context=get_current_request_path(),
-                    grouping_hash=exc_info[1].args[0])
+                if key not in [
+                        # Don't nag about fields definitely not indexed in solr
+                        'autorships', 'image'
+                        'blog', 'url',
+                        'short_text', 'long_text'] + list(
+                            zeit.push.interfaces.IAccountData):
+                    bugsnag.notify(
+                        exc_info[1],
+                        traceback=exc_info[2],
+                        context=get_current_request_path(),
+                        grouping_hash=exc_info[1].args[0])
                 log.debug(u"ProxyExposed: '{}' has no attribute '{}'".format(
                     self, key))
         return getattr(self.__origin__, key)
