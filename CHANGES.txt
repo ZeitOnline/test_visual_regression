@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.128 (unreleased)
+3.128 (2018-03-07)
 ------------------
 
 - ZON-4398: Do not render Adlabel (it is served by IQD now)
