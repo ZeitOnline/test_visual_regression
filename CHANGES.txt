@@ -5,14 +5,26 @@ POSTDEPLOY
 ----------
 
 
-3.128 (unreleased)
+3.129 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.128 (2018-03-07)
 ------------------
 
 - ZON-4398: Do not render Adlabel (it is served by IQD now)
 
 - BUG-864: Support Gallery in ZAR
 
+- BUG-860: Fix dpa-articles w/o images
+
 - MAINT: Remove unused referrerCount script
+
+- MAINT: Hide titles from servicebox icons
+
+- MAINT: Add default values for (solr) proxy
 
 
 3.127.1 (2018-03-02)
