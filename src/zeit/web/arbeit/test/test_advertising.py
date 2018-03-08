@@ -77,7 +77,6 @@ def test_zar_adplaces_present_on_cp(testbrowser, togglepatch):
     assert len(browser.cssselect('#ad-desktop-2')) == 1
     assert len(browser.cssselect('#ad-desktop-3')) == 1
     assert len(browser.cssselect('#ad-desktop-4')) == 1
-    assert len(browser.cssselect('#ad-desktop-5')) == 1
     assert len(browser.cssselect('#ad-desktop-16')) == 1
 
     assert len(browser.cssselect('#ad-mobile-1')) == 1
