@@ -60,15 +60,20 @@
 
     {% endblock content %}
 
-    {% block nextread %}
-        {% set module = view.nextread %}
-        {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
-    {% endblock %}
+    {% if toggles('ligatus') %}
+        {% set ligatus_id = '101664' %}
+        {% include 'zeit.web.core:templates/inc/ligatus/ligatus.html' %}
+    {% else %}
+        {% block nextread %}
+            {% set module = view.nextread %}
+            {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
+        {% endblock %}
 
-    {% block nextread_ad %}
-        {% set module = view.nextread_ad %}
-        {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
-    {% endblock %}
+        {% block nextread_ad %}
+            {% set module = view.nextread_ad %}
+            {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
+        {% endblock %}
+    {% endif %}
 
     {% block article_google_ad %}
         {% if toggles('adtile5') and view.has_comment_area -%}
