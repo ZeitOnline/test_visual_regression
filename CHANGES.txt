@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4483: iPhoneX landscape-fix
 
+- BUG-815: Remove misplaced ad tile on ZAR homepage
+
 
 3.128 (2018-03-07)
 ------------------
