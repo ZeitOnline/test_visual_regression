@@ -8,7 +8,7 @@ POSTDEPLOY
 3.129 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4483: iPhoneX landscape-fix
 
 
 3.128 (2018-03-07)
