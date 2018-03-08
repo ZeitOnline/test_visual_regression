@@ -39,11 +39,16 @@
     </article>
     {% endblock content %}
 
-    {% block nextread %}
-        {% if view.nextread %}
-            {% include "zeit.web.campus:templates/inc/article/nextread.html" %}
-        {% endif %}
-    {% endblock %}
+    {% if toggles('ligatus') %}
+        {% set ligatus_id = '101844' %}
+        {% include 'zeit.web.core:templates/inc/ligatus/ligatus.html' %}
+    {% else %}
+        {% block nextread %}
+            {% if view.nextread %}
+                {% include "zeit.web.campus:templates/inc/article/nextread.html" %}
+            {% endif %}
+        {% endblock %}
+    {% endif %}
 
     {% block article_google_ad %}
         {% if toggles('adtile5') and view.has_comment_area -%}
