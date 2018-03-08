@@ -7,22 +7,13 @@
 	+respond-min($break-tablet-min)
 		padding: $page-padding
 
-// We need a fixed max-width to enable "text-overflow: ellipsis".
-// And we need it gradually, to look good.
-// Optimize: It would be cool to have it more fluid. But calc() and percentages
-// do not seem to work.
-.article-heading__headline--podcast > span
-	+respond-min($break-tablet-min)
-		max-width: remify(400px)
++respond-min($break-tablet-min)
+	.article-heading__podcast
+		// Initial setting on flex items is min-width: auto.
+		// Then it cannot be smaller than the size of its content.
+		// Set to min-width: 0 to prevent overflowing children
+		min-width: 0
+
+	.article-heading__headline--podcast > span
 		overflow: hidden
 		text-overflow: ellipsis
-	+respond-min(800px)
-		max-width: remify(425px)
-	+respond-min(850px)
-		max-width: remify(450px)
-	+respond-min(900px)
-		max-width: remify(500px)
-	+respond-min(1000px)
-		max-width: remify(550px)
-	+respond-min($break-desktop-min)
-		max-width: remify(560px)

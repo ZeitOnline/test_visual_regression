@@ -10,7 +10,7 @@
     <header class="{{ 'article-heading' | with_mods('podcast') }}" data-ct-area="articleheader" {% if card_style %} style="{{ card_style }}"{% endif %}>
         <div class="{{ 'article-heading__container' | with_mods('podcast') }}">
             {% include "zeit.web.site:templates/inc/asset/image_article-header-podcast.html" %}
-            <div>
+            <div class="article-heading__podcast">
                 <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}" itemprop="headline">
                     <span class="{{ 'article-heading__series' | with_mods('podcast') }}">
                         {% if view.serie %}
