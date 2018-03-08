@@ -71,10 +71,14 @@ class Converter(object):
         doc.setdefault('commentSectionEnable', True)
         doc.setdefault('date_last_published_semantic', None)
         doc.setdefault('lead_candidate', False)
+        doc.setdefault('ressort', None)
         doc.setdefault('sub_ressort', None)
         doc.setdefault('supertitle', None)
+        doc.setdefault('title', None)
         doc.setdefault('tldr_title', None)
+        doc.setdefault('tldr_text', None)
         doc.setdefault('tldr_date', None)
+        doc.setdefault('tldr_milestone', None)
         # Imported news articles don't have a teaser section
         for teaser, fallback in cls.TEASER_FIELDS.items():
             if not doc.get(teaser):
@@ -96,7 +100,7 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         'authors': '',
         'comments': 'commentsAllowed',
         'date-last-modified': 'date_last_modified',
-        'date_first_released': '',
+        'date-first-released': 'date_first_released',
         'date_last_published': '',
         'date_last_published_semantic': 'date_last_published_semantic',
         'id': '',
