@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4459: Inject SSO ID into the DOM to be consumed by Webtrekk
 
+- ZON-4465: Small fixes for brandeins parquet
+
 
 3.129 (2018-03-08)
 ------------------
