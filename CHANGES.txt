@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.130 (unreleased)
+3.130 (2018-03-09)
 ------------------
 
 - ZON-4459: Inject SSO ID into the DOM to be consumed by Webtrekk
