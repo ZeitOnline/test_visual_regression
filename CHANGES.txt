@@ -8,7 +8,7 @@ POSTDEPLOY
 3.128 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4459: Inject SSO ID into the DOM to be consumed by Webtrekk
 
 
 3.127 (2018-03-02)
