@@ -538,16 +538,6 @@ def test_health_check_with_fs_should_be_configurable(testbrowser):
         zeit.web.core.view.health_check('request')
 
 
-def test_reader_revenue_status_should_utilize_feature_toggle(
-        dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'access_status_webtrekk': False}.get)
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert 'cp28' not in view.webtrekk['customParameter'].keys()
-
-
 def test_reader_revenue_status_should_reflect_access_right(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')

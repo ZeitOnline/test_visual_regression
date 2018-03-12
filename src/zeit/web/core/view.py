@@ -692,10 +692,6 @@ class Base(object):
         ])
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
-                'access_status_webtrekk'):
-            del custom_parameter['cp28']
-
-        if not zeit.web.core.application.FEATURE_TOGGLES.find(
                 'reader_revenue'):
             custom_parameter['cp29'] = 'unfeasible'
 
