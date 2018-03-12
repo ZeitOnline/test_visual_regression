@@ -2,6 +2,8 @@
 	display: table
 	margin: remify(59px auto 40px)
 	position: relative
+	+zon-adlabel
+		@extend %label
 	+respond_min($break-mobile-ad-width)
 		display: none // generally hidden on desktop
 	&--1
@@ -12,9 +14,8 @@
 .ad-desktop
 	$name: '.ad-desktop'
 	display: none // generally hidden on mobile
-	&[data-banner-label]:before
+	+zon-adlabel
 		@extend %label
-		content: attr(data-banner-label)
 	+respond_min($break-mobile-ad-width)
 		display: table // generally visible on desktop
 		&--1,
