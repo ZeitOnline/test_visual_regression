@@ -8,7 +8,7 @@ POSTDEPLOY
 3.131 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- MAINT: Remove unused feature toggle `access_status_webtrekk`
 
 
 3.130 (2018-03-09)
