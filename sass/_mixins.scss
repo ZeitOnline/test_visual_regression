@@ -577,7 +577,7 @@ $inline-block-alignment: none !default;
 
 
 @mixin outlined-font($color) {
-	@include font-smoothing()
+	@include font-smoothing();
 	color: $color; // fallback
 	text-fill-color: transparent;
 	text-stroke-width: remify(1.25px);
@@ -585,4 +585,12 @@ $inline-block-alignment: none !default;
 	-webkit-text-fill-color: transparent;
 	-webkit-text-stroke-width: remify(1.25px);
 	-webkit-text-stroke-color: $color;
+}
+
+
+@mixin zon-adlabel {
+	&[data-banner-label]:before{
+		@content;
+		content: attr(data-banner-label);
+	}
 }
