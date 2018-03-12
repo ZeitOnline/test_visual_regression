@@ -5,7 +5,29 @@ POSTDEPLOY
 ----------
 
 
-3.128 (unreleased)
+3.131 (unreleased)
+------------------
+
+- MAINT: Remove unused feature toggle `access_status_webtrekk`
+
+
+3.130 (2018-03-09)
+------------------
+
+- ZON-4459: Inject SSO ID into the DOM to be consumed by Webtrekk
+
+- ZON-4465: Small fixes for brandeins parquet
+
+
+3.129 (2018-03-08)
+------------------
+
+- ZON-4483: iPhoneX landscape-fix
+
+- BUG-815: Remove misplaced ad tile on ZAR homepage
+
+
+3.128 (2018-03-07)
 ------------------
 
 - ZON-4398: Do not render Adlabel (it is served by IQD now)

@@ -1,11 +1,10 @@
 {% extends "zeit.web.core:templates/inc/region/default.html" %}
 {%- block before_region %}
     {% if region_loop.index == 4 -%}
-        {% include "zeit.web.core:templates/inc/ads/places/desktop/place4.html" %}
         {% include "zeit.web.core:templates/inc/ads/places/mobile/place3.html" %}
     {% endif -%}
     {% if region_loop.index == 7 -%}
-        {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place4.html" %}
         {% include "zeit.web.core:templates/inc/ads/places/mobile/place4.html" %}
     {% endif -%}
 {% endblock %}
