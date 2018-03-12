@@ -5,10 +5,18 @@ POSTDEPLOY
 ----------
 
 
-3.130 (unreleased)
+3.131 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+3.130 (2018-03-09)
+------------------
+
+- ZON-4459: Inject SSO ID into the DOM to be consumed by Webtrekk
+
+- ZON-4465: Small fixes for brandeins parquet
 
 
 3.129 (2018-03-08)
