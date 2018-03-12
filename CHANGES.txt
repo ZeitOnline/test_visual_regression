@@ -8,7 +8,9 @@ POSTDEPLOY
 3.131 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-830: Change adlabel placement in AMP
+
+- MAINT: Remove unused feature toggle `access_status_webtrekk`
 
 
 3.130 (2018-03-09)
