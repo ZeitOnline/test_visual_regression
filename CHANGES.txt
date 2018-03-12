@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - MAINT: Remove unused feature toggle `access_status_webtrekk`
 
+- FIX: Toggle mobile ZON adlabel
+
 
 3.130 (2018-03-09)
 ------------------
