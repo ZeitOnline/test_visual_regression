@@ -23,6 +23,12 @@ POSTDEPLOY
 - ZON-4465: Small fixes for brandeins parquet
 
 
+3.129.1 (2018-03-13)
+--------------------
+
+- TMS-187: Call TMS intextlink endpoint only once when rendering an article page
+
+
 3.129 (2018-03-08)
 ------------------
 
