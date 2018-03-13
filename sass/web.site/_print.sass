@@ -1,4 +1,4 @@
-$zon-print-grey: #707070
+$zon-print-grey: #444
 $print-media-width: 100mm
 $print-media-margin: 14pt 0
 // using this zoom factor to make fonts bigger
@@ -30,7 +30,6 @@ $print-zoom: 1.263157895
 		content: " (" attr(title) ")"
 
 	a[href^="http"]
-		color: $zon-print-grey
 		page-break-inside: avoid
 		&:after
 			border-bottom: 1px solid white // To visibly hide grey border of <a>
@@ -102,6 +101,7 @@ $print-zoom: 1.263157895
 		content: ""
 
 	.metadata
+		color: $zon-print-grey
 		font-size: 7pt * $print-zoom
 		line-height: 9pt * $print-zoom
 		margin-bottom: 14pt * $print-zoom
