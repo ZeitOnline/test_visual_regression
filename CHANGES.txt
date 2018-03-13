@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.131 (unreleased)
+3.131 (2018-03-13)
 ------------------
 
 - BUG-830: Change adlabel placement in AMP
