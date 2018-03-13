@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='3.128.dev0',
+    version='3.132.dev0',
     author=(
         'Thomas Baumann, Nico Bruenjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -32,6 +32,7 @@ setup(
         'cryptography',
         'dogpile.cache',
         'python-dateutil',
+        'gocept.cache',
         'grokcore.component',
         'iso8601',
         'lxml',
@@ -77,7 +78,7 @@ setup(
         'zeit.magazin',
         'zeit.newsletter',
         'zeit.push>=1.13.0.dev0',
-        'zeit.retresco>=1.18.0.dev0',
+        'zeit.retresco>=1.20.0.dev0',
         'zeit.seo>=1.8.0.dev0',
         'zeit.solr',
         'zeit.vgwort',
