@@ -172,9 +172,8 @@ def get_retresco_body(article):
         try:
             assert not zeit.seo.interfaces.ISEO(article).disable_intext_links
 
-            uuid = zeit.cms.content.interfaces.IUUID(article).id
             timeout = conf.get('retresco_timeout', 0.1)
-            body = conn.get_article_body(uuid, timeout=timeout)
+            body = conn.get_article_body(article, timeout=timeout)
 
             if unichr(65533) in body:
                 # XXX Stopgap until tms encoding issues are resolved
@@ -184,7 +183,7 @@ def get_retresco_body(article):
             xml = gocept.lxml.objectify.fromstring(body)
         except AssertionError:
             log.debug('Retresco body disabled for %s', article.uniqueId)
-        except:
+        except Exception:
             log.warning(
                 'Retresco body failed for %s', article.uniqueId, exc_info=True)
 
