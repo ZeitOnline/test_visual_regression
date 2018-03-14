@@ -8,7 +8,7 @@ POSTDEPLOY
 3.132 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix: Align mobile D18 nav badge
 
 
 3.131 (2018-03-13)
