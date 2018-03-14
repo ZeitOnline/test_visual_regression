@@ -23,6 +23,9 @@
     {% if toggles('third_party_modules') -%}
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif -%}
+    {% if toggles('optimize_ab_testing') -%}
+        <script src="https://converlytics-services.de/zon/optimize_to_wt.js"></script>
+    {% endif -%}
     {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
         {%- block content_ad_script -%}{%- endblock -%}

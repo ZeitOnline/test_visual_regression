@@ -35,7 +35,9 @@
     {% if toggles('third_party_modules') -%}
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif -%}
-
+    {% if toggles('optimize_ab_testing') -%}
+        <script src="https://converlytics-services.de/zon/optimize_to_wt.js"></script>
+    {% endif -%}
     {% if view.include_optimizely -%}
         <script src="{{ view.include_optimizely }}"></script>
     {% endif -%}
