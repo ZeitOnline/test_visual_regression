@@ -158,9 +158,9 @@ def test_adplaces_have_banner_label_data_attribute(testbrowser, monkeypatch):
     assert labelstring not in browser.cssselect('#ad-desktop-2')[0].text
     assert labelstring in browser.cssselect('#ad-desktop-3')[0].text
     assert labelstring in browser.cssselect('#ad-desktop-5')[0].text
-    assert labelstring not in browser.cssselect('#ad-mobile-1')[0].text
-    assert labelstring not in browser.cssselect('#ad-mobile-3')[0].text
-    assert labelstring not in browser.cssselect('#ad-mobile-4')[0].text
+    assert labelstring in browser.cssselect('#ad-mobile-1')[0].text
+    assert labelstring in browser.cssselect('#ad-mobile-3')[0].text
+    assert labelstring in browser.cssselect('#ad-mobile-4')[0].text
 
 
 def test_adplaces_have_no_banner_label_data_attribute(

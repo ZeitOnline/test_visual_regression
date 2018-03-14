@@ -423,9 +423,8 @@ class Base(object):
                 zeit.web.core.interfaces.ISettings)
             tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
             try:
-                uuid = zeit.cms.content.interfaces.IUUID(self.context).id
                 timeout = conf.get('retresco_timeout', 0.1)
-                return tms.get_article_keywords(uuid, timeout=timeout)
+                return tms.get_article_keywords(self.context, timeout=timeout)
             except Exception:
                 log.warning(
                     'Retresco keywords failed for %s', self.context.uniqueId,
