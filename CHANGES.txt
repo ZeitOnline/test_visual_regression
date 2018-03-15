@@ -8,8 +8,13 @@ POSTDEPLOY
 3.132 (unreleased)
 ------------------
 
-- Fix: Align mobile D18 nav badge
+- ZON-4488: Clear floating elements before liveblog
 
+- BUG-875: Align coverless Z+ badge in article header
+
+- MAINT: Stop sending proxy KeyError to Bugsnag
+
+- Fix: Align mobile D18 nav badge
 
 3.131 (2018-03-13)
 ------------------
