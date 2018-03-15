@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4488: Clear floating elements before liveblog
 
+- BUG-875: Align coverless Z+ badge in article header
+
 - MAINT: Stop sending proxy KeyError to Bugsnag
 
 
