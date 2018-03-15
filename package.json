@@ -52,7 +52,7 @@
     "livereload": "livereload 'src/zeit/web/static/css, src/zeit/web/static/js' -d",
     "postcss": "postcss -u autoprefixer -r 'src/zeit/web/static/css/**/*.css'",
     "sass": "node-sass --include-path sass --include-path node_modules sass/ -o src/zeit/web/static/css/",
-    "sass:dev": "npm run sass -- --output-style expanded --source-map true --source-map-root file://${PWD}/src/zeit/web/static/css/web",
+    "sass:dev": "npm run sass -- --output-style expanded --source-map true --source-map-root ${PWD}/src/zeit/web/static/css/web",
     "sass:dist": "npm run sass -- --output-style compressed --quiet",
     "postsass:dev": "npm run postcss",
     "postsass:dist": "npm run postcss -- --no-map",

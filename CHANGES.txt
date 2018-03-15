@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - MAINT: Stop sending proxy KeyError to Bugsnag
 
+- Fix: Align mobile D18 nav badge
+
 
 3.131 (2018-03-13)
 ------------------
