@@ -39,7 +39,8 @@ $print-zoom: 1.263157895
 			word-wrap: break-word
 
 	a[href^="#"]:after,
-	.zplus-badge a:after // this is full of tracking-params
+	.zplus-badge a:after, // this is full of tracking-params
+	.header__publisher a:after
 		content: ""
 
 	#ads,
@@ -62,7 +63,6 @@ $print-zoom: 1.263157895
 	.column-heading__author,
 	.comment-section,
 	.footer,
-	.header__brand,
 	.newsletter-teaser-box, // raw-code in articles comes with own stylesheets
 	.nextread,
 	.nextread-advertisement,
@@ -77,10 +77,11 @@ $print-zoom: 1.263157895
 		padding: 0
 		margin: 0
 
-	.header:after
+	.header__brand
 		border-bottom: 1pt solid $zon-print-grey
-		content: url("../../images/logo-zon-print.svg")
-		display: block
+		.header__teaser,
+		.header__menu-link
+			display: none
 
 	.article-heading
 		margin: 6mm 0 0
