@@ -1,2 +1,4 @@
-{% extends "zeit.web.core:templates/inc/ads/places/desktop/ad.html" %}
-{% block tile %}5{% endblock %}
+{% if not (view.paywall and view.ressort == 'zeit-magazin') %}
+    {% extends "zeit.web.core:templates/inc/ads/places/desktop/ad.html" %}
+    {% block tile %}5{% endblock %}
+{% endif %}
