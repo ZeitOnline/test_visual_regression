@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import math
 
-import pyramid
-import zope.schema
+import pyramid.httpexceptions
+import pyramid.threadlocal
+import zope.interface
 
 import zeit.content.cp.automatic
 import zeit.content.cp.interfaces
@@ -11,18 +12,7 @@ import zeit.web
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.template
-
-
-class IRanking(zeit.content.cp.interfaces.IArea):
-
-    sort_order = zope.schema.TextLine(
-        title=u'Search result order', default=u'aktuell', required=False)
-
-    raw_query = zope.schema.Text(
-        title=u'Raw solr query', default=None, required=False)
-
-    hits = zope.schema.Int(
-        title=u'Search result count', default=None, required=False)
+import zeit.web.core.utils
 
 
 @zeit.web.register_area('ranking')
@@ -40,7 +30,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     """
 
     zope.interface.implements(
-        IRanking,
+        zeit.content.cp.interfaces.IArea,
         zeit.web.core.interfaces.IPagination
     )
 
