@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - BUG-875: Align coverless Z+ badge in article header
 
+- BUG-849: Don’t render adtile5 in ZMO with paywall
+
 - MAINT: Stop sending proxy KeyError to Bugsnag
 
 - Fix: Align mobile D18 nav badge
