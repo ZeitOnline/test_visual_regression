@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4488: Clear floating elements before liveblog
 
+- ZON-4501: Improve ZON print stylesheet
+
 - BUG-875: Align coverless Z+ badge in article header
 
 - BUG-849: Don’t render adtile5 in ZMO with paywall
