@@ -325,7 +325,7 @@ class IPaywallAccess(zope.interface.Interface):
 
 
 class IVertical(zope.interface.Interface):
-    """Returns short identifier string (zon/zmo/zco/zar/zett) to signify which
+    """Returns short identifier string (zon/zmo/zco/zar) to signify which
     vertical an ICMSContent belongs to.
 
     This is not quite the same as which zeit.cms.section.ISectionMarker the
