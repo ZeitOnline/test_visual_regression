@@ -1,5 +1,8 @@
-import mock
+import datetime
+
 import lxml.etree
+import mock
+import pytz
 import zope.component
 
 import zeit.content.cp.interfaces
@@ -17,8 +20,8 @@ def get_area(kind, count):
     area.kind = kind
     jango = area.values()[0]
     area.clear()
-    for value in zeit.web.site.area.overview.DateContentQuery.clone_factory(
-            jango, count):
+    mixin = zeit.web.site.area.overview.OverviewContentQueryMixin
+    for value in mixin.clone_factory(jango, count):
         area.insert(0, value)
     return zope.component.getAdapter(
         area, zeit.content.cp.interfaces.IRenderedArea, kind)
@@ -29,52 +32,83 @@ def test_overview_area_should_have_a_sanity_bound_count(application):
     assert area.count == zeit.web.site.area.overview.SANITY_BOUND
 
 
-def test_overview_area_should_produce_correct_ranges(
+def test_overview_area_should_produce_correct_date_ranges(
         clock, application, dummy_request):
     clock.freeze(zeit.web.core.date.parse_date(
         '2016-05-10T1:23:59.780412+00:00'))
     area = get_area('overview', 20)
     area.request = dummy_request
 
-    assert area._content_query._range_query() == (
-        'date_first_released:[2016-05-10T00:00:00Z '
-        'TO 2016-05-11T00:00:00Z]')
+    start, finish = area._content_query._date_range()
+    assert start == datetime.datetime(2016, 5, 10, tzinfo=pytz.UTC)
+    assert finish == datetime.datetime(2016, 5, 11, tzinfo=pytz.UTC)
 
     dummy_request.GET['date'] = '2016-05-09'
     area = get_area('overview', 20)
 
-    assert area._content_query._range_query() == (
-        'date_first_released:[2016-05-09T00:00:00Z '
-        'TO 2016-05-10T00:00:00Z]')
+    start, finish = area._content_query._date_range()
+    assert start == datetime.datetime(2016, 5, 9, tzinfo=pytz.UTC)
+    assert finish == datetime.datetime(2016, 5, 10, tzinfo=pytz.UTC)
 
     dummy_request.GET['date'] = '2016-05-08'
     area = get_area('overview', 20)
 
-    assert area._content_query._range_query() == (
-        'date_first_released:[2016-05-08T00:00:00Z '
-        'TO 2016-05-09T00:00:00Z]')
+    start, finish = area._content_query._date_range()
+    assert start == datetime.datetime(2016, 5, 8, tzinfo=pytz.UTC)
+    assert finish == datetime.datetime(2016, 5, 9, tzinfo=pytz.UTC)
 
 
-def test_overview_area_should_overflow_if_necessary(
+def test_overview_solr_area_should_overflow_if_necessary(
         application, dummy_request):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
         ({'uniqueId':
           'http://xml.zeit.de/zeit-online/article/01'}) for i in range(3)]
     area = get_area('overview', 1)
+    area.automatic_type = 'query'
     assert len(area.values()) == 3
 
     solr.results = [
         ({'uniqueId':
           'http://xml.zeit.de/zeit-online/article/01'}) for i in range(3)]
     area = get_area('overview', 3)
+    area.automatic_type = 'query'
     assert len(area.values()) == 3
 
 
-def test_overview_area_should_respect_sanity_bound(
+def test_overview_elasticsearch_area_should_overflow_if_necessary(
+        application, dummy_request):
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
+        ({'uniqueId':
+          'http://xml.zeit.de/zeit-online/article/01'}) for i in range(3)]
+    area = get_area('overview', 1)
+    assert len(area.values()) == 3
+
+    es.results = [
+        ({'uniqueId':
+          'http://xml.zeit.de/zeit-online/article/01'}) for i in range(3)]
+    area = get_area('overview', 3)
+    assert len(area.values()) == 3
+
+
+def test_overview_solr_area_should_respect_sanity_bound(
         application, dummy_request, monkeypatch):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
+        ({'uniqueId':
+          'http://xml.zeit.de/zeit-online/article/01'}) for i in range(10)]
+    monkeypatch.setattr(zeit.web.site.area.overview, 'SANITY_BOUND', 5)
+
+    area = get_area('overview', 1)
+    area.automatic_type = 'query'
+    assert len(area.values()) == 5
+
+
+def test_overview_elasticsearch_area_should_respect_sanity_bound(
+        application, dummy_request, monkeypatch):
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
         ({'uniqueId':
           'http://xml.zeit.de/zeit-online/article/01'}) for i in range(10)]
     monkeypatch.setattr(zeit.web.site.area.overview, 'SANITY_BOUND', 5)
@@ -89,8 +123,8 @@ def test_overview_area_clone_factory_should_set_proper_attributes():
         __name__ = object()
         xml = lxml.etree.fromstring('<foo/>')
 
-    clones = zeit.web.site.area.overview.DateContentQuery.clone_factory(
-        Foo(), 3)
+    mixin = zeit.web.site.area.overview.OverviewContentQueryMixin
+    clones = mixin.clone_factory(Foo(), 3)
 
     assert all(c.xml is Foo.xml for c in clones)
     assert all(c.__parent__ is Foo.__parent__ for c in clones)
