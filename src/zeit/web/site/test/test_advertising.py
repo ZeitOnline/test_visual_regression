@@ -354,3 +354,15 @@ def test_iqd_adtile8_on_article_new_placement_alternative(
 def test_p5_not_displayed_when_there_are_no_comments(testbrowser):
     browser = testbrowser('/zeit-online/article/quiz')
     assert not browser.cssselect('#ad-desktop-5')
+
+
+def test_adtile5_is_empty_on_zmo_paywall(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'reader_revenue': True
+    }.get)
+
+    param = "?C1-Meter-Status=paywall&C1-Meter-User-Status=always-paid"
+    browser = testbrowser('/zeit-magazin/article/01' + param)
+    assert not browser.cssselect('#ad-desktop-5')
