@@ -51,24 +51,17 @@ $print-zoom: 1.263157895
 	#iqdLastNode,
 	#iqdSitebarWrapper,
 	#iqdInfoBox,
-	#nextread,
 	#pDebug,
 	.ad,
 	.ads,
 	.ad-container,
-	.article-footer,
-	.article-lineage,
-	.article-pagination,
-	.article-toc,
-	.column-heading__author,
+	.article__footer,
 	.comment-section,
-	.footer,
+	.main-footer,
 	.newsletter-teaser-box, // raw-code in articles comes with own stylesheets
 	.nextread,
-	.nextread-advertisement,
 	.video-player,
 	.visually-hidden,
-	.breaking-news-banner,
 	#bp-container, // teaser for browser-push
 	iframe[id^="google_ads"]
 		display: none !important
@@ -77,11 +70,29 @@ $print-zoom: 1.263157895
 		padding: 0
 		margin: 0
 
+	.header
+		background: none
+
 	.header__brand
 		border-bottom: 1pt solid $zon-print-grey
+		margin-bottom: remify(13px)
+		padding-bottom: remify(13px)
 		.header__teaser,
 		.header__menu-link
 			display: none
+
+	.header__logo
+		fill: #313131
+
+
+	.page__content,
+	.article__item,
+	.is-constrained
+		max-width: $max-page-width
+
+	.header-article__media
+		margin-left: 0 !important
+		margin-right: 0 !important
 
 	.article-heading
 		margin: 6mm 0 0
@@ -130,6 +141,13 @@ $print-zoom: 1.263157895
 				margin: 0 (20pt * $print-zoom) (14pt * $print-zoom) 0
 				a
 					font-size: 7pt * $print-zoom
+
+	.article-pagination__pager
+		display: none
+
+	.article-pagination__nexttitle
+		border-top: 1pt solid $zon-print-grey
+		font-weight: normal
 
 	.figure
 		&__caption
