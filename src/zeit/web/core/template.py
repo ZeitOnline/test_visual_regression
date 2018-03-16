@@ -175,6 +175,24 @@ def tag_with_logo_content(content, area_kind=None):
 
 
 @zeit.web.register_filter
+def vertical(context):
+    if zeit.content.link.interfaces.ILink.providedBy(context):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        zett_host = urlparse.urlparse(conf.get('zett_host')).netloc
+        brandeins_host = urlparse.urlparse(conf.get('brandeins_host')).netloc
+
+        context_host = urlparse.urlparse(context.url).netloc
+
+        if brandeins_host == context_host:
+            return 'brandeins'
+
+        if zett_host == context_host:
+            return 'zett'
+
+    return zeit.web.core.interfaces.IVertical(context)
+
+
+@zeit.web.register_filter
 def logo_icon(teaser, area_kind=None, zplus=None):
     """Function to add a list of icon templates to a teaser
     :param teaser:      Teaser to which the icons are added
@@ -199,27 +217,27 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         if zplus == 'only':
             return templates
 
-    vertical = zeit.web.core.interfaces.IVertical(teaser)
+    brand = vertical(teaser)
     # exclusive icons, set and return
-    if vertical == 'zmo' and area_kind != 'zmo-parquet':
+    if brand == 'zmo' and area_kind != 'zmo-parquet':
         templates.append('logo-zmo-zm')
         return templates
     if liveblog(teaser):
         templates.append('liveblog')
         return templates
-    if vertical == 'zett':
+    if brand == 'zett':
         templates.append('logo-zett-small')
         return templates
-    if vertical == 'brandeins':
+    if brand == 'brandeins':
         templates.append('logo-brandeins')
         return templates
 
     # inclusive icons may appear both
     if tag_with_logo_content(teaser, area_kind) and not zplus_icon:
         templates.append('taglogo')
-    if vertical == 'zco' and area_kind != 'zco-parquet':
+    if brand == 'zco' and area_kind != 'zco-parquet':
         templates.append('logo-zco')
-    if vertical == 'zar' and area_kind != 'zar-parquet':
+    if brand == 'zar' and area_kind != 'zar-parquet':
         templates.append('logo-zar')
 
     return templates
@@ -269,11 +287,6 @@ def framebuilder(view):
 @zeit.web.register_test
 def paragraph(block):
     return block_type(block) == 'paragraph'
-
-
-@zeit.web.register_filter
-def vertical(content):
-    return zeit.web.core.interfaces.IVertical(content)
 
 
 @zeit.web.register_filter
