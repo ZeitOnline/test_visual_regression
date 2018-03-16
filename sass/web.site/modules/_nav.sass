@@ -54,6 +54,10 @@
 		// & + &:before
 		// 	content: none
 
+	&__ressorts-item--featured
+		svg
+			vertical-align: middle
+
 	// LOGIN
 	&__login-link
 		text-align: right
@@ -144,9 +148,7 @@
 		&__ressorts
 			.nav__dropdown-list
 				display: none
-		&__ressorts-item--featured
-			a
-				vertical-align: remify(-10px)
+
 		&__ressorts-item--has-label
 			clear: left
 			display: list-item
@@ -269,10 +271,6 @@
 			display: list-item
 		.js &__ressorts-item--featured
 			margin-left: auto // align right @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
-			//height: remify(30px)
-			padding: 0
-			position: relative
-			top: remify(4px)
 
 		&__dropdown-item--has-label
 			background-color: #FAFAF3
@@ -288,7 +286,6 @@
 		&__ressorts-item
 			&--featured
 				a
-					height: remify(30px)
 					+on-interaction
 						box-shadow: none
 			&--icon-featured-d18
@@ -355,7 +352,6 @@
 
 		li.nav__ressorts-item--featured
 			float: right
-			font-size: remify(12px)
 			padding-right: 0
 
 		// Tags and date
