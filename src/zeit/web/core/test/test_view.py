@@ -538,16 +538,6 @@ def test_health_check_with_fs_should_be_configurable(testbrowser):
         zeit.web.core.view.health_check('request')
 
 
-def test_reader_revenue_status_should_utilize_feature_toggle(
-        dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'access_status_webtrekk': False}.get)
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert 'cp28' not in view.webtrekk['customParameter'].keys()
-
-
 def test_reader_revenue_status_should_reflect_access_right(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -963,9 +953,7 @@ def test_retrieve_keywords_from_tms(application, monkeypatch):
             tms.return_value = [mock.sentinel.tag]
             assert view.keywords == [mock.sentinel.tag]
             assert not kw.called
-            tms.assert_called_with(
-                '{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}',
-                timeout=0.42)
+            tms.assert_called_with(article, timeout=0.42)
 
 
 def test_fall_back_on_vivi_keywords_on_tms_failure(application, monkeypatch):
