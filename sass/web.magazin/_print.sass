@@ -6,13 +6,30 @@
 	.main-footer
 		display: none !important
 
-
-
+	// full width
 	.page__content,
 	.article__item,
-	.is-constrained
+	.is-constrained,
+	.header-article,
+	.header-article--column > figure, // specificity
+	.header-article--default > figure // specificity
 		max-width: $max-page-width
 
+
+	// standardize headers
+	.header-article--briefmarke,
+	.header-article--mode,
+	.header-article--text-only
+		text-align: center
+
+
+	// --------------------------------------------
+	// article elements
+	.meta
+		text-transform: none
+
+	// --------------------------------------------
+	// TODO: clean up and sort
 	.header-article__media
 		margin-left: 0 !important
 		margin-right: 0 !important
@@ -25,6 +42,7 @@
 		background-color: #fff
 		color: $zon-print-grey
 		position: relative
+		text-align: center
 
 	.article-heading
 		margin: 6mm 0 0
