@@ -35,7 +35,7 @@
                     13: window.Zeit.breakpoint.getTrackingBreakpoint()
                 {%- elif key == 'cp32' -%}
                     32: window.location.protocol.replace(':', '')
-                {%- elif key == 'cp36' -%}
+                {%- elif key == 'cp36' and toggles('optimize_ab_testing') -%}
                     36: window.Zeit.getOptimizeString()
                 {%- else -%}
                     {{ key | replace('cp', '') | int }}: "{{ view.webtrekk.customParameter[key] }}"
