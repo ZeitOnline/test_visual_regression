@@ -159,11 +159,24 @@ $print-zoom: 1.263157895
 		border-top: 1pt solid $zon-print-grey
 		font-weight: normal
 
-	.figure
-		&__caption
-			font-size: 7pt * $print-zoom
-			margin-left: 0
-			padding-left: 0 !important
+	.figure,
+	.figure-stamp
+		float: left
+		margin: 0 2rem 1rem 0
+		max-width: $stamp-width
+	.figure__caption
+		font-size: 7pt * $print-zoom
+		margin-left: 0
+		padding-left: 0 !important
+
+	// dont style the media for print, because we styles the figure already
+	.figure-stamp .figure__media,
+	.figure-stamp--right .figure__media
+		float: none
+		margin: 0
+		max-width: none
+		width: auto
+
 
 	.video-player + .figure__caption
 		display: none
