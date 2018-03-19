@@ -1,15 +1,12 @@
 import re
+
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
-
 import zope.component
+
 import zeit.solr.interfaces
-
-# import zeit.cms.interfaces
-
-# import zeit.web.core.interfaces
 
 import zeit.web.campus.view_centerpage
 

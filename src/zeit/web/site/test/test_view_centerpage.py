@@ -876,7 +876,7 @@ def test_newsticker_should_have_expected_dom(testbrowser, data_solr):
         teaser[0].cssselect('a .newsteaser__text .newsteaser__product')) == 1
 
 
-def test_newspage_has_expected_elements(testbrowser, data_solr):
+def test_newspage_has_expected_elements(testbrowser, data_es):
     browser = testbrowser('/news/index')
     area = browser.cssselect('.cp-area--overview')[0]
     assert len(area.cssselect('.pager--overview')) == 1
