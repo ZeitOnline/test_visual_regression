@@ -5,7 +5,13 @@ POSTDEPLOY
 ----------
 
 
-3.132 (unreleased)
+3.133 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.132 (2018-03-16)
 ------------------
 
 - ZON-4488: Clear floating elements before liveblog
