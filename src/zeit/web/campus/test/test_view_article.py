@@ -370,3 +370,43 @@ def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
 def test_campus_advertorial_has_no_home_button_as_pagination(testbrowser):
     browser = testbrowser('/campus/article/advertorial-onepage')
     assert len(browser.cssselect('.article-pagination__link')) == 0
+
+
+def test_campus_print_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple_date_print'.format(
+        testserver.url))
+    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    source = selenium_driver.find_element_by_css_selector('.metadata__source')
+
+    assert date.text.strip() == (u'10. Januar 2016')
+    assert source.text.strip() == u'DIE ZEIT Nr. 1/2015, 5. Mai 2015'
+
+
+def test_campus_print_changed_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple_date_print_changed'.format(
+        testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
+    source = selenium_driver.find_element_by_css_selector('.metadata__source')
+
+    assert dates[0].text == u'10. Februar 2016, 10:39 Uhr'
+    assert dates[1].text == u'Editiert am 22. Februar 2016, 18:18 Uhr'
+    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
+
+
+def test_campus_changed_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple_date_changed'.format(
+        testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
+
+    assert dates[0].text == u'10. Januar 2016, 10:39 Uhr'
+    assert dates[1].text == u'Aktualisiert am 10. Februar 2016, 10:39 Uhr'
+
+
+def test_campus_article_has_correct_meta_line(testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple'.format(testserver.url))
+    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+
+    assert date.text.strip() == (u'10. Januar 2016, 10:39 Uhr')

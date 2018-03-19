@@ -43,6 +43,7 @@ import zope.processlifetime
 import zope.testbrowser.wsgi
 
 import zeit.content.image.interfaces
+import zeit.retresco.interfaces
 import zeit.solr.interfaces
 
 import zeit.web.core.application
@@ -265,7 +266,6 @@ def app_settings(mockserver):
         'jinja2.enable_profiler': False,
         'use_wesgi': True,
         'serve_assets': True,
-        'mock_solr': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
         'vivi_zeit.web_runtime-settings-source': (
@@ -345,15 +345,18 @@ def application_session(app_settings, set_loglevel, request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     factory = zeit.web.core.application.Application()
     app = factory({}, **app_settings)
-    zope.component.provideUtility(MockSolr(),)
+    zope.component.provideUtility(MockSolr(),
+                                  zeit.solr.interfaces.ISolr)
     zope.component.provideUtility(MockSitemapSolr(),
                                   zeit.web.core.solr.ISitemapSolrConnection)
+    zope.component.provideUtility(MockES(),
+                                  zeit.retresco.interfaces.IElasticsearch)
     zope.component.provideUtility(mock.Mock(),
                                   zeit.objectlog.interfaces.IObjectLog)
-    zope.component.provideUtility(mock.Mock(), zeit.web.core.interfaces.IMail)
-    captcha = mock.Mock()
-    captcha.verify.return_value = True
-    zope.component.provideUtility(captcha, zeit.web.core.interfaces.ICaptcha)
+    zope.component.provideUtility(mock.Mock(),
+                                  zeit.web.core.interfaces.IMail)
+    zope.component.provideUtility(mock.Mock(**{'verify.return_value': True}),
+                                  zeit.web.core.interfaces.ICaptcha)
     # ZODB needs to come after ZCML is set up by the Application.
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
@@ -395,14 +398,21 @@ def reset_solr(application_session, request):
 
 
 @pytest.fixture
+def reset_es(application_session, request):
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    if isinstance(es, MockES):
+        es.reset()
+
+
+@pytest.fixture
 def reset_cache(application_session, request):
     pyramid_dogpile_cache2.clear()
 
 
 @pytest.fixture
 def application(
-        application_session, preserve_settings, reset_solr, reset_cache,
-        zodb, request):
+        application_session, preserve_settings, reset_solr, reset_es,
+        reset_cache, zodb, request):
     # This application_session/application split is a bit clumsy, but some
     # things (e.g. reset connector, teardown zodb) needs to be called after
     # each test (i.e. in 'function' scope). The many diverse fixtures make this
@@ -870,9 +880,7 @@ class HttpBrowser(BaseBrowser):
         self.contents = r.text
 
 
-class MockSolr(object):
-
-    zope.interface.implements(zeit.solr.interfaces.ISolr)
+class MockSearch(object):
 
     def __init__(self):
         self.reset()
@@ -880,14 +888,17 @@ class MockSolr(object):
     def reset(self):
         self.results = []
 
-    def search(self, q, rows=10, **kw):
+    def pop_results(self, size):
         results = []
-        for i in range(rows):
+        for i in range(size):
             try:
                 results.insert(0, self.results.pop())
             except IndexError:
                 break
-        return pysolr.Results(results, self._hits)
+        return results
+
+    def search(self, q, rows=10, **kw):
+        return pop_results(rows)
 
     def update_raw(self, xml, **kw):
         pass
@@ -904,8 +915,21 @@ class MockSolr(object):
         self._hits = len(value)
         self._results = value
 
-MockSolr.timeout = property(
-    zeit.web.core.solr.solr_timeout_from_settings, lambda self, value: None)
+
+class MockSolr(MockSearch):
+
+    zope.interface.implements(zeit.solr.interfaces.ISolr)
+
+    def search(self, q, rows=10, **kw):
+        return pysolr.Results(self.pop_results(rows), self._hits)
+
+    @property
+    def timeout(self):
+        return zeit.web.core.solr.solr_timeout_from_settings(self)
+
+    @timeout.setter
+    def timeout(self, value):
+        pass
 
 
 class MockSitemapSolr(MockSolr):
@@ -913,25 +937,57 @@ class MockSitemapSolr(MockSolr):
     zope.interface.implements(zeit.web.core.solr.ISitemapSolrConnection)
 
     def __init__(self):
-        self._sitemap_sorl = zeit.web.core.solr.SitemapSolrConnection()
+        self._sitemap_solr = zeit.web.core.solr.SitemapSolrConnection()
         super(MockSitemapSolr, self).__init__()
 
     @property
     def timeout(self):
         # Delegate to non mocked sitemap solr object
-        return self._sitemap_sorl.timeout
+        return self._sitemap_solr.timeout
 
     @timeout.setter
     def timeout(self, value):
         pass
 
 
+class MockES(MockSearch):
+
+    zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
+
+    def search(self, query, order, rows=25, **kw):
+        result = zeit.cms.interfaces.Result(self.pop_results(rows))
+        result.hits = self._hits
+        return result
+
+    @MockSearch.results.setter
+    def results(self, value):
+        # Tries to rewrite uniqueIds into tms-style url paths
+        for result in value:
+            try:
+                path = result.pop('uniqueId').replace(
+                    zeit.cms.interfaces.ID_NAMESPACE.rstrip('/'), '')
+                result.setdefault('url', path)
+            except KeyError:
+                continue
+        self._hits = len(value)
+        self._results = value
+
+
 @pytest.fixture
-def datasolr(request):
+def data_solr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
     zope.component.provideUtility(zeit.web.core.solr.DataSolr())
+
+
+@pytest.fixture
+def data_es(request):
+    previous = zope.component.queryUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    if previous is not None:
+        request.addfinalizer(lambda: zope.component.provideUtility(previous))
+    zope.component.provideUtility(zeit.web.core.retresco.DataES())
 
 
 @pytest.fixture(scope='session')
