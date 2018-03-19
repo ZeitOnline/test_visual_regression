@@ -689,7 +689,7 @@ class Base(object):
             ('cp29', first_click_free),  # First click free
             ('cp30', self.paywall or 'open'),  # Paywall Schranke
             ('cp32', 'unfeasible'),  # Protokoll (set via JS in webtrekk.html)
-            ('cp36', 'unfeasible') # Google Optimize
+            ('cp36', 'unfeasible')  # Google Optimize
         ])
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
