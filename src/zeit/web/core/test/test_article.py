@@ -79,9 +79,7 @@ def test_retresco_body_should_replace_xml_body(application, monkeypatch):
         zeit.content.article.edit.interfaces.IEditableBody,
         name='retresco')
 
-    assert get_article_body.call_args == [
-        ('{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}',),
-        {'timeout': 0.42}]
+    assert get_article_body.call_args == [(article,), {'timeout': 0.42}]
     assert body.xml.find('a') == 'topicpage'
 
 

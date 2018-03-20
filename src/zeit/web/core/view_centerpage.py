@@ -200,7 +200,7 @@ class Centerpage(AreaProvidingPaginationMixin,
     def webtrekk_content_id(self):
         if zeit.content.cp.interfaces.ISearchpage.providedBy(self.context):
             area = self.area_providing_pagination
-            if area and getattr(area, 'query_string', None):
+            if area and getattr(area, 'query', None):
                 content_url = self.content_url.replace('http://', '')
                 if content_url.endswith('/index'):
                     content_url = content_url[:-len('/index')]

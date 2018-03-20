@@ -1,0 +1,41 @@
+<script>
+    (function() {
+        {# This is some redundant code, copied from our codebase. But we need only these bits,
+           and we need them only here. #}
+        function cookieRead( name ) {
+            return ( document.cookie.match( '(?:^|;) ?' + name + '\\s*=\\s*([^;]*)' ) || 0 )[ 1 ];
+        }
+
+        function parseJwt( token ) {
+            var base64Url = token.split( '.' )[ 1 ];
+            var base64 = base64Url.replace( '-', '+' ).replace( '_', '/' );
+            return JSON.parse( window.atob( base64 ) );
+        }
+
+        function injectIntoDom( ssoid ) {
+            var currentScript = document.currentScript || (function() {
+                var scripts = document.getElementsByTagName('script');
+                return scripts[scripts.length - 1];
+            })();
+            var parent = currentScript.parentNode;
+
+            var loginStateDiv = document.createElement('div');
+            loginStateDiv.setAttribute('id', 'login-state');
+            loginStateDiv.setAttribute('data-sso-id', ssoid);
+
+            parent.replaceChild(loginStateDiv, currentScript);
+
+        }
+
+        {# getting the cookie from settings (for single-source-of-truth and staging-vs-production)
+           is done in a later PR (WIP) #}
+        var cookieValue = cookieRead( 'zeit_sso_201501' );
+
+        if ( cookieValue ) {
+            var userObject = parseJwt( cookieValue );
+            if ( userObject.id ) {
+                injectIntoDom( userObject.id );
+            }
+        }
+    })(); {# self-invoked and anonymous, dont spill anything into the global namespace #}
+</script>

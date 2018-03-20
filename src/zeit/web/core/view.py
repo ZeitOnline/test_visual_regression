@@ -423,9 +423,8 @@ class Base(object):
                 zeit.web.core.interfaces.ISettings)
             tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
             try:
-                uuid = zeit.cms.content.interfaces.IUUID(self.context).id
                 timeout = conf.get('retresco_timeout', 0.1)
-                return tms.get_article_keywords(uuid, timeout=timeout)
+                return tms.get_article_keywords(self.context, timeout=timeout)
             except Exception:
                 log.warning(
                     'Retresco keywords failed for %s', self.context.uniqueId,
@@ -690,10 +689,6 @@ class Base(object):
             ('cp30', self.paywall or 'open'),  # Paywall Schranke
             ('cp32', 'unfeasible')  # Protokoll (set via JS in webtrekk.html)
         ])
-
-        if not zeit.web.core.application.FEATURE_TOGGLES.find(
-                'access_status_webtrekk'):
-            del custom_parameter['cp28']
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
                 'reader_revenue'):
