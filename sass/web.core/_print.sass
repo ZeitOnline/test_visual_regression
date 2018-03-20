@@ -1,6 +1,7 @@
 $zon-print-grey: #444
 $print-media-width: 100mm
 $print-media-margin: 14pt 0
+$print-articleitem-margin: 28pt
 // using this zoom factor to make fonts bigger
 // in opposition to designs
 $print-zoom: 1.263157895
@@ -41,8 +42,9 @@ $print-zoom: 1.263157895
 		display: none !important
 
 	// --------------------------------------------
-	// print lik targets
+	// print link targets
 	a[href^="http"]
+		color: $zon-print-grey
 		page-break-inside: avoid
 		&:after
 			border-bottom: 1px solid white // To visibly hide grey border of <a>
