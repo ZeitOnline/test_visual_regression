@@ -319,10 +319,11 @@ class Application(object):
             config[setting] = value
 
     def configure_overrides(self, context):
-        """Local development environments use an overrides zcml to allow
-        us to mock external dependencies or tweak the zope product config.
+        """For development environments using the test data repository within
+        the egg, we congiure overrides for external data source connectors.
         """
-        if self.settings.get('mock_solr'):
+        repository_path = self.settings['vivi_zeit.connector_repository-path']
+        if 'zeit.web.core' in repository_path:
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
 

@@ -266,4 +266,6 @@ class LazyProxy(object):
                     return zeit.cms.interfaces.ICMSContent(value, None)
         log.debug(
             u"ProxyExposed: '{}' could not emulate 'get_cover'".format(self))
-        return self.__origin__.get_cover(cover_id)
+        volume = zeit.content.volume.interfaces.IVolume(self.__origin__, None)
+        if volume:
+            return volume.get_cover(cover_id)

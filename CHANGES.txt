@@ -8,7 +8,9 @@ POSTDEPLOY
 3.133 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- TMS-164: Enable search support for Solr and ES backends
+
+- TMS-165: Add support for elasticsearch overview areas 
 
 
 3.132 (2018-03-16)
