@@ -45,8 +45,6 @@
 	.article__item.quote
 		margin-left: $print-articleitem-margin
 
-	// --------------------------------------------
-	// TODO: clean up and sort
 	.header-article__media
 		margin-left: 0 !important
 		margin-right: 0 !important
@@ -60,54 +58,6 @@
 		color: $zon-print-grey
 		position: relative
 		text-align: center
-
-	.article-heading
-		margin: 6mm 0 0
-
-		&__kicker
-			color: $zon-print-grey
-			font-size: 7pt * $print-zoom
-			line-height: 9pt * $print-zoom
-			margin-bottom: 1pt * $print-zoom
-			padding: 0
-
-		&__title
-			font-size: 18pt * $print-zoom
-			line-height: 21pt * $print-zoom
-			margin-bottom: 14pt * $print-zoom
-
-	.summary,
-	.byline
-		font-size: 10.5pt * $print-zoom
-		line-height: 15pt * $print-zoom
-		margin-bottom: 7pt * $print-zoom
-
-	.byline a:after
-		content: ""
-
-	.metadata
-		color: $zon-print-grey
-		font-size: 7pt * $print-zoom
-		line-height: 9pt * $print-zoom
-		margin-bottom: 14pt * $print-zoom
-
-	.article
-		&__media
-			max-width: $print-media-width
-			margin: $print-media-margin
-
-		&__media-item[src*='kreuzwortgitter']
-			width: 15cm
-
-		&__item
-			&--marginalia
-				clear: left
-				float: left
-				page-break-inside: avoid
-				max-width: $stamp-width
-				margin: 0 (20pt * $print-zoom) (14pt * $print-zoom) 0
-				a
-					font-size: 7pt * $print-zoom
 
 	.article-pagination__pager
 		display: none
@@ -136,22 +86,3 @@
 		margin: 0
 		max-width: none
 		width: auto
-
-
-	.video-player + .figure__caption
-		display: none
-
-	.article__subheading
-		font-size: 11pt * $print-zoom
-		line-height: 14pt * $print-zoom
-		margin-bottom: 7pt * $print-zoom
-		margin-top: 14pt * $print-zoom
-		page-break-inside: avoid
-		page-break-after: avoid
-
-	.paragraph,
-	.raw
-		font-size: 9.5pt * $print-zoom
-		line-height: 14pt * $print-zoom
-		margin-bottom: 7pt * $print-zoom
-
