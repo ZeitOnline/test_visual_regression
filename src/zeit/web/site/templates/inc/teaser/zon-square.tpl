@@ -20,7 +20,7 @@
 {% block teaser_journalistic_format %}
     {%- if teaser.serie %}
         {%- if teaser.serie.column %}
-           <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">{{ teaser.serie.serienname }}</span>
+            <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">{{ teaser.serie.serienname }}</span>
         {%- else %}
             <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Serie: {{ teaser.serie.serienname }}</span>
         {%- endif %}
