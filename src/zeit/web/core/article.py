@@ -174,12 +174,6 @@ def get_retresco_body(article):
         try:
             timeout = conf.get('retresco_timeout', 0.1)
             body = conn.get_article_body(article, timeout=timeout)
-
-            if unichr(65533) in body:
-                # XXX Stopgap until tms encoding issues are resolved
-                raise ValueError(
-                    'Encountered encoding issues in retresco body')
-
             xml = gocept.lxml.objectify.fromstring(body)
         except Exception:
             log.warning(
