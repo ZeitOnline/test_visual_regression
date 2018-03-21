@@ -143,6 +143,13 @@ $zon-print-grey: #252525
 			&:last-child()
 				display: none
 
+	// on ZMO we can show "next page", because that does not lead to HP on last page
+	.article-pagination,
+	.article-pagination__nexttitle
+		display: block !important
+	.article-pagination__pager
+		display: none
+
 	// --------------------------------------------
 	// override all font sizes
 	.headline__supertitle
