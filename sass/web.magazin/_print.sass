@@ -23,13 +23,6 @@ $stamp-margin: 20pt 30pt 20pt 0
 	.header-article
 		max-width: $max-page-width
 
-
-	// standardize headers
-	.header-article--briefmarke,
-	.header-article--mode,
-	.header-article--text-only
-		text-align: center
-
 	.header-article__caption
 		opacity: 1
 		background-color: #fff
@@ -41,6 +34,16 @@ $stamp-margin: 20pt 30pt 20pt 0
 	.header-article--leinwand > figure
 		margin-left: 0
 		margin-right: 0
+
+	.header-article--mode > figure
+		float: left
+		margin: 26pt 2.5rem 0 2.5rem
+		width: 32%
+	.header-article--mode
+		+pie-clearfix
+		.headline
+			margin-bottom: 1.5rem
+
 
 	// --------------------------------------------
 	// article elements
@@ -163,7 +166,7 @@ $stamp-margin: 20pt 30pt 20pt 0
 	// override all font sizes
 	.headline__supertitle
 		font-size: 10pt
-		letter-spacing: 0.5p5
+		letter-spacing: 0.5pt
 		line-height: 12pt
 	.headline__title
 		font-size: 18pt
