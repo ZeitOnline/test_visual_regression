@@ -1125,6 +1125,11 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
         return webtrekk
 
     @zeit.web.reify
+    def ligatus(self):
+        # TODO: consider vivi setting of the current article
+        return zeit.web.core.application.FEATURE_TOGGLES.find('ligatus')
+
+    @zeit.web.reify
     def nextread(self):
         return zeit.web.core.interfaces.INextread(self.context, [])
 

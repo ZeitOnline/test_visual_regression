@@ -60,7 +60,7 @@
 
     {% endblock content %}
 
-    {% if toggles('ligatus') %}
+    {% if view.ligatus %}
         {% block ligatus %}
             {% set ligatus_id = '101664' %}
             {% include 'zeit.web.core:templates/inc/ligatus/ligatus.html' %}
