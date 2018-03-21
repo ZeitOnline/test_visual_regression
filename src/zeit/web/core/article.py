@@ -168,11 +168,10 @@ def get_retresco_body(article):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conn = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     toggles = zeit.web.core.application.FEATURE_TOGGLES
+    seo = zeit.seo.interfaces.ISEO(article)
 
-    if toggles.find('enable_intext_links'):
+    if toggles.find('enable_intext_links') and not seo.disable_intext_links:
         try:
-            assert not zeit.seo.interfaces.ISEO(article).disable_intext_links
-
             timeout = conf.get('retresco_timeout', 0.1)
             body = conn.get_article_body(article, timeout=timeout)
 
@@ -182,8 +181,6 @@ def get_retresco_body(article):
                     'Encountered encoding issues in retresco body')
 
             xml = gocept.lxml.objectify.fromstring(body)
-        except AssertionError:
-            log.debug('Retresco body disabled for %s', article.uniqueId)
         except Exception:
             log.warning(
                 'Retresco body failed for %s', article.uniqueId, exc_info=True)
