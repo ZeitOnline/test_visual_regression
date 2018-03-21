@@ -1,3 +1,5 @@
+$zon-print-grey: #252525
+
 @media print
 
 	// hide ZMO-specific things
@@ -5,6 +7,13 @@
 	.comment-section,
 	.main-footer
 		display: none !important
+
+	.header__brand
+		border-color: #CCCCCF
+
+	.header__logo
+		height: 27pt
+		width: auto
 
 	// full width
 	.page__content,
@@ -25,9 +34,6 @@
 
 	// --------------------------------------------
 	// article elements
-	.meta
-		text-transform: none
-
 	.volume-teaser
 		display: none
 
@@ -86,3 +92,28 @@
 		margin: 0
 		max-width: none
 		width: auto
+
+	// --------------------------------------------
+	// override all font sizes
+	.headline__supertitle
+		font-size: 10pt
+		letter-spacing: 0.5p5
+		line-height: 12pt
+	.headline__title
+		font-size: 18pt
+		line-height: 21pt
+	.header-article__subtitle
+		font-size: 13pt
+		line-height: 18pt
+	.meta
+		color: #99999C
+		font-size: 8pt
+		letter-spacing: 0.5pt
+		line-height: 10pt
+	.article__item
+		font-size: 11pt
+		line-height: 17pt
+	.header-article__caption,
+	.figure__caption
+		font-size: 10pt
+		line-height: 13pt
