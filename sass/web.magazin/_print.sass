@@ -91,7 +91,8 @@ $stamp-margin: 20pt 30pt 20pt 0
 	.authorbox__container
 		all: unset // TODO: IE + Edge egal?
 	.portraitbox__heading,
-	.authorbox__name
+	.authorbox__name,
+	.infobox-tab__title
 			font-size: 9pt
 			letter-spacing: 0.5pt
 			line-height: 11pt
@@ -99,7 +100,8 @@ $stamp-margin: 20pt 30pt 20pt 0
 	.authorbox__text
 		margin: 0
 	.portraitbox__body,
-	.authorbox__summary
+	.authorbox__summary,
+	.infobox__content
 		color: $zon-print-grey
 		font-size: 10pt
 		line-height: 14pt
@@ -113,6 +115,14 @@ $stamp-margin: 20pt 30pt 20pt 0
 		display: none
 
 	// TODO: das zeigt, dass man die Boxen auch mal refactorn sollte
+
+	.infobox
+		max-width: 300pt
+		&-tab__link
+			margin: 0
+			color: inherit
+		&-tab__panel
+			margin-bottom: 0
 
 	// --------------------------------------------
 	// galleries. beat JS-set styles with !important
