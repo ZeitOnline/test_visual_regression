@@ -20,7 +20,7 @@
         {% endif %}
         <div class="{{ module_layout }}__container">
             <h2 class="{{ module_layout }}__heading">
-                <span class="{{ '%s__kicker' | format(module_layout) | with_mods(teaser | vertical) }}">
+                <span class="{{ '%s__kicker' | format(module_layout) | with_mods(teaser | branding) }}">
                 {% set logo_layout = self.layout() %}
                 {% for template in teaser | logo_icon() %}
                     {% include "zeit.web.core:templates/inc/badges/{}.tpl".format(template) %}

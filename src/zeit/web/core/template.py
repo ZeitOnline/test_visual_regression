@@ -175,7 +175,7 @@ def tag_with_logo_content(content, area_kind=None):
 
 
 @zeit.web.register_filter
-def vertical(context):
+def branding(context):
     if zeit.content.link.interfaces.ILink.providedBy(context):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         zett_host = urlparse.urlparse(conf.get('zett_host')).netloc
@@ -217,7 +217,7 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         if zplus == 'only':
             return templates
 
-    brand = vertical(teaser)
+    brand = branding(teaser)
     # exclusive icons, set and return
     if brand == 'zmo' and area_kind != 'zmo-parquet':
         templates.append('logo-zmo-zm')
