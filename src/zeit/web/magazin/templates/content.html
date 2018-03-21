@@ -48,7 +48,7 @@
         {% endif %}
 
         {% block article_google_ad %}
-            {% if toggles('adtile5') and view.has_comment_area -%}
+            {% if toggles('adtile5') and view.has_comment_area and not view.paywall -%}
                 <!-- P5 -->
                 {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
             {% endif %}

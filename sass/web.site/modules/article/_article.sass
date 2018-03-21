@@ -57,10 +57,17 @@
 
 				.article__zplus
 					display: flex
+					// BUG-875: remove margin from last child in article intro and add it here
+					// because there are no collapsing margins in a flex formatting context
+					// therefore a coverless Z+ badge did not align correctly
+					margin-bottom: remify(40px)
 
 				.article__intro
 					flex-grow: 1
 					max-width: remify(540px) // BUG-701 Safari 9 Fix
+
+					& > div:last-child
+						margin-bottom: 0
 
 		+respond-min($break-desktop-min)
 			&--apart

@@ -5,10 +5,58 @@ POSTDEPLOY
 ----------
 
 
-3.130 (unreleased)
+3.133 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- TMS-164: Enable search support for Solr and ES backends
+
+- TMS-165: Add support for elasticsearch overview areas
+
+- BUG-868: Fix liveblog header
+
+- BUG-878: Remove padding top in app for iPhoneX/6
+
+- MAINT: Update stellenmarkt link in ZAR (https, campaign tracking)
+
+
+3.132 (2018-03-16)
+------------------
+
+- ZON-4488: Clear floating elements before liveblog
+
+- ZON-4501: Improve ZON print stylesheet
+
+- BUG-875: Align coverless Z+ badge in article header
+
+- BUG-849: Don’t render adtile5 in ZMO with paywall
+
+- MAINT: Stop sending proxy KeyError to Bugsnag
+
+- Fix: Align mobile D18 nav badge
+
+
+3.131 (2018-03-13)
+------------------
+
+- BUG-830: Change adlabel placement in AMP
+
+- MAINT: Remove unused feature toggle `access_status_webtrekk`
+
+- FIX: Toggle mobile ZON adlabel
+
+
+3.130 (2018-03-09)
+------------------
+
+- ZON-4459: Inject SSO ID into the DOM to be consumed by Webtrekk
+
+- ZON-4465: Small fixes for brandeins parquet
+
+
+3.129.1 (2018-03-13)
+--------------------
+
+- TMS-187: Call TMS intextlink endpoint only once when rendering an article page
 
 
 3.129 (2018-03-08)

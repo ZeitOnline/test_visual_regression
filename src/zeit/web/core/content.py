@@ -1,8 +1,6 @@
 import datetime
 import logging
-import sys
 
-import bugsnag
 import peak.util.proxies
 import pytz
 import zope.component
@@ -14,8 +12,6 @@ import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.content.video.video
 import zeit.retresco.tag
-
-from zeit.web.core.jinja import get_current_request_path
 
 
 log = logging.getLogger(__name__)
@@ -112,18 +108,6 @@ class LazyProxy(object):
             try:
                 return self.__proxy__[key]
             except KeyError:
-                exc_info = sys.exc_info()
-                if key not in [
-                        # Don't nag about fields definitely not indexed in solr
-                        'autorships', 'image'
-                        'blog', 'url',
-                        'short_text', 'long_text'] + list(
-                            zeit.push.interfaces.IAccountData):
-                    bugsnag.notify(
-                        exc_info[1],
-                        traceback=exc_info[2],
-                        context=get_current_request_path(),
-                        grouping_hash=exc_info[1].args[0])
                 log.debug(u"ProxyExposed: '{}' has no attribute '{}'".format(
                     self, key))
         return getattr(self.__origin__, key)
@@ -282,4 +266,6 @@ class LazyProxy(object):
                     return zeit.cms.interfaces.ICMSContent(value, None)
         log.debug(
             u"ProxyExposed: '{}' could not emulate 'get_cover'".format(self))
-        return self.__origin__.get_cover(cover_id)
+        volume = zeit.content.volume.interfaces.IVolume(self.__origin__, None)
+        if volume:
+            return volume.get_cover(cover_id)
