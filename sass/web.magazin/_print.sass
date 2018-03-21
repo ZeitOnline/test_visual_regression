@@ -1,4 +1,5 @@
 $zon-print-grey: #252525
+$stamp-margin: 20pt 30pt 20pt 0
 
 @media print
 
@@ -19,9 +20,7 @@ $zon-print-grey: #252525
 	.page__content,
 	.article__item,
 	.is-constrained,
-	.header-article,
-	.header-article--column > figure, // specificity
-	.header-article--default > figure // specificity
+	.header-article
 		max-width: $max-page-width
 
 
@@ -31,6 +30,18 @@ $zon-print-grey: #252525
 	.header-article--text-only
 		text-align: center
 
+	.header-article__caption
+		opacity: 1
+		background-color: #fff
+		color: $zon-print-grey
+		position: relative
+		text-align: center
+
+	// no negative margins
+	.header-article--leinwand > figure
+		margin-left: 0
+		margin-right: 0
+
 	// --------------------------------------------
 	// article elements
 	.volume-teaser
@@ -39,20 +50,6 @@ $zon-print-grey: #252525
 	.article__item.quote
 		margin-left: $print-articleitem-margin
 
-	.header-article__media
-		margin-left: 0 !important
-		margin-right: 0 !important
-		&-item
-			max-width: $print-media-width
-			margin-left: auto
-			margin-right: auto
-	.header-article__caption
-		opacity: 1
-		background-color: #fff
-		color: $zon-print-grey
-		position: relative
-		text-align: center
-
 	.article-pagination__pager
 		display: none
 
@@ -60,18 +57,20 @@ $zon-print-grey: #252525
 		border-top: 1pt solid $zon-print-grey
 		font-weight: normal
 
-	.figure,
 	.figure-stamp,
-	.figure-stamp--right,
-	.figure-full-width
+	.figure-stamp--right
 		clear: both
 		float: left
-		margin: 0 2rem 1rem 0
-		max-width: $stamp-width
+		margin: $stamp-margin
+		width: $stamp-width
 	.figure__caption
 		font-size: 7pt * $print-zoom
 		margin-left: 0
 		padding-left: 0 !important
+
+	.figure
+		margin-left: 0
+		max-width: 70%
 
 	// dont style the media for print, because we styled the figure already
 	.figure-stamp .figure__media,
@@ -87,7 +86,7 @@ $zon-print-grey: #252525
 	.authorbox
 		color: $zon-print-grey
 		float: left
-		margin: 20pt 30pt 20pt 0
+		margin: $stamp-margin
 		width: $stamp-width
 	.authorbox__container
 		all: unset // TODO: IE + Edge egal?
