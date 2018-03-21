@@ -31,22 +31,10 @@ $zon-print-grey: #252525
 	.header-article--text-only
 		text-align: center
 
-
 	// --------------------------------------------
 	// article elements
 	.volume-teaser
 		display: none
-
-	.authorbox__text:only-child
-		text-align: left
-	.authorbox__summary
-		color: $zon-print-grey
-		font-style: normal
-	.authorbox__button
-		display: none
-
-	.portraitbox__body
-		color: $zon-print-grey
 
 	.article__item.quote
 		margin-left: $print-articleitem-margin
@@ -94,6 +82,40 @@ $zon-print-grey: #252525
 		width: auto
 
 	// --------------------------------------------
+	// marginalia text boxes
+	.portraitbox,
+	.authorbox
+		color: $zon-print-grey
+		float: left
+		margin: 20pt 30pt 20pt 0
+		width: $stamp-width
+	.authorbox__container
+		all: unset // TODO: IE + Edge egal?
+	.portraitbox__heading,
+	.authorbox__name
+			font-size: 9pt
+			letter-spacing: 0.5pt
+			line-height: 11pt
+			margin: 0 0 6pt 0
+	.authorbox__text
+		margin: 0
+	.portraitbox__body,
+	.authorbox__summary
+		color: $zon-print-grey
+		font-size: 10pt
+		line-height: 14pt
+		p
+			margin: 0 0 6pt 0
+	.authorbox__text:only-child
+		text-align: left
+	.authorbox__summary
+		font-style: normal
+	.authorbox__button
+		display: none
+
+	// TODO: das zeigt, dass man die Boxen auch mal refactorn sollte
+
+	// --------------------------------------------
 	// override all font sizes
 	.headline__supertitle
 		font-size: 10pt
@@ -106,7 +128,6 @@ $zon-print-grey: #252525
 		font-size: 13pt
 		line-height: 18pt
 	.meta
-		color: #99999C
 		font-size: 8pt
 		letter-spacing: 0.5pt
 		line-height: 10pt
@@ -117,3 +138,16 @@ $zon-print-grey: #252525
 	.figure__caption
 		font-size: 10pt
 		line-height: 13pt
+
+	// --------------------------------------------
+	// undo the nifty flexbox stuff of series-vs-date arrangement
+	.meta
+		display: block
+		&__serie:after
+			all: unset
+	// lowercase URLs in uppercase linktexts
+	.meta,
+	.byline
+		a:after
+			font-weight: normal
+			text-transform: none
