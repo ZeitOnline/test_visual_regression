@@ -155,8 +155,9 @@ def _paragraphs_by_length(paragraphs, sufficient_length=10):
     return filtered_paragraphs
 
 
-@zope.component.adapter(zeit.content.article.interfaces.IArticle)
-@zope.interface.implementer(zeit.content.article.edit.interfaces.IEditableBody)
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(
+    zeit.content.article.edit.interfaces.IEditableBody)
 def get_retresco_body(article):
     # We want to be very cautious here and retreat to static XML as a
     # source for our article body if anything goes wrong/ takes too long
@@ -193,10 +194,7 @@ def get_retresco_body(article):
 
 
 def pages_of_article(article, advertising_enabled=True):
-    body = zope.component.getAdapter(
-        article,
-        zeit.content.article.edit.interfaces.IEditableBody,
-        name='retresco')
+    body = zeit.content.article.edit.interfaces.IEditableBody(article)
     body.ensure_division()  # Old articles don't always have divisions.
 
     # IEditableBody excludes the first division since it cannot be edited

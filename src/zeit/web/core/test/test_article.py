@@ -34,10 +34,7 @@ def test_retresco_body_should_respect_toggle_off(application, monkeypatch):
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    zope.component.getAdapter(
-        article,
-        zeit.content.article.edit.interfaces.IEditableBody,
-        name='retresco')
+    zeit.content.article.edit.interfaces.IEditableBody(article)
 
     assert get_article_body.call_count == 0
 
@@ -52,10 +49,7 @@ def test_retresco_body_should_respect_seo_flag(application, monkeypatch):
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/intext-disabled')
-    zope.component.getAdapter(
-        article,
-        zeit.content.article.edit.interfaces.IEditableBody,
-        name='retresco')
+    zeit.content.article.edit.interfaces.IEditableBody(article)
 
     assert get_article_body.call_count == 0
 
@@ -74,10 +68,7 @@ def test_retresco_body_should_replace_xml_body(application, monkeypatch):
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    body = zope.component.getAdapter(
-        article,
-        zeit.content.article.edit.interfaces.IEditableBody,
-        name='retresco')
+    body = zeit.content.article.edit.interfaces.IEditableBody(article)
 
     assert get_article_body.call_args == [(article,), {'timeout': 0.42}]
     assert body.xml.find('a') == 'topicpage'
