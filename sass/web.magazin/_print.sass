@@ -116,6 +116,34 @@ $zon-print-grey: #252525
 	// TODO: das zeigt, dass man die Boxen auch mal refactorn sollte
 
 	// --------------------------------------------
+	// galleries. beat JS-set styles with !important
+	.gallery
+		+pie-clearfix
+		background: none
+		margin: 0
+		.gallery-container,
+		.inline-gallery-container
+			margin: 0
+			max-width: none
+		.bx-controls,
+		.bx-zone-next,
+		.bx-zone-prev
+			display: none !important
+		.bx-viewport
+			overflow: visible !important
+			margin: 0 auto !important
+			width: $max-page-width*0.7 !important
+		.gallery-slides
+			position: relative !important
+			transform: none !important
+			width: auto !important
+		.slide
+			margin: 20pt 0 !important
+			&:first-child(),
+			&:last-child()
+				display: none
+
+	// --------------------------------------------
 	// override all font sizes
 	.headline__supertitle
 		font-size: 10pt
