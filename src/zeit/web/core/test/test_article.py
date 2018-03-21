@@ -1,3 +1,4 @@
+import lxml.etree
 import mock
 import zope.component
 
@@ -72,6 +73,22 @@ def test_retresco_body_should_replace_xml_body(application, monkeypatch):
 
     assert get_article_body.call_args == [(article,), {'timeout': 0.42}]
     assert body.xml.find('a') == 'topicpage'
+
+
+def test_retresco_body_xml_should_be_cached(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'enable_intext_links': True}.get)
+    get_article_body = mock.Mock(
+        return_value='<body><a href="http://foo">topicpage</a></body>')
+    monkeypatch.setattr(
+        zeit.retresco.connection.TMS, 'get_article_body', get_article_body)
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    b1 = zeit.content.article.edit.interfaces.IEditableBody(article)
+    assert get_article_body.call_count == 1
+    b2 = zeit.content.article.edit.interfaces.IEditableBody(article)
+    assert get_article_body.call_count == 1
+    assert lxml.etree.tostring(b1.xml) == lxml.etree.tostring(b2.xml)
 
 
 def test_skips_blocks_with_errors(application):

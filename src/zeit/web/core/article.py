@@ -171,13 +171,19 @@ def get_retresco_body(article):
     seo = zeit.seo.interfaces.ISEO(article)
 
     if toggles.find('enable_intext_links') and not seo.disable_intext_links:
-        try:
-            timeout = conf.get('retresco_timeout', 0.1)
-            body = conn.get_article_body(article, timeout=timeout)
-            xml = gocept.lxml.objectify.fromstring(body)
-        except Exception:
-            log.warning(
-                'Retresco body failed for %s', article.uniqueId, exc_info=True)
+        if hasattr(article, '_v_retresco_body'):
+            xml = article._v_retresco_body
+        else:
+            try:
+                timeout = conf.get('retresco_timeout', 0.1)
+                body = conn.get_article_body(article, timeout=timeout)
+                xml = gocept.lxml.objectify.fromstring(body)
+            except Exception:
+                log.warning(
+                    'Retresco body failed for %s', article.uniqueId,
+                    exc_info=True)
+            else:
+                article._v_retresco_body = xml
 
     return zope.component.queryMultiAdapter(
         (article, xml),
