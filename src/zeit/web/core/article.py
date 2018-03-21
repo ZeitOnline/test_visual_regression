@@ -162,11 +162,7 @@ def get_retresco_body(article):
     # We want to be very cautious here and retreat to static XML as a
     # source for our article body if anything goes wrong/ takes too long
     # with the TMS body.
-
     xml = zope.security.proxy.removeSecurityProxy(article.xml['body'])
-
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conn = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     toggles = zeit.web.core.application.FEATURE_TOGGLES
     seo = zeit.seo.interfaces.ISEO(article)
 
@@ -174,9 +170,12 @@ def get_retresco_body(article):
         if hasattr(article, '_v_retresco_body'):
             xml = article._v_retresco_body
         else:
+            conf = zope.component.getUtility(
+                zeit.web.core.interfaces.ISettings)
+            tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
             try:
-                timeout = conf.get('retresco_timeout', 0.1)
-                body = conn.get_article_body(article, timeout=timeout)
+                body = tms.get_article_body(
+                    article, timeout=conf.get('retresco_timeout', 0.1))
                 xml = gocept.lxml.objectify.fromstring(body)
             except Exception:
                 log.warning(
