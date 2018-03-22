@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - TMS-165: Add support for elasticsearch overview areas
 
+- TMS-192: Use TMS body generally, not only for article pages
+
 - BUG-868: Fix liveblog header
 
 - BUG-878: Remove padding top in app for iPhoneX/6
