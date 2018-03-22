@@ -8,7 +8,7 @@ POSTDEPLOY
 3.134 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-868: Fix bug in bugfix for liveblog header
 
 
 3.133 (2018-03-22)
