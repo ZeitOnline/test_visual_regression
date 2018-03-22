@@ -60,3 +60,16 @@ def test_ligatus_can_be_toggled_off(testbrowser, togglepatch):
 
     browser = testbrowser('/zeit-online/article/simple')
     assert not browser.cssselect('script[src*=".ligatus.com"]')
+
+
+def test_ligatus_can_be_disabled_on_article(testbrowser, togglepatch):
+    togglepatch({'ligatus': True})
+
+    browser = testbrowser('/zeit-online/article/simple-ligatus-disabled')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')
+    meta = browser.cssselect('meta[property="ligatus:hide_recommendations"]')
+    assert meta[0].get('content') == 'True'
+
+    browser = testbrowser('/zeit-online/article/simple')
+    meta = browser.cssselect('meta[property="ligatus:hide_recommendations"]')
+    assert meta[0].get('content') == 'False'

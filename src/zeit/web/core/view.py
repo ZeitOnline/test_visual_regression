@@ -1126,8 +1126,9 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def ligatus(self):
-        # TODO: consider vivi setting of the current article
-        return zeit.web.core.application.FEATURE_TOGGLES.find('ligatus')
+        return (
+            zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
+            not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
     def nextread(self):
