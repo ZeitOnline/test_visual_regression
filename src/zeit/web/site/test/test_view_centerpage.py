@@ -304,24 +304,26 @@ def test_responsive_image_should_have_noscript(testbrowser):
     assert len(noscript) == 3
 
 
-def test_topic_links_title_schould_have_a_value_and_default_value():
-    context = mock.Mock()
-    context.topic_links = mock.Mock()
+def test_topic_links_title_schould_have_a_value_and_default_value(application):
+    context = zeit.content.cp.centerpage.CenterPage()
+
     context.topiclink_title = 'My Title'
     topic_links = zeit.web.core.centerpage.TopicLink(context)
-
     assert topic_links.title == 'My Title'
 
     context.topiclink_title = None
     topic_links = zeit.web.core.centerpage.TopicLink(context)
-
     assert topic_links.title == 'Schwerpunkte'
 
 
-def test_centerpage_view_should_have_topic_links():
-    mycp = mock.Mock()
+def test_centerpage_view_should_have_topic_links(
+        application, preserve_settings):
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['transform_to_secure_links_for'] = ['www.zeit.de']
+
+    mycp = zeit.content.cp.centerpage.CenterPage()
     mycp.topiclink_label_1 = 'Label 1'
-    mycp.topiclink_url_1 = 'http://link_1'
+    mycp.topiclink_url_1 = 'http://www.zeit.de/thema/foo'
     mycp.topiclink_label_2 = 'Label 2'
     mycp.topiclink_url_2 = 'http://link_2'
     mycp.topiclink_label_3 = 'Label 3'
@@ -329,7 +331,7 @@ def test_centerpage_view_should_have_topic_links():
 
     topic_links = list(zeit.web.core.centerpage.TopicLink(mycp))
 
-    assert topic_links == [('Label 1', 'http://link_1'),
+    assert topic_links == [('Label 1', 'https://www.zeit.de/thema/foo'),
                            ('Label 2', 'http://link_2'),
                            ('Label 3', 'http://link_3')]
 
@@ -714,7 +716,7 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
             round((main_width - gutter_width) / 3.0) - gutter_width))
 
 
-def test_canonical_ruleset_on_cps(testbrowser, datasolr):
+def test_canonical_ruleset_on_cps(testbrowser, data_solr):
     browser = testbrowser('/dynamic/ukraine')
 
     # no param
@@ -738,7 +740,7 @@ def test_canonical_ruleset_on_article_pages(testbrowser):
     assert link[0].get('href') == 'http://localhost/zeit-online/index'
 
 
-def test_canonical_ruleset_on_ranking_pages(testbrowser, datasolr):
+def test_canonical_ruleset_on_ranking_pages(testbrowser, data_solr):
     browser = testbrowser('/suche/index')
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == 'http://localhost/suche/index'
@@ -859,7 +861,7 @@ def test_meta_rules_for_keyword_paths(application):
         'von ZEIT ONLINE zu dem Thema Ausdauersport.')
 
 
-def test_newsticker_should_have_expected_dom(testbrowser, datasolr):
+def test_newsticker_should_have_expected_dom(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/news-teaser')
 
     cols = browser.cssselect('.cp-area--newsticker .newsticker__column')
@@ -875,7 +877,7 @@ def test_newsticker_should_have_expected_dom(testbrowser, datasolr):
         teaser[0].cssselect('a .newsteaser__text .newsteaser__product')) == 1
 
 
-def test_newspage_has_expected_elements(testbrowser, datasolr):
+def test_newspage_has_expected_elements(testbrowser, data_es):
     browser = testbrowser('/news/index')
     area = browser.cssselect('.cp-area--overview')[0]
     assert len(area.cssselect('.pager--overview')) == 1
@@ -1658,7 +1660,7 @@ def test_studiumbox_interessentest_works(selenium_driver, testserver):
     button = (box.find_element_by_class_name('studiumbox__content--clone')
               .find_element_by_class_name('studiumbox__button'))
     button.click()
-    assert ('http://studiengaenge.zeit.de/sit'
+    assert ('https://studiengaenge.zeit.de/sit'
             '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.sit.teaser.'
             'button.&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
@@ -1681,7 +1683,7 @@ def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
     input_element = (form.find_element_by_class_name('studiumbox__input'))
     input_element.send_keys('test')
     form.submit()
-    assert ('http://studiengaenge.zeit.de/studienangebote'
+    assert ('https://studiengaenge.zeit.de/studienangebote'
             '?suche=test&wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium'
             '.suma.teaser.button.&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
@@ -2137,7 +2139,7 @@ def test_centerpage_page_should_require_ranking(application, dummy_request):
         list(view.regions)
 
 
-def test_centerpage_page_integration(testbrowser, datasolr):
+def test_centerpage_page_integration(testbrowser, data_solr):
     browser = testbrowser('/dynamic/umbrien?p=2')
     # Curated content is not shown
     assert 'Ich bin nicht intellektuell' not in browser.contents
@@ -2674,20 +2676,20 @@ def test_register_teaser_has_zplus_register_badge(testbrowser):
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus-register')
 
 
-def test_zplus_teaser_has_no_badge_in_ressort_area(testbrowser, datasolr):
+def test_zplus_teaser_has_no_badge_in_ressort_area(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     teaser = browser.cssselect(
         '.cp-region--solo:nth-child(3) article.teaser-large')[0]
     assert not teaser.cssselect('.teaser-large__kicker-logo--zplus')
 
 
-def test_campus_teaser_has_no_badge_in_ressort_area(testbrowser, datasolr):
+def test_campus_teaser_has_no_badge_in_ressort_area(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort-with-campus')
     assert not browser.cssselect('.teaser-small__kicker-logo--zco')
     assert not browser.cssselect('.teaser-large__kicker-logo--zco')
 
 
-def test_ressort_areas_have_ressort_title(testbrowser, datasolr):
+def test_ressort_areas_have_ressort_title(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     areas = browser.cssselect('.cp-area--print-ressort')
     assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
@@ -2875,6 +2877,74 @@ def test_d17_icon_is_display_on_nextread(testbrowser):
     assert browser.cssselect('article.nextread .nextread__kicker-logo--tag')
 
 
+def test_d18_icon_feature_toggle_is_working(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': False}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
+    assert not browser.cssselect('*[data-taglogo="true"]')
+
+
+def test_d18_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
+    assert browser.cssselect('*[data-taglogo="true"]')
+    assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--tag')) == 1
+    assert len(browser.cssselect('.teaser-small__kicker-logo--tag')) == 3
+    assert len(browser.cssselect(
+        '.teaser-fullwidth-column__kicker-logo--tag')) == 1
+    assert len(browser.cssselect(
+        '.teaser-small-column__kicker-logo--tag')) == 1
+    assert browser.cssselect(
+        '.teaser-small__kicker-logo--tag')
+    text = 'Freier Teaser Kicker'
+    uid = 'http://xml.zeit.de/zeit-online/cp-content/taglogo/link-d18-tag'
+    attr = 'data-unique-id="{}"'.format(uid)
+    selector = 'article[{}] .teaser-small__kicker-logo--tag'.format(attr)
+    assert text in browser.cssselect(selector)[0].getparent().text_content()
+
+
+def test_d18_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
+    assert not browser.cssselect(
+        'teaser-small__kicker-logo--zplus + .teaser-small__kicker-logo--tag')
+    assert not browser.cssselect(
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zplus')
+
+
+def test_d18_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
+    assert not browser.cssselect(
+        'teaser-small__kicker-logo--zmo + .teaser-small__kicker-logo--tag')
+    assert not browser.cssselect(
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zmo')
+
+
+def test_d18_icon_is_not_display_on_d18_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/parquet')
+    assert not browser.cssselect(
+        '.cp-area--d18-parquet .teaser-large__kicker-logo--tag')
+
+
+def test_d18_icon_is_display_on_auto_area(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
+    query = ('.cp-region--solo + .cp-region--duo article:first-child')
+    assert browser.cssselect(query)
+
+
+def test_d18_icon_is_display_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-taglogo')
+    assert browser.cssselect('article.nextread .nextread__kicker-logo--tag')
+
+
 def test_zett_icon_is_display_on_nextread(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-zett')
     assert browser.cssselect('article.nextread .nextread__kicker-logo--zett')
@@ -2997,3 +3067,38 @@ def test_responsive_image_teaser_only_in_first_region(testbrowser):
     assert len(sel('.teaser-classic__media')) == 3
     assert len(sel('picture.teaser-classic__media-container')) == 1
     assert len(sel('div.teaser-classic__media-container')) == 2
+
+
+def test_topicpage_has_jsonld(testbrowser, data_solr):
+    browser = testbrowser('/thema/jurastudium')
+    assert browser.cssselect('script[type="application/ld+json"]')
+    assert '"@type": "ItemList"' in browser.contents
+
+
+def test_centerpage_has_no_jsonld(testbrowser, data_solr):
+    browser = testbrowser('/zeit-online/index')
+    assert 'ld+json' not in browser.contents
+
+
+def test_brandeins_teaser_kicker_should_contain_logo(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/teasers-to-brandeins')
+
+    teaser_fullwidth_logo = browser.cssselect(
+        '.teaser-fullwidth__kicker-logo--brandeins')
+    teaser_classic_logo = browser.cssselect(
+        '.teaser-classic__kicker-logo--brandeins')
+    teaser_large_logo = browser.cssselect(
+        '.teaser-large__kicker-logo--brandeins')
+    teaser_small_logo = browser.cssselect(
+        '.teaser-small__kicker-logo--brandeins')
+    teaser_small_minor_logo = browser.cssselect(
+        '.teaser-small-minor__kicker-logo--brandeins')
+    teaser_square_logo = browser.cssselect(
+        '.teaser-square__kicker-logo--brandeins')
+
+    assert len(teaser_fullwidth_logo) == 1
+    assert len(teaser_classic_logo) == 1
+    assert len(teaser_large_logo) == 2
+    assert len(teaser_small_logo) == 4
+    assert len(teaser_small_minor_logo) == 2
+    assert len(teaser_square_logo) == 2

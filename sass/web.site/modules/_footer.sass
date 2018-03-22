@@ -79,6 +79,8 @@
 		display: block
 		height: remify(30px)
 		width: remify(280px)
+		// in case of extremely high font size on small devices
+		max-width: 98vw
 		+respond-min($break-tablet-min)
 			height: remify(32px)
 			width: remify(300px)

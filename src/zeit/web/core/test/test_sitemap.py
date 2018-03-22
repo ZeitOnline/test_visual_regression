@@ -1,5 +1,7 @@
 # coding: utf-8
+import datetime
 import mock
+import pytz
 import lxml.etree
 import zope.component
 
@@ -99,11 +101,28 @@ def test_gsitemap_page_does_not_break_without_image_caption(
         u'(©\xa0Warner Bros./dpa)')
 
 
+def test_gsitemap_page_does_not_contain_invalid_lastmod_date(
+        testbrowser, monkeypatch):
+    set_sitemap_solr_results([{
+        'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
+    monkeypatch.setattr(
+        zeit.content.article.article.ArticleWorkflow, 'date_first_released',
+        datetime.datetime(1967, 1, 1, 12, 50, 52, 380804, tzinfo=pytz.UTC))
+    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    assert (browser.document.xpath('//url/loc')[0].text ==
+            'http://localhost/campus/article/01-countdown-studium')
+    assert not browser.document.xpath('//url/lastmod')
+
+
 def test_gsitemap_newssite(testbrowser):
     set_sitemap_solr_results([{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
                           'crystal-meth-nancy-schmidt/'],
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
+        'supertitle': 'Big Data',
+        'title': 'Schwanger ohne digitale Spuren',
+        'ressort': 'Digital',
+        'sub_ressort': 'Datenschutz',
         'keyword': ['Schwangerschaft', 'Konsumverhalten'],
         'keyword_id': ['schwangerschaft', 'konsumverhalten']},
     ])
@@ -153,6 +172,7 @@ def test_gsitemap_news_does_not_contain_none_in_keywords(
         testbrowser, monkeypatch):
     set_sitemap_solr_results([{
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
+        'ressort': 'Digital',
         'keyword': ['Schwangerschaft', 'Konsumverhalten'],
         'keyword_id': ['schwangerschaft', 'konsumverhalten']},
     ])
@@ -171,7 +191,12 @@ def test_gsitemap_news_does_not_contain_none_in_keywords(
 
 def test_gsitemap_video(testbrowser):
     set_sitemap_solr_results([{
-        'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
+        'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001',
+        'title': u'Foto-Momente: Die stille Schönheit der Polarlichter',
+        'subtitle': 'Sie sind eines der faszinierendsten Schauspiele, die '
+        'die Natur zu bieten hat: Polarlichter, auch als Aurora borealis '
+        'bekannt, illuminieren den Himmel in atemberaubenden Farben.',
+        'ressort': 'Wissen'
     }])
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['image_prefix'] = 'http://img.example.com'
@@ -207,13 +232,14 @@ def test_gsitemap_video(testbrowser):
         'yes')
 
 
-def test_gsitemap_video_creates_no_publucation_date_field_if_no_date_is_set(
+def test_gsitemap_video_creates_no_publication_date_field_if_no_date_is_set(
         testbrowser, monkeypatch):
     set_sitemap_solr_results([{
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
     }])
     monkeypatch.setattr(
-       zeit.workflow.asset.AssetWorkflow, 'date_last_published_semantic', None)
+        zeit.workflow.asset.AssetWorkflow,
+        'date_last_published_semantic', None)
     monkeypatch.setattr(
         zeit.workflow.asset.AssetWorkflow, 'date_first_released', None)
     browser = testbrowser('/gsitemaps/video.xml?p=1')
@@ -236,7 +262,6 @@ def test_gsitemap_video_does_not_call_bc_api(testbrowser, monkeypatch):
     }
     monkeypatch.setattr(
         zeit.brightcove.connection.PlaybackAPI, 'get_video', mocked_get_video)
-    browser = testbrowser('/gsitemaps/video.xml?p=1')
     assert not mocked_get_video.called, \
         'get_video from BC-API was called and should not have been'
 
@@ -254,15 +279,15 @@ def test_gsitemap_themen_page(testbrowser):
     assert len(browser.document.xpath('//url')) == 10
     assert (
         browser.document.xpath('//url/loc')[1].text ==
-        'http://localhost/thema/abschreibung')
+        'http://localhost/thema/addis-abeba')
 
 
 def test_gsitemap_themen_last_page(testbrowser):
-    browser = testbrowser('/gsitemaps/themenindex.xml?p=1376')
-    assert len(browser.document.xpath('//url')) == 4
+    browser = testbrowser('/gsitemaps/themenindex.xml?p=495')
+    assert len(browser.document.xpath('//url')) == 7
     assert (
-        browser.document.xpath('//url/loc')[3].text ==
-        'http://localhost/thema/2.-fussball-bundesliga')
+        browser.document.xpath('//url/loc')[-1].text ==
+        'http://localhost/thema/sanliurfa')
 
 
 def test_gsitemap_appcon(monkeypatch, testbrowser):

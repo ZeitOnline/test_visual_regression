@@ -49,7 +49,7 @@ def test_framebuilder_can_contain_webtrekk(testbrowser, togglepatch):
     togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?webtrekk')
     webtrekk_script = browser.cssselect(
-        'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
+        'script[src^="https://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
 
 
@@ -233,7 +233,7 @@ def test_framebuilder_minimal_can_contain_webtrekk(testbrowser, togglepatch):
     togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?minimal&webtrekk')
     webtrekk_script = browser.cssselect(
-        'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
+        'script[src^="https://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
 
 

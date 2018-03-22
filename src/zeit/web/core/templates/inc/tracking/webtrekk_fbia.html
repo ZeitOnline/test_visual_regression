@@ -36,7 +36,7 @@
             {% endfor -%}
         };
 
-        wt.contentId = "{{ view.webtrekk_content_id }}";
+        wt.contentId = "{{ view.webtrekk_content_id | replace('fbia.zeit.de', 'www.zeit.de') }}";
         wt.sendinfo();
     }
 </script>

@@ -155,38 +155,34 @@ def _paragraphs_by_length(paragraphs, sufficient_length=10):
     return filtered_paragraphs
 
 
-@zope.component.adapter(zeit.content.article.interfaces.IArticle)
-@zope.interface.implementer(zeit.content.article.edit.interfaces.IEditableBody)
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(
+    zeit.content.article.edit.interfaces.IEditableBody)
 def get_retresco_body(article):
     # We want to be very cautious here and retreat to static XML as a
     # source for our article body if anything goes wrong/ takes too long
     # with the TMS body.
-
     xml = zope.security.proxy.removeSecurityProxy(article.xml['body'])
-
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conn = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     toggles = zeit.web.core.application.FEATURE_TOGGLES
+    seo = zeit.seo.interfaces.ISEO(article)
 
-    if toggles.find('enable_intext_links'):
-        try:
-            assert not zeit.seo.interfaces.ISEO(article).disable_intext_links
-
-            uuid = zeit.cms.content.interfaces.IUUID(article).id
-            timeout = conf.get('retresco_timeout', 0.1)
-            body = conn.get_article_body(uuid, timeout=timeout)
-
-            if unichr(65533) in body:
-                # XXX Stopgap until tms encoding issues are resolved
-                raise ValueError(
-                    'Encountered encoding issues in retresco body')
-
-            xml = gocept.lxml.objectify.fromstring(body)
-        except AssertionError:
-            log.debug('Retresco body disabled for %s', article.uniqueId)
-        except:
-            log.warning(
-                'Retresco body failed for %s', article.uniqueId, exc_info=True)
+    if toggles.find('enable_intext_links') and not seo.disable_intext_links:
+        if hasattr(article, '_v_retresco_body'):
+            xml = article._v_retresco_body
+        else:
+            conf = zope.component.getUtility(
+                zeit.web.core.interfaces.ISettings)
+            tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
+            try:
+                body = tms.get_article_body(
+                    article, timeout=conf.get('retresco_timeout', 0.1))
+                xml = gocept.lxml.objectify.fromstring(body)
+            except Exception:
+                log.warning(
+                    'Retresco body failed for %s', article.uniqueId,
+                    exc_info=True)
+            else:
+                article._v_retresco_body = xml
 
     return zope.component.queryMultiAdapter(
         (article, xml),
@@ -194,10 +190,7 @@ def get_retresco_body(article):
 
 
 def pages_of_article(article, advertising_enabled=True):
-    body = zope.component.getAdapter(
-        article,
-        zeit.content.article.edit.interfaces.IEditableBody,
-        name='retresco')
+    body = zeit.content.article.edit.interfaces.IEditableBody(article)
     body.ensure_division()  # Old articles don't always have divisions.
 
     # IEditableBody excludes the first division since it cannot be edited
@@ -271,7 +264,7 @@ def images_from_nextread(context):
         raise zope.component.interfaces.ComponentLookupError(
             'Could not adapt', context, zeit.content.image.interfaces.IImages)
     else:
-        return zeit.content.image.interfaces.IImages(context[0])
+        return zeit.content.image.interfaces.IImages(context[0], None)
 
 
 class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):

@@ -1,0 +1,13 @@
+{% extends "zeit.web.site:templates/inc/article-header/default.html" -%}
+
+{% block heading %}
+    <div class="dpa-header__headline">
+        {{ super() }}
+    </div>
+{% endblock %}
+
+{% block headermodule %}
+<div class="dpa-header__image">
+    {{- super() -}}
+</div>
+{% endblock %}

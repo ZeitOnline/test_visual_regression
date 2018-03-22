@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='3.118.dev0',
+    version='3.134.dev0',
     author=(
         'Thomas Baumann, Nico Bruenjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -32,6 +32,7 @@ setup(
         'cryptography',
         'dogpile.cache',
         'python-dateutil',
+        'gocept.cache',
         'grokcore.component',
         'iso8601',
         'lxml',
@@ -59,7 +60,7 @@ setup(
         'zeit.content.advertisement',
         'zeit.content.article>=3.32.0.dev0',
         'zeit.content.author>=2.6.0.dev0',
-        'zeit.content.cp>=3.20.0.dev0',
+        'zeit.content.cp>=3.22.0.dev0',
         'zeit.content.dynamicfolder',
         'zeit.content.gallery>=2.7.4.dev0',
         'zeit.content.image>=2.20.0',
@@ -77,7 +78,7 @@ setup(
         'zeit.magazin',
         'zeit.newsletter',
         'zeit.push>=1.13.0.dev0',
-        'zeit.retresco>=1.15.0.dev0',
+        'zeit.retresco>=1.20.0.dev0',
         'zeit.seo>=1.8.0.dev0',
         'zeit.solr',
         'zeit.vgwort',
@@ -101,9 +102,10 @@ setup(
             'gocept.httpserverlayer',
             'mock',
             'plone.testing [zca,zodb]',
-            'pytest>=3.3.0.dev0',
+            'pytest>=3.4.0.dev0',
             'pytest-pep8',
             'pytest-timeout',
+            'requests-mock',
             'selenium',
             'transaction',
             'waitress',

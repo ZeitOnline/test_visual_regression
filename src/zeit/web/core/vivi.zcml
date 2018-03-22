@@ -53,12 +53,7 @@
     <include package="zeit.push" />
     <exclude package="zeit.cms.testcontenttype.browser" />
     <include package="zeit.cms.testcontenttype" />
-
-    <!-- XXX Transitionary period: We load "most" of retresco,
-         but use ITagger and IWhitelist from intrafind, since
-         ZCML feature `zeit.retresco.tms` is not active. -->
     <include package="zeit.retresco" />
-    <include package="zeit.intrafind" />
 
     <!-- We only want the solr connection, but not IUpdater etc, since that
          would only slow tests down that use the `workingcopy` fixture. -->

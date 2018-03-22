@@ -4,7 +4,7 @@
 {% block teaser %}
 <article class="
     {%- block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}
-    {%- if teaser.product_text == 'Advertorial' and not view.is_advertorial %} {{ self.layout() }}--advertorial{% endif %}
+    {%- if teaser.product.title == 'Advertorial' and not view.is_advertorial %} {{ self.layout() }}--advertorial{% endif %}
     {%- if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="
     {{- teaser.uniqueId }}"
     {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}

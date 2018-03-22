@@ -1,0 +1,13 @@
+{% extends "zeit.web.site:templates/inc/area/parquet.html" %}
+
+{% block area_title %}
+    {% if area.referenced_cp is none %}
+        <span class="parquet-meta__title">
+            {{ area.title }}
+        </span>
+    {% else %}
+        <a class="parquet-meta__title parquet-meta__title--d18" href="{{ area.referenced_cp.uniqueId | create_url }}">
+            {{ lama.use_svg_icon('tag-d18', 'parquet-meta__logo parquet-meta__logo--tag-d18', view.package) }}
+        </a>
+    {% endif %}
+{% endblock area_title %}

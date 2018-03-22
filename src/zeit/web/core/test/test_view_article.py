@@ -1,5 +1,6 @@
 import mock
 import pyramid.testing
+import pytest
 import requests
 import zeit.cms.interfaces
 import zeit.web.core.view_article
@@ -92,3 +93,26 @@ def test_app_user_feedback_is_working(selenium_driver, testserver):
         assert True
     except TimeoutException:
         assert False, 'appUserFeedback message not shown within 2 seconds'
+
+
+@pytest.mark.parametrize(
+    'content', [
+        ('/zeit-online/article/fischer',
+         '.column-heading__media-item',
+         'Julia Zange'),
+        ('/zeit-online/article/authorbox',
+         '.authorbox__media-item',
+         'Jochen Wegner'),
+        ('/zeit-online/centerpage/register',
+         '.teaser-fullwidth-column__media-item',
+         'Julia Zange'),
+        ('/arbeit/article/column',
+         '.article-header-column__media-item',
+         'Julia Zange'),
+        ('/campus/article/column',
+         '.article-header__media-item',
+         'Thomas Fischer')
+    ])
+def test_author_images_should_have_name_as_alt(content, testbrowser):
+    browser = testbrowser(content[0])
+    browser.cssselect(content[1])[0].get('alt') == content[2]

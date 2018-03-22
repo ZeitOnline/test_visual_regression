@@ -4,8 +4,9 @@
 		box-shadow: 0 0 em(5px) rgba($color-body-bg, .5) // add invisible box-shadow to tame bodypainting advertising
 		color: $color-text
 		margin: 0 auto
-		min-width: em(300px)
+		min-width: 300px
 		max-width: $max-page-width
+		padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left) // iPhoneX "the notch" fix
 
 		// special case for app wrapper
 		// sometimes the gray body background-color shines through at the top of the page
@@ -15,3 +16,8 @@
 		&:before
 			content: " "
 			display: table
+
+		+respond-max($break-phablet-min)
+			word-wrap: break-word
+			h1, h2, h3, h4, h5, h6
+				hyphens: auto

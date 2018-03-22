@@ -1,0 +1,22 @@
+// Header for dpa articles
+.dpa-header
+	&__image
+		.figure__caption
+			display: none
+		&:empty
+			display: none
+
+	+respond-min($break-tablet-min)
+		display: flex
+		flex-wrap: wrap
+
+		&__headline
+			flex: 1 0 72%
+		&__image
+			flex: 0 0 28%
+			margin: remify(32px 32px 0 -32px)
+			order: -1
+
+	+respond-min($break-desktop-min)
+		&__image
+			margin: remify(20px 40px 0 -80px)

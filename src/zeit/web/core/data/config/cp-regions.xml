@@ -39,6 +39,9 @@
     <region kind="parquet" title="D17 Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="d17-parquet"/>
     </region>
+    <region kind="parquet" title="D18 Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
+        <area kind="d18-parquet"/>
+    </region>
     <region kind="parquet" title="ZEIT Arbeit Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="zar-parquet"/>
     </region>
@@ -53,6 +56,9 @@
     </region>
     <region kind="parquet" title="Spektrum Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="spektrum"/>
+    </region>
+    <region kind="parquet" title="brand eins Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
+        <area kind="brandeins"/>
     </region>
     <region kind="parquet" title="ZE.TT Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="zett"/>

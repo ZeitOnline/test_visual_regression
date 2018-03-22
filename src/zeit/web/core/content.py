@@ -1,8 +1,6 @@
 import datetime
 import logging
-import sys
 
-import bugsnag
 import peak.util.proxies
 import pytz
 import zope.component
@@ -13,8 +11,7 @@ import zeit.cms.content.interfaces
 import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.content.video.video
-
-from zeit.web.core.jinja import get_current_request_path
+import zeit.retresco.tag
 
 
 log = logging.getLogger(__name__)
@@ -111,12 +108,6 @@ class LazyProxy(object):
             try:
                 return self.__proxy__[key]
             except KeyError:
-                exc_info = sys.exc_info()
-                bugsnag.notify(
-                    exc_info[1],
-                    traceback=exc_info[2],
-                    context=get_current_request_path(),
-                    grouping_hash=exc_info[1].args[0])
                 log.debug(u"ProxyExposed: '{}' has no attribute '{}'".format(
                     self, key))
         return getattr(self.__origin__, key)
@@ -213,11 +204,8 @@ class LazyProxy(object):
     @property
     def keywords(self):
         tags = []
-        keywords = zip(self.__proxy__.get('keyword', ()),
-                       self.__proxy__.get('keyword_id', ()))
-        for label, url_value in keywords:
-            tags.append(zeit.intrafind.tag.Tag(
-                label, label, url_value=url_value))
+        for label in self.__proxy__.get('keyword', ()):
+            tags.append(zeit.retresco.tag.Tag(label, 'keyword'))
         return tags
 
     # Proxy zeit.content.image.interfaces.IImages. Since we bypass ZCA
@@ -278,4 +266,6 @@ class LazyProxy(object):
                     return zeit.cms.interfaces.ICMSContent(value, None)
         log.debug(
             u"ProxyExposed: '{}' could not emulate 'get_cover'".format(self))
-        return self.__origin__.get_cover(cover_id)
+        volume = zeit.content.volume.interfaces.IVolume(self.__origin__, None)
+        if volume:
+            return volume.get_cover(cover_id)

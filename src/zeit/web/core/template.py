@@ -161,7 +161,8 @@ def tag_with_logo_content(content, area_kind=None):
         # - Tag String (keyword on the article)
         # - File name of the SVG logo (returned here and used in template)
         # - Area where the taglogo should not be shown
-        logotags = [('D17', 'tag-d17', 'd17-parquet')]
+        logotags = [('D17', 'tag-d17', 'd17-parquet'),
+                    ('D18', 'tag-d18', 'd18-parquet')]
         try:
             for keyword in content.keywords:
                 for label, logo, exclude_logo_from_area in logotags:
@@ -208,6 +209,9 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         return templates
     if vertical == 'zett':
         templates.append('logo-zett-small')
+        return templates
+    if vertical == 'brandeins':
+        templates.append('logo-brandeins')
         return templates
 
     # inclusive icons may appear both
@@ -699,7 +703,7 @@ def format_iqd(string):
 def get_clicktracking_identifier(area):
     if area.kind == 'parquet' and area.title:
         return 'parquet-{}'.format(format_webtrekk(area.title))
-    elif area.kind in ['zett', 'spektrum']:
+    elif area.kind in ['zett', 'spektrum', 'brandeins']:
         return 'parquet-{}'.format(area.kind)
     elif area.kind.endswith('-parquet'):
         return 'parquet-{}'.format(area.kind.rsplit('-', 1).pop(0))
@@ -860,7 +864,10 @@ def adapt(obj, iface, name=u'', multi=False):
     if multi:
         return zope.component.queryMultiAdapter(obj, iface, name)
     else:
-        return zope.component.queryAdapter(obj, iface, name)
+        if not name:
+            return iface(obj, None)
+        else:
+            return zope.component.queryAdapter(obj, iface, name)
 
 
 @SHORT_TERM_CACHE.cache_on_arguments()
@@ -964,3 +971,9 @@ def get_image_path(image, width=480, device=None):
     # If a device is appended (__desktop/mobile), the image server would
     # deliver the mobile motif, if defined in Vivi.
     return "{}__{}x{}".format(image.path, width, height)
+
+
+@zeit.web.register_filter
+def replace_https_on_esi_include(url):
+    return urlparse.urlunsplit(
+        urlparse.urlsplit(url)._replace(scheme='http'))

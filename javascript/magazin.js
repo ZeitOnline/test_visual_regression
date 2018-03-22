@@ -42,7 +42,6 @@ require( 'web.core/plugins/jquery.animatescroll' );
 require( 'web.core/plugins/jquery.infobox' );
 require( 'web.core/plugins/jquery.inlinegallery' );
 require( 'web.core/plugins/jquery.picturefill' );
-require( 'web.core/plugins/jquery.referrerCount' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 require( 'web.core/plugins/jquery.notifications' );
@@ -52,7 +51,6 @@ if ( pageType === 'article' ) {
     $( '.js-infobox' ).infobox();
 }
 
-$( window ).referrerCount();
 $.notifications();
 $( '.js-gallery' ).inlinegallery();
 $( 'div[data-backgroundvideo]' ).backgroundVideo();

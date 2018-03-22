@@ -162,7 +162,7 @@ def test_zar_teaser_quote_has_correct_structure(testbrowser):
     assert teaser_without_quote_text.startswith('Mit dem Jobwechsel')
 
 
-def test_zar_topicpage_has_correct_structure(testbrowser, datasolr):
+def test_zar_topicpage_has_correct_structure(testbrowser, data_solr):
     # first page with handmade teasers
     select = testbrowser('/arbeit/centerpage/thema-opulent').cssselect
     assert 1 == len(select(
@@ -202,3 +202,14 @@ def test_zar_advertorial_teaser_has_modifier(testbrowser):
     select = testbrowser('/arbeit/centerpage/teaser-advertorial').cssselect
     assert len(select('.teaser-small--advertorial')) == 3
     assert len(select('.teaser-duo--advertorial')) == 2
+
+
+def test_zar_topicpage_has_jsonld(testbrowser, data_solr):
+    browser = testbrowser('/arbeit/centerpage/thema-automatic')
+    assert browser.cssselect('script[type="application/ld+json"]')
+    assert '"@type": "ItemList"' in browser.contents
+
+
+def test_zar_centerpage_has_no_jsonld(testbrowser, data_solr):
+    browser = testbrowser('/arbeit/index')
+    assert 'ld+json' not in browser.contents

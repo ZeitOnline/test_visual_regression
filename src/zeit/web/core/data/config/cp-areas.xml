@@ -10,11 +10,13 @@
     <area kind="minor" title="Minor-Fläche">minor</area>
     <area kind="parquet" title="Parkett-Fläche">parquet</area>
     <area kind="d17-parquet" title="D17 Parkett" available="zeit.web.core.interfaces.IInternalUse">d17-parquet</area>
+    <area kind="d18-parquet" title="D18 Parkett" available="zeit.web.core.interfaces.IInternalUse">d18-parquet</area>
     <area kind="zar-parquet" title="ZEIT Arbeit Parkett" available="zeit.web.core.interfaces.IInternalUse">zar-parquet</area>
     <area kind="zmo-parquet" title="ZEITmagazin Parkett" available="zeit.web.core.interfaces.IInternalUse">zmo-parquet</area>
     <area kind="zco-parquet" title="ZEIT Campus Parkett" available="zeit.web.core.interfaces.IInternalUse">zco-parquet</area>
     <area kind="zplus-parquet" title="Z+ Parkett" available="zeit.web.core.interfaces.IInternalUse">zplus-parquet</area>
     <area kind="spektrum" title="Spektrum Parkett" available="zeit.web.core.interfaces.IInternalUse">spektrum</area>
+    <area kind="brandeins" title="brand eins Parkett" available="zeit.web.core.interfaces.IInternalUse">brandeins</area>
     <area kind="zett" title="ze.tt Parkett" available="zeit.web.core.interfaces.IInternalUse">zett</area>
     <area kind="storystream" title="Storystream-Fläche">storystream</area>
     <area kind="gallery" title="Fotostrecken-Fläche">gallery</area>

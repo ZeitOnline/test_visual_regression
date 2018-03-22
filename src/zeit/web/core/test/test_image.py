@@ -286,7 +286,7 @@ def test_image_view_should_calculate_caching_time_from_context(application):
 
 def test_variant_source_should_produce_variant_legacy_mapping(application):
     vs = zeit.web.core.image.VARIANT_SOURCE
-    assert len(vs.factory._get_mapping()) == 54
+    assert len(vs.factory._get_mapping()) == 55
 
 
 def test_variant_source_should_honor_configured_availability(

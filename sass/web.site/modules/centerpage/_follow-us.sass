@@ -22,7 +22,7 @@ $followus-icon-padding: remify(13px)
 		font-size: remify(18px)
 		letter-spacing: remify(0.08px)
 		margin: remify(28px) auto remify(14px) auto
-		width: 247px // centering above mobile
+		width: 308px // centering above mobile
 		+respond-min($break-tablet-min)
 			width: 100%
 			.cp-area--minor &,
@@ -77,6 +77,10 @@ $followus-icon-padding: remify(13px)
 			background: $color-facebook
 			&:hover
 				background: $color-facebook-hover
+		&--flipboard
+			background: $color-flipboard
+			&:hover
+				background: $color-flipboard-hover
 		&--instagram
 			background: $color-instagram
 			&:hover
@@ -134,6 +138,12 @@ $followus-icon-padding: remify(13px)
 					display: block
 					height: auto
 					margin: remify(2px) auto
+		&--flipboard
+			margin-top: remify(2px)
+			+respond-min($break-tablet-min)
+				.cp-area--minor &,
+				.cp-area--major &
+					margin-top: remify(5px)
 		&--twitter
 			margin-top: remify(3px)
 			.cp-area--minor &,

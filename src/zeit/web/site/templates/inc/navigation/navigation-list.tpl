@@ -9,9 +9,6 @@
     {% if id in (view.ressort, view.sub_ressort) %}
         {% set link_css_class = '{}-link--current'.format(class) %}
     {% endif %}
-    {% if class == 'nav__ressorts' and id == 'arbeit' and toggles('arbeit_hightlight_ressortnav') %}
-        {% set link_css_class = '{}-link--arbeit-highlighted'.format(class) %}
-    {% endif %}
 
     <li {%- if item.label %} class="{{ class }}-item--has-label" data-label="{{ item.label }}"{% endif %}
         {%- if item | length %} class="{{ class }}-item--has-dropdown"{% endif %}>
@@ -40,16 +37,10 @@
         <ul class="nav__dropdown-list" id="more-ressorts" aria-hidden="true" data-ct-column>
         </ul>
     </li>
-    {% if toggles('d17_navigation') -%}
-    <li class="{{ class }}-item--featured-d17">
-        <a itemprop="url" href="{{ request.route_url('home') }}thema/d17">
-            <span itemprop="name">#D17</span>
-        </a>
-    </li>
-    {% else %}
+    {% if toggles('dtag_navigation') -%}
     <li class="{{ class }}-item--featured">
-        <a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index">
-            <span itemprop="name">ZEITmagazin</span>
+        <a itemprop="url" href="{{ request.route_url('home') }}thema/d18">
+           {{ lama.use_svg_icon('logo-d18-yellow', 'nav__ressorts-item--icon-featured-d18', view.package) }}
         </a>
     </li>
     {% endif %}

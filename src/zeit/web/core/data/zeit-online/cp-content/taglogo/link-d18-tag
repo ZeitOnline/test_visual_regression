@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<link>
+    <head>
+        <author expires="" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <display_name>Tom Sundermann</display_name>
+        </author>
+        <rankedTags>
+          <tag type="topic" score="10" uuid="6d2eb253-f131-4181-b667-8a9033ac2a9e" url_value="d18">D18</tag>
+          <tag type="topic" score="9" uuid="c151f61d-da76-4f38-95c6-6f04f4a41c1f" url_value="wirtschaftspolitik">Wirtschaftspolitik</tag>
+          <tag type="Organization" score="5" uuid="0599bca7-37f0-4ad1-9281-66c1efe41d20" url_value="europaeische-zentralbank">Europäische Zentralbank</tag>
+          <tag type="Organization" score="5" uuid="3ca2d609-188c-459d-9461-4ad025482ba4" url_value="oecd">OECD</tag>
+          <tag type="free" score="4" uuid="3294ba09-e9a0-4e97-a2ac-6f3bf617b48a" url_value="deflation">Deflation</tag>
+          <tag type="free" score="4" uuid="4b2d29a1-d9d6-4b6c-968a-e4d636858fce" url_value="europapolitik">Europapolitik</tag>
+          <tag type="free" score="4" uuid="242bd103-9c34-436a-b498-5c3b3b1ed8ca" url_value="stabilitaetspakt">Stabilitätspakt</tag>
+        </rankedTags>
+        <image align="left" base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" expires="" publication-date="" title="NSU Prozess" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <bu>Beate Zschäpe und ihre Anwälte im Gerichtssaal in München</bu>
+            <copyright>© Joerg Koch/Anadolu Agency/Getty Images</copyright>
+        </image>
+        <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+        <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-02-25T07:28:55.063189+00:00</attribute>
+        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-02-25T07:29:54.791058+00:00</attribute>
+        <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-02-25T07:29:19.304503+00:00</attribute>
+        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2015-02-25T07:30:19.241979+00:00</attribute>
+        <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2015-02-25T07:29:16.866608+00:00</attribute>
+        <attribute name="date_last_pushed" ns="http://namespaces.zeit.de/CMS/workflow">2015-02-25T07:29:17.545067+00:00</attribute>
+        <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="enabled" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+        <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="images_added" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-02-25T07:28:33.069549+00:00</attribute>
+        <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.haake</attribute>
+        <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+        <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+        <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="refined" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Gesellschaft</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+        <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+        <attribute name="short_text" ns="http://namespaces.zeit.de/CMS/workflow">Beate #Zschäpe sei eine harmlose Hausfrau, sagt die Zeugin im #NSU-Prozess. Ab und zu sei sie aber ausgerastet. (sdo)</attribute>
+        <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+        <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">Zeitgeschehen</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">link</attribute>
+        <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:3cd9f287-40aa-4af2-a672-efe6889d8a81}</attribute>
+        <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">8</attribute>
+        <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
+        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;Link&quot; module=&quot;zeit.content.link.link&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+        <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noarchive </attribute>
+    </head>
+    <body>
+        <supertitle>Freier Teaser Kicker</supertitle>
+        <title>Freier Teaser Title</title>
+        <subtitle>Lorem ipsum Aliqua laboris mollit irure laboris irure sit voluptate dolor Duis qui consectetur nisi qui non Excepteur ullamco enim mollit sunt nisi dolor sunt.</subtitle>
+        <url>http://example.com/some_target</url>
+        <nofollow>false</nofollow>
+    </body>
+    <teaser>
+        <title>Teaser Title</title>
+        <text>Lorem ipsum Aliqua ullamco non aliquip do et proident velit nisi Ut est dolor proident proident voluptate qui in ad est et fugiat elit eu occaecat.</text>
+    </teaser>
+</link>

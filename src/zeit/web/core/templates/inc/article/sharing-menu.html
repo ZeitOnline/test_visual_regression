@@ -8,13 +8,19 @@
         <li class="{{ self.layout() }}__item">
             <a class="{{ '%s__link' | format(self.layout()) | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}" target="_blank" data-ct-label="facebook">
                 {{ lama.use_svg_icon('sharing-facebook', '%s__icon' | format(self.layout()) | with_mods('facebook'), view.package) }}
-                <span class="{{ self.layout() }}__text">{% block sharing_menu_text_facebook %}Auf Facebook teilen{% endblock %}</span>
+                <span class="{{ self.layout() }}__text">{% block sharing_menu_text_facebook %}Facebook{% endblock %}</span>
             </a>
         </li>
         <li class="{{ self.layout() }}__item">
             <a class="{{ '%s__link' | format(self.layout()) | with_mods('twitter') }}" href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via={{ view.twitter_username | urlencode }}&amp;url={{ content_url.format('twitter') | urlencode }}" target="_blank" data-ct-label="twitter">
                 {{ lama.use_svg_icon('sharing-twitter', '%s__icon' | format(self.layout()) | with_mods('twitter'), view.package) }}
                 <span class="{{ self.layout() }}__text">{% block sharing_menu_text_twitter %}Twittern{% endblock %}</span>
+            </a>
+        </li>
+        <li class="{{ self.layout() }}__item">
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('flipboard') }}" href="https://share.flipboard.com/bookmarklet/popout?v=2&title={{ view.title | urlencode }}&url={{ content_url.format('flipboard') | urlencode | replace('sm.ext', 'soref.ext') }}" target="_blank" data-ct-label="flipboard">
+                {{ lama.use_svg_icon('sharing-flipboard', '%s__icon' | format(self.layout()) | with_mods('flipboard'), view.package) }}
+                <span class="{{ self.layout() }}__text">{% block sharing_menu_text_flipboard %}Flippen{% endblock %}</span>
             </a>
         </li>
         <li class="{{ '%s__item' | format(self.layout()) | with_mods('whatsapp') }}">

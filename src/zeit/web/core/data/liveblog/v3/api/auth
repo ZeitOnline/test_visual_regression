@@ -1,0 +1,16 @@
+{
+	"_created": "2018-01-05T11:39:22+00:00",
+	"_etag": "3ab47f167210f656cd28ae0ec97c0cd6f425ad12",
+	"_id": "5a4f63ea6aa4f500eb91fed4",
+	"_links": {
+		"self": {
+			"href": "auth_db/5a4f63ea6aa4f500eb91fed4",
+			"title": "Auth_db"
+		}
+	},
+	"_status": "OK",
+	"_updated": "2018-01-05T11:39:22+00:00",
+	"token": "3b4b508e-66e4-4977-910c-c8bd5b985d09",
+	"user": "596f7d516aa4f573efa7b4ab",
+	"username": "ThomasS"
+}

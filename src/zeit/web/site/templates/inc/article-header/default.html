@@ -13,10 +13,10 @@
 {% endblock %}
 
 {% block headermodule %}
-    {# This only applies to core:templates/inc/block/headerimage.html, but the
+    {#- This only applies to core:templates/inc/block/headerimage.html, but the
        requirement is that the header determines the image layout, so we have
-       to do it here. #}
+       to do it here. -#}
     {% set article_header_image_figure_modifiers = 'article__item' | with_mods('wide', 'rimless', 'apart') %}
 
-    {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
+    {%- include "zeit.web.core:templates/inc/article/header-module.tpl" %}
 {% endblock %}

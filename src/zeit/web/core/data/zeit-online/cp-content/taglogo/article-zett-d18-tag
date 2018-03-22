@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<link>
+  <head>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-online/cp-content/ig-2" type="jpg" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright link="http://www.photocase.com/user.asp?u=427969">© simonthon.com/photocase.com</copyright>
+    </image>
+    <rankedTags>
+      <tag type="topic" score="10" uuid="6d2eb253-f131-4181-b667-8a9033ac2a9e" url_value="d18">D18</tag>
+      <tag type="topic" score="9" uuid="c151f61d-da76-4f38-95c6-6f04f4a41c1f" url_value="wirtschaftspolitik">Wirtschaftspolitik</tag>
+      <tag type="Organization" score="5" uuid="0599bca7-37f0-4ad1-9281-66c1efe41d20" url_value="europaeische-zentralbank">Europäische Zentralbank</tag>
+      <tag type="Organization" score="5" uuid="3ca2d609-188c-459d-9461-4ad025482ba4" url_value="oecd">OECD</tag>
+      <tag type="free" score="4" uuid="3294ba09-e9a0-4e97-a2ac-6f3bf617b48a" url_value="deflation">Deflation</tag>
+      <tag type="free" score="4" uuid="4b2d29a1-d9d6-4b6c-968a-e4d636858fce" url_value="europapolitik">Europapolitik</tag>
+      <tag type="free" score="4" uuid="242bd103-9c34-436a-b498-5c3b3b1ed8ca" url_value="stabilitaetspakt">Stabilitätspakt</tag>
+    </rankedTags>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-10-16T20:07:55.715503+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-10-16T20:08:34.009139+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-10-16T20:08:34.355247+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-10-16T20:08:34.009139+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-10-16T20:08:32.934222+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-10-16T20:07:55+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.rvd-spaet-ersatz</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Digital</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Internet</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">link</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:8d9a3163-6c7e-4b39-b534-57318b4a149e}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">41</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Link" module="zeit.content.link.link"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Online lernen</supertitle>
+    <title>Wissen für die Welt</title>
+    <subtitle>Online können wir so ziemlich alles lernen, was wir wollen. Ze.tt zeigt eine Übersicht für Wissenshungrige.</subtitle>
+    <url>https://ze.tt/online-lernen-hier-werdet-ihr-schlauer-2/</url>
+    <nofollow>false</nofollow>
+  </body>
+  <teaser>
+    <title>Wissen für die Welt</title>
+    <text>Online können wir so ziemlich alles lernen, was wir wollen. Ze.tt zeigt eine Übersicht für Wissenshungrige.</text>
+  </teaser>
+</link>

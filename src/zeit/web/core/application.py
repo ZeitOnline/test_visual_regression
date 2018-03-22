@@ -32,6 +32,7 @@ import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.repository  # activate monkeypatches
+import zeit.web.core.retresco  # activate monkeypatches
 import zeit.web.core.routing
 import zeit.web.core.security
 import zeit.web.core.solr  # activate monkeypatches
@@ -163,6 +164,7 @@ class Application(object):
         # XXX align-route-config-uris: Ensure downward compatibility until
         # corresponding varnish changes have been deployed. Remove afterwards.
         config.add_route('health_check_XXX', '/health_check')  # XXX remove
+        config.add_route('brandeins-image', '/brandeins-image/*path')
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route('zett-image', '/zett-image/*path')
         config.add_route('blacklist', '/-blacklist', factory=lambda x: None)
@@ -317,10 +319,11 @@ class Application(object):
             config[setting] = value
 
     def configure_overrides(self, context):
-        """Local development environments use an overrides zcml to allow
-        us to mock external dependencies or tweak the zope product config.
+        """For development environments using the test data repository within
+        the egg, we congiure overrides for external data source connectors.
         """
-        if self.settings.get('mock_solr'):
+        repository_path = self.settings['vivi_zeit.connector_repository-path']
+        if 'zeit.web.core' in repository_path:
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
 

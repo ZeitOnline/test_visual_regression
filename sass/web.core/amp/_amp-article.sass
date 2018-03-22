@@ -31,6 +31,19 @@
 		+respond-min($break-tablet-min)
 			+pie-clearfix
 			display: block
+	&__placeholder
+		background-color: $grey--light
+		color: $color-text--light
+		font-family: $font-tabletgothic
+		font-size: em(15px)
+		letter-spacing: $zon-letter-spacing-s
+		margin: remify(40px) auto
+		padding: remify(40px)
+		text-align: center
+		a
+			color: inherit
+			font-weight: bolder
+			text-decoration: underline
 	&__volume
 		display: table-footer-group
 		+respond-min($break-tablet-min)
@@ -228,3 +241,7 @@
 	&__body
 		color: $zon-grey
 		letter-spacing: $zon-letter-spacing-s
+
+.liveblog
+    margin-bottom: remify(20px)
+    margin-top: remify(50px)

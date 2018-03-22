@@ -1,7 +1,11 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% if block.blog_id -%}
     <div class="liveblog">
-        {% set esi_source = '{}/{}.html'.format(settings('liveblog_backend_url'), block.blog_id) %}
+        {% if block.version == '3' %}
+            {% set esi_source = '{}/{}/index.html'.format(settings('liveblog_backend_url_v3'), block.blog_id) %}
+        {% else %}
+            {% set esi_source = '{}/{}.html'.format(settings('liveblog_backend_url'), block.blog_id) %}
+        {% endif %}
         {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
     </div>
 {%- endif %}

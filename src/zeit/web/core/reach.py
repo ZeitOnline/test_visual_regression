@@ -45,11 +45,9 @@ class Reach(object):
         kw.setdefault('limit', 3)
         docs = self._get('/'.join(('ranking', location)), **kw) or []
         for idx, doc in enumerate(docs):
+            zeit.web.core.area.automatic.Converter._set_defaults(doc)
             doc['product_id'] = doc.get('product_id')
             doc['serie'] = doc.get('serie')
-            doc['teaserTitle'] = doc.get('title')
-            doc['teaserSupertitle'] = doc.get('supertitle')
-            doc['access'] = doc.get('access', 'free')
             if 'date_first_released' in doc:
                 try:
                     doc['date_first_released'] = zc.iso8601.parse.datetimetz(

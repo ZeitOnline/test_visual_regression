@@ -104,7 +104,7 @@
                 return;
             }
 
-            if ( !Zeit.isMobileView() ) {
+            if ( !( Zeit.isMobileView() || $( '#overlay-wrapper' ).is( ':visible' ) ) ) {
                 poll( options.timeEndpoint, options.timeInterval * 1000, '.js-update-datetime' );
                 poll( options.commentsEndpoint, options.commentsInterval * 1000, '.js-update-commentcount' );
 

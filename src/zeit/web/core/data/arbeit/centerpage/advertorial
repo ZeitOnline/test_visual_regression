@@ -25,8 +25,8 @@
     <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/index</attribute>
-    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
-    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ADV</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">Advertorial</attribute>
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Studium</attribute>
@@ -38,7 +38,6 @@
     <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
     <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:92cd9648-a5f2-46b4-ae2d-0f037b24865e}</attribute>
     <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">30</attribute>
-    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">Advertorial</attribute>
     <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2017</attribute>
     <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
   &lt;initialized_object&gt;

@@ -1,8 +1,15 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% set amp_blog_id = block.get_amp_themed_id(block.id) %}
 {% if amp_blog_id -%}
-    <div class="liveblog article__item article__item--large">
-        {% set esi_source = '{}/{}.html'.format(settings('liveblog_backend_url'), amp_blog_id) %}
-        {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
-    </div>
+    {% if block.version == '3' %}
+        <div class="liveblog article__item article__item--large">
+            {% set esi_source = '{}/{}/{}/index.html'.format(settings('liveblog_backend_url_v3'), block.blog_id, amp_blog_id) %}
+            {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
+        </div>
+    {% else %}
+        <div class="liveblog article__item article__item--large">
+            {% set esi_source = '{}/{}.html'.format(settings('liveblog_backend_url'), amp_blog_id) %}
+            {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
+        </div>
+    {% endif %}
 {%- endif %}

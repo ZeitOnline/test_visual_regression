@@ -54,14 +54,35 @@ class Converter(object):
             for x in doc.get('authorships', ())]
         return doc
 
-    def _set_defaults(self, doc):
+    TEASER_FIELDS = {
+        'teaserSupertitle': 'supertitle',
+        'teaserTitle': 'title',
+        'teaserText': 'subtitle',
+    }
+
+    @classmethod
+    def _set_defaults(cls, doc):
         # XXX These asset badges and classification flags are not indexed
         #     in Solr, so we lie about them.
         for name in ['gallery', 'genre', 'template', 'video', 'video_2']:
             doc.setdefault(name, None)
-        doc.setdefault('lead_candidate', False)
-        doc.setdefault('commentSectionEnable', True)
         doc.setdefault('access', 'free')
+        doc.setdefault('commentsAllowed', True)
+        doc.setdefault('commentSectionEnable', True)
+        doc.setdefault('date_last_published_semantic', None)
+        doc.setdefault('lead_candidate', False)
+        doc.setdefault('ressort', None)
+        doc.setdefault('sub_ressort', None)
+        doc.setdefault('supertitle', None)
+        doc.setdefault('title', None)
+        doc.setdefault('tldr_title', None)
+        doc.setdefault('tldr_text', None)
+        doc.setdefault('tldr_date', None)
+        doc.setdefault('tldr_milestone', None)
+        # Imported news articles don't have a teaser section
+        for teaser, fallback in cls.TEASER_FIELDS.items():
+            if not doc.get(teaser):
+                doc[teaser] = doc.get(fallback)
         return doc
 
 
@@ -79,9 +100,10 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         'authors': '',
         'comments': 'commentsAllowed',
         'date-last-modified': 'date_last_modified',
-        'date_first_released': '',
+        'date-first-released': 'date_first_released',
         'date_last_published': '',
         'date_last_published_semantic': 'date_last_published_semantic',
+        'id': '',
         'image-base-id': 'teaser_image',
         'image-fill-color': 'teaser_image_fill_color',
         'keyword': '',
@@ -89,11 +111,14 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         'last-semantic-change': 'last_semantic_change',
         'lead_candidate': '',
         'product_id': '',
+        'ressort': '',
         'serie': '',
         'show_commentthread': 'commentSectionEnable',
+        'supertitle': '',
         'teaser_supertitle': 'teaserSupertitle',
         'teaser_text': 'teaserText',
         'teaser_title': 'teaserTitle',
+        'title': '',
         'type': 'doc_type',
         'uniqueId': '',
     }
@@ -113,47 +138,25 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
 
 
-class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery,
-                      Converter):
-
-    # XXX Can we generate this from zeit.retresco.convert somehow?
-    FIELD_MAP = collections.OrderedDict((
-        ('authors', 'authorships'),
-        ('author_names', 'authors'),
-        ('date_last_semantic_change', 'last_semantic_change'),
-        ('allow_comments', 'commentsAllowed'),
-        ('show_comments', 'commentSectionEnable'),
-        ('print_ressort', 'printRessort'),
-        ('teaser_text', 'teaserText'),
-        ('teaser_title', 'teaserTitle'),
-        ('teaser_supertitle', 'teaserSupertitle'),
-        ('article_genre', 'genre'),
-        ('article_template', 'template'),
-    ))
-
-    def _convert(self, doc):
-        doc = super(TMSContentQuery, self)._convert(doc)
-        doc = self._convert_authorships(doc)
-        return doc
+class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery):
 
     def _resolve(self, doc):
-        return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
+        content = zeit.retresco.interfaces.ITMSContent(doc)
+        zeit.web.core.repository.add_marker_interfaces(
+            content, in_repository=False)
+        return content
 
 
 class ElasticsearchContentQuery(
-        zeit.content.cp.automatic.ElasticsearchContentQuery,
-        Converter):
+        zeit.content.cp.automatic.ElasticsearchContentQuery):
 
     include_payload = True
-    FIELD_MAP = TMSContentQuery.FIELD_MAP
-
-    def _convert(self, doc):
-        doc = super(ElasticsearchContentQuery, self)._convert(doc)
-        doc = self._convert_authorships(doc)
-        return doc
 
     def _resolve(self, doc):
-        return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
+        content = zeit.retresco.interfaces.ITMSContent(doc)
+        zeit.web.core.repository.add_marker_interfaces(
+            content, in_repository=False)
+        return content
 
 
 class TopicsitemapContentQuery(zeit.content.cp.automatic.ContentQuery):

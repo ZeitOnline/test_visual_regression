@@ -66,4 +66,5 @@
   <variant old="brightcove-still" new="wide"/>
   <variant old="brightcove-thumbnail" new="wide"/>
   <variant old="spektrum" new="wide"/>
+  <variant old="brandeins" new="wide"/>
 </legacy_variants>

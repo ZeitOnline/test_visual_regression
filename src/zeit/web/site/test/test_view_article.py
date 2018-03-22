@@ -1308,6 +1308,13 @@ def test_fbia_article_contains_correct_webtrekk_platform(httpbrowser):
     assert '25: "instant article"' in browser.contents
 
 
+def test_fbia_article_contains_correct_webtrekk_contentid(httpbrowser):
+    browser = httpbrowser('/fbia/zeit-online/article/simple',
+                          headers={'Host': 'fbia.zeit.de'})
+    assert 'wt.contentId = "redaktion.sport...article.sid|www.zeit.de\
+/zeit-online/article/simple";' in browser.contents
+
+
 def test_cannot_access_content_on_fbia_host(testserver):
     r = requests.get('%s/zeit-online/index' % testserver.url,
                      headers={'Host': 'fbia.zeit.de'})
@@ -1338,6 +1345,17 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
     assert amp_link
     amp_url = amp_link[0].get('href')
     assert amp_url.endswith('amp/zeit-online/article/zeit')
+
+
+@pytest.mark.parametrize(
+    'parameter', [
+        ('/amp/zeit-online/article/cardstack'),
+        ('/amp/zeit-online/article/quiz'),
+        ('/amp/zeit-online/article/raw_code')
+    ])
+def test_amp_article_placeholder(testbrowser, parameter):
+    select = testbrowser(parameter).cssselect
+    assert len(select('.article__placeholder')) >= 1
 
 
 def test_newsletter_optin_page_has_webtrekk_ecommerce(
@@ -1389,6 +1407,13 @@ def test_article_contains_webtrekk_parameter_asset(dummy_request):
         'http://xml.zeit.de/zeit-online/article/video-expired')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp27'] == ''
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/amp-invalid')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp27'] == \
+        'cardstack.2/seite-1;' \
+        'quiz.3/seite-1;raw.4/seite-1;rawtext.5/seite-1'
 
 
 def test_advertorial_article_contains_correct_webtrekk_param(dummy_request):
@@ -1963,30 +1988,38 @@ def test_share_buttons_are_present(testbrowser):
     assert query.get('via').pop(0) == 'zeitonline'
     assert 'share' in query.get('url').pop(0)
 
-    #  whatsapp
+    #  flipboard
     parts = urlparse.urlparse(links[2].get('href'))
+    query = urlparse.parse_qs(parts.query)
+    assert query.get('title').pop(0) == (
+        'Williams wackelt weiter, steht aber im Viertelfinale')
+    assert 'share' in query.get('url').pop(0)
+
+    #  whatsapp
+    parts = urlparse.urlparse(links[3].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE: ') in query.get('text').pop(0)
 
     #  facebook messenger
-    parts = urlparse.urlparse(links[3].get('href'))
+    parts = urlparse.urlparse(links[4].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert query.get('link').pop(0).startswith(canonical)
     assert query.get('app_id').pop(0) == '638028906281625'
 
     #  mail
-    parts = urlparse.urlparse(links[4].get('href'))
+    parts = urlparse.urlparse(links[5].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
     assert 'Artikel auf ZEIT ONLINE lesen:' in query.get('body').pop(0)
 
-    assert labels[0].text == 'Auf Facebook teilen'
+    assert labels[0].text == 'Facebook'
     assert labels[1].text == 'Twittern'
-    assert labels[2].text == 'WhatsApp'
-    assert labels[3].text == 'Facebook Messenger'
-    assert labels[4].text == 'Mailen'
+    assert labels[2].text == 'Flippen'
+    assert labels[3].text == 'WhatsApp'
+    assert labels[4].text == 'Facebook Messenger'
+    assert labels[5].text == 'Mailen'
 
 
 def test_merian_link_has_nofollow(testbrowser, dummy_request):
@@ -2322,3 +2355,35 @@ def test_dpa_article_should_have_correct_header(testbrowser):
     browser = testbrowser('/zeit-online/article/dpa-image')
     assert len(browser.cssselect('.dpa-header')) == 1
     assert len(browser.cssselect('.dpa-header__image')) == 1
+
+
+def test_font_sizing_via_js_api_from_app(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    html_elem = driver.find_element_by_css_selector('html')
+
+    driver.execute_script("window.Zeit.setFontSize(0)")
+    assert not html_elem.get_attribute('style')
+
+    driver.execute_script("window.Zeit.setFontSize('Wurstbrot')")
+    assert not html_elem.get_attribute('style')
+
+    driver.execute_script("window.Zeit.setFontSize(200)")
+    assert html_elem.get_attribute('style') == 'font-size: 200%;'
+
+    driver.get('%s/zeit-online/article/simple' % testserver.url)
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, '.main--article'))
+    assert WebDriverWait(selenium_driver, 1).until(condition)
+
+    html_elem = driver.find_element_by_css_selector('html')
+    assert html_elem.get_attribute('style') == 'font-size: 200%;'
+
+    # clean up to not harm the next tests
+    driver.execute_script("window.localStorage.clear()")
+
+
+def test_dpa_noimage_article_renders_empty_image_block(testbrowser):
+    browser = testbrowser('/zeit-online/article/dpa')
+    empty_img_block = browser.cssselect('.dpa-header__image:empty')
+    assert len(empty_img_block) == 1

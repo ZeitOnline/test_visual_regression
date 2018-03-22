@@ -7,7 +7,7 @@ Default teaser template to inherit from.
 {%- set image = get_image(module, fallback=True) %}
 {%- set video = get_video(teaser) %}
 
-<article class="{% block layout %}teaser{% endblock %} {% block layout_shade %}{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
+<article class="{% block layout %}teaser{% endblock %} {% block layout_shade %}{% endblock %} {{ cp.advertorial_modifier(teaser.product, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
          {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %}
          {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
