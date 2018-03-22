@@ -2,12 +2,12 @@
 {% set template = module | get_layout %}
 {% set id = module.identification %}
 <div class="{{ 'buzz-box' | with_mods(modifier) }} js-accordion">
-    <h3 class="buzz-box__heading">
+    <h2 class="buzz-box__heading">
         <button class="buzz-box__button" id="{{ id }}-label" aria-controls="{{ id }}" data-tracking="
             {{- '{}.{}..buzz-box.{}'.format(area.kind, region_loop.index, module.header | format_webtrekk) }}|#buzz-box">
             {{- module.header -}}
         </button>
-    </h3>
+    </h2>
     <div id="{{ id }}" role="region" aria-labelledby="{{ id }}-label">
         <ol class="buzz-box__teasers">
             {% for teaser in module[:3] -%}
