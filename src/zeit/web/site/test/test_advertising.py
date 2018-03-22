@@ -179,22 +179,22 @@ def test_adplaces_have_no_banner_label_data_attribute(
     assert labelstring not in browser.contents
 
 
-def test_adplace5_can_be_toggled_off(testbrowser, monkeypatch):
+def test_adplace5_depends_on_ligatus_toggle_on(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
         'iqd': True,
-        'adtile5': False
+        'ligatus': True
     }.get)
 
     browser = testbrowser('/zeit-online/article/zeit')
     assert not browser.cssselect('#ad-desktop-5')
 
 
-def test_adplace5_can_be_toggled_on(testbrowser, monkeypatch):
+def test_adplace5_depends_on_ligatus_toggle_off(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
         'iqd': True,
-        'adtile5': True
+        'ligatus': False
     }.get)
 
     browser = testbrowser('/zeit-online/article/zeit')
@@ -387,7 +387,8 @@ def test_adtile5_is_empty_on_zmo_paywall(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
         'iqd': True,
-        'reader_revenue': True
+        'reader_revenue': True,
+        'ligatus': False
     }.get)
 
     param = "?C1-Meter-Status=paywall&C1-Meter-User-Status=always-paid"

@@ -141,22 +141,22 @@ def test_adplace16_on_articles(testbrowser):
     assert len(browser.cssselect('#ad-desktop-16')) == 1
 
 
-def test_zco_adplace5_can_be_toggled_off(testbrowser, monkeypatch):
+def test_zco_adplace5_depends_on_ligatus_toggle_on(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
         'iqd': True,
-        'adtile5': False
+        'ligatus': True
     }.get)
 
     browser = testbrowser('/campus/article/01-countdown-studium')
     assert not browser.cssselect('#ad-desktop-5')
 
 
-def test_zco_adplace5_can_be_toggled_on(testbrowser, monkeypatch):
+def test_zco_adplace5_depends_on_ligatus_toggle_off(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
         'iqd': True,
-        'adtile5': True
+        'ligatus': False
     }.get)
 
     browser = testbrowser('/campus/article/01-countdown-studium')
