@@ -10,7 +10,13 @@ POSTDEPLOY
 
 - TMS-164: Enable search support for Solr and ES backends
 
-- TMS-165: Add support for elasticsearch overview areas 
+- TMS-165: Add support for elasticsearch overview areas
+
+- BUG-868: Fix liveblog header
+
+- BUG-878: Remove padding top in app for iPhoneX/6
+
+- MAINT: Update stellenmarkt link in ZAR (https, campaign tracking)
 
 
 3.132 (2018-03-16)
