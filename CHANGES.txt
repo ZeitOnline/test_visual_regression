@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.133 (unreleased)
+3.133 (2018-03-22)
 ------------------
 
 - TMS-164: Enable search support for Solr and ES backends
