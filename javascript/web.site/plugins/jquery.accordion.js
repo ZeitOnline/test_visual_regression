@@ -6,7 +6,6 @@
 ( function( $ ) {
     var defaults = {
         classname: 'buzz-accordion',
-        multiselectable: false,
         duration: 300
     };
 
@@ -15,10 +14,7 @@
         this.parentNode = element.parentNode;
 
         this.options = $.extend({}, defaults, options );
-        this.accordion = $( '<div/>' ).addClass( this.options.classname ).attr({
-            'role': 'tablist',
-            'aria-multiselectable': true
-        });
+        this.accordion = $( '<div/>' ).addClass( this.options.classname );
 
         this.init( element );
     }
@@ -31,7 +27,7 @@
             this.addItem( element, true );
 
             // Configure click event handler
-            this.accordion.on( 'click', '[role="tab"]', function( event ) {
+            this.accordion.on( 'click', '[aria-controls]', function( event ) {
                 event.preventDefault();
                 self.toggleItem( $( this ) );
             });
@@ -45,26 +41,20 @@
 
                 // simple caching
                 if ( !self.tabs.length ) {
-                    self.tabs = self.accordion.find( '[role="tab"]' );
+                    self.tabs = self.accordion.find( '[aria-controls]' );
                 }
 
                 var index = self.tabs.index( document.activeElement ),
-                    focus,
-                    select;
+                    focus;
 
                 if ( index !== -1 ) {
                     switch ( event.which ) {
-                        case 13: // [RETURN]
-                        case 32: // [SPACE]
-                            select = index;
-                            break;
-
                         case 35: // [END]
-                            select = self.tabs.length - 1;
+                            focus = self.tabs.length - 1;
                             break;
 
                         case 36: // [HOME]
-                            select = 0;
+                            focus = 0;
                             break;
 
                         case 37: // [LEFT]
@@ -82,9 +72,6 @@
                 if ( focus !== undefined ) {
                     event.preventDefault();
                     self.tabs.eq( focus ).focus();
-                } else if ( select !== undefined ) {
-                    event.preventDefault();
-                    self.toggleItem( self.tabs.eq( select ).focus() );
                 }
             });
         },
@@ -92,9 +79,7 @@
         toggleItem: function( tab ) {
             var expanded = tab.attr( 'aria-expanded' ) !== 'false';
 
-            if ( this.options.multiselectable ) {
-                this.toggleTab( tab, !expanded );
-            } else if ( !expanded ) {
+            if ( !expanded ) {
                 this.hideItem( this.accordion.find( '[aria-expanded="true"]' ) );
                 this.showItem( tab );
             }
@@ -105,7 +90,7 @@
                 animation = expand ? 'slideDown' : 'slideUp';
 
             tab.attr({
-                'aria-selected': expand,
+                'aria-disabled': expand,
                 'aria-expanded': expand
             });
 
@@ -124,7 +109,7 @@
 
         addItem: function( element, expand ) {
             this.accordion.append( element );
-            this.toggleTab( $( element ).find( '[role="tab"]' ), expand, 0 );
+            this.toggleTab( $( element ).find( '[aria-controls]' ), expand, 0 );
         }
     };
 

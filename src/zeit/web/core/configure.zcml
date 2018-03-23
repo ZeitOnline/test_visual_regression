@@ -21,12 +21,6 @@
       provides="zeit.cms.interfaces.ICMSContent"
       />
 
-    <adapter
-      factory=".article.get_retresco_body"
-      provides="zeit.content.article.edit.interfaces.IEditableBody"
-      name="retresco"
-      />
-
     <adapter factory=".view_gallery.persistent_thumbnail_factory" />
 
 </configure>

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import math
 
-import pyramid
-import zope.schema
+import pyramid.httpexceptions
+import pyramid.threadlocal
+import zope.interface
 
 import zeit.content.cp.automatic
 import zeit.content.cp.interfaces
@@ -11,18 +12,7 @@ import zeit.web
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.template
-
-
-class IRanking(zeit.content.cp.interfaces.IArea):
-
-    sort_order = zope.schema.TextLine(
-        title=u'Search result order', default=u'aktuell', required=False)
-
-    raw_query = zope.schema.Text(
-        title=u'Raw solr query', default=None, required=False)
-
-    hits = zope.schema.Int(
-        title=u'Search result count', default=None, required=False)
+import zeit.web.core.utils
 
 
 @zeit.web.register_area('ranking')
@@ -40,17 +30,20 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     """
 
     zope.interface.implements(
-        IRanking,
+        zeit.content.cp.interfaces.IArea,
         zeit.web.core.interfaces.IPagination
     )
 
     def __init__(self, context):
         super(Ranking, self).__init__(context)
         self.request = pyramid.threadlocal.get_current_request()
-        centerpage = zeit.content.cp.interfaces.ICenterPage(context)
+
+    @zeit.web.reify
+    def search_form(self):
+        centerpage = zeit.content.cp.interfaces.ICenterPage(self.context)
         module = zeit.web.core.utils.find_block(
             centerpage, module='search-form')
-        self.search_form = zeit.web.core.centerpage.get_module(module)
+        return zeit.web.core.centerpage.get_module(module)
 
     def values(self):
         return self._values
@@ -60,23 +53,37 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         return super(Ranking, self).values()
 
     @property
+    def query_string(self):
+        return self.search_form.search_term
+
+    @property
     def raw_query(self):
         if self.search_form:
             return self.search_form.raw_query
-        else:
-            return super(Ranking, self).raw_query
+        return super(Ranking, self).raw_query
+
+    @property
+    def elasticsearch_raw_query(self):
+        if self.search_form:
+            return self.search_form.elasticsearch_raw_query
+        return super(Ranking, self).elasticsearch_raw_query
 
     @property
     def raw_order(self):
         if self.search_form:
             return self.search_form.raw_order
-        else:
-            return super(Ranking, self).raw_order
+        return super(Ranking, self).raw_order
+
+    @property
+    def elasticsearch_raw_order(self):
+        if self.search_form:
+            return self.search_form.elasticsearch_raw_order
+        return super(Ranking, self).elasticsearch_raw_order
 
     @property
     def sort_order(self):
         if self.search_form:
-            return self.search_form.sort_order
+            return self.search_form.order
 
     @zeit.web.reify
     def surrounding_teasers(self):
@@ -86,9 +93,9 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return 0
 
     @zeit.web.reify
-    def query_string(self):
+    def query(self):
         param = u' '.join(self.request.GET.getall('q'))
-        if param and self.raw_query:
+        if param and self.search_form:
             return param
 
     @zeit.web.reify

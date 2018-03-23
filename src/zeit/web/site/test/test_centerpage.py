@@ -178,7 +178,7 @@ def test_dynamic_centerpage_collection_should_output_teasers(
     assert counter == 8
 
 
-def test_dynamic_centerpage_should_be_paginatable(testbrowser, datasolr):
+def test_dynamic_centerpage_should_be_paginatable(testbrowser, data_solr):
     browser = testbrowser('/dynamic/angela-merkel?p=2')
     current = browser.cssselect('.pager__page--current')[0]
     assert current.text_content().strip() == '2'
@@ -242,7 +242,8 @@ def test_ad_label_should_be_displayed(testbrowser):
     assert labels[0].text == 'Anzeige'
 
 
-def test_link_rel_should_be_set_according_to_pagination(testbrowser, datasolr):
+def test_link_rel_should_be_set_according_to_pagination(
+        testbrowser, data_solr):
     select = testbrowser('/dynamic/angela-merkel?p=3').cssselect
     rel_next = select('link[rel="next"]')
     rel_prev = select('link[rel="prev"]')
@@ -253,7 +254,7 @@ def test_link_rel_should_be_set_according_to_pagination(testbrowser, datasolr):
 
 
 def test_link_rel_to_prev_page_should_not_exist_on_first_page(
-        testbrowser, datasolr):
+        testbrowser, data_solr):
     select = testbrowser('/dynamic/angela-merkel').cssselect
     rel_next = select('link[rel="next"]')
     rel_prev = select('link[rel="prev"]')
@@ -382,7 +383,7 @@ def test_format_date_returns_expected_value_in_newsbox():
         == format_date(yesterday, pattern="HH:mm")
 
 
-def test_newsbox_renders_correctly_on_homepage(testbrowser, datasolr):
+def test_newsbox_renders_correctly_on_homepage(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/slenderized-index-with-newsbox')
     wrapper = browser.cssselect('.newsticker__column')
     section_heading_link = browser.cssselect('.section-heading__link')
@@ -390,22 +391,22 @@ def test_newsbox_renders_correctly_on_homepage(testbrowser, datasolr):
     assert len(section_heading_link) == 1
 
 
-def test_newsbox_renders_correctly_on_keywordpage(testbrowser, datasolr):
+def test_newsbox_renders_correctly_on_auto_topicpage(testbrowser, data_solr):
     browser = testbrowser('/thema/oper')
     newsbox = browser.cssselect(
-        '.cp-area--newsticker.cp-area--newsticker-on-keywordpage')
-    linktext = browser.cssselect('.newsteaser__text--on-keywordpage')
+        '.cp-area--newsticker.cp-area--newsticker-on-autotopic')
+    linktext = browser.cssselect('.newsteaser__text--on-autotopic')
     section_heading_link = browser.cssselect('.section-heading__link')
     assert len(newsbox) == 1
     assert len(linktext) == 8
     assert len(section_heading_link) == 0
 
 
-def test_newsbox_renders_correctly_on_topicpage(testbrowser, datasolr):
+def test_newsbox_renders_correctly_on_manual_topicpage(testbrowser, data_solr):
     browser = testbrowser('/thema/jurastudium')
     newsbox = browser.cssselect(
-        '.cp-area--newsticker.cp-area--newsticker-on-topicpage')
-    linktext = browser.cssselect('.newsteaser__text--on-topicpage')
+        '.cp-area--newsticker.cp-area--newsticker-on-manualtopic')
+    linktext = browser.cssselect('.newsteaser__text--on-manualtopic')
     section_heading_link = browser.cssselect('.section-heading__link')
     assert len(newsbox) == 1
     assert len(linktext) == 8

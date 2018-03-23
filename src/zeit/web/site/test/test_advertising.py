@@ -179,6 +179,28 @@ def test_adplaces_have_no_banner_label_data_attribute(
     assert labelstring not in browser.contents
 
 
+def test_adplace5_depends_on_ligatus_toggle_on(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'ligatus': True
+    }.get)
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert not browser.cssselect('#ad-desktop-5')
+
+
+def test_adplace5_depends_on_ligatus_toggle_off(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'ligatus': False
+    }.get)
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert browser.cssselect('#ad-desktop-5')
+
+
 def test_iqd_adtile2_should_not_be_inserted_on_small_screens(
         selenium_driver, testserver, monkeypatch):
 
@@ -351,6 +373,24 @@ def test_iqd_adtile8_on_article_new_placement_alternative(
     assert body[2].cssselect('script')[0].get('id') == 'ad-desktop-8'
 
 
-def test_p5_not_displayed_when_there_are_no_comments(testbrowser):
+def test_p5_not_displayed_when_there_are_no_comments(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'adplace5': True
+    }.get)
     browser = testbrowser('/zeit-online/article/quiz')
+    assert not browser.cssselect('#ad-desktop-5')
+
+
+def test_adtile5_is_empty_on_zmo_paywall(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'reader_revenue': True,
+        'ligatus': False
+    }.get)
+
+    param = "?C1-Meter-Status=paywall&C1-Meter-User-Status=always-paid"
+    browser = testbrowser('/zeit-magazin/article/01' + param)
     assert not browser.cssselect('#ad-desktop-5')

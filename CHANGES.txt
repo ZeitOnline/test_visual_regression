@@ -5,12 +5,60 @@ POSTDEPLOY
 ----------
 
 
-3.132 (unreleased)
+3.135 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.134 (2018-03-23)
+------------------
+
+- ZON-4495: Webtrekk tracking for Google Optimize A/B tests
+
+- ZON-4496: Use Ligatus as nextread
+
+- TMS-181: Update topicpage CP types to current usage
+
+- FEM-80: Improve accessibility of buzz-box accordion
+
+- BUG-868: Fix bug in bugfix for liveblog header
+
+- FIX: Be defensive about missing uuid for old-style moderation_url
+
+- FIX: Be defensive when parsing mod_date
+
+- FIX: Adjust core.IImage to LazyProxy's adapter behaviour
+
+- FIX: Be defensive about missing jobticker feed setting
+
+
+3.133 (2018-03-22)
+------------------
+
+- TMS-164: Enable search support for Solr and ES backends
+
+- TMS-165: Add support for elasticsearch overview areas
+
+- TMS-192: Use TMS body generally, not only for article pages
+
+- BUG-868: Fix liveblog header
+
+- BUG-878: Remove padding top in app for iPhoneX/6
+
+- MAINT: Update stellenmarkt link in ZAR (https, campaign tracking)
+
+
+3.132 (2018-03-16)
 ------------------
 
 - ZON-4488: Clear floating elements before liveblog
 
+- ZON-4501: Improve ZON print stylesheet
+
 - BUG-875: Align coverless Z+ badge in article header
+
+- BUG-849: Don’t render adtile5 in ZMO with paywall
 
 - MAINT: Stop sending proxy KeyError to Bugsnag
 

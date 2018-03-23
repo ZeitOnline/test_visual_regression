@@ -1,0 +1,56 @@
+.buzz-accordion
+	margin: 0 0 $vertical-space
+
+.buzz-box
+	margin-top: $vertical-space
+	padding: 0 $page-padding--small
+	& + &
+		margin-top: 0
+	+respond-min($break-areas)
+		padding: 0
+
+	&__heading
+		margin: 0 0 1px
+
+	&__button
+		background-color: $zon-lighter-grey
+		border: none
+		color: $zon-dark-grey
+		// display: block
+		font-size: em(14px)
+		font-weight: bold
+		letter-spacing: $zon-letter-spacing-l
+		margin: 0
+		padding: remify(6px 10px)
+		text-align: left
+		text-transform: uppercase
+		width: 100%
+		+on-interaction
+			background-color: $zon-dark-grey
+			color: $white
+			cursor: pointer
+		&[aria-expanded="true"]
+			background-color: $zon-lighter-grey
+			color: $zon-dark-grey
+			cursor: auto
+	&__teasers
+		counter-reset: buzz-box
+		list-style-type: none
+		margin: 0
+		overflow: hidden
+		padding: 0
+		li
+			margin: em(14px 0 18px 40px)
+			padding: 0
+			position: relative
+			&:before
+				color: $zon-dark-grey
+				content: counter(buzz-box)
+				counter-increment: buzz-box
+				font-size: em(22px)
+				font-weight: bold
+				left: remify(-40px)
+				line-height: 1
+				position: absolute
+				text-align: center
+				width: remify(32px)
