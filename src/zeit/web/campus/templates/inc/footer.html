@@ -46,62 +46,6 @@
     {% endif %}
 
     {% if toggles('optimize_ab_testing') -%}
-        <script type="text/javascript">
-            (function () {
-                if (typeof window.Zeit !== 'object') {
-                    return;
-                }
-
-                window.Zeit.getOptimizeString = function () {
-                    if (typeof window.gaData !== 'object') {
-                        return "undefined";
-                    }
-                    /**
-                    * ENTER DATA HERE
-                    * property: Enter the Google Analytics PropertyID in Google Optimize
-                    **/
-                    var property = "UA-18122964-8";
-
-                    /**
-                    * format a given string to usage with webtrekk parameters naming style
-                    * @param  str String
-                    * @return String
-                    *
-                    * @notice by first changing case, we have don't have to search for upper case letters
-                    **/
-                    function formatStringForWebtrekk(str) {
-                        var regex = /[Ã¶Ã¤Ã¼Ã–Ã„ÃœÃŸ\s\;\#]/g,
-                            translate = { 'Ã¤': 'ae', 'Ã¶': 'oe', 'Ã¼': 'ue', 'ÃŸ': 'ss', ' ': '_', ';': '_', '#': '_' };
-                        return (str.toLowerCase().replace(regex, function (match) {
-                            return translate[match];
-                        }).replace(/[\_]{2,}/g, '_'));
-                    }
-
-                    /**
-                    * find the active google optimize experiment and log to webtrekk
-                    **/
-                    // variables always first
-                    var experiments, expVarName, out = "", data = window.gaData;
-                    // check for optimizely object moved to top level
-                    if (typeof data[property] !== 'undefined' && data[property].experiments !== 'undefined') {
-                        experiments = data[property].experiments;
-                        for (var key in experiments) {
-                            if (!experiments.hasOwnProperty(key)) continue;
-                            // one stop function incl. lowercase and repeating underscore prevention
-                            if (experiments[key] == "0") {
-                                expVarName = "original";
-                            } else {
-                                expVarName = "variation_" + experiments[key];
-                            }
-                            out += formatStringForWebtrekk(key) + "." + expVarName + ";";
-                        }
-                    } else {
-                        return "undefined";
-                    }
-
-                    return out.replace(/\;+$/g, '');
-                };
-            })();
-        </script>
+        {% include "zeit.web.core:templates/inc/tracking/webtrekk_googleoptimize.html" %}
     {% endif -%}
 </footer>
