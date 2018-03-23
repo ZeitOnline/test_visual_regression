@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4495: Webtrekk tracking for Google Optimize A/B tests
 
+- FEM-80: Improve accessibility of buzz-box accordion
+
 - BUG-868: Fix bug in bugfix for liveblog header
 
 - FIX: Be defensive about missing uuid for old-style moderation_url
