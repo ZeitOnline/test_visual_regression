@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - FIX: Be defensive when parsing mod_date
 
+- FIX: Adjust core.IImage to LazyProxy's adapter behaviour
+
 
 3.133 (2018-03-22)
 ------------------
