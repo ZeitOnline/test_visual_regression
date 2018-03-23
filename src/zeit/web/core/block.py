@@ -602,16 +602,18 @@ class JobTicker(Module):
 
     @zeit.web.reify
     def items(self):
+        if not self.content:
+            return ()
         return list(zeit.web.site.area.rss.parse_feed(
             self.content.feed_url, 'jobbox_ticker'))
 
     @zeit.web.reify
     def teaser_text(self):
-        return self.content.teaser
+        return self.content and self.content.teaser
 
     @zeit.web.reify
     def landing_page_url(self):
-        return self.content.landing_url
+        return self.content and self.content.landing_url
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)

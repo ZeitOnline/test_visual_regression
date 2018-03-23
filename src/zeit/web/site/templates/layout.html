@@ -28,6 +28,7 @@
     {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
     {%- include "zeit.web.site:templates/inc/meta/sharing.html" -%}
     {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
+    {%- include "zeit.web.core:templates/inc/meta/ligatus.html" -%}
     {% block schemaorg_data %}{% endblock %}
 
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
@@ -35,7 +36,6 @@
     {% if toggles('third_party_modules') -%}
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif -%}
-
     {% if view.include_optimizely -%}
         <script src="{{ view.include_optimizely }}"></script>
     {% endif -%}
