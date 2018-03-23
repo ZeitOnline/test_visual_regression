@@ -47,7 +47,7 @@ def mod_date(resource):
             return released.astimezone(tz)
         elif modified:
             return modified.astimezone(tz)
-    except TypeError:
+    except (TypeError, AttributeError):
         return
 
 

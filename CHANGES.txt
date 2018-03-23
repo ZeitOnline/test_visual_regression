@@ -8,7 +8,19 @@ POSTDEPLOY
 3.134 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4495: Webtrekk tracking for Google Optimize A/B tests
+
+- FEM-80: Improve accessibility of buzz-box accordion
+
+- BUG-868: Fix bug in bugfix for liveblog header
+
+- FIX: Be defensive about missing uuid for old-style moderation_url
+
+- FIX: Be defensive when parsing mod_date
+
+- FIX: Adjust core.IImage to LazyProxy's adapter behaviour
+
+- FIX: Be defensive about missing jobticker feed setting
 
 
 3.133 (2018-03-22)
