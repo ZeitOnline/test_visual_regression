@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - FIX: Adjust core.IImage to LazyProxy's adapter behaviour
 
+- FIX: Be defensive about missing jobticker feed setting
+
 
 3.133 (2018-03-22)
 ------------------
