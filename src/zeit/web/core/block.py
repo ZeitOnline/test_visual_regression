@@ -739,10 +739,9 @@ class NewsletterTeaser(Module):
             self.context.reference, None)
         if body is None:
             return []
-        return [zeit.web.core.interfaces.IArticleModule(element)
-                for element in body.values()
-                if zeit.content.article.edit.interfaces.IVideo.providedBy(
-                    element)]
+        return [
+            zeit.web.core.interfaces.IArticleModule(x) for x in
+            body.filter_values(zeit.content.article.edit.interfaces.IVideo)]
 
     @property
     def url(self):

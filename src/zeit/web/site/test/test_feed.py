@@ -88,7 +88,10 @@ def test_newsfeed_should_concat_supertitle_and_title(testserver):
 
 def test_newsfeed_should_render_an_authorfeed(testserver):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}]
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
+         'title': 'Mei, is des traurig!'}
+    ]
     res = requests.get(
         '{}/autoren/author3'.format(testserver.url),
         headers={'Host': 'newsfeed.zeit.de'})
@@ -277,17 +280,23 @@ def test_msn_feed_contains_expected_fields(testserver):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
-         'type': 'article'},
+         'type': 'article',
+         'title': 'Dummytitle'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
-         'type': 'article'},
+         'type': 'article',
+         'title': 'Dummytitle'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit',
-         'type': 'article'},
+         'type': 'article',
+         'title': 'Dummytitle'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/simple',
-         'type': 'article'},
+         'type': 'article',
+         'title': 'Dummytitle'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/tags',
-         'type': 'article'},
+         'type': 'article',
+         'title': 'Dummytitle'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/fischer',
-         'type': 'article'}
+         'type': 'article',
+         'title': 'Dummytitle'}
     ]
 
     res = requests.get(
@@ -314,7 +323,8 @@ def test_msn_feed_item_contains_copyright_information(testserver):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
-         'type': 'article'}
+         'type': 'article',
+         'title': 'Dummytitle'}
     ]
 
     res = requests.get(

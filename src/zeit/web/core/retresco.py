@@ -2,6 +2,7 @@ import collections
 import logging
 import random
 
+from gocept.cache.property import TransactionBoundCache
 import grokcore.component
 import lxml.etree
 import mock
@@ -69,6 +70,23 @@ def tms_request(self, *args, **kw):
 
 original_request = zeit.retresco.connection.TMS._request
 zeit.retresco.connection.TMS._request = tms_request
+
+
+def cached_intextlink_data(self, content, timeout):
+    """Cache TMS response until the end of the request.
+    This mainly prevents request duplication from get_article_body and
+    get_article_keywords, which are both used when displaying an IArticle page.
+    """
+    if content.uniqueId not in self._intextlink_data:
+        response = orig_get_intextlink_data(self, content, timeout)
+        self._intextlink_data[content.uniqueId] = response
+    return self._intextlink_data[content.uniqueId]
+
+
+orig_get_intextlink_data = zeit.retresco.connection.TMS._get_intextlink_data
+zeit.retresco.connection.TMS._get_intextlink_data = cached_intextlink_data
+zeit.retresco.connection.TMS._intextlink_data = TransactionBoundCache(
+    '_v_intextlink_data', dict)
 
 
 # Test helpers ##############################

@@ -3,6 +3,8 @@
 	&__image
 		.figure__caption
 			display: none
+		&:empty
+			display: none
 
 	+respond-min($break-tablet-min)
 		display: flex
