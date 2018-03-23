@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.134 (unreleased)
+3.134 (2018-03-23)
 ------------------
 
 - ZON-4495: Webtrekk tracking for Google Optimize A/B tests
