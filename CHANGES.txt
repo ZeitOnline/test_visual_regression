@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - FIX: Be defensive about missing uuid for old-style moderation_url
 
+- FIX: Be defensive when parsing mod_date
+
 
 3.133 (2018-03-22)
 ------------------
