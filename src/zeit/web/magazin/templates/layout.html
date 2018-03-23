@@ -116,9 +116,6 @@
                             </div>
                         </div>
                         {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
-                        {% if toggles('optimize_ab_testing') -%}
-                            {% include "zeit.web.core:templates/inc/tracking/webtrekk_googleoptimize.html" %}
-                        {% endif -%}
                     </footer>
                 {% endblock footer %}
                 {% endprofile %}
