@@ -518,6 +518,24 @@ class Citation(Module):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IPuzzleForm)
+class Puzzleform(Module):
+
+    @pyramid.decorator.reify
+    def success_message(self):
+        return u"Vielen Dank für ihre Einsendung."
+
+    @pyramid.decorator.reify
+    def failure_message(self):
+        return u"Leider ist ein technisches Problem aufgetreten. " \
+               u"Versuchen sie es später erneut oder kontaktieren sie uns."
+
+    @pyramid.decorator.reify
+    def is_mulitple(self):
+        return self.puzzle_type.multiple
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
 class Video(Module):
 

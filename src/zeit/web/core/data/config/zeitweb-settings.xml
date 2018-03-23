@@ -61,7 +61,8 @@
    <!-- Use this nonsense Hosts for test purposes. -->
   <setting name="newsletter_image_host" xsi:type="xsd:string">http://imgtest.zeit.de</setting>
   <setting name="newsletter_content_host" xsi:type="xsd:string">http://www.zeittest.de</setting>
-
+  <!-- Run docker-compose of the zeit.puzzle repo if u want to use this-->
+  <setting name="puzzle_backend" xsi:type="xsd:string">http://localhost:3000/solutions</setting>
   <setting name="asset_prefix" xsi:type="xsd:string">/static/latest</setting>
   <setting name="image_prefix" xsi:type="xsd:string"></setting>
   <setting name="jsconf_prefix" xsi:type="xsd:string">/config</setting>
