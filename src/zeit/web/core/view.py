@@ -1129,6 +1129,12 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
         return webtrekk
 
     @zeit.web.reify
+    def ligatus(self):
+        return (
+            zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
+            not getattr(self.context, 'hide_ligatus_recommendations', False))
+
+    @zeit.web.reify
     def nextread(self):
         return zeit.web.core.interfaces.INextread(self.context, [])
 

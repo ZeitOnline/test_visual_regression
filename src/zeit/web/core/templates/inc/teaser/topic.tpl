@@ -3,15 +3,11 @@
 {% block layout %}teaser-topic-item{% endblock %}
 
 {% block teaser_journalistic_format %}
-	{%- if teaser.serie %}
-		{%- if teaser.serie.column %}
-		   <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">{{ teaser.serie.serienname }}</span>
-		{%- else %}
-			<span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Serie: {{ teaser.serie.serienname }}</span>
-		{%- endif %}
-	{%- elif teaser.blog %}
-		<span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Blog: {{ teaser.blog.name }}</span>
-	{%- endif %}
+    {%- if teaser.blog %}
+        <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | branding ) }}">Blog: {{ teaser.blog.name }}</span>
+    {%- else %}
+        {{- super() -}}
+    {%- endif %}
 {% endblock teaser_journalistic_format %}
 
 {% block teaser_container %}{% endblock %}

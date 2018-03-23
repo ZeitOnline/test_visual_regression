@@ -33,7 +33,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wissen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Campus</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
@@ -52,8 +52,9 @@
     &lt;arguments&gt;
       &lt;tuple&gt;
         &lt;global name="Link" module="zeit.content.link.link"/&gt;
+        &lt;global name="IZCOLink" module="zeit.campus.interfaces"/&gt;
+        &lt;global name="IZCOContent" module="zeit.campus.interfaces"/&gt;
         &lt;global name="Interface" module="zope.interface"/&gt;
-        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;

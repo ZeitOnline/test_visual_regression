@@ -391,22 +391,22 @@ def test_newsbox_renders_correctly_on_homepage(testbrowser, data_solr):
     assert len(section_heading_link) == 1
 
 
-def test_newsbox_renders_correctly_on_keywordpage(testbrowser, data_solr):
+def test_newsbox_renders_correctly_on_auto_topicpage(testbrowser, data_solr):
     browser = testbrowser('/thema/oper')
     newsbox = browser.cssselect(
-        '.cp-area--newsticker.cp-area--newsticker-on-keywordpage')
-    linktext = browser.cssselect('.newsteaser__text--on-keywordpage')
+        '.cp-area--newsticker.cp-area--newsticker-on-autotopic')
+    linktext = browser.cssselect('.newsteaser__text--on-autotopic')
     section_heading_link = browser.cssselect('.section-heading__link')
     assert len(newsbox) == 1
     assert len(linktext) == 8
     assert len(section_heading_link) == 0
 
 
-def test_newsbox_renders_correctly_on_topicpage(testbrowser, data_solr):
+def test_newsbox_renders_correctly_on_manual_topicpage(testbrowser, data_solr):
     browser = testbrowser('/thema/jurastudium')
     newsbox = browser.cssselect(
-        '.cp-area--newsticker.cp-area--newsticker-on-topicpage')
-    linktext = browser.cssselect('.newsteaser__text--on-topicpage')
+        '.cp-area--newsticker.cp-area--newsticker-on-manualtopic')
+    linktext = browser.cssselect('.newsteaser__text--on-manualtopic')
     section_heading_link = browser.cssselect('.section-heading__link')
     assert len(newsbox) == 1
     assert len(linktext) == 8

@@ -6,6 +6,8 @@
 
 {% block article_footer %}{% endblock %}
 {% block nextread %}{% endblock %}
+{% block nextread_ad %}{% endblock %}
+{% block ligatus %}{% endblock %}
 {% block comments %}
     {% if view.paywall == 'register' and toggles('reader_revenue_registered_with_comments') %}
         {% include "zeit.web.core:templates/inc/article/comments.html" %}
