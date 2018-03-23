@@ -80,7 +80,7 @@ class Image(object):
     @zeit.web.reify
     def group(self):
         # Contains a valid (synthesized) imagegroup
-        if self._images:
+        if zeit.content.image.interfaces.IImages.providedBy(self._images):
             return zeit.content.image.interfaces.IImageGroup(
                 self._images.image, None)
 
@@ -141,7 +141,7 @@ class Image(object):
 
     @zeit.web.reify
     def fill_color(self):
-        if self._images:
+        if zeit.content.image.interfaces.IImages.providedBy(self._images):
             return self._images.fill_color
 
     @zeit.web.reify

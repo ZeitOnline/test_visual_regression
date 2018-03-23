@@ -5,12 +5,28 @@ POSTDEPLOY
 ----------
 
 
-3.133 (unreleased)
+3.134 (unreleased)
+------------------
+
+- ZON-4495: Webtrekk tracking for Google Optimize A/B tests
+
+- BUG-868: Fix bug in bugfix for liveblog header
+
+- FIX: Be defensive about missing uuid for old-style moderation_url
+
+- FIX: Be defensive when parsing mod_date
+
+- FIX: Adjust core.IImage to LazyProxy's adapter behaviour
+
+
+3.133 (2018-03-22)
 ------------------
 
 - TMS-164: Enable search support for Solr and ES backends
 
 - TMS-165: Add support for elasticsearch overview areas
+
+- TMS-192: Use TMS body generally, not only for article pages
 
 - BUG-868: Fix liveblog header
 
