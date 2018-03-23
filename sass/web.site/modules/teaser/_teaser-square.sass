@@ -12,27 +12,28 @@ $layout: ".teaser-square"
 		border-top-width: 0
 
 	&__media
-		margin: 0
 		position: absolute
-		top: 0
 		width: 100%
 		height: 100%
 	&__media-link
 		+teaser-image-dark-overlay($angle: 0deg)
 	&__container
-		position: absolute
 		bottom: 0
-		left: 0
-		right: 0
 		padding: em(24px)
+		position: absolute
+		width: 100%
+		@supports (display: flex)
+			display: flex
+			flex-direction: column
+			justify-content: flex-end
+			top: 0
+
 	&__heading
 		display: inline
 		font-size: 1em
 		margin: 0
 	&__combined-link
 		@extend %teaser-combined-link
-		color: $white
-		display: inline
 		+teaser-image-text-shadow
 		+on-interaction
 			color: $white
@@ -68,6 +69,7 @@ $layout: ".teaser-square"
 			height: remify(24px)
 			left: remify(15px)
 			position: absolute
+			top: 0
 			width: remify(40px)
 		&--liveblog
 			@extend %teaser-kicker-logo--liveblog
@@ -168,6 +170,7 @@ $layout: ".teaser-square"
 	&--graphic
 		#{$layout}__container
 			+padded
+			align-items: center
 			text-align: center
 
 		#{$layout}__media-link

@@ -403,8 +403,8 @@ class HostRestrictionPredicate(object):
 class VerticalPredicate(object):
     """Restricts requests to content that belongs to a specified vertical.
 
-    See zeit.web.core.interfaces.IVertical for possible values; but note that
-    'zett' is not applicable here. A value of '*' means allow all verticals.
+    See zeit.web.core.interfaces.IVertical for possible values. A value of '*'
+    means allow all verticals.
 
     This is also the place to disable newly introduced verticals via feature
     toggles.
@@ -431,9 +431,6 @@ class VerticalPredicate(object):
             return True
 
         vertical = zeit.web.core.interfaces.IVertical(context)
-        if vertical == 'zett':
-            # zett is not a vertical in the sense of this predicate.
-            vertical = 'zon'
 
         return vertical == self.value
 

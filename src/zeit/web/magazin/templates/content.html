@@ -34,18 +34,24 @@
         </div>
         {% endblock %}
 
-        {% block nextread %}
-            {% if view.nextread %}
-                {%- include "zeit.web.magazin:templates/inc/article/nextread.html" -%}
-            {% endif %}
-        {% endblock nextread %}
-
-        {% block article_google_ad %}
-            {% if view.has_comment_area and not view.paywall -%}
-                <!-- P5 -->
-                {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
-            {% endif %}
-        {% endblock article_google_ad %}
+        {% if view.ligatus %}
+            {% block ligatus %}
+                {% set ligatus_id = '101840' %}
+                {% include 'zeit.web.core:templates/inc/ligatus/ligatus.html' %}
+            {% endblock %}
+        {% else %}
+            {% block nextread %}
+                {% if view.nextread %}
+                    {%- include "zeit.web.magazin:templates/inc/article/nextread.html" -%}
+                {% endif %}
+            {% endblock nextread %}
+            {% block article_google_ad %}
+                {% if view.has_comment_area and not view.paywall -%}
+                    <!-- P5 -->
+                    {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
+                {% endif %}
+            {% endblock article_google_ad %}
+        {% endif %}
     </article>
 
     {% if view.product_id not in ('TGS', 'ZEI', 'ZMLB') and view.date_last_published_semantic %}
