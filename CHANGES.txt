@@ -8,6 +8,8 @@ POSTDEPLOY
 3.134 (unreleased)
 ------------------
 
+- ZON-4495: Webtrekk tracking for Google Optimize A/B tests
+
 - BUG-868: Fix bug in bugfix for liveblog header
 
 
