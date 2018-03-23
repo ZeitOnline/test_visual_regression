@@ -915,7 +915,10 @@ class CommentMixin(object):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
         if not toggles.find('zoca_moderation_launch'):
             uuid = zeit.cms.content.interfaces.IUUID(
-                self.context).id.strip('{}').replace('urn:uuid:', '')
+                self.context).id
+            if not uuid:
+                return None
+            uuid = uuid.strip('{}').replace('urn:uuid:', '')
             return u'{}/{}/thread/%cid%'.format(
                 conf.get('community_admin_host').rstrip('/'), uuid)
         else:

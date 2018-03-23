@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - BUG-868: Fix bug in bugfix for liveblog header
 
+- FIX: Be defensive about missing uuid for old-style moderation_url
+
 
 3.133 (2018-03-22)
 ------------------
