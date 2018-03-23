@@ -182,7 +182,15 @@ class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
     renderer='zeit.web.site:templates/article.html')
 class DPAArticle(Article):
 
-    header_layout = 'dpa'
+    header_layout = news_type = 'dpa'
+
+
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_afp_article,),
+    renderer='zeit.web.site:templates/article.html')
+class afpArticle(Article):
+
+    news_type = 'afp'
 
 
 @zeit.web.view_config(
