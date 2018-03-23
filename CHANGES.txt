@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4495: Webtrekk tracking for Google Optimize A/B tests
 
+- ZON-4496: Use Ligatus as nextread
+
 - FEM-80: Improve accessibility of buzz-box accordion
 
 - BUG-868: Fix bug in bugfix for liveblog header
