@@ -168,3 +168,32 @@ $print-zoom: 1.263157895
 
 		&__content[aria-hidden='true']
 			max-height: none // always show all infobox content (ignore script)
+
+	// --------------------------------------------
+	// galleries. beat JS-set styles with !important
+	.gallery,
+	.inline-gallery
+		+pie-clearfix
+		background: none
+		margin: 0
+		.bx-controls,
+		.bx-zone-next,
+		.bx-zone-prev
+			display: none !important
+		.bx-viewport
+			overflow: visible !important
+			margin: 0 auto !important
+			max-width: 70% !important
+		.gallery-slides
+			position: relative !important
+			transform: none !important
+			width: auto !important
+		.slide
+			margin: 20pt 0 !important
+			&:first-child(),
+			&:last-child()
+				display: none
+	.gallery-container,
+	.inline-gallery-container
+		margin: 0
+		max-width: none
