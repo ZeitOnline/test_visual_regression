@@ -164,7 +164,9 @@ def test_centerpages_contain_teasers(config, testbrowser):
 
 def test_topicpage_contains_teasers(config, testbrowser):
     browser = testbrowser('{}/thema/europa'.format(config['BASE_URL']))
-    assert len(browser.cssselect('article[class*=teaser]')) == 25
+    assert len(browser.cssselect('article[class*=teaser-small]')) == 25
+    if config['ENV'] == 'PRODUCTION':
+        assert len(browser.cssselect('article[class*=newsteaser]')) == 7
 
 
 def test_search_results_page_contains_teasers(config, testbrowser):

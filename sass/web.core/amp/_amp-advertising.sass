@@ -1,9 +1,15 @@
 .advertising
 	display: table
 	margin: remify(40px auto 34px)
-	&:before
+	&__container
+		display: flex
+		flex-direction: column
+	&__marker
 		@extend %label
-		content: "Anzeige"
+		display: none
+		order: -1
 		+respond-max(em(320px), false)
-			padding: remify(0 10px)
+			margin-right: 10px
 
+.advertising__container > amp-ad:not([style*="display: none"]) + .advertising__marker
+	display: block

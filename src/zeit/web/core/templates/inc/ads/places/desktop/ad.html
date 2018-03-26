@@ -1,4 +1,4 @@
 {% extends "zeit.web.core:templates/inc/ads/places/ad.html" %}
 {% block type %}desktop{% endblock %}
 {% block mobileview %} && !window.Zeit.isMobileView(){% endblock %}
-{% block adtile_label %}elem.setAttribute('data-banner-label', 'Anzeige');{% endblock %}
+{% block adtile_label %}{% if toggles('zon_admark') -%}elem.setAttribute('data-banner-label', 'Anzeige');{% endif %}{% endblock %}

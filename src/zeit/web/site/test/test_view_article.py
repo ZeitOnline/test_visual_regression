@@ -2381,3 +2381,9 @@ def test_font_sizing_via_js_api_from_app(selenium_driver, testserver):
 
     # clean up to not harm the next tests
     driver.execute_script("window.localStorage.clear()")
+
+
+def test_dpa_noimage_article_renders_empty_image_block(testbrowser):
+    browser = testbrowser('/zeit-online/article/dpa')
+    empty_img_block = browser.cssselect('.dpa-header__image:empty')
+    assert len(empty_img_block) == 1

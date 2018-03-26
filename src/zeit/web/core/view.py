@@ -423,9 +423,8 @@ class Base(object):
                 zeit.web.core.interfaces.ISettings)
             tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
             try:
-                uuid = zeit.cms.content.interfaces.IUUID(self.context).id
                 timeout = conf.get('retresco_timeout', 0.1)
-                return tms.get_article_keywords(uuid, timeout=timeout)
+                return tms.get_article_keywords(self.context, timeout=timeout)
             except Exception:
                 log.warning(
                     'Retresco keywords failed for %s', self.context.uniqueId,
@@ -688,12 +687,9 @@ class Base(object):
             ('cp28', access),  #
             ('cp29', first_click_free),  # First click free
             ('cp30', self.paywall or 'open'),  # Paywall Schranke
-            ('cp32', 'unfeasible')  # Protokoll (set via JS in webtrekk.html)
+            ('cp32', 'unfeasible'),  # Protokoll (set via JS in webtrekk.html)
+            ('cp36', 'unfeasible')  # Google Optimize
         ])
-
-        if not zeit.web.core.application.FEATURE_TOGGLES.find(
-                'access_status_webtrekk'):
-            del custom_parameter['cp28']
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
                 'reader_revenue'):
@@ -919,7 +915,10 @@ class CommentMixin(object):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
         if not toggles.find('zoca_moderation_launch'):
             uuid = zeit.cms.content.interfaces.IUUID(
-                self.context).id.strip('{}').replace('urn:uuid:', '')
+                self.context).id
+            if not uuid:
+                return None
+            uuid = uuid.strip('{}').replace('urn:uuid:', '')
             return u'{}/{}/thread/%cid%'.format(
                 conf.get('community_admin_host').rstrip('/'), uuid)
         else:
@@ -1128,6 +1127,12 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             custom_parameter['cp33'] = ''.join(parsed[1:3])
 
         return webtrekk
+
+    @zeit.web.reify
+    def ligatus(self):
+        return (
+            zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
+            not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
     def nextread(self):

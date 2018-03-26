@@ -296,7 +296,7 @@ def test_materialized_topic_cp_contains_correct_webtrekk_param(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/thema/jurastudium')
     view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
-    assert view.webtrekk['customParameter']['cp26'] == 'centerpage.topicpage'
+    assert view.webtrekk['customParameter']['cp26'] == 'centerpage.manualtopic'
 
 
 def test_dynamic_topic_cp_contains_correct_webtrekk_param(dummy_request):
@@ -304,7 +304,7 @@ def test_dynamic_topic_cp_contains_correct_webtrekk_param(dummy_request):
         'http://xml.zeit.de/thema/berlin')
     view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
     assert view.webtrekk['customParameter'][
-        'cp26'] == 'centerpage.keywordpage.location'
+        'cp26'] == 'centerpage.autotopic.location'
 
 
 def test_invisible_region_should_not_be_rendered(application, testbrowser):
@@ -344,7 +344,7 @@ def test_invisible_module_should_not_be_rendered(application, testbrowser):
 
 
 def test_centerpage_should_update_webtrekk_content_id_for_search_results(
-        application, dummy_request, datasolr):
+        application, dummy_request, data_es):
     dummy_request.GET['q'] = 'test'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)

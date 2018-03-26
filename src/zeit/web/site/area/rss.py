@@ -52,7 +52,9 @@ class RSSLink(object):
 
     @zeit.web.reify
     def title(self):
-        return self.xml.findtext('title')
+        title = self.xml.findtext('title')
+        if title is not None:
+            return title.strip()
 
     @property
     def teaserTitle(self):  # NOQA
@@ -60,7 +62,9 @@ class RSSLink(object):
 
     @zeit.web.reify
     def supertitle(self):
-        return self.xml.findtext('category')
+        supertitle = self.xml.findtext('category')
+        if supertitle is not None:
+            return supertitle.strip()
 
     @property
     def teaserSupertitle(self):  # NOQA

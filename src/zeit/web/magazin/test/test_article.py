@@ -195,7 +195,8 @@ def test_article03_has_correct_webtrekk_values(httpbrowser, togglepatch):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp32': 'unfeasible'}
+        'cp32': 'unfeasible',
+        'cp36': 'unfeasible'}
 
 
 def test_article03_page2_has_correct_webtrekk_values(httpbrowser, togglepatch):
@@ -253,7 +254,8 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser, togglepatch):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp32': 'unfeasible'}
+        'cp32': 'unfeasible',
+        'cp36': 'unfeasible'}
 
 
 def test_cp_has_correct_webtrekk_values(httpbrowser, togglepatch):
@@ -338,7 +340,8 @@ def test_cp_has_correct_webtrekk_values(httpbrowser, togglepatch):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp32': 'unfeasible'}
+        'cp32': 'unfeasible',
+        'cp36': 'unfeasible'}
 
 
 def test_webtrekk_series_tag_is_set_corectly(httpbrowser, togglepatch):

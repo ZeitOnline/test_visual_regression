@@ -2,25 +2,20 @@
 	display: table
 	margin: remify(59px auto 40px)
 	position: relative
+	+zon-adlabel
+		@extend %label
 	+respond_min($break-mobile-ad-width)
 		display: none // generally hidden on desktop
 	&--1
 		margin: remify(29px auto 10px)
 	&:before
 		@extend %label
-		content: "Anzeige"
-		position: absolute
-		right: 0
-		top: -19px
-		+respond-max(em(320px), false)
-			padding-right: remify(10px)
 
 .ad-desktop
 	$name: '.ad-desktop'
 	display: none // generally hidden on mobile
-	&[data-banner-label]:before
+	+zon-adlabel
 		@extend %label
-		content: attr(data-banner-label)
 	+respond_min($break-mobile-ad-width)
 		display: table // generally visible on desktop
 		&--1,
@@ -96,24 +91,6 @@ div.smartClipAnzeige:before
 	top: 0 !important
 
 +respond-max($break-mobile-ad-width)
-	div#iqadtile1::before,
-	div#iqadtile3::before,
-	div#iqadtile4::before,
-	div#iqadtile5::before,
-	div#iqadtile8::before
-		content: 'Anzeige' !important
-		color: $dusty-gray !important
-		position: absolute !important
-		font-size: em(9px) !important
-		background-color: transparent !important
-		width: auto !important
-		margin-top: auto !important
-		height: auto !important
-		line-height: 1 !important
-		top: -19px !important
-		left: auto !important
-		right: 0 !important
-
 	div#iqadtile1
 		margin-top: remify(29px) !important
 
