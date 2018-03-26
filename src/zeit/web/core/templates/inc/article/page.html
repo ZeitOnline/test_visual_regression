@@ -18,15 +18,3 @@
         "zeit.web.core:templates/inc/blocks/{0}_{1}.html".format(type, block.layout),
         "zeit.web.core:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
 {% endfor %}
-{% if view.news_type == 'dpa' or view.news_type == 'afp' %}
-    <div class="article-notice">
-        <h2 class="article-notice__title">Hinweis zu Agenturmeldungen</h2>
-        <p class="article-notice__text">
-            {% if view.news_type == 'dpa' %}
-                Dies ist ein von der Deutschen Presse-Agentur (dpa) für ZEIT ONLINE zur Verfügung gestellter Nachrichten-Feed. Die dpa ist eine Nachrichtenagentur, die Medien mit selbst recherchierten und formulierten Meldungen zu aktuellen Ereignissen beliefert.
-            {% else %}
-                Dies ist eine von der Agency France-Press (AFP) für ZEIT ONLINE zur Verfügung gestellte Nachricht. Die AFP ist eine Nachrichtenagentur, die Medien mit selbst recherchierten und formulierten Meldungen zu aktuellen Ereignissen beliefert.
-            {% endif %}
-        </p>
-    </div>
-{% endif %}
