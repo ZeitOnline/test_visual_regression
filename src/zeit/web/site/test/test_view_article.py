@@ -2396,4 +2396,4 @@ def test_dpa_noimage_article_renders_empty_image_block(testbrowser):
     ])
 def test_dpa_afp_article_should_have_notice(testbrowser, parameter):
     browser = testbrowser('/zeit-online/article/' + parameter)
-    assert len(browser.cssselect('.article-heading__notice')) == 1
+    assert len(browser.cssselect('.article-notice')) == 1
