@@ -2387,3 +2387,13 @@ def test_dpa_noimage_article_renders_empty_image_block(testbrowser):
     browser = testbrowser('/zeit-online/article/dpa')
     empty_img_block = browser.cssselect('.dpa-header__image:empty')
     assert len(empty_img_block) == 1
+
+
+@pytest.mark.parametrize(
+    'parameter', [
+        ('dpa'),
+        ('afp')
+    ])
+def test_dpa_afp_article_should_have_notice(testbrowser, parameter):
+    browser = testbrowser('/zeit-online/article/' + parameter)
+    assert len(browser.cssselect('.article-notice')) == 1
