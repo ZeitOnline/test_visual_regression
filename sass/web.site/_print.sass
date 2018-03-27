@@ -1,87 +1,18 @@
-$zon-print-grey: #444
-$print-media-width: 100mm
-$print-media-margin: 14pt 0
-// using this zoom factor to make fonts bigger
-// in opposition to designs
-$print-zoom: 1.263157895
-
 @media print
 
-	@page
-		margin: 15mm 25mm
-		size: auto
-
-	body,
-	.page__content
-		background: white !important
-		box-shadow: none !important
-
-	p
-		orphans: 2
-		widows: 3
-
-	h1, h2, h3, h4, h5, h6
-		break-after: avoid
-		page-break-after: avoid
-		page-break-inside: avoid
-
-	acronym[title]:after,
-	abbr[title]:after
-		content: " (" attr(title) ")"
-
-	a[href^="http"]
-		page-break-inside: avoid
-		&:after
-			border-bottom: 1px solid white // To visibly hide grey border of <a>
-			color: $zon-print-grey
-			content: " [" attr(href) "]"
-			font-size: inherit
-			word-wrap: break-word
-
-	a[href^="#"]:after,
-	.zplus-badge a:after, // this is full of tracking-params
-	.header__publisher a:after
-		content: ""
-
-	#ads,
-	#adunit,
-	#comments,
-	#iqadtileOOP,
-	#iqd_mainAd,
-	#iqdLastNode,
-	#iqdSitebarWrapper,
-	#iqdInfoBox,
+	// --------------------------------------------
+	// article elements
 	#nextread,
-	#pDebug,
-	.ad,
-	.ads,
-	.ad-container,
-	.article-footer,
+	// TODO: Verticals??
 	.article-lineage,
-	.article-pagination,
-	.article-toc,
 	.column-heading__author,
 	.comment-section,
-	.footer,
 	.newsletter-teaser-box, // raw-code in articles comes with own stylesheets
-	.nextread,
-	.nextread-advertisement,
-	.video-player,
-	.visually-hidden,
 	.breaking-news-banner,
-	#bp-container, // teaser for browser-push
-	iframe[id^="google_ads"]
 		display: none !important
 
-	#main
-		padding: 0
-		margin: 0
-
-	.header__brand
-		border-bottom: 1pt solid $zon-print-grey
-		.header__teaser,
-		.header__menu-link
-			display: none
+	// --------------------------------------------
+	// article sections
 
 	.article-heading
 		margin: 6mm 0 0
@@ -137,9 +68,6 @@ $print-zoom: 1.263157895
 			margin-left: 0
 			padding-left: 0 !important
 
-	.video-player + .figure__caption
-		display: none
-
 	.article__subheading
 		font-size: 11pt * $print-zoom
 		line-height: 14pt * $print-zoom
@@ -154,46 +82,8 @@ $print-zoom: 1.263157895
 		line-height: 14pt * $print-zoom
 		margin-bottom: 7pt * $print-zoom
 
-	.portraitbox
-
-		&__heading,
-		&__body
-			font-size: 7pt * $print-zoom
-			line-height: 11pt * $print-zoom
-			margin-bottom: 6pt * $print-zoom
-		a,
-		a:after
-			color: $zon-print-grey
-			font-size: 7pt * $print-zoom
-
-	.infobox
-		background-color: transparent
-		border: 1pt solid $zon-print-grey
-		margin: $print-media-margin
-		padding: 0
-		page-break-inside: avoid
-		max-width: $print-media-width
-
-	.infobox-tab
-		border-bottom: 1pt solid $zon-print-grey
-		padding: 9pt * $print-zoom
-
-		&__link,
-		&__title,
-		&__content p
-			font-size: 7pt * $print-zoom
-			line-height: 11pt * $print-zoom
-			margin-bottom: 6pt * $print-zoom
-
-		&__title
-			padding: 0
-
-		&__link
-			font-weight: bold
-
-		&__content[aria-hidden='true']
-			max-height: none // always show all infobox content (ignore script)
-
+	// --------------------------------------------
+	// column articles
 	.column-heading *
 		background: white !important
 		color: $zon-print-grey !important
@@ -204,5 +94,4 @@ $print-zoom: 1.263157895
 	.column-heading__title
 		max-width: none
 
-	.paragraph--faded:before
-		content: none // faded paragraph would not be printed at all, so we dont fade it
+
