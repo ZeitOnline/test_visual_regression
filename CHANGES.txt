@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4500: Print styles for ZMO
 
+- ZON-4550: Add ligatus container element to DOM
+
 
 3.134 (2018-03-23)
 ------------------
