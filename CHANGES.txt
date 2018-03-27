@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4507: Infotext for dpa and afp articles
 
+- ZON-4500: Print styles for ZMO
+
 
 3.134 (2018-03-23)
 ------------------
