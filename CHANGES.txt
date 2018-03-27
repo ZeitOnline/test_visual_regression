@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4464: Consider ze.tt and brandeins kicker logo badges in all teasers
 
+- ZON-4507: Infotext for dpa and afp articles
+
 
 3.134 (2018-03-23)
 ------------------
