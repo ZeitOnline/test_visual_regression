@@ -2,11 +2,16 @@ $zon-print-grey: #252525
 $stamp-margin: 20pt 30pt 20pt 0
 
 @media print
-
 	// hide ZMO-specific things
 	.article__footer,
 	.comment-section,
-	.main-footer
+	.cp_comment__counter,
+	.cp-region .teaser-card,
+	.follow-us,
+	.main--centerpage .scaled-image,
+	.main-footer,
+	.newsletter-card,
+	.teaser-upright
 		display: none !important
 
 	.header__brand
@@ -94,6 +99,25 @@ $stamp-margin: 20pt 30pt 20pt 0
 
 	.article-page
 		margin-bottom: 0
+
+	// --------------------------------------------
+	// cp elements
+	.teaser-landscape-large,
+	.teaser-landscape-small,
+	.teaser-mtb-square
+		height: auto
+		margin-bottom: 2.0rem
+		max-width: $max-page-width
+		min-height: initial
+		padding: 0
+		width: 100%
+
+	.teaser-landscape-large__text,
+	.teaser-square-large,
+	.teaser-square-large__text
+		margin: 0
+		padding: 0
+		position: initial
 
 	// --------------------------------------------
 	// marginalia text boxes
