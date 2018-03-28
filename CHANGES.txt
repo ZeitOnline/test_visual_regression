@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - ZON-4547: Render liveblog from Varnish when Liveblog API server is down
 
+- BUG-881: Fix overlay-slide buttons in gallery for Firefox ≥ 59
+
 
 3.134 (2018-03-23)
 ------------------
