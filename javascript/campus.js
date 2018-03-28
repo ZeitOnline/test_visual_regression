@@ -32,6 +32,7 @@ if ( article ) {
 }
 
 // add required jQuery plugins
+require( 'web.core/vendor/modernizr-custom' );
 require( 'velocity.ui' );
 require( 'web.core/plugins/jquery.scrollIntoView' ); // plugin used by other plugins
 require( 'web.core/plugins/jquery.animatescroll' );

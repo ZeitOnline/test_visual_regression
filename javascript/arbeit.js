@@ -22,6 +22,7 @@ saveGetToCookie.init();
 zeit.clearQueue();
 
 // add required jQuery plugins
+require( 'web.core/vendor/modernizr-custom' );
 require( 'velocity.ui' );
 require( 'web.core/plugins/jquery.notifications' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
