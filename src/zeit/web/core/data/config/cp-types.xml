@@ -3,8 +3,8 @@
   <type name="homepage">Homepage</type>
   <type name="ressort">Ressort-CP</type>
   <type name="centerpage">Centerpage</type>
-  <type name="keywordpage">Schlagwortseite</type>
-  <type name="topicpage">Themenseite</type>
+  <type name="autotopic">Themenseite (automatisch)</type>
+  <type name="manualtopic">Inszenierte Themenseite</type>
   <type name="arena">Arena</type>
   <type name="frame">Rahmen</type>
   <type name="iframe">Iframe</type>

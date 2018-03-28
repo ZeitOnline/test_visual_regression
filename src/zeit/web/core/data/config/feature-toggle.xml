@@ -20,6 +20,8 @@
   <iqd_tablet_transformation>true</iqd_tablet_transformation>
   <iqd_touchpoint>true</iqd_touchpoint>
   <keywords_from_tms>false</keywords_from_tms>
+  <ligatus>false</ligatus>
+  <optimize_ab_testing>false</optimize_ab_testing>
   <podlove_button>true</podlove_button>
   <rawr_iframe>true</rawr_iframe>
   <reader_revenue>true</reader_revenue>

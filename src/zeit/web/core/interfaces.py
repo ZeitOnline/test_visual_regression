@@ -284,7 +284,7 @@ class IDetailedContentType(zope.interface.Interface):
     """Returns more detailed content type information, not just
     article/centerpage/etc. but also the CP-Type or Article-Template etc.
 
-    The format is a dotted string, e.g. 'centerpage.topicpage.person'.
+    The format is a dotted string, e.g. 'centerpage.autotopic.person'.
     """
 
 
@@ -325,7 +325,7 @@ class IPaywallAccess(zope.interface.Interface):
 
 
 class IVertical(zope.interface.Interface):
-    """Returns short identifier string (zon/zmo/zco/zar/zett) to signify which
+    """Returns short identifier string (zon/zmo/zco/zar) to signify which
     vertical an ICMSContent belongs to.
 
     This is not quite the same as which zeit.cms.section.ISectionMarker the

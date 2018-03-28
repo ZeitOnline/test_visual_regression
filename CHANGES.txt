@@ -5,10 +5,40 @@ POSTDEPLOY
 ----------
 
 
-3.134 (unreleased)
+3.135 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4464: Consider ze.tt and brandeins kicker logo badges in all teasers
+
+- ZON-4507: Infotext for dpa and afp articles
+
+- ZON-4500: Print styles for ZMO
+
+- ZON-4550: Add ligatus container element to DOM
+
+- ZON-4547: Render liveblog from Varnish when Liveblog API server is down
+
+
+3.134 (2018-03-23)
+------------------
+
+- ZON-4495: Webtrekk tracking for Google Optimize A/B tests
+
+- ZON-4496: Use Ligatus as nextread
+
+- TMS-181: Update topicpage CP types to current usage
+
+- FEM-80: Improve accessibility of buzz-box accordion
+
+- BUG-868: Fix bug in bugfix for liveblog header
+
+- FIX: Be defensive about missing uuid for old-style moderation_url
+
+- FIX: Be defensive when parsing mod_date
+
+- FIX: Adjust core.IImage to LazyProxy's adapter behaviour
+
+- FIX: Be defensive about missing jobticker feed setting
 
 
 3.133 (2018-03-22)

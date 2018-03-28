@@ -6,6 +6,7 @@ import babel.dates
 import base64
 import grokcore.component
 import json
+import logging
 import lxml.etree
 import lxml.html
 import pyramid
@@ -30,6 +31,7 @@ import zeit.web.core.metrics
 import zeit.web.core.template
 import zeit.web.core.utils
 
+log = logging.getLogger(__name__)
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 LONG_TERM_CACHE = zeit.web.core.cache.get_region('long_term')
@@ -299,10 +301,14 @@ class Liveblog(Module):
         headers = {'Content-Type': 'application/json;charset=UTF-8'}
         payload = {'username': username, 'password': password}
 
-        r = requests.post(url, data=json.dumps(payload), headers=headers)
-        r.raise_for_status()
-        token = r.json().get('token')
-        LONG_TERM_CACHE.set('liveblog_api_auth_token', token)
+        try:
+            r = requests.post(url, data=json.dumps(payload), headers=headers)
+            r.raise_for_status()
+            token = r.json().get('token')
+            LONG_TERM_CACHE.set('liveblog_api_auth_token', token)
+        except requests.exceptions.HTTPError as e:
+            log.error(e.message)
+            token = 'no_token'
         return token
 
     def api_blog_request(self):
@@ -602,16 +608,18 @@ class JobTicker(Module):
 
     @zeit.web.reify
     def items(self):
+        if not self.content:
+            return ()
         return list(zeit.web.site.area.rss.parse_feed(
             self.content.feed_url, 'jobbox_ticker'))
 
     @zeit.web.reify
     def teaser_text(self):
-        return self.content.teaser
+        return self.content and self.content.teaser
 
     @zeit.web.reify
     def landing_page_url(self):
-        return self.content.landing_url
+        return self.content and self.content.landing_url
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)

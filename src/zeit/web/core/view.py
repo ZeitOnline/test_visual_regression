@@ -98,6 +98,10 @@ def is_dpa_article(context, request):
     return context.product and context.product.id == 'News'
 
 
+def is_afp_article(context, request):
+    return context.product and context.product.id == 'afp'
+
+
 class Base(object):
 
     """Base class for all views."""
@@ -687,7 +691,8 @@ class Base(object):
             ('cp28', access),  #
             ('cp29', first_click_free),  # First click free
             ('cp30', self.paywall or 'open'),  # Paywall Schranke
-            ('cp32', 'unfeasible')  # Protokoll (set via JS in webtrekk.html)
+            ('cp32', 'unfeasible'),  # Protokoll (set via JS in webtrekk.html)
+            ('cp36', 'unfeasible')  # Google Optimize
         ])
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
@@ -914,7 +919,10 @@ class CommentMixin(object):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
         if not toggles.find('zoca_moderation_launch'):
             uuid = zeit.cms.content.interfaces.IUUID(
-                self.context).id.strip('{}').replace('urn:uuid:', '')
+                self.context).id
+            if not uuid:
+                return None
+            uuid = uuid.strip('{}').replace('urn:uuid:', '')
             return u'{}/{}/thread/%cid%'.format(
                 conf.get('community_admin_host').rstrip('/'), uuid)
         else:
@@ -1123,6 +1131,12 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             custom_parameter['cp33'] = ''.join(parsed[1:3])
 
         return webtrekk
+
+    @zeit.web.reify
+    def ligatus(self):
+        return (
+            zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
+            not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
     def nextread(self):

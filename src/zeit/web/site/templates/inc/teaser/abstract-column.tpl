@@ -8,7 +8,3 @@
     {% set module_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/asset/image_zon-column.tpl" %}
 {% endblock %}
-
-{% block teaser_journalistic_format %}
-   <div class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">{{ teaser.serie.serienname }}</div>
-{% endblock %}
