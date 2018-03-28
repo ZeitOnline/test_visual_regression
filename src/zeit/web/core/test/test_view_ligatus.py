@@ -133,3 +133,17 @@ def test_ligatus_has_special(testbrowser, parameter):
     browser = testbrowser(parameter[0])
     metatag = browser.cssselect('meta[property="ligatus:special"]')
     assert metatag[0].get('content') == parameter[1]
+
+
+def test_ligatus_has_no_tag_when_special_is_missing(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    assert not browser.cssselect('meta[property="ligatus:special"]')
+
+    browser = testbrowser('/arbeit/article/simple')
+    assert not browser.cssselect('meta[property="ligatus:special"]')
+
+    browser = testbrowser('/campus/article/simple')
+    assert not browser.cssselect('meta[property="ligatus:special"]')
+
+    browser = testbrowser('/zeit-magazin/article/header-text-only')
+    assert not browser.cssselect('meta[property="ligatus:special"]')

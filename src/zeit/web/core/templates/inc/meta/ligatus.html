@@ -2,4 +2,6 @@
 <meta property="ligatus:hide_recommendations" content="{{ view.context.hide_ligatus_recommendations or 'False' }}">
 <meta property="ligatus:do_not_index" content="{{ view.context.no_ligatus_indexing_allowed or 'False' }}">
 <meta property="ligatus:section" content="{{ view.ressort }}">
+{% if view.ligatus_special %}
 <meta property="ligatus:special" content="{{ view.ligatus_special | join(', ') }}">
+{% endif %}
