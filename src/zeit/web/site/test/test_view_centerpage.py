@@ -1704,8 +1704,9 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
             'studiumbox__content--clone')
             .find_element_by_tag_name('form'))
     dropdown = (form.find_element_by_class_name('studiumbox__input'))
-    dropdown.find_element_by_xpath(
-        "//option[text()='BWL']").click()
+
+    # dropdown.find_element_by_xpath("//option[text()='BWL']").click()
+    dropdown.find_element_by_css_selector("option[value='24']").click()
     form.submit()
     assert ('https://ranking.zeit.de/che/de/rankingunion/show?'
             'esb=24&ab=3&hstyp=1&subfach=&wt_zmc=fix.int.zonpmr.zeitde'
