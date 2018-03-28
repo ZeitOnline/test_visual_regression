@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-4550: Add ligatus container element to DOM
 
+- ZON-4547: Render liveblog from Varnish when Liveblog API server is down
+
 
 3.134 (2018-03-23)
 ------------------
