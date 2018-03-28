@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.135 (unreleased)
+3.135 (2018-03-28)
 ------------------
 
 - ZON-4464: Consider ze.tt and brandeins kicker logo badges in all teasers
