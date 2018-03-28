@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - ZON-4547: Render liveblog from Varnish when Liveblog API server is down
 
+- ZON-4545: Add new meta tags for ligatus
+
 - BUG-881: Fix overlay-slide buttons in gallery for Firefox ≥ 59
 
 
