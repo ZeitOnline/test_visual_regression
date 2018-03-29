@@ -355,16 +355,6 @@ def test_framebuilder_should_require_ssl(application, dummy_request):
     assert view.framebuilder_requires_ssl is True
 
 
-def test_framebuilder_uses_ssl_assets(testbrowser):
-    browser = testbrowser('/framebuilder?useSSL')
-    ssl_str = 'https://ssl.zeit.de/www.zeit.de/static/latest/'
-    assert '{}css/web.site/framebuilder.css'.format(
-        ssl_str) in browser.contents
-    assert '{}js/vendor/modernizr-custom.js'.format(
-        ssl_str) in browser.contents
-    assert '{}js/web.site/frame.js'.format(ssl_str) in browser.contents
-
-
 # needs selenium because of esi include
 def test_framebuilder_does_not_render_login_data(
         selenium_driver, testserver, sso_keypair):
