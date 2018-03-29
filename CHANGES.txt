@@ -5,10 +5,10 @@ POSTDEPLOY
 ----------
 
 
-3.136 (unreleased)
+3.135.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FIX: Fix building daterange solr querries
 
 
 3.135 (2018-03-28)
