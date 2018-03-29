@@ -430,3 +430,11 @@ def test_framebuilder_renders_login_data_if_new_feature_is_requested(
     assert len(select('.nav__login')) == 1
     assert not select('.nav__login')[0].get_attribute('data-featuretoggle')
     assert len(select('.nav__user-name')) == 1
+
+
+def test_framebuilder_uses_static_ssl_url(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['ssl_asset_prefix'] = 'https://static.zeit.de/static/latest/'
+    browser = testbrowser('/framebuilder')
+    urls = browser.contents.count('https://static.zeit.de/static/latest/')
+    assert urls == 6
