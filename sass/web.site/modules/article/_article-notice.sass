@@ -1,0 +1,24 @@
+.article-notice
+	padding-bottom: remify(30px)
+	+respond-max($break-tablet-min)
+		+padded
+	&__title
+		display: block
+		font-weight: bold
+		&:before
+			+font-smoothing
+			background-color: $grey
+			border-radius: 50%
+			color: $white
+			content: "\2139"
+			display: inline-block
+			height: rem(20px)
+			line-height: 1
+			margin-right: rem(5px)
+			position: relative
+			top: rem(-2px)
+			text-align: center
+			width: rem(20px)
+	&__text
+		color: $zon-grey
+		font-size: remify(15px)
