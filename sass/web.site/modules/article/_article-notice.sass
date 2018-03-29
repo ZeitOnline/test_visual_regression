@@ -1,24 +1,31 @@
 .article-notice
-	padding-bottom: remify(30px)
+	letter-spacing: 0.3px
+	padding-bottom: remify(50px)
 	+respond-max($break-tablet-min)
 		+padded
 	&__title
 		display: block
 		font-weight: bold
+		margin: 0 0 remify(6px) 0
 		&:before
 			+font-smoothing
-			background-color: $grey
+			background-color: $zon-charcoal
 			border-radius: 50%
 			color: $white
 			content: "\2139"
 			display: inline-block
-			height: rem(20px)
-			line-height: 1
+			height: rem(16px)
+			line-height: 0.8
 			margin-right: rem(5px)
 			position: relative
 			top: rem(-2px)
 			text-align: center
-			width: rem(20px)
+			width: rem(16px)
 	&__text
 		color: $zon-grey
 		font-size: remify(15px)
+		margin: 0
+
+// negate the big margin of last article page (50px)
+.article-page:last-of-type + .article-notice
+	margin-top: remify(-20px)
