@@ -1205,6 +1205,7 @@ class service_unavailable(object):  # NOQA
 class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     inline_svg_icons = True
+    framebuilder_requires_ssl = True
 
     def __call__(self):
         resp = super(FrameBuilder, self).__call__()
@@ -1295,10 +1296,6 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
     @zeit.web.reify
     def cap_title(self):
         return self.request.GET.get('adlabel') or 'Anzeige'
-
-    @zeit.web.reify
-    def framebuilder_requires_ssl(self):
-        return 'useSSL' in self.request.GET
 
     @zeit.web.reify
     def adcontroller_values(self):
