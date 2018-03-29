@@ -1657,7 +1657,6 @@ def test_studiumbox_interessentest_works(selenium_driver, testserver):
     box.find_elements_by_tag_name('h2')
 
     # test interessentest
-    driver.implicitly_wait(1)  # seconds
     button = (box.find_element_by_class_name('studiumbox__content--clone')
               .find_element_by_class_name('studiumbox__button'))
     button.click()
@@ -1701,7 +1700,6 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
     # test suchmaschine
     active_link = links[2].find_element_by_tag_name('a')
     active_link.click()
-    driver.implicitly_wait(1)  # seconds
     form = (box.find_element_by_class_name(
             'studiumbox__content--clone')
             .find_element_by_tag_name('form'))
@@ -1727,7 +1725,6 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
 
     # test with hochschulranking
     link.click()
-    driver.implicitly_wait(1)  # seconds
     button = (box.find_element_by_class_name('studiumbox__content--clone')
               .find_element_by_class_name('studiumbox__button'))
     button.click()
