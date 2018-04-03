@@ -27,6 +27,7 @@
 
   <setting name="comment_page_size" xsi:type="xsd:int">4</setting>
   <setting name="community_host_timeout_secs" xsi:type="xsd:int">10</setting>
+  <setting name="community_profile_url" xsi:type="xsd:string">https://community.zeit.de</setting>
 
   <setting name="mailjet_timeout" xsi:type="xsd:int">1</setting>
   <setting name="mailjet_sender" xsi:type="xsd:string">zon-backend@zeit.de</setting>

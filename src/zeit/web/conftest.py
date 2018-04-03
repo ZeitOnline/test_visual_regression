@@ -92,6 +92,7 @@ def app_settings(mockserver):
         'cookie_fallback_domain': 'localhost',
         'comment_page_size': '4',
         'community_host': mockserver.url + '/comments',
+        'community_profile_url': 'https://community.zeit.de',
         'community_admin_host': 'http://community_admin',
         'community_static_host': 'http://static_community',
         'community_maintenance': (
