@@ -5,8 +5,8 @@ POSTDEPLOY
 ----------
 
 
-3.136 (unreleased)
---------------------
+3.136 (2018-04-03)
+------------------
 
 - SSL-174: Framebuilder uses https://static.zeit.de instead of ssl.zeit.de-Proxy
 
