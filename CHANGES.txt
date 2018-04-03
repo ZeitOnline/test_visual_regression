@@ -8,7 +8,7 @@ POSTDEPLOY
 3.135.2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- HOTFIX: Make channel queries work in ranking areas again after typo in TMS-164
 
 
 3.135.1 (2018-03-29)
