@@ -233,3 +233,16 @@ def test_zar_hp_should_render(config, selenium_driver):
         assert True
     except TimeoutException:
         assert False, 'ZAR HP not rendered'
+
+
+def test_centerpages_with_autoareas_contain_teasers(config, testbrowser):
+
+    browser = testbrowser('{}/podcasts'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')) > 5
+
+    browser = testbrowser('{}/investigativ'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')) > 5
+
+    browser = testbrowser('{}/serie/fischer-im-recht'.format(
+        config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')) > 5
