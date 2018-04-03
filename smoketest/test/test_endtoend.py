@@ -170,13 +170,14 @@ def test_topicpage_contains_teasers(config, testbrowser):
 
 
 def test_search_results_page_contains_teasers(config, testbrowser):
-    # OPTIMIZE: fix search on staging (provide content to solr)
-    if config['ENV'] == 'STAGING':
-        assert True
-    else:
-        browser = testbrowser(
-            '{}/suche/index?q=europa'.format(config['BASE_URL']))
-        assert len(browser.cssselect('article[class*=teaser]')) == 10
+    browser = testbrowser(
+        '{}/suche/index?q=europa'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]'))
+
+    browser = testbrowser(
+        '{}/suche/index?q=&mode=7d&type=article&type=video'.format(
+            config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]'))
 
 
 def test_configured_redirects(config):

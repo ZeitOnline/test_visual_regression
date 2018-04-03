@@ -339,18 +339,31 @@ def test_liveblog_auth(application, liveblog):
     assert token == u'3b4b508e-66e4-4977-910c-c8bd5b985d09'
 
 
-def test_liveblog_auth_fail(application, liveblog, monkeypatch):
-    def post(url, data, headers):
-        response = requests.Response()
-        response.status_code = 401
-        return response
+def test_liveblog_auth_fail(application, caplog, liveblog, monkeypatch):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    auth_url = conf.get('liveblog_api_auth_url_v3')
 
-    monkeypatch.setattr(requests, 'post', post)
-    monkeypatch.setattr(
-        zeit.web.core.block.Liveblog, 'set_blog_info', lambda x: [])
+    with requests_mock.Mocker() as m:
+        m.post(
+            auth_url, reason='Unauthorized', status_code=401)
+        token = liveblog.api_auth_token()
+        assert 'no_token' == token
+        assert '401 Client Error' in caplog.text
 
-    with pytest.raises(requests.exceptions.HTTPError):
-        liveblog.api_auth_token()
+
+def test_liveblog_api_request_is_not_stoped_by_unavailable_auth_server(
+        application, caplog, liveblog, monkeypatch):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    api_url = conf.get('liveblog_api_url_v3')
+    api_url = '{}/{}'.format(api_url, liveblog.blog_id)
+    auth_url = conf.get('liveblog_api_auth_url_v3')
+
+    with requests_mock.Mocker() as m:
+        m.get(api_url, json={'blog_id': '123'}, status_code=200)
+        m.post(
+            auth_url, reason='Service unavailable', status_code=503)
+        blog_object = liveblog.api_blog_request()
+        assert '123' == blog_object['blog_id']
 
 
 def test_liveblog_api_request_renews_expired_cache_token(

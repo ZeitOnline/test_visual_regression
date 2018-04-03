@@ -1143,7 +1143,7 @@ def test_breadcrumbs_should_handle_non_ascii(application, monkeypatch):
     monkeypatch.setattr(
         zeit.content.cp.centerpage.CenterPage, u'supertitle', u'umläut')
     monkeypatch.setattr(
-        zeit.content.cp.centerpage.CenterPage, u'type', u'topicpage')
+        zeit.content.cp.centerpage.CenterPage, u'type', u'manualtopic')
     view = zeit.web.site.view_centerpage.Centerpage(
         context, pyramid.testing.DummyRequest())
     assert (u'Thema: umläut', None) in view.breadcrumbs

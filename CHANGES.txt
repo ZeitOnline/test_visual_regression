@@ -5,7 +5,75 @@ POSTDEPLOY
 ----------
 
 
-3.132 (unreleased)
+3.135.2 (unreleased)
+--------------------
+
+- Nothing changed yet.
+
+
+3.135.1 (2018-03-29)
+--------------------
+
+- FIX: Fix building daterange solr querries
+
+
+3.135 (2018-03-28)
+------------------
+
+- ZON-4464: Consider ze.tt and brandeins kicker logo badges in all teasers
+
+- ZON-4507: Infotext for dpa and afp articles
+
+- ZON-4500: Print styles for ZMO
+
+- ZON-4550: Add ligatus container element to DOM
+
+- ZON-4547: Render liveblog from Varnish when Liveblog API server is down
+
+- ZON-4545: Add new meta tags for ligatus
+
+- BUG-881: Fix overlay-slide buttons in gallery for Firefox ≥ 59
+
+
+3.134 (2018-03-23)
+------------------
+
+- ZON-4495: Webtrekk tracking for Google Optimize A/B tests
+
+- ZON-4496: Use Ligatus as nextread
+
+- TMS-181: Update topicpage CP types to current usage
+
+- FEM-80: Improve accessibility of buzz-box accordion
+
+- BUG-868: Fix bug in bugfix for liveblog header
+
+- FIX: Be defensive about missing uuid for old-style moderation_url
+
+- FIX: Be defensive when parsing mod_date
+
+- FIX: Adjust core.IImage to LazyProxy's adapter behaviour
+
+- FIX: Be defensive about missing jobticker feed setting
+
+
+3.133 (2018-03-22)
+------------------
+
+- TMS-164: Enable search support for Solr and ES backends
+
+- TMS-165: Add support for elasticsearch overview areas
+
+- TMS-192: Use TMS body generally, not only for article pages
+
+- BUG-868: Fix liveblog header
+
+- BUG-878: Remove padding top in app for iPhoneX/6
+
+- MAINT: Update stellenmarkt link in ZAR (https, campaign tracking)
+
+
+3.132 (2018-03-16)
 ------------------
 
 - ZON-4488: Clear floating elements before liveblog

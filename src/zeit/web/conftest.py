@@ -399,9 +399,9 @@ def reset_solr(application_session, request):
 
 @pytest.fixture
 def reset_es(application_session, request):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    if isinstance(solr, MockES):
-        solr.reset()
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    if isinstance(es, MockES):
+        es.reset()
 
 
 @pytest.fixture

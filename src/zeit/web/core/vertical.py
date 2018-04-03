@@ -46,21 +46,3 @@ def zco_vertical(context):
 @grok.implementer(zeit.web.core.interfaces.IVertical)
 def zar_vertical(context):
     return 'zar'
-
-
-@grok.adapter(zeit.content.link.interfaces.ILink)
-@grok.implementer(zeit.web.core.interfaces.IVertical)
-def external_vertical(context):
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    zett_host = urlparse.urlparse(conf.get('zett_host')).netloc
-    brandeins_host = urlparse.urlparse(conf.get('brandeins_host')).netloc
-
-    context_host = urlparse.urlparse(context.url).netloc
-
-    if brandeins_host == context_host:
-        return 'brandeins'
-
-    if zett_host == context_host:
-        return 'zett'
-
-    return 'zon'

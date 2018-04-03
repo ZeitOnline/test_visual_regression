@@ -1,0 +1,27 @@
+.liveblog-heading
+
+	&__media
+		margin: 0 0 remify(24px)
+
+	&__media-container
+		height: 0
+		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
+
+	+respond-min($break-tablet-min)
+		align-items: flex-end
+		display: flex
+		margin-top: remify(80px)
+
+		&__media
+			flex: 0 0 35%
+			margin-bottom: remify(6px)
+			margin-right: 3.75%
+			width: 35%
+
+		&__headline
+			margin: 0
+
+	+respond-min($break-desktop-min)
+		&__media
+			margin-bottom: remify(8px)
+			margin-left: remify(-90px)

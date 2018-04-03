@@ -7,25 +7,18 @@
 		position: relative
 	&__container--podcast
 		+padded
-	&__headline
+	&__headline--podcast
+		margin: 0
 		text-align: center
-		width: auto
-	&__media
-		&--podcast
-			height: auto
-			margin: 0
-			padding: 0
 	&__title
 		&--podcast
-			font-family: $font-tabletgothic
 			line-height: 1.12
 			margin-bottom: $vertical-space
 	&__series,
 	&__kicker
 		&--podcast
 			color: $zon-charcoal
-			display: inline-block
-			font-family: $font-tabletgothic
+			display: block
 			font-weight: normal
 			font-size: remify(16px)
 			letter-spacing: $letter-spacing-l
@@ -66,7 +59,7 @@
 					width: remify(220px)
 		&__podcast-player
 			margin-bottom: remify(60px)
-		&__headline
+		&__headline--podcast
 			text-align: left
 
 +respond-min($break-desktop-min)
