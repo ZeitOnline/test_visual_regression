@@ -1139,6 +1139,20 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
+    def ligatus_special(self):
+        ligatus_special_output = []
+
+        ligatus_special_taglist = ['D17', 'D18']
+        for keyword in self.context.keywords:
+            if keyword.label in ligatus_special_taglist:
+                ligatus_special_output.append(keyword.label)
+
+        if self.serie:
+            ligatus_special_output.append(self.serie)
+
+        return ligatus_special_output
+
+    @zeit.web.reify
     def nextread(self):
         return zeit.web.core.interfaces.INextread(self.context, [])
 
