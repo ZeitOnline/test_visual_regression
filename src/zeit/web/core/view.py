@@ -1219,18 +1219,17 @@ class service_unavailable(object):  # NOQA
 class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     inline_svg_icons = True
+    framebuilder_requires_ssl = True
 
     def __call__(self):
         resp = super(FrameBuilder, self).__call__()
-        # as long as we use the dirty ssl.zeit.de/* thing
-        # we can only hack it into the asset pipeline
-        # and hope for the best. We'll need https://www.zeit.de!
-        if self.framebuilder_requires_ssl:
-            try:
-                self.request.asset_host = (
-                    self.request.framebuilder_ssl_asset_host)
-            except AttributeError:
-                pass
+        # in preparation for ssl launch we switch all asset calls in
+        # framebuilder to https://static.zeit.de/…
+        # can be dropped after launch when https://www.zeit.de is available
+        try:
+            self.request.asset_host = self.request.ssl_asset_host
+        except AttributeError:
+            pass
         return resp
 
     @zeit.web.reify
@@ -1309,10 +1308,6 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
     @zeit.web.reify
     def cap_title(self):
         return self.request.GET.get('adlabel') or 'Anzeige'
-
-    @zeit.web.reify
-    def framebuilder_requires_ssl(self):
-        return 'useSSL' in self.request.GET
 
     @zeit.web.reify
     def adcontroller_values(self):
