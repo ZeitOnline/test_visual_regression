@@ -3101,3 +3101,19 @@ def test_brandeins_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_small_logo) == 4
     assert len(teaser_small_minor_logo) == 2
     assert len(teaser_square_logo) == 2
+
+
+def test_brandeins_teaser_should_display_its_image_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/zeit-online/parquet-feeds' % testserver.url)
+    teaser_images = driver.find_elements_by_css_selector(
+        '.cp-area--brandeins .teaser-small__media')
+
+    assert len(teaser_images)
+
+    for image in teaser_images:
+        assert ('teaser-small__media--force-mobile' in
+                image.get_attribute('class'))
+        assert image.is_displayed()

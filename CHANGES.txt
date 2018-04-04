@@ -8,6 +8,8 @@ POSTDEPLOY
 3.137 (unreleased)
 ------------------
 
+- ZON-4578: Show brandeins parquet teaser images on mobile
+
 - FIX: Handle non-ascii uniqueIds in synthetic image groups
 
 
