@@ -8,7 +8,7 @@ POSTDEPLOY
 3.138 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-889: Change wording of dpa/afp infotext
 
 
 3.137 (2018-04-04)
