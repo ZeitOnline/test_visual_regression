@@ -1,11 +1,10 @@
 .article-notice
 	letter-spacing: 0.3px
-	padding-bottom: remify(50px)
+	margin-top: remify(30px)
 	+respond-max($break-tablet-min)
-		+padded
+		padding: remify(0 20px)
+
 	&__title
-		display: block
-		font-weight: bold
 		margin: 0 0 remify(6px) 0
 		&:before
 			+font-smoothing
@@ -25,7 +24,3 @@
 		color: $zon-grey
 		font-size: remify(15px)
 		margin: 0
-
-// negate the big margin of last article page (50px)
-.article-page:last-of-type + .article-notice
-	margin-top: remify(-20px)
