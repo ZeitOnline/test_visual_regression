@@ -11,6 +11,7 @@ import zope.component
 import zope.interface
 import zope.security.proxy
 
+from zeit.cms.checkout.interfaces import ILocalContent
 import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.content.article.edit.interfaces
@@ -166,7 +167,9 @@ def get_retresco_body(article):
     toggles = zeit.web.core.application.FEATURE_TOGGLES
     seo = zeit.seo.interfaces.ISEO(article)
 
-    if toggles.find('enable_intext_links') and not seo.disable_intext_links:
+    if (toggles.find('enable_intext_links') and
+            not seo.disable_intext_links and
+            not ILocalContent.providedBy(article)):
         if hasattr(article, '_v_retresco_body'):
             xml = article._v_retresco_body
         else:
