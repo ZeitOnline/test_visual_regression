@@ -633,8 +633,7 @@ def test_zmo_article_pagination_provides_expected_webtrekk_string(
         assert False, 'we will wait for the footer forever ...'
 
     links = driver.find_elements_by_css_selector('.article-pagination a')
-    labels = ['auf_seite_4', 'vorige_seite', '1', '2', '3', '4', '5', '6', '7',
-              'naechste_seite']
+    labels = ['naechste_seite', '1', '2', '4', '5', '6', '7', 'all']
 
     assert len(links) == len(labels)
 

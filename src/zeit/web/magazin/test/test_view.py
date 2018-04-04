@@ -483,8 +483,6 @@ def test_pagination_dict_should_have_correct_entries(application):
 
 def test_pagination_next_title_should_be_in_html(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03/seite-2')
-
-    assert 'Auf Seite 3' in browser.contents
     assert 'Sogar die eckige Flasche kommt' in browser.contents
 
 
