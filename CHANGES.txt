@@ -8,7 +8,7 @@ POSTDEPLOY
 3.137 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FIX: Handle non-ascii uniqueIds in synthetic image groups
 
 
 3.136 (2018-04-03)
