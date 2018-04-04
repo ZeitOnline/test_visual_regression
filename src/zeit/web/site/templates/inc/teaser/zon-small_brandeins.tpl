@@ -14,3 +14,5 @@
         <span class="{{ self.layout() }}__label">Anzeige</span>
     {% endif %}
 {% endblock %}
+
+{% set force_mobile_image=True %}
