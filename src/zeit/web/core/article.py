@@ -360,6 +360,11 @@ class LiveblogInfo(object):
         if self.liveblog:
             return self.liveblog.last_modified
 
+    @property
+    def collapse_preceding_content(self):
+        if self.liveblog:
+            return self.liveblog.collapse_preceding_content
+
 
 TEMPLATE_INTERFACES = {
     'zon-liveblog': (ILiveblogArticle,),
