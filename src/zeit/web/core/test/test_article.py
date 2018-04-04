@@ -2,6 +2,7 @@ import lxml.etree
 import mock
 import zope.component
 
+from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
 import zeit.content.article.article
 import zeit.content.article.edit.interfaces
@@ -41,8 +42,7 @@ def test_retresco_body_should_respect_toggle_off(application, monkeypatch):
 
 
 def test_retresco_body_should_respect_seo_flag(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'enable_intext_links': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
 
     get_article_body = mock.Mock(return_value='')
     monkeypatch.setattr(
@@ -56,8 +56,7 @@ def test_retresco_body_should_respect_seo_flag(application, monkeypatch):
 
 
 def test_retresco_body_should_replace_xml_body(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'enable_intext_links': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['retresco_timeout'] = 0.42
@@ -76,8 +75,7 @@ def test_retresco_body_should_replace_xml_body(application, monkeypatch):
 
 
 def test_retresco_body_xml_should_be_cached(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'enable_intext_links': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
     get_article_body = mock.Mock(
         return_value='<body><a href="http://foo">topicpage</a></body>')
     monkeypatch.setattr(

@@ -42,21 +42,20 @@ def mock_ad_view(application):
     return MockAdView
 
 
-def test_iqd_ads_should_utilize_feature_toggles(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd': True, 'third_party_modules': True}.get)
+def test_iqd_ads_should_utilize_feature_toggles(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('iqd', 'third_party_modules')
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' in (
         browser.cssselect('head')[0].text_content())
 
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd': False, 'third_party_modules': False}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.unset(
+        'iqd', 'third_party_modules')
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' not in (
         browser.cssselect('head')[0].text_content())
 
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd': True, 'third_party_modules': False}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('iqd')
+    zeit.web.core.application.FEATURE_TOGGLES.unset('third_party_modules')
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' not in (
         browser.cssselect('head')[0].text_content())
