@@ -104,3 +104,19 @@ def test_editable_body_should_calculate_values_only_once(application):
     m1 = article.body.values()[0]
     m2 = article.body.values()[0]
     assert m1 is m2
+
+
+def test_retresco_body_is_not_used_for_articles_with_keywords_on_blacklist(
+        application, monkeypatch, workingcopy):
+    zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
+    get_article_body = mock.Mock(return_value='<body/>')
+    monkeypatch.setattr(
+        zeit.retresco.connection.TMS, 'get_article_body', get_article_body)
+
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    with checked_out(article) as co:
+        co.keywords = (zeit.retresco.tag.Tag('Jedi-Ritter', 'organisation'),)
+
+    zeit.content.article.edit.interfaces.IEditableBody(article)
+    assert not get_article_body.called

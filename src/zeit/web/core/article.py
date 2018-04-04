@@ -7,6 +7,7 @@ import bugsnag
 import gocept.lxml.objectify
 import grokcore.component
 import xml.sax.saxutils
+import zc.sourcefactory.source
 import zope.component
 import zope.interface
 import zope.security.proxy
@@ -169,7 +170,8 @@ def get_retresco_body(article):
 
     if (toggles.find('enable_intext_links') and
             not seo.disable_intext_links and
-            not ILocalContent.providedBy(article)):
+            not ILocalContent.providedBy(article) and
+            not suppress_intextlinks(article)):
         if hasattr(article, '_v_retresco_body'):
             xml = article._v_retresco_body
         else:
@@ -454,3 +456,32 @@ def get_keywords(context):
                 keyword.link = None
             result.append(keyword)
         return result
+
+
+class IntextlinkBlacklistSource(zeit.cms.content.sources.XMLSource):
+    # Only contextual so we can customize source_class
+
+    product_configuration = 'zeit.web'
+    config_url = 'intextlink-blacklist-url'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def __contains__(self, value):
+            return value in self.factory
+
+    # This is the one case where the zc.sourcefactory abstractions are rather
+    # unhelpful: we don't want to enumerate the values, but do a targeted
+    # "contains" check instead.
+    def __contains__(self, x):
+        return bool(self._get_tree().xpath(
+            '//entity[@type="%s" and text()="%s"]' % (x.entity_type, x.label)))
+
+
+INTEXTLINK_BLACKLIST = IntextlinkBlacklistSource()(None)
+
+
+def suppress_intextlinks(article):
+    for keyword in get_keywords(article):
+        if keyword in INTEXTLINK_BLACKLIST:
+            return True
+    return False
