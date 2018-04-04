@@ -1,97 +1,61 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
-      <display_name>Heike Jahberg</display_name>
-    </author>
-    <rankedTags>
-      <tag type="Location" score="9" uuid="cf450d19-c8a2-4c92-b29a-51bf1f5bbf87" url_value="schweiz">Schweiz</tag>
-      <tag type="topic" score="5" uuid="bca8a0d6-3710-4565-a58a-fa1ba0dc4db9" url_value="steuerhinterziehung">Steuerhinterziehung</tag>
-      <tag type="free" score="4" uuid="d411666c-5c17-4bc7-b5e5-060e044bb050" url_value="euro">Euro</tag>
-      <tag type="free" score="4" uuid="c444054a-0160-4e4f-9e9b-8d91a91d3d7f" url_value="geld">Geld</tag>
-      <tag type="Organization" score="4" uuid="d4585b49-b0f0-485d-98ae-ff5e2ab642de" url_value="hsbc">HSBC</tag>
-      <tag type="Location" score="3" uuid="fe6421fd-05b8-46b2-a698-0472c2812872" url_value="luxemburg">Luxemburg</tag>
-    </rankedTags>
-    <references>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2015-02/steuerhinterziehung-bekaempfen-politik" year="2015" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" author="Christopher Ziedler">
-        <supertitle>SwissLeaks</supertitle>
-        <title>Wie die Politik Steuerhinterziehung bekämpfen will</title>
-        <text>Eigentlich sind sich alle einig: Konzerne sollen ihre Gewinne nicht mehr vor dem Fiskus verstecken können. Doch strengere Regeln werden erst in ein paar Jahren gelten. </text>
-        <description>Eigentlich sind sich alle einig: Konzerne sollen ihre Gewinne nicht mehr vor dem Fiskus verstecken können. Doch strengere Regeln werden erst in ein paar Jahren gelten. </description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/wirtschaft/2015-02/hsbc-swiss-leaks/" type="jpg" align="left" publication-date="" expires="2015-05-10T07:39:28+00:00">
-          <bu>Schweizer Zentrale der HSBC in Genf</bu>
-          <copyright>© Salvatore di Nolfi/EPA/dpa</copyright>
-        </image>
-        <author href="http://xml.zeit.de/autoren/Z/Christopher_Ziedler" publication-date="" expires="">
-          <display_name>Christopher Ziedler</display_name>
-        </author>
-      </reference>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/geldanlage/2015-02/swissleaks-deutschland-hsbc" year="2015" issue="6" ressort="Wirtschaft" contenttype="article" publication-date="" expires="">
-        <supertitle>HSBC</supertitle>
-        <title>SwissLeaks enthüllt 3,5 Milliarden deutschen Schwarzgelds</title>
-        <text>Mehr als 3.600 Spuren der Schweizer Bank HSBC führen nach Deutschland, etwa 1.000 Deutschen drohen Strafverfahren. Prominente wie Phil Collins sind auch betroffen.</text>
-        <description>Mehr als 3.600 Spuren der Schweizer Bank HSBC führen nach Deutschland, etwa 1.000 Deutschen drohen Strafverfahren. Prominente wie Phil Collins sind auch betroffen.</description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/wirtschaft/2015-02/hsbc/" type="jpg" title="HSBC" align="left" publication-date="" expires="2015-05-10T07:16:43+00:00">
-          <bu>HSBC-Filiale in Paris</bu>
-          <copyright>© Orban Thierry/dpa</copyright>
-        </image>
-      </reference>
-    </references>
-    <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="Der Hauptsitz von HSBC in London (Archiv)" alt="Der Hauptsitz von HSBC in London (Archiv)" align="left" publication-date="" expires="">
-      <bu>Der Hauptsitz von HSBC in London (Archiv)</bu>
-      <copyright>© Peter Nicholls/Reuters</copyright>
-    </image>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <keywordset>
+      <keyword src="manual">UNO</keyword>
+    </keywordset>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Heike Jahberg</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner_content">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Wirtschaft</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments_premoderate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">afp</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-02-16T11:27:35.743240+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-02-14T23:00:00.000000+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-02-16T11:27:56.581409+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-02-16T11:28:56.503848+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-02-16T10:59:01.368997+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="deeplink_url">http://www.tagesspiegel.de/wirtschaft/steuerhinterziehung-die-ermittlungen-sind-schwierig/11376942-3.html</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2018-03-06T23:46:04.316118+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2018-03-06T23:46:03+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-03-06T23:46:06.092872+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2018-03-06T23:46:06.045345+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2018-03-06T23:46:03.910987+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
     <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="fixture">UNO-USA-Nordkorea-Südkorea-Präsident-Diplomatie-Atom</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">interview</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="image_bu">Steuer-CD: Seitdem die deutschen Behörden Listen mit möglichen Steuersündern kaufen, machen viele Täter reinen Tisch und zeigen sich selbst an.</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="image_file">http://www.tagesspiegel.de/images/heprodimagesfotos84120150216schwwiz-jpg/11376956/3-formatOriginal.JPG?format=formatOriginal</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-02-16T10:58:50.702169+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bildbestellung</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2018-03-06T23:46:03+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.newspublish</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">7</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/wirtschaft/2015-02/die-schweiz-ist-die-groesste-;http://xml.zeit.de/wirtschaft/2015-02/steuerhinterziehung-schweiz-thomas-eigenthaler</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn:newsml:afp.com:20180306:doc-1226qx-copy:1</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="overscrolling">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">afp</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">09dae0b6911f422a9362b71f680a8695</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">afp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">b98a29704607424eb655a3ae5c373ba6</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wirtschaft</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">News</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">8421</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">UN-Generalsekretär ermutigt von Einigung auf innerkoreanisches Gipfeltreffen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:c113e03a-494a-36b5-ac96-2442be26334e}</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:f9de35ad-1f5f-4bd5-b79d-99f42f7a810e}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">1900</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
@@ -100,71 +64,20 @@
     &lt;arguments&gt;
       &lt;tuple&gt;
         &lt;global name="Article" module="zeit.content.article.article"/&gt;
-        &lt;global name="ITagesspiegelArticle" module="zeit.content.article.interfaces"/&gt;
-        &lt;global name="Interface" module="zope.interface"/&gt;
-        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
         &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <supertitle>Steuerhinterziehung</supertitle>
-    <title>"Die Schweiz ist die größte Fluchtburg"</title>
-    <subtitle>Trotz Steuer-CDs und Selbstanzeigen: 40 Milliarden Euro verstecken Deutsche noch immer in der Schweiz, sagt der Chef der Deutschen Steuergewerkschaft, Eigenthaler.</subtitle>
-    <byline>Heike Jahberg</byline>
+    <supertitle>UNO</supertitle>
+    <title>UN-Generalsekretär ermutigt von Einigung auf innerkoreanisches Gipfeltreffen</title>
+    <byline/>
     <division type="page">
-      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="Der Hauptsitz von HSBC in London (Archiv)" alt="Der Hauptsitz von HSBC in London (Archiv)" align="left" publication-date="" expires="" layout="large" is_empty="False">
-        <bu>Der Hauptsitz von HSBC in London (Archiv)</bu>
-        <copyright>© Peter Nicholls/Reuters</copyright>
-      </image>
-      <p><strong>Frage:</strong> Herr Eigenthaler, die <a class="" href="http://www.zeit.de/politik/ausland/2015-02/swissleaks-ijic-steuerflucht" target="_blank">HSBC-Bank</a> hat tausenden Kunden in der Schweiz geholfen, Geld vor dem Fiskus zu verstecken und ist damit 2009 aufgeflogen. Könnte es solche Fälle auch heute noch geben?</p>
-      <p><strong>Thomas Eigenthaler:</strong> Ausschließen kann man das nicht. Aus Schweizer Sicht ist Steuerhinterziehung ja keine Straftat, also gar keine dramatische Sache. Was die HSBC gemacht hat, war früher in der Schweiz gang und gäbe. Inzwischen gibt es eine Selbstverpflichtung des Schweizer Bankenverbands, eine Weißgeldstrategie zu fahren. Die UBS hat kürzlich erklärt, 95 Prozent der Kunden hätten sich inzwischen regularisiert.</p>
-      <p><strong>Frage: </strong>Ehrlich gemacht? <br/></p>
-      <p><strong>Eigenthaler:</strong> Ja. Interessante Wortwahl, finden Sie nicht? Das zeigt doch schon, dass man in der Schweiz Steuerhinterziehung und schwarze Konten nicht als kriminell empfindet.</p>
-      <p><strong>Frage: </strong>Aber 95 Prozent Ehrlichmachung sind doch eine gute Quote! <br/></p>
-      <p><strong>Eigenthaler:</strong> Ja, aber was heißt das denn? Verlangt der Bankmitarbeiter in der Schweiz jetzt Steuerbescheide, oder wie kontrolliert er sonst, dass sich Kunden regularisiert haben? Reicht es aus, wenn die Kunden eine entsprechende Erklärung abgeben? Es ist gut möglich, dass auch weiterhin Anleger durch die Maschen schlüpfen.</p>
-      <p><strong>Frage: </strong>Wie viel Geld haben Deutsche noch in der Schweiz versteckt? <br/></p>
-      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/portraitboxen/eigenthaler" publication-date="" expires=""/>
-      <p><strong>Eigenthaler:</strong> Die Schweiz ist die größte Fluchtburg für deutsches Schwarzgeld. Das liegt an der Nähe und daran, dass die politischen Verhältnisse stabil sind. Statt auf die Cayman-Inseln bringen Deutsche ihr Geld lieber nach Zürich. Es geht um gewaltige Summen. Ich gehe davon aus, dass noch vor Kurzem rund 160 Milliarden Euro unversteuertes deutsches Geld auf Schweizer Konten gelegen haben. Durch die Weißgeldstrategie der Schweizer Banken, die Steuer-CDs und die Selbstanzeigen hat sich diese Summe in den vergangenen Jahren verringert. Aber es dürften heute noch mindestens 40 Milliarden Euro von Deutschen in der Schweiz liegen, von denen der deutsche Fiskus nichts weiß. Mindestens ein Viertel des unversteuerten Kapitals hat sich dem Zugriff der Finanzbehörden weiterhin entzogen.</p>
-      <p><strong>Frage:</strong> Ist das Geld noch in der Schweiz?  </p>
-      <p><strong>Eigenthaler:</strong> Einiges ist sicherlich nach Ostasien oder in andere Steueroasen abgewandert, möglicherweise auch hier wieder mithilfe der Schweizer Banken und ihrer globalen Dependancen. Viel Cash ist aber inzwischen in Sachwerte umgewandelt worden, auch wegen der Niedrigzinsen. Das Geld steckt jetzt in Immobilien, in Schmuck, in Gold, in Reitpferden oder in teurem Wein. Der Vorteil: Wenn das Geld erst einmal in Sachwerten untergebracht ist, müssen Steuerhinterzieher auch nicht mehr befürchten, dass sie auffliegen, wenn es <a class="" href="http://www.zeit.de/wirtschaft/2014-10/steuerhinterziehung-steuerbetrug-abkommen" target="_blank">ab 2017 den automatischen Informationsaustausch über Bankdaten geben wird</a>.</p>
-      <p><strong>Frage:</strong> Was teilen ausländische Banken dem deutschen Staat ab 2017 mit? <br/></p>
-      <p><strong>Eigenthaler:</strong> Welche Bankkonten deutsche Bürger bei ihnen haben, welche Erträge ihnen zugeflossen sind, wie viel Geld auf den Konten ist. Aber das Gold im Schließfach oder der Picasso an der Wand werden davon nicht erfasst.</p>
-      <p><strong>Frage:</strong> Ab 2017 müssen auch Luxemburg und Österreich ihre Bankgeheimnisse mit den deutschen Finanzämtern teilen. Über welche Größenordnungen reden wir hier? <br/></p>
-      <p><strong>Eigenthaler:</strong> Die Dimensionen sind deutlich bescheidener als bei der Schweiz. In dem EU-Land Luxemburg gab es ja schon früh Ermittlungen gegen Steuerhinterzieher, das hat die Leute nervös gemacht. Ich schätze, dort lagen früher unversteuert rund 50 Milliarden Euro, heute dürften es vielleicht noch zwölf Milliarden Euro sein. Österreich ist die Nummer drei, aber mit deutlich niedrigeren Summen.</p>
-    </division>
-    <division type="page" teaser="&quot;Die Behörden sind auf den Datenaustausch nicht vorbereitet&quot;">
-      <p><strong>Frage:</strong> Schickt auch die Schweiz ab 2017 automatisch Bankdaten nach Deutschland? <br/></p>
-      <p><strong>Eigenthaler:</strong> Nein. Rund 50 Staaten haben sich vor Kurzem auf OECD-Ebene verpflichtet, das zu tun. Die Schweiz nicht. Sie hat erklärt, sie wolle zwar ebenfalls mitmachen, müsse aber erst entsprechende Volksabstimmungen durchführen.</p>
-      <p><strong>Frage:</strong> Sind die deutschen Finanzämter auf den Datenstrom ab 2017 vorbereitet? Oder können Steuerhinterzieher darauf hoffen, weiter unter dem Radar zu fliegen? <br/></p>
-      <p><strong>Eigenthaler:</strong> Deutschland ist derzeit noch nicht gerüstet. Die Daten müssen ja automatisiert kommen und ausgewertet werden. Die dafür nötige Infrastruktur haben wir aber nicht. Es ist höchste Zeit, eine solche EDV-Infrastruktur aufzubauen.</p>
-      <p><strong>Frage:</strong> Wie könnte die aussehen? <br/></p>
-      <p><strong>Eigenthaler:</strong> Die Datenstränge aus dem Ausland müssten beim Bundeszentralamt für Steuern in Bonn zusammenlaufen, diese Behörde untersteht dem Bundesfinanzministerium. Schäuble muss also endlich Geld in die Hand nehmen, um die EDV aufzubauen und das nötige Personal einzustellen. Das Bundeszentralamt für Steuern müsste als Clearingstelle dann dafür sorgen, dass die Daten an die 600 Finanzämter weitergeleitet werden, und zwar an die richtigen. Ein Finanzbeamter in Berlin oder in Stuttgart muss die Daten der richtigen Steuerakte zuordnen können. Dass das Ganze klappt, ist aber auch eine Prestigefrage. Deutschland kann doch nicht jahrelang den Informationsaustausch fordern, und dann kriegen wir das technisch nicht hin!  Deutschland hat noch zwei Jahre Zeit. Reicht das nicht? Ich bin skeptisch. Auch weil in den Finanzämtern derzeit ein enormer Aderlass stattfindet. Viele Sachbearbeiter scheiden altersbedingt aus. Das erschwert die Sache noch zusätzlich.</p>
-      <p><strong>Frage: </strong><a class="" href="http://www.zeit.de/wirtschaft/geldanlage/2015-02/swissleaks-deutschland-hsbc" target="_blank">Auf der HSBC-Liste sollen auch 2.000 Kunden aus Deutschland stehen</a>. Bisher ist aber wohl erst in 1.000 Fällen ermittelt worden. Warum brauchen Steuerfahndung und Finanzämter so lange? <br/></p>
-      <p><strong>Eigenthaler:</strong> Ich weiß nicht, wie verlässlich die Zahlen sind. Und es ist ja nicht so, dass alle, die auf der Liste sind, vor den Kadi müssen. Vielleicht haben einige von ihnen bereits eine Selbstanzeige gemacht. Hinzu kommt, dass die Listen oft nicht finanzamtstauglich sind. Die Datenübertragung ist lückenhaft, es werden Fantasienamen benutzt oder Nummernkonten. Die Finanzämter müssen deshalb in vielen Fällen erst einmal mühsam recherchieren, um wen es überhaupt geht. Fälle von Wirtschaftskriminalität sind aufwendig, die Täter sind intelligent. Das sehen Sie doch <a class="" href="http://www.zeit.de/gesellschaft/zeitgeschehen/2014-03/hoeness-urteil-kommentar" target="_blank">auch am Fall Hoeneß</a>.</p>
-      <p><strong>Frage:</strong> Aber der sitzt doch inzwischen in Haft.  </p>
-      <p><strong>Eigenthaler:</strong> Ja, aber die Anklage lautete auf das Hinterziehen von drei Millionen Euro an Steuern. Am ersten Verhandlungstag hat Hoeneß von sich aus auf 15 Millionen erhöht, am Ende waren es 28. Dabei hatte die Staatsanwaltschaft ein Jahr lang ermittelt und lag trotzdem gewaltig daneben. Da sehen Sie mal, wie schwierig das sein kann, vor allem wenn der Steuerhinterzieher und sein Anwalt mauern.</p>
-      <p><strong>Frage:</strong> Im vergangenen Jahr hat es eine <a class="" href="http://www.zeit.de/wirtschaft/2014-12/steuerhinterziehung-selbstanzeigen-deutschland" target="_blank">wahre Flut von Selbstanzeigen</a> gegeben, seit Anfang dieses Jahres sind die Voraussetzungen für die Selbstanzeige erschwert worden. Werden die Steuerhinterzieher, die noch nicht erwischt worden sind, jetzt lieber pokern? <br/></p>
-      <p><strong>Eigenthaler:</strong> Für größere Fälle ist es seit Anfang des Jahres teurer geworden. Aber für viele Steuerhinterzieher ist das kein Argument, die Leute haben ja Geld. Was schwerer wiegt: Seit diesem Jahr muss man sich für zehn Jahre zurück ehrlich machen, um einer Bestrafung zu entgehen, vorher waren es in den meisten Fällen fünf Jahre. Man muss jetzt also für zehn Jahre rückwirkend eine korrekte und vollständige Selbstanzeige machen, um Straflosigkeit zu erreichen. Das ist nicht leicht. Man braucht Wochen, um die Daten für die vergangenen zehn Jahre zusammenzutragen. Schwieriger wird es noch, wenn Unterlagen im Ausland liegen. Oder wenn Kunden bei der HSBC oder anderen Banken in der Schweiz angekreuzt haben, dass sie gar keine Unterlagen haben wollen. Das rächt sich heute. Die Unterlagen im Nachhinein anzufertigen, ist teuer und dauert lange. Und wehe Sie vergessen etwas, dann ist es aus mit der Straflosigkeit. Jede neue Selbstanzeige ist ein großes Risiko und erfordert eine intensive Beratung.</p>
-      <p>
-        <em>Thomas Eigenthaler (56) ist gelernter Steuerinspektor und Steuerjurist.
-Er leitete jahrelang ein Finanzamt in Stuttgart, ehe er 2011
-Bundesvorsitzender der Deutschen Steuergewerkschaft (DSTG) wurde. Diese
-vertritt die Beamten und Angestellten in den Finanzämtern und anderen
-Steuerbehörden. Von den 110.000 Beschäftigten in der Steuerverwaltung
-sind über 70.000 in der Gewerkschaft organisiert.</em>
-      </p>
+      <p>New York (AFP) UN-Generalsekretär Antonio Guterres hat sich nach der Einigung zwischen Süd- und Nordkorea auf ein Gipfeltreffen ermutigt gezeigt. Die jüngsten Entwicklungen seien weitere Schritte in Richtung "einer Grundlage für die Aufnahme eines aufrichtigen Dialogs", der zu einem nachhaltigen Frieden und einer Denuklearisierung der koreanischen Halbinsel führen könne, teilte sein Büro in New York am Dienstag mit. </p>
     </division>
   </body>
-  <teaser>
-    <title>"Die Schweiz ist die größte Fluchtburg"</title>
-    <text>Trotz Steuer-CDs und Selbstanzeigen: 40 Milliarden Euro verstecken Deutsche noch immer in der Schweiz, sagt der Chef der Deutschen Steuergewerkschaft, Eigenthaler.</text>
-    <supertitle>Steuerhinterziehung</supertitle>
-  </teaser>
-  <indexteaser>
-    <title>Steuerhinterziehung</title>
-    <text>„Die Schweiz ist die größte Fluchtburg"</text>
-  </indexteaser>
 </article>
