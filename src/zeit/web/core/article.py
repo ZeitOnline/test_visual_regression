@@ -407,3 +407,47 @@ def mark_according_to_series(context):
     if context.serie.fallback_image:
         result.append(ISeriesArticleWithFallbackImage)
     return result
+
+
+def get_keywords(context):
+    if zeit.web.core.application.FEATURE_TOGGLES.find('keywords_from_tms'):
+        conf = zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings)
+        tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
+        try:
+            timeout = conf.get('retresco_timeout', 0.1)
+            return tms.get_article_keywords(context, timeout=timeout)
+        except Exception:
+            log.warning(
+                'Retresco keywords failed for %s', context.uniqueId,
+                exc_info=True)
+            # Fall back to the vivi-stored keywords, i.e. without any links
+            # since only the TMS knows about those.
+            if not hasattr(context, 'keywords'):
+                return []
+            result = []
+            for keyword in context.keywords:
+                if not keyword.label:
+                    continue
+                keyword.link = None
+                result.append(keyword)
+            return result
+    else:
+        if not hasattr(context, 'keywords'):
+            return []
+        result = []
+        for keyword in context.keywords:
+            if not keyword.label:
+                continue
+            if not keyword.url_value:
+                uuid = keyword.uniqueId.replace('tag://', '')
+                keyword = zope.component.getUtility(
+                    zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
+                if keyword is None:
+                    continue
+            if keyword.url_value:
+                keyword.link = u'thema/{}'.format(keyword.url_value)
+            else:
+                keyword.link = None
+            result.append(keyword)
+        return result
