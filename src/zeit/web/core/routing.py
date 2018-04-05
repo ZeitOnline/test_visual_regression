@@ -261,39 +261,8 @@ class Video(Traversable):
             tdict['view_name'] = ''
 
 
-class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):
-    # Only contextual so we can customize source_class
-
-    product_configuration = 'zeit.web'
-    config_url = 'blacklist-url'
-
-    class source_class(zc.sourcefactory.source.FactoredContextualSource):
-
-        def matches(self, path):
-            return self.factory.matches(path)
-
-    def matches(self, path):
-        for matcher in self.compile():
-            if matcher(path) is not None:
-                return True
-        return False
-
-    @CONFIG_CACHE.cache_on_arguments()
-    def compile(self):
-        matchers = []
-        for pattern in self.getValues(None):
-            matcher, _ = pyramid.urldispatch._compile_route(pattern)
-            matchers.append(matcher)
-        return matchers
-
-
-BLACKLIST = BlacklistSource()(None)
-
-
 @zope.interface.implementer(pyramid.interfaces.IRoutesMapper)
 class RoutesMapper(pyramid.urldispatch.RoutesMapper):
-
-    SKIP_BLACKLIST_ON_HOSTS = ['newsfeed', 'xml']
 
     def __call__(self, request):
         # Duplicated from super class (sigh).
@@ -306,19 +275,7 @@ class RoutesMapper(pyramid.urldispatch.RoutesMapper):
             raise pyramid.exceptions.URLDecodeError(
                 e.encoding, e.object, e.start, e.end, e.reason)
 
-        # It would be nice if we could use a custom `Route` class (to perform
-        # the blacklist matching in the Route.match() method) -- then we
-        # wouldn't need to touch RoutesMapper at all. However, Pyramid's
-        # configurator doesn't allow that easily.
-        if self.should_apply_blacklist(request) and BLACKLIST.matches(path):
-            return {'route': self.routes['blacklist'], 'match': {}}
-
         return super(RoutesMapper, self).__call__(request)
-
-    def should_apply_blacklist(self, request):
-        host = request.headers.get('Host', '')
-        return not any(
-            [host.startswith(x) for x in self.SKIP_BLACKLIST_ON_HOSTS])
 
 
 class HostRestrictionPredicate(object):
