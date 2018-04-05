@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - FIX: Be defensive about missing jobticker feed setting
 
+- PERF: Calcluate article body values only once per request
+
 
 3.133 (2018-03-22)
 ------------------
