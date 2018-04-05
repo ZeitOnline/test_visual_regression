@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - SSL-196: Transform navigation links to https if configured
 
+- FIX: Change brandeins topiclink according as requested
+
 
 3.137.1 (2018-04-04)
 --------------------
