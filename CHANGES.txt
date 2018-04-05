@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4507: Polish news article transparency notice
 
+- SSL-196: Transform navigation links to https if configured
+
 
 3.137.1 (2018-04-04)
 --------------------
