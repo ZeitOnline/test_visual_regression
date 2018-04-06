@@ -8,7 +8,7 @@ POSTDEPLOY
 3.139 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4558: Make ZMO article pagination more core-ish
 
 
 3.138 (2018-04-05)
