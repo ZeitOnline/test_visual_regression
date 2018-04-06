@@ -1153,6 +1153,14 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
         return ligatus_special_output
 
     @zeit.web.reify
+    def ligatus_do_not_index(self):
+        if getattr(self.context, 'no_ligatus_indexing_allowed', False):
+            return True
+        if self.is_all_pages_view or self.pagination['current'] > 1:
+            return True
+        return False
+
+    @zeit.web.reify
     def nextread(self):
         return zeit.web.core.interfaces.INextread(self.context, [])
 
