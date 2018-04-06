@@ -246,3 +246,12 @@ def test_centerpages_with_autoareas_contain_teasers(config, testbrowser):
     browser = testbrowser('{}/serie/fischer-im-recht'.format(
         config['BASE_URL']))
     assert len(browser.cssselect('article[class*=teaser]')), 'no Serie'
+
+
+def test_homepage_has_buzzboxes_with_content(config, testbrowser):
+    browser = testbrowser('{}/index'.format(config['BASE_URL']))
+
+    assert len(browser.cssselect('#buzz-mostread .teaser-buzz')) == 3
+    assert len(browser.cssselect('#buzz-comments .teaser-buzz')) == 3
+    assert len(browser.cssselect('#buzz-shared .teaser-buzz')) == 3
+    assert len(browser.cssselect('.buzzboard .teaser-buzzboard')) == 12

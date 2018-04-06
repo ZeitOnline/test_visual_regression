@@ -98,3 +98,11 @@ def test_skips_blocks_with_errors(application):
         pbox.side_effect = RuntimeError('provoked')
         pages = zeit.web.core.article.pages_of_article(article)
     assert len(pages) == 1
+
+
+def test_editable_body_should_calculate_values_only_once(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    m1 = article.body.values()[0]
+    m2 = article.body.values()[0]
+    assert m1 is m2
