@@ -143,7 +143,7 @@ def test_adplace16_on_articles(testbrowser):
 
 def test_zco_adplace5_depends_on_ligatus_toggle_on(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set(
-        'third_party_modules', 'iqd', 'ligatus')
+        'third_party_modules', 'iqd', 'ligatus', 'ligatus_on_campus')
     browser = testbrowser('/campus/article/01-countdown-studium')
     assert not browser.cssselect('#ad-desktop-5')
 
