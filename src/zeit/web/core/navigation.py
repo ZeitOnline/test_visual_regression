@@ -5,7 +5,7 @@ import zc.sourcefactory.source
 import zeit.cms.content.sources
 
 import zeit.web.core.cache
-
+import zeit.web.core.utils
 
 CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
@@ -48,7 +48,8 @@ class NavigationSource(zeit.cms.content.sources.SimpleContextualXMLSource):
         for section in node:
             item_id = section.find('link').get('id')
             text = section.find('link').text
-            href = section.find('link').get('href')
+            href = zeit.web.core.utils.maybe_convert_http_to_https(
+                section.find('link').get('href'))
             label = section.find('link').get('label') or None
             navigation[item_id] = NavigationItem(item_id, text, href, label)
             try:

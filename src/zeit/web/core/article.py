@@ -189,6 +189,19 @@ def get_retresco_body(article):
         zeit.content.article.edit.interfaces.IEditableBody)
 
 
+class ValuesCachingEditableBody(zeit.content.article.edit.body.EditableBody):
+
+    def values(self):
+        if zeit.cms.checkout.interfaces.ILocalContent.providedBy(
+                self.__parent__):
+            return super(ValuesCachingEditableBody, self).values()
+        if not hasattr(self.__parent__, '_v_body_values'):
+            self.__parent__._v_body_values = super(
+                ValuesCachingEditableBody, self).values()
+        # Return a copy, as e.g. pages_of_article below deletes modules from it
+        return self.__parent__._v_body_values[:]
+
+
 def pages_of_article(article, advertising_enabled=True):
     body = zeit.content.article.edit.interfaces.IEditableBody(article)
     body.ensure_division()  # Old articles don't always have divisions.
