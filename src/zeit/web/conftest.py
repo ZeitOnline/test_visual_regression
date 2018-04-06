@@ -233,6 +233,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/blacklist.xml'),
         'vivi_zeit.imp_scale-source':
             'egg://zeit.web.core/data/config/scales.xml',
+        'vivi_zeit.web_intextlink-blacklist-url': (
+            'egg://zeit.web.core/data/config/intextlink-blacklist.xml'),
         'vivi_zeit.content.link_source-blogs': (
             'egg://zeit.web.core/data/config/blogs_meta.xml'),
         'vivi_zeit.push_facebook-accounts': (

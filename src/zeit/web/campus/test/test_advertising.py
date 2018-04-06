@@ -141,23 +141,15 @@ def test_adplace16_on_articles(testbrowser):
     assert len(browser.cssselect('#ad-desktop-16')) == 1
 
 
-def test_zco_adplace5_depends_on_ligatus_toggle_on(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True,
-        'iqd': True,
-        'ligatus': True
-    }.get)
-
+def test_zco_adplace5_depends_on_ligatus_toggle_on(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'third_party_modules', 'iqd', 'ligatus')
     browser = testbrowser('/campus/article/01-countdown-studium')
     assert not browser.cssselect('#ad-desktop-5')
 
 
-def test_zco_adplace5_depends_on_ligatus_toggle_off(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True,
-        'iqd': True,
-        'ligatus': False
-    }.get)
-
+def test_zco_adplace5_depends_on_ligatus_toggle_off(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
+    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
     browser = testbrowser('/campus/article/01-countdown-studium')
     assert browser.cssselect('#ad-desktop-5')
