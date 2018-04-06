@@ -150,7 +150,7 @@ def test_adplaces_have_no_banner_label_data_attribute(testbrowser):
 
 def test_adplace5_depends_on_ligatus_toggle_on(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set(
-        'third_party_modules', 'iqd', 'ligatus')
+        'third_party_modules', 'iqd', 'ligatus', 'ligatus_on_site')
     browser = testbrowser('/zeit-online/article/zeit')
     assert not browser.cssselect('#ad-desktop-5')
 
