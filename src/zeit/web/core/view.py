@@ -1134,8 +1134,12 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def ligatus(self):
+        # self.package is "zeit.web.arbeit"
+        shortpackage = self.package.replace('zeit.web.', '')
+        verticaltoggle = 'ligatus_on_{}'.format(shortpackage)
         return (
             zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
+            zeit.web.core.application.FEATURE_TOGGLES.find(verticaltoggle) and
             not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
