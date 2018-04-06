@@ -32,13 +32,11 @@ def test_article_tags_template_renders_rel_attribute(
         assert tag.get('rel') == 'tag'
 
 
-def test_adc_keywords_are_sanitized_correctly(selenium_driver,
-                                              testserver, monkeypatch):
+def test_adc_keywords_are_sanitized_correctly(selenium_driver, testserver):
     driver = selenium_driver
     # avoid "diuquilon", which is added by JS for specific screen sizes
     driver.set_window_size(1200, 800)
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver.get('%s/zeit-online/article/tags' % testserver.url)
     assert ('zeitonline,mailand,claudioabbado,johannsebastianbach,oper,'
             'opernhaus,10slze42foo' == driver.execute_script(

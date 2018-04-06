@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4476: Add liveblog property to collapse preceding content
 
+- ZON-4567: Suppress retresco body if article has keywords on a configured blacklist
+
 
 3.138 (2018-04-05)
 ------------------

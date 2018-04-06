@@ -390,11 +390,9 @@ def test_webtrekk_noscript_contains_user_info(httpbrowser):
 
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')
 def test_ivw_tracking_for_mobile_and_desktop_and_wrapper(
-        selenium_driver, testserver, monkeypatch):
+        selenium_driver, testserver):
 
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True}.get)
-
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver = selenium_driver
 
     # ipad landscape
