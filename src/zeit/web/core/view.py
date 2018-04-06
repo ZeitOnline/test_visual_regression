@@ -420,47 +420,7 @@ class Base(object):
 
     @zeit.web.reify
     def keywords(self):
-        if zeit.web.core.application.FEATURE_TOGGLES.find('keywords_from_tms'):
-            conf = zope.component.getUtility(
-                zeit.web.core.interfaces.ISettings)
-            tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
-            try:
-                timeout = conf.get('retresco_timeout', 0.1)
-                return tms.get_article_keywords(self.context, timeout=timeout)
-            except Exception:
-                log.warning(
-                    'Retresco keywords failed for %s', self.context.uniqueId,
-                    exc_info=True)
-                # Fall back to the vivi-stored keywords, i.e. without any links
-                # since only the TMS knows about those.
-                if not hasattr(self.context, 'keywords'):
-                    return []
-                result = []
-                for keyword in self.context.keywords:
-                    if not keyword.label:
-                        continue
-                    keyword.link = None
-                    result.append(keyword)
-                return result
-        else:
-            if not hasattr(self.context, 'keywords'):
-                return []
-            result = []
-            for keyword in self.context.keywords:
-                if not keyword.label:
-                    continue
-                if not keyword.url_value:
-                    uuid = keyword.uniqueId.replace('tag://', '')
-                    keyword = zope.component.getUtility(
-                        zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
-                    if keyword is None:
-                        continue
-                if keyword.url_value:
-                    keyword.link = u'thema/{}'.format(keyword.url_value)
-                else:
-                    keyword.link = None
-                result.append(keyword)
-            return result
+        return zeit.web.core.article.get_keywords(self.context)
 
     @zeit.web.reify
     def meta_keywords(self):
@@ -1170,18 +1130,17 @@ class service_unavailable(object):  # NOQA
 class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     inline_svg_icons = True
+    framebuilder_requires_ssl = True
 
     def __call__(self):
         resp = super(FrameBuilder, self).__call__()
-        # as long as we use the dirty ssl.zeit.de/* thing
-        # we can only hack it into the asset pipeline
-        # and hope for the best. We'll need https://www.zeit.de!
-        if self.framebuilder_requires_ssl:
-            try:
-                self.request.asset_host = (
-                    self.request.framebuilder_ssl_asset_host)
-            except AttributeError:
-                pass
+        # in preparation for ssl launch we switch all asset calls in
+        # framebuilder to https://static.zeit.de/…
+        # can be dropped after launch when https://www.zeit.de is available
+        try:
+            self.request.asset_host = self.request.ssl_asset_host
+        except AttributeError:
+            pass
         return resp
 
     @zeit.web.reify
@@ -1260,10 +1219,6 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
     @zeit.web.reify
     def cap_title(self):
         return self.request.GET.get('adlabel') or 'Anzeige'
-
-    @zeit.web.reify
-    def framebuilder_requires_ssl(self):
-        return 'useSSL' in self.request.GET
 
     @zeit.web.reify
     def adcontroller_values(self):

@@ -233,3 +233,25 @@ def test_zar_hp_should_render(config, selenium_driver):
         assert True
     except TimeoutException:
         assert False, 'ZAR HP not rendered'
+
+
+def test_centerpages_with_autoareas_contain_teasers(config, testbrowser):
+
+    browser = testbrowser('{}/podcasts'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')), 'no Podcasts'
+
+    browser = testbrowser('{}/investigativ'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')), 'no Investigativ'
+
+    browser = testbrowser('{}/serie/fischer-im-recht'.format(
+        config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')), 'no Serie'
+
+
+def test_homepage_has_buzzboxes_with_content(config, testbrowser):
+    browser = testbrowser('{}/index'.format(config['BASE_URL']))
+
+    assert len(browser.cssselect('#buzz-mostread .teaser-buzz')) == 3
+    assert len(browser.cssselect('#buzz-comments .teaser-buzz')) == 3
+    assert len(browser.cssselect('#buzz-shared .teaser-buzz')) == 3
+    assert len(browser.cssselect('.buzzboard .teaser-buzzboard')) == 12

@@ -205,23 +205,15 @@ def test_zar_adcontroller_values_return_values_on_advertorial_article(
     assert adcv == view.adcontroller_values
 
 
-def test_zar_adplace5_depends_on_ligatus_toggle_off(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True,
-        'iqd': True,
-        'ligatus': False
-    }.get)
-
+def test_zar_adplace5_depends_on_ligatus_toggle_off(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
+    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
     browser = testbrowser('/arbeit/article/01-digitale-nomaden')
     assert browser.cssselect('#ad-desktop-5')
 
 
-def test_zar_adplace5_depends_on_ligatus_toggle_on(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True,
-        'iqd': True,
-        'ligatus': True
-    }.get)
-
+def test_zar_adplace5_depends_on_ligatus_toggle_on(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'third_party_modules', 'iqd', 'ligatus')
     browser = testbrowser('/arbeit/article/01-digitale-nomaden')
     assert not browser.cssselect('#ad-desktop-5')

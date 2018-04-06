@@ -2807,16 +2807,15 @@ def test_hpoverlay_html_output_is_not_on_articles(testbrowser):
     assert not browser.cssselect('#overlay-wrapper')
 
 
-def test_d17_icon_feature_toggle_is_working(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': False}.get)
+def test_d17_icon_feature_toggle_is_working(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('tag_logos')
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     assert not browser.cssselect('*[data-taglogo="true"]')
 
 
-def test_d17_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d17_icon_is_displayed_on_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     assert browser.cssselect('*[data-taglogo="true"]')
     assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--tag')) == 1
@@ -2834,9 +2833,9 @@ def test_d17_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
     assert text in browser.cssselect(selector)[0].getparent().text_content()
 
 
-def test_d17_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d17_icon_is_not_display_on_zplus_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zplus + .teaser-small__kicker-logo--tag')
@@ -2844,9 +2843,9 @@ def test_d17_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
         '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zplus')
 
 
-def test_d17_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d17_icon_is_not_display_on_zmo_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zmo + .teaser-small__kicker-logo--tag')
@@ -2854,17 +2853,17 @@ def test_d17_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
         '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zmo')
 
 
-def test_d17_icon_is_not_display_on_d17_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d17_icon_is_not_display_on_d17_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/parquet')
     assert not browser.cssselect(
         '.cp-area--d17-parquet .teaser-large__kicker-logo--tag')
 
 
-def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d17_icon_is_display_on_auto_area(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     query = ('.cp-region--solo + .cp-region--duo article:first-child '
              '.teaser-small__kicker-logo--tag')
@@ -2876,16 +2875,15 @@ def test_d17_icon_is_display_on_nextread(testbrowser):
     assert browser.cssselect('article.nextread .nextread__kicker-logo--tag')
 
 
-def test_d18_icon_feature_toggle_is_working(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': False}.get)
+def test_d18_icon_feature_toggle_is_working(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('tag_logos')
     browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
     assert not browser.cssselect('*[data-taglogo="true"]')
 
 
-def test_d18_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d18_icon_is_displayed_on_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
     assert browser.cssselect('*[data-taglogo="true"]')
     assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--tag')) == 1
@@ -2903,9 +2901,9 @@ def test_d18_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
     assert text in browser.cssselect(selector)[0].getparent().text_content()
 
 
-def test_d18_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d18_icon_is_not_display_on_zplus_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zplus + .teaser-small__kicker-logo--tag')
@@ -2913,9 +2911,9 @@ def test_d18_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
         '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zplus')
 
 
-def test_d18_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d18_icon_is_not_display_on_zmo_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zmo + .teaser-small__kicker-logo--tag')
@@ -2923,17 +2921,17 @@ def test_d18_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
         '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zmo')
 
 
-def test_d18_icon_is_not_display_on_d18_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d18_icon_is_not_display_on_d18_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/parquet')
     assert not browser.cssselect(
         '.cp-area--d18-parquet .teaser-large__kicker-logo--tag')
 
 
-def test_d18_icon_is_display_on_auto_area(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d18_icon_is_display_on_auto_area(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
     query = ('.cp-region--solo + .cp-region--duo article:first-child')
     assert browser.cssselect(query)
@@ -3101,3 +3099,19 @@ def test_brandeins_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_small_logo) == 4
     assert len(teaser_small_minor_logo) == 2
     assert len(teaser_square_logo) == 2
+
+
+def test_brandeins_teaser_should_display_its_image_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/zeit-online/parquet-feeds' % testserver.url)
+    teaser_images = driver.find_elements_by_css_selector(
+        '.cp-area--brandeins .teaser-small__media')
+
+    assert len(teaser_images)
+
+    for image in teaser_images:
+        assert ('teaser-small__media--force-mobile' in
+                image.get_attribute('class'))
+        assert image.is_displayed()

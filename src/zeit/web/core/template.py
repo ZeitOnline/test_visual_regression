@@ -947,14 +947,14 @@ def debugger():
     pdb.set_trace()
 
 
-# XXX: Remove ASAP
-# Temporary hack, needed until we deliver www.zeit.de via SSL.
-# We use this mainly for framebuilder?useSSL context.
+# TODO: Remove after SSL Launch
+# Temporary hack, in preparation for ssl launch
+# Used in framebuilder context.
 @zeit.web.register_filter
 def rewrite_for_ssl_if_required(url, rewrite_required=False):
     if rewrite_required:
         return url.replace(
-            'http://www.zeit.de/', 'https://ssl.zeit.de/www.zeit.de/')
+            'http://www.zeit.de/', 'https://static.zeit.de/')
     return url
 
 
