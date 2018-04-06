@@ -4,8 +4,8 @@
     {{ super() }}
     {% block lineage %}
         {% include "zeit.web.site:templates/inc/article/lineage.tpl" %}
-    {% endblock %}
-{% endblock %}
+    {% endblock lineage %}
+{% endblock content %}
 
 {% block content_ad_script -%}
 {% if view.advertising_enabled %}
@@ -19,7 +19,7 @@
     })();
 </script>
 {% endif %}
-{%- endblock %}
+{%- endblock content_ad_script %}
 
 {% block article_pages %}
     <section class="article-page" data-page-number="{{ view.current_page.number + 1 }}">
@@ -56,4 +56,4 @@
 
 {% block print %}
     {% include "zeit.web.core:templates/inc/article/print.tpl" %}
-{% endblock %}
+{% endblock print %}
