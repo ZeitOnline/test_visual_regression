@@ -200,6 +200,7 @@ class ValuesCachingEditableBody(zeit.content.article.edit.body.EditableBody):
         if zeit.cms.checkout.interfaces.ILocalContent.providedBy(
                 self.__parent__):
             return super(ValuesCachingEditableBody, self).values()
+        self.ensure_division()  # Old articles don't always have divisions.
         if not hasattr(self.__parent__, '_v_body_values'):
             self.__parent__._v_body_values = super(
                 ValuesCachingEditableBody, self).values()
@@ -209,7 +210,6 @@ class ValuesCachingEditableBody(zeit.content.article.edit.body.EditableBody):
 
 def pages_of_article(article, advertising_enabled=True):
     body = zeit.content.article.edit.interfaces.IEditableBody(article)
-    body.ensure_division()  # Old articles don't always have divisions.
 
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
