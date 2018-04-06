@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4558: Make ZMO article pagination more core-ish
 
+- ZON-4476: Add liveblog property to collapse preceding content
+
 
 3.138 (2018-04-05)
 ------------------
