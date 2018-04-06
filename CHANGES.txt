@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4567: Suppress retresco body if article has keywords on a configured blacklist
 
+- MAINT: Ligatus can be toggled for each vertical
+
 
 3.138 (2018-04-05)
 ------------------
