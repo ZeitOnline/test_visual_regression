@@ -145,7 +145,8 @@ def test_zco_adplace5_depends_on_ligatus_toggle_on(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
         'iqd': True,
-        'ligatus': True
+        'ligatus': True,
+        'ligatus_on_campus': True
     }.get)
 
     browser = testbrowser('/campus/article/01-countdown-studium')
