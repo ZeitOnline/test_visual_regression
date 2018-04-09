@@ -261,23 +261,6 @@ class Video(Traversable):
             tdict['view_name'] = ''
 
 
-@zope.interface.implementer(pyramid.interfaces.IRoutesMapper)
-class RoutesMapper(pyramid.urldispatch.RoutesMapper):
-
-    def __call__(self, request):
-        # Duplicated from super class (sigh).
-        try:
-            path = pyramid.urldispatch.decode_path_info(
-                request.environ['PATH_INFO'] or '/')
-        except KeyError:
-            path = '/'
-        except UnicodeDecodeError as e:
-            raise pyramid.exceptions.URLDecodeError(
-                e.encoding, e.object, e.start, e.end, e.reason)
-
-        return super(RoutesMapper, self).__call__(request)
-
-
 class HostRestrictionPredicate(object):
     """Requests with a specific host header shall be exclusively answered by
     certain views. This means, that these views can only be accessed with that
