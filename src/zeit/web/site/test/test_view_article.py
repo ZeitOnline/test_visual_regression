@@ -1055,10 +1055,8 @@ def test_article_lineage_should_render_correctly(testbrowser):
     assert len(browser.cssselect('.al-text--next')) == 1
 
 
-def test_article_lineage_should_utilize_feature_toggle(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'article_lineage': False}.get)
+def test_article_lineage_should_utilize_feature_toggle(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('article_lineage')
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(browser.cssselect('.article-lineage')) == 0
 
@@ -1233,12 +1231,8 @@ def test_instantarticle_should_render_empty_page_on_interrupt(testserver):
     assert len(resp.text) == 0
 
 
-def test_instantarticle_should_render_ads(testbrowser, monkeypatch):
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'fbia_advertising': True
-    }.get)
-
+def test_instantarticle_should_render_ads(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('fbia_advertising')
     browser = testbrowser(
         '/instantarticle/zeit-online/article/simple-multipage')
     assert len(browser.cssselect('iframe #iqadtile3')) == 1
@@ -1246,16 +1240,10 @@ def test_instantarticle_should_render_ads(testbrowser, monkeypatch):
     assert len(browser.cssselect('iframe #iqadtile8')) == 1
 
 
-def test_instantarticle_ads_should_include_adcontroller_values(
-        testbrowser, monkeypatch):
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'fbia_advertising': True
-    }.get)
-
+def test_instantarticle_ads_should_include_adcontroller_values(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('fbia_advertising')
     browser = testbrowser(
         '/instantarticle/campus/article/01-countdown-studium')
-
     assert 'mitte1' in browser.contents
     assert 'zeitonline,fachhochschulen,bafg,' in browser.contents
     assert '"studium",' in browser.contents
@@ -1816,10 +1804,8 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser, monkeypatch):
             in zplus_media[0].get('src'))
 
 
-def test_zplus_print_article_has_correct_markup(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'reader_revenue': True}.get)
+def test_zplus_print_article_has_correct_markup(testbrowser, monkeypatch):
+    zeit.web.core.application.FEATURE_TOGGLES.set('reader_revenue')
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, 'volumepage_is_published', True)
     browser = testbrowser('/zeit-online/article/zplus-zeit-register')
@@ -1854,11 +1840,9 @@ def test_zplus_print_article_has_correct_markup(
 
 
 def test_zplus_print_article_has_correct_markup_if_reader_revenue_off(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'reader_revenue': False}.get)
+        testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('reader_revenue')
     browser = testbrowser('/zeit-online/article/zplus-zeit-register')
-
     article_metadata_source = browser.cssselect('.metadata__source')
     assert article_metadata_source.__len__() == 1
 

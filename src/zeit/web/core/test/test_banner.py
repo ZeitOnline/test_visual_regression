@@ -48,9 +48,8 @@ def test_paragraphs_should_be_filtered_by_length():
 
 
 def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True}.get)
+        testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
 
     # test article with xml banner is missing
     browser = testbrowser('/zeit-magazin/article/10')
