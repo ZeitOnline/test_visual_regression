@@ -7,7 +7,7 @@ POSTDEPLOY
 - Remove obsoleted `render_404` from feature-toggles.xml
 
 
-3.139 (unreleased)
+3.139 (2018-04-09)
 ------------------
 
 - ZON-4558: Make ZMO article pagination more core-ish
