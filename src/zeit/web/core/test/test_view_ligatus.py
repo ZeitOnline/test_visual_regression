@@ -238,3 +238,12 @@ def test_ligatus_is_shown_below_special_content(testbrowser):
     browser = testbrowser('/zeit-online/gallery/biga_1')
     assert browser.cssselect('#ligatus')
     assert browser.cssselect('script[src*=".ligatus.com"]')
+
+
+def test_ligatus_is_not_shown_if_ads_disabled(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'ligatus', 'ligatus_on_magazin')
+
+    browser = testbrowser('/zeit-magazin/article/nobanner')
+    assert not browser.cssselect('#ligatus')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')

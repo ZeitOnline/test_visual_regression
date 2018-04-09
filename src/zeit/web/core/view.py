@@ -1100,6 +1100,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
         return (
             zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
             zeit.web.core.application.FEATURE_TOGGLES.find(verticaltoggle) and
+            self.advertising_enabled and
             not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
