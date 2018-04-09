@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - ZON-4558: Make ZMO article pagination more core-ish
 
+- ZON-4476: Add liveblog property to collapse preceding content
+
 - ZON-4567: Suppress retresco body if article has keywords on a configured blacklist
 
 - SSL-165: Remove "send to XSLT" blacklist

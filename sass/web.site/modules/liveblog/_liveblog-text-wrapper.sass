@@ -1,9 +1,3 @@
-.liveblog
-	+unpadded
-	clear: both
-	margin-bottom: remify(20px)
-	margin-top: remify(50px)
-
 .liveblog-text-wrapper
 	transition: max-height .5s
 	overflow: hidden
@@ -13,3 +7,11 @@
 	margin: 0 auto
 	max-width: em(660px)
 	+text-wrapper()
+
+	// display content if focus moves to hidden elements
+	&:focus-within:not(:focus)
+		max-height: none
+
+		&::before,
+		&::after
+			content: none
