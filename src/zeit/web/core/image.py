@@ -528,7 +528,7 @@ class LocalImageGroup(SyntheticImageGroup):
 
     def __init__(self, context):
         super(LocalImageGroup, self).__init__(context)
-        self.uniqueId = '{}/imagegroup/'.format(context.uniqueId)
+        self.uniqueId = u'{}/imagegroup/'.format(context.uniqueId)
 
     @zeit.web.reify
     def master_image(self):

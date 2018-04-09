@@ -170,13 +170,14 @@ def test_topicpage_contains_teasers(config, testbrowser):
 
 
 def test_search_results_page_contains_teasers(config, testbrowser):
-    # OPTIMIZE: fix search on staging (provide content to solr)
-    if config['ENV'] == 'STAGING':
-        assert True
-    else:
-        browser = testbrowser(
-            '{}/suche/index?q=europa'.format(config['BASE_URL']))
-        assert len(browser.cssselect('article[class*=teaser]')) == 10
+    browser = testbrowser(
+        '{}/suche/index?q=europa'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]'))
+
+    browser = testbrowser(
+        '{}/suche/index?q=&mode=7d&type=article&type=video'.format(
+            config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]'))
 
 
 def test_configured_redirects(config):
@@ -232,3 +233,25 @@ def test_zar_hp_should_render(config, selenium_driver):
         assert True
     except TimeoutException:
         assert False, 'ZAR HP not rendered'
+
+
+def test_centerpages_with_autoareas_contain_teasers(config, testbrowser):
+
+    browser = testbrowser('{}/podcasts'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')), 'no Podcasts'
+
+    browser = testbrowser('{}/investigativ'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')), 'no Investigativ'
+
+    browser = testbrowser('{}/serie/fischer-im-recht'.format(
+        config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')), 'no Serie'
+
+
+def test_homepage_has_buzzboxes_with_content(config, testbrowser):
+    browser = testbrowser('{}/index'.format(config['BASE_URL']))
+
+    assert len(browser.cssselect('#buzz-mostread .teaser-buzz')) == 3
+    assert len(browser.cssselect('#buzz-comments .teaser-buzz')) == 3
+    assert len(browser.cssselect('#buzz-shared .teaser-buzz')) == 3
+    assert len(browser.cssselect('.buzzboard .teaser-buzzboard')) == 12

@@ -92,6 +92,7 @@ def app_settings(mockserver):
         'cookie_fallback_domain': 'localhost',
         'comment_page_size': '4',
         'community_host': mockserver.url + '/comments',
+        'community_profile_url': 'https://community.zeit.de',
         'community_admin_host': 'http://community_admin',
         'community_static_host': 'http://static_community',
         'community_maintenance': (
@@ -228,10 +229,10 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/series.xml'),
         'vivi_zeit.web_feature-toggle-source': (
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
-        'vivi_zeit.web_blacklist-url': (
-            'egg://zeit.web.core/data/config/blacklist.xml'),
-        'vivi_zeit.imp_scale-source': (
-            'egg://zeit.web.core/data/config/scales.xml'),
+        'vivi_zeit.imp_scale-source':
+            'egg://zeit.web.core/data/config/scales.xml',
+        'vivi_zeit.web_intextlink-blacklist-url': (
+            'egg://zeit.web.core/data/config/intextlink-blacklist.xml'),
         'vivi_zeit.content.link_source-blogs': (
             'egg://zeit.web.core/data/config/blogs_meta.xml'),
         'vivi_zeit.push_facebook-accounts': (

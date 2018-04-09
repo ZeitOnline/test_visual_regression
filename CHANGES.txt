@@ -4,8 +4,76 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- Remove obsoleted `render_404` from feature-toggles.xml
 
-3.135 (unreleased)
+
+3.140 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.139 (2018-04-09)
+------------------
+
+- ZON-4558: Make ZMO article pagination more core-ish
+
+- ZON-4476: Add liveblog property to collapse preceding content
+
+- ZON-4567: Suppress retresco body if article has keywords on a configured blacklist
+
+- SSL-165: Remove "send to XSLT" blacklist
+
+- MAINT: Ligatus can be toggled for each vertical
+
+
+3.138 (2018-04-05)
+------------------
+
+- ZON-4550: Fix ligatus positioning
+
+- ZON-4507: Polish news article transparency notice
+
+- SSL-196: Transform navigation links to https if configured
+
+- FIX: Change brandeins topiclink according as requested
+
+
+3.137.1 (2018-04-04)
+--------------------
+
+- BUG-889: Change wording of dpa/afp infotext
+
+
+3.137 (2018-04-04)
+------------------
+
+- ZON-4578: Show brandeins parquet teaser images on mobile
+
+- FIX: Handle non-ascii uniqueIds in synthetic image groups
+
+
+3.136 (2018-04-03)
+------------------
+
+- SSL-174: Framebuilder uses https://static.zeit.de instead of ssl.zeit.de-Proxy
+
+- HOTFIX: Introduce community_profile_url for external linking
+
+
+3.135.2 (2018-04-03)
+--------------------
+
+- HOTFIX: Make channel queries work in ranking areas again after typo in TMS-164
+
+
+3.135.1 (2018-03-29)
+--------------------
+
+- FIX: Fix building daterange solr querries
+
+
+3.135 (2018-03-28)
 ------------------
 
 - ZON-4464: Consider ze.tt and brandeins kicker logo badges in all teasers
@@ -17,6 +85,8 @@ POSTDEPLOY
 - ZON-4550: Add ligatus container element to DOM
 
 - ZON-4547: Render liveblog from Varnish when Liveblog API server is down
+
+- ZON-4545: Add new meta tags for ligatus
 
 - BUG-881: Fix overlay-slide buttons in gallery for Firefox ≥ 59
 
@@ -41,6 +111,8 @@ POSTDEPLOY
 - FIX: Adjust core.IImage to LazyProxy's adapter behaviour
 
 - FIX: Be defensive about missing jobticker feed setting
+
+- PERF: Calcluate article body values only once per request
 
 
 3.133 (2018-03-22)

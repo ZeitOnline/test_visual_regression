@@ -93,12 +93,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return 0
 
     @zeit.web.reify
-    def query(self):
-        param = u' '.join(self.request.GET.getall('q'))
-        if param and self.search_form:
-            return param
-
-    @zeit.web.reify
     def hits(self):
         self.values()
         try:

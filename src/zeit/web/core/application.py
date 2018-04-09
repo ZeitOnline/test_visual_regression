@@ -83,9 +83,6 @@ class Application(object):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
 
-        mapper = zeit.web.core.routing.RoutesMapper()
-        registry.registerUtility(mapper, pyramid.interfaces.IRoutesMapper)
-
         self.settings['version'] = pkg_resources.get_distribution(
             'zeit.web').version
 
@@ -167,12 +164,6 @@ class Application(object):
         config.add_route('brandeins-image', '/brandeins-image/*path')
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route('zett-image', '/zett-image/*path')
-        config.add_route('blacklist', '/-blacklist', factory=lambda x: None)
-        config.add_route(
-            'schlagworte_index',
-            '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}')
-        config.add_view(
-            zeit.web.core.view.surrender, route_name='schlagworte_index')
         config.add_route(
             'schlagworte',
             '/schlagworte/{category}/{item}'
@@ -193,6 +184,7 @@ class Application(object):
         config.add_request_method(configure_host('fbia'), reify=True)
         config.add_request_method(
             configure_host('framebuilder_ssl_asset'), reify=True)
+        config.add_request_method(configure_host('ssl_asset'), reify=True)
 
         config.add_request_method(
             zeit.web.core.security.get_user, name='user', reify=True)
@@ -435,7 +427,7 @@ def register_standard_site_manager(event):
     zope.component.hooks.setSite()
 
 
-class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+class FeatureToggleSource(zeit.cms.content.sources.XMLSource):
     # Only contextual so we can customize source_class
 
     product_configuration = 'zeit.web'
@@ -446,10 +438,22 @@ class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
         def find(self, name):
             return self.factory.find(name)
 
+        def set(self, *args):  # only for tests
+            self.factory.override(*args, value=True)
+
+        def unset(self, *args):  # only for tests
+            self.factory.override(*args, value=False)
+
     def find(self, name):
         try:
             return bool(getattr(self._get_tree(), name, False))
         except TypeError:
             return False
+
+    def override(self, *names, **kw):
+        for name in names:
+            # Changes are discarded between tests by `reset_cache` fixture.
+            setattr(self._get_tree(), name, kw['value'])
+
 
 FEATURE_TOGGLES = FeatureToggleSource()(None)

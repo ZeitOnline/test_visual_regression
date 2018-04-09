@@ -77,18 +77,6 @@
     <supertitle>Auto</supertitle>
     <title>Winterkorn tritt zurück - VW setzt Sonderausschuss ein</title>
     <division type="page">
-      <raw alldevices="true">
-        <p>
-        <button id="testmessage">Test messaging</button>
-        <script>
-          // small script to test frame to parent messaging
-          var but = document.getElementById('testmessage');
-          but.addEventListener('click', function(){
-            parent.postMessage(JSON.stringify({name: "test"}),"http://localhost:9090");
-          }, true);
-        </script>
-      </p>
-      </raw>
       <p>Wolfsburg (dpa) - Die schwere Vertrauenskrise nach dem Abgas-Skandal in den USA hat VW-Chef Martin Winterkorn zum Rücktritt gezwungen. Der Autobauer prüft rechtliche Schritte gegen die Verantwortlichen.</p>
       <p>Nach einer Krisensitzung der obersten Aufseher in Wolfsburg teilte der Schwabe in einer Erklärung mit: "Ich bin bestürzt über das, was in den vergangenen Tagen geschehen ist. Vor allem bin ich fassungslos, dass Verfehlungen dieser Tragweite im Volkswagen Konzern möglich waren." Als Vorstandschef übernehme er die Verantwortung. Er habe daher den Aufsichtsrat um seine Ablösung gebeten: "Ich tue dies im Interesse des Unternehmens, obwohl ich mir keines Fehlverhaltens bewusst bin."</p>
       <p>Der Interimsvorsitzende Berthold Huber drückte Betroffenheit über den Skandal um manipulierte Messungen beim Schadstoffausstoß von Dieselmotoren aus, der zu einem schweren Vertrauensverlust geführt habe. Das Präsidium sei entschlossen, "einen glaubwürdigen Neuanfang" zu machen. Winterkorn habe keine Kenntnis von den Machenschaften gehabt, aber die Verantwortung übernommen. Vorschläge zur personellen Neubesetzung würden am Freitag in der Aufsichtsratsitzung besprochen.</p>
