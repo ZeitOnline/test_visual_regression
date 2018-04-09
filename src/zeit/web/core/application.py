@@ -83,9 +83,6 @@ class Application(object):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
 
-        mapper = zeit.web.core.routing.RoutesMapper()
-        registry.registerUtility(mapper, pyramid.interfaces.IRoutesMapper)
-
         self.settings['version'] = pkg_resources.get_distribution(
             'zeit.web').version
 
