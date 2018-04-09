@@ -14,7 +14,7 @@ POSTDEPLOY
 
 - ZON-4567: Suppress retresco body if article has keywords on a configured blacklist
 
-- SSL-185: Remove "send to XSLT" blacklist
+- SSL-165: Remove "send to XSLT" blacklist
 
 - MAINT: Ligatus can be toggled for each vertical
 
