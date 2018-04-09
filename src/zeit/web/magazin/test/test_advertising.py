@@ -48,9 +48,8 @@ def test_banner_tile3_should_be_displayed_on_pages(testbrowser):
 
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
-def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True}.get)
+def test_ad_keyword_diuqilon(selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
 
     driver = selenium_driver
     driver.set_window_size(768, 1024)
@@ -81,10 +80,8 @@ def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
 
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
-def test_viewport_is_not_resized_in_other_browser(
-        selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True}.get)
+def test_viewport_is_not_resized_in_other_browser(selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/zeit-magazin/article/01' % testserver.url)
@@ -99,9 +96,8 @@ def test_viewport_is_not_resized_in_other_browser(
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_tile2_not_ommitted_in_landscape(
-        selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True}.get)
+        selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/zeit-magazin/article/01' % testserver.url)
@@ -126,23 +122,15 @@ def test_adplace16_on_articles(testbrowser):
     assert len(browser.cssselect('#ad-desktop-16')) == 1
 
 
-def test_zmo_adplace5_depends_on_ligatus_toggle_on(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True,
-        'iqd': True,
-        'ligatus': True
-    }.get)
-
+def test_zmo_adplace5_depends_on_ligatus_toggle_on(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'third_party_modules', 'iqd', 'ligatus', 'ligatus_on_magazin')
     browser = testbrowser('/zeit-magazin/article/03')
     assert not browser.cssselect('#ad-desktop-5')
 
 
 def test_zmo_adplace5_depends_on_ligatus_toggle_off(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True,
-        'iqd': True,
-        'ligatus': False
-    }.get)
-
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
+    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
     browser = testbrowser('/zeit-magazin/article/03')
     assert browser.cssselect('#ad-desktop-5')

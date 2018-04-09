@@ -5,10 +5,9 @@ import zope.component
 
 
 def test_campus_framebuilder_accepts_banner_channel_parameter(
-        selenium_driver, testserver, monkeypatch):
+        selenium_driver, testserver):
 
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver = selenium_driver
 
     # avoid "diuquilon", which is added by JS for specific screen sizes

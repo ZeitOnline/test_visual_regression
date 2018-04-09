@@ -34,7 +34,13 @@ def test_ligatus_zon_article_has_access_value(testbrowser, togglepatch):
 
 
 def test_ligatus_is_available_in_all_verticals(testbrowser, togglepatch):
-    togglepatch({'ligatus': True})
+    togglepatch({
+        'ligatus': True,
+        'ligatus_on_arbeit': True,
+        'ligatus_on_campus': True,
+        'ligatus_on_magazin': True,
+        'ligatus_on_site': True
+    })
 
     browser = testbrowser('/arbeit/article/simple-nextread')
     assert browser.cssselect('#ligatus')
@@ -74,7 +80,7 @@ def test_ligatus_can_be_toggled_off(testbrowser, togglepatch):
 
 
 def test_ligatus_can_be_disabled_on_article(testbrowser, togglepatch):
-    togglepatch({'ligatus': True})
+    togglepatch({'ligatus': True, 'ligatus_on_site': True})
 
     browser = testbrowser('/zeit-online/article/simple-ligatus-disabled')
     assert not browser.cssselect('#ligatus')
@@ -167,3 +173,55 @@ def test_ligatus_indexing_only_on_first_page(testbrowser, param):
     browser = testbrowser(param[0])
     meta = browser.cssselect('meta[property="ligatus:do_not_index"]')
     assert meta[0].get('content') == param[1]
+
+
+def test_ligatus_can_be_toggled_globally(testbrowser, togglepatch):
+    togglepatch({
+        'ligatus': False,
+        'ligatus_on_arbeit': True,
+        'ligatus_on_campus': True,
+        'ligatus_on_magazin': True,
+        'ligatus_on_site': True
+    })
+
+    browser = testbrowser('/arbeit/article/simple-nextread')
+    assert not browser.cssselect('#ligatus')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')
+
+    browser = testbrowser('/campus/article/simple')
+    assert not browser.cssselect('#ligatus')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')
+
+    browser = testbrowser('/zeit-magazin/article/header-text-only')
+    assert not browser.cssselect('#ligatus')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')
+
+    browser = testbrowser('/zeit-online/article/simple')
+    assert not browser.cssselect('#ligatus')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')
+
+
+def test_ligatus_can_be_toggled_for_verticals(testbrowser, togglepatch):
+    togglepatch({
+        'ligatus': True,
+        'ligatus_on_arbeit': True,
+        'ligatus_on_campus': False,
+        'ligatus_on_magazin': False,
+        'ligatus_on_site': True
+    })
+
+    browser = testbrowser('/arbeit/article/simple-nextread')
+    assert browser.cssselect('#ligatus')
+    assert browser.cssselect('script[src*=".ligatus.com"]')
+
+    browser = testbrowser('/campus/article/simple')
+    assert not browser.cssselect('#ligatus')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')
+
+    browser = testbrowser('/zeit-magazin/article/header-text-only')
+    assert not browser.cssselect('#ligatus')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')
+
+    browser = testbrowser('/zeit-online/article/simple')
+    assert browser.cssselect('#ligatus')
+    assert browser.cssselect('script[src*=".ligatus.com"]')
