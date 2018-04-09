@@ -83,9 +83,6 @@ class Application(object):
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
 
-        mapper = zeit.web.core.routing.RoutesMapper()
-        registry.registerUtility(mapper, pyramid.interfaces.IRoutesMapper)
-
         self.settings['version'] = pkg_resources.get_distribution(
             'zeit.web').version
 
@@ -167,12 +164,6 @@ class Application(object):
         config.add_route('brandeins-image', '/brandeins-image/*path')
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route('zett-image', '/zett-image/*path')
-        config.add_route('blacklist', '/-blacklist', factory=lambda x: None)
-        config.add_route(
-            'schlagworte_index',
-            '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}')
-        config.add_view(
-            zeit.web.core.view.surrender, route_name='schlagworte_index')
         config.add_route(
             'schlagworte',
             '/schlagworte/{category}/{item}'
