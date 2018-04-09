@@ -1,4 +1,5 @@
 import pytest
+import zeit.web.core.application
 
 
 def test_ligatus_zar_article_has_access_value(testbrowser, togglepatch):
@@ -223,5 +224,17 @@ def test_ligatus_can_be_toggled_for_verticals(testbrowser, togglepatch):
     assert not browser.cssselect('script[src*=".ligatus.com"]')
 
     browser = testbrowser('/zeit-online/article/simple')
+    assert browser.cssselect('#ligatus')
+    assert browser.cssselect('script[src*=".ligatus.com"]')
+
+
+def test_ligatus_is_shown_below_special_content(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus', 'ligatus_on_site')
+
+    browser = testbrowser('/zeit-online/video/3537342483001')
+    assert browser.cssselect('#ligatus')
+    assert browser.cssselect('script[src*=".ligatus.com"]')
+
+    browser = testbrowser('/zeit-online/gallery/biga_1')
     assert browser.cssselect('#ligatus')
     assert browser.cssselect('script[src*=".ligatus.com"]')

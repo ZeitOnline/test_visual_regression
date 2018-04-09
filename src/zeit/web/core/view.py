@@ -1120,8 +1120,12 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
     def ligatus_do_not_index(self):
         if getattr(self.context, 'no_ligatus_indexing_allowed', False):
             return True
-        if self.is_all_pages_view or self.pagination['current'] > 1:
-            return True
+        # galleries or videos do not have pagination: so be defensive!
+        if getattr(self, 'pagination', None):
+            if getattr(self, 'is_all_pages_view', False):
+                return True
+            elif self.pagination.get('current') > 1:
+                return True
         return False
 
     @zeit.web.reify
