@@ -43,6 +43,11 @@
             </a>
         </li>
         {%- endblock %}
+        {% block print %}
+        <li class="{{ '%s__item' | format(self.layout()) }} {{ '%s__item' | format(self.layout()) }}--printbutton">
+            {% include "zeit.web.core:templates/inc/article/print.tpl" %}
+        </li>
+        {% endblock %}
     </ul>
 </div>
 {%- endblock sharing_menu %}
