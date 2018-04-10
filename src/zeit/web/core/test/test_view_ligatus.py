@@ -176,6 +176,18 @@ def test_ligatus_indexing_only_on_first_page(testbrowser, param):
     assert meta[0].get('content') == param[1]
 
 
+@pytest.mark.parametrize('param', [
+    ('/arbeit/article/advertorial', 'True'),
+    ('/campus/article/advertorial', 'True'),
+    ('/zeit-magazin/article/advertorial', 'True'),
+    ('/zeit-online/article/advertorial', 'True')
+])
+def test_ligatus_do_not_index_advertorials(testbrowser, param):
+    browser = testbrowser(param[0])
+    meta = browser.cssselect('meta[property="ligatus:do_not_index"]')
+    assert meta[0].get('content') == param[1]
+
+
 def test_ligatus_can_be_toggled_globally(testbrowser, togglepatch):
     togglepatch({
         'ligatus': False,
