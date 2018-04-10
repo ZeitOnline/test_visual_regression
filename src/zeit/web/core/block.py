@@ -251,7 +251,9 @@ class Liveblog(Module):
     def __init__(self, context):
         super(Liveblog, self).__init__(context)
         self.blog_id = self.context.blog_id
-        self.version = getattr(self.context, 'version', None)
+        self.version = self.context.version
+        self.collapse_preceding_content = (
+            self.context.collapse_preceding_content)
         self.is_live = False
         self.last_modified = None
         self.id = None

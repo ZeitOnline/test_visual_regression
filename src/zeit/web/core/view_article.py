@@ -44,9 +44,13 @@ class Article(zeit.web.core.view.Content):
         return self.context.header_layout or 'default'
 
     @zeit.web.reify
+    def advertising_in_article_enabled(self):
+        return self.advertising_enabled
+
+    @zeit.web.reify
     def pages(self):
         return zeit.web.core.article.pages_of_article(
-            self.context, self.advertising_enabled)
+            self.context, self.advertising_in_article_enabled)
 
     @zeit.web.reify
     def is_all_pages_view(self):
