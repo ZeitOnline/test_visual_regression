@@ -10,7 +10,7 @@ POSTDEPLOY
 3.140 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- SSL-190: Load fonts from https://static.zeit.de
 
 
 3.139 (2018-04-09)
