@@ -12,6 +12,7 @@ POSTDEPLOY
 
 - SSL-198: Switch to ssl asset host for css loading
 
+- SSL-201: Use correct community host setting to create links to userprofile
 
 3.139 (2018-04-09)
 ------------------
