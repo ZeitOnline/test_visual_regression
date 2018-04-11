@@ -36,3 +36,9 @@ class Link(zeit.web.site.area.rss.RSSLink):
 class Brandeins(zeit.web.site.area.rss.RSSArea):
 
     feed_key = 'brandeins_hp_feed'
+
+    def values(self):
+        values = super(Brandeins, self).values()
+        for module in values:
+            module.force_mobile_image = True
+        return values
