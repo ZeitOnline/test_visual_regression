@@ -630,9 +630,8 @@ def test_article_should_show_main_image_from_imagegroup(testbrowser):
     assert 'filmstill-hobbit-schlacht-fuenf-hee' in images[0].get('src')
 
 
-def test_article_should_have_proper_meetrics_integration(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article_should_have_proper_meetrics_integration(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/article/01')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -1069,8 +1068,8 @@ def test_article_view_should_provide_solr_lineage(
 
 
 def test_article_view_should_provide_elasticsearch_lineage(
-        application, dummy_request, togglepatch):
-    togglepatch({'elasticsearch_lineage': True})
+        application, dummy_request):
+    zeit.web.core.application.FEATURE_TOGGLES.set('elasticsearch_lineage')
 
     elasticsearch = zope.component.getUtility(
         zeit.retresco.interfaces.IElasticsearch)
@@ -1091,8 +1090,8 @@ def test_article_view_should_provide_elasticsearch_lineage(
 
 
 def test_article_lineage_should_default_to_index_page(
-        application, dummy_request, togglepatch):
-    togglepatch({'elasticsearch_lineage': True})
+        application, dummy_request):
+    zeit.web.core.application.FEATURE_TOGGLES.set('elasticsearch_lineage')
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -1331,8 +1330,8 @@ def test_nextread_should_display_date_last_published_semantic(testbrowser):
     assert nextread_date.text.strip() == '15. Februar 2015'
 
 
-def test_article_contains_zeit_clickcounter(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article_contains_zeit_clickcounter(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/article/simple')
     counter = browser.cssselect('body noscript img[src^="https://cc.zeit.de"]')
     assert ("img.src = 'https://cc.zeit.de/cc.gif?banner-channel="
@@ -1404,9 +1403,8 @@ def test_amp_article_placeholder(testbrowser, parameter):
     assert len(select('.article__placeholder')) >= 1
 
 
-def test_newsletter_optin_page_has_webtrekk_ecommerce(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_newsletter_optin_page_has_webtrekk_ecommerce(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser(
         '/zeit-online/article/simple?newsletter-optin=elbVertiefung-_!1:2')
     assert '8: \'elbvertiefung-_1_2\'' in browser.contents
