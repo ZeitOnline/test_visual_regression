@@ -219,7 +219,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             if self.liveblog.collapse_preceding_content:
                 return False
 
-        return self.advertising_enabled
+        return super(Article, self).advertising_in_article_body_enabled
 
 
 @zeit.web.view_defaults(vertical='zon')
