@@ -555,15 +555,15 @@ $inline-block-alignment: none !default;
 
 // Avoid jumping while the image gets lazy-loaded
 @mixin reserve-space-for-article-media($ratio) {
-	position: relative;
-	&:before {
+	&::before {
 		content: '';
-		display: block;
+		float: left;
 		padding-bottom: $ratio;
 	}
-	& .article__media-container {
-		position: absolute;
-		top: 0;
+	&::after {
+		content: '';
+		display: block;
+		clear: both;
 	}
 }
 
