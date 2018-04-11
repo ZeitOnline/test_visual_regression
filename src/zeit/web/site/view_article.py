@@ -214,7 +214,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return zeit.web.core.interfaces.ILiveblogInfo(self.context)
 
     @zeit.web.reify
-    def advertising_in_article_enabled(self):
+    def advertising_in_article_body_enabled(self):
         if self.advertising_enabled:
             if self.liveblog.collapse_preceding_content:
                 return False
