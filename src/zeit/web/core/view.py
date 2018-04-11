@@ -887,7 +887,7 @@ class CommentMixin(object):
                 conf.get('community_admin_host').rstrip('/'), uuid)
         else:
             return u'{}/comment/edit/%cid%'.format(
-                conf.get('community_host').rstrip('/'))
+                conf.get('community_profile_url').rstrip('/'))
 
 
 class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
