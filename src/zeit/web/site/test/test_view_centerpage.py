@@ -2624,6 +2624,16 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus')
 
 
+def test_zplus_teaser_should_force_mobile_images(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/zplus')
+    figures = browser.cssselect('figure.teaser-small__media, '
+                                'figure.teaser-small-minor__media')
+
+    assert figures
+    for figure in figures:
+        assert '__media--force-mobile' in figure.get('class')
+
+
 def test_register_teaser_has_zplus_register_badge(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/register')
 
@@ -3099,6 +3109,15 @@ def test_brandeins_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_small_logo) == 4
     assert len(teaser_small_minor_logo) == 2
     assert len(teaser_square_logo) == 2
+
+
+def test_brandeins_teaser_should_force_mobile_images(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/teasers-to-brandeins')
+    figures = browser.cssselect('figure[class*="teaser-small"]')
+
+    assert figures
+    for figure in figures:
+        assert '__media--force-mobile' in figure.get('class')
 
 
 def test_brandeins_teaser_should_display_its_image_on_mobile(
