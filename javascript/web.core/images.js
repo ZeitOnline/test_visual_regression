@@ -43,10 +43,6 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             $imageWrapper.html( '<img src="' + source + '"/>' );
         } else {
             $imageWrapper.html( '' ).height( 'auto' );
-            // @todo: we should hide things inside the $imageWrapper,
-            // but not all comment count on the whole page
-            // unfortunately comment count is outside of the $imageWrapper in ZMO
-            $( '.cp_comment__count__wrap' ).hide();
         }
     }
 
