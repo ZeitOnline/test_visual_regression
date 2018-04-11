@@ -52,7 +52,7 @@
                 {% endif %}
                 {% if request.user.name %}
                     Angemeldet als
-                    <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user" data-ct-label="username">
+                    <a class="comment-form__username" href="{{ request.registry.settings.community_profile_url}}/user" data-ct-label="username">
                         {{ request.user.name }}
                     </a>
                 {% endif %}
