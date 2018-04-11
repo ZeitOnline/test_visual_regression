@@ -82,7 +82,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             subject = $parent;
 
             // determine size of image from container width + ratio of original image
-            width = subject.width();
+            width = $img.parent().width() || subject.width();
 
             // workaround for hidden images
             if ( !subject.is( ':visible' ) ) {
