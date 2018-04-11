@@ -9,11 +9,6 @@
 		font-family: $font-patronbold
 		font-size: remify(20px)
 		line-height: 1.3
-	&__media
-		margin-bottom: remify(40px)
-		+unpadded
-		&--header-image
-			margin-top: remify(40px)
 	&__item
 		&--apart
 			clear: both
@@ -45,15 +40,14 @@
 			&--marginalia
 				clear: left
 				float: left
-				margin: remify(25px)
-				margin-left: 0
+				margin: remify(25px 25px 25px 0)
 				width: remify(240px)
-				img
+				.article__media-container
 					width: remify(180px)
-				// mitigate jumping marginalia image between tablet and desktop breakpoint
-				@media screen and (min-width: 880px) and (max-width: $break-desktop-min)
-					margin-left: 4vw
-		&__media
+		// Caution: we mimic the styles for .article__item--wide here (tbd)
+		// ZEIT Arbeit displays images with display_mode `column-width` and `large` same same
+		// see zeit.web.core.block.Image.figure_mods
+		&__media.article__item--apart
 			max-width: $wide-content-width
 		&__subheading
 			font-size: remify(28px)
@@ -63,7 +57,6 @@
 	.article
 		&__item
 			&--marginalia
-				// (1000px - $wide-content-width) / 2
 				margin-left: remify(80px)-$page-padding
 
 .article-page
@@ -105,14 +98,12 @@
 	&__caption
 		@extend %figure-caption
 		margin: remify(8px auto)
-		padding: 0 $page-padding--small
-		&--marginalia
-			padding: 0
-		+respond-min($break-tablet-min)
-			max-width: $medium-content-width
-			padding: 0
+
 		&--marginalia
 			margin-top: remify(12px)
+
+		+respond-min($break-tablet-min)
+			max-width: $medium-content-width
 
 		.article__item--rimless &
 			padding-left: $page-padding--small
