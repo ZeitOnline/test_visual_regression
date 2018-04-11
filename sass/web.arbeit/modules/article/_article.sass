@@ -16,12 +16,15 @@
 			margin-top: remify(40px)
 	&__item
 		&--apart
+			clear: both
 			margin-top: remify(40px)
 			margin-bottom: remify(40px)
+
 		&--rimless
 			+unpadded
 
 		&--marginalia
+			clear: both
 			margin: remify(40px) auto
 			width: 90%
 
@@ -35,8 +38,12 @@
 				margin-top: remify(60px)
 				margin-bottom: remify(60px)
 			&--wide
+				clear: both
 				max-width: $wide-content-width
+			&--full
+				max-width: none
 			&--marginalia
+				clear: left
 				float: left
 				margin: remify(25px)
 				margin-left: 0
