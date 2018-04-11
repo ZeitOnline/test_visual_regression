@@ -10,7 +10,7 @@ import zeit.web.site.module.teaser
 @grokcore.component.adapter(
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.campus.interfaces.IZCOContent)
-class ZCOTeaserBlock(zeit.web.core.module.teaser.LayoutOverrideTeaserBlock):
+class ZCOTeaserBlock(zeit.web.core.module.teaser.TeaserBlock):
 
     @property
     def layout(self):
