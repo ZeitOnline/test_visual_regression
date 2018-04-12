@@ -26,6 +26,12 @@ def test_asset_host_supports_url_prefix(dummy_request):
     assert dummy_request.asset_host == 'http://example.com/foo/assets'
 
 
+def test_asset_host_should_be_neutral_to_protocol(dummy_request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['asset_prefix'] = '//assets.example.com/'
+    assert dummy_request.asset_host == '//assets.example.com'
+
+
 def test_acceptable_pagination_should_not_redirect(testserver):
     resp = requests.get('%s/zeit-magazin/article/03/seite-3' % testserver.url,
                         allow_redirects=False)

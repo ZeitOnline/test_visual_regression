@@ -8,6 +8,8 @@ POSTDEPLOY
 3.141 (unreleased)
 ------------------
 
+- SSL-206: Implement protocol neutrality on configured hosts
+
 - MAINT: Replace `togglepatch` fixture by built-in override functionality from 8fe69a5
 
 
