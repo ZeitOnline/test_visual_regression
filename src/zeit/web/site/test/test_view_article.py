@@ -1049,16 +1049,63 @@ def test_article_advertorial_pages_should_render_correctly(testbrowser):
     assert browser.cssselect('.advertorial-marker')
 
 
+def test_article_view_should_provide_solr_lineage(
+        application, dummy_request):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/03',
+         'title': 'Foo', 'supertitle': 'Bar'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'title': 'Lorem', 'supertitle': 'Ipsum'}]
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.lineage == (
+        {'uniqueId': u'http://xml.zeit.de/zeit-online/article/01',
+         'title': 'Lorem', 'supertitle': 'Ipsum'},
+        {'uniqueId': u'http://xml.zeit.de/zeit-online/article/03',
+         'title': 'Foo', 'supertitle': 'Bar'})
+
+
+def test_article_view_should_provide_elasticsearch_lineage(
+        application, dummy_request, togglepatch):
+    togglepatch({'elasticsearch_lineage': True})
+
+    elasticsearch = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elasticsearch.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/03',
+         'payload': {'body': {'title': 'Foo', 'supertitle': 'Bar'}}},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'payload': {'body': {'title': 'Lorem', 'supertitle': 'Ipsum'}}}]
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.lineage == (
+        {'uniqueId': u'http://xml.zeit.de/zeit-online/article/01',
+         'title': 'Lorem', 'supertitle': 'Ipsum'},
+        {'uniqueId': u'http://xml.zeit.de/zeit-online/article/03',
+         'title': 'Foo', 'supertitle': 'Bar'})
+
+
+def test_article_lineage_should_default_to_index_page(
+        application, dummy_request, togglepatch):
+    togglepatch({'elasticsearch_lineage': True})
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.lineage == (
+        {'uniqueId': u'http://xml.zeit.de/index',
+         'title': 'Startseite', 'supertitle': ''},) * 2
+
+
 def test_article_lineage_should_render_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(browser.cssselect('.al-text--prev')) == 1
     assert len(browser.cssselect('.al-text--next')) == 1
-
-
-def test_article_lineage_should_utilize_feature_toggle(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.unset('article_lineage')
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect('.article-lineage')) == 0
 
 
 def test_article_lineage_has_text_elements(testbrowser):
@@ -1157,6 +1204,17 @@ def test_article_lineage_should_not_render_on_articles_without_channels(
 
 def test_article_lineage_should_not_render_on_administratives(testbrowser):
     browser = testbrowser('/zeit-online/article/administratives')
+    assert len(browser.cssselect('.article-lineage')) == 0
+
+
+def test_article_lineage_should_not_render_on_errorpage(testbrowser):
+    browser = testbrowser('/error/404')
+    assert len(browser.cssselect('.article-lineage')) == 0
+
+
+def test_article_lineage_should_not_render_on_paywall(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/01?C1-Meter-Status=always_paid')
     assert len(browser.cssselect('.article-lineage')) == 0
 
 

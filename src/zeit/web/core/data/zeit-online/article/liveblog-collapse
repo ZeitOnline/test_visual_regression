@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/G/Dirk-_Gieselmann/index">
+      <display_name>Dirk  Gieselmann</display_name>
+    </author>
+    <rankedTags>
+      <tag type="person">Warren Beatty</tag>
+      <tag type="person">Toni Erdmann</tag>
+      <tag type="person">Donald Trump</tag>
+      <tag type="person">Kevin Winter</tag>
+      <tag type="person">Barry Jenkins</tag>
+      <tag type="person">Asghar Farhadi</tag>
+    </rankedTags>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/thema/oscar" contenttype="centerpage-2009"/>
+    </references>
+    <image base-id="http://xml.zeit.de/kultur/film/2017-02/oscars-2017-warren-beatty/" type="jpg"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Dirk  Gieselmann</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments_premoderate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2018-03-22T16:05:27.362319+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2017-02-26T22:31:05.484617+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-03-22T16:06:11.915002+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2017-09-22T09:56:55.517908+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2017-09-22T09:01:04.210587+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2017-04-05T12:11:36.291110+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">liveblog-closed</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="hide_ligatus_recommendations">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2018-03-22T16:05:27+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stroebele</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="overscrolling">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/kultur/film/2017-02/b7fd5603-d7a4-45e0-9a0f-a86c159600f7.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">c6c51d2bfb9047579862aadbfdf00c14</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Kultur</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Was passiert bei den #Oscars nach dem Schaulaufen? Dirk Gieselmann verrät es auf unserem Liveblog.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Film</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-liveblog</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">1836</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:da4c1984-5e13-468f-aced-d488b0a90d51}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">9</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2017</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Oscars 2017</supertitle>
+    <title>Mit Warren Beatty zum Frühschoppen</title>
+    <subtitle>Einfach die falsche Karte gezogen: "La La Land" ist nicht der beste Film! "Toni Erdmann" auch nicht. Und Donald Trump hat nicht getwittert. Die Oscarnacht zum Nachlesen</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" title="oscars-2017-warren-beatty" alt="Warren Beatty" display_mode="column-width" variant_name="wide" is_empty="False" title_local="oscars-2017-warren-beatty" caption_local="Warren Beatty erklärt die Panne bei der Verkündung des Oscarpreisträgers für den besten Film." alt_local="Warren Beatty">
+        <bu>Warren Beatty erklärt die Panne bei der Verkündung des Oscarpreisträgers für den besten Film.</bu>
+        <copyright>© Kevin Winter/Getty Images</copyright>
+      </image>
+      <ul>
+        <li>Als <strong>bester Film</strong> wurde <a class="" href="http://www.zeit.de/kultur/film/2017-02/barry-jenkins-moonlight-oscars" target="_blank"><em>Moonlight</em></a> von Barry Jenkins ausgezeichnet, nachdem der Laudator Warren Beatty zunächst die Besetzung von <em>La La Land</em> als Preisträger auf die Bühne gebeten hatte.</li>
+        <li>Der deutsche Beitrag <a class="" href="http://www.zeit.de/kultur/film/2016-05/maren-ade-cannes-toni-erdmann-komik-interview" target="_blank"><em>Toni Erdmann</em></a> von Maren Ade war für einen <strong>Auslandsoscar</strong> nominiert, gewann die Trophäe aber nicht. Stattdessen wurde <em><a class="" href="http://www.zeit.de/2017/06/the-salesman-asghar-farhadi-film-iran" target="_blank">The Salesman</a></em> des iranischen Regisseurs Asghar Farhadi ausgezeichnet.</li>
+        <li>Die Auszeichnung für die <strong>beste männliche Hauptrolle</strong> gewann Casey Affleck (<a class="" href="http://www.zeit.de/2017/04/manchester-by-the-sea-kenneth-lonergan-kritik" target="_blank"><em>Manchester by the Sea</em></a>), diejenige für die <strong>beste weibliche Hauptrolle</strong> Emma Stone (<em><a class="" href="http://www.zeit.de/kultur/film/2017-01/la-la-land-musical-film-golden-globes-ryan-gosling-emma-stone" target="_blank">La La Land</a>).</em> Das Musical war 14 Mal nominiert und gewann sechs Preise, u. a. in den Kategorien <strong>Regie</strong>, <strong>Schnitt</strong> und <strong>Kamera</strong>.</li>
+        <li>Im vergangenen Jahr hat es die Debatte um <a class="" href="http://www.zeit.de/kultur/film/2016-01/oscars-nominierungen-2016-rassismus-oscarssowhite" target="_blank"><strong>#OscarsSoWhite</strong></a> gegeben. Diesmal wurden mehr schwarze Künstler als je zuvor nominiert. Mit Viola Davis und Mahershala Ali gewannen bereits zwei schwarze Schauspieler in der Kategorie der besten Nebendarsteller.</li>
+        <li>Der Moderator Jimmy Kimmel teilte zwar ein paar Mal gegen Donald Trump aus, die Preisträger hielten sich jedoch mit politischen Äußerungen weitestgehend zurück. Der iranische Regisseur Asghar Farhadi, der den Oscar für den besten fremdsprachigen Film gewann, war der Veranstaltung aus Protest gegen den von US-Präsident Trump verhängten Einreisestopp für Muslime aus sieben Ländern ferngeblieben. Über seine Vertreterin ließ er eine Erklärung verlesen, in der er davor warnte, die Welt in die Kategorien Freund oder Feind einzuteilen. </li>
+        <li>Hier finden Sie alle <a class="" href="http://www.zeit.de/thema/oscar" target="_blank">Beiträge zu den Oscaranwärtern</a>.</li>
+      </ul>
+      <p>Totam natus est doloribus quis repellendus, dicta architecto error commodi laudantium saepe. Ipsum commodi earum, consectetur praesentium aliquid neque dolorum id dicta.</p>
+      <p>Suscipit, tempora. Nobis unde velit impedit aliquid laudantium necessitatibus voluptatem, harum, cum quod culpa inventore, reiciendis nulla! Id modi odit enim, repudiandae.</p>
+      <liveblog blogID="275-446" collapse-preceding-content="True"/>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Oscars 2017</supertitle>
+    <title>Mit Warren Beatty zum Frühschoppen</title>
+    <text>Einfach die falsche Karte gezogen: "La La Land" ist nicht der beste Film! "Toni Erdmann" auch nicht. Und Donald Trump hat nicht getwittert. Die Oscarnacht zum Nachlesen</text>
+  </teaser>
+</article>

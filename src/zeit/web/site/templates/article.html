@@ -1,4 +1,12 @@
 {% extends "zeit.web.site:templates/content.html" %}
+
+{% block content %}
+    {{ super() }}
+    {% block lineage %}
+        {% include "zeit.web.site:templates/inc/article/lineage.tpl" %}
+    {% endblock lineage %}
+{% endblock content %}
+
 {% block content_ad_script -%}
 {% if view.advertising_enabled %}
 <script type="text/javascript">
@@ -11,7 +19,7 @@
     })();
 </script>
 {% endif %}
-{%- endblock %}
+{%- endblock content_ad_script %}
 
 {% block article_pages %}
     <section class="article-page" data-page-number="{{ view.current_page.number + 1 }}">
@@ -38,7 +46,6 @@
     {% include "zeit.web.site:templates/inc/article/pagination.tpl" %}
 {% endblock article_pagination %}
 
-
 {% block article_storystreamteaser_teaser %}
     {% include "zeit.web.site:templates/inc/article/storystreamteaser/article_storystreamteaser_teaser.tpl" %}
 {% endblock article_storystreamteaser_teaser %}
@@ -49,4 +56,4 @@
 
 {% block print %}
     {% include "zeit.web.core:templates/inc/article/print.tpl" %}
-{% endblock %}
+{% endblock print %}

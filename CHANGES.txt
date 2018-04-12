@@ -10,13 +10,21 @@ POSTDEPLOY
 3.140 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- TMS-203: Migrate lineage to elasticsearch (toggle `elasticsearch_lineage`)
+
+- SSL-201: Use correct community host setting to create links to userprofile
+
+- SSL-198: Switch to ssl asset host for css loading
+
+- SSL-190: Load fonts from https://static.zeit.de
 
 
 3.139 (2018-04-09)
 ------------------
 
 - ZON-4558: Make ZMO article pagination more core-ish
+
+- ZON-4476: Add liveblog property to collapse preceding content
 
 - ZON-4567: Suppress retresco body if article has keywords on a configured blacklist
 

@@ -1041,7 +1041,7 @@ def test_smoke_post_on_article(testserver, application):
 
 
 @pytest.mark.parametrize('toggle, host, path', [
-    (True, 'community_host', '/comment/edit/%cid%'),
+    (True, 'community_profile_url', '/comment/edit/%cid%'),
     (False, 'community_admin_host',
      '/9e7bf051-2299-43e4-b5e6-1fa81d097dbd/thread/%cid%')])
 def test_moderation_url_should_be_set_according_to_toggle(
