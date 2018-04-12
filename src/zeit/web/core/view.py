@@ -259,7 +259,7 @@ class Base(object):
         if self.context.banner_content is False:
             return False
         else:
-            return True
+            return self.advertising_enabled
 
     @zeit.web.reify
     def adcontroller_handle(self):
