@@ -420,6 +420,7 @@ def test_block_citation_should_contain_expected_structure(tplbrowser):
 def test_block_contentadblock_should_contain_expected_structure(tplbrowser):
     view = mock.Mock()
     page = mock.Mock()
+    page.number = 0
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/contentadblock.html',
         view=view, page=page)
