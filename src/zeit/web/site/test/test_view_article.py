@@ -1009,16 +1009,16 @@ def test_missing_keyword_links_are_replaced(testbrowser):
     assert keyword.get('href').endswith('/thema/wein')
 
 
-def test_article_has_print_function(testbrowser):
+def test_article_has_print_menu(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/zeit-online/article/01?print'))
 
 
-def test_multi_page_article_has_print_link(testbrowser):
+def test_multi_page_article_has_print_menu(testbrowser):
     browser = testbrowser('/zeit-online/article/tagesspiegel')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/zeit-online/article/tagesspiegel/komplettansicht?print'))
 

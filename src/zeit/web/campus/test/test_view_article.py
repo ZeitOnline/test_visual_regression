@@ -239,16 +239,16 @@ def test_article_header_default_considers_image_layout(testbrowser):
     assert image.get('data-ratio') == '1.77777777778'
 
 
-def test_article_has_print_function(testbrowser):
+def test_article_has_print_menu(testbrowser):
     browser = testbrowser('/campus/article/debate')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/campus/article/debate?print'))
 
 
-def test_multi_page_article_has_print_link(testbrowser):
+def test_multi_page_article_has_print_menu(testbrowser):
     browser = testbrowser('/campus/article/paginated')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/campus/article/paginated/komplettansicht?print'))
 
