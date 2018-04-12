@@ -40,11 +40,11 @@ class TeaserBlock(grokcore.component.MultiAdapter):
                 self._v_first_content) and (
                 self._v_first_content.access == 'abo')):
             return True
-        return super(TeaserBlock, self).force_mobile_image
+        return self.module.force_mobile_image
 
     @force_mobile_image.setter
     def force_mobile_image(self, value):
-        super(TeaserBlock, self).force_mobile_image = value
+        self.module.force_mobile_image = value
 
     @property
     def layout(self):
@@ -58,7 +58,7 @@ class TeaserBlock(grokcore.component.MultiAdapter):
                 id = self.override_layout_id
                 return zeit.content.cp.layout.BlockLayout(
                     id, id, areas=[], image_pattern=id)
-        return super(TeaserBlock, self).layout
+        return self.module.layout
 
 
 # Since we register for 'teaser', we can implicitly assume that context
