@@ -7,7 +7,7 @@ POSTDEPLOY
 - Remove obsoleted `render_404` from feature-toggles.xml
 
 
-3.140 (unreleased)
+3.140 (2018-04-12)
 ------------------
 
 - ZON-4583: Ligatus Enhancements
