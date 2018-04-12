@@ -25,6 +25,7 @@ def test_asset_host_supports_url_prefix(dummy_request):
     dummy_request.application_url = 'http://example.com/foo'
     assert dummy_request.asset_host == 'http://example.com/foo/assets'
 
+
 def test_asset_host_should_be_neutral_to_protocol(dummy_request):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['asset_prefix'] = '//assets.example.com/'
