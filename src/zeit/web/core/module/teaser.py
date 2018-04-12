@@ -40,9 +40,6 @@ class TeaserBlock(grokcore.component.MultiAdapter):
                 self._v_first_content) and (
                 self._v_first_content.access == 'abo')):
             return True
-        elif zeit.web.core.template.branding(
-                self._v_first_content) == 'brandeins':
-            return True
         return super(TeaserBlock, self).force_mobile_image
 
     @force_mobile_image.setter
