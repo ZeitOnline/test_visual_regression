@@ -1,4 +1,5 @@
 import pytest
+import zeit.web.core.application
 
 
 def test_ligatus_zar_article_has_access_value(testbrowser, togglepatch):
@@ -155,6 +156,38 @@ def test_ligatus_has_no_tag_when_special_is_missing(testbrowser):
     assert not browser.cssselect('meta[property="ligatus:special"]')
 
 
+@pytest.mark.parametrize('param', [
+    ('/arbeit/article/paginated', 'False'),
+    ('/arbeit/article/paginated/seite-3', 'True'),
+    ('/arbeit/article/paginated/komplettansicht', 'True'),
+    ('/campus/article/02-beziehung-schluss-machen', 'False'),
+    ('/campus/article/02-beziehung-schluss-machen/seite-2', 'True'),
+    ('/campus/article/02-beziehung-schluss-machen/komplettansicht', 'True'),
+    ('/zeit-magazin/article/03', 'False'),
+    ('/zeit-magazin/article/03/seite-4', 'True'),
+    ('/zeit-magazin/article/03/komplettansicht', 'True'),
+    ('/zeit-online/article/zeit', 'False'),
+    ('/zeit-online/article/zeit/seite-2', 'True'),
+    ('/zeit-online/article/zeit/komplettansicht', 'True')
+])
+def test_ligatus_indexing_only_on_first_page(testbrowser, param):
+    browser = testbrowser(param[0])
+    meta = browser.cssselect('meta[property="ligatus:do_not_index"]')
+    assert meta[0].get('content') == param[1]
+
+
+@pytest.mark.parametrize('param', [
+    ('/arbeit/article/advertorial', 'True'),
+    ('/campus/article/advertorial', 'True'),
+    ('/zeit-magazin/article/advertorial', 'True'),
+    ('/zeit-online/article/advertorial', 'True')
+])
+def test_ligatus_do_not_index_advertorials(testbrowser, param):
+    browser = testbrowser(param[0])
+    meta = browser.cssselect('meta[property="ligatus:do_not_index"]')
+    assert meta[0].get('content') == param[1]
+
+
 def test_ligatus_can_be_toggled_globally(testbrowser, togglepatch):
     togglepatch({
         'ligatus': False,
@@ -205,3 +238,24 @@ def test_ligatus_can_be_toggled_for_verticals(testbrowser, togglepatch):
     browser = testbrowser('/zeit-online/article/simple')
     assert browser.cssselect('#ligatus')
     assert browser.cssselect('script[src*=".ligatus.com"]')
+
+
+def test_ligatus_is_shown_below_special_content(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus', 'ligatus_on_site')
+
+    browser = testbrowser('/zeit-online/video/3537342483001')
+    assert browser.cssselect('#ligatus')
+    assert browser.cssselect('script[src*=".ligatus.com"]')
+
+    browser = testbrowser('/zeit-online/gallery/biga_1')
+    assert browser.cssselect('#ligatus')
+    assert browser.cssselect('script[src*=".ligatus.com"]')
+
+
+def test_ligatus_is_not_shown_if_ads_disabled(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'ligatus', 'ligatus_on_magazin')
+
+    browser = testbrowser('/zeit-magazin/article/nobanner')
+    assert not browser.cssselect('#ligatus')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')

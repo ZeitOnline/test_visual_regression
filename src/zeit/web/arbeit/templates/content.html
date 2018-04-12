@@ -1,5 +1,9 @@
 {% extends 'zeit.web.arbeit:templates/layout.html' %}
 
+{% block ligatus_include %}
+    {%- include "zeit.web.core:templates/inc/meta/ligatus.html" -%}
+{% endblock %}
+
 {% block schemaorg_data %}
     {%- include "zeit.web.core:templates/inc/meta/schemaorg.html" -%}
 {% endblock %}

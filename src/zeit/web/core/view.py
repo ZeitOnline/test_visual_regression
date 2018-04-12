@@ -1051,6 +1051,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
         return (
             zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
             zeit.web.core.application.FEATURE_TOGGLES.find(verticaltoggle) and
+            self.advertising_enabled and
             not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
@@ -1066,6 +1067,20 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             ligatus_special_output.append(self.serie)
 
         return ligatus_special_output
+
+    @zeit.web.reify
+    def ligatus_do_not_index(self):
+        if getattr(self.context, 'no_ligatus_indexing_allowed', False):
+            return True
+        if getattr(self, 'is_advertorial', None):
+            return True
+        # galleries or videos do not have pagination: so be defensive!
+        if getattr(self, 'pagination', None):
+            if getattr(self, 'is_all_pages_view', False):
+                return True
+            elif self.pagination.get('current') > 1:
+                return True
+        return False
 
     @zeit.web.reify
     def nextread(self):
