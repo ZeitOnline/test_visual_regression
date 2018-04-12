@@ -101,8 +101,8 @@ def test_salvageable_pagination_should_redirect_to_article_page(testserver):
     assert resp.status_code == 301
 
 
-def test_vgwort_pixel_should_be_present(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_vgwort_pixel_should_be_present(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-magazin/article/01')
     pixel = browser.cssselect('body img[src^="http://example.com"]')
     assert len(pixel) == 1
@@ -168,11 +168,10 @@ def test_pyramid_settings_and_settings_utility_are_the_same(application):
 
 
 def test_scheme_for_home_route_urls_depends_on_https_feature_toggle(
-        dummy_request,
-        togglepatch):
-    togglepatch({'https': True})
+        dummy_request):
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
     # This has to be set for our dummy request
     dummy_request.environ['SERVER_NAME'] = "foo"
     assert dummy_request.route_url('home').startswith('https:')
-    togglepatch({'https': False})
+    zeit.web.core.application.FEATURE_TOGGLES.unset('https')
     assert not dummy_request.route_url('home').startswith('https:')

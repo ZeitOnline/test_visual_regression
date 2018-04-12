@@ -1,12 +1,5 @@
 {% extends "zeit.web.site:templates/content.html" %}
 
-{% block content %}
-    {{ super() }}
-    {% block lineage %}
-        {% include "zeit.web.site:templates/inc/article/lineage.tpl" %}
-    {% endblock lineage %}
-{% endblock content %}
-
 {% block content_ad_script -%}
 {% if view.advertising_enabled %}
 <script type="text/javascript">
@@ -57,3 +50,7 @@
 {% block print %}
     {% include "zeit.web.core:templates/inc/article/print.tpl" %}
 {% endblock print %}
+
+{% block lineage %}
+    {% include "zeit.web.site:templates/inc/article/lineage.tpl" %}
+{% endblock lineage %}

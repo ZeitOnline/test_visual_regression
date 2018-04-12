@@ -582,8 +582,8 @@ def test_jquery_not_in_window_scope(testserver, selenium_driver):
     assert 'undefined' == selenium_driver.execute_script(script)
 
 
-def test_webtrekk_tracking_id_is_defined(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_webtrekk_tracking_id_is_defined(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/article/simple')
     assert 'window.webtrekkConfig.trackId = "674229970930653";' in (
         browser.contents)
