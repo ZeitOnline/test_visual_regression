@@ -10,6 +10,8 @@ POSTDEPLOY
 3.140 (unreleased)
 ------------------
 
+- TMS-203: Migrate lineage to elasticsearch (toggle `elasticsearch_lineage`)
+
 - SSL-201: Use correct community host setting to create links to userprofile
 
 - SSL-198: Switch to ssl asset host for css loading

@@ -420,15 +420,6 @@ def test_cp2015_redirect_can_be_disabled(application):
     view()
 
 
-def test_content_view_should_provide_lineage_property(
-        application, dummy_request):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    content = zeit.web.core.view.Content(context, dummy_request)
-    assert len(content.lineage) == 2
-    assert all(isinstance(l, dict) for l in content.lineage)
-
-
 def test_ispaginated_predicate_should_handle_get_parameter():
     ip = zeit.web.core.view.is_paginated
     assert ip(None, mock.Mock(GET={})) is False

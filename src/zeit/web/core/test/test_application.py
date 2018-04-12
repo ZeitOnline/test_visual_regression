@@ -126,7 +126,7 @@ def test_assets_have_configurable_cache_control_header(testbrowser):
 
 
 def test_feature_toggle_source_should_be_parsed(application):
-    assert zeit.web.core.application.FEATURE_TOGGLES.find('article_lineage')
+    assert zeit.web.core.application.FEATURE_TOGGLES.find('dtag_navigation')
     assert not zeit.web.core.application.FEATURE_TOGGLES.find('dummy')
     assert not zeit.web.core.application.FEATURE_TOGGLES.find('nonexistent')
 
