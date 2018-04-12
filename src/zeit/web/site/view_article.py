@@ -209,6 +209,18 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         pubinfo = zeit.cms.workflow.interfaces.IPublishInfo(cp, None)
         return getattr(pubinfo, 'published', False)
 
+    @zeit.web.reify
+    def liveblog(self):
+        return zeit.web.core.interfaces.ILiveblogInfo(self.context)
+
+    @zeit.web.reify
+    def advertising_in_article_enabled(self):
+        if self.advertising_enabled:
+            if self.liveblog.collapse_preceding_content:
+                return False
+
+        return self.advertising_enabled
+
 
 @zeit.web.view_defaults(vertical='zon')
 @zeit.web.view_config(
@@ -311,20 +323,13 @@ class LiveblogArticle(Article):
 
     header_layout = 'liveblog'
 
-    @zeit.web.reify
-    def liveblog(self):
-        return zeit.web.core.interfaces.ILiveblogInfo(self.context)
-
 
 @zeit.web.view_config(
     route_name='amp',
     renderer='templates/amp/article.html')
 class AcceleratedMobilePageArticle(
         zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
-
-    @zeit.web.reify
-    def liveblog(self):
-        return zeit.web.core.interfaces.ILiveblogInfo(self.context)
+    pass
 
 
 @zeit.web.view_config(

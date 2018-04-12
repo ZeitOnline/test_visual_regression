@@ -43,20 +43,6 @@ def test_article_should_have_correct_breadcrumb_structure(testbrowser):
     assert len(breadcrumbs_links) == 2
 
 
-def test_keyword_index_pages_should_fall_back_to_xslt(testserver):
-    resp = requests.get(
-        '%s/schlagworte/index/A/index' % testserver.url,
-        allow_redirects=False)
-    assert resp.status_code == 303
-    assert resp.headers['x-render-with'] == 'default'
-
-    resp = requests.get(
-        '%s/schlagworte/themen/A/index' % testserver.url,
-        allow_redirects=False)
-    assert resp.status_code == 303
-    assert resp.headers['x-render-with'] == 'default'
-
-
 def test_keyword_pages_should_send_redirect(testserver):
     resp = requests.get(
         '%s/schlagworte/orte/berlin/index' % testserver.url,

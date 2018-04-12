@@ -885,7 +885,7 @@ class CommentMixin(object):
                 conf.get('community_admin_host').rstrip('/'), uuid)
         else:
             return u'{}/comment/edit/%cid%'.format(
-                conf.get('community_host').rstrip('/'))
+                conf.get('community_profile_url').rstrip('/'))
 
 
 class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
@@ -1045,8 +1045,12 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def ligatus(self):
+        # self.package is "zeit.web.arbeit"
+        shortpackage = self.package.replace('zeit.web.', '')
+        verticaltoggle = 'ligatus_on_{}'.format(shortpackage)
         return (
             zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
+            zeit.web.core.application.FEATURE_TOGGLES.find(verticaltoggle) and
             not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
@@ -1242,13 +1246,6 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
 @pyramid.view.notfound_view_config()
 def not_found(request):
-    # BBB: Remove this once we're satisfied with rendering it ourselves.
-    if not zeit.web.core.application.FEATURE_TOGGLES.find('render_404'):
-        return pyramid.response.Response(
-            'Status 404: Dokument nicht gefunden.', 404,
-            [('X-Render-With', 'default'),
-             ('Content-Type', 'text/plain; charset=utf-8')])
-
     if request.path.startswith('/error/404'):  # Safetybelt
         log.warn('404 for /error/404, returning synthetic response instead')
         return pyramid.response.Response(
@@ -1279,18 +1276,6 @@ def render_not_found_body(hostname):
 def invalid_unicode_in_request(request):
     body = 'Status 400: Invalid unicode data in request.'
     return pyramid.response.Response(body, 400)
-
-
-def surrender(context, request):
-    return pyramid.response.Response(
-        'OK', 303, headerlist=[('X-Render-With', 'default')])
-
-
-@zeit.web.view_config(route_name='blacklist')
-def blacklist(context, request):
-    return pyramid.httpexceptions.HTTPNotImplemented(
-        headers=[('X-Render-With', 'default'),
-                 ('Content-Type', 'text/plain; charset=utf-8')])
 
 
 @zeit.web.view_config(
