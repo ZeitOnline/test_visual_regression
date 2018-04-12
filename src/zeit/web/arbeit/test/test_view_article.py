@@ -89,9 +89,15 @@ def test_zar_article_zplus_comments_not_under_abo_article(testbrowser):
 def test_zar_article_paginated_has_headerimage_only_on_first_page(testbrowser):
     browser = testbrowser('/arbeit/article/01-digitale-nomaden')
     assert len(browser.cssselect('div[data-ct-row="headerimage"] img')) == 1
+    assert len(browser.cssselect('.article-body .article__media img')) == 1
 
     browser = testbrowser('/arbeit/article/01-digitale-nomaden/seite-2')
     assert not browser.cssselect('div[data-ct-row="headerimage"]')
+    assert len(browser.cssselect('.article-body .article__media img')) == 1
+
+    browser = testbrowser('/arbeit/article/01-digitale-nomaden/seite-3')
+    assert not browser.cssselect('div[data-ct-row="headerimage"]')
+    assert len(browser.cssselect('.article-body .article__media img')) == 1
 
     browser = testbrowser(
         '/arbeit/article/01-digitale-nomaden/komplettansicht')
