@@ -1,5 +1,4 @@
 import pytest
-import zeit.web.core.application
 
 import zeit.web.core.application
 
@@ -158,7 +157,6 @@ def test_ligatus_has_no_tag_when_special_is_missing(testbrowser):
     assert not browser.cssselect('meta[property="ligatus:special"]')
 
 
-<<<<<<< 58c2b364a942ef8b94ea9412871be01fd93b3447
 @pytest.mark.parametrize('param', [
     ('/arbeit/article/paginated', 'False'),
     ('/arbeit/article/paginated/seite-3', 'True'),
