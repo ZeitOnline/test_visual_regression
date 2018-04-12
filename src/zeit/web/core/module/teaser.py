@@ -10,6 +10,13 @@ import zeit.web.core.template
 
 
 class TeaserBlock(grokcore.component.MultiAdapter):
+    """Provides the mechanical basis for dispatch_teaser_via_contenttype().
+
+    It proxies all attributes to the underlying
+    zeit.content.cp.interfaces.ITeaserBlock object (=self.context), except for
+    `layout`, where subclasses can set `override_layout_id` for an easy
+    override.
+    """
 
     grokcore.component.baseclass()
     grokcore.component.provides(zeit.web.core.interfaces.IBlock)
@@ -66,6 +73,10 @@ class TeaserBlock(grokcore.component.MultiAdapter):
 # context.type.
 @zeit.web.register_module('teaser')
 def dispatch_teaser_via_contenttype(context):
+    """Supports having different IBlock implementations according to what kind
+    of content object is contained in the ITeaserBlock.
+    (See zeit.web.magazin.module.teaser for an example)
+    """
     try:
         teaser = list(context)[0]
     except (IndexError, TypeError):
@@ -84,6 +95,10 @@ def module_for_auto_teaser(context):
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.cms.interfaces.ICMSContent)
 class ContentTeaserBlock(TeaserBlock):
+    """This is the default IBlock/'teaser' implementation, which has no special
+    behaviour and thus proxies everything through to the vivi module object.
+    (XXX except for the storystream layout handling, sigh)
+    """
 
     @property
     def layout(self):
