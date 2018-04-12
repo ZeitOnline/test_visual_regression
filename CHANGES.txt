@@ -8,7 +8,7 @@ POSTDEPLOY
 3.141 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- MAINT: Replace `togglepatch` fixture by built-in override functionality from 8fe69a5
 
 
 3.140 (2018-04-12)
