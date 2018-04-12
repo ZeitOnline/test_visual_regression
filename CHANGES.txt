@@ -4,8 +4,6 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- Remove obsoleted `render_404` from feature-toggles.xml
-
 
 3.141 (unreleased)
 ------------------
