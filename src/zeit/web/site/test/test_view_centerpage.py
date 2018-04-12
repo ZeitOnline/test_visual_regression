@@ -3113,11 +3113,11 @@ def test_brandeins_teaser_kicker_should_contain_logo(testbrowser):
 
 def test_brandeins_teaser_should_force_mobile_images(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/teasers-to-brandeins')
-    figures = browser.cssselect('figure[class*="teaser-small"]')
+    figures = browser.cssselect('.cp-area--brandeins .teaser-small__media')
 
     assert figures
     for figure in figures:
-        assert '__media--force-mobile' in figure.get('class')
+        assert 'teaser-small__media--force-mobile' in figure.get('class')
 
 
 def test_brandeins_teaser_should_display_its_image_on_mobile(
