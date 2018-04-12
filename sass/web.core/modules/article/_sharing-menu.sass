@@ -1,5 +1,5 @@
 .sharing-menu
-	margin: remify(20px -7px 56px 0)
+	margin: remify(20px 0 56px)
 
 	&__items
 		+clearfix
@@ -9,15 +9,16 @@
 
 	&__item
 		float: left
+		line-height: remify(34px)
 		margin-right: remify(7px)
+
 		&--printbutton
-			float: right
+			display: none
 
 	&__link
 		border-radius: 4px
 		color: $white
 		display: block
-		line-height: remify(34px)
 		min-height: remify(40px)
 		min-width: remify(40px)
 		text-align: center
@@ -83,7 +84,6 @@
 	+respond-min($break-tablet-min)
 
 		&__item
-			margin-bottom: remify(7px)
 			&--whatsapp,
 			&--messenger
 				display: none
@@ -97,3 +97,10 @@
 				margin-right: remify(11px)
 		&__text
 			display: inline
+
+	+respond-min($break-desktop-min)
+		&__item
+			&--printbutton
+				display: list-item
+				float: right
+				margin-right: 0
