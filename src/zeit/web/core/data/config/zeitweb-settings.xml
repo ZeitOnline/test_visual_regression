@@ -78,6 +78,10 @@
   <setting name="webtrekk_version" xsi:type="xsd:string">4.3.1</setting>
   <setting name="webtrekk_id" xsi:type="xsd:string">674229970930653</setting>
 
+  <!--Comma separated list of fqdns.-->
+  <!--All links will be transformed to https.-->
+  <setting name="transform_to_secure_links_for" xsi:type="xsd:string">www.zeit.de,blog.zeit.de</setting>
+
   <setting name="varnish_caching_time_content" xsi:type="xsd:int">3600</setting>
   <setting name="varnish_caching_time_sitemap" xsi:type="xsd:int">0</setting>
 

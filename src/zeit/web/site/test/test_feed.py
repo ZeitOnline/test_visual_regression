@@ -169,8 +169,7 @@ def test_roost_feed_contains_mobile_override_text(testserver,
                                                   preserve_settings):
     feed_path = '/zeit-magazin/centerpage/index/rss-roost'
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['transform_to_secure_links_for'] = []
-
+    settings['transform_to_secure_links_for'] = ''
     res = requests.get(
         testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
 

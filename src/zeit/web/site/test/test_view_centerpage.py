@@ -318,7 +318,7 @@ def test_topic_links_title_schould_have_a_value_and_default_value(application):
 def test_centerpage_view_should_have_topic_links(
         application, preserve_settings):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['transform_to_secure_links_for'] = ['www.zeit.de']
+    settings['transform_to_secure_links_for'] = 'www.zeit.de'
 
     mycp = zeit.content.cp.centerpage.CenterPage()
     mycp.topiclink_label_1 = 'Label 1'
