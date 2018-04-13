@@ -7,7 +7,7 @@
 			{{- (view.liveblog.last_modified or view.date_last_modified) | format_date('short') -}}
 		</span>
 		<span class="liveblog-status__meta-updated">
-		{%- if view.liveblog.is_live or view.liveblog.is_slow -%}
+		{%- if view.liveblog.is_live -%}
 			{{ (view.liveblog.last_modified or view.date_last_modified) | format_date('timedelta') }} aktualisiert
 		{%- else -%}
 			Liveblog abgeschlossen
