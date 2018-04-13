@@ -17,14 +17,12 @@ import pyramid.view
 import pyramid.httpexceptions
 import zope.component
 
-from zeit.solr import query as lq
 import zeit.cms.content.interfaces
 import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.push.interfaces
-import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.application
@@ -1034,53 +1032,6 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
                         "d. MMMM yyyy", locale="de_De")
                 return label
 
-    @zeit.web.reify('default_term')
-    def lineage(self):
-        if self.is_advertorial or not self.context.channels or (
-                self.ressort == 'administratives'):
-            return None
-
-        conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-
-        def next(from_, to, sort):
-            query = lq.and_(
-                lq.datetime_range(
-                    'date_first_released', from_, to),
-                lq.bool_field(
-                    'breaking_news', False),
-                lq.field_raw(
-                    'type', 'article'),
-                lq.not_(
-                    lq.field('uniqueId', self.context.uniqueId)),
-                lq.not_(
-                    lq.field('ressort', 'zeit-magazin')),
-                lq.not_(
-                    lq.field('ressort', 'Campus')),
-                lq.text_range('channels', None, None),
-                lq.field_raw(
-                    'product_id', lq.or_(
-                        'ZEDE', 'ZEI', 'ZECH', 'ZEC', 'ZEOE', 'ZES', 'ZTWI',
-                        'ZTGS', 'ZTCS', 'CSRG', 'ZSF', 'KINZ')),
-                lq.field(
-                    'published', 'published'))
-            with zeit.web.core.metrics.timer('lineage.solr.reponse_time'):
-                return conn.search(query, sort='date_first_released ' + sort,
-                                   fl='title supertitle uniqueId', rows=1).docs
-
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_first_released
-
-        default = [{
-            'title': 'Startseite',
-            'supertitle': '',
-            'uniqueId': 'http://xml.zeit.de/index'}]
-        predecessor = next(None, date, 'desc') or default
-        successor = next(date, None, 'asc') or default
-        if predecessor is default or successor is default:
-            return zeit.web.dont_cache(predecessor + successor)
-
-        return predecessor + successor
-
     @zeit.web.reify
     def webtrekk(self):
         webtrekk = super(Content, self).webtrekk
@@ -1100,6 +1051,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
         return (
             zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
             zeit.web.core.application.FEATURE_TOGGLES.find(verticaltoggle) and
+            self.advertising_enabled and
             not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
@@ -1115,6 +1067,20 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             ligatus_special_output.append(self.serie)
 
         return ligatus_special_output
+
+    @zeit.web.reify
+    def ligatus_do_not_index(self):
+        if getattr(self.context, 'no_ligatus_indexing_allowed', False):
+            return True
+        if getattr(self, 'is_advertorial', None):
+            return True
+        # galleries or videos do not have pagination: so be defensive!
+        if getattr(self, 'pagination', None):
+            if getattr(self, 'is_all_pages_view', False):
+                return True
+            elif self.pagination.get('current') > 1:
+                return True
+        return False
 
     @zeit.web.reify
     def nextread(self):
@@ -1133,10 +1099,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             *[t.uniqueId for t in self.nextread])
 
 
-# XXX align-route-config-uris: Ensure downward compatibility until
-# corresponding varnish changes have been deployed. Remove afterwards.
 @zeit.web.view_config(route_name='health_check')
-@zeit.web.view_config(route_name='health_check_XXX')  # XXX remove
 def health_check(request):
     """ View callable to perform a health a check by checking,
         if the configured repository path exists.
