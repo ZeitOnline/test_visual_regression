@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - BUG-891: Fix print button on advertorials
 
+- BUG-893: Clear floating advertisements before fullwidth block content
+
 - MAINT: Remove obsolete route config for `/health_check`
 
 - MAINT: Move 'transform_to_secure_links_for' setting to web-settings
