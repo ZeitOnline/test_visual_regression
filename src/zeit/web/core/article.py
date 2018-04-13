@@ -362,16 +362,8 @@ class LiveblogInfo(object):
 
     @property
     def is_live(self):
-        if self.context.header_layout == 'liveblog-closed':
-            return False
-        elif self.liveblog:
-            return self.liveblog.is_live
-
-    @property
-    def is_slow(self):
         if self.liveblog:
-            return (self.liveblog.is_live and
-                    self.context.header_layout == 'liveblog-closed')
+            return self.liveblog.is_live
 
     @property
     def last_modified(self):
