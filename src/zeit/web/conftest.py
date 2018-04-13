@@ -92,6 +92,7 @@ def app_settings(mockserver):
         'cookie_fallback_domain': 'localhost',
         'comment_page_size': '4',
         'community_host': mockserver.url + '/comments',
+        'community_profile_url': 'https://community.zeit.de',
         'community_admin_host': 'http://community_admin',
         'community_static_host': 'http://static_community',
         'community_maintenance': (
@@ -228,10 +229,10 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/series.xml'),
         'vivi_zeit.web_feature-toggle-source': (
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
-        'vivi_zeit.web_blacklist-url': (
-            'egg://zeit.web.core/data/config/blacklist.xml'),
         'vivi_zeit.imp_scale-source':
             'egg://zeit.web.core/data/config/scales.xml',
+        'vivi_zeit.web_intextlink-blacklist-url': (
+            'egg://zeit.web.core/data/config/intextlink-blacklist.xml'),
         'vivi_zeit.content.link_source-blogs': (
             'egg://zeit.web.core/data/config/blogs_meta.xml'),
         'vivi_zeit.push_facebook-accounts': (
@@ -723,32 +724,6 @@ def mock_metrics(monkeypatch):
         zeit.web.core.metrics.mock_contextmanager)
     monkeypatch.setattr(
         zeit.web.core.metrics, 'increment', lambda *args: None)
-
-
-@pytest.fixture
-def togglepatch(monkeypatch):
-
-    class ToggleOverride(object):
-        def __init__(self, toggles):
-            self.original_find = zeit.web.core.application.FEATURE_TOGGLES.find
-            self.toggles = toggles
-
-        def find(self, arg):
-            try:
-                return self.toggles[arg]
-            except KeyError:
-                return self.original_find(arg)
-
-    def patch(patched_toggles):
-        # We alter the "find" method of the original FEATURE_TOGGLE Source.
-        # As a result, Friedbert will use our "find" method to determine
-        # the value of a toggle. And our "find" method looks into the
-        # patched dict first, and then into the original Source.
-        monkeypatch.setattr(
-            zeit.web.core.application.FEATURE_TOGGLES,
-            'find', ToggleOverride(patched_toggles).find)
-
-    return patch
 
 
 @pytest.fixture

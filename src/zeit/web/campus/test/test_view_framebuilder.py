@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import zeit.web.core.application
 
+import zope.component
+
 
 def test_campus_framebuilder_accepts_banner_channel_parameter(
-        selenium_driver, testserver, monkeypatch):
+        selenium_driver, testserver):
 
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver = selenium_driver
 
     # avoid "diuquilon", which is added by JS for specific screen sizes
@@ -79,3 +80,11 @@ def test_campus_framebuilder_loads_slimmed_script_file(testbrowser):
     browser = testbrowser('/campus/framebuilder')
     scripts = browser.cssselect('body script')
     assert scripts[-1].get('src').endswith('/js/web.campus/frame.js')
+
+
+def test_campus_framebuilder_uses_static_ssl_url(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['ssl_asset_prefix'] = 'https://static.zeit.de/static/latest/'
+    browser = testbrowser('/campus/framebuilder')
+    urls = browser.contents.count('https://static.zeit.de/static/latest/')
+    assert urls == 6

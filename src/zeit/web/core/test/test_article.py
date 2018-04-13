@@ -2,6 +2,7 @@ import lxml.etree
 import mock
 import zope.component
 
+from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
 import zeit.content.article.article
 import zeit.content.article.edit.interfaces
@@ -41,8 +42,7 @@ def test_retresco_body_should_respect_toggle_off(application, monkeypatch):
 
 
 def test_retresco_body_should_respect_seo_flag(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'enable_intext_links': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
 
     get_article_body = mock.Mock(return_value='')
     monkeypatch.setattr(
@@ -56,8 +56,7 @@ def test_retresco_body_should_respect_seo_flag(application, monkeypatch):
 
 
 def test_retresco_body_should_replace_xml_body(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'enable_intext_links': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['retresco_timeout'] = 0.42
@@ -76,8 +75,7 @@ def test_retresco_body_should_replace_xml_body(application, monkeypatch):
 
 
 def test_retresco_body_xml_should_be_cached(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'enable_intext_links': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
     get_article_body = mock.Mock(
         return_value='<body><a href="http://foo">topicpage</a></body>')
     monkeypatch.setattr(
@@ -98,3 +96,27 @@ def test_skips_blocks_with_errors(application):
         pbox.side_effect = RuntimeError('provoked')
         pages = zeit.web.core.article.pages_of_article(article)
     assert len(pages) == 1
+
+
+def test_editable_body_should_calculate_values_only_once(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    m1 = article.body.values()[0]
+    m2 = article.body.values()[0]
+    assert m1 is m2
+
+
+def test_retresco_body_is_not_used_for_articles_with_keywords_on_blacklist(
+        application, monkeypatch, workingcopy):
+    zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
+    get_article_body = mock.Mock(return_value='<body/>')
+    monkeypatch.setattr(
+        zeit.retresco.connection.TMS, 'get_article_body', get_article_body)
+
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    with checked_out(article) as co:
+        co.keywords = (zeit.retresco.tag.Tag('Jedi-Ritter', 'organisation'),)
+
+    zeit.content.article.edit.interfaces.IEditableBody(article)
+    assert not get_article_body.called

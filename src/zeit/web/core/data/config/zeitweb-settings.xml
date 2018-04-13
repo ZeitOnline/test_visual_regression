@@ -27,6 +27,7 @@
 
   <setting name="comment_page_size" xsi:type="xsd:int">4</setting>
   <setting name="community_host_timeout_secs" xsi:type="xsd:int">10</setting>
+  <setting name="community_profile_url" xsi:type="xsd:string">https://community.zeit.de</setting>
 
   <setting name="mailjet_timeout" xsi:type="xsd:int">1</setting>
   <setting name="mailjet_sender" xsi:type="xsd:string">zon-backend@zeit.de</setting>
@@ -63,6 +64,8 @@
   <setting name="newsletter_content_host" xsi:type="xsd:string">http://www.zeittest.de</setting>
 
   <setting name="asset_prefix" xsi:type="xsd:string">/static/latest</setting>
+  <!-- needs https://static.zeit.de/static/{version} in production and staging -->
+  <setting name="ssl_asset_prefix" xsi:type="xsd:string">/static/latest</setting>
   <setting name="image_prefix" xsi:type="xsd:string"></setting>
   <setting name="jsconf_prefix" xsi:type="xsd:string">/config</setting>
   <setting name="fbia_prefix" xsi:type="xsd:string">/fbia</setting>

@@ -81,7 +81,7 @@ def comment_to_dict(comment):
 
     if comment.xpath('author/@url'):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        profile_url = (conf.get('community_host', '') +
+        profile_url = (conf.get('community_profile_url', '') +
                        comment.xpath('author/@url')[0])
 
     if comment.xpath('content/text()'):

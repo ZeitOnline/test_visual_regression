@@ -45,17 +45,16 @@ def test_framebuilder_contains_no_webtrekk(testbrowser):
     assert 'webtrekk' not in browser.contents
 
 
-def test_framebuilder_can_contain_webtrekk(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_framebuilder_can_contain_webtrekk(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/framebuilder?webtrekk')
     webtrekk_script = browser.cssselect(
         'script[src^="https://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
 
 
-def test_framebuilder_sets_webtrekk_values_differently(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_framebuilder_sets_webtrekk_values_differently(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/framebuilder?webtrekk')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -89,8 +88,8 @@ def test_framebuilder_contains_no_meetrics(testbrowser):
     assert len(meetrics_script) == 0
 
 
-def test_framebuilder_can_contain_meetrics(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_framebuilder_can_contain_meetrics(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/framebuilder?meetrics')
     meetrics_script = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -142,10 +141,9 @@ def test_framebuilder_should_have_login_cut_mark(testbrowser):
 
 
 def test_framebuilder_accepts_banner_channel_parameter(
-        selenium_driver, testserver, monkeypatch):
+        selenium_driver, testserver):
 
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver = selenium_driver
 
     # avoid "diuquilon", which is added by JS for specific screen sizes
@@ -229,17 +227,16 @@ def test_framebuilder_minimal_contains_no_webtrekk(testbrowser):
     assert 'webtrekk' not in browser.contents
 
 
-def test_framebuilder_minimal_can_contain_webtrekk(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_framebuilder_minimal_can_contain_webtrekk(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/framebuilder?minimal&webtrekk')
     webtrekk_script = browser.cssselect(
         'script[src^="https://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
 
 
-def test_framebuilder_minimal_sets_webtrekk_values_differently(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_framebuilder_minimal_sets_webtrekk_values_differently(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/framebuilder?minimal&webtrekk')
     assert ('wt.contentId = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
@@ -276,10 +273,9 @@ def test_framebuilder_minimal_should_have_login_cut_mark(testbrowser):
 
 
 def test_framebuilder_minimal_accepts_banner_channel_parameter(
-        selenium_driver, testserver, monkeypatch):
+        selenium_driver, testserver):
 
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver = selenium_driver
 
     # avoid "diuquilon", which is added by JS for specific screen sizes
@@ -355,16 +351,6 @@ def test_framebuilder_should_require_ssl(application, dummy_request):
     assert view.framebuilder_requires_ssl is True
 
 
-def test_framebuilder_uses_ssl_assets(testbrowser):
-    browser = testbrowser('/framebuilder?useSSL')
-    ssl_str = 'https://ssl.zeit.de/www.zeit.de/static/latest/'
-    assert '{}css/web.site/framebuilder.css'.format(
-        ssl_str) in browser.contents
-    assert '{}js/vendor/modernizr-custom.js'.format(
-        ssl_str) in browser.contents
-    assert '{}js/web.site/frame.js'.format(ssl_str) in browser.contents
-
-
 # needs selenium because of esi include
 def test_framebuilder_does_not_render_login_data(
         selenium_driver, testserver, sso_keypair):
@@ -421,8 +407,9 @@ def test_framebuilder_renders_login_data(
 
 
 def test_framebuilder_renders_login_data_if_new_feature_is_requested(
-        selenium_driver, togglepatch, testserver, sso_keypair):
-    togglepatch({'framebuilder_loginstatus_disabled': True})
+        selenium_driver, testserver, sso_keypair):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'framebuilder_loginstatus_disabled')
     driver = selenium_driver
     select = driver.find_elements_by_css_selector
 
@@ -440,3 +427,11 @@ def test_framebuilder_renders_login_data_if_new_feature_is_requested(
     assert len(select('.nav__login')) == 1
     assert not select('.nav__login')[0].get_attribute('data-featuretoggle')
     assert len(select('.nav__user-name')) == 1
+
+
+def test_framebuilder_uses_static_ssl_url(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['ssl_asset_prefix'] = 'https://static.zeit.de/static/latest/'
+    browser = testbrowser('/framebuilder')
+    urls = browser.contents.count('https://static.zeit.de/static/latest/')
+    assert urls == 6

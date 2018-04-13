@@ -199,12 +199,12 @@ def test_search_form_should_create_valid_fulltext_elasticsearch_query(
 
 
 def test_search_form_should_create_valid_date_range_solr_query(
-        dummy_request, monkeypatch, search_form):
-    date_range = datetime.datetime(2000, 1, 1), datetime.datetime(2010, 1, 1)
+        dummy_request, search_form, clock, monkeypatch):
+    clock.freeze(datetime.datetime(2010, 3, 2))
+    monkeypatch.setattr(zeit.find.daterange, 'datetime', clock)
     dummy_request.GET['mode'] = '1y'
-    monkeypatch.setattr(search_form, 'raw_mode', date_range)
     assert search_form.raw_query == (
-        'last-semantic-change:[2000-01-01T00:00:00Z TO 2010-01-01T00:00:00Z] '
+        'last-semantic-change:[2009-03-01T00:00:00Z TO 2010-03-02T00:00:00Z] '
         'type:(article OR gallery OR video) '
         'NOT product_id:(News OR afp OR SID OR ADV) '
         'NOT ressort:(Administratives OR News OR Aktuelles) '

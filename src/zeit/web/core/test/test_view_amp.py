@@ -179,17 +179,16 @@ def test_amp_article_shows_tags_correctly(testbrowser):
         u'Arbeitsmarkt, Migration, Europäische Union')
 
 
-def test_amp_article_shows_ads_correctly(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'amp_advertising': True}.get)
+def test_amp_article_shows_ads_correctly(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('amp_advertising')
     browser = testbrowser('/amp/zeit-online/article/amp')
     ads = browser.cssselect('.advertising')
     assert len(ads) == 4
 
 
-def test_amp_article_should_have_ivw_tracking(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'tracking': True}.get)
+def test_amp_article_should_have_ivw_tracking(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'third_party_modules', 'tracking')
     browser = testbrowser('/amp/zeit-online/article/amp')
     ivw = browser.cssselect('amp-analytics[type="infonline"]')
     assert len(ivw) == 1

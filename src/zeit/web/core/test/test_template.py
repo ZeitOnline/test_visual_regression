@@ -477,25 +477,22 @@ def test_zplus_is_true_for_registration_articles(application):
     assert zeit.web.core.template.zplus_content(content) is True
 
 
-def test_zplus_should_be_toggleable(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'reader_revenue': False}.get)
+def test_zplus_should_be_toggleable(application):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('reader_revenue')
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/fischer')
     assert zeit.web.core.template.zplus_content(content) is False
 
 
-def test_zplus_abo_should_be_toggleable(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'reader_revenue': False}.get)
+def test_zplus_abo_should_be_toggleable(application):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('reader_revenue')
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/fischer')
     assert zeit.web.core.template.zplus_abo_content(content) is False
 
 
-def test_zplus_register_icon_should_be_toggleable(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'zplus_badge_gray': False}.get)
+def test_zplus_register_icon_should_be_toggleable(application):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('zplus_badge_gray')
     path = ('http://xml.zeit.de/zeit-online/cp-content/register/'
             'article-zeit-register')
     content = zeit.cms.interfaces.ICMSContent(path)

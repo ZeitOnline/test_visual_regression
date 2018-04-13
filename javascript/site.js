@@ -95,7 +95,7 @@ if ( pageType === 'centerpage' ) {
     // article, gallery etc.
     article.find( '.js-gallery' ).inlinegallery();
     article.find( '.js-infobox' ).infobox();
-    article.find( '.liveblog' ).liveblog();
+    article.find( '.js-liveblog' ).liveblog();
     article.find( '.article-toc' ).toggleRegions();
     $.picturefill();
     $( '.sharing-menu' ).toggleRegions();

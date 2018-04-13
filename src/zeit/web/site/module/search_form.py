@@ -85,11 +85,11 @@ class Form(zeit.web.core.centerpage.Module):
     def raw_mode(self):
         """Time range in solr query usable format"""
         return {
-            'today': zeit.find.daterange.today_range,
-            '24h': zeit.find.daterange.one_day_range,
-            '7d': zeit.find.daterange.seven_day_range,
-            '30d': zeit.find.daterange.month_range,
-            '1y': zeit.find.daterange.year_range,
+            'today': zeit.find.daterange.today_range(),
+            '24h': zeit.find.daterange.one_day_range(),
+            '7d': zeit.find.daterange.seven_day_range(),
+            '30d': zeit.find.daterange.month_range(),
+            '1y': zeit.find.daterange.year_range(),
         }.get(self.mode)
 
     @zeit.web.reify

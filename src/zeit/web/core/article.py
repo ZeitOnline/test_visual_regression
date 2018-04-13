@@ -7,10 +7,12 @@ import bugsnag
 import gocept.lxml.objectify
 import grokcore.component
 import xml.sax.saxutils
+import zc.sourcefactory.source
 import zope.component
 import zope.interface
 import zope.security.proxy
 
+from zeit.cms.checkout.interfaces import ILocalContent
 import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.content.article.edit.interfaces
@@ -166,7 +168,10 @@ def get_retresco_body(article):
     toggles = zeit.web.core.application.FEATURE_TOGGLES
     seo = zeit.seo.interfaces.ISEO(article)
 
-    if toggles.find('enable_intext_links') and not seo.disable_intext_links:
+    if (toggles.find('enable_intext_links') and
+            not seo.disable_intext_links and
+            not ILocalContent.providedBy(article) and
+            not suppress_intextlinks(article)):
         if hasattr(article, '_v_retresco_body'):
             xml = article._v_retresco_body
         else:
@@ -189,9 +194,22 @@ def get_retresco_body(article):
         zeit.content.article.edit.interfaces.IEditableBody)
 
 
+class ValuesCachingEditableBody(zeit.content.article.edit.body.EditableBody):
+
+    def values(self):
+        if zeit.cms.checkout.interfaces.ILocalContent.providedBy(
+                self.__parent__):
+            return super(ValuesCachingEditableBody, self).values()
+        self.ensure_division()  # Old articles don't always have divisions.
+        if not hasattr(self.__parent__, '_v_body_values'):
+            self.__parent__._v_body_values = super(
+                ValuesCachingEditableBody, self).values()
+        # Return a copy, as e.g. pages_of_article below deletes modules from it
+        return self.__parent__._v_body_values[:]
+
+
 def pages_of_article(article, advertising_enabled=True):
     body = zeit.content.article.edit.interfaces.IEditableBody(article)
-    body.ensure_division()  # Old articles don't always have divisions.
 
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
@@ -360,6 +378,11 @@ class LiveblogInfo(object):
         if self.liveblog:
             return self.liveblog.last_modified
 
+    @property
+    def collapse_preceding_content(self):
+        if self.liveblog:
+            return self.liveblog.collapse_preceding_content
+
 
 TEMPLATE_INTERFACES = {
     'zon-liveblog': (ILiveblogArticle,),
@@ -394,3 +417,76 @@ def mark_according_to_series(context):
     if context.serie.fallback_image:
         result.append(ISeriesArticleWithFallbackImage)
     return result
+
+
+def get_keywords(context):
+    if zeit.web.core.application.FEATURE_TOGGLES.find('keywords_from_tms'):
+        conf = zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings)
+        tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
+        try:
+            timeout = conf.get('retresco_timeout', 0.1)
+            return tms.get_article_keywords(context, timeout=timeout)
+        except Exception:
+            log.warning(
+                'Retresco keywords failed for %s', context.uniqueId,
+                exc_info=True)
+            # Fall back to the vivi-stored keywords, i.e. without any links
+            # since only the TMS knows about those.
+            if not hasattr(context, 'keywords'):
+                return []
+            result = []
+            for keyword in context.keywords:
+                if not keyword.label:
+                    continue
+                keyword.link = None
+                result.append(keyword)
+            return result
+    else:
+        if not hasattr(context, 'keywords'):
+            return []
+        result = []
+        for keyword in context.keywords:
+            if not keyword.label:
+                continue
+            if not keyword.url_value:
+                uuid = keyword.uniqueId.replace('tag://', '')
+                keyword = zope.component.getUtility(
+                    zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
+                if keyword is None:
+                    continue
+            if keyword.url_value:
+                keyword.link = u'thema/{}'.format(keyword.url_value)
+            else:
+                keyword.link = None
+            result.append(keyword)
+        return result
+
+
+class IntextlinkBlacklistSource(zeit.cms.content.sources.XMLSource):
+    # Only contextual so we can customize source_class
+
+    product_configuration = 'zeit.web'
+    config_url = 'intextlink-blacklist-url'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def __contains__(self, value):
+            return value in self.factory
+
+    # This is the one case where the zc.sourcefactory abstractions are rather
+    # unhelpful: we don't want to enumerate the values, but do a targeted
+    # "contains" check instead.
+    def __contains__(self, x):
+        return bool(self._get_tree().xpath(
+            '//entity[@type="%s" and text()="%s"]' % (x.entity_type, x.label)))
+
+
+INTEXTLINK_BLACKLIST = IntextlinkBlacklistSource()(None)
+
+
+def suppress_intextlinks(article):
+    for keyword in get_keywords(article):
+        if keyword in INTEXTLINK_BLACKLIST:
+            return True
+    return False

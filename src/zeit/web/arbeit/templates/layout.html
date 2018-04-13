@@ -9,14 +9,14 @@
     <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
 
     {% block css_link %}
-        <link href="{{ request.asset_host }}/css/web.arbeit/screen.css" media="all" rel="stylesheet" type="text/css">
+        <link href="{{ request.ssl_asset_host }}/css/web.arbeit/screen.css" media="all" rel="stylesheet" type="text/css">
     {% endblock css_link %}
 
     {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
     {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
     {%- include "zeit.web.arbeit:templates/inc/meta/sharing.html" -%}
     {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
-    {%- include "zeit.web.core:templates/inc/meta/ligatus.html" -%}
+    {% block ligatus_include %}{% endblock %}
     {% block schemaorg_data %}{% endblock %}
 
     {% if toggles('modernizr_js_file') -%}
