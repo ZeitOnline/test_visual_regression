@@ -4,13 +4,39 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- Remove obsoleted `render_404` from feature-toggles.xml
 
-
-3.140 (unreleased)
+3.142 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4508: Force images on zplus-abo teaser in mobile view
+
+- ZON-4580: Remove additional liveblog header layout
+
+- ZON-4582: Implement exclusion for article body ads
+
+- BUG-891: Fix print button on advertorials
+
+- MAINT: Remove obsolete route config for `/health_check`
+
+
+3.141 (2018-04-12)
+------------------
+
+- SSL-206: Implement protocol neutrality on configured hosts
+
+- MAINT: Replace `togglepatch` fixture by built-in override functionality from 8fe69a5
+
+
+3.140 (2018-04-12)
+------------------
+
+- ZON-4583: Ligatus Enhancements
+
+- TMS-203: Migrate lineage to elasticsearch (toggle `elasticsearch_lineage`)
+
+- SSL-201: Use correct community host setting to create links to userprofile
+
+- SSL-198: Switch to ssl asset host for css loading
 
 
 3.139 (2018-04-09)

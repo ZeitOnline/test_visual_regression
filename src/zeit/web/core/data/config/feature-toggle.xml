@@ -3,11 +3,11 @@
   <access_status_ivw>true</access_status_ivw>
   <amp_advertising>true</amp_advertising>
   <arbeit_quote_sharing>true</arbeit_quote_sharing>
-  <article_lineage>true</article_lineage>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
   <dtag_navigation>true</dtag_navigation>
   <campus_toolbox>true</campus_toolbox>
   <dummy>false</dummy>
+  <elasticsearch_lineage>false</elasticsearch_lineage>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
   <framebuilder_loginstatus_disabled>false</framebuilder_loginstatus_disabled>

@@ -22,9 +22,6 @@
     <header name="liveblog">
       <title>Standard</title>
     </header>
-    <header name="liveblog-closed">
-      <title>Offline</title>
-    </header>
   </template>
   <!--
     ZAR-Templates

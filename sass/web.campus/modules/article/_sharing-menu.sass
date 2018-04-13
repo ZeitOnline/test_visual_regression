@@ -1,10 +1,9 @@
 .sharing-menu
-	+clearfix
 	line-height: remify(40px)
 	margin: remify(20px 0 32px)
 
 	&__items
-		float: left
+		+clearfix
 		list-style-type: none
 		margin: 0
 		padding: 0
@@ -12,6 +11,9 @@
 	&__item
 		float: left
 		margin-right: 1px
+
+		&--printbutton
+			display: none
 
 	&__link
 		+clearfix
@@ -54,7 +56,6 @@
 		width: remify(22px)
 
 	+respond-min($break-tablet-min)
-		float: left
 
 		&__item
 			margin-right: remify(10px)
@@ -73,3 +74,9 @@
 
 		&__text
 			display: inline
+
+	+respond-min($break-desktop-min)
+		&__item
+			&--printbutton
+				display: list-item
+				margin: remify(0 0 0 6px)

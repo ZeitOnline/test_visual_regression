@@ -8,8 +8,6 @@ import mock
 import pyramid_dogpile_cache2
 import pyramid.testing
 import pytest
-import requests
-import requests.exceptions
 import requests_mock
 import zope.interface.declarations
 
@@ -421,15 +419,18 @@ def test_block_citation_should_contain_expected_structure(tplbrowser):
 
 def test_block_contentadblock_should_contain_expected_structure(tplbrowser):
     view = mock.Mock()
+    page = mock.Mock()
+    page.number = 0
     browser = tplbrowser(
-        'zeit.web.core:templates/inc/blocks/contentadblock.html', view=view)
+        'zeit.web.core:templates/inc/blocks/contentadblock.html',
+        view=view, page=page)
     assert browser.cssselect('div#iq-artikelanker')
 
 
 def test_block_contentadblock_isnt_shown_when_content_ad_enabled_is_false(
         tplbrowser):
     view = mock.Mock()
-    view.content_ad_enabled = False
+    view.advertising_in_article_body_enabled = False
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/contentadblock.html', view=view)
     assert not browser.cssselect('div#iq-artikelanker')

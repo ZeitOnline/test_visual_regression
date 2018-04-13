@@ -39,14 +39,14 @@
 }
 @font-face {
     font-family: "FranziskaWebPro";
-    src: url('/static/latest/fonts/franziska/FranziskaWebPro-Italic.woff') format('woff');
+    src: url('../../../latest/fonts/franziska/FranziskaWebPro-Italic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
 }
 @font-face {
     font-family: "BeckettLight";
-    src: url('/static/latest/fonts/beckett/Beckett-Light.woff2') format('woff2'),
-         url('/static/latest/fonts/beckett/Beckett-Light.woff') format('woff');
+    src: url('../../../latest/fonts/beckett/Beckett-Light.woff2') format('woff2'),
+         url('../../../latest/fonts/beckett/Beckett-Light.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
