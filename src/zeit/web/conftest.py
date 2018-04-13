@@ -122,7 +122,6 @@ def app_settings(mockserver):
         'redirect_volume_cp': 'http://redirect.example.com',
         'breaking_news_config': (
             'http://xml.zeit.de/eilmeldung/homepage-banner'),
-        'transform_to_secure_links_for': 'www.zeit.de,blog.zeit.de',
         'breaking_news_fallback_image': (
             'http://xml.zeit.de/administratives/eilmeldung-share-image'),
         'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',

@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - MAINT: Remove obsolete route config for `/health_check`
 
+- MAINT: Move 'transform_to_secure_links_for' setting to web-settings
+
 
 3.141 (2018-04-12)
 ------------------
