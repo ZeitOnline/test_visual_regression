@@ -158,9 +158,6 @@ class Application(object):
             pregenerator=zeit.web.core.routing.https_url_pregenerator)
         config.add_route('login_state', '/login-state')
         config.add_route('health_check', '/health-check')
-        # XXX align-route-config-uris: Ensure downward compatibility until
-        # corresponding varnish changes have been deployed. Remove afterwards.
-        config.add_route('health_check_XXX', '/health_check')  # XXX remove
         config.add_route('brandeins-image', '/brandeins-image/*path')
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route('zett-image', '/zett-image/*path')
