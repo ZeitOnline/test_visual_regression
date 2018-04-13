@@ -8,9 +8,11 @@ POSTDEPLOY
 3.142 (unreleased)
 ------------------
 
-- MAINT: Remove obsolete route config for `/health_check`
+- ZON-4580: Remove additional liveblog header layout
 
 - BUG-891: Fix print button on advertorials
+
+- MAINT: Remove obsolete route config for `/health_check`
 
 
 3.141 (2018-04-12)
