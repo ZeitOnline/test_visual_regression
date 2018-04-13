@@ -1,5 +1,9 @@
 {% extends 'zeit.web.campus:templates/layout.html' %}
 
+{% block ligatus_include %}
+    {%- include "zeit.web.core:templates/inc/meta/ligatus.html" -%}
+{% endblock %}
+
 {% block schemaorg_data %}
     {%- include "zeit.web.core:templates/inc/meta/schemaorg.html" -%}
 {% endblock %}
@@ -26,9 +30,6 @@
         <footer class="article-footer article__item" data-ct-area="articlebottom">
             {% block article_sharing %}
                 {% include "zeit.web.campus:templates/inc/article/sharing-menu.html" %}
-            {% endblock %}
-
-            {% block print %}
             {% endblock %}
 
             {% block article_tags %}
