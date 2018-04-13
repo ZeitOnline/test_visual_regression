@@ -237,7 +237,7 @@ def test_author_biography_should_be_fully_rendered(testbrowser):
     assert browser.cssselect('.author-questions')
 
 
-def test_author_first_favorite_article_forces_mobile_image(application):
+def test_author_first_favorite_article_should_force_mobile_images(application):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/j_random')
     request = pyramid.testing.DummyRequest()

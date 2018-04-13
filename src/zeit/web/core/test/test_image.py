@@ -366,3 +366,12 @@ def test_link_nofollow_should_be_set_in_core_image_template(testbrowser):
     browser = testbrowser('/zeit-online/cp-content/article-03')
     image_link = browser.cssselect('.header-article__media-container a')[0]
     assert image_link.get('rel') == 'nofollow'
+
+
+def test_module_should_force_mobile_images(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/force-mobile-image')
+    assert len(browser.cssselect('.teaser-small__media')) == 5
+    assert len(browser.cssselect('.teaser-small__media--force-mobile')) == 3
+    assert len(browser.cssselect('.teaser-small-minor__media')) == 2
+    assert len(browser.cssselect(
+        '.teaser-small-minor__media--force-mobile')) == 1
