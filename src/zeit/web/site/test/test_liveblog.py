@@ -33,3 +33,9 @@ def test_liveblog_show_preceding_content(testbrowser):
     assert len(liveblog) == 1
     assert 'js-liveblog' not in liveblog[0].get('class')
     assert browser.cssselect('[itemprop="articleBody"] .ad-container')
+
+
+def test_liveblog_has_no_print_menu(testbrowser):
+    browser = testbrowser('/zeit-online/article/liveblog3')
+    assert not browser.cssselect('.sharing-menu__item--printbutton')
+    assert not browser.cssselect('.print-menu')

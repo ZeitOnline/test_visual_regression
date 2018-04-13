@@ -111,8 +111,8 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
         'pixel for IVW not in DOM')
 
 
-def test_article03_has_correct_webtrekk_values(httpbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article03_has_correct_webtrekk_values(httpbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = httpbrowser('/zeit-magazin/article/03')
     source = browser.cssselect(
         'img[src^="https://audev.zeit.de/"]')[0].get('src')
@@ -199,8 +199,8 @@ def test_article03_has_correct_webtrekk_values(httpbrowser, togglepatch):
         'cp36': 'unfeasible'}
 
 
-def test_article03_page2_has_correct_webtrekk_values(httpbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = httpbrowser('/zeit-magazin/article/03/seite-2')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -258,8 +258,8 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser, togglepatch):
         'cp36': 'unfeasible'}
 
 
-def test_cp_has_correct_webtrekk_values(httpbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_cp_has_correct_webtrekk_values(httpbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = httpbrowser('/zeit-magazin/index')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -344,8 +344,8 @@ def test_cp_has_correct_webtrekk_values(httpbrowser, togglepatch):
         'cp36': 'unfeasible'}
 
 
-def test_webtrekk_series_tag_is_set_corectly(httpbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = httpbrowser('/zeit-magazin/article/06')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -364,8 +364,8 @@ def test_webtrekk_series_tag_is_set_corectly(httpbrowser, togglepatch):
             .format(urllib.quote(host))) in source
 
 
-def test_webtrekk_has_session_parameter(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_webtrekk_has_session_parameter(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/slenderized-index?app-content')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -874,8 +874,8 @@ def test_zmo_should_not_render_advertisement_nextread(
     assert len(browser.cssselect('.nextread-advertisement')) == 0
 
 
-def test_article_contains_zeit_clickcounter(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article_contains_zeit_clickcounter(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-magazin/article/03')
     counter = browser.cssselect('body noscript img[src^="https://cc.zeit.de"]')
     assert ("img.src = 'https://cc.zeit.de/cc.gif?banner-channel="
@@ -984,9 +984,8 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[5].text == 'Mailen'
 
 
-def test_webtrekk_paywall_status_is_set_on_paid_article(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     url = ('/zeit-online/article/zplus-zeit'
            '?C1-Meter-Status=always_paid')
     browser = testbrowser(url)

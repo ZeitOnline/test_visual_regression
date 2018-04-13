@@ -1041,16 +1041,17 @@ def test_smoke_post_on_article(testserver, application):
 
 
 @pytest.mark.parametrize('toggle, host, path', [
-    (True, 'community_host', '/comment/edit/%cid%'),
-    (False, 'community_admin_host',
+    ('set', 'community_profile_url', '/comment/edit/%cid%'),
+    ('unset', 'community_admin_host',
      '/9e7bf051-2299-43e4-b5e6-1fa81d097dbd/thread/%cid%')])
 def test_moderation_url_should_be_set_according_to_toggle(
-        application, togglepatch, toggle, host, path):
+        application, toggle, host, path):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     mixin = zeit.web.core.view.CommentMixin()
     mixin.context = context
 
-    togglepatch({'zoca_moderation_launch': toggle})
+    getattr(zeit.web.core.application.FEATURE_TOGGLES, toggle)(
+        'zoca_moderation_launch')
     assert mixin.moderation_url == conf.get(host) + path

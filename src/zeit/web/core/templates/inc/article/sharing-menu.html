@@ -3,8 +3,8 @@
 {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_%s_link_x' | format(tracking_id) -%}
 {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.%s.link.x' | format(tracking_id) %}
 {% block sharing_menu -%}
-<div class="{{ self.layout() | with_mods(view.share_buttons) }}">
-    <ul class="{% block layout %}sharing-menu{% endblock %}__items" id="sharing-menu-list" data-ct-row="social">
+<div class="{% block layout %}sharing-menu{% endblock %}">
+    <ul class="{{ self.layout() }}__items" id="sharing-menu-list" data-ct-row="social">
         <li class="{{ self.layout() }}__item">
             <a class="{{ '%s__link' | format(self.layout()) | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}" target="_blank" data-ct-label="facebook">
                 {{ lama.use_svg_icon('sharing-facebook', '%s__icon' | format(self.layout()) | with_mods('facebook'), view.package) }}
@@ -43,6 +43,13 @@
             </a>
         </li>
         {%- endblock %}
+        {%- block print -%}
+            {%- if not view.context | is_video and not view.context is liveblog -%}
+                <li class="{{ '%s__item' | format(self.layout()) | with_mods('printbutton') }}">
+                    {% include "zeit.web.core:templates/inc/article/print.tpl" %}
+                </li>
+            {%- endif -%}
+        {%- endblock -%}
     </ul>
 </div>
 {%- endblock sharing_menu %}

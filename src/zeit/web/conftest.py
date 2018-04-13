@@ -726,33 +726,6 @@ def mock_metrics(monkeypatch):
 
 
 @pytest.fixture
-def togglepatch(monkeypatch):
-
-    class ToggleOverride(object):
-
-        def __init__(self, toggles):
-            self.original_find = zeit.web.core.application.FEATURE_TOGGLES.find
-            self.toggles = toggles
-
-        def find(self, arg):
-            try:
-                return self.toggles[arg]
-            except KeyError:
-                return self.original_find(arg)
-
-    def patch(patched_toggles):
-        # We alter the "find" method of the original FEATURE_TOGGLE Source.
-        # As a result, Friedbert will use our "find" method to determine
-        # the value of a toggle. And our "find" method looks into the
-        # patched dict first, and then into the original Source.
-        monkeypatch.setattr(
-            zeit.web.core.application.FEATURE_TOGGLES,
-            'find', ToggleOverride(patched_toggles).find)
-
-    return patch
-
-
-@pytest.fixture
 def appbrowser(application):
     """Returns an instance of `webtest.TestApp` for wsgi-level testing"""
     return TestApp(application, extra_environ={'HTTP_HOST': 'example.com'})
