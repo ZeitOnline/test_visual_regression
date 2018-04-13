@@ -255,11 +255,11 @@ class Base(object):
             return True
 
     @zeit.web.reify
-    def content_ad_enabled(self):
+    def advertising_in_article_body_enabled(self):
         if self.context.banner_content is False:
             return False
         else:
-            return True
+            return self.advertising_enabled
 
     @zeit.web.reify
     def adcontroller_handle(self):

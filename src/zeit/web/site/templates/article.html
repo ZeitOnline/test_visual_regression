@@ -1,17 +1,7 @@
 {% extends "zeit.web.site:templates/content.html" %}
 
 {% block content_ad_script -%}
-{% if view.advertising_enabled %}
-<script type="text/javascript">
-    (function() {
-        var s = document.createElement('script');
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = document.location.protocol + '//cdn.iqcontentplatform.de/iq.js';
-        var sc = document.getElementsByTagName('script')[0]; sc.parentNode.insertBefore(s, sc);
-    })();
-</script>
-{% endif %}
+    {%- include "zeit.web.core:templates/inc/ads/content-ad.html" -%}
 {%- endblock content_ad_script %}
 
 {% block article_pages %}

@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4580: Remove additional liveblog header layout
 
+- ZON-4582: Implement exclusion for article body ads
+
 - BUG-891: Fix print button on advertorials
 
 - MAINT: Remove obsolete route config for `/health_check`
