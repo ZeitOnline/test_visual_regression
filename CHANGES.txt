@@ -8,6 +8,8 @@ POSTDEPLOY
 3.142 (unreleased)
 ------------------
 
+- ZON-4508: Force images on zplus-abo teaser in mobile view
+
 - ZON-4580: Remove additional liveblog header layout
 
 - BUG-891: Fix print button on advertorials
