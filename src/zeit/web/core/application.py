@@ -408,7 +408,7 @@ def configure_host(key):
         prefix = conf.get(key + '_prefix', '')
         version = conf.get('version', 'latest')
         prefix = prefix.format(version=version)
-        if not prefix.startswith('http'):
+        if not (prefix.startswith('http') or prefix.startswith('//')):
             prefix = join_url_path(
                 request.application_url, '/' + prefix.strip('/'))
         return request.route_url('home', _app_url=prefix).rstrip('/')

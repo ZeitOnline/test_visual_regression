@@ -1,9 +1,10 @@
 import pytest
+
 import zeit.web.core.application
 
 
-def test_ligatus_zar_article_has_access_value(testbrowser, togglepatch):
-    togglepatch({'ligatus': True})
+def test_ligatus_zar_article_has_access_value(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus')
 
     browser = testbrowser('/arbeit/article/simple-nextread')
     meta = browser.cssselect('meta[property="ligatus:article_access_status"]')
@@ -18,8 +19,8 @@ def test_ligatus_zar_article_has_access_value(testbrowser, togglepatch):
     assert meta[0].get('content') == 'registration'
 
 
-def test_ligatus_zon_article_has_access_value(testbrowser, togglepatch):
-    togglepatch({'ligatus': True})
+def test_ligatus_zon_article_has_access_value(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus')
 
     browser = testbrowser('/zeit-online/article/simple')
     meta = browser.cssselect('meta[property="ligatus:article_access_status"]')
@@ -34,14 +35,14 @@ def test_ligatus_zon_article_has_access_value(testbrowser, togglepatch):
     assert meta[0].get('content') == 'registration'
 
 
-def test_ligatus_is_available_in_all_verticals(testbrowser, togglepatch):
-    togglepatch({
-        'ligatus': True,
-        'ligatus_on_arbeit': True,
-        'ligatus_on_campus': True,
-        'ligatus_on_magazin': True,
-        'ligatus_on_site': True
-    })
+def test_ligatus_is_available_in_all_verticals(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'ligatus',
+        'ligatus_on_arbeit',
+        'ligatus_on_campus',
+        'ligatus_on_magazin',
+        'ligatus_on_site'
+    )
 
     browser = testbrowser('/arbeit/article/simple-nextread')
     assert browser.cssselect('#ligatus')
@@ -60,8 +61,8 @@ def test_ligatus_is_available_in_all_verticals(testbrowser, togglepatch):
     assert browser.cssselect('script[src*=".ligatus.com"]')
 
 
-def test_ligatus_can_be_toggled_off(testbrowser, togglepatch):
-    togglepatch({'ligatus': False})
+def test_ligatus_can_be_toggled_off(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
 
     browser = testbrowser('/arbeit/article/simple-nextread')
     assert not browser.cssselect('#ligatus')
@@ -80,8 +81,8 @@ def test_ligatus_can_be_toggled_off(testbrowser, togglepatch):
     assert not browser.cssselect('script[src*=".ligatus.com"]')
 
 
-def test_ligatus_can_be_disabled_on_article(testbrowser, togglepatch):
-    togglepatch({'ligatus': True, 'ligatus_on_site': True})
+def test_ligatus_can_be_disabled_on_article(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus', 'ligatus_on_site')
 
     browser = testbrowser('/zeit-online/article/simple-ligatus-disabled')
     assert not browser.cssselect('#ligatus')
@@ -188,14 +189,14 @@ def test_ligatus_do_not_index_advertorials(testbrowser, param):
     assert meta[0].get('content') == param[1]
 
 
-def test_ligatus_can_be_toggled_globally(testbrowser, togglepatch):
-    togglepatch({
-        'ligatus': False,
-        'ligatus_on_arbeit': True,
-        'ligatus_on_campus': True,
-        'ligatus_on_magazin': True,
-        'ligatus_on_site': True
-    })
+def test_ligatus_can_be_toggled_globally(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'ligatus_on_arbeit',
+        'ligatus_on_campus',
+        'ligatus_on_magazin',
+        'ligatus_on_site'
+    )
+    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
 
     browser = testbrowser('/arbeit/article/simple-nextread')
     assert not browser.cssselect('#ligatus')
@@ -214,14 +215,16 @@ def test_ligatus_can_be_toggled_globally(testbrowser, togglepatch):
     assert not browser.cssselect('script[src*=".ligatus.com"]')
 
 
-def test_ligatus_can_be_toggled_for_verticals(testbrowser, togglepatch):
-    togglepatch({
-        'ligatus': True,
-        'ligatus_on_arbeit': True,
-        'ligatus_on_campus': False,
-        'ligatus_on_magazin': False,
-        'ligatus_on_site': True
-    })
+def test_ligatus_can_be_toggled_for_verticals(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'ligatus',
+        'ligatus_on_arbeit',
+        'ligatus_on_site'
+    )
+    zeit.web.core.application.FEATURE_TOGGLES.unset(
+        'ligatus_on_campus',
+        'ligatus_on_magazin'
+    )
 
     browser = testbrowser('/arbeit/article/simple-nextread')
     assert browser.cssselect('#ligatus')

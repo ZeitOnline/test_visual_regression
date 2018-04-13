@@ -45,17 +45,16 @@ def test_framebuilder_contains_no_webtrekk(testbrowser):
     assert 'webtrekk' not in browser.contents
 
 
-def test_framebuilder_can_contain_webtrekk(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_framebuilder_can_contain_webtrekk(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/framebuilder?webtrekk')
     webtrekk_script = browser.cssselect(
         'script[src^="https://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
 
 
-def test_framebuilder_sets_webtrekk_values_differently(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_framebuilder_sets_webtrekk_values_differently(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/framebuilder?webtrekk')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -89,8 +88,8 @@ def test_framebuilder_contains_no_meetrics(testbrowser):
     assert len(meetrics_script) == 0
 
 
-def test_framebuilder_can_contain_meetrics(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_framebuilder_can_contain_meetrics(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/framebuilder?meetrics')
     meetrics_script = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -228,17 +227,16 @@ def test_framebuilder_minimal_contains_no_webtrekk(testbrowser):
     assert 'webtrekk' not in browser.contents
 
 
-def test_framebuilder_minimal_can_contain_webtrekk(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_framebuilder_minimal_can_contain_webtrekk(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/framebuilder?minimal&webtrekk')
     webtrekk_script = browser.cssselect(
         'script[src^="https://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
 
 
-def test_framebuilder_minimal_sets_webtrekk_values_differently(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_framebuilder_minimal_sets_webtrekk_values_differently(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/framebuilder?minimal&webtrekk')
     assert ('wt.contentId = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
@@ -409,8 +407,9 @@ def test_framebuilder_renders_login_data(
 
 
 def test_framebuilder_renders_login_data_if_new_feature_is_requested(
-        selenium_driver, togglepatch, testserver, sso_keypair):
-    togglepatch({'framebuilder_loginstatus_disabled': True})
+        selenium_driver, testserver, sso_keypair):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'framebuilder_loginstatus_disabled')
     driver = selenium_driver
     select = driver.find_elements_by_css_selector
 
