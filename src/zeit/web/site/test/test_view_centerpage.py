@@ -184,8 +184,9 @@ def test_fullwidth_teaser_should_be_rendered(testbrowser):
 
 
 def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
-        testbrowser, togglepatch):
-    togglepatch({'responsive_image_leadteaser': False})
+        testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset(
+        'responsive_image_leadteaser')
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     img = browser.cssselect('.teaser-fullwidth__media-item')[0]
     assert img.get('data-mobile-ratio').startswith('1.77')
@@ -887,7 +888,8 @@ def test_servicebox_present_in_wide_breakpoints(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    driver.get(
+        '%s/zeit-online/slenderized-index-with-newsbox' % testserver.url)
     servicebox = driver.find_element_by_id('servicebox')
 
     if screen_size[0] == 320:
@@ -1082,18 +1084,16 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
         'teaser-gallery-setup/area/id-5fe59e73-e388-42a4-a8d4-750b0bf96812?p=')
 
 
-def test_homepage_should_have_proper_meetrics_integration(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_homepage_should_have_proper_meetrics_integration(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/slenderized-index')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
 
 
-def test_centerpage_should_have_meetrics_integration(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_centerpage_should_have_meetrics_integration(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/main-teaser-setup')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -2340,9 +2340,8 @@ def test_author_list_should_show_authors(testbrowser):
     assert len(browser.cssselect('.author-list__item')) == 1
 
 
-def test_centerpage_contains_webtrekk_parameter_asset(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/centerpage/cardstack')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -2622,6 +2621,16 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
     assert len(teasers) == 3
     for teaser in teasers:
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus')
+
+
+def test_zplus_teaser_should_force_mobile_images(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/zplus')
+    figures = browser.cssselect('figure.teaser-small__media, '
+                                'figure.teaser-small-minor__media')
+
+    assert figures
+    for figure in figures:
+        assert '__media--force-mobile' in figure.get('class')
 
 
 def test_register_teaser_has_zplus_register_badge(testbrowser):
@@ -3099,6 +3108,15 @@ def test_brandeins_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_small_logo) == 4
     assert len(teaser_small_minor_logo) == 2
     assert len(teaser_square_logo) == 2
+
+
+def test_brandeins_teaser_should_force_mobile_images(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/teasers-to-brandeins')
+    figures = browser.cssselect('.cp-area--brandeins .teaser-small__media')
+
+    assert figures
+    for figure in figures:
+        assert 'teaser-small__media--force-mobile' in figure.get('class')
 
 
 def test_brandeins_teaser_should_display_its_image_on_mobile(

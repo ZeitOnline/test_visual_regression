@@ -356,9 +356,8 @@ def test_breadcrumbs_for_topicpage(dummy_request):
     assert view.breadcrumbs == breadcrumbs
 
 
-def test_centerpage_contains_webtrekk_parameter_asset(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/campus/centerpage/cardstack')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]

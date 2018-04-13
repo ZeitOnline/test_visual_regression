@@ -424,24 +424,26 @@ def test_zar_advertorial_has_no_home_button_as_pagination(testbrowser):
     assert len(browser.cssselect('.article-pagination__link')) == 0
 
 
-def test_zar_sharequote_is_hidden_if_toggle_is_false(testbrowser, togglepatch):
-    togglepatch({'arbeit_quote_sharing': False})
+def test_zar_sharequote_is_hidden_if_toggle_is_false(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('arbeit_quote_sharing')
     browser = testbrowser('/arbeit/article/sharequote')
     assert len(browser.cssselect('.quote-sharing')) == 0
 
 
-def test_zar_sharequote_is_shown_if_toggle_is_true(testbrowser, togglepatch):
-    togglepatch({'arbeit_quote_sharing': True})
+def test_zar_sharequote_is_shown_if_toggle_is_true(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('arbeit_quote_sharing')
     browser = testbrowser('/arbeit/article/sharequote')
     assert len(browser.cssselect('.quote-sharing')) == 2
 
 
-def test_zar_sharebert_toggle_works(testbrowser, togglepatch):
-    togglepatch({'share_blocks_via_screenshot': False})
+def test_zar_sharebert_toggle_works(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset(
+        'share_blocks_via_screenshot')
     browser = testbrowser('/arbeit/article/sharequote')
     assert len(browser.cssselect('.js-shareblock')) == 0
 
-    togglepatch({'share_blocks_via_screenshot': True})
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'share_blocks_via_screenshot')
     browser = testbrowser('/arbeit/article/sharequote')
     assert len(browser.cssselect('.js-shareblock')) == 2
 

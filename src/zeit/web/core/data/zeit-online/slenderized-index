@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
@@ -67,27 +67,19 @@
         <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True" kind="solo">
             <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
                 <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008"></block>
+                    <block uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
                 </container>
             </region>
         </cluster>
         <cluster area="id-41a8299d-b569-4c42-b713-d5bdbd86a64e" visible="True" kind="duo">
             <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
                 <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
-                    </block>
+                    <block uniqueId="http://xml.zeit.de/zeit-online/article/01"/>
                 </container>
             </region>
             <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" visible="True" kind="minor">
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
-                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008"></block>
-                </container>
-            </region>
-        </cluster>
-        <cluster area="id-19e29491-d40f-4033-a07f-52b752b8b2da" kind="solo" title="Service-Box" visible="True">
-            <region area="id-13ae5250-58f2-4d47-8fe9-5c24164389e5" kind="solo" visible="True">
-                <container cp:__name__="huwaaaaa" cp:type="cpextra" module="servicebox" visible="True">
-                    <cp_extra for="zeit.content.cp.interfaces.IArea" id="servicebox" />
+                    <block uniqueId="http://xml.zeit.de/zeit-online/article/01"/>
                 </container>
             </region>
         </cluster>

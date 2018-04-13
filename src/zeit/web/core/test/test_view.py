@@ -420,15 +420,6 @@ def test_cp2015_redirect_can_be_disabled(application):
     view()
 
 
-def test_content_view_should_provide_lineage_property(
-        application, dummy_request):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    content = zeit.web.core.view.Content(context, dummy_request)
-    assert len(content.lineage) == 2
-    assert all(isinstance(l, dict) for l in content.lineage)
-
-
 def test_ispaginated_predicate_should_handle_get_parameter():
     ip = zeit.web.core.view.is_paginated
     assert ip(None, mock.Mock(GET={})) is False
@@ -495,16 +486,6 @@ def test_rawr_config_should_have_series_tag(selenium_driver, testserver):
 
 def test_health_check_should_response_and_have_status_200(testbrowser):
     browser = testbrowser('/health-check')
-    assert browser.headers['Content-Length'] == '2'
-    resp = zeit.web.core.view.health_check('request')
-    assert resp.status_code == 200
-
-
-# XXX align-route-config-uris: Ensure downward compatibility until
-# corresponding varnish changes have been deployed.
-# Remove this test afterwards!
-def test_health_check_should_response_and_have_status_200_XXX(testbrowser):
-    browser = testbrowser('/health_check')
     assert browser.headers['Content-Length'] == '2'
     resp = zeit.web.core.view.health_check('request')
     assert resp.status_code == 200
@@ -591,8 +572,8 @@ def test_jquery_not_in_window_scope(testserver, selenium_driver):
     assert 'undefined' == selenium_driver.execute_script(script)
 
 
-def test_webtrekk_tracking_id_is_defined(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_webtrekk_tracking_id_is_defined(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/article/simple')
     assert 'window.webtrekkConfig.trackId = "674229970930653";' in (
         browser.contents)

@@ -630,9 +630,8 @@ def test_article_should_show_main_image_from_imagegroup(testbrowser):
     assert 'filmstill-hobbit-schlacht-fuenf-hee' in images[0].get('src')
 
 
-def test_article_should_have_proper_meetrics_integration(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article_should_have_proper_meetrics_integration(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/article/01')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -1010,16 +1009,16 @@ def test_missing_keyword_links_are_replaced(testbrowser):
     assert keyword.get('href').endswith('/thema/wein')
 
 
-def test_article_has_print_function(testbrowser):
+def test_article_has_print_menu(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/zeit-online/article/01?print'))
 
 
-def test_multi_page_article_has_print_link(testbrowser):
+def test_multi_page_article_has_print_menu(testbrowser):
     browser = testbrowser('/zeit-online/article/tagesspiegel')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/zeit-online/article/tagesspiegel/komplettansicht?print'))
 
@@ -1049,16 +1048,63 @@ def test_article_advertorial_pages_should_render_correctly(testbrowser):
     assert browser.cssselect('.advertorial-marker')
 
 
+def test_article_view_should_provide_solr_lineage(
+        application, dummy_request):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/03',
+         'title': 'Foo', 'supertitle': 'Bar'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'title': 'Lorem', 'supertitle': 'Ipsum'}]
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.lineage == (
+        {'uniqueId': u'http://xml.zeit.de/zeit-online/article/01',
+         'title': 'Lorem', 'supertitle': 'Ipsum'},
+        {'uniqueId': u'http://xml.zeit.de/zeit-online/article/03',
+         'title': 'Foo', 'supertitle': 'Bar'})
+
+
+def test_article_view_should_provide_elasticsearch_lineage(
+        application, dummy_request):
+    zeit.web.core.application.FEATURE_TOGGLES.set('elasticsearch_lineage')
+
+    elasticsearch = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elasticsearch.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/03',
+         'payload': {'body': {'title': 'Foo', 'supertitle': 'Bar'}}},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'payload': {'body': {'title': 'Lorem', 'supertitle': 'Ipsum'}}}]
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.lineage == (
+        {'uniqueId': u'http://xml.zeit.de/zeit-online/article/01',
+         'title': 'Lorem', 'supertitle': 'Ipsum'},
+        {'uniqueId': u'http://xml.zeit.de/zeit-online/article/03',
+         'title': 'Foo', 'supertitle': 'Bar'})
+
+
+def test_article_lineage_should_default_to_index_page(
+        application, dummy_request):
+    zeit.web.core.application.FEATURE_TOGGLES.set('elasticsearch_lineage')
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.lineage == (
+        {'uniqueId': u'http://xml.zeit.de/index',
+         'title': 'Startseite', 'supertitle': ''},) * 2
+
+
 def test_article_lineage_should_render_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(browser.cssselect('.al-text--prev')) == 1
     assert len(browser.cssselect('.al-text--next')) == 1
-
-
-def test_article_lineage_should_utilize_feature_toggle(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.unset('article_lineage')
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect('.article-lineage')) == 0
 
 
 def test_article_lineage_has_text_elements(testbrowser):
@@ -1157,6 +1203,17 @@ def test_article_lineage_should_not_render_on_articles_without_channels(
 
 def test_article_lineage_should_not_render_on_administratives(testbrowser):
     browser = testbrowser('/zeit-online/article/administratives')
+    assert len(browser.cssselect('.article-lineage')) == 0
+
+
+def test_article_lineage_should_not_render_on_errorpage(testbrowser):
+    browser = testbrowser('/error/404')
+    assert len(browser.cssselect('.article-lineage')) == 0
+
+
+def test_article_lineage_should_not_render_on_paywall(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/01?C1-Meter-Status=always_paid')
     assert len(browser.cssselect('.article-lineage')) == 0
 
 
@@ -1273,8 +1330,8 @@ def test_nextread_should_display_date_last_published_semantic(testbrowser):
     assert nextread_date.text.strip() == '15. Februar 2015'
 
 
-def test_article_contains_zeit_clickcounter(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article_contains_zeit_clickcounter(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/article/simple')
     counter = browser.cssselect('body noscript img[src^="https://cc.zeit.de"]')
     assert ("img.src = 'https://cc.zeit.de/cc.gif?banner-channel="
@@ -1346,9 +1403,8 @@ def test_amp_article_placeholder(testbrowser, parameter):
     assert len(select('.article__placeholder')) >= 1
 
 
-def test_newsletter_optin_page_has_webtrekk_ecommerce(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_newsletter_optin_page_has_webtrekk_ecommerce(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser(
         '/zeit-online/article/simple?newsletter-optin=elbVertiefung-_!1:2')
     assert '8: \'elbvertiefung-_1_2\'' in browser.contents

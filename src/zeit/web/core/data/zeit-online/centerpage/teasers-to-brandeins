@@ -69,8 +69,8 @@
     <cluster area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
       <region area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
         <container cp:type="teaser" module="zon-fullwidth" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead1c">
-      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
-    </container>
+          <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+        </container>
       </region>
     </cluster>
 
@@ -78,39 +78,32 @@
     <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" kind="solo" title="AufmacherClassic">
       <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" kind="solo">
         <container cp:type="teaser" module="zon-classic" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead2c">
-      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
-    </container>
+          <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+        </container>
       </region>
     </cluster>
 
     <!-- Major/Minor Duo -->
     <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
       <region area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
-
         <container cp:type="teaser" module="zon-large" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead3c">
-      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
-    </container>
-
-    <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead4c">
-      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
-    </container>
-
-     <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead5f">
-      <block href="http://xml.zeit.de/brandeins/der-besessene"/>
-    </container>
-
+          <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead4c">
+          <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead5f">
+          <block href="http://xml.zeit.de/brandeins/der-besessene"/>
+        </container>
       </region>
 
       <region area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
-
         <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead1b">
-      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
-    </container>
-
-    <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead8f">
-      <block href="http://xml.zeit.de/brandeins/der-besessene"/>
-    </container>
-
+          <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead8f">
+          <block href="http://xml.zeit.de/brandeins/der-besessene"/>
+        </container>
       </region>
     </cluster>
 
@@ -129,44 +122,41 @@
         </container>
       </region>
     </cluster>
+
     <!-- Square -->
     <cluster area="id-7e329214-665f-457d-a624-94c47850f956" kind="duo">
-        <region area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
-            <container cp:type="teaser" module="zon-square" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152572a">
-        <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
-      </container>
-        </region>
-        <region area="id-0e98c5c2-2b95-42b7-9ccc-83e684fa87bb" kind="duo">
-            <container cp:type="teaser" module="zon-square" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152573a">
-        <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
-      </container>
-        </region>
+      <region area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
+        <container cp:type="teaser" module="zon-square" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152572a">
+          <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+        </container>
+      </region>
+      <region area="id-0e98c5c2-2b95-42b7-9ccc-83e684fa87bb" kind="duo">
+        <container cp:type="teaser" module="zon-square" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152573a">
+          <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+        </container>
+      </region>
     </cluster>
 
     <!-- brand eins Teaser in Standard Parkett -->
     <cluster area="id-bdfb0156-4df4-4bcd-bf1e-68609ef1a109" kind="parquet" title="Parquet">
       <region area="id-1ac0ac50-fe94-4431-baac-435cc2a934dd" kind="parquet" title="Parkett: brand eins Teaser">
-
-    <container cp:type="teaser" module="zon-large" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
-      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
-    </container>
+        <container cp:type="teaser" module="zon-large" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
+          <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+        </container>
 
         <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
-      <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
-    </container>
+          <block href="http://xml.zeit.de/brandeins/eine-reisbaeuerin-in-indien"/>
+        </container>
 
-    <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b">
-      <block href="http://xml.zeit.de/brandeins/der-besessene"/>
-    </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b">
+          <block href="http://xml.zeit.de/brandeins/der-besessene"/>
+        </container>
       </region>
     </cluster>
 
-  <!-- TODO: brand eins Parkett -->
-  <!--
-  <cluster area="id-e2f9e2c4-2700-4c62-8701-9f914e653123" kind="parquet" title="Zett Parkett" visible="True" visible_mobile="True">
-    <region area="id-663bd0f8-dab4-4388-97d4-e83a9d177123" hide-dupes="True" kind="zett" title="Zett" visible="True" visible_mobile="True"/>
-  </cluster>
-  -->
+    <cluster visible="True" visible_mobile="True" area="id-ac86778b-5430-4649-b833-78e2ddcdfd1a" kind="parquet" kind_title="brand eins Parkett-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-6607b3f7-27c3-49c1-a6b7-52e6b59a14c0" kind="brandeins"/>
+    </cluster>
 
   </body>
   <feed />

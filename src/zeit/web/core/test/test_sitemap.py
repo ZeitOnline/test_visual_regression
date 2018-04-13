@@ -312,13 +312,12 @@ def test_gsitemap_appcon(monkeypatch, testbrowser):
         'nsu-blog-bouffier')
 
 
-def test_gsitemap_appcon_creates_https_urls(
-        monkeypatch, testbrowser, togglepatch):
+def test_gsitemap_appcon_creates_https_urls(monkeypatch, testbrowser):
     set_sitemap_solr_results([
         {'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'},
         {'uniqueId': 'http://blog.zeit.de/blogs/nsu-blog-bouffier'}
     ])
-    togglepatch({'https': True})
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
     monkeypatch.setattr(zeit.web.core.interfaces, 'IImage', None)
     browser = testbrowser('/gsitemaps/appconsitemap.xml?p=1')
     xml = lxml.etree.fromstring(browser.contents)
