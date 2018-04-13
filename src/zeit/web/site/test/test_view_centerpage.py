@@ -887,7 +887,8 @@ def test_servicebox_present_in_wide_breakpoints(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    driver.get(
+        '%s/zeit-online/slenderized-index-with-newsbox' % testserver.url)
     servicebox = driver.find_element_by_id('servicebox')
 
     if screen_size[0] == 320:

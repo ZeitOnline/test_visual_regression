@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <topiclinks>
+      <topiclink>
+        <topiclink_label_1>Donald Trump</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/thema/donald-trump</topiclink_url_1>
+        <topiclink_label_2>Syrien</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/thema/syrien</topiclink_url_2>
+        <topiclink_label_3>Podcasts</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/podcasts</topiclink_url_3>
+      </topiclink>
+    </topiclinks>
+    <header_image/>
+    <rankedTags>
+      <tag type="person">Karim Sahib</tag>
+      <tag type="location">Düsseldorf</tag>
+      <tag type="organisation">Google Inc.</tag>
+      <tag type="product">Instagram</tag>
+      <tag type="keyword">Heißluftballonfestival</tag>
+      <tag type="keyword">Hintergrundbericht</tag>
+      <tag type="keyword">Große Koalition</tag>
+    </rankedTags>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments_premoderate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2018-04-13T08:25:42.742568+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-10-01T16:16:50.233082+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-04-13T08:25:43.995821+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2018-04-13T08:25:43.936385+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2018-04-13T08:25:43.883957+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2017-08-08T11:46:59.819795+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Aktuelle Nachrichten</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">ZEIT ONLINE | Nachrichten, Hintergründe und Debatten</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2018-04-13T08:25:40.549403+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.hp-assistent</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="overscrolling">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">homepage</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ec3d1b35-41b0-44a1-9453-0ff5c004c872}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>ZEIT ONLINE Startseite</title>
+    <cluster area="id-ff74a31d-ef34-4e3e-8933-fe10a9bb5520" kind="solo">
+      <region area="id-364a31cb-f55b-4a50-8842-6a698dc052f4" kind="solo">
+        <container cp:type="teaser" module="zon-classic" cp:__name__="id-226b0628-f6d4-444c-85a0-198e67b02a3b" force_mobile_image="True">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-48d3636e-f131-4ee0-b368-a0e18e62a8c7" kind="duo">
+      <region area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-d4855716-9272-4bd2-8ea5-57911515cc85" force_mobile_image="True">
+          <block href="http://xml.zeit.de/zeit-online/article/01"/>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-d4855716-9272-4bd2-8ea5-57911515cc86" force_mobile_image="True">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02"/>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-e74a9249-c040-4410-9536-d7bb1e0f5560">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-03"/>
+        </container>
+      </region>
+      <region area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor">
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-16cf0b5c-ca04-44ee-b7c6-b0d250955ef0" force_mobile_image="True">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-05"/>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-9a84ea60-c403-4070-8d07-283abc32e52c">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-06"/>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-c01879aa-f212-497e-b201-4ac10bbf86a4" kind="parquet">
+      <region area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e94" kind="parquet" title="Politik" read_more_url="http://www.zeit.de/politik/index" read_more="mehr Politik">
+        <referenced_cp>http://xml.zeit.de/zeit-online/centerpage/force-mobile-image</referenced_cp>
+        <container cp:type="teaser" module="zon-large" cp:__name__="id-ba7a149b-ff1c-43a6-ab61-c2dbe0dce555" force_mobile_image="True">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-06"/>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-1ffb1044-4be3-4a4d-9fb1-45fe263e19af" force_mobile_image="True">
+          <block href="http://xml.zeit.de/zeit-online/article/01"/>
+        </container>
+        <container cp:type="teaser" module="zon-small" cp:__name__="id-df702ff7-3c25-4c27-84b0-6f14fe2cbba1">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/link_teaser"/>
+        </container>
+      </region>
+    </cluster>
+  </body>
+</centerpage>
