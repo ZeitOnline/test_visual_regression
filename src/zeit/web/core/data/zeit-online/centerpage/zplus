@@ -165,7 +165,7 @@
                 <container cp:type="teaser" module="zon-large" cp:__name__="id-84169f27-ebff-48c0-a630-d08841984dd6">
                     <block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
                 </container>
-                <container cp:type="teaser" module="zon-large" cp:__name__="id-15218f5d-4cf2-4aa4-be2f-82597116ddd2" force_mobile_image="True">
+                <container cp:type="teaser" module="zon-large" cp:__name__="id-15218f5d-4cf2-4aa4-be2f-82597116ddd2">
                     <block href="http://xml.zeit.de/zeit-online/article/fischer"/>
                 </container>
                 <container cp:type="teaser" module="zon-small" cp:__name__="id-9644ea40-0b1a-415f-9be9-38310b9bbcc2">
@@ -174,7 +174,7 @@
                 <container cp:type="teaser" module="zon-small" cp:__name__="id-84169f27-ebff-48c0-a630-d08841984aa6">
                     <block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
                 </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-15218f5d-4cf2-4aa4-be2f-82597116cba2" force_mobile_image="True">
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-15218f5d-4cf2-4aa4-be2f-82597116cba2">
                     <block href="http://xml.zeit.de/zeit-online/article/fischer"/>
                 </container>
             </region>

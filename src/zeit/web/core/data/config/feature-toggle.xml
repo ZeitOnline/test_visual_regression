@@ -13,7 +13,7 @@
   <framebuilder_loginstatus_disabled>false</framebuilder_loginstatus_disabled>
 
   <!-- Produce https link, when set to true (only for certain domains, when
-  'transform_to_secure_links_for[cs-list_with_fqdn]` is configured in web.ini) -->
+  'transform_to_secure_links_for[cs-list_with_fqdn]` is configured in web-settings) -->
   <https>false</https>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>

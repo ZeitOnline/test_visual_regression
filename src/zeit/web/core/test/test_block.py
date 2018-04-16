@@ -23,7 +23,7 @@ def test_inline_html_replaces_http_protocol_if_https_toggle_set(monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'https': True}.get)
 
-    rewrite_links = []
+    rewrite_links = ''
 
     def getUtility(utility):
         if utility is zeit.web.core.interfaces.ISettings:
@@ -42,7 +42,7 @@ def test_inline_html_replaces_http_protocol_if_https_toggle_set(monkeypatch):
     assert xml_str == (
         str(zeit.web.core.block._inline_html(xml)).replace('\n', ''))
 
-    rewrite_links = ['www.zeit.de']
+    rewrite_links = 'www.zeit.de'
     xml_str = ('Text <a href="https://www.zeit.de/foo'
                '?foo=bar#fragment" class="myclass" '
                'rel="nofollow" data-foo="bar"> ba </a> und mehr Text')

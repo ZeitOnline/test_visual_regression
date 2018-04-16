@@ -5,8 +5,16 @@ POSTDEPLOY
 ----------
 
 
-3.142 (unreleased)
+3.143 (unreleased)
 ------------------
+
+- Nothing changed yet.
+
+
+3.142 (2018-04-16)
+------------------
+
+- ZON-4508: Force images on zplus-abo teaser in mobile view
 
 - ZON-4580: Remove additional liveblog header layout
 
@@ -14,7 +22,11 @@ POSTDEPLOY
 
 - BUG-891: Fix print button on advertorials
 
+- BUG-893: Clear floating advertisements before fullwidth block content
+
 - MAINT: Remove obsolete route config for `/health_check`
+
+- MAINT: Move 'transform_to_secure_links_for' setting to web-settings
 
 
 3.141 (2018-04-12)
