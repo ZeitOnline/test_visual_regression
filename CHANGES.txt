@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.142 (unreleased)
+3.142 (2018-04-16)
 ------------------
 
 - ZON-4508: Force images on zplus-abo teaser in mobile view
