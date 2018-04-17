@@ -169,7 +169,7 @@ def test_ligatus_has_no_tag_when_special_is_missing(testbrowser):
     ('/zeit-magazin/article/03', 'False'),
     ('/zeit-magazin/article/03/seite-4', 'True'),
     ('/zeit-magazin/article/03/komplettansicht', 'True'),
-    ('/zeit-magazin/article/01', 'True'),
+    ('/zeit-magazin/article/01?page=2', 'True'),
     ('/zeit-online/article/zeit', 'False'),
     ('/zeit-online/article/zeit/seite-2', 'True'),
     ('/zeit-online/article/zeit/komplettansicht', 'True'),
