@@ -124,19 +124,17 @@
         window.Zeit.setFontSize( storedFontSize, false );
     }
 
-{%- if view.advertising_enabled %}
-    {%- if view.package == 'zeit.web.site' %}
-        {%- if view.is_hp %}
+    {%- if view.advertising_enabled %}
+        {%- if view.package == 'zeit.web.site' and view.is_hp %}
             {# ZON HP: inflate 768-1000 screens always to 1280px #}
             if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.maxWidth ) {
                 window.Zeit.viewport.set( 'banner' );
             }
         {%- else %}
-            {# ZON other pages: inflate portrait tablets (768-1000px) to 1000px #}
+            {# All other pages: inflate portrait tablets (768-1000px) to 1000px #}
             if ( window.matchMedia( '(orientation: portrait)' ).matches && screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.tabletSmallMinWidth) {
                 window.Zeit.viewport.set( 'portrait' );
             }
         {%- endif %}
     {%- endif %}
-{%- endif %}
 </script>
