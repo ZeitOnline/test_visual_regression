@@ -344,13 +344,6 @@ def test_framebuilder_loads_slimmed_script_file(testbrowser):
     assert scripts[-1].get('src').endswith('/js/web.site/frame.js')
 
 
-def test_framebuilder_should_require_ssl(application, dummy_request):
-    dummy_request.GET['useSSL'] = 'true'
-    view = zeit.web.site.view.FrameBuilder(None, dummy_request)
-
-    assert view.framebuilder_requires_ssl is True
-
-
 # needs selenium because of esi include
 def test_framebuilder_does_not_render_login_data(
         selenium_driver, testserver, sso_keypair):
