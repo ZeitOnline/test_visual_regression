@@ -38,7 +38,6 @@
   <share_blocks_via_screenshot>true</share_blocks_via_screenshot>
   <tag_logos>true</tag_logos>
   <third_party_modules>false</third_party_modules>
-  <topicpages_tms>true</topicpages_tms>
   <tracking>false</tracking>
   <track_gate_visibility>true</track_gate_visibility>
   <update_signals>true</update_signals>
