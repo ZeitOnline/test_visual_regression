@@ -3,7 +3,7 @@
     document.createElement( 'picture' );
     window.Zeit = {
         publicPath: '{{ request.asset_host }}/js/',
-        jsconfHost: '{{ request.jsconf_host | rewrite_for_ssl_if_required(view.framebuilder_requires_ssl) }}',
+        jsconfHost: '{{ request.jsconf_host }}',
         cookieFallbackDomain: '{{ settings('cookie_fallback_domain', 'zeit.de') }}',
         moderationURL: '{{ view.moderation_url }}',
         cpVideoPlayerId: '{{ settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') }}',
