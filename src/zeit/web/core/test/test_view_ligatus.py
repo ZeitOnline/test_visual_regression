@@ -161,15 +161,19 @@ def test_ligatus_has_no_tag_when_special_is_missing(testbrowser):
     ('/arbeit/article/paginated', 'False'),
     ('/arbeit/article/paginated/seite-3', 'True'),
     ('/arbeit/article/paginated/komplettansicht', 'True'),
+    ('/arbeit/article/comments?page=2', 'True'),
     ('/campus/article/02-beziehung-schluss-machen', 'False'),
     ('/campus/article/02-beziehung-schluss-machen/seite-2', 'True'),
     ('/campus/article/02-beziehung-schluss-machen/komplettansicht', 'True'),
+    ('/campus/article/paginated?page=2', 'True'),
     ('/zeit-magazin/article/03', 'False'),
     ('/zeit-magazin/article/03/seite-4', 'True'),
     ('/zeit-magazin/article/03/komplettansicht', 'True'),
+    ('/zeit-magazin/article/01', 'True'),
     ('/zeit-online/article/zeit', 'False'),
     ('/zeit-online/article/zeit/seite-2', 'True'),
-    ('/zeit-online/article/zeit/komplettansicht', 'True')
+    ('/zeit-online/article/zeit/komplettansicht', 'True'),
+    ('/zeit-online/article/01?page=2', 'True')
 ])
 def test_ligatus_indexing_only_on_first_page(testbrowser, param):
     browser = testbrowser(param[0])
