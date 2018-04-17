@@ -4,6 +4,8 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- remove `iqd_tablet_transformation` feature toggle from Vivis XML
+
 
 3.143 (unreleased)
 ------------------
