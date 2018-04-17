@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.143 (unreleased)
+3.143 (2018-04-17)
 ------------------
 
 - ZON-4532: Remove zeit.intrafind and the zeit.retresco.tms featuretoggle
