@@ -8,7 +8,7 @@ POSTDEPLOY
 3.143 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- SSL-215: Rewrite certain URLs in RAW
 
 
 3.142 (2018-04-16)

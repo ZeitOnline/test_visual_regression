@@ -50,6 +50,31 @@ def test_inline_html_replaces_http_protocol_if_https_toggle_set(monkeypatch):
         str(zeit.web.core.block._inline_html(xml)).replace('\n', ''))
 
 
+def test_raw_html_should_replace_secure_urls(monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'https': True}.get)
+
+    rewrite_links = ''
+
+    def getUtility(utility):
+        if utility is zeit.web.core.interfaces.ISettings:
+            return {'transform_to_secure_links_for': rewrite_links}
+        if utility is zeit.web.core.interfaces.IMetrics:
+            return zeit.web.core.metrics.Metrics('test', 'localhost', 0)
+
+    monkeypatch.setattr(zope.component, 'getUtility', getUtility)
+
+    raw = '<raw><x>http://interactive.zeit.de/foo</x></raw>'
+    xml = lxml.etree.fromstring(raw)
+    assert '<x>http://interactive.zeit.de/foo</x>' == (
+        str(zeit.web.core.block._raw_html(xml)).replace('\n', ''))
+
+    rewrite_links = 'interactive.zeit.de'
+    xml = lxml.etree.fromstring(raw)
+    assert '<x>https://interactive.zeit.de/foo</x>' == (
+        str(zeit.web.core.block._raw_html(xml)).replace('\n', ''))
+
+
 def test_inline_html_should_filter_to_valid_html():
     p = ('<p>Text <a href="foo" class="myclass" rel="nofollow" '
          'data-foo="bar"> ba </a> und <em>Text</em> abc invalid valid: '
