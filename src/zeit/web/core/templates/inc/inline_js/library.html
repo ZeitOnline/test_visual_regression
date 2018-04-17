@@ -80,26 +80,6 @@
             portrait: 'width=1000',
             set: function( key ) {
                 this.meta.setAttribute( 'content', this[ key ] );
-            },
-            isLandscape: function() {
-                if ( window.matchMedia ) {
-                    return window.matchMedia( '(orientation: landscape)' ).matches;
-                }
-
-                var orientation = screen.orientation || screen.mozOrientation || screen.msOrientation,
-                    angle;
-
-                if ( typeof orientation === 'string' ) {
-                    return /^landscape/.test( orientation );
-                }
-
-                if ( typeof orientation === 'object' ) {
-                    angle = orientation.angle;
-                } else if ( 'orientation' in window ) {
-                    angle = window.orientation;
-                }
-
-                return Math.abs( angle ) === 90;
             }
         },
         breakpoint: {
