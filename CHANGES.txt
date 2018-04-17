@@ -8,6 +8,8 @@ POSTDEPLOY
 3.143 (unreleased)
 ------------------
 
+- ZON-4532: Remove zeit.intrafind and the zeit.retresco.tms featuretoggle
+
 - SSL-215: Rewrite certain URLs in RAW
 
 
