@@ -1,82 +1,46 @@
+@import "web.core/modules/article/sharing-menu"
+
+$campus-sharing-button-factor: 1.2
+
 .sharing-menu
-	line-height: remify(40px)
 	margin: remify(20px 0 32px)
 
-	&__items
-		+clearfix
-		list-style-type: none
-		margin: 0
-		padding: 0
-
 	&__item
-		float: left
+		line-height: remify(40px)
 		margin-right: 1px
 
-		&--printbutton
-			display: none
-
 	&__link
-		+clearfix
-		display: block
-		&--facebook
-			background-color: $color-facebook
-			+on-interaction
-				background-color: $color-facebook-hover
-		&--flipboard
-			background-color: $color-flipboard
-			+on-interaction
-				background-color: $color-flipboard-hover
-		&--twitter
-			background-color: $color-twitter
-			+on-interaction
-				background-color: $color-twitter-hover
-		&--whatsapp
-			background-color: $color-whatsapp
-			+on-interaction
-				background-color: $color-whatsapp-hover
-		&--messenger
-			background-color: $color-messenger
-			+on-interaction
-				background-color: $color-messenger-hover
+		border-radius: 0
+		min-height: remify(40px)
+		min-width: remify(46px)
 
 	&__text
 		@extend %font-beckett
-		+font-smoothing
 		+scaled-font(22px, $title-factor)
-		color: $white
-		display: none
+		font-weight: normal
+		vertical-align: middle
 		padding-right: remify(15px)
-		vertical-align: remify(-1px)
 
+	// icon size from core, but a little inflated
 	&__icon
-		color: $white
-		float: left
-		height: remify(22px)
-		margin: remify(9px 12px)
-		width: remify(22px)
+		margin-top: remify(-2px)
+		&--facebook
+			height: remify($campus-sharing-button-factor * 20px)
+			width: remify($campus-sharing-button-factor * 10px)
+		&--flipboard
+			height: remify($campus-sharing-button-factor * 19px)
+			width: remify($campus-sharing-button-factor * 19px)
+		&--twitter
+			height: remify($campus-sharing-button-factor * 16px)
+			width: remify($campus-sharing-button-factor * 21px)
+		&--whatsapp,
+		&--messenger
+			height: remify($campus-sharing-button-factor * 22px)
+			width: remify($campus-sharing-button-factor * 22px)
+		&--mail
+			height: remify($campus-sharing-button-factor * 14px)
+			width: remify($campus-sharing-button-factor * 20px)
 
 	+respond-min($break-tablet-min)
-
 		&__item
 			margin-right: remify(10px)
-			&--whatsapp,
-			&--messenger
-				display: none
-
-		&__icon
-			height: remify(26px)
-			margin: remify(7px 10px)
-			width: remify(26px)
-			&--flipboard
-				height: remify(24px)
-				margin: remify(8px 10px)
-				width: remify(24px)
-
-		&__text
-			display: inline
-
-	+respond-min($break-desktop-min)
-		&__item
-			&--printbutton
-				display: list-item
-				margin: remify(0 0 0 6px)
