@@ -5,8 +5,8 @@ POSTDEPLOY
 ----------
 
 
-3.144 (unreleased)
-------------------
+3.143.1 (2018-04-18)
+--------------------
 
 - FIX: Ensure ensure_division is called before we interact with the
   article body, for all possible code paths
