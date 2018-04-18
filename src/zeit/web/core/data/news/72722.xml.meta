@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/news/artikel/2006/09/01/72722.xml</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT online, Tagesspiegel | 01.09.2006 18:45</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2009-08-17T23:24:33.324446+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2006-09-01T06:45:00+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="pagelabel">News</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">5000</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">News</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e0148356-37ad-4836-9792-8af74c008cff}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">News</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="disabled"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="keywords">&lt;ns0:rankedTags xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/tagging"&gt;&lt;ns0:rankedTags&gt;&lt;tag type="person" py:pytype="str"&gt;Colin Smith&lt;/tag&gt;&lt;tag type="location" py:pytype="str"&gt;Neuseeland&lt;/tag&gt;&lt;tag type="location" py:pytype="str"&gt;Tauranga&lt;/tag&gt;&lt;tag type="organisation" py:pytype="str"&gt;Polizei&lt;/tag&gt;&lt;tag type="keyword" py:pytype="str"&gt;Verkehr&lt;/tag&gt;&lt;tag type="keyword" py:pytype="str"&gt;Autofahrer&lt;/tag&gt;&lt;tag type="keyword" py:pytype="str"&gt;Auto&lt;/tag&gt;&lt;/ns0:rankedTags&gt;&lt;/ns0:rankedTags&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">imported</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2017-05-10T15:35:19Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">3117</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Mon, 17 Aug 2009 23:24:04 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"c2d-4715eb297cd00"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">application/xml</attribute>
+</head>
