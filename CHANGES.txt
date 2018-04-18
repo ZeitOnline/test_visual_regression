@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - remove `framebuilder_ssl_asset_prefix` setting from Vivis XML
 
+- remove `framebuilder_loginstatus_disabled` feature toggle from Vivis XML
+
 
 3.144 (unreleased)
 ------------------

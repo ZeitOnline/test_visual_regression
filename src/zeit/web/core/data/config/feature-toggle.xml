@@ -10,7 +10,6 @@
   <elasticsearch_lineage>false</elasticsearch_lineage>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
-  <framebuilder_loginstatus_disabled>false</framebuilder_loginstatus_disabled>
 
   <!-- Produce https link, when set to true (only for certain domains, when
   'transform_to_secure_links_for[cs-list_with_fqdn]` is configured in web-settings) -->
