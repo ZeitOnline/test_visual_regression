@@ -1,6 +1,12 @@
 Change log for zeit.web
 =======================
 
+PREDEPLOY
+---------
+
+- Set `asset_prefix` to `https://static.zeit.de/static/{version}` and `jsconf_prefix` to `https://static.zeit.de/static/js` in the settings of all production sites.
+
+
 POSTDEPLOY
 ----------
 
@@ -15,6 +21,8 @@ POSTDEPLOY
 - ZON-4609: Do not index comment-paginated pages in Ligatus
 
 - ZON-4434: Transmit article genre to webtrekk
+
+- SSL-205: Load all assets from https://static.zeit.de
 
 - BUG-897: Adjust tablet viewport on all verticals
 
