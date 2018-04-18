@@ -132,7 +132,7 @@
             }
         {%- else %}
             {# All other pages: inflate portrait tablets (768-1000px) to 1000px #}
-            if ( window.matchMedia( '(orientation: portrait)' ).matches && screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.tabletSmallMinWidth) {
+            if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.tabletSmallMinWidth ) {
                 window.Zeit.viewport.set( 'portrait' );
             }
         {%- endif %}
