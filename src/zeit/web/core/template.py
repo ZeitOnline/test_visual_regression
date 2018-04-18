@@ -947,17 +947,6 @@ def debugger():
     pdb.set_trace()
 
 
-# TODO: Remove after SSL Launch
-# Temporary hack, in preparation for ssl launch
-# Used in framebuilder context.
-@zeit.web.register_filter
-def rewrite_for_ssl_if_required(url, rewrite_required=False):
-    if rewrite_required:
-        return url.replace(
-            'http://www.zeit.de/', 'https://static.zeit.de/')
-    return url
-
-
 # Use case: The view.adcontroller_values are a list of tuples,
 # which is looped for regular output in our templates.
 # But for Instant Articles, we need access to specific ones.

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.asset_host }}/icons/favicon.ico">
     {% block css_link -%}
-        <link href="{{ request.ssl_asset_host }}/css/web.site/framebuilder-minimal.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="{{ request.asset_host }}/css/web.site/framebuilder-minimal.css" media="screen" rel="stylesheet" type="text/css">
     {%- endblock css_link %}
 
     {% include "zeit.web.core:templates/inc/inline_js/library.html" %}

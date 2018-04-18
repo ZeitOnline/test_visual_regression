@@ -1150,18 +1150,6 @@ class service_unavailable(object):  # NOQA
 class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     inline_svg_icons = True
-    framebuilder_requires_ssl = True
-
-    def __call__(self):
-        resp = super(FrameBuilder, self).__call__()
-        # in preparation for ssl launch we switch all asset calls in
-        # framebuilder to https://static.zeit.de/…
-        # can be dropped after launch when https://www.zeit.de is available
-        try:
-            self.request.asset_host = self.request.ssl_asset_host
-        except AttributeError:
-            pass
-        return resp
 
     @zeit.web.reify
     def framebuilder_is_minimal(self):

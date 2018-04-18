@@ -63,17 +63,15 @@
   <setting name="newsletter_image_host" xsi:type="xsd:string">http://imgtest.zeit.de</setting>
   <setting name="newsletter_content_host" xsi:type="xsd:string">http://www.zeittest.de</setting>
 
+  <!-- needs https://static.zeit.de/static/{version} in production -->
   <setting name="asset_prefix" xsi:type="xsd:string">/static/latest</setting>
-  <!-- needs https://static.zeit.de/static/{version} in production and staging -->
-  <setting name="ssl_asset_prefix" xsi:type="xsd:string">/static/latest</setting>
   <setting name="image_prefix" xsi:type="xsd:string"></setting>
+  <!-- needs https://static.zeit.de/static/js in production -->
   <setting name="jsconf_prefix" xsi:type="xsd:string">/config</setting>
   <setting name="fbia_prefix" xsi:type="xsd:string">/fbia</setting>
   <setting name="c1_prefix" xsi:type="xsd:string">/config</setting>
   <setting name="series_prefix" xsi:type="xsd:string">http://xml.zeit.de/serie</setting>
   <setting name="topic_prefix" xsi:type="xsd:string">http://xml.zeit.de/thema</setting>
-  <!-- Do not use in other contexts than framebuilders useSSL variant, has no local testing alternative -->
-  <setting name="framebuilder_ssl_asset_prefix" xsi:type="xsd:string">https://ssl.zeit.de/www.zeit.de/static/latest</setting>
   <setting name="volume_navigation_base" xsi:type="xsd:string">https://premium.zeit.de/abo/diezeit/%s/%02d</setting>
   <setting name="webtrekk_version" xsi:type="xsd:string">4.3.1</setting>
   <setting name="webtrekk_id" xsi:type="xsd:string">674229970930653</setting>
