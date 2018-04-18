@@ -210,6 +210,8 @@ class ValuesCachingEditableBody(zeit.content.article.edit.body.EditableBody):
 
 def pages_of_article(article, advertising_enabled=True):
     body = zeit.content.article.edit.interfaces.IEditableBody(article)
+    # Call values() first, to ensure that ensure_divsion() was called.
+    blocks = body.values()
 
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
@@ -218,7 +220,6 @@ def pages_of_article(article, advertising_enabled=True):
     pages = []
     page = Page(first_division)
     pages.append(page)
-    blocks = body.values()
 
     try:
         if blocks[0] == article.header.module:

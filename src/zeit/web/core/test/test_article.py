@@ -120,3 +120,9 @@ def test_retresco_body_is_not_used_for_articles_with_keywords_on_blacklist(
 
     zeit.content.article.edit.interfaces.IEditableBody(article)
     assert not get_article_body.called
+
+
+def test_first_division_is_available_for_old_articles(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/news/72722.xml')
+    assert len(zeit.web.core.article.pages_of_article(article)) == 1
