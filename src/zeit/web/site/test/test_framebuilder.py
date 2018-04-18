@@ -424,7 +424,7 @@ def test_framebuilder_renders_login_data_if_new_feature_is_requested(
 
 def test_framebuilder_uses_static_ssl_url(testbrowser):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['ssl_asset_prefix'] = 'https://static.zeit.de/static/latest/'
+    conf['asset_prefix'] = 'https://static.zeit.de/static/latest/'
     browser = testbrowser('/framebuilder')
     urls = browser.contents.count('https://static.zeit.de/static/latest/')
     assert urls == 6
