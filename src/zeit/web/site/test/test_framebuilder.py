@@ -344,13 +344,6 @@ def test_framebuilder_loads_slimmed_script_file(testbrowser):
     assert scripts[-1].get('src').endswith('/js/web.site/frame.js')
 
 
-def test_framebuilder_should_require_ssl(application, dummy_request):
-    dummy_request.GET['useSSL'] = 'true'
-    view = zeit.web.site.view.FrameBuilder(None, dummy_request)
-
-    assert view.framebuilder_requires_ssl is True
-
-
 # needs selenium because of esi include
 def test_framebuilder_does_not_render_login_data(
         selenium_driver, testserver, sso_keypair):
@@ -431,7 +424,7 @@ def test_framebuilder_renders_login_data_if_new_feature_is_requested(
 
 def test_framebuilder_uses_static_ssl_url(testbrowser):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['ssl_asset_prefix'] = 'https://static.zeit.de/static/latest/'
+    conf['asset_prefix'] = 'https://static.zeit.de/static/latest/'
     browser = testbrowser('/framebuilder')
     urls = browser.contents.count('https://static.zeit.de/static/latest/')
     assert urls == 6

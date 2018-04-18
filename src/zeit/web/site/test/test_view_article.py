@@ -1467,11 +1467,11 @@ def test_advertorial_article_contains_correct_webtrekk_param(dummy_request):
     assert view.webtrekk['customParameter']['cp26'] == 'article.advertorial'
 
 
-def test_serie_article_contains_correct_webtrekk_param(dummy_request):
+def test_article_contains_serie_and_genre_in_webtrekk_param(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.webtrekk['customParameter']['cp26'] == 'article.serie'
+    assert view.webtrekk['customParameter']['cp26'] == 'article.serie.glosse'
 
 
 def test_article_has_image_header_embed(testbrowser):
