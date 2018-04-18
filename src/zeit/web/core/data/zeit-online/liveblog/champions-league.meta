@@ -19,6 +19,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-05-06T22:08:47.851876+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Sport</attribute>

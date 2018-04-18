@@ -230,6 +230,10 @@ class AcceleratedMobilePageArticle(
 @zeit.web.view_config(
     route_name='amp',
     context=zeit.web.core.article.ILiveblogArticle,
+    # XXX Since `context` is evaluated *before* everything else, we cannot
+    # rely on `z.w.core.redirect_amp_disabled` trumping us with its predicate,
+    # and have to repeat the appropriate predicate here.
+    custom_predicates=(lambda context, _: context.is_amp,),
     renderer='templates/amp/liveblog.html')
 class AcceleratedMobilePageLiveblogArticle(
         LiveblogArticle, AcceleratedMobilePageArticle):
