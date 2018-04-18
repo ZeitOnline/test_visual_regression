@@ -1080,6 +1080,10 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
                 return True
             elif self.pagination.get('current') > 1:
                 return True
+        # actually we aim for comment pagination, but it is also good to
+        # not trigger indexing with campaign params and stuff
+        if self.request.query_string:
+            return True
         return False
 
     @zeit.web.reify
