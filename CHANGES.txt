@@ -8,7 +8,16 @@ POSTDEPLOY
 3.144 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4609: Do not index comment-paginated pages in Ligatus
+
+- ZON-4434: Transmit article genre to webtrekk
+
+
+3.143.1 (2018-04-18)
+--------------------
+
+- FIX: Ensure ensure_division is called before we interact with the
+  article body, for all possible code paths
 
 
 3.143 (2018-04-17)

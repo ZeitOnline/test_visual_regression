@@ -210,6 +210,8 @@ class ValuesCachingEditableBody(zeit.content.article.edit.body.EditableBody):
 
 def pages_of_article(article, advertising_enabled=True):
     body = zeit.content.article.edit.interfaces.IEditableBody(article)
+    # Call values() first, to ensure that ensure_divsion() was called.
+    blocks = body.values()
 
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
@@ -218,7 +220,6 @@ def pages_of_article(article, advertising_enabled=True):
     pages = []
     page = Page(first_division)
     pages.append(page)
-    blocks = body.values()
 
     try:
         if blocks[0] == article.header.module:
@@ -335,15 +336,16 @@ def cms_content_type(context):
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 @grokcore.component.implementer(zeit.web.core.interfaces.IDetailedContentType)
 def content_type(context):
-    typ = cms_content_type(context)
-    subtyp = 'article'
+    parts = [cms_content_type(context), 'article']
     if zeit.web.core.view.is_advertorial(context, None):
-        subtyp = 'advertorial'
+        parts[1] = 'advertorial'
     elif getattr(context, 'serie', None):
-        subtyp = "serie"
+        parts[1] = 'serie'
         if context.serie.column:
-            subtyp = "column"
-    return '{}.{}'.format(typ, subtyp)
+            parts[1] = 'column'
+    if getattr(context, 'genre', None):
+        parts.append(context.genre)
+    return '.'.join(parts)
 
 
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
