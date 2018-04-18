@@ -6,6 +6,8 @@ POSTDEPLOY
 
 - remove `iqd_tablet_transformation` feature toggle from Vivis XML
 
+- remove `framebuilder_ssl_asset_prefix` setting from Vivis XML
+
 
 3.144 (unreleased)
 ------------------
