@@ -10,7 +10,9 @@ POSTDEPLOY
 3.144 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4609: Do not index comment-paginated pages in Ligatus
+
+- ZON-4434: Transmit article genre to webtrekk
 
 
 3.143.1 (2018-04-18)
