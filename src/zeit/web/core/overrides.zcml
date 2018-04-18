@@ -4,5 +4,4 @@
     <utility factory="zeit.web.core.reach.MockReach" provides="zeit.web.core.interfaces.IReach"/>
     <utility factory="zeit.web.core.retresco.DataTMS" provides="zeit.retresco.interfaces.ITMS"/>
     <utility factory="zeit.web.core.retresco.DataES" provides="zeit.retresco.interfaces.IElasticsearch"/>
-    <meta:provides feature="zeit.retresco.tms" />
 </configure>
