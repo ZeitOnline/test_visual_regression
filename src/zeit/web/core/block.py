@@ -303,15 +303,25 @@ class Liveblog(Module):
         headers = {'Content-Type': 'application/json;charset=UTF-8'}
         payload = {'username': username, 'password': password}
 
+        r = None
+        token = 'no_token'
+
         try:
-            r = requests.post(url, data=json.dumps(payload), headers=headers)
+            with zeit.web.core.metrics.timer('liveblog3auth.reponse_time'):
+                r = requests.post(
+                    url, data=json.dumps(payload), headers=headers)
             r.raise_for_status()
             token = r.json().get('token')
             LONG_TERM_CACHE.set('liveblog_api_auth_token', token)
         except requests.exceptions.HTTPError as e:
             log.error(e.message)
-            token = 'no_token'
-        return token
+            pass
+        except (requests.exceptions.RequestException, ValueError):
+            pass
+        finally:
+            status = r.status_code if r else 599
+            zeit.web.core.metrics.increment('liveblog3auth.status.%s' % status)
+            return token
 
     def api_blog_request(self):
         token = LONG_TERM_CACHE.get('liveblog_api_auth_token')
@@ -325,15 +335,37 @@ class Liveblog(Module):
             url = '{}/{}'.format(api_url, self.blog_id)
             headers = {
                 'Authorization': 'basic ' + base64.b64encode(token + ':')}
-            r = requests.get(url, headers=headers)
+            r = None
 
-            if r.status_code == 200:
+            try:
+                with zeit.web.core.metrics.timer('liveblog3api.reponse_time'):
+                    r = requests.get(url, headers=headers)
+            except (requests.exceptions.RequestException, ValueError):
+                pass
+            finally:
+                status = r.status_code if r else 599
+                zeit.web.core.metrics.increment(
+                    'liveblog3.status.%s' % status)
+
+            if status == 200:
                 return r.json()
             else:
                 token = self.api_auth_token()
                 headers = {
                     'Authorization': 'basic ' + base64.b64encode(token + ':')}
-                r = requests.get(url, headers=headers)
+                r = None
+
+                try:
+                    with zeit.web.core.metrics.timer(
+                            'liveblog3api.reponse_time'):
+                        r = requests.get(url, headers=headers)
+                except (requests.exceptions.RequestException, ValueError):
+                    pass
+                finally:
+                    status = r.status_code if r else 599
+                    zeit.web.core.metrics.increment(
+                        'liveblog3.status.%s' % status)
+
                 r.raise_for_status()
                 return r.json()
 
