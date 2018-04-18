@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4434: Transmit article genre to webtrekk
 
+- BUG-897: Adjust tablet viewport on all verticals
+
 
 3.143.1 (2018-04-18)
 --------------------
