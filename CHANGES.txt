@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - remove `framebuilder_ssl_asset_prefix` setting from Vivis XML
 
+- remove `framebuilder_loginstatus_disabled` feature toggle from Vivis XML
+
 
 3.144 (unreleased)
 ------------------
@@ -22,11 +24,16 @@ POSTDEPLOY
 
 - ZON-4434: Transmit article genre to webtrekk
 
+- ZON-4599: Polish ZMO article footer
+
 - SSL-205: Load all assets from https://static.zeit.de
 
 - BUG-897: Adjust tablet viewport on all verticals
 
 - MAINT: Use core styles for ZCO sharing buttons
+
+- MAINT: Remove `framebuilder_loginstatus_disabled` feature toggle
+
 
 3.143.1 (2018-04-18)
 --------------------
