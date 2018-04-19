@@ -28,6 +28,8 @@ POSTDEPLOY
 
 - BUG-897: Adjust tablet viewport on all verticals
 
+- MAINT: Remove `framebuilder_loginstatus_disabled` feature toggle
+
 
 3.143.1 (2018-04-18)
 --------------------
