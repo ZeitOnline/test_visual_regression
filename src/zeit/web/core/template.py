@@ -406,11 +406,10 @@ def format_date(date, type='short', pattern=None):
                                             add_direction=True, locale="de_DE")
         return text[:1].lower() + text[1:] if text else ''
     elif type == 'switch_from_hours_to_date':
-        delta = datetime.datetime.now(date.tzinfo) - date
-        if delta.days >= int(1):
-            pattern = 'dd. MM. yyyy'
-        elif delta.days < int(1):
+        if datetime.datetime.today().date() == date.date():
             pattern = "'Heute,' HH:mm"
+        else:
+            pattern = 'dd. MM. yyyy'
     if pattern is None:
         pattern = formats[type]
     # adjust UTC dates to local time
