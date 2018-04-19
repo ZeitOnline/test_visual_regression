@@ -34,6 +34,8 @@ POSTDEPLOY
 
 - BUG-897: Adjust tablet viewport on all verticals
 
+- BUG-898: Fix date error in news teasers
+
 - MAINT: Use core styles for ZCO sharing buttons
 
 - MAINT: Remove `framebuilder_loginstatus_disabled` feature toggle
