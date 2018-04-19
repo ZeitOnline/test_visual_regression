@@ -12,11 +12,7 @@
         // conditionalize output of cdn directory for mobile, to prevent code replication
         mob_suffix = window.Zeit.isMobileView() ? '_mob' : '';
 
-    {% if view is framebuilder and view.framebuilder_requires_ssl %}
-        document.write('<scr' + 'ipt src="https://s3-eu-central-1.amazonaws.com/prod.iqdcontroller.iqdigital/cdn_zeit' + mob_suffix + '/' + iqd_mode + '/iqadcontroller.js"></scr' + 'ipt>');
-    {% else %}
-        document.write('<scr' + 'ipt src="https://scripts.zeit.de/iqd/cdn_zeit' + mob_suffix + '/' + iqd_mode + '/iqadcontroller.js"></scr' + 'ipt>');
-    {% endif %}
+    document.write('<scr' + 'ipt src="https://scripts.zeit.de/iqd/cdn_zeit' + mob_suffix + '/' + iqd_mode + '/iqadcontroller.js"></scr' + 'ipt>');
 
 </script>
 
