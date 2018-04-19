@@ -369,13 +369,17 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
 def test_format_date_returns_expected_value_in_newsbox():
     tz = babel.dates.get_timezone('Europe/Berlin')
     now = datetime.now(tz)
-    before = now - timedelta(hours=5)
+    # We assume this test runs during office hours ;-)
+    before_today = now - timedelta(hours=3)
+    before_yesterday = now - timedelta(hours=22)
     yesterday = now - timedelta(days=1)
 
-    assert 'Heute, ' + str(before.strftime('%H:%M'))\
-        == format_date(before, type="switch_from_hours_to_date")
+    assert 'Heute, ' + str(before_today.strftime('%H:%M'))\
+        == format_date(before_today, type="switch_from_hours_to_date")
 
     day = str(yesterday.strftime('%d'))
+    assert day + '. ' + str(before_yesterday.strftime('%m. %Y')) \
+        == format_date(before_yesterday, type="switch_from_hours_to_date")
     assert day + '. ' + str(yesterday.strftime('%m. %Y')) \
         == format_date(yesterday, type="switch_from_hours_to_date")
 
