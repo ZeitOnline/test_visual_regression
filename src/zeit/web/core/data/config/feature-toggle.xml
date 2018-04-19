@@ -7,7 +7,6 @@
   <dtag_navigation>true</dtag_navigation>
   <campus_toolbox>true</campus_toolbox>
   <dummy>false</dummy>
-  <elasticsearch_lineage>false</elasticsearch_lineage>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
 

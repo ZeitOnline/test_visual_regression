@@ -12,9 +12,11 @@ POSTDEPLOY
 
 - remove `iqd_tablet_transformation` feature toggle from Vivis XML
 
-- remove `framebuilder_ssl_asset_prefix` setting from Vivis XML
-
 - remove `framebuilder_loginstatus_disabled` feature toggle from Vivis XML
+
+- remove `article_lineage` feature toggle from Vivis XML
+
+- remove `framebuilder_ssl_asset_prefix` setting from Vivis XML
 
 
 3.144 (unreleased)
@@ -26,9 +28,13 @@ POSTDEPLOY
 
 - ZON-4599: Polish ZMO article footer
 
+- ZON-4589: Remove article navigation (aka "lineage")
+
 - SSL-205: Load all assets from https://static.zeit.de
 
 - BUG-897: Adjust tablet viewport on all verticals
+
+- MAINT: Use core styles for ZCO sharing buttons
 
 - MAINT: Remove `framebuilder_loginstatus_disabled` feature toggle
 
