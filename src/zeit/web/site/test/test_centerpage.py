@@ -366,25 +366,34 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
     assert len(offline) == 8
 
 
-def test_format_date_returns_expected_value_in_newsbox():
-    tz = babel.dates.get_timezone('Europe/Berlin')
-    now = datetime.now(tz)
-    # We assume this test runs during office hours ;-)
-    before_today = now - timedelta(hours=3)
-    before_yesterday = now - timedelta(hours=22)
-    yesterday = now - timedelta(days=1)
+def test_format_date_returns_expected_value_in_newsbox(clock):
+    # we tell the test that it is currently 14 o clock in June 2015
+    # (to be indepentent from the actual runtime)
+    clock.freeze(datetime(2015, 6, 1, 14, 0))
 
-    assert 'Heute, ' + str(before_today.strftime('%H:%M'))\
-        == format_date(before_today, type="switch_from_hours_to_date")
+    date_today = datetime(2015, 6, 1, 10, 21)
+    assert 'Heute, 10:21' == format_date(
+        date_today, type='switch_from_hours_to_date')
+    assert '10:21' == format_date(
+        date_today, pattern='HH:mm')
 
-    day = str(yesterday.strftime('%d'))
-    assert day + '. ' + str(before_yesterday.strftime('%m. %Y')) \
-        == format_date(before_yesterday, type="switch_from_hours_to_date")
-    assert day + '. ' + str(yesterday.strftime('%m. %Y')) \
-        == format_date(yesterday, type="switch_from_hours_to_date")
+    date_yesterday_less_than_24h_ago = datetime(2015, 5, 31, 18, 2)
+    assert '31. 05. 2015' == format_date(
+        date_yesterday_less_than_24h_ago, type='switch_from_hours_to_date')
+    assert '18:02' == format_date(
+        date_yesterday_less_than_24h_ago, pattern='HH:mm')
 
-    assert str(yesterday.strftime('%H:%M'))\
-        == format_date(yesterday, pattern="HH:mm")
+    date_yesterday_more_than_24h_ago = datetime(2015, 5, 31, 9, 30)
+    assert '31. 05. 2015' == format_date(
+        date_yesterday_more_than_24h_ago, type='switch_from_hours_to_date')
+    assert '09:30' == format_date(
+        date_yesterday_more_than_24h_ago, pattern='HH:mm')
+
+    date_long_time_ago = datetime(2015, 4, 3, 1, 52)
+    assert '03. 04. 2015' == format_date(
+        date_long_time_ago, type='switch_from_hours_to_date')
+    assert '01:52' == format_date(
+        date_long_time_ago, pattern='HH:mm')
 
 
 def test_newsbox_renders_correctly_on_homepage(testbrowser, data_solr):
