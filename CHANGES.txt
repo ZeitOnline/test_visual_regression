@@ -40,6 +40,8 @@ POSTDEPLOY
 
 - MAINT: Remove `framebuilder_loginstatus_disabled` feature toggle
 
+- MAINT: Fix contrast in ZON footer for A11y
+
 
 3.143.1 (2018-04-18)
 --------------------
