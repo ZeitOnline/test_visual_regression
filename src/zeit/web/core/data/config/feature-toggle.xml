@@ -8,6 +8,7 @@
   <dtag_navigation>true</dtag_navigation>
   <campus_toolbox>true</campus_toolbox>
   <dummy>false</dummy>
+  <elasticsearch_zoca>false</elasticsearch_zoca>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
   <framebuilder_loginstatus_disabled>false</framebuilder_loginstatus_disabled>

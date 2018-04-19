@@ -168,18 +168,67 @@ def test_json_ressort_list_should_exclude_advertorials(
 @pytest.mark.parametrize('json', [
     ['uniqueId'],
     {'uniqueIds': 2},
-    {'uniqueIds': ["clearly_not_a_unique_id"]},
+    {'uniqueIds': ['clearly_not_a_unique_id']},
     {'uuids': [False]},
-    {'uuids': ["clearly-not-a-uuid"]}])
+    {'uuids': ['clearly-not-a-uuid']}])
 def test_json_article_query_should_do_sanity_checks_on_post(json, testserver):
     resp = requests.post('%s/json/article-query' % testserver.url, json=json)
     assert resp.status_code == 400
 
 
-def test_json_article_query_should_respond_to_good_request(testserver):
+def test_json_article_query_should_return_empty_for_empty_query(testserver):
+    resp = requests.post('%s/json/article-query' % testserver.url, json={})
+    assert resp.json() == []
+
+
+def test_json_article_query_should_accept_valid_request_for_solr(testserver):
     json = {'uniqueIds': ['http://xml.zeit.de/zeit-online/article/zeit']}
     resp = requests.post('%s/json/article-query' % testserver.url, json=json)
     assert resp.ok
+
+
+def test_json_article_query_should_accept_valid_request_for_elasticserach(
+        testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('elasticsearch_zoca')
+    json = {'uniqueIds': ['http://xml.zeit.de/zeit-online/article/zeit']}
+    resp = requests.post('%s/json/article-query' % testserver.url, json=json)
+    assert resp.ok
+
+
+def test_json_article_query_should_ignore_broken_hp_for_solr(
+        application, monkeypatch):
+    monkeypatch.setattr(zeit.cms.interfaces, 'ICMSContent',
+                        lambda _, default: default)
+    request = mock.MagicMock()
+    request.route_url = mock.MagicMock(return_value='/')
+    request.json_body = {'uniqueIds': [
+        'http://xml.zeit.de/zeit-online/cp-content/article-01']}
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
+        'uuid': '{urn:uuid:123eca9c-8a28-48e2-962b-96948577d000}'
+    }]
+    response = zeit.web.core.view_json.json_article_query(request)
+    assert response[0]['on_homepage'] == False
+
+
+def test_json_article_query_should_ignore_broken_hp_for_elasticsearch(
+        application, monkeypatch):
+    zeit.web.core.application.FEATURE_TOGGLES.set('elasticsearch_zoca')
+    monkeypatch.setattr(zeit.cms.interfaces, 'ICMSContent',
+                        lambda _, default: default)
+    request = mock.MagicMock()
+    request.route_url = mock.MagicMock(return_value='/')
+    request.json_body = {'uniqueIds': [
+        'http://xml.zeit.de/zeit-online/cp-content/article-01']}
+    elasticsearch = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elasticsearch.results = [{
+        'doc_id': '{urn:uuid:893eca9c-8a28-48e2-962b-96948577111d}',
+        'url': '/zeit-online/cp-content/article-01'
+    }]
+    response = zeit.web.core.view_json.json_article_query(request)
+    assert response[0]['on_homepage'] == False
 
 
 def test_json_article_query_should_construct_correct_solr_queries(
@@ -200,50 +249,39 @@ def test_json_article_query_should_construct_correct_solr_queries(
     assert kw['fq'] == 'comments:(true)'
 
 
-def test_json_article_query_should_work_even_when_homepage_is_unreachable(
+def test_json_article_query_should_construct_correct_elasticsearch_queries(
         application, monkeypatch):
-    monkeypatch.setattr(zeit.cms.interfaces, 'ICMSContent',
-                        lambda _, default: default)
+    zeit.web.core.application.FEATURE_TOGGLES.set('elasticsearch_zoca')
+    monkeypatch.setattr(zeit.cms.interfaces, 'ID_NAMESPACE', 'foo')
     request = mock.MagicMock()
-    request.route_url = mock.MagicMock(return_value='/')
-    request.json_body = {'uniqueIds': [
-        'http://xml.zeit.de/zeit-online/article/zeit']}
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{
-        'date_first_released': '2016-05-03T15:01:26.098814+00:00',
-        'date_last_published': '2016-05-03T15:01:26.098814+00:00',
-        'keywords': ['kw-1', 'kw-8'],
-        'ressort': 'my-ressort',
-        'sub_ressort': 'my-sub-ressort',
-        'supertitle': 'my-super-title',
-        'teaser_text': 'my-teaser-text',
-        'title': 'my-title',
-        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
-        'uuid': 'my-uuid'
-    }]
-    response = zeit.web.core.view_json.json_article_query(request)
-    assert response == [{
-        'date_first_released': '2016-05-03T15:01:26.098814+00:00',
-        'date_last_published': '2016-05-03T15:01:26.098814+00:00',
-        'keywords': ['kw-1', 'kw-8'],
-        'lead_article': False,
-        'on_homepage': False,
-        'ressort': 'my-ressort',
-        'sub_ressort': 'my-sub-ressort',
-        'supertitle': 'my-super-title',
-        'teaser_text': 'my-teaser-text',
-        'title': 'my-title',
-        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
-        'url': '/zeit-online/cp-content/article-01',
-        'uuid': 'my-uuid'
-    }]
+    request.json_body = {
+        'uniqueIds': ['foo://1', 'foo://2'],
+        'uuids': ['30d678d7-d8d7-4eaf-a5c8-f99fa137d69e']
+    }
+    elasticsearch = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    search = mock.MagicMock(return_value=[])
+    monkeypatch.setattr(elasticsearch, 'search', search)
+    zeit.web.core.view_json.json_article_query(request)
+    args, _ = search.call_args
+    assert args[0]['query'] == {
+        'bool': {
+            'filter': {
+                'term': {'payload.document.comments': True}},
+            'minimum_should_match': 1,
+            'should': [
+                {'terms': {'doc_id': [
+                    '{urn:uuid:30d678d7-d8d7-4eaf-a5c8-f99fa137d69e}']}},
+                {'terms': {'url': ['/://1', '/://2']}}]}}
+    assert args[1] == 'payload.document.date_first_released:desc'
 
 
-def test_json_article_query_should_transform_solr_fields(application):
+def test_json_article_query_should_transform_solr(application):
     request = mock.Mock()
     request.route_url = mock.MagicMock(return_value='//zeit.to/')
     request.json_body = {'uniqueIds': [
-        'http://xml.zeit.de/zeit-online/cp-content/article-01']}
+        'http://xml.zeit.de/zeit-online/cp-content/article-01',
+        'http://xml.zeit.de/zeit-online/cp-content/article-05']}
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
         'date_first_released': '2017-05-03T15:01:26.098814+00:00',
@@ -297,4 +335,68 @@ def test_json_article_query_should_transform_solr_fields(application):
         'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-05',
         'url': '//zeit.to/zeit-online/cp-content/article-05',
         'uuid': 'my-uuid-article-05'
+    }]
+
+
+def test_json_article_query_should_transform_elasticsearch(application):
+    zeit.web.core.application.FEATURE_TOGGLES.set('elasticsearch_zoca')
+    request = mock.Mock()
+    request.route_url = mock.MagicMock(return_value='//zeit.to/')
+    request.json_body = {'uniqueIds': [
+        'http://xml.zeit.de/zeit-online/cp-content/article-01',
+        'http://xml.zeit.de/zeit-online/cp-content/article-05']}
+    elasticsearch = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elasticsearch.results = [{
+        'doc_id': '{urn:uuid:893eca9c-8a28-48e2-962b-96948577111d}',
+        'payload': {
+            'document': {
+                'comments_premoderate': False,
+                'date_first_released': '2018-04-04T14:54:18.915698+00:00',
+                'ressort': 'Sport',
+                'sub_ressort': 'Ballsport'},
+            'workflow': {
+                'date_last_published': '2018-04-11T10:44:08.002988+00:00'}
+            },
+        'rtr_tags': [
+            'Handball',
+            'Russland',
+            'Watutinki'],
+        'supertitle': 'Handball-WM in Russland',
+        'teaser': 'Unsere Autorin wollte nun ins deutsche WM-Quartier',
+        'title': 'Der Geist von Watutinki',
+        'url': '/zeit-online/cp-content/article-01'
+    }, {
+        'doc_id': '{urn:uuid:123eca9c-8a28-48e2-962b-96948577d000}',
+        'url': '/zeit-online/cp-content/article-05'
+    }]
+    response = zeit.web.core.view_json.json_article_query(request)
+    assert response == [{
+        'date_first_released': '2018-04-04T14:54:18.915698+00:00',
+        'date_last_published': '2018-04-11T10:44:08.002988+00:00',
+        'keywords': ['Handball', 'Russland', 'Watutinki'],
+        'comments_premoderate': False,
+        'lead_article': True,
+        'on_homepage': True,
+        'ressort': 'Sport',
+        'sub_ressort': 'Ballsport',
+        'supertitle': 'Handball-WM in Russland',
+        'teaser_text': 'Unsere Autorin wollte nun ins deutsche WM-Quartier',
+        'title': 'Der Geist von Watutinki',
+        'uniqueId': u'http://xml.zeit.de/zeit-online/cp-content/article-01',
+        'url': u'//zeit.to/zeit-online/cp-content/article-01',
+        'uuid': '{urn:uuid:893eca9c-8a28-48e2-962b-96948577111d}'
+    }, {
+        'date_first_released': None,
+        'date_last_published': None,
+        'keywords': [],
+        'comments_premoderate': False,
+        'lead_article': False,
+        'on_homepage': True,
+        'ressort': None,
+        'sub_ressort': None,
+        'teaser_text': None,
+        'uniqueId': u'http://xml.zeit.de/zeit-online/cp-content/article-05',
+        'url': u'//zeit.to/zeit-online/cp-content/article-05',
+        'uuid': '{urn:uuid:123eca9c-8a28-48e2-962b-96948577d000}'
     }]
