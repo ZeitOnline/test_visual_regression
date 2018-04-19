@@ -87,20 +87,26 @@ def test_zar_article_zplus_comments_not_under_abo_article(testbrowser):
 
 
 def test_zar_article_paginated_has_headerimage_only_on_first_page(testbrowser):
-    browser = testbrowser('/arbeit/article/01-digitale-nomaden/')
-    assert len(browser.cssselect('.article__media--header-image')) == 1
+    browser = testbrowser('/arbeit/article/01-digitale-nomaden')
+    assert len(browser.cssselect('div[data-ct-row="headerimage"] img')) == 1
+    assert len(browser.cssselect('.article-body .article__media img')) == 1
 
     browser = testbrowser('/arbeit/article/01-digitale-nomaden/seite-2')
-    assert not browser.cssselect('.article__media--header-image')
+    assert not browser.cssselect('div[data-ct-row="headerimage"]')
+    assert len(browser.cssselect('.article-body .article__media img')) == 1
+
+    browser = testbrowser('/arbeit/article/01-digitale-nomaden/seite-3')
+    assert not browser.cssselect('div[data-ct-row="headerimage"]')
+    assert len(browser.cssselect('.article-body .article__media img')) == 1
 
     browser = testbrowser(
         '/arbeit/article/01-digitale-nomaden/komplettansicht')
-    assert len(browser.cssselect('.article__media--header-image')) == 1
+    assert len(browser.cssselect('div[data-ct-row="headerimage"] img')) == 1
 
 
 def test_zar_article_image_has_caption(testbrowser):
     browser = testbrowser('/arbeit/article/01-digitale-nomaden')
-    headerimage = browser.cssselect('figure.article__media--header-image')
+    headerimage = browser.cssselect('div[data-ct-row="headerimage"]')
     assert len(headerimage) == 1
     headerimage_caption = headerimage[0].cssselect('.figure__text')
     assert len(headerimage_caption) == 1
@@ -130,7 +136,7 @@ def test_zar_article_with_dark_header_has_correct_structure(testbrowser):
     # image should be outside/behind the header (because the figure caption
     # has a bright background)
     assert len(browser.cssselect(
-        '.article-header--dark + .article__media--header-image')) == 1
+        '.article-header--dark + div[data-ct-row="headerimage"]')) == 1
 
 
 def test_zar_article_header_on_second_page_has_correct_structure(testbrowser):
@@ -138,7 +144,7 @@ def test_zar_article_header_on_second_page_has_correct_structure(testbrowser):
     assert len(browser.cssselect('.article-header--dark')) == 1
     assert len(browser.cssselect(
         '.article-header--dark .article__page-teaser')) == 1
-    assert len(browser.cssselect('.article__media--header-image')) == 0
+    assert len(browser.cssselect('div[data-ct-row="headerimage"]')) == 0
 
 
 def test_zar_article_renders_nextread_correctly(testbrowser):
@@ -418,24 +424,26 @@ def test_zar_advertorial_has_no_home_button_as_pagination(testbrowser):
     assert len(browser.cssselect('.article-pagination__link')) == 0
 
 
-def test_zar_sharequote_is_hidden_if_toggle_is_false(testbrowser, togglepatch):
-    togglepatch({'arbeit_quote_sharing': False})
+def test_zar_sharequote_is_hidden_if_toggle_is_false(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('arbeit_quote_sharing')
     browser = testbrowser('/arbeit/article/sharequote')
     assert len(browser.cssselect('.quote-sharing')) == 0
 
 
-def test_zar_sharequote_is_shown_if_toggle_is_true(testbrowser, togglepatch):
-    togglepatch({'arbeit_quote_sharing': True})
+def test_zar_sharequote_is_shown_if_toggle_is_true(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('arbeit_quote_sharing')
     browser = testbrowser('/arbeit/article/sharequote')
     assert len(browser.cssselect('.quote-sharing')) == 2
 
 
-def test_zar_sharebert_toggle_works(testbrowser, togglepatch):
-    togglepatch({'share_blocks_via_screenshot': False})
+def test_zar_sharebert_toggle_works(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset(
+        'share_blocks_via_screenshot')
     browser = testbrowser('/arbeit/article/sharequote')
     assert len(browser.cssselect('.js-shareblock')) == 0
 
-    togglepatch({'share_blocks_via_screenshot': True})
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'share_blocks_via_screenshot')
     browser = testbrowser('/arbeit/article/sharequote')
     assert len(browser.cssselect('.js-shareblock')) == 2
 

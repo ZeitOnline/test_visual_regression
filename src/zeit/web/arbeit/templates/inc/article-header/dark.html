@@ -11,8 +11,8 @@
         {% include "zeit.web.arbeit:templates/inc/article/metadata.tpl" %}
     {% endblock %}
 </div>
-{% if view.pagination and view.pagination.current == 1 %}
-    {% block header_image %}
-        {% include "zeit.web.arbeit:templates/inc/article-header/image.html" %}
-    {% endblock %}
-{% endif %}
+
+{% block header_image %}
+    {% set article_header_image_figure_modifiers = 'article__item' | with_mods('full', 'rimless') %}
+    {%- include "zeit.web.core:templates/inc/article/header-module.tpl" %}
+{% endblock %}

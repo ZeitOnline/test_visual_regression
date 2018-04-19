@@ -205,7 +205,7 @@ def test_campus_article_has_sharing_menu(testbrowser):
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
-    assert len(sharing_menu.cssselect('.sharing-menu__item')) == 5
+    assert len(sharing_menu.cssselect('.sharing-menu__item')) == 6
     assert labels[0].text == 'Facebook'
     assert labels[1].text == 'Twittern'
     assert labels[2].text == 'Flippen'
@@ -239,16 +239,16 @@ def test_article_header_default_considers_image_layout(testbrowser):
     assert image.get('data-ratio') == '1.77777777778'
 
 
-def test_article_has_print_function(testbrowser):
+def test_article_has_print_menu(testbrowser):
     browser = testbrowser('/campus/article/debate')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/campus/article/debate?print'))
 
 
-def test_multi_page_article_has_print_link(testbrowser):
+def test_multi_page_article_has_print_menu(testbrowser):
     browser = testbrowser('/campus/article/paginated')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/campus/article/paginated/komplettansicht?print'))
 

@@ -5,12 +5,16 @@ import logging
 import babel.dates
 import zope.component
 
+from zeit.solr import query as lq
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
+import zeit.retresco.interfaces
+import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.article
 import zeit.web.core.interfaces
+import zeit.web.core.metrics
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_article
@@ -105,12 +109,12 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return zeit.web.core.interfaces.ILiveblogInfo(self.context)
 
     @zeit.web.reify
-    def advertising_in_article_enabled(self):
+    def advertising_in_article_body_enabled(self):
         if self.advertising_enabled:
             if self.liveblog.collapse_preceding_content:
                 return False
 
-        return self.advertising_enabled
+        return super(Article, self).advertising_in_article_body_enabled
 
 
 @zeit.web.view_defaults(vertical='zon')

@@ -3,7 +3,6 @@
   <access_status_ivw>true</access_status_ivw>
   <amp_advertising>true</amp_advertising>
   <arbeit_quote_sharing>true</arbeit_quote_sharing>
-  <article_lineage>true</article_lineage>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
   <dtag_navigation>true</dtag_navigation>
   <campus_toolbox>true</campus_toolbox>
@@ -11,14 +10,12 @@
   <elasticsearch_zoca>false</elasticsearch_zoca>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
-  <framebuilder_loginstatus_disabled>false</framebuilder_loginstatus_disabled>
 
   <!-- Produce https link, when set to true (only for certain domains, when
-  'transform_to_secure_links_for[cs-list_with_fqdn]` is configured in web.ini) -->
+  'transform_to_secure_links_for[cs-list_with_fqdn]` is configured in web-settings) -->
   <https>false</https>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
-  <iqd_tablet_transformation>true</iqd_tablet_transformation>
   <iqd_touchpoint>true</iqd_touchpoint>
   <keywords_from_tms>false</keywords_from_tms>
 
@@ -39,7 +36,6 @@
   <share_blocks_via_screenshot>true</share_blocks_via_screenshot>
   <tag_logos>true</tag_logos>
   <third_party_modules>false</third_party_modules>
-  <topicpages_tms>true</topicpages_tms>
   <tracking>false</tracking>
   <track_gate_visibility>true</track_gate_visibility>
   <update_signals>true</update_signals>

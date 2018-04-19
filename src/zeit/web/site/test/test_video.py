@@ -249,3 +249,9 @@ def test_expired_video_should_show_404(testserver):
         '%s/zeit-online/video/3537342483002/testdaten-abgelaufenes-video'
         % testserver.url)
     assert resp.status_code == 404
+
+
+def test_video_page_has_no_print_menu(testbrowser):
+    browser = testbrowser('/zeit-online/video/3537342483001')
+    assert not browser.cssselect('.sharing-menu__item--printbutton')
+    assert not browser.cssselect('.print-menu')

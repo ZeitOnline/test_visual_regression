@@ -294,7 +294,8 @@ def maybe_convert_http_to_https(url):
     if not url:
         return
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    rewrite_https_links = conf['transform_to_secure_links_for']
+    rewrite_https_links = conf.get('transform_to_secure_links_for',
+                                   '').split(',')
     scheme, netloc, path, params, query, fragments = urlparse.urlparse(url)
     if scheme != 'http':
         return url

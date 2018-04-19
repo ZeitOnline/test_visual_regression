@@ -792,7 +792,17 @@ def _raw_html(xml):
         </xsl:stylesheet>
     """)
     transform = lxml.etree.XSLT(filter_xslt)
-    return transform(xml)
+    text = unicode(transform(xml))
+
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('https'):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        rewrite_https_links = conf.get(
+            'transform_to_secure_links_for', '').split(',')
+        for link in rewrite_https_links:
+            if link:
+                text = text.replace("http://%s" % link, "https://%s" % link)
+    return text
 
 
 def _inline_html(xml, elements=None):

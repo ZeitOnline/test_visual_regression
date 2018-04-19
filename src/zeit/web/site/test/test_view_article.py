@@ -630,9 +630,8 @@ def test_article_should_show_main_image_from_imagegroup(testbrowser):
     assert 'filmstill-hobbit-schlacht-fuenf-hee' in images[0].get('src')
 
 
-def test_article_should_have_proper_meetrics_integration(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article_should_have_proper_meetrics_integration(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/article/01')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -1010,16 +1009,16 @@ def test_missing_keyword_links_are_replaced(testbrowser):
     assert keyword.get('href').endswith('/thema/wein')
 
 
-def test_article_has_print_function(testbrowser):
+def test_article_has_print_menu(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/zeit-online/article/01?print'))
 
 
-def test_multi_page_article_has_print_link(testbrowser):
+def test_multi_page_article_has_print_menu(testbrowser):
     browser = testbrowser('/zeit-online/article/tagesspiegel')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/zeit-online/article/tagesspiegel/komplettansicht?print'))
 
@@ -1047,117 +1046,6 @@ def test_article_advertorial_pages_should_render_correctly(testbrowser):
     assert browser.cssselect('.advertorial-marker')
     browser = testbrowser('/zeit-online/article/angebot/komplettansicht')
     assert browser.cssselect('.advertorial-marker')
-
-
-def test_article_lineage_should_render_correctly(testbrowser):
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect('.al-text--prev')) == 1
-    assert len(browser.cssselect('.al-text--next')) == 1
-
-
-def test_article_lineage_should_utilize_feature_toggle(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.unset('article_lineage')
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect('.article-lineage')) == 0
-
-
-def test_article_lineage_has_text_elements(testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{
-        u'supertitle': u'a',
-        u'uniqueId': u'http://xml.zeit.de/01',
-        u'title': u'b'}, {
-            u'supertitle': u'c',
-            u'uniqueId': u'http://xml.zeit.de/02',
-            u'title': u'd'}]
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect('.al-text__kicker')) == 2
-    assert len(browser.cssselect('.al-text__supertitle')) == 2
-    assert len(browser.cssselect('.al-text__title')) == 2
-
-
-@pytest.mark.xfail(reason='This test fails on Jenkins. Disabled until fixed.')
-def test_article_lineage_should_be_hidden_on_small_screens(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/article/zeit' % testserver.url)
-    driver.execute_script("window.scrollTo(0, 500)")
-    lineage_links = driver.find_elements_by_css_selector(
-        '.al-link')
-    lineage_linktexts = driver.find_elements_by_css_selector(
-        '.al-text')
-
-    if screen_size[0] < 1000:
-        assert not lineage_links[0].is_displayed()
-        assert not lineage_links[1].is_displayed()
-        assert not lineage_linktexts[0].is_displayed()
-        assert not lineage_linktexts[1].is_displayed()
-
-    if screen_size[0] >= 1000:
-        assert lineage_links[0].is_displayed()
-        assert lineage_links[1].is_displayed()
-        assert not lineage_linktexts[0].is_displayed()
-        assert not lineage_linktexts[1].is_displayed()
-
-
-@pytest.mark.xfail(reason='This test fails on Jenkins. Disabled until fixed.')
-def test_article_lineage_should_be_fixed_after_scrolling(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.set_window_size(1000, 1024)
-    driver.get('%s/zeit-online/article/zeit' % testserver.url)
-    driver.execute_script("window.scrollTo(0, 1200)")
-    try:
-        wait = WebDriverWait(driver, 10)
-        wait.until(expected_conditions.visibility_of_element_located(
-                   (By.CSS_SELECTOR, '.article-lineage--fixed')))
-    except TimeoutException:
-        assert False, 'Fixed Lineage not visible after scrolled into view'
-
-
-@pytest.mark.xfail(reason='This test fails on Jenkins. Disabled until fixed.')
-def test_article_lineage_overlapping_with_fullwidth_elements_should_be_hidden(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.set_window_size(1024, 768)
-    driver.get('%s/zeit-online/article/infoboxartikel' % testserver.url)
-    # Force page load even if another test has left the browser on _this_ page.
-    driver.refresh()
-
-    driver.execute_script('window.scrollTo(0, 600)')
-    wait = WebDriverWait(driver, 5)
-
-    try:
-        wait.until(expected_conditions.visibility_of_element_located(
-                   (By.CSS_SELECTOR, '.article-lineage')))
-    except TimeoutException:
-        assert False, 'Fixed Lineage not visible after scrolled into view'
-
-    driver.get('%s/zeit-online/article/infoboxartikel#info-bonobo' %
-               testserver.url)
-
-    try:
-        wait.until(expected_conditions.invisibility_of_element_located(
-                   (By.CSS_SELECTOR, '.article-lineage')))
-    except TimeoutException:
-        assert False, 'Fixed Lineage visible above fullwidth element'
-
-
-def test_article_lineage_should_not_render_on_advertorials(testbrowser):
-    browser = testbrowser('/zeit-online/article/angebot')
-    assert len(browser.cssselect('.article-lineage')) == 0
-
-
-def test_article_lineage_should_not_render_on_articles_without_channels(
-        testbrowser):
-    browser = testbrowser('/zeit-online/article/dpa')
-    assert len(browser.cssselect('.article-lineage')) == 0
-
-
-def test_article_lineage_should_not_render_on_administratives(testbrowser):
-    browser = testbrowser('/zeit-online/article/administratives')
-    assert len(browser.cssselect('.article-lineage')) == 0
 
 
 def test_article_should_render_quiz_in_iframe(testbrowser):
@@ -1273,8 +1161,8 @@ def test_nextread_should_display_date_last_published_semantic(testbrowser):
     assert nextread_date.text.strip() == '15. Februar 2015'
 
 
-def test_article_contains_zeit_clickcounter(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article_contains_zeit_clickcounter(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/article/simple')
     counter = browser.cssselect('body noscript img[src^="https://cc.zeit.de"]')
     assert ("img.src = 'https://cc.zeit.de/cc.gif?banner-channel="
@@ -1346,9 +1234,8 @@ def test_amp_article_placeholder(testbrowser, parameter):
     assert len(select('.article__placeholder')) >= 1
 
 
-def test_newsletter_optin_page_has_webtrekk_ecommerce(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_newsletter_optin_page_has_webtrekk_ecommerce(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser(
         '/zeit-online/article/simple?newsletter-optin=elbVertiefung-_!1:2')
     assert '8: \'elbvertiefung-_1_2\'' in browser.contents
@@ -1411,11 +1298,11 @@ def test_advertorial_article_contains_correct_webtrekk_param(dummy_request):
     assert view.webtrekk['customParameter']['cp26'] == 'article.advertorial'
 
 
-def test_serie_article_contains_correct_webtrekk_param(dummy_request):
+def test_article_contains_serie_and_genre_in_webtrekk_param(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.webtrekk['customParameter']['cp26'] == 'article.serie'
+    assert view.webtrekk['customParameter']['cp26'] == 'article.serie.glosse'
 
 
 def test_article_has_image_header_embed(testbrowser):
