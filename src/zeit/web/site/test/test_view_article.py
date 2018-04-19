@@ -1996,7 +1996,7 @@ def test_paid_subscription_article_has_correct_ivw_code(dummy_request):
 def test_not_paid_subscription_article_has_correct_ivw_code(dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/zplus-zeit')
-    dummy_request.GET = {'C1-Meter-Status': 'always_paid'}
+    dummy_request.GET['C1-Meter-Status'] = 'always_paid'
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert view.ivw_code == 'kultur/film/bild-text'
 
