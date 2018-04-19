@@ -94,6 +94,18 @@ def test_article_pagination(testbrowser):
     assert '--current' in select('.article-toc__item')[0].get('class')
 
 
+def test_article_paginator_has_https_links(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('https')
+    select = testbrowser('/zeit-online/article/zeit').cssselect
+    pages = select('.article-pager__number a')
+    assert 'https://' not in pages[0].attrib.get('href')
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
+    select = testbrowser('/zeit-online/article/zeit').cssselect
+    pages = select('.article-pager__number a')
+    assert 'https://' in pages[0].attrib.get('href')
+
+
 def test_article_pagination_active_state(testbrowser):
     select = testbrowser('/zeit-online/article/zeit/seite-3').cssselect
 

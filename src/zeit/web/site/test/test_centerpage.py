@@ -184,6 +184,18 @@ def test_dynamic_centerpage_should_be_paginatable(testbrowser, data_solr):
     assert current.text_content().strip() == '2'
 
 
+def test_dynamic_centerpage_paginator_has_https_links(testbrowser, data_solr):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('https')
+    browser = testbrowser('/dynamic/angela-merkel?p=2')
+    current = browser.cssselect('.pager__page a')[0]
+    assert 'http://' in current.attrib.get('href')
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
+    browser = testbrowser('/dynamic/angela-merkel?p=2')
+    current = browser.cssselect('.pager__page a')[0]
+    assert 'https://' in current.attrib.get('href')
+
+
 def test_pagination_should_be_validated(testbrowser):
     with pytest.raises(urllib2.HTTPError):
         assert '404 Not Found' in testbrowser(
