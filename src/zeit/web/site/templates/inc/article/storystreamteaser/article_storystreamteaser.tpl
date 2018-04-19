@@ -2,7 +2,7 @@
 
     {% set blockname = 'storystream-in-article' %}
 
-    <aside class="{{ blockname }} hide-lineage" id="zeitleiste">
+    <aside class="{{ blockname }}" id="zeitleiste">
         <div class="{{ blockname }}__container {{ blockname }}__container--header">
             <div class="{{ blockname }}__content {{ blockname }}__content--header {{ blockname }}__content--with-border">
                 <h2 class="{{ blockname }}__headline">
