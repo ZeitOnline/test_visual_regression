@@ -55,7 +55,6 @@ require( 'web.site/plugins/jquery.adaptnav' );
 require( 'web.core/plugins/jquery.animateJobs' );
 require( 'web.site/plugins/jquery.autoclick' );
 require( 'web.site/plugins/jquery.extendfooter' );
-require( 'web.site/plugins/jquery.fixPosition' );
 require( 'web.site/plugins/jquery.hpOverlay' );
 require( 'web.site/plugins/jquery.liveblog' );
 require( 'web.site/plugins/jquery.searchTools' );
@@ -99,7 +98,6 @@ if ( pageType === 'centerpage' ) {
     $.picturefill();
     $( '.sharing-menu' ).toggleRegions();
     $( '.comment-section' ).countFormchars();
-    $( '.js-fix-position' ).fixPosition();
 } else if ( pageType === 'author' ) {
     $( '.author-questions' ).longTextWrapper();
 }

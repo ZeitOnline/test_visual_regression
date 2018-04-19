@@ -443,7 +443,6 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                         '#servicebox',
                         '.teaser-topic-variant__media',
                         '.breaking-news-banner',
-                        '.article-lineage',
                         '.js-truncate-region'
                     ].join(),
                     'a[data-id]:not([data-wt-click])'
