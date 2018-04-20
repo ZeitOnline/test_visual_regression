@@ -34,6 +34,8 @@ POSTDEPLOY
 
 - ZON-4591: Migrate zoca json endpoint to elasticsearch
 
+- ZON-4516: Add request metrics for Liveblog3
+
 - SSL-205: Load all assets from https://static.zeit.de
 
 - BUG-897: Adjust tablet viewport on all verticals
