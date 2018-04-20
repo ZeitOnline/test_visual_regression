@@ -1,4 +1,21 @@
-{% if view.pagination and view.pagination.total > 1 %}
+{% if view.template == 'faq' %}
+<aside class="article-flexible-foc article__item article__item--wide">
+    <div class="article-flexible-toc__container">
+        <h3 class="article-flexible-toc__headline" id="article-flexible-toc-label">
+            Alle Fragen im Überblick:
+        </h3>
+        <div class="article-flexible-toc__seperator" id="article-flexible-toc-box">
+            <ol class="article-flexible-toc__list" id="article-flexible-toc-list">
+            {%- for subheading in view.subheadings %}
+                <li class="article-flexible-toc__item article-flexible-toc__item--empty">
+                    <a class="article-flexible-toc__link js-scroll" href="">{{ subheading.text }}</a>
+                </li>
+            {%- endfor -%}
+            </ol>
+        </div>
+    </div>
+</aside>
+{% elif view.pagination and view.pagination.total > 1 %}
 <aside class="article-toc article__item article__item--wide" data-ct-area="article-toc" data-ct-row="{{ 'page_%s_of_%s' | format(view.pagination.current, view.pagination.total) }}" data-ct-column="false">
     <div class="article-toc__container">
         <h3 class="article-toc__headline" id="article-toc-label" aria-controls="{% block toc_expandable_region %}article-toc-list{% endblock %}" data-constrained="mobile,phablet">
