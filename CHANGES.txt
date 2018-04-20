@@ -30,6 +30,8 @@ POSTDEPLOY
 
 - ZON-4589: Remove article navigation (aka "lineage")
 
+- ZON-4610: Force images on video teaser in mobile view
+
 - SSL-205: Load all assets from https://static.zeit.de
 
 - BUG-897: Adjust tablet viewport on all verticals
