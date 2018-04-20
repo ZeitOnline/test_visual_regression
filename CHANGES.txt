@@ -32,6 +32,8 @@ POSTDEPLOY
 
 - ZON-4610: Force images on video teaser in mobile view
 
+- ZON-4591: Migrate zoca json endpoint to elasticsearch
+
 - SSL-205: Load all assets from https://static.zeit.de
 
 - BUG-897: Adjust tablet viewport on all verticals
