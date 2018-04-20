@@ -35,19 +35,16 @@ def is_healthy(self):
     timeout = float(conf.get('tms_timeout', 0.5))
     response = None
     try:
-        with zeit.web.core.metrics.timer(
-                'zeit.retresco.connection.health_check.tms.reponse_time'):
+        with zeit.web.core.metrics.http(
+                'zeit.retresco.connection.health_check.tms') as record:
             response = requests.get(
                 self.url + '/health-check', timeout=timeout)
+            record(response)
         response.raise_for_status()
         return True
     except Exception:
         log.warning('Health check failed', exc_info=True)
         return False
-    finally:
-        status = response.status_code if response else 599
-        zeit.web.core.metrics.increment(
-            'zeit.retresco.connection.health_check.tms.status.%s' % status)
 
 
 zeit.retresco.connection.TMS.is_healthy = is_healthy
