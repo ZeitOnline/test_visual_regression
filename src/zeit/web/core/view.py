@@ -1080,6 +1080,10 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
                 return True
             elif self.pagination.get('current') > 1:
                 return True
+        # actually we aim for comment pagination, but it is also good to
+        # not trigger indexing with campaign params and stuff
+        if self.request.query_string:
+            return True
         return False
 
     @zeit.web.reify
@@ -1146,18 +1150,6 @@ class service_unavailable(object):  # NOQA
 class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     inline_svg_icons = True
-    framebuilder_requires_ssl = True
-
-    def __call__(self):
-        resp = super(FrameBuilder, self).__call__()
-        # in preparation for ssl launch we switch all asset calls in
-        # framebuilder to https://static.zeit.de/…
-        # can be dropped after launch when https://www.zeit.de is available
-        try:
-            self.request.asset_host = self.request.ssl_asset_host
-        except AttributeError:
-            pass
-        return resp
 
     @zeit.web.reify
     def framebuilder_is_minimal(self):
@@ -1173,12 +1165,9 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     @zeit.web.reify
     def framebuilder_loginstatus_disabled(self):
-        # This (featuretoggle and GET param) is double-negative, so we can
+        # This (GET param) is double-negative, so we can
         # remove everything as soon as we do not need the safety net any longer
-        return (zeit.web.core.application.FEATURE_TOGGLES.find(
-            'framebuilder_loginstatus_disabled') or (
-            'loginstatus_disabled' in self.request.GET)) and (
-            'loginstatus_enforced' not in self.request.GET)
+        return 'loginstatus_disabled' in self.request.GET
 
     @zeit.web.reify
     def advertising_enabled(self):
