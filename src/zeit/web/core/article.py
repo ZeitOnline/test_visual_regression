@@ -34,6 +34,10 @@ class IColumnArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that belong to a "column" series."""
 
 
+class IFAQArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that contain a FAQ."""
+
+
 class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that contain a liveblog."""
 
@@ -379,6 +383,7 @@ class LiveblogInfo(object):
 
 
 TEMPLATE_INTERFACES = {
+    'faq': (IFAQArticle,),
     'zon-liveblog': (ILiveblogArticle,),
     # Should we check that the article provides IZMOContent? Because those
     # templates are only available there.

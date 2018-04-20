@@ -212,6 +212,19 @@ class AFPArticle(Article):
 
 
 @zeit.web.view_config(
+    context=zeit.web.core.article.IFAQArticle,
+    renderer='templates/faq.html')
+class FAQArticle(Article):
+
+    @zeit.web.reify
+    def subheadings(self):
+        for page in self.pages:
+            for block in page.blocks[:]:
+                if isinstance(block, zeit.web.core.block.Intertitle):
+                    yield block.context
+
+
+@zeit.web.view_config(
     context=zeit.web.core.article.ILiveblogArticle,
     renderer='templates/liveblog.html')
 class LiveblogArticle(Article):
