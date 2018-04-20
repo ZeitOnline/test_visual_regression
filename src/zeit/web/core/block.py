@@ -299,7 +299,7 @@ class Liveblog(Module):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = conf.get('liveblog_api_auth_url_v3')
         try:
-            with zeit.web.core.metrics.http('liveblog3auth') as record:
+            with zeit.web.core.metrics.http('liveblog3.auth') as record:
                 response = requests.post(url, json={
                     'username': conf.get('liveblog_api_auth_username_v3'),
                     'password': conf.get('liveblog_api_auth_password_v3')})
@@ -323,7 +323,7 @@ class Liveblog(Module):
         if token is dogpile.cache.api.NO_VALUE:
             token = ''
         try:
-            with zeit.web.core.metrics.http('liveblog3api') as record:
+            with zeit.web.core.metrics.http('liveblog3.api') as record:
                 response = requests.get(url, auth=(token, ''))
                 record(response)
             response.raise_for_status()
