@@ -3,6 +3,7 @@ import zope.component
 
 import zeit.cms.content.interfaces
 import zeit.content.cp.interfaces
+import zeit.content.video.interfaces
 
 import zeit.web
 import zeit.web.core.interfaces
@@ -46,6 +47,9 @@ class TeaserBlock(grokcore.component.MultiAdapter):
         if (zeit.cms.content.interfaces.ICommonMetadata.providedBy(
                 self._v_first_content) and (
                 self._v_first_content.access == 'abo')):
+            return True
+        if (zeit.content.video.interfaces.IVideo.providedBy(
+                self._v_first_content)):
             return True
         return self.module.force_mobile_image
 

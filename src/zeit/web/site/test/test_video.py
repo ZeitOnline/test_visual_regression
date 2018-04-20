@@ -164,6 +164,15 @@ def test_video_teaser_should_display_byline(testbrowser):
         assert " ".join(value.text.split()) == 'Von Wenke Husmann'
 
 
+def test_video_teaser_should_force_mobile_images(testbrowser):
+    browser = testbrowser('/zeit-online/video-teaser')
+    assert len(browser.cssselect('.teaser-small__media')) == 2
+    assert len(browser.cssselect('.teaser-small__media--force-mobile')) == 2
+    assert len(browser.cssselect('.teaser-small-minor__media')) == 1
+    assert len(browser.cssselect(
+        '.teaser-small-minor__media--force-mobile')) == 1
+
+
 def test_video_single_page_should_display_byline(testbrowser):
     byline = testbrowser('/zeit-online/video/3537342483001')\
         .cssselect('.byline--on-videopage')
