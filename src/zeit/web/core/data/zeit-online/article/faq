@@ -9,7 +9,7 @@
     <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
       <display_name>Heike Jahberg</display_name>
     </author>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-article-faq</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">faq</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
@@ -75,6 +75,10 @@
     <title>Williams wackelt weiter, steht aber im Viertelfinale</title>
     <byline>SID</byline>
     <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00" is_empty="False" title_local="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" alt_local="Kultur, &quot;Der Hobbit&quot;, Film, Peter Jackson, Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott" title="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" alt="Kultur, &quot;Der Hobbit&quot;, Film, Peter Jackson, Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott">
+        <bu>Bernie Sanders kommt Hillary Clinton gefährlich nahe. Wenn der Sozialist sie weiter bedrängt, könnte sie nach links ausscheren.</bu>
+        <copyright>© Warner Bros.</copyright>
+      </image>
       <intertitle>Unter der Kritik wegducken</intertitle>
       <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
       <intertitle>Unter der Kritik wegducken Teil 2</intertitle>
