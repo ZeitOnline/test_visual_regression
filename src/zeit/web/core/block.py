@@ -518,7 +518,10 @@ class Raw(Module):
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawText)
 class RawText(Module):
-    pass
+
+    @zeit.web.reify
+    def raw_code(self):
+        return _raw_text(self.context.raw_code)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
@@ -794,8 +797,10 @@ def _raw_html(xml):
         </xsl:stylesheet>
     """)
     transform = lxml.etree.XSLT(filter_xslt)
-    text = unicode(transform(xml))
+    return _raw_text(unicode(transform(xml)))
 
+
+def _raw_text(text):
     toggles = zeit.web.core.application.FEATURE_TOGGLES
     if toggles.find('https'):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
