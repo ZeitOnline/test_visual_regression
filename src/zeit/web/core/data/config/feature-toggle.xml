@@ -7,17 +7,15 @@
   <dtag_navigation>true</dtag_navigation>
   <campus_toolbox>true</campus_toolbox>
   <dummy>false</dummy>
-  <elasticsearch_lineage>false</elasticsearch_lineage>
+  <elasticsearch_zoca>false</elasticsearch_zoca>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
-  <framebuilder_loginstatus_disabled>false</framebuilder_loginstatus_disabled>
 
   <!-- Produce https link, when set to true (only for certain domains, when
   'transform_to_secure_links_for[cs-list_with_fqdn]` is configured in web-settings) -->
   <https>false</https>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
-  <iqd_tablet_transformation>true</iqd_tablet_transformation>
   <iqd_touchpoint>true</iqd_touchpoint>
   <keywords_from_tms>false</keywords_from_tms>
 

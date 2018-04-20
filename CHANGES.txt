@@ -1,13 +1,52 @@
 Change log for zeit.web
 =======================
 
+PREDEPLOY
+---------
+
+- Set `asset_prefix` to `https://static.zeit.de/static/{version}` and `jsconf_prefix` to `https://static.zeit.de/static/js` in the settings of all production sites.
+
+
 POSTDEPLOY
 ----------
 
-3.143.4 (unreleased)
---------------------
+- remove `iqd_tablet_transformation` feature toggle from Vivis XML
 
-- Nothing changed yet.
+- remove `framebuilder_loginstatus_disabled` feature toggle from Vivis XML
+
+- remove `article_lineage` feature toggle from Vivis XML
+
+- remove `framebuilder_ssl_asset_prefix` setting from Vivis XML
+
+
+3.144 (unreleased)
+------------------
+
+- ZON-4609: Do not index comment-paginated pages in Ligatus
+
+- ZON-4434: Transmit article genre to webtrekk
+
+- ZON-4599: Polish ZMO article footer
+
+- ZON-4589: Remove article navigation (aka "lineage")
+
+- ZON-4610: Force images on video teaser in mobile view
+
+- ZON-4591: Migrate zoca json endpoint to elasticsearch
+
+- SSL-205: Load all assets from https://static.zeit.de
+
+- BUG-897: Adjust tablet viewport on all verticals
+
+- BUG-898: Fix date error in news teasers
+
+- MAINT: Use core styles for ZCO sharing buttons
+
+- MAINT: Remove `framebuilder_loginstatus_disabled` feature toggle
+
+- MAINT: Fix contrast in ZON footer for A11y
+
+- MAINT: Add margin to Ligatus on video page
 
 
 3.143.3 (2018-04-20)
