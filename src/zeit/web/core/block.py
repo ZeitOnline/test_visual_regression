@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
-import datetime
-import random
-
-import babel.dates
 import base64
-import grokcore.component
+import datetime
 import json
 import logging
+import random
+import re
+import urlparse
+
+import babel.dates
+import dogpile.cache.api
+import grokcore.component
 import lxml.etree
 import lxml.html
 import pyramid
-import re
 import requests
 import requests.exceptions
-import urlparse
 import zope.component
 import zope.interface
 
@@ -294,7 +295,7 @@ class Liveblog(Module):
         self.is_live = json.get('blog_status') == u'open'
         self.last_modified = self.format_date(json.get('_updated'))
 
-    def api_auth_token(self):
+    def _retrieve_auth_token(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = conf.get('liveblog_api_auth_url_v3')
 
@@ -303,58 +304,50 @@ class Liveblog(Module):
         headers = {'Content-Type': 'application/json;charset=UTF-8'}
         payload = {'username': username, 'password': password}
 
-        token = 'no_token'
         try:
             with zeit.web.core.metrics.http('liveblog3auth') as record:
                 response = requests.post(
                     url, data=json.dumps(payload), headers=headers)
                 record(response)
             response.raise_for_status()
-            token = response.json().get('token')
-            LONG_TERM_CACHE.set('liveblog_api_auth_token', token)
+            return response.json().get('token')
         except requests.exceptions.HTTPError as e:
             log.error(e.message)
         except (requests.exceptions.RequestException, ValueError):
             pass
-        return token
 
-    def api_blog_request(self):
+    def api_blog_request(self, _retries=0):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        api_url = conf.get('liveblog_api_url_v3')
+        url = '{}/{}'.format(api_url, self.blog_id)
+
+        if _retries >= 2:
+            raise RuntimeError('Maximum retries exceeded for %s' % url)
+
         token = LONG_TERM_CACHE.get('liveblog_api_auth_token')
-        if not token:
-            token = self.api_auth_token()
+        if token is dogpile.cache.api.NO_VALUE:
+            token = ''
+        headers = {
+            'Authorization': 'basic ' + base64.b64encode(token + ':')}
 
-        if isinstance(token, basestring):
-            conf = zope.component.getUtility(
-                zeit.web.core.interfaces.ISettings)
-            api_url = conf.get('liveblog_api_url_v3')
-            url = '{}/{}'.format(api_url, self.blog_id)
-            headers = {
-                'Authorization': 'basic ' + base64.b64encode(token + ':')}
-
-            try:
-                with zeit.web.core.metrics.http('liveblog3api') as record:
-                    response = requests.get(url, headers=headers)
-                    record(response)
-            except (requests.exceptions.RequestException, ValueError):
-                pass
-
-            status = response.status_code if response else 599
-            if status == 200:
-                return response.json()
-
-            token = self.api_auth_token()
-            headers = {
-                'Authorization': 'basic ' + base64.b64encode(token + ':')}
-            response = None
-
-            try:
-                with zeit.web.core.metrics.http('liveblog3api') as record:
-                    response = requests.get(url, headers=headers)
-                    record(response)
-            except (requests.exceptions.RequestException, ValueError):
-                pass
+        try:
+            with zeit.web.core.metrics.http('liveblog3api') as record:
+                response = requests.get(url, headers=headers)
+                record(response)
             response.raise_for_status()
+        except requests.exceptions.RequestException as err:
+            status = getattr(err.response, 'status_code', 510)
+            if status == 401:
+                log.debug('Refreshing liveblog3 auth token')
+                LONG_TERM_CACHE.set(
+                    'liveblog_api_auth_token', self._retrieve_auth_token())
+                return self.api_blog_request(_retries=_retries + 1)
+            raise
+        try:
             return response.json()
+        except Exception:
+            log.error('%s returned invalid json %r', url, response.text)
+            raise ValueError('No valid JSON found for %s' % url)
 
     def format_date(self, date):
         tz = babel.dates.get_timezone('Europe/Berlin')
