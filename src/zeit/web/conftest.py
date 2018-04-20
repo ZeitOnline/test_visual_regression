@@ -441,14 +441,24 @@ def workingcopy(application, zodb, request):
 
 @pytest.fixture
 def dummy_request(application, request):
-    req = pyramid.testing.DummyRequest(is_xhr=False)
-    # XXX DummyRequest is not life-like enough out-of-the-box, sigh.
-    req.GET = webob.multidict.MultiDict(req.GET)
-    req.response.headers = set()
-    req.matched_route = None
+    config = application.zeit_app.config
+    # pyramid's DummyRequest is too dissimilar, so we use a real one.
+    factory = config.registry.getUtility(pyramid.interfaces.IRequestFactory)
+    req = factory({
+        'SERVER_NAME': 'example.com',
+        'PATH_INFO': '/',
+        'REQUEST_METHOD': 'GET',
+    })
+
+    # A real request object only works properly after IRouter.handle_request()
+    # has set some attributes on it like `view_name`. We fake these, just like
+    # DummyRequest does.
+    dummy = pyramid.testing.DummyRequest()
+    for name in ['root', 'context', 'view_name', 'subpath', 'traversed',
+                 'virtual_root', 'virtual_root_path', 'session']:
+        req.__dict__[name] = getattr(dummy, name)
 
     # See pyramid.router.Router.invoke_subrequest()
-    config = application.zeit_app.config
     req.registry = config.registry
     pyramid.request.apply_request_extensions(req, config.registry.getUtility(
         pyramid.interfaces.IRequestExtensions))
