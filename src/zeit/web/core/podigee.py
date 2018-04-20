@@ -31,33 +31,29 @@ class Podigee(object):
         url = '{}/{}'.format(conf.get('podigee_url'), path)
         response = None
         try:
-            with zeit.web.core.metrics.timer('api.http.reponse_time'):
+            with zeit.web.core.metrics.http('api.http') as record:
                 response = requests.get(
                     url, headers={'Token': conf.get('podigee_token')},
                     timeout=conf.get('podigee_api_timeout', 2))
-                return response.json()
+                record(response)
+            return response.json()
         except Exception:
             log.warning('API GET %s failed', path, exc_info=True)
             return {}
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment('api.http.status.%s' % status)
 
     @MEDIUM_TERM_CACHE.cache_on_arguments(should_cache_fn=lambda x: x)
     def get_player_configuration(self, url):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         response = None
         try:
-            with zeit.web.core.metrics.timer('config.http.reponse_time'):
+            with zeit.web.core.metrics.http('config.http') as record:
                 response = requests.get(
                     url + u'/embed?context=external',
                     headers={'Accept': 'application/json'},
                     timeout=conf.get('podigee_config_timeout', 2))
+                record(response)
             data = response.json()
             return data
         except Exception:
             log.warning('config GET %s failed', url, exc_info=True)
             return {}
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment('config.http.status.%s' % status)

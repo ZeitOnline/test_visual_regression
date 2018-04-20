@@ -1151,6 +1151,10 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     inline_svg_icons = True
 
+    def __init__(self, context, request):
+        super(FrameBuilder, self).__init__(context, request)
+        self.request.response.headers.add('Access-Control-Allow-Origin', '*')
+
     @zeit.web.reify
     def framebuilder_is_minimal(self):
         return 'minimal' in self.request.GET
