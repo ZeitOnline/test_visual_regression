@@ -269,8 +269,8 @@ class Article(zeit.web.core.view.Content):
 
             if access == 'abo':
                 badge.update({
-                    'link': 'http://{}/exklusive-zeit-artikel'.format(
-                            self.request.host),
+                    'link': '{}exklusive-zeit-artikel'.format(
+                        self.request.route_url('home')),
                     'link_text': u'Exklusiv für Abonnenten',
                     'zplus': True
                 })
@@ -279,7 +279,7 @@ class Article(zeit.web.core.view.Content):
                 badge.update({
                     'cover': self.volume.get_cover('printcover'),
                     'link': self.volume.fill_template(
-                        'http://%s/{year}/{name}' % self.request.host),
+                        '%s{year}/{name}' % self.request.route_url('home')),
                     'volume_exists': True
                 })
 
