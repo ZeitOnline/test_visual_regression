@@ -22,6 +22,8 @@ POSTDEPLOY
 3.145 (unreleased)
 ------------------
 
+- SSL-227: Remove non-ssl links to live0.zeit.de
+
 - PERF: Preload webfonts on ZON
 
 
