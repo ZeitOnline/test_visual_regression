@@ -34,6 +34,8 @@ POSTDEPLOY 3.144
 
 - SSL-225: Use HTTPS for external links if appropriate
 
+- SSL-226: Remove ssl.zeit.de from amp tracking
+
 - PERF: Preload webfonts on ZON
 
 
