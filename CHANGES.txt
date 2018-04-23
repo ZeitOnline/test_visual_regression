@@ -28,6 +28,8 @@ POSTDEPLOY 3.144
 
 - SSL-222: Make Z+ badge protocol aware
 
+- SSL-228: Use SSL hosts in framebuilder login status
+
 - PERF: Preload webfonts on ZON
 
 
