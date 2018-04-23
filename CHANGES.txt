@@ -32,6 +32,8 @@ POSTDEPLOY 3.144
 
 - SSL-229: Remove schema in HP overlay webtrekk content id
 
+- SSL-225: Use HTTPS for external links if appropriate
+
 - PERF: Preload webfonts on ZON
 
 
