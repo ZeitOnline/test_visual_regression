@@ -30,6 +30,8 @@ POSTDEPLOY 3.144
 
 - SSL-228: Use SSL hosts in framebuilder login status
 
+- SSL-229: Remove schema in HP overlay webtrekk content id
+
 - PERF: Preload webfonts on ZON
 
 
