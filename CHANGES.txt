@@ -22,6 +22,8 @@ POSTDEPLOY 3.144
 3.145 (unreleased)
 ------------------
 
+- SSL-227: Remove non-ssl links to live0.zeit.de
+
 - SSL-223: Repair webtrekk contentId
 
 - PERF: Preload webfonts on ZON
