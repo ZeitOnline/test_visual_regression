@@ -19,6 +19,12 @@ POSTDEPLOY
 - remove `framebuilder_ssl_asset_prefix` setting from Vivis XML
 
 
+3.145 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 3.144 (2018-04-23)
 ------------------
 
