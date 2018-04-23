@@ -26,6 +26,8 @@ POSTDEPLOY 3.144
 
 - SSL-223: Repair webtrekk contentId
 
+- SSL-222: Make Z+ badge protocol aware
+
 - PERF: Preload webfonts on ZON
 
 
