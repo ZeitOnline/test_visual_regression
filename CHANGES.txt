@@ -52,6 +52,8 @@ POSTDEPLOY
 
 - MAINT: Add margin to Ligatus on video page
 
+- MAINT: Fix D18 nav-badge on IE
+
 
 3.143.3 (2018-04-20)
 --------------------
