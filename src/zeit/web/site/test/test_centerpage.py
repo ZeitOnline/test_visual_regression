@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import datetime
 import urllib2
 
 import lxml.html
@@ -12,9 +12,6 @@ import zeit.solr.interfaces
 
 import zeit.web.site.view_centerpage
 
-import babel
-from datetime import datetime
-from datetime import timedelta
 from zeit.web.core.template import format_date
 
 
@@ -279,7 +276,8 @@ def test_hp_hides_popover_per_default(selenium_driver, testserver):
     driver = selenium_driver
 
     # default
-    driver.get('%s/index?debug-popover' % testserver.url)
+    driver.get('{}/zeit-online/slenderized-index?debug-popover'.format(
+        testserver.url))
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
@@ -294,7 +292,8 @@ def test_hp_shows_popover(selenium_driver, testserver):
     driver = selenium_driver
 
     # default
-    driver.get('%s/index?force-popover' % testserver.url)
+    driver.get('{}/zeit-online/slenderized-index?force-popover'.format(
+        testserver.url))
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
@@ -381,27 +380,27 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
 def test_format_date_returns_expected_value_in_newsbox(clock):
     # we tell the test that it is currently 14 o clock in June 2015
     # (to be indepentent from the actual runtime)
-    clock.freeze(datetime(2015, 6, 1, 14, 0))
+    clock.freeze(datetime.datetime(2015, 6, 1, 14, 0))
 
-    date_today = datetime(2015, 6, 1, 10, 21)
+    date_today = datetime.datetime(2015, 6, 1, 10, 21)
     assert 'Heute, 10:21' == format_date(
         date_today, type='switch_from_hours_to_date')
     assert '10:21' == format_date(
         date_today, pattern='HH:mm')
 
-    date_yesterday_less_than_24h_ago = datetime(2015, 5, 31, 18, 2)
+    date_yesterday_less_than_24h_ago = datetime.datetime(2015, 5, 31, 18, 2)
     assert '31. 05. 2015' == format_date(
         date_yesterday_less_than_24h_ago, type='switch_from_hours_to_date')
     assert '18:02' == format_date(
         date_yesterday_less_than_24h_ago, pattern='HH:mm')
 
-    date_yesterday_more_than_24h_ago = datetime(2015, 5, 31, 9, 30)
+    date_yesterday_more_than_24h_ago = datetime.datetime(2015, 5, 31, 9, 30)
     assert '31. 05. 2015' == format_date(
         date_yesterday_more_than_24h_ago, type='switch_from_hours_to_date')
     assert '09:30' == format_date(
         date_yesterday_more_than_24h_ago, pattern='HH:mm')
 
-    date_long_time_ago = datetime(2015, 4, 3, 1, 52)
+    date_long_time_ago = datetime.datetime(2015, 4, 3, 1, 52)
     assert '03. 04. 2015' == format_date(
         date_long_time_ago, type='switch_from_hours_to_date')
     assert '01:52' == format_date(
