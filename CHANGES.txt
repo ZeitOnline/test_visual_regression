@@ -38,6 +38,8 @@ POSTDEPLOY
 
 - SSL-205: Load all assets from https://static.zeit.de
 
+- SSL-220: Replace links in raw, if referenced by file
+
 - BUG-897: Adjust tablet viewport on all verticals
 
 - BUG-898: Fix date error in news teasers
