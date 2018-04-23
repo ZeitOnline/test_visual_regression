@@ -2,14 +2,14 @@
 
 <select class="partner__dropdown" data-tracklink="?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.funktionsbox.streifen.berufsfeld_auswahl.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=funktionsbox_streifen_berufsfeld_auswahl_">
     <option class="partner__dropdown-option">Berufsfeld auswählen</option>
-    <option class="partner__dropdown-option" value="http://jobs.zeit.de/stellenmarkt/naturwissenschaften_life_science_39807.html">Naturwissenschaften &amp; Life Sciences</option>
-    <option class="partner__dropdown-option" value="http://jobs.zeit.de/stellenmarkt/paedagogik_soziales_39805.html">Pädagogik &amp; Soziales</option>
-    <option class="partner__dropdown-option" value="http://jobs.zeit.de/stellenmarkt/medizin_gesundheit_39798.html">Medizin, Gesundheit &amp; Psychologie</option>
-    <option class="partner__dropdown-option" value="http://jobs.zeit.de/stellenmarkt/kultur_kunst_39802.html">Kunst &amp; Kultur</option>
-    <option class="partner__dropdown-option" value="http://jobs.zeit.de/stellenmarkt/ingenieure_it_technik_57353.html">Ingenieure, IT &amp; Technik</option>
-    <option class="partner__dropdown-option" value="http://jobs.zeit.de/stellenmarkt/medien_kommunikation_39801.html">Medien &amp; Kommunikation</option>
-    <option class="partner__dropdown-option" value="http://jobs.zeit.de/stellenmarkt/verwaltung_management_recht_57354.html">Verwaltung, Management &amp; Recht</option>
-    <option class="partner__dropdown-option" value="http://jobs.zeit.de/stellenmarkt/internationale_zusammenarbeit_39808.html">Internationale Zusammenarbeit</option>
+    <option class="partner__dropdown-option" value="https://jobs.zeit.de/stellenmarkt/naturwissenschaften_life_science_39807.html">Naturwissenschaften &amp; Life Sciences</option>
+    <option class="partner__dropdown-option" value="https://jobs.zeit.de/stellenmarkt/paedagogik_soziales_39805.html">Pädagogik &amp; Soziales</option>
+    <option class="partner__dropdown-option" value="https://jobs.zeit.de/stellenmarkt/medizin_gesundheit_39798.html">Medizin, Gesundheit &amp; Psychologie</option>
+    <option class="partner__dropdown-option" value="https://jobs.zeit.de/stellenmarkt/kultur_kunst_39802.html">Kunst &amp; Kultur</option>
+    <option class="partner__dropdown-option" value="https://jobs.zeit.de/stellenmarkt/ingenieure_it_technik_57353.html">Ingenieure, IT &amp; Technik</option>
+    <option class="partner__dropdown-option" value="https://jobs.zeit.de/stellenmarkt/medien_kommunikation_39801.html">Medien &amp; Kommunikation</option>
+    <option class="partner__dropdown-option" value="https://jobs.zeit.de/stellenmarkt/verwaltung_management_recht_57354.html">Verwaltung, Management &amp; Recht</option>
+    <option class="partner__dropdown-option" value="https://jobs.zeit.de/stellenmarkt/internationale_zusammenarbeit_39808.html">Internationale Zusammenarbeit</option>
 </select>
 
 {% endmacro %}
