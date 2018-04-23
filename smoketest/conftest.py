@@ -24,9 +24,9 @@ TESTCONFIG_STAGING = {
 
 TESTCONFIG_PRODUCTION = {
     'ENV': 'PRODUCTION',
-    'BASE_URL': 'http://www.zeit.de',
+    'BASE_URL': 'https://www.zeit.de',
     'TIMEOUT': 10,
-    'NEWSFEED_BASE_URL': 'http://newsfeed.zeit.de',
+    'NEWSFEED_BASE_URL': 'https://newsfeed.zeit.de',
     'MEMBER_BASE_URL': 'https://meine.zeit.de',
     'MEMBER_USERNAME': 'leser-moderiert@example.com',
     'MEMBER_PASSWORD': 'pytestEnd2End'

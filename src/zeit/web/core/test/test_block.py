@@ -358,7 +358,7 @@ def liveblog():
 
 
 def test_liveblog_auth(application, liveblog):
-    token = liveblog.api_auth_token()
+    token = liveblog._retrieve_auth_token()
     assert token == u'3b4b508e-66e4-4977-910c-c8bd5b985d09'
 
 
@@ -369,8 +369,8 @@ def test_liveblog_auth_fail(application, caplog, liveblog, monkeypatch):
     with requests_mock.Mocker() as m:
         m.post(
             auth_url, reason='Unauthorized', status_code=401)
-        token = liveblog.api_auth_token()
-        assert 'no_token' == token
+        token = liveblog._retrieve_auth_token()
+        assert token is None
         assert '401 Client Error' in caplog.text
 
 
