@@ -87,9 +87,9 @@ def test_headervideo_block_should_produce_markup(tplbrowser):
     assert browser.cssselect('video')[0].get('poster') == 'pic.jpg'
     assert browser.cssselect('source')[0].get('src') == 'test.mp4'
     assert browser.cssselect('source')[1].get('src') == (
-        'http://live0.zeit.de/multimedia/videos/42.webm')
+        'https://live0.zeit.de/multimedia/videos/42.webm')
     assert browser.cssselect('img')[0].get('src') == (
-        'http://live0.zeit.de/multimedia/videos/42.jpg')
+        'https://live0.zeit.de/multimedia/videos/42.jpg')
 
 
 def test_headervideo_block_should_handle_video_id_correctly(tplbrowser):
