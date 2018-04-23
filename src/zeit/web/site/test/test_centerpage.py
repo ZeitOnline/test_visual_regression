@@ -276,7 +276,8 @@ def test_hp_hides_popover_per_default(selenium_driver, testserver):
     driver = selenium_driver
 
     # default
-    driver.get('%s/index?debug-popover' % testserver.url)
+    driver.get('{}/zeit-online/slenderized-index?debug-popover'.format(
+        testserver.url))
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
@@ -291,7 +292,8 @@ def test_hp_shows_popover(selenium_driver, testserver):
     driver = selenium_driver
 
     # default
-    driver.get('%s/index?force-popover' % testserver.url)
+    driver.get('{}/zeit-online/slenderized-index?force-popover'.format(
+        testserver.url))
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
