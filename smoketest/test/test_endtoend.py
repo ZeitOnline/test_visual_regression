@@ -2,6 +2,7 @@
 # i.e. already running servers and real hostnames (not just "localhost").
 # The test requires a registered and confirmed user (state=active).
 
+import pytest
 import requests
 import time
 import zope.testbrowser.browser
@@ -71,6 +72,8 @@ def test_infographic(config):
     assert 'Logout erfolgreich' in b.contents
 
 
+@pytest.mark.skipif(datetime.now() < datetime(2018, 5, 14),
+                    reason="Community needs this repaired by Tobias Kabbeck")
 def test_commenting(config):
     if config['ENV'] == 'PRODUCTION':
         assert True
