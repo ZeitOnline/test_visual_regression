@@ -5,16 +5,41 @@
             Alle Fragen im Überblick:
         </h3>
         <div class="article-flexible-toc__seperator" id="article-flexible-toc-box">
-            <ol class="article-flexible-toc__list" id="article-flexible-toc-list">
+            <ul class="article-flexible-toc__list" id="article-flexible-toc-list">
+            {% set morequestions = [] %}
             {%- for subheading in view.subheadings %}
-                <li class="article-flexible-toc__item article-flexible-toc__item--empty">
-                    <a class="article-flexible-toc__link js-scroll" href="">{{ subheading.text }}</a>
+                {%- if loop.index > 8 %}
+                    {% if morequestions.append(True) %}{% endif %}
+                {% endif %}
+                <li class="article-flexible-toc__item article-flexible-toc__item--empty {% if morequestions %}article-flexible-toc__item--hide{% endif %}">
+                    <a class="article-flexible-toc__link js-scroll" href="#{{ subheading.text|format_faq }}">{{ subheading.text }}</a>
                 </li>
             {%- endfor -%}
-            </ol>
+            </ul>
+            {% if morequestions %}
+                <div id="showall">
+                    <div class="article-flexible-toc__fadeout"></div>
+                    <div class="article-flexible-toc__showall">Mehr anzeigen</div>
+                </div>
+            {% endif %}
         </div>
     </div>
 </aside>
+<script>
+    document.getElementById('showall').onclick = function () {
+        if (document.getElementById('showall')) {
+            // remove showall
+            var showall = document.getElementById('showall');
+            showall.parentNode.removeChild(showall);
+
+            // show hidden elements
+            var elements = document.getElementsByClassName('article-flexible-toc__item--hide');
+            while (elements.length > 0) {
+                elements[0].classList.remove('article-flexible-toc__item--hide');
+            }
+        }
+    }
+</script>
 {% elif view.pagination and view.pagination.total > 1 %}
 <aside class="article-toc article__item article__item--wide" data-ct-area="article-toc" data-ct-row="{{ 'page_%s_of_%s' | format(view.pagination.current, view.pagination.total) }}" data-ct-column="false">
     <div class="article-toc__container">

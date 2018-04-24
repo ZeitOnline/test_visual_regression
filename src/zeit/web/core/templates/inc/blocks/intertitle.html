@@ -1,3 +1,4 @@
-<h2 class="article__subheading article__item">
+<h2 class="article__subheading article__item {% if view.template == 'faq' %}article-flexible-toc__subheading{% endif %}" {% if view.template == 'faq' %}id="{{ block.text|format_faq }}"{% endif %}>
+    {% if view.template == 'faq' %}<a class="article-flexible-toc__subheading-link js-scroll" href="#article-flexible-toc-label"><span class="article-flexible-toc__subheading-arrow"></span></a>{% endif %}
     {{- block | striptags -}}
 </h2>
