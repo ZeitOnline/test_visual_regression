@@ -690,6 +690,26 @@ def format_webtrekk(string):
 
 
 @zeit.web.register_filter
+def format_faq(string):
+    """Returns a string that is save for the faq site."""
+    if not isinstance(string, basestring):
+        return string
+    string = string.lower().replace(
+        u'ä', 'ae').replace(
+        u'ö', 'oe').replace(
+        u'ü', 'ue').replace(
+        u'á', 'a').replace(
+        u'à', 'a').replace(
+        u'é', 'e').replace(
+        u'è', 'e').replace(
+        u'ß', 'ss')
+    string = re.sub(u'[^-a-zA-Z0-9]', '-', string)
+    string = re.sub(u'_+', '-', string)
+    string = re.sub(u'^_|_$', '', string)
+    return string
+
+
+@zeit.web.register_filter
 def format_iqd(string):
     """Returns a string that is iqd-safe.
     Only allows latin characters, numbers and underscore.
