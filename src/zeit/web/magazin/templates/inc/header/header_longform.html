@@ -7,7 +7,9 @@
     </h1>
     <div class="article__head__meta" data-x-marker="meta">
         {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
-        {{ self.genre_and_authors() }}
+        <span data-ct-row="author">
+            {{ self.genre_and_authors() }}
+        </span>
     </div>
 </header>
 {% endblock %}
