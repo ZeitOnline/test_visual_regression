@@ -52,8 +52,8 @@ def test_article_single_page_has_no_pagination(testbrowser):
 
 
 def test_article_full_view_has_no_pagination(testbrowser):
-    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
 
+    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
     assert len(select('.summary, .byline, .metadata')) == 3
     assert len(select('.article-pagination')) == 1
     assert len(select('.article-pager')) == 0
@@ -2268,3 +2268,10 @@ def test_dpa_noimage_article_renders_empty_image_block(testbrowser):
 def test_dpa_afp_article_should_have_notice(testbrowser, parameter):
     browser = testbrowser('/zeit-online/article/' + parameter)
     assert len(browser.cssselect('.article-notice')) == 1
+
+
+def test_faq_page_renders_items_and_show_more_btn(testbrowser):
+    browser = testbrowser('/zeit-online/article/faq').cssselect
+
+    if len(browser('.article-flexible-toc__item')) > 8:
+        assert len(browser('#showall')) == 1
