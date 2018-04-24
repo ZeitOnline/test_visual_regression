@@ -348,30 +348,6 @@ def test_article08_has_second_author(application):
     assert article_view.authors[1]['location'] == ', London'
 
 
-def test_article08_has_correct_genre(application):
-    # 'ein'
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/08')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.genre == 'ein Kommentar'
-
-
-def test_article09_has_correct_genre(application):
-    # 'eine'
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/09')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.genre == 'eine Glosse'
-
-
-def test_article05_has_no_genre(application):
-    # no genre
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.genre is None
-
-
 def test_article08_has_correct_source_label(application):
     # print source
     context = zeit.cms.interfaces.ICMSContent(
