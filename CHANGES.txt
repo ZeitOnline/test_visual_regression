@@ -1,22 +1,12 @@
 Change log for zeit.web
 =======================
 
-PREDEPLOY 3.144
----------------
-
-- Set `asset_prefix` to `https://static.zeit.de/static/{version}` and `jsconf_prefix` to `https://static.zeit.de/static/js` in the settings of all production sites.
+PREDEPLOY
+---------
 
 
-POSTDEPLOY 3.144
-----------------
-
-- remove `iqd_tablet_transformation` feature toggle from Vivis XML
-
-- remove `framebuilder_loginstatus_disabled` feature toggle from Vivis XML
-
-- remove `article_lineage` feature toggle from Vivis XML
-
-- remove `framebuilder_ssl_asset_prefix` setting from Vivis XML
+POSTDEPLOY
+----------
 
 
 3.145 (unreleased)
