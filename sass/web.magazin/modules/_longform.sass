@@ -143,21 +143,6 @@ $longform-header-max-height: 1400px
 				+link-colors($white, $white, $white, $white, $white)
 				border-color: $white
 
-	// does this really still exist? [ms]
-	&.has-light-header
-		.article__head-wrap
-			background-color: $charcoal
-			color: $charcoal
-			&:after
-				box-shadow: none
-		.article__title-wrap
-			.article__head__title, .article__head__meta
-				text-shadow: rgba($white, 1) 0 0 30px
-				color: $black
-			.article__head__meta a
-				+link-colors($black, $black, $black, $black, $black)
-				border-color: $black
-
 	.article__subpage-head
 		@extend %headline
 		margin: 0 auto $small
