@@ -9,7 +9,7 @@ POSTDEPLOY
 ----------
 
 
-3.145 (unreleased)
+3.145 (2018-04-24)
 ------------------
 
 - SSL-227: Remove non-ssl links to live0.zeit.de
