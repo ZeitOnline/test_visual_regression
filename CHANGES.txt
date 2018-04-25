@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - MAINT: Use core mechanic to render ZMO byline
 
+- FIX: Fix path for webfont preloads
+
 
 3.145 (2018-04-24)
 ------------------
