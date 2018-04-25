@@ -17,10 +17,11 @@
     {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
 
     {% if toggles('preload_webfonts') %}
-        <link rel="preload" href="{{ request.asset_host }}/fonts/tabletgothic/TabletGothic-Regular.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="{{ request.asset_host }}/fonts/tabletgothic/TabletGothic-Bold.woff2" as="font" type="font/woff2" crossorigin>
+        {# ../latest/ for escaping the version number. Same is used in CSS. #}
+        <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/tabletgothic/TabletGothic-Regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/tabletgothic/TabletGothic-Bold.woff2" as="font" type="font/woff2" crossorigin>
         {% if not view.is_hp %}
-            <link rel="preload" href="{{ request.asset_host }}/fonts/franziska/FranziskaWebPro.woff" as="font" type="font/woff" crossorigin>
+            <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/franziska/FranziskaWebPro.woff" as="font" type="font/woff" crossorigin>
         {% endif %}
     {% endif %}
 
