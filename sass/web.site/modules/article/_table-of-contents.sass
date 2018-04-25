@@ -187,12 +187,14 @@
 			line-height: 1.2
 			margin-right: remify(8px)
 			text-align: center
-			text-decoration: none
+			text-decoration: underline // fix for IE pseudo elements - add
 			transition: background-color .2s
 			vertical-align: middle
 			width: remify(30px)
+		&:before,
 		&:hover:before
 			background-color: $color-text
+			text-decoration: none // fix for IE pseudo elements - remove
 
 	&__subheading
 		position: relative
