@@ -246,3 +246,9 @@ def test_article_header_traum_has_byline(testbrowser):
     author = browser.cssselect('main header *[data-ct-row="author"]')
     assert ' '.join(author[0].text_content().strip().split()).endswith(
         'Von Oliver Fritsch')
+
+
+def test_canonical_url_should_contain_first_page_on_full_view(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/03/komplettansicht')
+    canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
+    assert canonical_url.endswith('zeit-magazin/article/03')

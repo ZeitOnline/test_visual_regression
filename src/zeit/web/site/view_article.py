@@ -52,14 +52,6 @@ log = logging.getLogger(__name__)
 class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
-    def canonical_url(self):
-        """ Canonical for komplettansicht is first page """
-        if not self.is_all_pages_view:
-            return super(Article, self).canonical_url
-        else:
-            return self.resource_url
-
-    @zeit.web.reify
     def meta_keywords(self):
         return [x for x in ([self.ressort.title(), self.supertitle] +
                 super(Article, self).meta_keywords) if x]
