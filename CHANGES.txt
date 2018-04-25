@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - BUG-901: Fix canonical URL on full view in verticals
 
+- BUG-872: Fix view_config specificity for amp/liveblog articles
+
 - MAINT: Use core mechanic to render ZMO byline
 
 - MAINT: Remove unused DOM element id attribute
