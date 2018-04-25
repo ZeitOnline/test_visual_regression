@@ -167,6 +167,14 @@ class Article(zeit.web.core.view.Content):
         return self.request.resource_url(self.context).rstrip('/')
 
     @zeit.web.reify
+    def canonical_url(self):
+        """ Canonical for komplettansicht is first page """
+        if not self.is_all_pages_view:
+            return super(Article, self).canonical_url
+        else:
+            return self.resource_url
+
+    @zeit.web.reify
     def authors(self):
         return zeit.web.core.article.convert_authors(self.context)
 
@@ -269,8 +277,8 @@ class Article(zeit.web.core.view.Content):
 
             if access == 'abo':
                 badge.update({
-                    'link': 'http://{}/exklusive-zeit-artikel'.format(
-                            self.request.host),
+                    'link': '{}exklusive-zeit-artikel'.format(
+                        self.request.route_url('home')),
                     'link_text': u'Exklusiv für Abonnenten',
                     'zplus': True
                 })
@@ -279,7 +287,7 @@ class Article(zeit.web.core.view.Content):
                 badge.update({
                     'cover': self.volume.get_cover('printcover'),
                     'link': self.volume.fill_template(
-                        'http://%s/{year}/{name}' % self.request.host),
+                        '%s{year}/{name}' % self.request.route_url('home')),
                     'volume_exists': True
                 })
 

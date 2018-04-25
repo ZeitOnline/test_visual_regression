@@ -14,7 +14,7 @@ class PartnerboxReisen(zeit.web.core.centerpage.Module):
         super(PartnerboxReisen, self).__init__(context)
         self.layout.image_pattern = 'wide'
         self.href = (
-            'http://zeitreisen.zeit.de/?wt_mc=zr.intern.display.zeit_online.'
+            'https://zeitreisen.zeit.de/?wt_mc=zr.intern.display.zeit_online.'
             'reisebox.dynamisch.widget.widget&utm_source=zeit_online&utm_med'
             'ium=display&utm_campaign=reisebox_dynamisch&utm_content=widget')
 

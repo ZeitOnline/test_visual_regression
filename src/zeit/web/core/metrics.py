@@ -92,6 +92,47 @@ def timer(identifier):
     return metrics.time(identifier)
 
 
+class http(object):
+    """Contextmanager that records both duration and status code for a
+    `requests` call. Typical usage::
+
+        try:
+            with zeit.web.core.metrics.http('my.service') as record:
+                response = requests.get('http://my.service/api', timeout=2)
+                record(respons)
+            response.raise_for_status()
+        except RequestsException:
+            # handle errors and timeouts
+
+    This will record 2 metrics: `my.service.response_time` and
+    `my.service.status.200` (or 404 or whatever, or 599 in case of timeouts).
+    """
+
+    def __init__(self, identifier):
+        if not identifier.startswith('zeit.'):
+            module = sys._getframe(1).f_globals['__name__']
+            identifier = '%s.%s' % (module, identifier)
+        self.identifier = identifier
+
+        self.metrics = zope.component.getUtility(
+            zeit.web.core.interfaces.IMetrics)
+        self.timer = self.metrics.timer(self.identifier + '.response_time')
+
+        self.response = None
+
+    def __call__(self, response):
+        self.response = response
+
+    def __enter__(self):
+        self.timer.start()
+        return self
+
+    def __exit__(self, type, value, traceback):
+        self.timer.stop('')
+        status = self.response.status_code if self.response else 599
+        self.metrics.increment('%s.status.%s' % (self.identifier, status))
+
+
 def increment(identifier):
     if not identifier.startswith('zeit.'):
         module = sys._getframe(1).f_globals['__name__']

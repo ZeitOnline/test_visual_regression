@@ -3,7 +3,6 @@ import base64
 import datetime
 import urlparse
 
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
@@ -92,6 +91,18 @@ def test_article_pagination(testbrowser):
     assert len(select('.article-toc')) == 1
     assert len(select('.article-toc__item')) == 5
     assert '--current' in select('.article-toc__item')[0].get('class')
+
+
+def test_article_paginator_has_https_links(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('https')
+    select = testbrowser('/zeit-online/article/zeit').cssselect
+    pages = select('.article-pager__number a')
+    assert 'https://' not in pages[0].attrib.get('href')
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
+    select = testbrowser('/zeit-online/article/zeit').cssselect
+    pages = select('.article-pager__number a')
+    assert 'https://' in pages[0].attrib.get('href')
 
 
 def test_article_pagination_active_state(testbrowser):
@@ -883,6 +894,12 @@ def test_canonical_url_should_omit_queries_and_hashes(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit/seite-3?cid=123#comments')
     canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
     assert canonical_url.endswith('zeit-online/article/zeit/seite-3')
+
+
+def test_canonical_url_should_contain_first_page_on_full_view(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
+    assert canonical_url.endswith('zeit-online/article/zeit')
 
 
 def test_zeit_article_has_correct_meta_line(testserver, selenium_driver):
@@ -1996,7 +2013,7 @@ def test_paid_subscription_article_has_correct_ivw_code(dummy_request):
 def test_not_paid_subscription_article_has_correct_ivw_code(dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/zplus-zeit')
-    dummy_request.GET = {'C1-Meter-Status': 'always_paid'}
+    dummy_request.GET['C1-Meter-Status'] = 'always_paid'
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert view.ivw_code == 'kultur/film/bild-text'
 

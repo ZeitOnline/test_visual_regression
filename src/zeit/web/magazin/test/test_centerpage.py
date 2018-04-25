@@ -210,9 +210,9 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
         '201401/1105/18140073001_3035966678001_Beitrag'\
         '-Skispringen-f-r-Anf-nger.mp4'
     src2_val = \
-        'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
+        'https://live0.zeit.de/multimedia/videos/3035864892001.webm'
     src_img = \
-        'http://live0.zeit.de/multimedia/'\
+        'https://live0.zeit.de/multimedia/'\
         'videos/3035864892001.jpg'
 
     # structure
@@ -252,9 +252,9 @@ def test_teaser_fullwidth_light_with_video_has_correct_markup(
         '201401/1105/18140073001_3035966678001_Beitrag'\
         '-Skispringen-f-r-Anf-nger.mp4'
     src2_val = \
-        'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
+        'https://live0.zeit.de/multimedia/videos/3035864892001.webm'
     src_img = \
-        'http://live0.zeit.de/multimedia/'\
+        'https://live0.zeit.de/multimedia/'\
         'videos/3035864892001.jpg'
 
     # structure

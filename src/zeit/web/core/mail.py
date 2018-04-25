@@ -34,17 +34,15 @@ class MailJet(object):
         url = conf.get('mailjet_url') + path
         response = None
         try:
-            with zeit.web.core.metrics.timer('http.reponse_time'):
+            with zeit.web.core.metrics.http('http') as record:
                 response = method(
                     url, json=body,
                     auth=(conf['mailjet_key'], conf['mailjet_secret']),
                     timeout=conf.get('mailjet_timeout', 2))
-                response.raise_for_status()
-                return response
+                record(response)
+            response.raise_for_status()
+            return response
         except Exception:
             log.warning('%s %s failed: %s',
                         verb, url, getattr(response, 'text'), exc_info=True)
             raise
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment('http.status.%s' % status)

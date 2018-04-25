@@ -2154,7 +2154,7 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
     solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(35)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
-    dummy_request.GET['p'] = 2
+    dummy_request.GET['p'] = '2'
     area = zeit.web.core.centerpage.get_area(context)
     assert len(area.values()) == 10
     assert area.total_pages == 5
@@ -2183,7 +2183,7 @@ def test_ranking_area_should_handle_various_page_values(
     solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(12)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
-    dummy_request.GET = params
+    dummy_request.GET.update(params)
     area = zeit.web.core.centerpage.get_area(context)
     assert area.page == page
 

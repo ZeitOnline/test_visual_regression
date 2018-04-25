@@ -44,7 +44,7 @@ def test_nav_ressorts_should_produce_markup(
         zeit.web.core.navigation.NavigationItem(
             'hp.global.topnav.links.jobs',
             'Jobs',
-            'http://jobs.zeit.de/'))
+            'https://jobs.zeit.de/'))
     nav['hp.global.topnav.links.partnersuche'] = (
         zeit.web.core.navigation.NavigationItem(
             'hp.global.topnav.links.partnersuche',

@@ -99,6 +99,10 @@ $longform-header-max-height: 1400px
 		+respond-min-h(em(1400px))
 			height: em(1400px) - em($longform-header-offset)
 
+	.meta__date
+		&:after
+			content: ' — '
+
 	.article__main-video--longform
 		overflow: hidden
 		position: relative
@@ -136,23 +140,8 @@ $longform-header-max-height: 1400px
 			+respond-min($break-4)
 				font-size: $font-m
 			a
-				+link-colors($white, $white, $white, $white, $white)
-				border-color: $white
-
-	// does this really still exist? [ms]
-	&.has-light-header
-		.article__head-wrap
-			background-color: $charcoal
-			color: $charcoal
-			&:after
-				box-shadow: none
-		.article__title-wrap
-			.article__head__title, .article__head__meta
-				text-shadow: rgba($white, 1) 0 0 30px
-				color: $black
-			.article__head__meta a
-				+link-colors($black, $black, $black, $black, $black)
-				border-color: $black
+				border-bottom: 1px solid currentColor
+				color: inherit
 
 	.article__subpage-head
 		@extend %headline

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import urlparse
 
 import pyramid.httpexceptions
 import zope.component
@@ -201,7 +202,9 @@ class Centerpage(AreaProvidingPaginationMixin,
         if zeit.content.cp.interfaces.ISearchpage.providedBy(self.context):
             area = self.area_providing_pagination
             if area and getattr(area, 'query_string', None):
-                content_url = self.content_url.replace('http://', '')
+                _, netloc, path, _, _, _ = urlparse.urlparse(
+                    self.content_url)
+                content_url = '{}{}'.format(netloc, path)
                 if content_url.endswith('/index'):
                     content_url = content_url[:-len('/index')]
                 if area.hits:

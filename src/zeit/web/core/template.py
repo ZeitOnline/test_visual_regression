@@ -555,6 +555,14 @@ def remove_break(string):
 
 
 @zeit.web.register_filter
+def remove_schema(url):
+    if isinstance(url, basestring):
+        parsed = urlparse.urlparse(url)
+        return ''.join(parsed[1:3])
+    return url
+
+
+@zeit.web.register_filter
 def is_gallery(context):
     return zeit.content.gallery.interfaces.IGallery.providedBy(context)
 

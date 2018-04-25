@@ -192,11 +192,13 @@ def test_amp_article_should_have_ivw_tracking(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     ivw = browser.cssselect('amp-analytics[type="infonline"]')
     assert len(ivw) == 1
-    ivw_text = lxml.etree.tostring(ivw[0])
-    assert '"st":  "mobzeit"' in ivw_text
-    assert '"cp":  "wirtschaft/bild-text"' in ivw_text
-    assert '"url": "https://ssl.' in ivw_text
-    assert 'static/latest/html/amp-analytics-infonline.html' in ivw_text
+    json_source = ivw[0].cssselect('script')[0].text
+    analytics = json.loads(json_source)
+
+    assert analytics['vars']['st'] == 'mobzeit'
+    assert analytics['vars']['cp'] == 'wirtschaft/bild-text'
+    assert analytics['requests']['url'] == (
+        'http://localhost/static/latest/html/amp-analytics-infonline.html')
 
 
 def test_amp_article_links_contain_tracking_data_attributes(testbrowser):

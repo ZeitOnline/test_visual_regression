@@ -376,16 +376,12 @@ class Community(grokcore.component.GlobalUtility):
         timeout = float(conf.get('community_host_timeout_secs', 5))
 
         response = None
-        with zeit.web.core.metrics.timer(
-                'user_comments.community.response_time'):
+        with zeit.web.core.metrics.http('user_comments.community') as record:
             try:
                 response = requests.get(uri, timeout=timeout)
+                record(response)
             except requests.exceptions.RequestException:
                 raise UserCommentsException()
-            finally:
-                status = response.status_code if response else 599
-                zeit.web.core.metrics.increment(
-                    'user_comments.community.status.%s' % status)
         if not response.ok:
             return
 
@@ -436,18 +432,15 @@ class Community(grokcore.component.GlobalUtility):
         uri = '{}/agatho/health_check'.format(conf.get('community_host', ''))
         response = None
         try:
-            with zeit.web.core.metrics.timer(
-                    'health_check.community.reponse_time'):
+            with zeit.web.core.metrics.http(
+                    'health_check.community') as record:
                 response = requests.get(uri, timeout=timeout)
+                record(response)
             response.raise_for_status()
             return True
-        except:
+        except Exception:
             log.warning('Health check failed', exc_info=True)
             return False
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment(
-                'health_check.community.status.%s' % status)
 
     def _request_thread(self, unique_id, thread_type='full',
                         page=0, page_size=4, sort='asc', cid=None):
@@ -489,17 +482,14 @@ class Community(grokcore.component.GlobalUtility):
 
         response = None
         try:
-            with zeit.web.core.metrics.timer(
-                    'request_thread.community.reponse_time'):
+            with zeit.web.core.metrics.http(
+                    'request_thread.community') as record:
                 response = requests.get(uri, timeout=timeout)
-        except:
+                record(response)
+        except Exception:
             log.warning(
                 'request_thread received error, ignoring', exc_info=True)
             raise CommunityError()
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment(
-                'request_thread.community.status.%s' % status)
         if response.status_code == 404:
             raise ThreadNotFound(unique_id)
         if not (200 <= response.status_code < 300):
@@ -520,20 +510,17 @@ class Community(grokcore.component.GlobalUtility):
             conf.get('community_host', '').rstrip('/'))
         response = None
         try:
-            with zeit.web.core.metrics.timer(
-                    'request_counts.community.reponse_time'):
+            with zeit.web.core.metrics.http(
+                    'request_counts.community') as record:
                 response = requests.post(
                     uri, data=[('unique_ids[]', uid) for uid in unique_ids],
                     timeout=timeout)
+                record(response)
             return response.ok and response.content or None
-        except:
+        except Exception:
             log.warning(
                 'request_counts received error, ignoring', exc_info=True)
             return None
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment(
-                'request_counts.community.status.%s' % status)
 
 
 class CommunityError(Exception):

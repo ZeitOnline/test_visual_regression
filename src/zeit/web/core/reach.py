@@ -31,14 +31,12 @@ class Reach(object):
         timeout = conf.get('reach_timeout', 0.2)
         response = None
         try:
-            with zeit.web.core.metrics.timer('http.reponse_time'):
+            with zeit.web.core.metrics.http('http') as record:
                 response = self.session.get(url, params=kw, timeout=timeout)
-                return response.json()
+                record(response)
+            return response.json()
         except (requests.exceptions.RequestException, ValueError), err:
             log.debug('Reach connection failed: {}'.format(err))
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment('http.status.%s' % status)
 
     def _get_ranking(self, location, facet=None, **kw):
         location = '.'.join(filter(bool, (location, facet)))
@@ -52,7 +50,7 @@ class Reach(object):
                 try:
                     doc['date_first_released'] = zc.iso8601.parse.datetimetz(
                         str(doc['date_first_released']))
-                except:
+                except Exception:
                     pass
             docs[idx] = zeit.cms.interfaces.ICMSContent(doc)
         return docs
