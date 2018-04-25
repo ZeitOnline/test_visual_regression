@@ -7,6 +7,7 @@ import zeit.cms.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
+import zeit.retresco.interfaces
 
 import zeit.web
 import zeit.web.core.date
@@ -155,6 +156,9 @@ def json_article_query(request):
     except AssertionError, e:
         raise pyramid.httpexceptions.HTTPBadRequest(e.message)
 
+    if not uuids and not unique_ids:
+        return []
+
     lead_unique_id = None
     hp_unique_ids = []
     hp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index', None)
@@ -168,26 +172,39 @@ def json_article_query(request):
                     lead_unique_id = teasered[0].uniqueId
                 hp_unique_ids.extend(t.uniqueId for t in teasered)
 
-    identifiers = []
     try:
         for unique_id in unique_ids:
             assert isinstance(
                 unique_id, basestring), 'unique_id must be string'
             assert unique_id.startswith(zeit.cms.interfaces.ID_NAMESPACE), (
                 'invalid uniqueId: %s' % unique_id)
-            identifiers.append('uniqueId:"%s"' % unique_id)
-        for uuid in uuids:
+        for index, uuid in enumerate(uuids):
             try:
-                uuid = uuidlib.UUID(uuid).urn
+                uuids[index] = '{%s}' % uuidlib.UUID(uuid).urn
             except:
                 raise AssertionError('invalid uuid: %s' % uuid)
-            identifiers.append('uuid:"{%s}"' % uuid)
     except AssertionError, e:
         raise pyramid.httpexceptions.HTTPBadRequest(e.message)
 
-    Q = zeit.solr.query
-    main_query = Q.or_(*identifiers)
-    filter_query = Q.field_raw('comments', 'true')
+    if zeit.web.core.application.FEATURE_TOGGLES.find('elasticsearch_zoca'):
+        results = _get_articles_elasticsearch(unique_ids, uuids)
+    else:
+        results = _get_articles_solr(unique_ids, uuids)
+
+    for item in results:
+        item['lead_article'] = item['uniqueId'] == lead_unique_id
+        item['on_homepage'] = item['uniqueId'] in hp_unique_ids
+        item['url'] = item['uniqueId'].replace(
+            zeit.cms.interfaces.ID_NAMESPACE, request.route_url('home'))
+    return results
+
+
+def _get_articles_solr(unique_ids=[], uuids=[]):
+    terms = [
+        'uniqueId:"%s"' % i for i in unique_ids] + [
+        'uuid:"%s"' % i for i in uuids]
+    query = zeit.solr.query.or_(*terms)
+    filter_query = zeit.solr.query.field_raw('comments', 'true')
     fields = ','.join((
         'uuid',
         'uniqueId',
@@ -200,18 +217,65 @@ def json_article_query(request):
         'date_last_published',
         'keywords'))
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    response = solr.search(
-        main_query,
-        rows=1000,
-        fl=fields,
-        sort='date_first_released desc',
-        fq=filter_query)
-    for item in response:
-        item['lead_article'] = item['uniqueId'] == lead_unique_id
-        item['on_homepage'] = item['uniqueId'] in hp_unique_ids
-        item['url'] = item['uniqueId'].replace(
-            zeit.cms.interfaces.ID_NAMESPACE, request.route_url('home'))
-    return list(response)
+    with zeit.web.core.metrics.timer('zoca.solr.reponse_time'):
+        results = solr.search(
+            query,
+            rows=1000,
+            fl=fields,
+            sort='date_first_released desc',
+            fq=filter_query)
+    return list(results)
+
+
+def _get_articles_elasticsearch(unique_ids=[], uuids=[]):
+    elasticsearch = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    urls = [
+        i.replace(zeit.cms.interfaces.ID_NAMESPACE, '/') for i in unique_ids]
+    query = {
+        'query': {
+            'bool': {
+                'minimum_should_match': 1,
+                'should': [
+                    {'terms': {'doc_id': uuids}},
+                    {'terms': {'url': urls}}],
+                'filter': {'term': {'payload.document.comments': True}}
+            }
+        },
+        '_source': [
+            'doc_id',
+            'url',
+            'supertitle',
+            'title',
+            'teaser',
+            'payload.document.ressort',
+            'payload.document.sub_ressort',
+            'payload.document.date_first_released',
+            'payload.document.comments_premoderate',
+            'payload.workflow.date_last_published',
+            'rtr_tags'
+        ]
+    }
+    with zeit.web.core.metrics.timer('zoca.elasticsearch.reponse_time'):
+        results = elasticsearch.search(
+            query,
+            'payload.document.date_first_released:desc',
+            rows=1000)
+    for item in results:
+        payload = item.pop('payload', {})
+        workflow = payload.get('workflow', {})
+        doc = payload.get('document', {})
+        path = item.pop('url', u'').lstrip(u'/')
+        item['uniqueId'] = u''.join((zeit.cms.interfaces.ID_NAMESPACE, path))
+        item['uuid'] = item.pop('doc_id')
+        item['teaser_text'] = item.pop('teaser', None)
+        item['keywords'] = item.pop('rtr_tags', [])
+        item['date_last_published'] = workflow.get('date_last_published')
+        item['ressort'] = doc.get('ressort')
+        item['sub_ressort'] = doc.get('sub_ressort')
+        item['date_first_released'] = doc.get('date_first_released')
+        item['comments_premoderate'] = doc.get('comments_premoderate', False)
+    return list(results)
 
 
 @zeit.web.view_config(

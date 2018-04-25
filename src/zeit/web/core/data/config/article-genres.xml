@@ -1,13 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article-genres>
-  <genre name="nachricht" prose="Eine Nachricht" display-frontend="false">Nachricht</genre>
-  <genre name="bericht" prose="Ein Bericht" display-frontend="false">Bericht</genre>
-  <genre name="analyse" prose="Eine Analyse" display-frontend="false">Analyse</genre>
-  <genre name="reportage" prose="Eine Reportage" display-frontend="false">Reportage</genre>
-  <genre name="interview" prose="Ein Interview" display-frontend="false">Interview</genre>
-  <genre name="portrait" prose="Ein Porträt" display-frontend="false">Porträt</genre>
-  <genre name="glosse" prose="Eine Glosse" display-frontend="true">Glosse</genre>
-  <genre name="kommentar" prose="Ein Kommentar" display-frontend="true">Kommentar</genre>
-  <genre name="leserartikel" prose="Ein Leserartikel" display-frontend="true">Leserartikel</genre>
-  <genre name="gastbeitrag" prose="Ein Gastbeitrag" display-frontend="true">Gastbeitrag</genre>
+<genre name="nachricht">Nachricht</genre>
+<genre name="bericht">Bericht</genre>
+<genre name="analyse">Analyse</genre>
+<genre name="reportage">Reportage</genre>
+<genre name="interview" byline="Interview:">Interview</genre>
+<genre name="portrait">Porträt</genre>
+<genre name="glosse" byline="Eine Glosse von">Glosse</genre>
+<genre name="kommentar" byline="Ein Kommentar von">Kommentar</genre>
+<genre name="leserartikel" byline="Ein Leserartikel von">Leserartikel</genre>
+<genre name="gastbeitrag" byline="Ein Gastbeitrag von">Gastbeitrag</genre>
+<genre name="kolumne" available="zeit.web.core.interfaces.IInternalUse" byline="Eine Kolumne von">Kolumne</genre>
 </article-genres>

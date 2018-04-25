@@ -4,7 +4,7 @@
 {%- for author in view.authors -%}
     {%- if author.href %}
 
-    <meta property="article:author" content="{{ author.href }}">
+    <meta property="article:author" content="{{ author.href | create_url }}">
     {%- endif -%}
 {% endfor %}
 

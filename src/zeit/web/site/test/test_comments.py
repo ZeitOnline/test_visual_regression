@@ -128,6 +128,18 @@ def test_comment_form_should_be_rendered_through_esi(testbrowser):
     assert browser.xpath('//include[contains(@src, "/comment-form")]')
 
 
+def test_comment_pagination_should_have_https_links(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('https')
+    browser = testbrowser('/zeit-online/article/01/comment-thread?page=2')
+    pages = browser.cssselect('.pager__page a')
+    assert 'https://' not in pages[0].attrib.get('href')
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
+    browser = testbrowser('/zeit-online/article/01/comment-thread?page=2')
+    pages = browser.cssselect('.pager__page a')
+    assert 'https://' in pages[0].attrib.get('href')
+
+
 def test_comment_pagination_should_work(testbrowser):
     browser = testbrowser('/zeit-online/article/01/comment-thread?page=2')
     pages = browser.cssselect('.pager__page')

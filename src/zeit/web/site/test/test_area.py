@@ -150,6 +150,22 @@ def test_overview_should_have_page_info(application, clock, dummy_request):
     assert pi['url'].endswith('date=2016-05-09')
 
 
+def test_overview_should_have_https_links(application, clock, dummy_request):
+    clock.freeze(zeit.web.core.date.parse_date(
+        '2016-05-10T1:23:59.780412+00:00'))
+    zeit.web.core.application.FEATURE_TOGGLES.unset('https')
+    area = get_area('overview', 1)
+    area.request = dummy_request
+    pi = area.page_info(1)
+    assert pi['url'].startswith('http://')
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
+    area = get_area('overview', 1)
+    area.request = dummy_request
+    pi = area.page_info(1)
+    assert pi['url'].startswith('https://')
+
+
 def test_overview_should_render_cover_image_from_solr_result(testbrowser):
     volume = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/2016/01/ausgabe')

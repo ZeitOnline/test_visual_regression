@@ -673,8 +673,9 @@ class Base(object):
 
     @zeit.web.reify
     def webtrekk_content_id(self):
-        content_url = self.content_url.replace(u'http://', u'')
-        return u'{}|{}'.format(self.webtrekk_identifier, content_url)
+        _, netloc, path, _, _, _ = urlparse.urlparse(
+            self.content_url)
+        return u'{}|{}{}'.format(self.webtrekk_identifier, netloc, path)
 
     @zeit.web.reify
     def webtrekk_assets(self):
@@ -1150,6 +1151,10 @@ class service_unavailable(object):  # NOQA
 class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     inline_svg_icons = True
+
+    def __init__(self, context, request):
+        super(FrameBuilder, self).__init__(context, request)
+        self.request.response.headers.add('Access-Control-Allow-Origin', '*')
 
     @zeit.web.reify
     def framebuilder_is_minimal(self):

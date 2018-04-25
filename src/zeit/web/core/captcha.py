@@ -20,17 +20,15 @@ class Recaptcha(object):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         response = None
         try:
-            with zeit.web.core.metrics.timer('http.reponse_time'):
+            with zeit.web.core.metrics.http('http') as record:
                 response = requests.post(self.RECAPTCHA_URL, timeout=1, data={
                     'secret': conf.get(
                         'recaptcha_secret_key' + ('_nojs' if nojs else '')),
                     'response': captcha_response,
                 })
+                record(response)
             response.raise_for_status()
             return bool(response.json()['success'])
         except Exception:
             log.warning('Validating recaptcha failed', exc_info=True)
             return False
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment('http.status.%s' % status)
