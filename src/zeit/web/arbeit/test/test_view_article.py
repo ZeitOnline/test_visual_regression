@@ -491,3 +491,9 @@ def test_zar_article_debate_block_renders_expected_structure(testbrowser):
     assert len(select('.debatebox-on-article__title')) == 1
     assert len(select('.debatebox-on-article__text')) == 1
     assert len(select('.debatebox-on-article__button')) == 1
+
+
+def test_zar_canonical_url_should_contain_first_page_on_full_view(testbrowser):
+    browser = testbrowser('/arbeit/article/paginated/komplettansicht')
+    canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
+    assert canonical_url.endswith('arbeit/article/paginated')

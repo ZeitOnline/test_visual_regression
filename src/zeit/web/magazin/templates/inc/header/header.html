@@ -20,38 +20,15 @@
     {% endif %}
 
     {% block subtitle -%}
-    <div class="header-article__subtitle">
+    <div class="header-article__subtitle" data-ct-row="author">
         {{ view.subtitle }}
 
         {% block genre_and_authors -%}
-            {% if view.genre -%}
-                {{ view.genre | title }}
+            {%- set byline = view.context | get_byline('main') %}
+            {% if byline | length -%}
+                {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
             {% endif -%}
-
-            {% if view.authors -%}
-                <span data-ct-row="author">
-                {% for author in view.authors -%}
-                    {% if view.genre -%}
-                        {{ author.prefix }}
-                    {% else -%}
-                        {{ author.prefix | title }}
-                    {% endif -%}
-                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                    {%- if author.href -%}
-                        <a class="header-article__author" href="
-                            {{- author.href | create_url }}" rel="author" itemprop="url" data-ct-column="
-                            {{- '%s_of_%s' | format(loop.index, loop.length) }}" data-ct-subcolumn="false"><span itemprop="name">
-                            {{- author.name -}}
-                        </span></a>{{ author.location }}
-                    {%- else -%}
-                        <span class="header-article__author"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
-                    {%- endif -%}
-                    </span>
-                    {{- author.suffix -}}
-                {% endfor -%}
-                </span>
-            {% endif -%}
-        {% endblock -%}
+        {% endblock genre_and_authors -%}
     </div>
     {% endblock -%}
 

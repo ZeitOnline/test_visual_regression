@@ -60,47 +60,26 @@ class Byline(list):
     The library of macros is located at zeit.web.core:inc/meta/byline.html
     """
 
-    # TODO: This should be configured by an XMLSource. So far the given
-    # Simple-XML-Source in vivi does not offer what we need.
-
-    genres = {'glosse': 'eine',
-              'kommentar': 'ein',
-              'leserartikel': 'ein',
-              'gastbeitrag': 'ein',
-              'interview': 'ein'}
-
     max_authors = 3
 
     def __init__(self, context):
         super(Byline, self).__init__()
         self.context = context
-        self.genre()
-        self.from_()
-        self.interview()
-        self.column()
-        self.groups()
+        self.prefix()
+        self.author_groups()
 
     def __repr__(self):
         return object.__repr__(self)
 
-    def genre(self):
-        if getattr(self.context, 'genre', None) in self.genres:
-            prefix = self.genres.get(self.context.genre, 'ein')
-            genre = u'{} {}'.format(prefix, self.context.genre).title()
-            self.append(('text', genre))
-
-    def from_(self):
-        self.append(('text', u'von' if self else u'Von'))
-
-    def interview(self):
-        if getattr(self.context, 'genre', None) == 'interview':
-            # Replace any prior byline efforts with a special interview label.
-            self[:] = [('text', u'{}:'.format(self.context.genre.title()))]
-
-    def column(self):
+    def prefix(self):
+        genre = getattr(self.context, 'genre', None) or ''
         if getattr(self.context, 'serie', None) and self.context.serie.column:
-            # Replace any prior byline efforts with a special interview label.
-            self[:] = [('text', u'Eine Kolumne von ')]
+            genre = 'kolumne'
+        text = GENRE_SOURCE.byline(genre)
+        if text:
+            self.append(('text', text))
+        else:
+            self.append(('text', u'Von'))
 
     @staticmethod
     def get_location(author):
@@ -130,7 +109,7 @@ class Byline(list):
         # Pre-sort our authors by location, to improve clustering
         return sorted(authors, key=self.get_location)
 
-    def groups(self):
+    def author_groups(self):
         groups = ()
         # Restrict authors to the defined maximum amount
         authors = self.authors[:self.max_authors]
@@ -160,13 +139,7 @@ class Byline(list):
             self.append(groups)
 
 
-@grokcore.component.adapter(
-    zeit.content.link.interfaces.ILink)
-@grokcore.component.implementer(IByline)
-class LinkTeaserByline(Byline):
-
-    def genre(self):
-        pass
+GENRE_SOURCE = zeit.content.article.interfaces.IArticle['genre'].source(None)
 
 
 @grokcore.component.adapter(
@@ -213,8 +186,8 @@ class ProxyByline(Byline):
         # for properties it might not have.
         super(Byline, self).__init__()
         self.context = context
-        self.from_()
-        self.groups()
+        self.append(('text', u'Von'))
+        self.author_groups()
 
     @zeit.web.reify
     def authors(self):

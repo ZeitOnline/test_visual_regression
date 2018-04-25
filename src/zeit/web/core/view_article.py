@@ -167,6 +167,14 @@ class Article(zeit.web.core.view.Content):
         return self.request.resource_url(self.context).rstrip('/')
 
     @zeit.web.reify
+    def canonical_url(self):
+        """ Canonical for komplettansicht is first page """
+        if not self.is_all_pages_view:
+            return super(Article, self).canonical_url
+        else:
+            return self.resource_url
+
+    @zeit.web.reify
     def authors(self):
         return zeit.web.core.article.convert_authors(self.context)
 
