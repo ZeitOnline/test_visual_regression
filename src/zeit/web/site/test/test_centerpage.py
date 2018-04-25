@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import datetime
 import urllib2
 
 import lxml.html
@@ -12,9 +12,6 @@ import zeit.solr.interfaces
 
 import zeit.web.site.view_centerpage
 
-import babel
-from datetime import datetime
-from datetime import timedelta
 from zeit.web.core.template import format_date
 
 
@@ -184,6 +181,18 @@ def test_dynamic_centerpage_should_be_paginatable(testbrowser, data_solr):
     assert current.text_content().strip() == '2'
 
 
+def test_dynamic_centerpage_paginator_has_https_links(testbrowser, data_solr):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('https')
+    browser = testbrowser('/dynamic/angela-merkel?p=2')
+    current = browser.cssselect('.pager__page a')[0]
+    assert 'http://' in current.attrib.get('href')
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
+    browser = testbrowser('/dynamic/angela-merkel?p=2')
+    current = browser.cssselect('.pager__page a')[0]
+    assert 'https://' in current.attrib.get('href')
+
+
 def test_pagination_should_be_validated(testbrowser):
     with pytest.raises(urllib2.HTTPError):
         assert '404 Not Found' in testbrowser(
@@ -267,7 +276,8 @@ def test_hp_hides_popover_per_default(selenium_driver, testserver):
     driver = selenium_driver
 
     # default
-    driver.get('%s/index?debug-popover' % testserver.url)
+    driver.get('{}/zeit-online/slenderized-index?debug-popover'.format(
+        testserver.url))
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
@@ -282,7 +292,8 @@ def test_hp_shows_popover(selenium_driver, testserver):
     driver = selenium_driver
 
     # default
-    driver.get('%s/index?force-popover' % testserver.url)
+    driver.get('{}/zeit-online/slenderized-index?force-popover'.format(
+        testserver.url))
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
@@ -366,21 +377,34 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
     assert len(offline) == 8
 
 
-def test_format_date_returns_expected_value_in_newsbox():
-    tz = babel.dates.get_timezone('Europe/Berlin')
-    now = datetime.now(tz)
-    before = now - timedelta(hours=5)
-    yesterday = now - timedelta(days=1)
+def test_format_date_returns_expected_value_in_newsbox(clock):
+    # we tell the test that it is currently 14 o clock in June 2015
+    # (to be indepentent from the actual runtime)
+    clock.freeze(datetime.datetime(2015, 6, 1, 14, 0))
 
-    assert 'Heute, ' + str(before.strftime('%H:%M'))\
-        == format_date(before, type="switch_from_hours_to_date")
+    date_today = datetime.datetime(2015, 6, 1, 10, 21)
+    assert 'Heute, 10:21' == format_date(
+        date_today, type='switch_from_hours_to_date')
+    assert '10:21' == format_date(
+        date_today, pattern='HH:mm')
 
-    day = str(yesterday.strftime('%d'))
-    assert day + '. ' + str(yesterday.strftime('%m. %Y')) \
-        == format_date(yesterday, type="switch_from_hours_to_date")
+    date_yesterday_less_than_24h_ago = datetime.datetime(2015, 5, 31, 18, 2)
+    assert '31. 05. 2015' == format_date(
+        date_yesterday_less_than_24h_ago, type='switch_from_hours_to_date')
+    assert '18:02' == format_date(
+        date_yesterday_less_than_24h_ago, pattern='HH:mm')
 
-    assert str(yesterday.strftime('%H:%M'))\
-        == format_date(yesterday, pattern="HH:mm")
+    date_yesterday_more_than_24h_ago = datetime.datetime(2015, 5, 31, 9, 30)
+    assert '31. 05. 2015' == format_date(
+        date_yesterday_more_than_24h_ago, type='switch_from_hours_to_date')
+    assert '09:30' == format_date(
+        date_yesterday_more_than_24h_ago, pattern='HH:mm')
+
+    date_long_time_ago = datetime.datetime(2015, 4, 3, 1, 52)
+    assert '03. 04. 2015' == format_date(
+        date_long_time_ago, type='switch_from_hours_to_date')
+    assert '01:52' == format_date(
+        date_long_time_ago, pattern='HH:mm')
 
 
 def test_newsbox_renders_correctly_on_homepage(testbrowser, data_solr):

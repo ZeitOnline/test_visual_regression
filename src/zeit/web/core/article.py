@@ -261,10 +261,7 @@ def convert_authors(article):
                 author['location'] = u', {}'.format(location)
             # add prefix
             if index == 0:
-                if is_longform:
-                    author['prefix'] = u'\u2014 von'
-                else:
-                    author['prefix'] = u' von'
+                author['prefix'] = u' von'
             # add suffix
             if index == len(author_ref) - 2:
                 author['suffix'] = u' und'
@@ -336,15 +333,16 @@ def cms_content_type(context):
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 @grokcore.component.implementer(zeit.web.core.interfaces.IDetailedContentType)
 def content_type(context):
-    typ = cms_content_type(context)
-    subtyp = 'article'
+    parts = [cms_content_type(context), 'article']
     if zeit.web.core.view.is_advertorial(context, None):
-        subtyp = 'advertorial'
+        parts[1] = 'advertorial'
     elif getattr(context, 'serie', None):
-        subtyp = "serie"
+        parts[1] = 'serie'
         if context.serie.column:
-            subtyp = "column"
-    return '{}.{}'.format(typ, subtyp)
+            parts[1] = 'column'
+    if getattr(context, 'genre', None):
+        parts.append(context.genre)
+    return '.'.join(parts)
 
 
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)

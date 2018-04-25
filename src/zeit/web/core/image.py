@@ -570,12 +570,13 @@ class RemoteImage(object):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         response = None
         try:
-            with zeit.web.core.metrics.timer(
-                    'zeit.web.core.video.thumbnail.brightcove.response_time'):
+            with zeit.web.core.metrics.http(
+                    'zeit.web.core.video.thumbnail.brightcove') as record:
                 response = session.get(
                     self.url, stream=True,
                     timeout=conf.get('brightcove_image_timeout', 2))
-                response.raise_for_status()
+                record(response)
+            response.raise_for_status()
             with self.open(mode='w+') as fh:
                 first_chunk = True
                 for chunk in response.iter_content(self.DOWNLOAD_CHUNK_SIZE):
@@ -590,10 +591,6 @@ class RemoteImage(object):
             log.debug('Remote image {} could not be downloaded to {}.'.format(
                       self.url, self.__name__))
             raise TypeError('Could not adapt {}'.format(self.url))
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment(
-                'zeit.web.core.video.thumbnail.brightcove.status.%s' % status)
 
     def open(self, mode='r'):
         return open(self.__name__, mode)

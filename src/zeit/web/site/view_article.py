@@ -52,14 +52,6 @@ log = logging.getLogger(__name__)
 class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
-    def canonical_url(self):
-        """ Canonical for komplettansicht is first page """
-        if not self.is_all_pages_view:
-            return super(Article, self).canonical_url
-        else:
-            return self.resource_url
-
-    @zeit.web.reify
     def meta_keywords(self):
         return [x for x in ([self.ressort.title(), self.supertitle] +
                 super(Article, self).meta_keywords) if x]
@@ -92,111 +84,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return atoms[-3:]
         else:
             return atoms[pos - 1:pos + 2]
-
-    def _get_solr_lineage(self, from_, to, sort, default):
-        query = lq.and_(
-            lq.datetime_range('date_first_released', from_, to),
-            lq.bool_field('breaking_news', False),
-            lq.field_raw('type', 'article'),
-            lq.not_(lq.field('uniqueId', self.context.uniqueId)),
-            lq.not_(lq.field('ressort', 'zeit-magazin')),
-            lq.not_(lq.field('ressort', 'Campus')),
-            lq.text_range('channels', None, None),
-            lq.field_raw('product_id', lq.or_(
-                'ZEDE', 'ZEI', 'ZECH', 'ZEC', 'ZEOE', 'ZES', 'ZTWI',
-                'ZTGS', 'ZTCS', 'CSRG', 'ZSF', 'KINZ')),
-            lq.field('published', 'published'))
-        solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        with zeit.web.core.metrics.timer('lineage.solr.reponse_time'):
-            result = solr.search(
-                query, sort='date_first_released {}'.format(sort),
-                fl='title supertitle uniqueId', rows=1)
-        if result.docs:
-            return result.docs[0]
-        else:
-            return default
-
-    def _get_lineage(self, from_, to, sort, default):
-        must_clause = [{
-            'range': {
-                'payload.document.date_first_released': {
-                    'gt': from_, 'lt': to
-                }
-            }
-        }, {
-            'term': {'payload.document.breaking_news': False}
-        }, {
-            'term': {'payload.document.access': 'free'}
-        }, {
-            'term': {'payload.meta.type': 'article'}
-        }, {
-            'exists': {'field': 'payload.document.channels'}
-        }, {
-            'terms': {'payload.workflow.product-id': [
-                'ZEDE', 'ZEI', 'ZECH', 'ZEC', 'ZEOE', 'ZES', 'ZTWI',
-                'ZTGS', 'ZTCS', 'CSRG', 'ZSF', 'KINZ']}
-        }, {
-            'term': {'payload.workflow.published': True}
-        }]
-        must_not_clause = [{
-            'terms': {'payload.document.ressort': [
-                'Administratives', 'zeit-magazin', 'Campus', 'Arbeit']}
-        }]
-        query = {
-            'query': {
-                'bool': {
-                    'must': must_clause,
-                    'must_not': must_not_clause
-                }
-            }
-        }
-        elasticsearch = zope.component.getUtility(
-            zeit.retresco.interfaces.IElasticsearch)
-        with zeit.web.core.metrics.timer('lineage.elasticsearch.reponse_time'):
-            results = elasticsearch.search(
-                query, 'payload.document.date_first_released:{}'.format(sort),
-                rows=1, include_payload=True)
-        if results:
-            doc = results[0]
-            return {
-                'title': doc['payload']['body'].get('title'),
-                'supertitle': doc['payload']['body'].get('supertitle'),
-                'uniqueId': (
-                    zeit.cms.interfaces.ID_NAMESPACE.rstrip('/') + doc['url'])}
-        else:
-            return default
-
-    @zeit.web.reify('default_term')
-    def lineage(self):
-        if (self.is_advertorial or
-            not self.context.channels or
-            self.ressort == 'administratives' or
-            self.paywall or
-            zeit.content.article.interfaces.IErrorPage.providedBy(
-                self.context)):
-            return
-
-        info = zeit.cms.workflow.interfaces.IPublishInfo(self.context)
-        date = info.date_first_released
-        default = {
-            'title': 'Startseite', 'supertitle': '',
-            'uniqueId': 'http://xml.zeit.de/index'}
-
-        if zeit.web.core.application.FEATURE_TOGGLES.find(
-                'elasticsearch_lineage'):
-            date = date.isoformat()
-            predecessor = self._get_lineage('now-1y', date, 'desc', default)
-            successor = self._get_lineage(date, 'now', 'asc', default)
-        else:
-            predecessor = self._get_solr_lineage(None, date, 'desc', default)
-            successor = self._get_solr_lineage(date, None, 'asc', default)
-
-        lineage = (predecessor, successor)
-
-        if default in lineage:
-            return zeit.web.dont_cache(lineage)
-
-        return lineage
 
     @zeit.web.reify
     def include_optimizely(self):

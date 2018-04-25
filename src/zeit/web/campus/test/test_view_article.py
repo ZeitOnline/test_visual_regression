@@ -410,3 +410,9 @@ def test_campus_article_has_correct_meta_line(testserver, selenium_driver):
     date = selenium_driver.find_element_by_css_selector('.metadata__date')
 
     assert date.text.strip() == (u'10. Januar 2016, 10:39 Uhr')
+
+
+def test_canonical_url_should_contain_first_page_on_full_view(testbrowser):
+    browser = testbrowser('/campus/article/paginated/komplettansicht')
+    canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
+    assert canonical_url.endswith('campus/article/paginated')

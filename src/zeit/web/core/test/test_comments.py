@@ -679,8 +679,9 @@ def test_post_comment_should_not_expose_requests_timeout_exception(
         application, monkeypatch, dummy_request):
 
     dummy_request.method = 'POST'
-    dummy_request.POST = dummy_request.params = {
-        'path': 'zeit-magazin/article/01', 'action': 'comment', 'comment': ' '}
+    dummy_request.POST.update({
+        'path': 'zeit-magazin/article/01', 'action': 'comment', 'comment': ' '
+    })
     dummy_request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
 
     def post(url, **kw):

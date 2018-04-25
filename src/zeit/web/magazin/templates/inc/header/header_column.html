@@ -3,7 +3,7 @@
 {% block article_header %}
 <header class="header-article header-article--column" data-ct-area="articleheader">
     {{ self.headline() }}
-    <div class="byline">
+    <div class="byline" data-ct-row="author">
         {{ self.genre_and_authors() }}
     </div>
     {{ self.zplusbadge() }}
