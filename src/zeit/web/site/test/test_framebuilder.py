@@ -344,13 +344,6 @@ def test_framebuilder_loads_slimmed_script_file(testbrowser):
     assert scripts[-1].get('src').endswith('/js/web.site/frame.js')
 
 
-def test_framebuilder_should_require_ssl(application, dummy_request):
-    dummy_request.GET['useSSL'] = 'true'
-    view = zeit.web.site.view.FrameBuilder(None, dummy_request)
-
-    assert view.framebuilder_requires_ssl is True
-
-
 # needs selenium because of esi include
 def test_framebuilder_does_not_render_login_data(
         selenium_driver, testserver, sso_keypair):
@@ -406,32 +399,9 @@ def test_framebuilder_renders_login_data(
     assert len(select('.nav__user-name')) == 0
 
 
-def test_framebuilder_renders_login_data_if_new_feature_is_requested(
-        selenium_driver, testserver, sso_keypair):
-    zeit.web.core.application.FEATURE_TOGGLES.set(
-        'framebuilder_loginstatus_disabled')
-    driver = selenium_driver
-    select = driver.find_elements_by_css_selector
-
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['sso_key'] = sso_keypair['public']
-    sso_cookie = jwt.encode(
-        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
-
-    # add_cookie() only works for the domain of the last get(), sigh.
-    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
-    driver.add_cookie({'name': 'zeit_sso_201501', 'value': sso_cookie})
-
-    # ... and set if it can be enforced, even if disabled in feature toggles
-    driver.get('{}/framebuilder?loginstatus_enforced'.format(testserver.url))
-    assert len(select('.nav__login')) == 1
-    assert not select('.nav__login')[0].get_attribute('data-featuretoggle')
-    assert len(select('.nav__user-name')) == 1
-
-
 def test_framebuilder_uses_static_ssl_url(testbrowser):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['ssl_asset_prefix'] = 'https://static.zeit.de/static/latest/'
+    conf['asset_prefix'] = 'https://static.zeit.de/static/latest/'
     browser = testbrowser('/framebuilder')
     urls = browser.contents.count('https://static.zeit.de/static/latest/')
     assert urls == 6

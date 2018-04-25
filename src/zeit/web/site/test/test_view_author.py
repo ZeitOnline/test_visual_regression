@@ -78,7 +78,7 @@ def test_author_area_articles_should_offset_correctly(
         'http://xml.zeit.de/autoren/j_random')
     area = zeit.web.site.view_author.create_author_article_area(author)
 
-    dummy_request.GET['p'] = 4
+    dummy_request.GET['p'] = '4'
     area.request = dummy_request
 
     assert area.surrounding_teasers == 3
@@ -166,7 +166,7 @@ def test_view_author_comments_should_have_comments_area(
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
     dummy_request.registry.settings['author_comment_page_size'] = '6'
-    dummy_request.GET = {'p': '1'}
+    dummy_request.GET['p'] = '1'
     view = zeit.web.site.view_author.Comments(author, dummy_request)
     assert type(view.tab_areas[0]) == (
         zeit.web.site.view_author.UserCommentsArea)
@@ -178,17 +178,17 @@ def test_author_comments_should_correctly_validate_pagination(
     monkeypatch.setattr(
         zeit.web.core.comments.Community, 'get_user_comments', mock_comments)
 
-    dummy_request.GET = {}
+    dummy_request.GET.clear()
     view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
     assert view.tab_areas is not None
     assert mock_comments.call_args[1]['page'] == 1
 
-    dummy_request.GET = {'p': 'nan'}
+    dummy_request.GET['p'] = 'nan'
     view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
     assert view.tab_areas is not None
     assert mock_comments.call_args[1]['page'] == 1
 
-    dummy_request.GET = {'p': '3'}
+    dummy_request.GET['p'] = '3'
     view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
     assert view.tab_areas is not None
     assert mock_comments.call_args[1]['page'] == 3
@@ -237,7 +237,7 @@ def test_author_biography_should_be_fully_rendered(testbrowser):
     assert browser.cssselect('.author-questions')
 
 
-def test_author_first_favorite_article_forces_mobile_image(application):
+def test_author_first_favorite_article_should_force_mobile_images(application):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/j_random')
     request = pyramid.testing.DummyRequest()
@@ -294,7 +294,6 @@ def test_author_page_has_correct_pagination_information(
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/j_random')
     dummy_request.path_info = u'/autoren/j_random'
-    dummy_request.url = 'http://example.com/autoren/j_random'
 
     view = zeit.web.site.view_author.Author(content, dummy_request)
     assert view.canonical_url == 'http://example.com/autoren/j_random'

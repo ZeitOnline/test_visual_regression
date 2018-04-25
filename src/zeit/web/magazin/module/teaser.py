@@ -11,7 +11,7 @@ import zeit.web.core.module.teaser
 @grokcore.component.adapter(
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.magazin.interfaces.IZMOContent)
-class ZMOTeaserBlock(zeit.web.core.module.teaser.LayoutOverrideTeaserBlock):
+class ZMOTeaserBlock(zeit.web.core.module.teaser.TeaserBlock):
 
     @property
     def layout(self):

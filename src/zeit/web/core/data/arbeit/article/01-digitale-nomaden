@@ -122,7 +122,7 @@
     <subtitle>Geld verdienen in der Hängematte – davon träumen doch alle. Es gibt Leute, die machen es vor: Ihr Laptop ist ihr Büro, und damit reisen sie um die Welt. Sind sie zu beneiden? Auf Kreuzfahrt mit 197 Digitalen Nomaden.</subtitle>
     <byline>von Karin Ceballos Betancur</byline>
     <division type="page">
-      <image base-id="http://xml.zeit.de/arbeit/image/05-hammock-cottage-woods/" type="jpg" title="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." publication-date="" expires="" layout="large" is_empty="False" caption_local="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." display_mode="large" variant_name="wide" title_local="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." alt_local="Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." alt="Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken.">
+      <image base-id="http://xml.zeit.de/arbeit/image/05-hammock-cottage-woods/" type="jpg" title="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." publication-date="" expires="" is_empty="False" caption_local="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." display_mode="large" variant_name="wide" title_local="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." alt_local="Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." alt="Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken.">
         <bu>Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken.</bu>
         <copyright>© Karin Ceballos Betancur</copyright>
       </image>
@@ -187,7 +187,7 @@
     <image-credits>Fotos: Karin Ceballos Betancur für DIE ZEIT</image-credits>
     <supertitle>Digitale Nomaden</supertitle>
     <division type="page" teaser="&quot;Insecurity is a bitch&quot;">
-      <image base-id="http://xml.zeit.de/entdecken/reisen/2016-07/monarch-boat2/" type="jpg" title="monarch-boat2" publication-date="" expires="" set-manually="True" layout="large" is_empty="False" display_mode="large" variant_name="wide">
+      <image base-id="http://xml.zeit.de/arbeit/image/02-bike-handle/" type="jpg" title="monarch-boat2" publication-date="" expires="" set-manually="True" is_empty="False" display_mode="column-width" variant_name="wide">
         <bu>Zwischendurch mal was anderes als nur die Fingerspitzen bewegen.</bu>
         <copyright>© Karin Ceballos Betancur</copyright>
       </image>
@@ -230,7 +230,7 @@
       <p>Wir beschließen, gemeinsam einen Ausflug zu machen. Vincent schaut auf seinem Smartphone, was bei TripAdvisor am beliebtesten ist (#mahobeach). Wir fahren dann doch zusammen nach Marigot im französischen Teil der Insel. Vincent handelt den Taxifahrer von 8 auf 7 Dollar runter. Später, beim Mittagessen in einer Hinterhofküche, erzählt er, er habe vor, den Pariser Nahverkehr zu revolutionieren. Mit Tretrollern. Problem: Tretroller gelten als brutal uncool. Aber wenn <entity idref="Jennifer+Lopez" entity_type="Person" url_value="personen/jennifer-lopez">Jennifer Lopez</entity> mal auf so einem Teil fahren würde, wollten alle eins haben. Vincent will seine Idee mit den Berater-Nomaden besprechen, mit denen, die was von Unternehmensgründungen verstehen.</p>
     </division>
     <division type="page" teaser="Unabhängigkeit um jeden Preis">
-      <image base-id="http://xml.zeit.de/entdecken/reisen/2016-07/monarch-boat3/" type="jpg" title="monarch-boat3" publication-date="" expires="" set-manually="True" layout="large" is_empty="False" display_mode="large" variant_name="wide">
+      <image base-id="http://xml.zeit.de/arbeit/image/03-outdoor-lake-jumping/" type="jpg" title="monarch-boat3" publication-date="" expires="" set-manually="True" is_empty="False" display_mode="large" variant_name="wide">
         <bu>Aufnäher auf dem Rucksack waren gestern.</bu>
         <copyright>© Karin Ceballos Betancur</copyright>
       </image>

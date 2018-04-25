@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
-import datetime
-import random
-
-import babel.dates
 import base64
-import grokcore.component
+import datetime
 import json
 import logging
+import random
+import re
+import urlparse
+
+import babel.dates
+import dogpile.cache.api
+import grokcore.component
 import lxml.etree
 import lxml.html
 import pyramid
-import re
 import requests
 import requests.exceptions
-import urlparse
 import zope.component
 import zope.interface
 
@@ -294,48 +295,51 @@ class Liveblog(Module):
         self.is_live = json.get('blog_status') == u'open'
         self.last_modified = self.format_date(json.get('_updated'))
 
-    def api_auth_token(self):
+    def _retrieve_auth_token(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = conf.get('liveblog_api_auth_url_v3')
-
-        username = conf.get('liveblog_api_auth_username_v3')
-        password = conf.get('liveblog_api_auth_password_v3')
-        headers = {'Content-Type': 'application/json;charset=UTF-8'}
-        payload = {'username': username, 'password': password}
-
         try:
-            r = requests.post(url, data=json.dumps(payload), headers=headers)
-            r.raise_for_status()
-            token = r.json().get('token')
-            LONG_TERM_CACHE.set('liveblog_api_auth_token', token)
+            with zeit.web.core.metrics.http('liveblog3.auth') as record:
+                response = requests.post(url, json={
+                    'username': conf.get('liveblog_api_auth_username_v3'),
+                    'password': conf.get('liveblog_api_auth_password_v3')})
+                record(response)
+            response.raise_for_status()
+            return response.json().get('token')
         except requests.exceptions.HTTPError as e:
             log.error(e.message)
-            token = 'no_token'
-        return token
+        except (requests.exceptions.RequestException, ValueError):
+            pass
 
-    def api_blog_request(self):
+    def api_blog_request(self, _retries=0):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        api_url = conf.get('liveblog_api_url_v3')
+        url = '{}/{}'.format(api_url, self.blog_id)
+
+        if _retries >= 2:
+            raise RuntimeError('Maximum retries exceeded for %s' % url)
+
         token = LONG_TERM_CACHE.get('liveblog_api_auth_token')
-        if not token:
-            token = self.api_auth_token()
-
-        if isinstance(token, basestring):
-            conf = zope.component.getUtility(
-                zeit.web.core.interfaces.ISettings)
-            api_url = conf.get('liveblog_api_url_v3')
-            url = '{}/{}'.format(api_url, self.blog_id)
-            headers = {
-                'Authorization': 'basic ' + base64.b64encode(token + ':')}
-            r = requests.get(url, headers=headers)
-
-            if r.status_code == 200:
-                return r.json()
-            else:
-                token = self.api_auth_token()
-                headers = {
-                    'Authorization': 'basic ' + base64.b64encode(token + ':')}
-                r = requests.get(url, headers=headers)
-                r.raise_for_status()
-                return r.json()
+        if token is dogpile.cache.api.NO_VALUE:
+            token = ''
+        try:
+            with zeit.web.core.metrics.http('liveblog3.api') as record:
+                response = requests.get(url, auth=(token, ''))
+                record(response)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as err:
+            status = getattr(err.response, 'status_code', 510)
+            if status == 401:
+                log.debug('Refreshing liveblog3 auth token')
+                LONG_TERM_CACHE.set(
+                    'liveblog_api_auth_token', self._retrieve_auth_token())
+                return self.api_blog_request(_retries=_retries + 1)
+            raise
+        try:
+            return response.json()
+        except Exception:
+            log.error('%s returned invalid json %r', url, response.text)
+            raise ValueError('No valid JSON found for %s' % url)
 
     def format_date(self, date):
         tz = babel.dates.get_timezone('Europe/Berlin')
@@ -358,15 +362,13 @@ class Liveblog(Module):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         response = None
         try:
-            with zeit.web.core.metrics.timer('liveblog.reponse_time'):
+            with zeit.web.core.metrics.http('liveblog') as record:
                 response = requests.get(
                     url, timeout=conf.get('liveblog_timeout', 1))
-                return response.json()
+                record(response)
+            return response.json()
         except (requests.exceptions.RequestException, ValueError):
             pass
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment('liveblog.status.%s' % status)
 
     @LONG_TERM_CACHE.cache_on_arguments()
     def get_amp_themed_id(self, blog_id):
@@ -516,7 +518,10 @@ class Raw(Module):
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawText)
 class RawText(Module):
-    pass
+
+    @zeit.web.reify
+    def raw_code(self):
+        return _raw_text(self.context.raw_code)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
@@ -792,7 +797,19 @@ def _raw_html(xml):
         </xsl:stylesheet>
     """)
     transform = lxml.etree.XSLT(filter_xslt)
-    return transform(xml)
+    return _raw_text(unicode(transform(xml)))
+
+
+def _raw_text(text):
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('https'):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        rewrite_https_links = conf.get(
+            'transform_to_secure_links_for', '').split(',')
+        for link in rewrite_https_links:
+            if link:
+                text = text.replace("http://%s" % link, "https://%s" % link)
+    return text
 
 
 def _inline_html(xml, elements=None):

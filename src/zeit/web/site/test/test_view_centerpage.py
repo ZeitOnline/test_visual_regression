@@ -319,7 +319,7 @@ def test_topic_links_title_schould_have_a_value_and_default_value(application):
 def test_centerpage_view_should_have_topic_links(
         application, preserve_settings):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['transform_to_secure_links_for'] = ['www.zeit.de']
+    settings['transform_to_secure_links_for'] = 'www.zeit.de'
 
     mycp = zeit.content.cp.centerpage.CenterPage()
     mycp.topiclink_label_1 = 'Label 1'
@@ -888,7 +888,8 @@ def test_servicebox_present_in_wide_breakpoints(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    driver.get(
+        '%s/zeit-online/slenderized-index-with-newsbox' % testserver.url)
     servicebox = driver.find_element_by_id('servicebox')
 
     if screen_size[0] == 320:
@@ -2153,7 +2154,7 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
     solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(35)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
-    dummy_request.GET['p'] = 2
+    dummy_request.GET['p'] = '2'
     area = zeit.web.core.centerpage.get_area(context)
     assert len(area.values()) == 10
     assert area.total_pages == 5
@@ -2182,7 +2183,7 @@ def test_ranking_area_should_handle_various_page_values(
     solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(12)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
-    dummy_request.GET = params
+    dummy_request.GET.update(params)
     area = zeit.web.core.centerpage.get_area(context)
     assert area.page == page
 
@@ -2620,6 +2621,16 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
     assert len(teasers) == 3
     for teaser in teasers:
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus')
+
+
+def test_zplus_teaser_should_force_mobile_images(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/zplus')
+    figures = browser.cssselect('figure.teaser-small__media, '
+                                'figure.teaser-small-minor__media')
+
+    assert figures
+    for figure in figures:
+        assert '__media--force-mobile' in figure.get('class')
 
 
 def test_register_teaser_has_zplus_register_badge(testbrowser):
@@ -3097,6 +3108,15 @@ def test_brandeins_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_small_logo) == 4
     assert len(teaser_small_minor_logo) == 2
     assert len(teaser_square_logo) == 2
+
+
+def test_brandeins_teaser_should_force_mobile_images(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/teasers-to-brandeins')
+    figures = browser.cssselect('.cp-area--brandeins .teaser-small__media')
+
+    assert figures
+    for figure in figures:
+        assert 'teaser-small__media--force-mobile' in figure.get('class')
 
 
 def test_brandeins_teaser_should_display_its_image_on_mobile(

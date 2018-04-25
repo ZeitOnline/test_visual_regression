@@ -41,7 +41,7 @@ def test_follow_us_has_correct_source(testbrowser):
     kicker = select('.teaser-follow-us__packshot .packshot__kicker')
     title = select('.teaser-follow-us__packshot .packshot__title')
     cta = select('.teaser-follow-us__packshot .packshot__cta')
-    img = select('.packshot__media > noscript')
+    img = select('.packshot__media-item')
 
     # assert packshot
     assert kicker[0].text == 'Das aktuelle Heft /'

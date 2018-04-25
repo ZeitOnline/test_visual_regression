@@ -406,11 +406,10 @@ def format_date(date, type='short', pattern=None):
                                             add_direction=True, locale="de_DE")
         return text[:1].lower() + text[1:] if text else ''
     elif type == 'switch_from_hours_to_date':
-        delta = datetime.datetime.now(date.tzinfo) - date
-        if delta.days >= int(1):
-            pattern = 'dd. MM. yyyy'
-        elif delta.days < int(1):
+        if datetime.datetime.today().date() == date.date():
             pattern = "'Heute,' HH:mm"
+        else:
+            pattern = 'dd. MM. yyyy'
     if pattern is None:
         pattern = formats[type]
     # adjust UTC dates to local time
@@ -553,6 +552,14 @@ def remove_break(string):
     if isinstance(string, basestring):
         return string.replace('\n', '')
     return string
+
+
+@zeit.web.register_filter
+def remove_schema(url):
+    if isinstance(url, basestring):
+        parsed = urlparse.urlparse(url)
+        return ''.join(parsed[1:3])
+    return url
 
 
 @zeit.web.register_filter
@@ -945,17 +952,6 @@ def urlquote_plus(text):
 @zeit.web.register_global
 def debugger():
     pdb.set_trace()
-
-
-# TODO: Remove after SSL Launch
-# Temporary hack, in preparation for ssl launch
-# Used in framebuilder context.
-@zeit.web.register_filter
-def rewrite_for_ssl_if_required(url, rewrite_required=False):
-    if rewrite_required:
-        return url.replace(
-            'http://www.zeit.de/', 'https://static.zeit.de/')
-    return url
 
 
 # Use case: The view.adcontroller_values are a list of tuples,

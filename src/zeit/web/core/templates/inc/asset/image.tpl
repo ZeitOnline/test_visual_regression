@@ -7,8 +7,8 @@
         {%- block image_additional_data_attributes %}{% endblock %}
         {%- if image_itemprop %} itemprop="{{ image_itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
         {% block media_caption_above %}{% endblock %}
-        <noscript data-src="{{ request.image_host + image.fallback_path }}">
-            <div class="{% block media_block_helper %}{{ module_layout }}__media-container{% endblock %} {{ media_container_additional_class }}">
+        <div class="{% block media_block_helper %}{{ module_layout }}__media-container{% endblock %} {{ media_container_additional_class }}">
+            <noscript data-src="{{ request.image_host + image.fallback_path }}">
                 {% block media_block_wrapper %}
                 <img class="{% block media_block_item %}{{ module_layout }}__media-item{% endblock %}"
                      {% block media_block_alt %}alt="{{ image.alt }}"{% endblock %}
@@ -20,8 +20,8 @@
                     {% endblock %}>
                 {% endblock %}
                 {{ media_container_after }}
-            </div>
-        </noscript>
+            </noscript>
+        </div>
         <meta itemprop="url" content="{{ request.image_host + image.fallback_path }}">
         <meta itemprop="width" content="{{ image_width }}">
         <meta itemprop="height" content="{{ image_height }}">

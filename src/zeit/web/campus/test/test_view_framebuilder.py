@@ -84,7 +84,7 @@ def test_campus_framebuilder_loads_slimmed_script_file(testbrowser):
 
 def test_campus_framebuilder_uses_static_ssl_url(testbrowser):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['ssl_asset_prefix'] = 'https://static.zeit.de/static/latest/'
+    conf['asset_prefix'] = 'https://static.zeit.de/static/latest/'
     browser = testbrowser('/campus/framebuilder')
     urls = browser.contents.count('https://static.zeit.de/static/latest/')
     assert urls == 6

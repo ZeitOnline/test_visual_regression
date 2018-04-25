@@ -23,7 +23,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">10492218</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Dorit Kowitz</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner_content">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>

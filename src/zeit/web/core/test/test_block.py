@@ -8,8 +8,6 @@ import mock
 import pyramid_dogpile_cache2
 import pyramid.testing
 import pytest
-import requests
-import requests.exceptions
 import requests_mock
 import zope.interface.declarations
 
@@ -25,7 +23,7 @@ def test_inline_html_replaces_http_protocol_if_https_toggle_set(monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'https': True}.get)
 
-    rewrite_links = []
+    rewrite_links = ''
 
     def getUtility(utility):
         if utility is zeit.web.core.interfaces.ISettings:
@@ -44,12 +42,37 @@ def test_inline_html_replaces_http_protocol_if_https_toggle_set(monkeypatch):
     assert xml_str == (
         str(zeit.web.core.block._inline_html(xml)).replace('\n', ''))
 
-    rewrite_links = ['www.zeit.de']
+    rewrite_links = 'www.zeit.de'
     xml_str = ('Text <a href="https://www.zeit.de/foo'
                '?foo=bar#fragment" class="myclass" '
                'rel="nofollow" data-foo="bar"> ba </a> und mehr Text')
     assert xml_str == (
         str(zeit.web.core.block._inline_html(xml)).replace('\n', ''))
+
+
+def test_raw_html_should_replace_secure_urls(monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'https': True}.get)
+
+    rewrite_links = ''
+
+    def getUtility(utility):
+        if utility is zeit.web.core.interfaces.ISettings:
+            return {'transform_to_secure_links_for': rewrite_links}
+        if utility is zeit.web.core.interfaces.IMetrics:
+            return zeit.web.core.metrics.Metrics('test', 'localhost', 0)
+
+    monkeypatch.setattr(zope.component, 'getUtility', getUtility)
+
+    raw = '<raw><x>http://interactive.zeit.de/foo</x></raw>'
+    xml = lxml.etree.fromstring(raw)
+    assert '<x>http://interactive.zeit.de/foo</x>' == (
+        str(zeit.web.core.block._raw_html(xml)).replace('\n', ''))
+
+    rewrite_links = 'interactive.zeit.de'
+    xml = lxml.etree.fromstring(raw)
+    assert '<x>https://interactive.zeit.de/foo</x>' == (
+        str(zeit.web.core.block._raw_html(xml)).replace('\n', ''))
 
 
 def test_inline_html_should_filter_to_valid_html():
@@ -335,7 +358,7 @@ def liveblog():
 
 
 def test_liveblog_auth(application, liveblog):
-    token = liveblog.api_auth_token()
+    token = liveblog._retrieve_auth_token()
     assert token == u'3b4b508e-66e4-4977-910c-c8bd5b985d09'
 
 
@@ -346,8 +369,8 @@ def test_liveblog_auth_fail(application, caplog, liveblog, monkeypatch):
     with requests_mock.Mocker() as m:
         m.post(
             auth_url, reason='Unauthorized', status_code=401)
-        token = liveblog.api_auth_token()
-        assert 'no_token' == token
+        token = liveblog._retrieve_auth_token()
+        assert token is None
         assert '401 Client Error' in caplog.text
 
 
@@ -421,15 +444,18 @@ def test_block_citation_should_contain_expected_structure(tplbrowser):
 
 def test_block_contentadblock_should_contain_expected_structure(tplbrowser):
     view = mock.Mock()
+    page = mock.Mock()
+    page.number = 0
     browser = tplbrowser(
-        'zeit.web.core:templates/inc/blocks/contentadblock.html', view=view)
+        'zeit.web.core:templates/inc/blocks/contentadblock.html',
+        view=view, page=page)
     assert browser.cssselect('div#iq-artikelanker')
 
 
 def test_block_contentadblock_isnt_shown_when_content_ad_enabled_is_false(
         tplbrowser):
     view = mock.Mock()
-    view.content_ad_enabled = False
+    view.advertising_in_article_body_enabled = False
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/contentadblock.html', view=view)
     assert not browser.cssselect('div#iq-artikelanker')

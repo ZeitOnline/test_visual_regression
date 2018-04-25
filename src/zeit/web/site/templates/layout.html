@@ -16,12 +16,21 @@
 
     {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
 
+    {% if toggles('preload_webfonts') %}
+        {# ../latest/ for escaping the version number. Same is used in CSS. #}
+        <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/tabletgothic/TabletGothic-Regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/tabletgothic/TabletGothic-Bold.woff2" as="font" type="font/woff2" crossorigin>
+        {% if not view.is_hp %}
+            <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/franziska/FranziskaWebPro.woff" as="font" type="font/woff" crossorigin>
+        {% endif %}
+    {% endif %}
+
     <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
 
     {% block css_link %}
-        <link href="{{ request.ssl_asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">
+        <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">
     {% endblock css_link %}
 
     {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}

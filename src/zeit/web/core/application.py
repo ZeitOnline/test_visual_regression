@@ -11,6 +11,7 @@ import pkg_resources
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
+import pyramid.request
 import pyramid.interfaces
 import pyramid_jinja2
 import pyramid_zodbconn
@@ -54,9 +55,6 @@ class Application(object):
         self.settings.update(settings)
         self.settings['app_servers'] = filter(
             None, settings['app_servers'].split(','))
-        self.settings['transform_to_secure_links_for'] = (
-            settings.get(
-                'transform_to_secure_links_for', '')).split(',')
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             settings.get('linkreach_host', ''))
         self.settings['sso_key'] = self.load_sso_key(
@@ -116,7 +114,6 @@ class Application(object):
         config.add_route_predicate(
             'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
             weighs_more_than=('traverse',))
-
         # For every new request, the site manager is reset. It might have been
         # modified at runtime, e.g. another solr utility was registered
         config.add_subscriber(register_standard_site_manager,
@@ -150,12 +147,8 @@ class Application(object):
         config.add_route(
             'invalidate_community_maintenance',
             '/-comments/invalidate-maintenance')
-        config.add_route(
-            'home', '/',
-            pregenerator=zeit.web.core.routing.https_url_pregenerator)
-        config.add_route(
-            'breaking_news', '/breaking-news',
-            pregenerator=zeit.web.core.routing.https_url_pregenerator)
+        config.add_route('home', '/')
+        config.add_route('breaking_news', '/breaking-news')
         config.add_route('login_state', '/login-state')
         config.add_route('health_check', '/health-check')
         config.add_route('brandeins-image', '/brandeins-image/*path')
@@ -175,12 +168,11 @@ class Application(object):
                 path='zeit.web.static:', cache_max_age=ast.literal_eval(
                     self.settings['assets_max_age']))
 
+        config.set_request_factory(SSLRequest)
         config.add_request_method(configure_host('asset'), reify=True)
         config.add_request_method(configure_host('image'), reify=True)
         config.add_request_method(configure_host('jsconf'), reify=True)
         config.add_request_method(configure_host('fbia'), reify=True)
-        config.add_request_method(
-            configure_host('framebuilder_ssl_asset'), reify=True)
         config.add_request_method(configure_host('ssl_asset'), reify=True)
 
         config.add_request_method(
@@ -454,3 +446,22 @@ class FeatureToggleSource(zeit.cms.content.sources.XMLSource):
 
 
 FEATURE_TOGGLES = FeatureToggleSource()(None)
+
+
+class SSLRequest(pyramid.request.Request):
+
+    @property
+    def host_url(self):
+        if FEATURE_TOGGLES.find('https'):
+            self.environ['wsgi.url_scheme'] = 'https'
+        else:
+            self.environ['wsgi.url_scheme'] = 'http'
+        return super(SSLRequest, self).host_url
+
+    @property
+    def host_port(self):
+        if FEATURE_TOGGLES.find('https'):
+            self.environ['wsgi.url_scheme'] = 'https'
+        else:
+            self.environ['wsgi.url_scheme'] = 'http'
+        return super(SSLRequest, self).host_port

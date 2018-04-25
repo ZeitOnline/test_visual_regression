@@ -1,16 +1,127 @@
 Change log for zeit.web
 =======================
 
+PREDEPLOY
+---------
+
+
 POSTDEPLOY
 ----------
 
 
-3.142 (unreleased)
+3.146 (unreleased)
 ------------------
+
+- ZON-4478: Use genre source to determine the complete byline prefix
+
+- BUG-901: Fix canonical URL on full view in verticals
+
+- MAINT: Use core mechanic to render ZMO byline
+
+- MAINT: Remove unused DOM element id attribute
+
+- FIX: Fix path for webfont preloads
+
+
+3.145 (2018-04-24)
+------------------
+
+- SSL-227: Remove non-ssl links to live0.zeit.de
+
+- SSL-223: Repair webtrekk contentId
+
+- SSL-222: Make Z+ badge protocol aware
+
+- SSL-228: Use SSL hosts in framebuilder login status
+
+- SSL-229: Remove schema in HP overlay webtrekk content id
+
+- SSL-225: Use HTTPS for external links if appropriate
+
+- SSL-226: Remove ssl.zeit.de from amp tracking
+
+- PERF: Preload webfonts on ZON
+
+
+3.144 (2018-04-23)
+------------------
+
+- ZON-4609: Do not index comment-paginated pages in Ligatus
+
+- ZON-4434: Transmit article genre to webtrekk
+
+- ZON-4599: Polish ZMO article footer
+
+- ZON-4589: Remove article navigation (aka "lineage")
+
+- ZON-4610: Force images on video teaser in mobile view
+
+- ZON-4591: Migrate zoca json endpoint to elasticsearch
+
+- ZON-4516: Add request metrics for Liveblog3
+
+- SSL-205: Load all assets from https://static.zeit.de
+
+- SSL-220: Replace links in raw, if referenced by file
+
+- BUG-897: Adjust tablet viewport on all verticals
+
+- BUG-898: Fix date error in news teasers
+
+- MAINT: Use core styles for ZCO sharing buttons
+
+- MAINT: Remove `framebuilder_loginstatus_disabled` feature toggle
+
+- MAINT: Fix contrast in ZON footer for A11y
+
+- MAINT: Add margin to Ligatus on video page
+
+- MAINT: Fix D18 nav-badge on IE
+
+
+3.143.3 (2018-04-20)
+--------------------
+
+- FIX: Wrong css
+
+
+3.143.2 (2018-04-20)
+--------------------
+
+- SSL-221: Make all requests ssl aware
+
+
+3.143.1 (2018-04-18)
+--------------------
+
+- FIX: Ensure ensure_division is called before we interact with the
+  article body, for all possible code paths
+
+
+3.143 (2018-04-17)
+------------------
+
+- ZON-4532: Remove zeit.intrafind and the zeit.retresco.tms featuretoggle
+
+- SSL-215: Rewrite certain URLs in RAW
+
+
+3.142 (2018-04-16)
+------------------
+
+- ZON-4508: Force images on zplus-abo teaser in mobile view
+
+- ZON-4580: Remove additional liveblog header layout
+
+- ZON-4582: Implement exclusion for article body ads
+
+- BUG-891: Fix print button on advertorials
+
+- BUG-893: Clear floating advertisements before fullwidth block content
 
 - MAINT: Remove obsolete route config for `/health_check`
 
-- BUG-891: Fix print button on advertorials
+- MAINT: Move 'transform_to_secure_links_for' setting to web-settings
 
 
 3.141 (2018-04-12)

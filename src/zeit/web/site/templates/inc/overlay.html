@@ -2,8 +2,8 @@
     {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
     <!-- config template -->
     <div id="overlay-wrapper" aria-hidden="true">
-    	<div id="overlay-tracker" data-tracking="refreshbox....appear|{{view.og_url|replace('http://','')}}"></div>
-    	<div class="overlay" data-tracking="refreshbox....refreshOverlay|{{view.og_url|replace('http://','')}}" tabindex="-1"></div>
+    	<div id="overlay-tracker" data-tracking="refreshbox....appear|{{ view.og_url | remove_schema }}"></div>
+    	<div class="overlay" data-tracking="refreshbox....refreshOverlay|{{ view.og_url | remove_schema }}" tabindex="-1"></div>
     	<div class="overlay__dialog" role="dialog" aria-labelledby="refreshbox-title" aria-describedby="refreshbox-text">
     		<div class="overlay__content" role="document">
     			<h3 class="overlay__headline" id="refreshbox-title">
@@ -12,11 +12,11 @@
     			<p class="overlay__text" id="refreshbox-text">
     				Laden Sie die Seite neu, um Zugriff auf alle aktuellen Beiträge zu haben.
     			</p>
-    			<button type="button" class="overlay__button button" data-tracking="refreshbox....refreshButton|{{view.og_url|replace('http://','')}}">
+    			<button type="button" class="overlay__button button" data-tracking="refreshbox....refreshButton|{{ view.og_url | remove_schema }}">
     				{{ lama.use_svg_icon('reload', 'overlay__button-icon', view.package) }}
     				Neu laden
     			</button>
-    			<button type="button" class="overlay__text-button" data-tracking="refreshbox....cancel|{{view.og_url|replace('http://','')}}">
+    			<button type="button" class="overlay__text-button" data-tracking="refreshbox....cancel|{{ view.og_url | remove_schema }}">
     				Abbrechen
     			</button>
     		</div>

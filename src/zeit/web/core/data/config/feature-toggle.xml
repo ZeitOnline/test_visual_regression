@@ -7,17 +7,15 @@
   <dtag_navigation>true</dtag_navigation>
   <campus_toolbox>true</campus_toolbox>
   <dummy>false</dummy>
-  <elasticsearch_lineage>false</elasticsearch_lineage>
+  <elasticsearch_zoca>false</elasticsearch_zoca>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
-  <framebuilder_loginstatus_disabled>false</framebuilder_loginstatus_disabled>
 
   <!-- Produce https link, when set to true (only for certain domains, when
-  'transform_to_secure_links_for[cs-list_with_fqdn]` is configured in web.ini) -->
+  'transform_to_secure_links_for[cs-list_with_fqdn]` is configured in web-settings) -->
   <https>false</https>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
-  <iqd_tablet_transformation>true</iqd_tablet_transformation>
   <iqd_touchpoint>true</iqd_touchpoint>
   <keywords_from_tms>false</keywords_from_tms>
   <modernizr_js_file>false</modernizr_js_file>
@@ -30,6 +28,7 @@
 
   <optimize_ab_testing>false</optimize_ab_testing>
   <podlove_button>true</podlove_button>
+  <preload_webfonts>true</preload_webfonts>
   <rawr_iframe>true</rawr_iframe>
   <reader_revenue>true</reader_revenue>
   <reader_revenue_handle_celeraone_login_inconsistency>true</reader_revenue_handle_celeraone_login_inconsistency>
@@ -39,7 +38,6 @@
   <share_blocks_via_screenshot>true</share_blocks_via_screenshot>
   <tag_logos>true</tag_logos>
   <third_party_modules>false</third_party_modules>
-  <topicpages_tms>true</topicpages_tms>
   <tracking>false</tracking>
   <track_gate_visibility>true</track_gate_visibility>
   <update_signals>true</update_signals>

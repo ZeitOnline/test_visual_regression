@@ -10,7 +10,7 @@ import zeit.web.site.module.teaser
 @grokcore.component.adapter(
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.arbeit.interfaces.IZARContent)
-class ZARTeaserBlock(zeit.web.core.module.teaser.LayoutOverrideTeaserBlock):
+class ZARTeaserBlock(zeit.web.core.module.teaser.TeaserBlock):
 
     @property
     def layout(self):

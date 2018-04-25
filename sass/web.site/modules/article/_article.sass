@@ -26,6 +26,7 @@
 			width: auto
 
 		&--apart
+			clear: both
 			margin-top: remify(28px)
 			margin-bottom: remify(40px)
 
@@ -167,13 +168,12 @@
 			+on-interaction
 				color: $color-link--hover
 
-// Reserve space for the article (header) image in order to prevent jumping content
-.article__media.variant--portrait
+// Reserve space for article images in order to prevent jumping content
+.variant--portrait .article__media-container
 	+reserve-space-for-article-media(100% / 3 * 4)
-.article__media.variant--square
+.variant--square .article__media-container
 	+reserve-space-for-article-media(100%)
-.article__media.variant--wide
-	clear: both
+.variant--wide .article__media-container
 	+reserve-space-for-article-media(100% / 16 * 9)
 
 // Brightcove styling makes the video small. We need to enforce the size

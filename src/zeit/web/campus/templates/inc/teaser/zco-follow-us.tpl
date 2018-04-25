@@ -15,7 +15,7 @@
         </a>
     </div>
     <div class="{{ self.layout() }}__actions">
-        <a class="abo-cta" href="http://community.zeit.de/newsletter-signup?nl=campus" data-ct-label="newsletter">
+        <a class="abo-cta" href="{{ settings('community_profile_url', '') }}/newsletter-signup?nl=campus" data-ct-label="newsletter">
             <div class="abo-cta__text">Hol’ Dir ZEIT Campus in dein Postfach</div>
             <span class="abo-cta__label">
                 <span class="visually-hidden">Jetzt den ZEIT Campus Newsletter </span>Abonnieren

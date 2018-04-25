@@ -10,12 +10,12 @@
     <nav class="nav__more">
         <a class="nav__more-title" href="#more-menu" role="button" aria-controls="more-menu"><span class="nav__dropdown">Mehr</span></a>
         <ul class="nav__more-list" id="more-menu" aria-hidden="true" data-ct-column>
-            {% for item in items.values() %}
-                <li>
-                    <a href="{{ item.href | create_url | replace('.__vertical__.', '.' ~ vertical_campaign_param_short ~ '.') }}" id="{{ item.item_id }}">
-                        {{- item.text -}}
-                    </a>
-                </li>
+            {% for item in items.values() -%}
+            <li>
+                <a href="{{ item.href | create_url | replace('.__vertical__.', '.' ~ vertical_campaign_param_short ~ '.') }}">
+                    {{- item.text -}}
+                </a>
+            </li>
             {% endfor %}
         </ul>
     </nav>

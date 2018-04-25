@@ -19,9 +19,9 @@
             {% endif %}
                 <video preload="auto" loop="loop" muted="muted" volume="0" poster="{{ obj.video_still }}">
                     <source src="{{ obj.highest_rendition_url }}" type="video/mp4">
-                    <source src="http://live0.zeit.de/multimedia/videos/{{ id }}.webm" type="video/webm">
+                    <source src="https://live0.zeit.de/multimedia/videos/{{ id }}.webm" type="video/webm">
                 </video>
-                <img class="video--fallback {{ img_class }}" src="http://live0.zeit.de/multimedia/videos/{{ id }}.jpg" alt="Video: {{ obj.title }}" title="Video: {{ obj.title }}">
+                <img class="video--fallback {{ img_class }}" src="https://live0.zeit.de/multimedia/videos/{{ id }}.jpg" alt="Video: {{ obj.title }}" title="Video: {{ obj.title }}">
             {% if href %}
             </a>
             {% endif %}

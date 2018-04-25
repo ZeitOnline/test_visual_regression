@@ -13,10 +13,10 @@
     <article class="article" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         {% block article_header %}
-            {% if view.current_page.number == 0 %}
-                {% include "zeit.web.magazin:templates/inc/header/header_{}.html".format(view.header_layout) ignore missing %}
-            {% else %}
+            {% if view.page_nr and view.page_nr > 1 %}
                 {% include "zeit.web.magazin:templates/inc/header/header_sequelpages.html" %}
+            {% else %}
+                {% include "zeit.web.magazin:templates/inc/header/header_{}.html".format(view.header_layout) ignore missing %}
             {% endif %}
         {% endblock article_header %}
         <div class="article__body" itemprop="articleBody">

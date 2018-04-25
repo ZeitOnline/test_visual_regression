@@ -8,7 +8,7 @@
                 "cp":  "{{ view.ivw_code }}"
             },
             "requests": {
-                "url": "https://ssl.zeit.de/{{ request.asset_host | replace('http://','')}}/html/amp-analytics-infonline.html"
+                "url": "{{ request.asset_host }}/html/amp-analytics-infonline.html"
             }
         }
     </script>
