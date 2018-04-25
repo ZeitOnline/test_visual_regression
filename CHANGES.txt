@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - BUG-901: Fix canonical URL on full view in verticals
 
+- MAINT: Use core mechanic to render ZMO byline
+
 
 3.145 (2018-04-24)
 ------------------
