@@ -173,8 +173,6 @@ class Application(object):
         config.add_request_method(configure_host('image'), reify=True)
         config.add_request_method(configure_host('jsconf'), reify=True)
         config.add_request_method(configure_host('fbia'), reify=True)
-        config.add_request_method(
-            configure_host('framebuilder_ssl_asset'), reify=True)
         config.add_request_method(configure_host('ssl_asset'), reify=True)
 
         config.add_request_method(
