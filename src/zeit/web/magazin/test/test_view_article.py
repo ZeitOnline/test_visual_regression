@@ -103,13 +103,16 @@ def test_article_contains_authorbox(testbrowser):
 
 def test_article_header_contains_authors(testbrowser):
     browser = testbrowser('/zeit-magazin/article/08')
+    summary = browser.cssselect('.header-article__subtitle')
     authors = browser.cssselect('span[itemprop="author"]')
     link = authors[0].cssselect('a[itemprop="url"]')[0]
+    assert ' '.join(summary[0].text_content().strip().split()).endswith(
+        'Ein Kommentar von Anne Mustermann, Berlin und Oliver Fritsch, London')
     assert len(authors) == 2
-    assert authors[0].text_content() == 'Anne Mustermann, Berlin'
-    assert authors[1].text_content() == 'Oliver Fritsch, London'
+    assert authors[0].text_content().strip() == 'Anne Mustermann'
+    assert authors[1].text_content().strip() == 'Oliver Fritsch'
     assert link.get('href') == 'http://localhost/autoren/anne_mustermann'
-    assert link.text_content() == 'Anne Mustermann'
+    assert link.text_content().strip() == 'Anne Mustermann'
 
 
 def test_article_header_without_author(testbrowser):
@@ -194,6 +197,55 @@ def test_zmo_article_has_series_link(testbrowser):
     series_link = browser.cssselect('.meta__serie')
     assert len(series_link) == 1
     assert series_link[0].get('href').endswith('/serie/weinkolumne')
+
+
+def test_article_header_briefmarke_has_byline(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-briefmarke')
+    author = browser.cssselect('main header *[data-ct-row="author"]')
+    assert ' '.join(author[0].text_content().strip().split()).endswith(
+        'Von Oliver Fritsch')
+
+
+def test_article_header_column_has_byline(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-column')
+    author = browser.cssselect('main header *[data-ct-row="author"]')
+    assert ' '.join(author[0].text_content().strip().split()) == (
+        'Von Oliver Fritsch')
+
+
+def test_article_header_default_has_byline(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-default')
+    author = browser.cssselect('main header *[data-ct-row="author"]')
+    assert ' '.join(author[0].text_content().strip().split()).endswith(
+        'Von Oliver Fritsch')
+
+
+def test_article_header_leinwand_has_byline(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-leinwand')
+    author = browser.cssselect('main header *[data-ct-row="author"]')
+    assert ' '.join(author[0].text_content().strip().split()).endswith(
+        'Eine Glosse von Oliver Fritsch')
+
+
+def test_article_header_mode_has_byline(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-mode')
+    author = browser.cssselect('main header *[data-ct-row="author"]')
+    assert ' '.join(author[0].text_content().strip().split()).endswith(
+        'Ein Kommentar von Anne Mustermann')
+
+
+def test_article_header_text_only_has_byline(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-text-only')
+    author = browser.cssselect('main header *[data-ct-row="author"]')
+    assert ' '.join(author[0].text_content().strip().split()).endswith(
+        'Interview: Anne Mustermann')
+
+
+def test_article_header_traum_has_byline(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-traum')
+    author = browser.cssselect('main header *[data-ct-row="author"]')
+    assert ' '.join(author[0].text_content().strip().split()).endswith(
+        'Von Oliver Fritsch')
 
 
 def test_canonical_url_should_contain_first_page_on_full_view(testbrowser):

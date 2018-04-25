@@ -1,9 +1,5 @@
 {% extends "zeit.web.magazin:templates/content.html" %}
 
-{% block article_header -%}
-    {% include "zeit.web.magazin:templates/inc/header/header_gallery.html" %}
-{%- endblock article_header %}
-
 {% block article_pages -%}
     {% require gallery = view.gallery %}
     <div class="article-page">

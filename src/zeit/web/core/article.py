@@ -261,10 +261,7 @@ def convert_authors(article):
                 author['location'] = u', {}'.format(location)
             # add prefix
             if index == 0:
-                if is_longform:
-                    author['prefix'] = u'\u2014 von'
-                else:
-                    author['prefix'] = u' von'
+                author['prefix'] = u' von'
             # add suffix
             if index == len(author_ref) - 2:
                 author['suffix'] = u' und'

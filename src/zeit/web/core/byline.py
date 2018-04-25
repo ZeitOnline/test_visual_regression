@@ -143,15 +143,6 @@ GENRE_SOURCE = zeit.content.article.interfaces.IArticle['genre'].source(None)
 
 
 @grokcore.component.adapter(
-    zeit.content.link.interfaces.ILink)
-@grokcore.component.implementer(IByline)
-class LinkTeaserByline(Byline):
-
-    def genre(self):
-        pass
-
-
-@grokcore.component.adapter(
     zeit.cms.content.interfaces.ICommonMetadata, name='main')
 @grokcore.component.implementer(IByline)
 class ArticleByline(Byline):
