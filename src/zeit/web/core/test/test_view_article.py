@@ -2,7 +2,10 @@ import mock
 import pyramid.testing
 import pytest
 import requests
+
+from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
+
 import zeit.web.core.view_article
 
 from selenium.common.exceptions import TimeoutException
@@ -16,6 +19,19 @@ def test_amp_disabled_articles_should_redirect_accordingly(testserver):
                         allow_redirects=False)
     assert resp.headers.get('Location') == (
         testserver.url + '/zeit-online/article/01?foo=42')
+    assert resp.status_code == 302
+
+
+def test_amp_disabled_specialized_articles_should_redirect_accordingly(
+        testserver, workingcopy):
+    with checked_out(zeit.cms.interfaces.ICMSContent(
+            'http://xml.zeit.de/zeit-online/article/liveblog3')) as co:
+        co.is_amp = False
+    resp = requests.get(
+        testserver.url + '/amp/zeit-online/article/liveblog3?foo=42',
+        allow_redirects=False)
+    assert resp.headers.get('Location') == (
+        testserver.url + '/zeit-online/article/liveblog3?foo=42')
     assert resp.status_code == 302
 
 
