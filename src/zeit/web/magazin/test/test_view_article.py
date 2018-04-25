@@ -194,3 +194,9 @@ def test_zmo_article_has_series_link(testbrowser):
     series_link = browser.cssselect('.meta__serie')
     assert len(series_link) == 1
     assert series_link[0].get('href').endswith('/serie/weinkolumne')
+
+
+def test_canonical_url_should_contain_first_page_on_full_view(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/03/komplettansicht')
+    canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
+    assert canonical_url.endswith('zeit-magazin/article/03')

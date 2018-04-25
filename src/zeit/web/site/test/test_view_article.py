@@ -3,7 +3,6 @@ import base64
 import datetime
 import urlparse
 
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
@@ -895,6 +894,12 @@ def test_canonical_url_should_omit_queries_and_hashes(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit/seite-3?cid=123#comments')
     canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
     assert canonical_url.endswith('zeit-online/article/zeit/seite-3')
+
+
+def test_canonical_url_should_contain_first_page_on_full_view(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
+    assert canonical_url.endswith('zeit-online/article/zeit')
 
 
 def test_zeit_article_has_correct_meta_line(testserver, selenium_driver):
