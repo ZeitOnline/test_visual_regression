@@ -329,3 +329,11 @@ def test_breaking_news_banner_shows_date_first_released(testbrowser):
     browser = testbrowser('/breaking-news?debug=eilmeldung')
     assert browser.cssselect('.breaking-news-banner__time')[0].text == (
         '19:11 Uhr')
+
+
+def test_page_1_of_ranking_redirects(testserver):
+    resp = requests.get(
+        '%s/dynamic/es-berlin?p=1' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 301
+    assert resp.headers['Location'] == '%s/dynamic/es-berlin' % testserver.url

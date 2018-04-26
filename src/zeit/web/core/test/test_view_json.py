@@ -209,7 +209,7 @@ def test_json_article_query_should_ignore_broken_hp_for_solr(
         'uuid': '{urn:uuid:123eca9c-8a28-48e2-962b-96948577d000}'
     }]
     response = zeit.web.core.view_json.json_article_query(request)
-    assert response[0]['on_homepage'] == False
+    assert not response[0]['on_homepage']
 
 
 def test_json_article_query_should_ignore_broken_hp_for_elasticsearch(
@@ -228,7 +228,7 @@ def test_json_article_query_should_ignore_broken_hp_for_elasticsearch(
         'url': '/zeit-online/cp-content/article-01'
     }]
     response = zeit.web.core.view_json.json_article_query(request)
-    assert response[0]['on_homepage'] == False
+    assert not response[0]['on_homepage']
 
 
 def test_json_article_query_should_construct_correct_solr_queries(

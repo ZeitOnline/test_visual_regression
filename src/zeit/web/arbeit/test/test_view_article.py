@@ -463,6 +463,14 @@ def test_zar_sharebert_has_correct_attributes(testbrowser):
         '_ext&utm_campaign=ref&utm_content=zeitde_share_link_x')
 
 
+def test_zar_sharequote_renders_standalone(testbrowser):
+    browser = testbrowser('/arbeit/article/sharequote/module/17/sharequote')
+    assert browser.cssselect('.quote__text')
+    # make sure this is not a whole page
+    assert not browser.cssselect('nav')
+    assert not browser.cssselect('article')
+
+
 def test_zar_series_without_series_image_have_correct_series_header_styles(
         testbrowser):
     browser = testbrowser('/arbeit/article/series-no-image')
