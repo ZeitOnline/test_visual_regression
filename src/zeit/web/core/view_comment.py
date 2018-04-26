@@ -323,12 +323,8 @@ class PostComment(zeit.web.core.view.Base):
                 explanation='The resource {} does not exist and there is'
                             'no comment_thread for it.'.format(unique_id))
 
-        xml_str = lxml.etree.tostring(content.xml)
-        headers = {
-            'X-uniqueId': '{}{}'.format(
-                self.request.route_url('home').rstrip('/'),
-                urlparse.urlparse(unique_id)[2]),
-            'Content-Type': 'text/xml'}
+        xml_str = lxml.etree.tostring(content.xml) 
+        headers = self._create_community_headers(unique_id)
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         error = None
@@ -360,6 +356,16 @@ class PostComment(zeit.web.core.view.Base):
 
         # XXX TRASHME together with get_cacheable_thread
         invalidate_comment_thread(unique_id)
+
+    def _create_community_headers(self, unique_id):
+        # XXX: The community expects a X-uniqueId which starts with "http"
+        # That's why we can not use the full home-route and use only the host
+        # name.
+        x_uniqueid_host = urlparse.urlparse(self.request.route_url('home'))[1]
+        path = urlparse.urlparse(unique_id)[2]
+        return {
+            'X-uniqueId': 'http://{}{}'.format(x_uniqueid_host, path),
+            'Content-Type': 'text/xml'}
 
 
 @zeit.web.view_config(

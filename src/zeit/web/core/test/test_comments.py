@@ -663,6 +663,7 @@ def test_post_comment_should_set_lock(application, action):
     assert request.session['lock_commenting'] is True
 
 
+
 @pytest.mark.parametrize("action", ['recommend', 'promote', 'demote'])
 def test_post_comment_should_not_set_lock(application, action):
     request = pyramid.testing.DummyRequest()
@@ -694,7 +695,6 @@ def test_post_comment_should_not_expose_requests_timeout_exception(
 
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         view.post_comment()
-
 
 def test_get_thread_should_return_none_on_errors(application, monkeypatch):
 
@@ -995,6 +995,22 @@ def test_request_thread_should_be_called_only_once_by_article_and_comment_esi(
         r = requests.get('{}/zeit-online/article/01'.format(testserver.url))
         r.raise_for_status()
         assert req_thread.call_count == 2
+
+
+def test_post_comment_should_create_commentsection_with_correct_x_unique_id(
+        application, dummy_request):
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
+
+    dummy_request.method = 'POST'
+    dummy_request.POST.update({
+        'path': 'zeit-magazin/article/01', 'action': 'comment', 'comment': ' '
+    })
+    dummy_request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
+
+    view = zeit.web.core.view_comment.PostComment(mock.Mock(), dummy_request)
+    headers = view._create_community_headers("http://xml.zeit.de/foo/batz")
+    assert dummy_request.route_url('home') == "https://example.com/"
+    assert headers['X-uniqueId'] == "http://example.com/foo/batz"
 
 
 def test_thread_template_should_render_adplace(
