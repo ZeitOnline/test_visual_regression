@@ -358,9 +358,11 @@ class PostComment(zeit.web.core.view.Base):
         invalidate_comment_thread(unique_id)
 
     def _create_community_headers(self, unique_id):
-        # XXX: The community expects a X-uniqueId which starts with "http"
-        # That's why we can not use the full home-route and use only the host
-        # name.
+        # XXX: The community currently expects X-uniqueId which
+        # a) uses "http" scheme
+        # b) can be www.zeit.de or www.staging.zeit.de
+        # Which doesn't play well with ssl-enabled route_url()
+        # We'll soon fix this on the community side to simply use xml.zeit.de
         x_uniqueid_host = urlparse.urlparse(self.request.route_url('home'))[1]
         path = urlparse.urlparse(unique_id)[2]
         return {
