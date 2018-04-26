@@ -9,10 +9,10 @@ POSTDEPLOY
 ----------
 
 
-3.147 (unreleased)
+3.146.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- OPS-877: Fix community uniqueIds for creating commentsections
 
 
 3.146 (2018-04-26)
