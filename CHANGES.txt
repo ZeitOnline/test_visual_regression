@@ -9,14 +9,24 @@ POSTDEPLOY
 ----------
 
 
-3.146 (unreleased)
+3.147 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.146 (2018-04-26)
 ------------------
 
 - ZON-4478: Use genre source to determine the complete byline prefix
 
 - BUG-901: Fix canonical URL on full view in verticals
 
+- BUG-872: Fix view_config specificity for amp/liveblog articles
+
 - MAINT: Use core mechanic to render ZMO byline
+
+- MAINT: Remove unused DOM element id attribute
 
 - FIX: Fix path for webfont preloads
 
