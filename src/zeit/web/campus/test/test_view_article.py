@@ -416,3 +416,21 @@ def test_canonical_url_should_contain_first_page_on_full_view(testbrowser):
     browser = testbrowser('/campus/article/paginated/komplettansicht')
     canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
     assert canonical_url.endswith('campus/article/paginated')
+
+
+def test_campus_leserarticle_renders_correct_header(testbrowser):
+    cssselect = testbrowser('/campus/article/leserartikel').cssselect
+    assert cssselect('.article-header--leserartikel')
+    assert cssselect('.article-header__topic--leserartikel')
+    assert cssselect('.article-header__title--leserartikel')
+    assert cssselect('.article-header__leserartikel-info')
+    'Ein Leserartikel von' in cssselect('.article-header__byline')[0].text
+
+
+def test_campus_column_renders_correct_header(testbrowser):
+    cssselect = testbrowser('/campus/article/column').cssselect
+    assert cssselect('.article-header--column')
+    assert cssselect('.article-header__topic--column')
+    assert cssselect('.article-header__title--column')
+    assert cssselect('.article-header__column-info')
+    'Eine Kolumne von' in cssselect('.article-header__byline')[0].text
