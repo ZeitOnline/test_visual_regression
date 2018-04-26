@@ -323,7 +323,7 @@ class PostComment(zeit.web.core.view.Base):
                 explanation='The resource {} does not exist and there is'
                             'no comment_thread for it.'.format(unique_id))
 
-        xml_str = lxml.etree.tostring(content.xml) 
+        xml_str = lxml.etree.tostring(content.xml)
         headers = self._create_community_headers(unique_id)
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)

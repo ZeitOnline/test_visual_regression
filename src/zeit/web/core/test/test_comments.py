@@ -663,7 +663,6 @@ def test_post_comment_should_set_lock(application, action):
     assert request.session['lock_commenting'] is True
 
 
-
 @pytest.mark.parametrize("action", ['recommend', 'promote', 'demote'])
 def test_post_comment_should_not_set_lock(application, action):
     request = pyramid.testing.DummyRequest()
@@ -695,6 +694,7 @@ def test_post_comment_should_not_expose_requests_timeout_exception(
 
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         view.post_comment()
+
 
 def test_get_thread_should_return_none_on_errors(application, monkeypatch):
 
