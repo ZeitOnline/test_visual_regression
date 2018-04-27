@@ -81,8 +81,8 @@
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:c9fe7ace-416d-4d77-a22d-f355894d19d8}</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">01</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">5</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;

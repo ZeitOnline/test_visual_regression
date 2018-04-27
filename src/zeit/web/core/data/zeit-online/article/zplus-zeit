@@ -50,6 +50,7 @@
     <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/kultur/film/2014-12/15a48f2c-82b0-4136-b4aa-ad3f57ff2fa0.tmp</attribute>
     <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEI</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">DIE ZEIT</attribute>
     <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">980d578641cd444aa69700ed11b21d63</attribute>
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="push_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
@@ -64,8 +65,8 @@
     <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">article</attribute>
     <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
     <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:21da7127-f585-49ed-b4c6-200c7a1f7fea}</attribute>
-    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">49</attribute>
-    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">5</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
     <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
