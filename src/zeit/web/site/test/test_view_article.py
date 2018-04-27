@@ -893,7 +893,7 @@ def test_article_doesnt_show_modified_date(testbrowser):
 
 
 def test_video_in_article_is_there(testbrowser):
-    article = testbrowser('/zeit-online/article/zeit')
+    article = testbrowser('/zeit-online/article/video-ads')
     assert len(article.cssselect('.video-player__videotag')) == 1
 
 
