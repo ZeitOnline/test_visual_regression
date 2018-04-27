@@ -1632,7 +1632,7 @@ def test_article_byline_is_displayed_completely(testbrowser):
 
 
 def test_video_in_article_has_poster_copyright(testbrowser):
-    browser = testbrowser('/zeit-online/article/zeit')
+    browser = testbrowser('/zeit-online/article/video')
     video = browser.cssselect('figure[data-video-size]')[0]
     figure_copyright = video.cssselect('.figure__copyright')
     assert len(figure_copyright) == 1
