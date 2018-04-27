@@ -9,10 +9,10 @@ POSTDEPLOY
 ----------
 
 
-3.146.2 (unreleased)
+3.147 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- BUG-904: Decode obfuscated article date in ZEIT Arbeit
 
 
 3.146.1 (2018-04-26)
