@@ -498,34 +498,18 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
     # By.CSS_SELECTOR requires using a specific selector
     # instead of picking a WebElement from an iterable
     try:
-        WebDriverWait(driver, 2).until(
-            expected_conditions.visibility_of(featured_nav_item))
-    except TimeoutException:
-        assert False, 'Featured item must be visible'
-
-    try:
-        WebDriverWait(driver, 2).until(
+        WebDriverWait(driver, 1).until(
             expected_conditions.invisibility_of_element_located(
                 (By.CSS_SELECTOR,
                  nav_ressort_links + r'[href$="\/sport\/index"]')))
-        assert more_dropdown.is_displayed(), (
-            '[on tablet] more dropdown should be visible')
-        actions.move_to_element(more_dropdown).perform()
-        assert cloned_nav_item.is_displayed(), (
-            '[on tablet] chosen nav item should be visible'
-            ' in more-dropdown on :hover')
     except TimeoutException:
-        assert False, 'more menue must be invisible'
-
-    try:
-        WebDriverWait(driver, 2).until(
-            expected_conditions.visibility_of(more_dropdown))
-        more_dropdown.click()
-        assert cloned_nav_item.is_displayed(), (
-            '[on tablet] chosen nav item should be visible'
-            ' in more-dropdown on :hover')
-    except TimeoutException:
-        assert False, 'more_dropdown must be visible'
+        assert False, '[on tablet] chosen nav item should be hidden'
+    assert more_dropdown.is_displayed(), (
+        '[on tablet] more dropdown should be visible')
+    actions.move_to_element(more_dropdown).perform()
+    assert cloned_nav_item.is_displayed(), (
+        '[on tablet] chosen nav item should be visible'
+        ' in more-dropdown on :hover')
 
     # desktop
     driver.set_window_size(1000, 1024)

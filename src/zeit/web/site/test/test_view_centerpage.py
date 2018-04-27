@@ -14,6 +14,7 @@ import pyramid.testing
 import pytest
 import requests
 import zope.component
+import math
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
@@ -234,11 +235,12 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
 
     if screen_size[0] == 768:
         width = driver.execute_script(script)
-        assert int(helper.size.get('width')) == int(width * 0.72)
+
+        assert int(helper.size.get('width')) == math.ceil(width * 0.72)
 
     elif screen_size[0] == 1000:
         width = driver.execute_script(script)
-        assert int(helper.size.get('width')) == int(width * 0.6666)
+        assert int(helper.size.get('width')) == math.ceil(width * 0.6666)
 
 
 def test_main_teasers_should_be_rendered_correctly(testbrowser):

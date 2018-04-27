@@ -903,7 +903,6 @@ def test_gallery_provides_expected_webtrekk_string(
 def test_buzz_box_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     pathname = '/zeit-online/buzz-box'
-    pattern = 'stationaer.minor.1..buzz-box.{}|#buzz-box'
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('{}{}#debug-clicktracking'.format(testserver.url, pathname))
@@ -915,11 +914,10 @@ def test_buzz_box_provides_expected_webtrekk_string(
     except TimeoutException:
         assert False, 'buzz boxes must be present'
 
-    for header in driver.find_elements_by_class_name('buzz-box__heading'):
-        key = zeit.web.core.template.format_webtrekk(header.text)
-        driver.execute_script('arguments[0].click();', header)
-        tracking_data = driver.execute_script("return window.trackingData")
-        assert tracking_data == pattern.format(key)
+    driver.find_elements_by_class_name('buzz-box__heading')[2].click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data == 'stationaer.minor.1..buzz' \
+        '-box.meistkommentiert|#buzz-box'
 
 
 def test_check_product_id_campaign_paywall_webtrekk(testbrowser):

@@ -18,9 +18,9 @@ def test_nav_dropdowns_are_working_as_expected(
     flyout = driver.find_element_by_class_name('header__flyout')
 
     # desktop
-    driver.execute_script('arguments[0].click()', more)
+    more.click()
     assert more_list.is_displayed()
-    driver.execute_script('arguments[0].click()', dropdown)
+    dropdown.click()
     assert flyout.is_displayed()
 
     # mobile
