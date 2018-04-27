@@ -264,7 +264,6 @@ class Article(zeit.web.core.view.Content):
         # default values
         badge = {
             'cover': False,  # volume cover
-            'hide_source_label': False,  # state of source label
             'intro': '',  # intro text for article badge
             'link': None,  # link to archiv or exclusiv page
             'link_text': '',  # link text
@@ -293,7 +292,6 @@ class Article(zeit.web.core.view.Content):
 
                 if access != 'abo':
                     badge.update({
-                        'hide_source_label': True,
                         'intro': 'Aus der',
                         'link_text': self.volume.fill_template(
                             'ZEIT Nr. {name}/{year}'),
