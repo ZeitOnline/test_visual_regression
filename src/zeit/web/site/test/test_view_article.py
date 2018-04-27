@@ -341,18 +341,33 @@ def test_other_page_types_should_not_designate_meta_pagination(testbrowser):
     assert not browser.xpath('//head/link[@rel="next"]')
 
 
-def test_article_obfuscated_source_without_date_print_published():
+def test_article_obfuscated_source_with_date_print_published(dummy_request):
     content = mock.Mock()
     content.product.label = content.product.title = 'DIE ZEIT'
     content.product.show = 'issue'
     content.copyrights = ''
     content.volume = 1
     content.year = 2011
-    view = zeit.web.site.view_article.Article(
-        content, pyramid.testing.DummyRequest())
-    view.date_print_published = None
-    source = u'DIE ZEIT Nr.\u00A01/2011'
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    view.date_print_published = datetime.datetime(2011, 1, 6)
+    source = u'DIE ZEIT Nr.\u00A01/2011, 6. Januar 2011'
+    assert view.source_label == u'DIE ZEIT Nr.\u00A01/2011'
     assert view.obfuscated_source == base64.b64encode(source.encode('latin-1'))
+    assert view.unobfuscated_source == source
+
+
+def test_article_obfuscated_source_without_date_print_published(dummy_request):
+    content = mock.Mock()
+    content.product.label = content.product.title = 'DIE ZEIT'
+    content.product.show = 'issue'
+    content.copyrights = ''
+    content.volume = 1
+    content.year = 2011
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    view.date_print_published = None
+    assert view.source_label == u'DIE ZEIT Nr.\u00A01/2011'
+    assert not view.obfuscated_source
+    assert not view.unobfuscated_source
 
 
 def test_article_sharing_menu_should_hide_app_links_tablet_upwards(
