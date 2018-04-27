@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="volume">
+  <head>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2017-03-30T13:26:14.897102+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-01-28T07:00:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2017-06-30T13:03:01.984033+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2017-03-30T13:26:14.740286+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2017-03-30T13:26:15.353390+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Lesen Sie alle Artikel der Wochenzeitung DIE ZEIT aus der Ausgabe 05 des Jahres 2015 online.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-01-28T07:00:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.manager</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">volume</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:5957a434-c866-4d55-b311-ec80750a8bdd}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">5</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-04-27T09:55:04.771363+00:00</attribute>
+  </head>
+  <body>
+    <title>DIE ZEIT: Ausgabe 05 / 2015 | Archiv | ZEIT ONLINE</title>
+    <cluster area="id-00463c2c-b18b-41f2-a50b-7412aeff96bb" kind="solo">
+      <region hide-dupes="True" area="id-3bdcf13a-48ec-4e64-bcb5-5b6029c8f37f" kind="volume-header"/>
+    </cluster>
+    <cluster area="id-546ddf68-1b93-4169-a251-19cb8cae9615" kind="solo">
+      <region area="id-3a2dc654-7e80-4217-aa12-4c3a5d4b3620" kind="print-ressort" title="Politik">
+        <container cp:type="auto-teaser" module="zon-large" cp:__name__="id-10f1371d-62f7-4750-a3fa-1fd4ea7e7533"/>
+        <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-31ebf9c5-25c9-45d2-8d1d-1e7315e68519"/>
+        <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-a2c9b1b2-7ba2-4473-b424-e2b2deddd6e2"/>
+      </region>
+    </cluster>
+  </body>
+</centerpage>
