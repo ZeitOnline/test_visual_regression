@@ -5,7 +5,6 @@ import logging
 import babel.dates
 import zope.component
 
-from zeit.solr import query as lq
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.retresco.interfaces
