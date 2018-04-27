@@ -688,9 +688,7 @@ def test_volume_overview_teaser_provides_expected_webtrekk_string(
 
 
 def test_volume_teaser_in_article_provides_expected_webtrekk_string(
-        selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'volumepage_is_published', True)
+        selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(800, 600)
     driver.get('%s/zeit-online/article/zplus-zeit#debug-clicktracking'
@@ -711,9 +709,7 @@ def test_volume_teaser_in_article_provides_expected_webtrekk_string(
 
 
 def test_coverless_volume_teaser_in_article_provides_expected_webtrekk_string(
-        selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'volumepage_is_published', True)
+        selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(800, 600)
     driver.get('%s/zeit-online/article/zplus-zon#debug-clicktracking'

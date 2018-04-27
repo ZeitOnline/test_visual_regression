@@ -379,8 +379,8 @@ def test_campus_print_article_has_correct_meta_line(
     date = selenium_driver.find_element_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'10. Januar 2016')
-    assert source.text.strip() == u'DIE ZEIT Nr. 1/2015, 5. Mai 2015'
+    assert date.text == u'30. März 2017'
+    assert source.text == u'DIE ZEIT Nr. 14/2017, 30. März 2017'
 
 
 def test_campus_print_changed_article_has_correct_meta_line(
@@ -390,9 +390,9 @@ def test_campus_print_changed_article_has_correct_meta_line(
     dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert dates[0].text == u'10. Februar 2016, 10:39 Uhr'
-    assert dates[1].text == u'Editiert am 22. Februar 2016, 18:18 Uhr'
-    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
+    assert dates[0].text == u'30. März 2017, 11:13 Uhr'
+    assert dates[1].text == u'Editiert am 31. März 2017, 9:16 Uhr'
+    assert source.text == u'DIE ZEIT Nr. 14/2017, 30. März 2017'
 
 
 def test_campus_changed_article_has_correct_meta_line(
