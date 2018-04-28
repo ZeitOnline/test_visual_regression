@@ -282,7 +282,7 @@ class Article(zeit.web.core.view.Content):
                     'zplus': True
                 })
 
-            if self.volume:
+            if self.volume and self.volumepage_is_published:
                 badge.update({
                     'cover': self.volume.get_cover('printcover'),
                     'link': self.volume.fill_template(
