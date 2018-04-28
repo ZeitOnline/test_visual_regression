@@ -2204,10 +2204,9 @@ def test_article_should_not_include_itunes_smart_app_banner(testbrowser):
 def test_zplus_badge_has_no_link_if_volumes_unpublished(
         testbrowser, monkeypatch):
     monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'volumepage_is_published', False)
+        zeit.web.core.view_article.Article, 'volumepage_is_published', False)
     browser = testbrowser('/zeit-online/article/zplus-zeit')
-    assert len(browser.cssselect(
-        '.zplus-badge__link-text')) == 0
+    assert not browser.cssselect('.zplus-badge__link')
 
 
 def test_advertorial_has_no_home_button_as_pagination(testbrowser):

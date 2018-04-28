@@ -253,6 +253,12 @@ class Article(zeit.web.core.view.Content):
     def volume(self):
         return zeit.content.volume.interfaces.IVolume(self.context, None)
 
+    @zeit.web.reify
+    def volumepage_is_published(self):
+        cp = zeit.content.cp.interfaces.ICenterPage(self.volume, None)
+        pubinfo = zeit.cms.workflow.interfaces.IPublishInfo(cp, None)
+        return getattr(pubinfo, 'published', False)
+
     # this property returns all the information for the article header badge
     @zeit.web.reify
     def zplus_label(self):
