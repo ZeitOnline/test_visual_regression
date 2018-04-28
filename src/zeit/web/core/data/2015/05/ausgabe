@@ -32,6 +32,6 @@
   </head>
   <body/>
   <covers>
-    <cover href="http://xml.zeit.de/zeit-online/image/zeitcover/zeitcover-05-360x260.jpg" id="printcover" product_id="ZEI"/>
+    <cover href="http://xml.zeit.de/zeit-online/image/zeitcover" id="printcover" product_id="ZEI"/>
   </covers>
 </volume>

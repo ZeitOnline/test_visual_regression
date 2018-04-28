@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/2017/14/printcover/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2017-03-29T08:08:36.125765+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2017-03-29T08:08:36.177073+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.cruz</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2017-03-29T08:08:25.578758+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_images">zeitcover-05-360x260.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2017-03-29T08:08:36.125765+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2017-03-29T08:08:36.070231+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple/&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:352822d5-0241-4233-8ae1-9ea25ebbe0d8}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="nofollow">no</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2017-03-29T08:08:37Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 29 Mar 2017 08:08:37 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"fba0eb-1000-54bda15631717"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"> 0 ldap.cruzSecond-237 opaquelocktoken:54484892-3a17-47d8-8a43-d9a0025968e2 </attribute>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>
