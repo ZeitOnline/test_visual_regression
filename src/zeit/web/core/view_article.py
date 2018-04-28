@@ -269,6 +269,7 @@ class Article(zeit.web.core.view.Content):
 
         # default values
         badge = {
+            'show': False,  # show volume badge
             'cover': False,  # volume cover
             'intro': '',  # intro text for article badge
             'link': None,  # link to archiv or exclusiv page
@@ -282,14 +283,16 @@ class Article(zeit.web.core.view.Content):
 
             if access == 'abo':
                 badge.update({
+                    'show': True,
                     'link': '{}exklusive-zeit-artikel'.format(
                         self.request.route_url('home')),
                     'link_text': u'Exklusiv für Abonnenten',
                     'zplus': True
                 })
 
-            if self.volume and self.volumepage_is_published:
+            if self.volume:
                 badge.update({
+                    'show': True,
                     'cover': self.volume.get_cover('printcover'),
                     'link': self.volume.fill_template(
                         '%s{year}/{name}' % self.request.route_url('home')),
@@ -303,12 +306,19 @@ class Article(zeit.web.core.view.Content):
                             'ZEIT Nr. {name}/{year}'),
                     })
 
+                if not self.volumepage_is_published:
+                    badge.update({
+                        'link': None
+                    })
+
             if badge['link']:
                 badge['link'] += (
                     '?wt_zmc=fix.int.zonpme.zeitde.wall_abo.premium.packshot.'
                     'cover.{0}&utm_medium=fix&utm_source=zeitde_zonpme_int&utm'
                     '_campaign=wall_abo&utm_content=premium_packshot_cover_{0}'
                 ).format(self.product_id.lower())
+
+            if badge['show']:
                 return badge
             return False
         except:
