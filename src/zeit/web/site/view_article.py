@@ -5,7 +5,6 @@ import logging
 import babel.dates
 import zope.component
 
-from zeit.solr import query as lq
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.retresco.interfaces
@@ -99,6 +98,15 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def liveblog(self):
         return zeit.web.core.interfaces.ILiveblogInfo(self.context)
+
+    @zeit.web.reify
+    def date_last_published_semantic(self):
+        modified = super(Article, self).date_last_published_semantic
+        if self.liveblog.last_modified:
+            if not modified or modified < self.liveblog.last_modified:
+                return self.liveblog.last_modified
+
+        return modified
 
     @zeit.web.reify
     def advertising_in_article_body_enabled(self):
