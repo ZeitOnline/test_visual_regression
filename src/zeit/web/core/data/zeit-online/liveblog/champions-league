@@ -8,52 +8,9 @@
       <display_name>Oliver Fritsch</display_name>
     </author>
     <references>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/sport/2015-05/fc-barcelona-sturm-messi-suarez-neymar" year="2015" issue="18" ressort="Sport" contenttype="article" publication-date="" expires="" author="Constantin Eckner">
-        <supertitle>Champions League</supertitle>
-        <title>Der Teufelsdreier von Barça</title>
-        <text>Der FC Barcelona ist nicht mehr der Gegner, den die Bayern vor zwei Jahren überrannten. Er ist besser, stürmischer. Das liegt am einmaligen Trio Messi, Neymar und Suárez.</text>
-        <description>Der FC Barcelona ist nicht mehr der Gegner, den die Bayern vor zwei Jahren überrannten. Er ist besser, stürmischer. Das liegt am einmaligen Trio Messi, Neymar und Suárez.</description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/sport/2015-05/barcelona-messi-suarez-neymar/" type="jpg" title="Suarez Neymar und Messi" align="left" publication-date="" expires="">
-          <bu>Barcelonas Stürmer Suárez, Neymar und Messi</bu>
-          <copyright>© Lluis Gene</copyright>
-        </image>
-        <author href="http://xml.zeit.de/autoren/E/Constantin_Eckner/index" publication-date="" expires="">
-          <display_name>Constantin Eckner</display_name>
-        </author>
-      </reference>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/sport/2015-05/pep-guardiola-barcelona-champions-league" year="2015" issue="18" ressort="Sport" contenttype="article" publication-date="" expires="" author="Christian Spiller">
-        <supertitle>FC Bayern München</supertitle>
-        <title>Bis der Trainer heult</title>
-        <text>Bei der Rückkehr in sein Barcelona kommen Pep Guardiola die Tränen. An seiner Entschlossenheit zu gewinnen soll das aber nichts ändern.</text>
-        <description>Bei der Rückkehr in sein Barcelona kommen Pep Guardiola die Tränen. An seiner Entschlossenheit zu gewinnen soll das aber nichts ändern.</description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/sport/2015-05/guardiola-bayern-barcelona/" type="jpg" title="Guardiola Bayern Barcelona" align="left" publication-date="2015-05-06T07:40:35+00:00" expires="2015-08-06T07:40:37+00:00">
-          <bu>Zurück im Camp Nou: Guardiola auf der Pressekonferenz vor dem Halbfinale</bu>
-          <copyright>© Peter Kneffel / dpa</copyright>
-        </image>
-        <author href="http://xml.zeit.de/autoren/S/Christian_Spiller/index.xml" publication-date="" expires="">
-          <display_name>Christian Spiller</display_name>
-          <location>Barcelona</location>
-        </author>
-      </reference>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/sport/2015-05/bayern-muenchen-pep-guardiola-juergen-klopp-champions-league" year="2015" issue="18" ressort="Sport" serie="Eilenbergers Kabinenpredigt" contenttype="article" publication-date="" expires="" author="Wolfram Eilenberger">
-        <supertitle>Eilenbergers Kabinenpredigt</supertitle>
-        <title>Pep soll es machen wie Klopp</title>
-        <text>Warum im Halbfinale gegen Barcelona ausgerechnet die Spielphilosophie Jürgen Klopps über die Zukunft des FC Bayern entscheidet, erklärt unser neuer Fußballkolumnist.</text>
-        <description>Warum im Halbfinale gegen Barcelona ausgerechnet die Spielphilosophie Jürgen Klopps über die Zukunft des FC Bayern entscheidet, erklärt unser neuer Fußballkolumnist.</description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/sport/2015-05/guardiola-klopp/" type="jpg" title="Pep Guardiola (r) gratuliert Jürgen Klopp" alt="Pep Guardiola (r) gratuliert Jürgen Klopp" align="left" publication-date="2015-05-05T11:24:54+00:00" expires="2015-08-05T11:04:26+00:00">
-          <bu>Pep Guardiola und Jürgen Klopp</bu>
-          <copyright>© Jonas Güttler/dpa</copyright>
-        </image>
-        <author href="http://xml.zeit.de/autoren/E/Wolfram_Eilenberger/index.xml" publication-date="" expires="">
-          <display_name>Wolfram Eilenberger</display_name>
-        </author>
-      </reference>
+      <reference type="intern" href="http://xml.zeit.de/sport/2015-05/fc-barcelona-sturm-messi-suarez-neymar" />
+      <reference type="intern" href="http://xml.zeit.de/sport/2015-05/pep-guardiola-barcelona-champions-league" />
+      <reference type="intern" href="http://xml.zeit.de/sport/2015-05/bayern-muenchen-pep-guardiola-juergen-klopp-champions-league" />
     </references>
     <rankedTags>
       <tag uuid="dc176d0f-0f66-4618-be8d-6a3263bdf8f0" url_value="" type="Person">Pep Guardiola</tag>
