@@ -879,7 +879,7 @@ class MockSearch(object):
         return results
 
     def search(self, q, rows=10, **kw):
-        return pop_results(rows)
+        return self.pop_results(rows)
 
     def update_raw(self, xml, **kw):
         pass
