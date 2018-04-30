@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
-from contextlib import contextmanager
 import copy
 import json
 import logging
@@ -27,13 +26,11 @@ import pyramid.testing
 import pyramid_dogpile_cache2
 import pysolr
 import pytest
-import _pytest.logging
 import requests
 import selenium.webdriver
 import selenium.webdriver.firefox.firefox_binary
 import transaction
 import waitress
-import webob.multidict
 import webtest
 import wesgi
 import zope.browserpage.metaconfigure
