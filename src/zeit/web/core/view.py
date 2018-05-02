@@ -911,21 +911,12 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             return date.astimezone(self.timezone)
 
     @zeit.web.reify
-    def date_format(self):
-        if self.product_id in ('ZEI', 'ZMLB'):
-            return 'short'
-        return 'long'
-
-    @zeit.web.reify
     def show_date_format(self):
         if self.date_last_published_semantic:
             return 'long'
-        else:
-            return self.date_format
-
-    @zeit.web.reify
-    def show_date_format_seo(self):
-        return self.date_format
+        elif self.product_id in ('ZEI', 'ZMLB'):
+            return 'short'
+        return 'long'
 
     @zeit.web.reify
     def adwords(self):
