@@ -1,5 +1,5 @@
 {% if view.template == 'faq' %}
-<aside class="article-flexible-foc article__item article__item--wide">
+<aside class="article-flexible-toc article__item article__item--wide">
     <div class="article-flexible-toc__container">
         <h3 class="article-flexible-toc__headline" id="article-flexible-toc-label">
             Alle Fragen im Überblick:
@@ -12,15 +12,15 @@
                     {% if morequestions.append(True) %}{% endif %}
                 {% endif %}
                 <li class="article-flexible-toc__item article-flexible-toc__item--empty {% if morequestions %}article-flexible-toc__item--hide{% endif %}">
-                    <a class="article-flexible-toc__link js-scroll" href="#{{ subheading.text|format_faq }}">{{ subheading.text }}</a>
+                    <a class="article-flexible-toc__link js-scroll" href="{{ view.content_url}}#{{ subheading.text|format_faq }}" data-ct-label="{{ subheading.text }}">{{ subheading.text }}</a>
                 </li>
             {%- endfor -%}
             </ul>
             {% if morequestions %}
-                <div id="showall">
+                <a href="#article-flexible-toc-label" class="js-scroll" id="showall" data-ct-label="mehr anzeigen">
                     <div class="article-flexible-toc__fadeout"></div>
                     <div class="article-flexible-toc__showall">Mehr anzeigen</div>
-                </div>
+                </a>
             {% endif %}
         </div>
     </div>
@@ -28,15 +28,15 @@
 <script>
     document.getElementById('showall').onclick = function () {
         if (document.getElementById('showall')) {
-            // remove showall
-            var showall = document.getElementById('showall');
-            showall.parentNode.removeChild(showall);
-
             // show hidden elements
             var elements = document.getElementsByClassName('article-flexible-toc__item--hide');
             while (elements.length > 0) {
                 elements[0].classList.remove('article-flexible-toc__item--hide');
             }
+
+            // remove showall
+            var showall = document.getElementById('showall');
+            showall.classList.add('article-flexible-toc__item--hide');
         }
     }
 </script>
