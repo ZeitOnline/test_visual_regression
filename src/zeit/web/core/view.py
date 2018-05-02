@@ -1025,13 +1025,11 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
     @zeit.web.reify
     def unobfuscated_source(self):
         if self.context.product and self.context.product.show == 'issue':
-            if self.source_label:
-                label = self.source_label
-                if self.date_print_published:
-                    label += ', ' + babel.dates.format_date(
-                        self.date_print_published,
-                        "d. MMMM yyyy", locale="de_De")
-                return label
+            if self.source_label and self.date_print_published:
+                return u'{}, {}'.format(
+                    self.source_label,
+                    babel.dates.format_date(self.date_print_published,
+                                            "d. MMMM yyyy", locale="de_De"))
 
     @zeit.web.reify
     def webtrekk(self):
