@@ -721,7 +721,8 @@ def test_podcast_header_should_provide_podlove_data(application):
 def test_podcast_should_show_podcast_links(testbrowser):
     browser = testbrowser('/zeit-online/article/podcast-header')
     podcast_links = browser.cssselect('.podcast-links__link')
+    assert len(podcast_links) == 4
     assert podcast_links[0].get('href') == 'http://xml.zeit.de/podcast/id1656'
     assert podcast_links[1].get('href') == 'http://xml.zeit.de/spotify_url'
-    # There's only two links, since no deezer url has been provided.
-    assert len(podcast_links) == 2
+    assert podcast_links[2].get('href') == 'http://xml.zeit.de/deezer_url'
+    assert podcast_links[3].get('href') == 'http://xml.zeit.de/alexa_url'
