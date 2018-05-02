@@ -13,7 +13,6 @@
     	{%- else -%}
     	{{ view.source_label }}
     	{%- endif -%}
-    	{%- if advertorial_byline %} {{ advertorial_byline }}{% endif -%}
     </span>
     {% endif %}
     <time itemprop="datePublished" content="{{ view.date_last_modified | format_date('iso8601') }}" datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="meta__date">
