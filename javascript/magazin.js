@@ -7,6 +7,7 @@ var $ = require( 'jquery' ),
     visibilityTracking = require( 'web.core/visibilityTracking' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
+    articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
     cards = require( 'web.magazin/cards' ),
     photocluster = require( 'web.magazin/photocluster' ),
@@ -24,14 +25,16 @@ clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
 cards.init();
-saveGetToCookie.init();
-zeit.clearQueue();
 
 if ( article ) {
+    articledate.init();
     comments.init();
     photocluster.init();
     visibilityTracking.init();
 }
+
+saveGetToCookie.init();
+zeit.clearQueue();
 
 // add required jQuery plugins
 require( 'velocity.ui' );

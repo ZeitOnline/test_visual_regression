@@ -40,7 +40,12 @@ import zeit.web.magazin.view
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
-    pass
+
+    @zeit.web.reify
+    def last_modified_wording(self):
+        if self.context.product and self.context.product.show == 'issue':
+            return 'editiert'
+        return 'zuletzt aktualisiert'
 
 
 @zeit.web.view_defaults(vertical='zmo')

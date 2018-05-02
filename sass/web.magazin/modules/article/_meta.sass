@@ -35,6 +35,11 @@
 			width: 100%
 			margin-top: remify(5px)
 
-// special case: JS-injected update time (http://localhost:9090/zeit-magazin/article/04) breaks the flex layout
-.meta__serie + span > br
-	display: none
+	&__date + &__date
+		display: block
+
+	// special case: update time (http://localhost:9090/zeit-magazin/article/04) breaks the flex layout
+	&__date--has-series:not(:empty)
+		display: inline
+		&:before
+			content: ' — '
