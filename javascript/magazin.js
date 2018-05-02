@@ -8,7 +8,6 @@ var $ = require( 'jquery' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
     comments = require( 'web.core/comments' ),
-    errors = require( 'web.magazin/errors' ),
     cards = require( 'web.magazin/cards' ),
     photocluster = require( 'web.magazin/photocluster' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
@@ -24,7 +23,6 @@ menu.init();
 clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
-errors.init();
 cards.init();
 saveGetToCookie.init();
 zeit.clearQueue();
