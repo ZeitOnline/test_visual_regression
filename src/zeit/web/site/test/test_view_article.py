@@ -2190,17 +2190,6 @@ def test_liveblog_article_uses_esi(selenium_driver, testserver):
     assert blog.is_displayed(), 'ESI Liveblog not displayed'
 
 
-def test_article_can_include_optimizely(testbrowser):
-    browser = testbrowser('/zeit-online/article/simple')
-    assert 'optimizely' not in browser.contents
-
-    optimizely_url = '//cdn.optimizely.com/js/281825380.js'
-    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['optimizely_on_zon_article'] = optimizely_url
-    browser = testbrowser('/zeit-online/article/simple')
-    assert optimizely_url in browser.contents
-
-
 def test_zplus_badge_is_zeit_on_print_insert(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit-geld-print-insert')
     assert len(browser.cssselect(

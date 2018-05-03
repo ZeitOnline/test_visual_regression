@@ -2977,17 +2977,6 @@ def test_gallery_teaser_handles_articles_with_inline_galleries(testbrowser):
     assert counter.text == '7 Fotos'
 
 
-def test_centerpage_can_include_optimizely(testbrowser):
-    browser = testbrowser('/zeit-online/slenderized-centerpage')
-    assert 'optimizely' not in browser.contents
-
-    optimizely_url = '//cdn.optimizely.com/js/281825380.js'
-    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['optimizely_on_zon_centerpage'] = optimizely_url
-    browser = testbrowser('/zeit-online/slenderized-centerpage')
-    assert optimizely_url in browser.contents
-
-
 def test_ressortpage_returns_is_ressortpage_correctly(
         application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')

@@ -8,6 +8,8 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
+- remove `optimizely` from settings in vivi xml
+
 
 3.147 (unreleased)
 --------------------
