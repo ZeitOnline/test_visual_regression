@@ -355,11 +355,11 @@ def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
 
     host = browser.host.replace('http://', '')
     assert ('wt.contentId = "redaktion.zeit-magazin..toedlichekeime'
-            '.article.zei|{}/zeit-magazin/article/06";'
+            '.article.zede|{}/zeit-magazin/article/06";'
             .format(host)) in webtrekk_config
     assert u'6: "tödlichekeime",' in webtrekk_config
 
-    assert ('redaktion.zeit-magazin..toedlichekeime.article.zei%7C'
+    assert ('redaktion.zeit-magazin..toedlichekeime.article.zede%7C'
             '{}/zeit-magazin/article/06,0,0,0,0,0,0,0,0'
             .format(urllib.quote(host))) in source
 
@@ -454,39 +454,53 @@ def test_article_has_correct_page_meta_keywords(testbrowser):
         ' Toskana, Bologna, Bozen, Florenz, Tübingen">' in browser.contents
 
 
-def test_article08_has_correct_date(testbrowser):
+def test_print_article_has_correct_date(testbrowser):
     # not updated print article
     browser = testbrowser('/zeit-magazin/article/08')
-    date = browser.cssselect('.meta__date')[0].text
-    assert date.strip() == '19. Februar 2014'
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == '19. Februar 2014'
+    assert not dates[1].text
 
 
-def test_article09_has_correct_date(testbrowser):
+def test_modified_print_article_has_correct_date(testbrowser):
     # updated print article
     browser = testbrowser('/zeit-magazin/article/09')
-    date = browser.cssselect('.meta__date')[0].text
-    assert date.strip() == u'4. März 2014, 14:35 Uhr'
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == u'4. März 2014, 14:35 Uhr'
+    assert dates[1].text == u'editiert am 4. März 2014, 14:35 Uhr'
 
 
-def test_article03_has_correct_date(testbrowser):
+def test_article_has_correct_date(testbrowser):
     # not updated online article
     browser = testbrowser('/zeit-magazin/article/03')
-    date = browser.cssselect('.meta__date')[0].text
-    assert date.strip() == '30. Juli 2013, 17:20 Uhr'
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == '30. Juli 2013, 17:20 Uhr'
+    assert not dates[1].text
 
 
-def test_article10_has_correct_date(testbrowser):
+def test_modified_article_has_correct_date(testbrowser):
     # updated online article
     browser = testbrowser('/zeit-magazin/article/10')
-    date = browser.cssselect('.meta__date')[0].text
-    assert date.strip() == '20. Februar 2014, 17:59 Uhr'
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == '20. Februar 2014, 17:59 Uhr'
+    assert dates[1].text == (
+        'zuletzt aktualisiert am 20. Februar 2014, 17:59 Uhr')
 
 
-def test_article05_has_correct_date(testbrowser):
-    # longform
-    browser = testbrowser('/zeit-magazin/article/05')
-    date = browser.cssselect('.meta__date')[0].text
-    assert date.strip() == '3. November 2013'
+def test_longform_article_has_correct_date(testbrowser):
+    # not updated longform
+    browser = testbrowser('/zeit-magazin/article/06')
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == '24. Oktober 2013'
+    assert not dates[1].text
+
+
+def test_modified_longform_article_has_correct_date(testbrowser):
+    # updated longform
+    browser = testbrowser('/zeit-magazin/article/07')
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == '3. November 2013'
+    assert dates[1].text == 'editiert am 3. November 2013, 8:10 Uhr'
 
 
 def test_print_article_has_no_last_changed_date(testbrowser):

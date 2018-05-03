@@ -376,16 +376,42 @@ def test_modified_print_article_has_correct_meta_line(
     assert source[0].get_attribute('textContent') == u'ZEITmagazin Nr. 26/2008'
 
 
+def test_longform_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/zeit-magazin/article/06'.format(testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.meta__date')
+    source = selenium_driver.find_elements_by_css_selector('.meta__source')
+
+    assert dates[0].get_attribute('textContent') == '24. Oktober 2013'
+    assert dates[0].get_attribute('datetime') == '2013-10-24T08:00:00+02:00'
+    assert not dates[1].text
+    assert dates[1].get_attribute('datetime') == '2013-10-24T08:00:00+02:00'
+    assert not source
+
+
 def test_modified_longform_article_has_correct_meta_line(
         testserver, selenium_driver):
     selenium_driver.get('{}/zeit-magazin/article/07'.format(testserver.url))
     dates = selenium_driver.find_elements_by_css_selector('.meta__date')
     source = selenium_driver.find_elements_by_css_selector('.meta__source')
 
-    assert dates[0].get_attribute('textContent') == (
-        '24. Oktober 2013, 8:00 Uhr')
+    assert dates[0].get_attribute('textContent') == '24. Oktober 2013'
     assert dates[0].get_attribute('datetime') == '2013-11-03T08:10:00+01:00'
     assert dates[1].get_attribute('textContent') == (
         'editiert am 3. November 2013, 8:10 Uhr')
     assert dates[1].get_attribute('datetime') == '2013-11-03T08:10:00+01:00'
     assert source[0].get_attribute('textContent') == u'DIE ZEIT Nr. 44/2013'
+
+
+def test_gallery_has_correct_meta_line(selenium_driver, testserver):
+    selenium_driver.get('{}/galerien/fs-desktop-schreibtisch-computer'.format(
+        testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.meta__date')
+    source = selenium_driver.find_elements_by_css_selector('.meta__source')
+
+    assert dates[0].get_attribute('textContent') == '2. April 2014, 17:30 Uhr'
+    assert dates[0].get_attribute('datetime') == '2014-04-03T16:17:49+02:00'
+    assert dates[1].get_attribute('textContent') == (
+        'zuletzt aktualisiert am 3. April 2014, 16:17 Uhr')
+    assert dates[1].get_attribute('datetime') == '2014-04-03T16:17:49+02:00'
+    assert not source
