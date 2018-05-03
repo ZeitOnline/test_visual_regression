@@ -5,7 +5,6 @@ import logging
 import babel.dates
 import zope.component
 
-from zeit.solr import query as lq
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.retresco.interfaces
@@ -84,12 +83,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return atoms[-3:]
         else:
             return atoms[pos - 1:pos + 2]
-
-    @zeit.web.reify
-    def volumepage_is_published(self):
-        cp = zeit.content.cp.interfaces.ICenterPage(self.volume, None)
-        pubinfo = zeit.cms.workflow.interfaces.IPublishInfo(cp, None)
-        return getattr(pubinfo, 'published', False)
 
     @zeit.web.reify
     def liveblog(self):

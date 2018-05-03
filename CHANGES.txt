@@ -18,6 +18,8 @@ POSTDEPLOY
   /digital/internet/2017-11/firefox-quantum-browser-test-vergleich-google-chrome
   /digital/internet/2018-04/adblocker-urteil-bgh-springer-adblock-plus
 
+- ZON-4551: Always show article source
+
 - BUG-904: Decode obfuscated article date in ZEIT Arbeit
 
 - BUG-908: Prevent rendering Unicode-Icon as Emoji
