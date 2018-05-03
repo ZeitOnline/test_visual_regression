@@ -34,7 +34,7 @@
             **/
             // variables always first
             var experiments, expVarName, out = "", data = window.gaData;
-            // check for optimizely object moved to top level
+            // check for optimize object moved to top level
             if (typeof data[property] !== 'undefined' && data[property].experiments !== 'undefined') {
                 experiments = data[property].experiments;
                 for (var key in experiments) {

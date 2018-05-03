@@ -8,6 +8,8 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
+- remove `optimizely` from settings in vivi xml
+
 
 3.147 (unreleased)
 --------------------
@@ -21,6 +23,8 @@ POSTDEPLOY
 - BUG-904: Decode obfuscated article date in ZEIT Arbeit
 
 - BUG-908: Prevent rendering Unicode-Icon as Emoji
+
+- MAINT: Remove Optimizely
 
 
 3.146.1 (2018-04-26)
