@@ -972,7 +972,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
     def obfuscated_date(self):
         if self.last_modified_label:
             date = zeit.web.core.template.format_date(
-                self.date_first_released, 'long')
+                self.date_first_released, self.show_date_format)
             return base64.b64encode(date.encode('latin-1'))
 
     @zeit.web.reify
