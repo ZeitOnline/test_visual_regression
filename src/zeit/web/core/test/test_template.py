@@ -425,6 +425,21 @@ def test_get_svg_without_package_should_be_empty_str(application):
     assert svg == ''
 
 
+def test_get_svg_from_file_can_remove_title(application):
+    name = 'follow-newsletter'
+    class_name = 'follow-newsletter'
+    package = 'zeit.web.site'
+    a11y = False
+    cleanup = True
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, class_name, package, cleanup, a11y, remove_title=False)
+    assert '<title>' in svg
+
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, class_name, package, cleanup, a11y, remove_title=True)
+    assert '<title>' not in svg
+
+
 def test_zplus_is_false_for_free_articles(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/all-blocks')
