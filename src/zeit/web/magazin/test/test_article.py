@@ -503,29 +503,6 @@ def test_modified_longform_article_has_correct_date(testbrowser):
     assert dates[1].text == 'editiert am 3. November 2013, 8:10 Uhr'
 
 
-def test_print_article_has_no_last_changed_date(testbrowser):
-    # print articles should omit the last semantic change date
-    article = testbrowser('/zeit-magazin/article/01').contents
-    assert '26. September 2013<span>editiert' not in article
-
-
-def test_online_article_has_last_changed_date(selenium_driver, testserver):
-    # online articles should include the last semantic change date
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/article/10' % testserver.url)
-    meta_date = driver.find_element_by_class_name("meta__date")
-    assert 'ZULETZT AKTUALISIERT AM 20. FEBRUAR 2014, '\
-        '17:59 UHR' in meta_date.text
-
-
-def test_gallery_has_last_changed_date(selenium_driver, testserver):
-    # galleries should include the last semantic change date
-    driver = selenium_driver
-    driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
-    meta_date = driver.find_element_by_class_name("meta__date")
-    assert 'ZULETZT AKTUALISIERT AM 3. APRIL 2014, 16:17 UHR' in meta_date.text
-
-
 def test_article03_has_no_source(testbrowser):
     # zon source
     browser = testbrowser('/zeit-magazin/article/03')
