@@ -235,12 +235,11 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
 
     if screen_size[0] == 768:
         width = driver.execute_script(script)
-
-        assert int(helper.size.get('width')) == math.ceil(width * 0.72)
+        assert int(helper.size.get('width')) == int(math.ceil(width * 0.72))
 
     elif screen_size[0] == 1000:
         width = driver.execute_script(script)
-        assert int(helper.size.get('width')) == math.ceil(width * 0.6666)
+        assert int(helper.size.get('width')) == int(math.ceil(width * 0.6666))
 
 
 def test_main_teasers_should_be_rendered_correctly(testbrowser):
@@ -1653,7 +1652,7 @@ def test_studiumbox_changes_tabs(selenium_driver, testserver):
 
 def test_studiumbox_interessentest_works(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     box.find_elements_by_tag_name('h2')
@@ -1671,7 +1670,7 @@ def test_studiumbox_interessentest_works(selenium_driver, testserver):
 
 def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     links = box.find_elements_by_tag_name('h2')
@@ -1694,7 +1693,7 @@ def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
 
 def test_studiumbox_ranking_works(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     links = box.find_elements_by_tag_name('h2')
@@ -1719,7 +1718,7 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
 
 def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     link = box.find_elements_by_tag_name('h2')[2].find_element_by_tag_name('a')

@@ -81,7 +81,7 @@ def test_url_of_image_groups_is_suffixed_with_mobile_on_small_browser_size(
 def test_url_of_image_groups_is_suffixed_with_desktop_on_big_browser_size(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/article/01' % testserver.url)
     try:
         body_image = WebDriverWait(driver, 2).until(
