@@ -3,23 +3,13 @@
 	margin-top: remify(30px)
 	+respond-max($break-tablet-min)
 		padding: remify(0 20px)
-
 	&__title
 		margin: 0 0 remify(6px) 0
-		&:before
-			+font-smoothing
-			background-color: $zon-charcoal
-			border-radius: 50%
-			color: $white
-			content: "\2139"
-			display: inline-block
-			height: rem(16px)
-			line-height: 0.8
-			margin-right: rem(5px)
-			position: relative
-			top: rem(-2px)
-			text-align: center
-			width: rem(16px)
+	&__title-icon
+		color: currentColor
+		height: 1em
+		margin-bottom: remify(-1px)
+		width: 1em
 	&__text
 		color: $zon-grey
 		font-size: remify(15px)
