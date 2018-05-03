@@ -25,8 +25,8 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/angebote/zeit-shop-buehne/index</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
