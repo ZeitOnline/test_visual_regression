@@ -10,7 +10,9 @@
         {%- include "zeit.web.core:templates/inc/article/page.html" -%}
         {%- if view.news_type == 'dpa' or view.news_type == 'afp' -%}
             <aside class="article-notice article__item">
-                <h2 class="article-notice__title">Hinweis</h2>
+                <h2 class="article-notice__title">
+                {{ lama.use_svg_icon('info', 'article-notice__title-icon', 'zeit.web.site', a11y=False) }}
+                Hinweis</h2>
                 <p class="article-notice__text">
                     {%- if view.news_type == 'dpa' -%}
                          Diese Meldung ist Teil des automatisierten Nachrichten-Feeds der Deutschen Presse-Agentur (dpa).
