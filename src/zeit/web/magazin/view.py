@@ -99,6 +99,15 @@ class Base(zeit.web.core.view.Base):
         return 'ZEITmagazin'
 
 
+class Content(zeit.web.core.view.Content, Base):
+
+    @zeit.web.reify
+    def last_modified_wording(self):
+        if self.context.product and self.context.product.show == 'issue':
+            return 'editiert'
+        return 'zuletzt aktualisiert'
+
+
 @zeit.web.view_config(
     route_name='login_state',
     renderer='templates/inc/navigation/login-state.html',
