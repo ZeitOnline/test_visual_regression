@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - ZON-4551: Always show article source
 
+- ZON-4631: Adjust modified date for article with liveblog
+
 - BUG-904: Decode obfuscated article date in ZEIT Arbeit
 
 - BUG-908: Prevent rendering Unicode-Icon as Emoji
