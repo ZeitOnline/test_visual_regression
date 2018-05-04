@@ -32,6 +32,8 @@
     "id": 1656,
     "intro_outro_files": [],
     "itunes_id": 1656,
+    "alexa_url": "http://xml.zeit.de/alexa_url",
+    "deezer_url": "http://xml.zeit.de/deezer_url",
     "spotify_url": "http://xml.zeit.de/spotify_url",
     "keywords": [],
     "language": "en",
