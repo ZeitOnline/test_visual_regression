@@ -6,6 +6,7 @@ import babel.dates
 import zope.interface
 
 import zeit.web
+import zeit.web.core.article
 import zeit.web.core.interfaces
 import zeit.web.core.template
 
@@ -37,6 +38,11 @@ def mod_date(resource):
         modified = pub_info.date_last_published_semantic
         released = pub_info.date_first_released
         tz = babel.dates.get_timezone('Europe/Berlin')
+        if zeit.web.core.article.ILiveblogArticle.providedBy(resource):
+            liveblog = zeit.web.core.interfaces.ILiveblogInfo(resource)
+            if liveblog.last_modified:
+                if not modified or modified < liveblog.last_modified:
+                    return liveblog.last_modified
         # use 60s of tolerance before displaying a modification date
         if (released and modified and
                 modified - released > datetime.timedelta(seconds=60)):
