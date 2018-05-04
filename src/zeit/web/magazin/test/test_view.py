@@ -286,48 +286,6 @@ def test_article05_has_set_text_length(application):
     assert article_view.text_length is not None
 
 
-def test_article05_has_correct_dates(application):
-    # updated article
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.date_last_published_semantic.isoformat() == (
-        '2013-11-03T08:10:00.626737+01:00')
-    assert article_view.date_first_released.isoformat() == (
-        '2013-10-24T08:00:00+02:00')
-    assert article_view.date_last_modified.isoformat() == (
-        '2013-11-03T08:10:00.626737+01:00')
-
-
-def test_article03_has_correct_dates(application):
-    # not updated article
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/03')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.date_first_released.isoformat() == (
-        '2013-07-30T17:20:50.176115+02:00')
-    assert article_view.date_last_modified.isoformat() == (
-        '2013-07-30T17:20:50.176115+02:00')
-
-
-def test_article09_has_correct_date_formats(application):
-    # print article, updated
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/09')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.show_date_format == 'long'
-    assert article_view.show_date_format_seo == 'short'
-
-
-def test_article10_has_correct_date_formats(application):
-    # online article, updated
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/10')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.show_date_format == 'long'
-    assert article_view.show_date_format_seo == 'long'
-
-
 def test_article08_has_first_author(application):
     xml = 'http://xml.zeit.de/zeit-magazin/article/08'
     context = zeit.cms.interfaces.ICMSContent(xml)

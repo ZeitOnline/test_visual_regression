@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - MAINT: Upgrade Selenium
 
+- MAINT: Use core function to obfuscate ZMO article date
+
 
 3.147 (2018-05-03)
 ------------------

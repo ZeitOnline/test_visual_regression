@@ -9,7 +9,8 @@ import zeit.web.magazin.view
     context=zeit.content.gallery.interfaces.IGallery,
     vertical='zmo',
     renderer='templates/gallery.html')
-class Gallery(zeit.web.core.view_gallery.Gallery, zeit.web.magazin.view.Base):
+class Gallery(zeit.web.core.view_gallery.Gallery,
+              zeit.web.magazin.view.Content):
 
     header_layout = 'gallery'
 
