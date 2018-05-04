@@ -28,7 +28,6 @@ import pysolr
 import pytest
 import requests
 import selenium.webdriver
-import selenium.webdriver.firefox.firefox_binary
 import transaction
 import waitress
 import webtest

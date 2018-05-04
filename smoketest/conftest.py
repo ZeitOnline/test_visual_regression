@@ -9,7 +9,8 @@ import lxml.html
 import pytest
 import requests
 import selenium.webdriver
-import selenium.webdriver.firefox.firefox_binary
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
 
 
 TESTCONFIG_STAGING = {
@@ -33,52 +34,56 @@ TESTCONFIG_PRODUCTION = {
 }
 
 
+def pytest_addoption(parser):
+    parser.addoption("--visible", action="store_true",
+                     default=False, help="Show browser when running tests")
+
+
 @pytest.fixture(scope='session')
 def config():
     environment = os.environ.get('ZEIT_WEB_SMOKETESTS', 'STAGING')
     return globals()['TESTCONFIG_%s' % environment]
 
-
+# 'chrome': selenium.webdriver.Chrome
+# needs Chromedriver, install via brew install chromedriver
+# or from https://sites.google.com/a/chromium.org/chromedriver/downloads
+# Also needs Chrome or Chromium, if you use chromium,
+# set path to Chromium in envorinment variable `ZEIT_WEB_CHROMIUM_BINARY`
 BROWSERS = {
-    'firefox': selenium.webdriver.Firefox,
+     'chrome': selenium.webdriver.Chrome,
 }
+
+
+def pytest_collection_modifyitems(items):
+    """Mark all selenium tests by use of fixture selenium_driver
+    to run only selenium test by invoking pytest -m selenium"""
+    for item in items:
+        try:
+            fixtures = item.fixturenames
+            if 'selenium_driver' in fixtures:
+                item.add_marker(pytest.mark.selenium)
+        except:
+            pass
 
 
 # XXX copy&paste from zeit.web.conftest, so we're independent of zeit.web and
 # its dependencies.
 @pytest.fixture(scope='session', params=BROWSERS.keys())
+@pytest.fixture(scope='session', params=BROWSERS.keys())
 def selenium_driver(request):
-    if request.param == 'firefox':
-        parameters = {}
-        profile = selenium.webdriver.FirefoxProfile(
-            os.environ.get('ZEIT_WEB_FF_PROFILE'))
-        profile.default_preferences.update({
-            'network.http.use-cache': False,
-            'browser.startup.page': 0,
-            'browser.startup.homepage_override.mstone': 'ignore'})
-        profile.update_preferences()
-        parameters['firefox_profile'] = profile
-        # Old versions: <https://ftp.mozilla.org/pub/firefox/releases/>
-        ff_binary = os.environ.get('ZEIT_WEB_FF_BINARY')
-        if ff_binary:
-            parameters['firefox_binary'] = (
-                selenium.webdriver.firefox.firefox_binary.FirefoxBinary(
-                    ff_binary))
-        browser = BROWSERS[request.param](**parameters)
-    else:
-        browser = BROWSERS[request.param]()
+    parameters = {}
+    if request.param == 'chrome':
+        opts = Options()
+        if not request.config.getoption('--visible'):
+            opts.add_argument('headless')
+        opts.add_argument('disable-gpu')
+        opts.add_argument('window-size=1200x800')
+        chromium_binary = os.environ.get('ZEIT_WEB_CHROMIUM_BINARY')
+        if chromium_binary:
+            opts.binary_location = chromium_binary
+        parameters['chrome_options'] = opts
+    browser = BROWSERS[request.param](**parameters)
     request.addfinalizer(lambda *args: browser.quit())
-
-    timeout = int(os.environ.get('ZEIT_WEB_FF_TIMEOUT', 30))
-    original_get = browser.get
-
-    def get_and_wait_for_body(self, *args, **kw):
-        result = original_get(*args, **kw)
-        WebDriverWait(self, timeout).until(
-            ec.presence_of_element_located((By.TAG_NAME, "body")))
-        return result
-    browser.get = get_and_wait_for_body.__get__(browser)
-
     return browser
 
 
