@@ -14,7 +14,7 @@ POSTDEPLOY
 3.148 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4621: Show alexa link in podcast footer
 
 
 3.147 (2018-05-03)
