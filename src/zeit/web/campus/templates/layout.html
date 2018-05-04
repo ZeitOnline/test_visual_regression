@@ -34,6 +34,7 @@
     {% endif %}
 
     {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
+    {% block babator_include %}{% endblock %}
 </head>
 <body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
