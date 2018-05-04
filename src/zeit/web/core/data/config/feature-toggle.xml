@@ -26,7 +26,7 @@
   <ligatus_on_magazin>false</ligatus_on_magazin>
   <ligatus_on_site>false</ligatus_on_site>
 
-  <optimize_ab_testing>false</optimize_ab_testing>
+  <optimize_ab_testing_to_webtrekk>false</optimize_ab_testing_to_webtrekk>
   <podlove_button>true</podlove_button>
   <preload_webfonts>true</preload_webfonts>
   <rawr_iframe>true</rawr_iframe>

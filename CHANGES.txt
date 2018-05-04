@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - remove `optimizely` from settings in vivi xml
 
+- rename `optimize_ab_testing` to `optimize_ab_testing_to_webtrekk` in feature toggles. value = false.
+
 
 3.147 (unreleased)
 --------------------
