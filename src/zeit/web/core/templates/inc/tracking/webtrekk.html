@@ -1,9 +1,5 @@
 {% if toggles('third_party_modules') -%}
 
-{% if toggles('optimize_ab_testing') -%}
-    {% include "zeit.web.core:templates/inc/tracking/webtrekk_googleoptimize.html" %}
-{% endif -%}
-
 {% include "zeit.web.core:templates/inc/tracking/webtrekk_script.html" %}
 <script>
 
