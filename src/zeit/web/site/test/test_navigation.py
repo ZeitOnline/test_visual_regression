@@ -9,6 +9,7 @@ import selenium.webdriver
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -373,10 +374,15 @@ def test_nav_search_is_working_as_expected(
             assert False, 'Input must be visible'
 
     # test if search form gets submitted
-    search__input.send_keys('test')
-    search__button.click()
-
-    assert driver.current_url.endswith('/zeit-online/zeitonline?q=test')
+    old_page = driver.find_element_by_tag_name('html')
+    stale = expected_conditions.staleness_of(old_page)
+    driver.execute_script('arguments[0].value="test"', search__input)
+    driver.execute_script('arguments[0].click()', search__button)
+    try:
+        WebDriverWait(driver, 20).until(stale)
+        assert driver.current_url.endswith('/zeit-online/zeitonline?q=test')
+    except TimeoutException:
+        assert False, 'Search page not visited'
 
 
 def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):

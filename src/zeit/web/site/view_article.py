@@ -85,13 +85,17 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return atoms[pos - 1:pos + 2]
 
     @zeit.web.reify
-    def include_optimizely(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('optimizely_on_zon_article', None)
-
-    @zeit.web.reify
     def liveblog(self):
         return zeit.web.core.interfaces.ILiveblogInfo(self.context)
+
+    @zeit.web.reify
+    def date_last_published_semantic(self):
+        modified = super(Article, self).date_last_published_semantic
+        if self.liveblog.last_modified:
+            if not modified or modified < self.liveblog.last_modified:
+                return self.liveblog.last_modified
+
+        return modified
 
     @zeit.web.reify
     def advertising_in_article_body_enabled(self):
