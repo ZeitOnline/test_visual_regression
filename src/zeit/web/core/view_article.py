@@ -396,6 +396,16 @@ class Article(zeit.web.core.view.Content):
     def has_series_attached(self):
         return getattr(self.context, 'serie', None)
 
+    @zeit.web.reify
+    def contains_video(self):
+        for nr, page in enumerate(self.pages, start=1):
+            for block in page:
+                block_type = zeit.web.core.template.block_type(block)
+                if block_type == 'video' and not (
+                    block.video is None or zeit.web.core.template.expired(
+                        block.video)):
+                            return True
+
 
 class AcceleratedMobilePageArticle(Article):
 
