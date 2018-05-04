@@ -11,8 +11,14 @@ POSTDEPLOY
 - remove `optimizely` from settings in vivi xml
 
 
-3.147 (unreleased)
---------------------
+3.148 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.147 (2018-05-03)
+------------------
 
 - ZON-4600: Set C1 adblocker headers on specific test articles
   /digital/internet/2017-11/firefox-quantum-browser-test-vergleich-google-chrome
