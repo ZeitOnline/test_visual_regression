@@ -4,6 +4,9 @@
   "description": "zeit web component",
   "license": "UNLICENSED",
   "private": true,
+  "engines": {
+    "node": "<10.0.0"
+  },
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "7.2.3",
