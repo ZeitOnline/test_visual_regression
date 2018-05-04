@@ -14,7 +14,6 @@ import pyramid.testing
 import pytest
 import requests
 import zope.component
-import math
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
@@ -219,27 +218,6 @@ def test_fullwidth_teaser_image_should_use_desktop_variant_on_desktop(
     assert '/cinema__' in img.get_attribute('currentSrc'), \
         'wide image variant should be used on mobile devices'
     assert 2.3 < ratio < 2.4, 'desktop cinema ratio should be 7:3-ish'
-
-
-def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
-    teaser = driver.find_element_by_class_name('teaser-fullwidth')
-    helper = driver.find_element_by_class_name('teaser-fullwidth__container')
-    script = 'return document.documentElement.clientWidth'
-
-    assert teaser.is_displayed(), 'Fullwidth teaser missing'
-    assert helper.is_displayed(), 'Fullwidth teaser container missing'
-
-    if screen_size[0] == 768:
-        width = driver.execute_script(script)
-        assert int(helper.size.get('width')) == int(math.ceil(width * 0.72))
-
-    elif screen_size[0] == 1000:
-        width = driver.execute_script(script)
-        assert int(helper.size.get('width')) == int(math.ceil(width * 0.6666))
 
 
 def test_main_teasers_should_be_rendered_correctly(testbrowser):
