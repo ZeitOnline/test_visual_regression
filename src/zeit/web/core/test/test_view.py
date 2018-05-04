@@ -683,6 +683,7 @@ def test_user_name_and_email_are_displayed_correctly(
     driver.add_cookie({
         'name': 'my_sso_cookie',
         'value': 'just be present',
+        'path': '/',
     })
     # check if user email is displayed if no name provided
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
@@ -715,6 +716,7 @@ def test_notification_after_account_confirmation_renders_correctly(
     driver.add_cookie({
         'name': 'my_sso_cookie',
         'value': 'just be present',
+        'path': '/',
     })
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
         get_user.return_value = {
@@ -748,6 +750,7 @@ def test_notification_after_account_change_renders_correctly(
     driver.add_cookie({
         'name': 'my_sso_cookie',
         'value': 'just be present',
+        'path': '/',
     })
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
         get_user.return_value = {
@@ -771,6 +774,7 @@ def test_notification_after_account_change_renders_correctly(
             assert url_hash not in driver.current_url
 
 
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
 def test_notification_renders_correctly_in_wrapper(
         testserver, selenium_driver):
     driver = selenium_driver
@@ -779,6 +783,7 @@ def test_notification_renders_correctly_in_wrapper(
     driver.add_cookie({
         'name': 'my_sso_cookie',
         'value': 'just be present',
+        'path': '/',
     })
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
         with mock.patch('zeit.web.core.view.Base.is_wrapped') as is_wrapped:
