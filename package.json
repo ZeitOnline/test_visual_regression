@@ -27,7 +27,7 @@
     "masonry-layout": "4.2.0",
     "mustache-loader": "^1.2.0",
     "modernizr": "3.5.0",
-    "node-sass": "4.7.2",
+    "node-sass": "4.9.0",
     "nodemon": "1.11.0",
     "normalize.css": "6.0.0",
     "npm-run-all": "4.0.2",

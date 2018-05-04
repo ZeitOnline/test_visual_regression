@@ -228,7 +228,7 @@ def test_amp_article_shows_volume_badge_for_registration(testbrowser):
     volume_badge = browser.cssselect('.zplus-badge')[0]
     volume_text = volume_badge.cssselect('.zplus-badge__text')[0]
 
-    assert volume_text.text.strip() == u'Aus der ZEIT Nr. 49/2014'
+    assert volume_text.text.strip() == u'Aus der ZEIT Nr. 05/2015'
     assert not volume_badge.cssselect('.zplus-badge__icon')
     assert volume_badge.cssselect('.zplus-badge__media')
 

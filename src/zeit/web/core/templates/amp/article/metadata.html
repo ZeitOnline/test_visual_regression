@@ -5,7 +5,7 @@
 
 {% if view.liveblog and view.liveblog.liveblog -%}
     <meta itemprop="coverageStartTime" content="{{ view.date_first_released | format_date('iso8601') }}">
-    <meta itemprop="coverageEndTime" content="{{ (view.liveblog.last_modified or view.date_last_modified) | format_date('iso8601') }}">
+    <meta itemprop="coverageEndTime" content="{{ (view.date_last_modified) | format_date('iso8601') }}">
 {% endif -%}
 
 <time itemprop="datePublished" datetime="{{ view.date_first_released | format_date('iso8601') }}" class="metadata__date">
@@ -18,7 +18,7 @@
     </time>
 {% endif -%}
 
-{% if view.source_label and not (view.zplus_label and view.zplus_label.hide_source_label) -%}
+{% if view.source_label -%}
     <span class="metadata__source">
         {%- if view.source_url -%}
             <a href="{{ view.source_url }}">{{ view.unobfuscated_source or view.source_label }}</a>

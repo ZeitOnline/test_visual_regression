@@ -893,7 +893,7 @@ def test_article_doesnt_show_modified_date(testbrowser):
 
 
 def test_video_in_article_is_there(testbrowser):
-    article = testbrowser('/zeit-online/article/zeit')
+    article = testbrowser('/zeit-online/article/video')
     assert len(article.cssselect('.video-player__videotag')) == 1
 
 
@@ -1632,7 +1632,7 @@ def test_article_byline_is_displayed_completely(testbrowser):
 
 
 def test_video_in_article_has_poster_copyright(testbrowser):
-    browser = testbrowser('/zeit-online/article/zeit')
+    browser = testbrowser('/zeit-online/article/video')
     video = browser.cssselect('figure[data-video-size]')[0]
     figure_copyright = video.cssselect('.figure__copyright')
     assert len(figure_copyright) == 1
@@ -1640,9 +1640,7 @@ def test_video_in_article_has_poster_copyright(testbrowser):
     assert copyright_person.text == u'© Foto: Alaa Al-Marjani/Reuters'
 
 
-def test_zplus_zon_article_has_correct_markup(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'volumepage_is_published', True)
+def test_zplus_zon_article_has_correct_markup(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zon')
 
     zplus_box = browser.cssselect('.zplus-badge--coverless')
@@ -1694,9 +1692,7 @@ def test_zplus_coverless_print_article_has_fallback_image(testbrowser):
     assert 'ZEIT Nr. 03/2016' in text.text_content()
 
 
-def test_zplus_abo_print_article_has_correct_markup(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'volumepage_is_published', True)
+def test_zplus_abo_print_article_has_correct_markup(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit')
 
     zplus_box = browser.cssselect('.zplus-badge')
@@ -1707,7 +1703,8 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser, monkeypatch):
     zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
     zplus_cover = zplus_box[0].cssselect('.zplus-badge__media')
     zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
-    zplus_link = zplus_box[0].cssselect('.zplus-badge__link-text')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link')
+    zplus_link_text = zplus_box[0].cssselect('.zplus-badge__link-text')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
@@ -1716,17 +1713,14 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser, monkeypatch):
     assert len(zplus_text) == 1
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
-    assert len(zplus_link) == 1
-    assert '/2014/49' in zplus_box[0].cssselect('a')[0].get('href')
-    assert 'Exklusiv' in zplus_link[0].text.strip()
-    assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
-            in zplus_media[0].get('src'))
+    assert len(zplus_link_text) == 1
+    assert zplus_link[0].get('href').startswith('http://localhost/2015/05')
+    assert zplus_link_text[0].text == u'Exklusiv für Abonnenten'
+    assert zplus_media[0].get('src').startswith(
+        'http://localhost/zeit-online/image/zeitcover/original')
 
 
-def test_zplus_print_article_has_correct_markup(testbrowser, monkeypatch):
-    zeit.web.core.application.FEATURE_TOGGLES.set('reader_revenue')
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'volumepage_is_published', True)
+def test_zplus_print_article_has_correct_markup(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-register')
 
     zplus_box = browser.cssselect('.zplus-badge')
@@ -1738,24 +1732,25 @@ def test_zplus_print_article_has_correct_markup(testbrowser, monkeypatch):
     zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
     zplus_cover = zplus_box[0].cssselect('.zplus-badge__media')
     zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
-    zplus_link = zplus_box[0].cssselect('.zplus-badge__link-text')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link')
+    zplus_link_text = zplus_box[0].cssselect('.zplus-badge__link-text')
     zplus_intro = zplus_box[0].cssselect('.zplus-badge__intro')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
+    assert len(article_metadata_source) == 1
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
     assert len(zplus_icon) == 0
     assert len(zplus_text) == 1
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
-    assert len(zplus_link) == 1
+    assert len(zplus_link_text) == 1
     assert len(zplus_intro) == 1
-    assert '/2014/49' in zplus_box[0].cssselect('a')[0].get('href')
-    assert 'ZEIT Nr. 49/2014' in zplus_link[0].text.strip()
-    assert 'Aus der' in zplus_intro[0].text.strip()
-    assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
-            in zplus_media[0].get('src'))
-    assert article_metadata_source.__len__() == 0
+    assert zplus_link[0].get('href').startswith('http://localhost/2015/05')
+    assert zplus_link_text[0].text == 'ZEIT Nr. 05/2015'
+    assert zplus_intro[0].text == 'Aus der'
+    assert zplus_media[0].get('src').startswith(
+        'http://localhost/zeit-online/image/zeitcover/original')
 
 
 def test_zplus_print_article_has_correct_markup_if_reader_revenue_off(
@@ -1786,16 +1781,14 @@ def test_zplus_comments_not_under_abo_article(testbrowser):
     assert len(browser.cssselect('.comment-section')) == 0
 
 
-def test_free_print_article_has_volume_badge(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'volumepage_is_published', True)
+def test_free_print_article_has_volume_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-free')
     badge = browser.cssselect('main article .zplus-badge')[0]
     label = badge.cssselect('.zplus-badge__text')[0]
     link = badge.cssselect('.zplus-badge__link')[0]
 
-    assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 01/2016'
-    assert link.get('href').startswith('http://localhost/2016/01')
+    assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 05/2015'
+    assert link.get('href').startswith('http://localhost/2015/05')
     assert badge.cssselect('.zplus-badge__media')
 
     # test volume badge is in single page view too
@@ -1821,24 +1814,16 @@ def test_registration_zon_article_has_no_zplus_badge(testbrowser):
 def test_free_article_has_no_zplus_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
 
-    zplus_box = browser.cssselect('.zplus-badge')
-    zplus_modifier = browser.cssselect('.article__item--has-badge')
-
-    assert len(zplus_box) == 0
-    assert len(zplus_modifier) == 0
+    assert not browser.cssselect('.zplus-badge')
+    assert not browser.cssselect('.article__item--has-badge')
 
 
-def test_zplus_volume_cover_should_track_link_with_product_id(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'volumepage_is_published', True)
+def test_zplus_volume_cover_should_track_link_with_product_id(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit')
-    assert browser.cssselect('.zplus-badge__link')
-    href = browser.cssselect('.zplus-badge__link')[0].get('href')
-    assert href == ('http://localhost/2014/49?wt_zmc=fix.int.zonpme.zeitde.'
-                    'wall_abo.premium.packshot.cover.zei&utm_medium=fix&utm'
-                    '_source=zeitde_zonpme_int&utm_campaign=wall_abo&'
-                    'utm_content=premium_packshot_cover_zei')
+    assert browser.cssselect('.zplus-badge__link')[0].get('href') == (
+        'http://localhost/2015/05?wt_zmc=fix.int.zonpme.zeitde.wall_abo.'
+        'premium.packshot.cover.zei&utm_medium=fix&utm_source=zeitde_zon'
+        'pme_int&utm_campaign=wall_abo&utm_content=premium_packshot_cover_zei')
 
 
 def test_volume_teaser_is_rendered_correctly(testbrowser):
@@ -2190,17 +2175,6 @@ def test_liveblog_article_uses_esi(selenium_driver, testserver):
     assert blog.is_displayed(), 'ESI Liveblog not displayed'
 
 
-def test_article_can_include_optimizely(testbrowser):
-    browser = testbrowser('/zeit-online/article/simple')
-    assert 'optimizely' not in browser.contents
-
-    optimizely_url = '//cdn.optimizely.com/js/281825380.js'
-    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['optimizely_on_zon_article'] = optimizely_url
-    browser = testbrowser('/zeit-online/article/simple')
-    assert optimizely_url in browser.contents
-
-
 def test_zplus_badge_is_zeit_on_print_insert(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit-geld-print-insert')
     assert len(browser.cssselect(
@@ -2219,10 +2193,9 @@ def test_article_should_not_include_itunes_smart_app_banner(testbrowser):
 def test_zplus_badge_has_no_link_if_volumes_unpublished(
         testbrowser, monkeypatch):
     monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'volumepage_is_published', False)
+        zeit.web.core.view_article.Article, 'volumepage_is_published', False)
     browser = testbrowser('/zeit-online/article/zplus-zeit')
-    assert len(browser.cssselect(
-        '.zplus-badge__link-text')) == 0
+    assert not browser.cssselect('.zplus-badge__link')
 
 
 def test_advertorial_has_no_home_button_as_pagination(testbrowser):

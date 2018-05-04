@@ -8,11 +8,31 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
+- remove `optimizely` from settings in vivi xml
 
-3.147 (unreleased)
---------------------
+
+3.148 (unreleased)
+------------------
+
+- ZON-4621: Show alexa link in podcast footer
+
+
+3.147 (2018-05-03)
+------------------
+
+- ZON-4600: Set C1 adblocker headers on specific test articles
+  /digital/internet/2017-11/firefox-quantum-browser-test-vergleich-google-chrome
+  /digital/internet/2018-04/adblocker-urteil-bgh-springer-adblock-plus
+
+- ZON-4551: Always show article source
+
+- ZON-4631: Adjust modified date for article with liveblog
 
 - BUG-904: Decode obfuscated article date in ZEIT Arbeit
+
+- BUG-908: Prevent rendering Unicode-Icon as Emoji
+
+- MAINT: Remove Optimizely
 
 
 3.146.1 (2018-04-26)

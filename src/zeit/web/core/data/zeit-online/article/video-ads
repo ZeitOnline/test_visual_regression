@@ -73,9 +73,9 @@
     <supertitle>Testdaten</supertitle>
     <title>Artikel mit Video ohne Ad</title>
     <division type="page">
-      <p>In diesem Artikel ist ein Video eingebundes, welches Expired ist. Deswegen wird es nicht angezeigt.</p>
-      <p>Falls man doch ein Video sieht, ist etwas kaputt.</p>
+      <p>Mollitia esse qui eos a! Fugiat a quidem delectus quia facilis non, obcaecati omnis magnam nihil tempora velit fugit! Doloribus, harum, iusto.</p>
       <video format="large" is_empty="True" href="http://xml.zeit.de/zeit-online/video/3537342483001" expires=""/>
+      <p>Non deleniti ipsa amet aut quas facilis sapiente, voluptatum quae nisi? Tenetur deleniti sit beatae dolor nobis commodi eum reiciendis assumenda optio.</p>
     </division>
   </body>
 </article>

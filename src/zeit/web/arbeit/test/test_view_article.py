@@ -507,7 +507,7 @@ def test_zar_canonical_url_should_contain_first_page_on_full_view(testbrowser):
     assert canonical_url.endswith('arbeit/article/paginated')
 
 
-def test_zar_article_has_correct_metadata(testserver, selenium_driver):
+def test_zar_article_has_correct_meta_line(testserver, selenium_driver):
     selenium_driver.get('{}/arbeit/article/simple'.format(testserver.url))
     dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
 
@@ -515,7 +515,8 @@ def test_zar_article_has_correct_metadata(testserver, selenium_driver):
     assert len(dates) == 1
 
 
-def test_zar_changed_article_has_correct_metadata(testserver, selenium_driver):
+def test_zar_changed_article_has_correct_meta_line(
+        testserver, selenium_driver):
     selenium_driver.get('{}/arbeit/article/simple-modified'.format(
         testserver.url))
     dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
@@ -525,7 +526,7 @@ def test_zar_changed_article_has_correct_metadata(testserver, selenium_driver):
     assert len(dates) == 2
 
 
-def test_zar_print_article_has_correct_metadata(
+def test_zar_print_article_has_correct_meta_line(
         testserver, selenium_driver):
     selenium_driver.get('{}/arbeit/article/simple-print'.format(
         testserver.url))
@@ -537,7 +538,7 @@ def test_zar_print_article_has_correct_metadata(
     assert len(dates) == 1
 
 
-def test_zar_print_changed_article_has_correct_metadata(
+def test_zar_print_changed_article_has_correct_meta_line(
         testserver, selenium_driver):
     selenium_driver.get('{}/arbeit/article/simple-print-modified'.format(
         testserver.url))

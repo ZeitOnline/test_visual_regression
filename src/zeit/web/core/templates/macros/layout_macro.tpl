@@ -1,4 +1,4 @@
-{% macro use_svg_icon(name, className, package, cleanup=True, a11y=True) -%}
+{% macro use_svg_icon(name, className, package, cleanup=True, a11y=True, remove_title=False) -%}
     {#
         Generates in SVG, from minified svg file on disk, cleaned and a11y'd
         :param name: name of the svg file, w/o extension
@@ -6,10 +6,12 @@
         :param package: the actual zeit.package i.e. zeit.web.site
         :param cleanup: clean svg from fill-attributes
         :param a11y: activate aria-label to read out svg/title/text()
+        :param remove_title: remove title-tag (so the tooltipp/hover shows the
+            surrounding link-title ("Podcast bei Spotify") instead of svg-title ("Spotfy"))
     #}
     {# workaround for wrong packages comment icons #}
     {% set package = 'zeit.web.site' if 'zeit.web.core' == package else package %}
-    {{ get_svg_from_file(name, className, package, cleanup, a11y) | safe }}
+    {{ get_svg_from_file(name, className, package, cleanup, a11y, remove_title) | safe }}
 {%- endmacro %}
 
 {% macro insert_esi(src, error_text='') %}
