@@ -20,7 +20,8 @@ def test_babator_is_shown_on_video_pages(testbrowser, url):
     '/arbeit/article/simple',
     '/campus/article/simple',
     '/zeit-online/article/simple',
-    '/zeit-online/article/video-expired'
+    '/zeit-online/article/video-expired',
+    '/campus/article/video/seite-2'
 ])
 def test_babator_is_not_shown_on_other_pages(testbrowser, url):
     zeit.web.core.application.FEATURE_TOGGLES.set('babator')

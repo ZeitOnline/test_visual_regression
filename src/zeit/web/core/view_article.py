@@ -398,7 +398,12 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def contains_video(self):
-        for nr, page in enumerate(self.pages, start=1):
+        if self.is_all_pages_view:
+            pages_to_iterate = self.pages
+        else:
+            pages_to_iterate = [self.current_page]
+
+        for nr, page in enumerate(pages_to_iterate):
             for block in page:
                 block_type = zeit.web.core.template.block_type(block)
                 if block_type == 'video' and not (
