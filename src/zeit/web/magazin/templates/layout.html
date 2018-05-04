@@ -42,6 +42,9 @@
     </head>
     <body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
+        {% if toggles('third_party_modules', 'tracking', 'optimize_ab_testing_to_webtrekk') -%}
+            {% include "zeit.web.core:templates/inc/tracking/webtrekk_googleoptimize.html" %}
+        {% endif -%}
         {% include "zeit.web.core:templates/inc/tag-manager.html" %}
         {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
         {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
