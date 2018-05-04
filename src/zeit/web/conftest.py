@@ -10,7 +10,6 @@ import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
-from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 import cryptography.hazmat.backends

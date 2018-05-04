@@ -69,7 +69,6 @@ def pytest_collection_modifyitems(items):
 # XXX copy&paste from zeit.web.conftest, so we're independent of zeit.web and
 # its dependencies.
 @pytest.fixture(scope='session', params=BROWSERS.keys())
-@pytest.fixture(scope='session', params=BROWSERS.keys())
 def selenium_driver(request):
     parameters = {}
     if request.param == 'chrome':
