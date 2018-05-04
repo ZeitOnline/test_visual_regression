@@ -1059,7 +1059,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def contains_video(self):
-        return True
+        return False
 
     @zeit.web.reify
     def ligatus_do_not_index(self):
