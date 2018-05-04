@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - ZON-4621: Show alexa link in podcast footer
 
+- MAINT: Upgrade Selenium
+
 
 3.147 (2018-05-03)
 ------------------

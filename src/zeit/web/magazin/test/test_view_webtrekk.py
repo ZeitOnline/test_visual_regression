@@ -2,6 +2,7 @@
 import mock
 import pyramid.decorator
 import pyramid.interfaces
+import pytest
 import time
 
 from selenium.webdriver.common.by import By
@@ -10,6 +11,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
 def test_comment_form_provides_expected_webtrekk_string(
         selenium_driver, testserver, application):
     extensions = application.zeit_app.config.registry.getUtility(
