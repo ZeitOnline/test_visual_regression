@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
-from contextlib import contextmanager
 import copy
 import json
 import logging
@@ -11,9 +10,9 @@ import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
-from selenium.webdriver.common.by import By
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
-from selenium.webdriver.support.ui import WebDriverWait
 import cryptography.hazmat.backends
 import cssselect
 import gocept.httpserverlayer.wsgi
@@ -27,13 +26,11 @@ import pyramid.testing
 import pyramid_dogpile_cache2
 import pysolr
 import pytest
-import _pytest.logging
 import requests
 import selenium.webdriver
 import selenium.webdriver.firefox.firefox_binary
 import transaction
 import waitress
-import webob.multidict
 import webtest
 import wesgi
 import zope.browserpage.metaconfigure
@@ -252,8 +249,8 @@ def app_settings(mockserver):
         'vivi_zeit.solr_solr-url': 'http://mock.solr',
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
-        'vivi_zeit.content.author_biography-questions':
-            'egg://zeit.web.core/data/config/author-biography-questions.xml',
+        'vivi_zeit.content.author_biography-questions': (
+            'egg://zeit.web.core/data/config/author-biography-questions.xml'),
         'vivi_zeit.cms_celery-config': '/dev/null',
         'vivi_zeit.brightcove_playback-url': mockserver.url + '/brightcove',
         'vivi_zeit.brightcove_playback-policy-key': 'None',
@@ -275,10 +272,26 @@ def app_settings(mockserver):
         'webtrekk_version': '3',
     }
 
-
+# 'chrome': selenium.webdriver.Chrome
+# needs Chromedriver, install via brew install chromedriver
+# or from https://sites.google.com/a/chromium.org/chromedriver/downloads
+# Also needs Chrome or Chromium, if you use chromium,
+# set path to Chromium in envorinment variable `ZEIT_WEB_CHROMIUM_BINARY`
 browsers = {
-    'firefox': selenium.webdriver.Firefox
+    'chrome': selenium.webdriver.Chrome
 }
+
+
+def pytest_collection_modifyitems(items):
+    """Mark all selenium tests by use of fixture selenium_driver
+    to run only selenium test by invoking pytest -m selenium"""
+    for item in items:
+        try:
+            fixtures = item.fixturenames
+            if 'selenium_driver' in fixtures:
+                item.add_marker(pytest.mark.selenium)
+        except:
+            pass
 
 
 def test_asset_path(*parts):
@@ -608,37 +621,19 @@ def http_testserver(request):
 
 @pytest.fixture(scope='session', params=browsers.keys())
 def selenium_driver(request):
-    if request.param == 'firefox':
-        parameters = {}
-        profile = selenium.webdriver.FirefoxProfile(
-            os.environ.get('ZEIT_WEB_FF_PROFILE'))
-        profile.default_preferences.update({
-            'network.http.use-cache': False,
-            'browser.startup.page': 0,
-            'browser.startup.homepage_override.mstone': 'ignore'})
-        profile.update_preferences()
-        parameters['firefox_profile'] = profile
-        # Old versions: <https://ftp.mozilla.org/pub/firefox/releases/>
-        ff_binary = os.environ.get('ZEIT_WEB_FF_BINARY')
-        if ff_binary:
-            parameters['firefox_binary'] = (
-                selenium.webdriver.firefox.firefox_binary.FirefoxBinary(
-                    ff_binary))
-        browser = browsers[request.param](**parameters)
-    else:
-        browser = browsers[request.param]()
+    parameters = {}
+    if request.param == 'chrome':
+        opts = Options()
+        if not request.config.getoption('--visible'):
+            opts.add_argument('headless')
+        opts.add_argument('disable-gpu')
+        opts.add_argument('window-size=1200x800')
+        chromium_binary = os.environ.get('ZEIT_WEB_CHROMIUM_BINARY')
+        if chromium_binary:
+            opts.binary_location = chromium_binary
+        parameters['chrome_options'] = opts
+    browser = browsers[request.param](**parameters)
     request.addfinalizer(lambda *args: browser.quit())
-
-    timeout = int(os.environ.get('ZEIT_WEB_FF_TIMEOUT', 30))
-    original_get = browser.get
-
-    def get_and_wait_for_body(self, *args, **kw):
-        result = original_get(*args, **kw)
-        WebDriverWait(self, timeout).until(
-            EC.presence_of_element_located((By.TAG_NAME, "body")))
-        return result
-    browser.get = get_and_wait_for_body.__get__(browser)
-
     return browser
 
 
@@ -687,6 +682,7 @@ def clock(monkeypatch):
     original = datetime.datetime
 
     class FreezeMeta(type):
+
         def __instancecheck__(self, instance):
             if type(instance) == original or type(instance) == Freeze:
                 return True
@@ -882,7 +878,7 @@ class MockSearch(object):
         return results
 
     def search(self, q, rows=10, **kw):
-        return pop_results(rows)
+        return self.pop_results(rows)
 
     def update_raw(self, xml, **kw):
         pass

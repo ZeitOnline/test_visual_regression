@@ -14,51 +14,9 @@
       <display_name>Jasper Riemann</display_name>
     </author>
     <references>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2015/11/sonnenfinsternis-solarstrom-netz-probleme" year="2015" issue="11" ressort="Wissen" contenttype="article" publication-date="2015-03-26T02:48:59+00:00" expires="" author="Dirk Asendorpf">
-        <supertitle>Sonnenfinsternis</supertitle>
-        <title>Stresstest für den Solarstrom</title>
-        <text>Ist am 20. März der Himmel vormittags klar, können wir einwandfrei eine teilweise Sonnenfinsternis bewundern. Gut für uns, für Solarstrombetreiber aber ein Albtraum.</text>
-        <description>Ist am 20. März der Himmel vormittags klar, können wir einwandfrei eine teilweise Sonnenfinsternis bewundern. Gut für uns, für Solarstrombetreiber aber ein Albtraum.</description>
-        <byline>von Dirk Asendorpf</byline>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/wissen/umwelt/2015-03/sonnenfinsternis-solarstrom-netz/" type="jpg" title="Sonnenfinsternis: Stresstest für den Solarstrom" alt="Sonnenfinsternis: Stresstest für den Solarstrom" align="left" publication-date="" expires="">
-          <bu>Der Mond schiebt sich zwischen Erde und Sonne und verdunkelt so den Tag, wie hier 2011 in München.</bu>
-          <copyright>© REUTERS/Michaela Rehle</copyright>
-        </image>
-        <author href="http://xml.zeit.de/autoren/A/Dirk_Asendorpf/index.xml" publication-date="" expires="">
-          <display_name>Dirk Asendorpf</display_name>
-        </author>
-      </reference>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/wirtschaft/2015-03/sonnenfinsternis-solarstrom-energiewende" year="2015" issue="9" ressort="Wirtschaft" contenttype="link" publication-date="" expires="" ns0:href="http://blog.zeit.de/gruenegeschaefte/2015/03/03/sonnenfinsternis-energiewende" ns0:target="_blank" author="Marlies Uken">
-        <supertitle>Sonnenfinsternis</supertitle>
-        <title>Der Härtetest für die Energiewende </title>
-        <text>Am 20. März versinkt Deutschland in eine partielle Sonnenfinsternis. Für das Stromnetz ein extremer Stresstest: Kein anderes Land weltweit setzt so sehr auf Solarstrom.</text>
-        <description>Am 20. März versinkt Deutschland in eine partielle Sonnenfinsternis. Für das Stromnetz ein extremer Stresstest: Kein anderes Land weltweit setzt so sehr auf Solarstrom.</description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/wirtschaft/2015-03/sonnenfinsternis-blackout/" type="jpg" title="Sonnenfinsternis Blackout" align="left" publication-date="" expires="">
-          <bu>Drei Frauen während einer teilweisen Sonnenfinsternis in San Diego im Jahr 2014 </bu>
-          <copyright>© REUTERS/Mike Blake </copyright>
-        </image>
-        <author href="http://xml.zeit.de/autoren/U/Marlies_Uken/index.xml" publication-date="" expires="">
-          <display_name>Marlies Uken</display_name>
-        </author>
-      </reference>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wissen/2012-11/fs-sonnenfinsternis-australien" year="2012" issue="46" ressort="Wissen" contenttype="gallery" publication-date="" expires="">
-        <badges>
-          <badge>gallery</badge>
-        </badges>
-        <supertitle>Totale Sonnenfinsternis</supertitle>
-        <title>Gleißender Feuerring über Down Under</title>
-        <text>Am Morgen des 14. November waren Teile Ostaustraliens in Dunkelheit gehüllt – Tausende beobachteten, wie sich die Silhouette des Mondes langsam vor die Sonne schob.</text>
-        <description>Am Morgen des 14. November waren Teile Ostaustraliens in Dunkelheit gehüllt – Tausende beobachteten, wie sich die Silhouette des Mondes langsam vor die Sonne schob.</description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
-        <image base-id="http://xml.zeit.de/wissen/2012-11/fs-sonnenfinsternis-australien-teaser/" type="jpg" align="left" publication-date="" expires="">
-          <bu xsi:nil="true"/>
-          <copyright>© Brian Cassey/dpa</copyright>
-        </image>
-      </reference>
+      <reference type="intern" href="http://xml.zeit.de/2015/11/sonnenfinsternis-solarstrom-netz-probleme" />
+      <reference type="intern" href="http://xml.zeit.de/wirtschaft/2015-03/sonnenfinsternis-solarstrom-energiewende" />
+      <reference type="intern" href="http://xml.zeit.de/wissen/2012-11/fs-sonnenfinsternis-australien" />
     </references>
     <badges/>
     <image base-id="http://xml.zeit.de/zeit-online/liveblog/sonnenfinsternis-bilder/sonnenfinsternis-svalbard/" type="jpg" title="Totale Sonnenfinsternis Svalbard" align="left" publication-date="" expires="">
@@ -81,11 +39,11 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-03-20T12:10:53.555185+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-03-20T07:53:46.232663+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-03-20T12:11:03.906277+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-03-20T12:12:03.699042+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-03-20T11:03:58.954167+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-03-19T12:10:53.555185+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-03-19T07:53:46.232663+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-03-19T12:11:03.906277+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-03-19T12:12:03.699042+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-03-19T11:03:58.954167+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
     <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
@@ -94,7 +52,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">liveblog-closed</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-03-20T11:02:59.923242+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-03-19T11:02:59.923242+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stockrahm</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
