@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import re
-
 import mock
+
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 def test_footer_should_have_basic_structure(tplbrowser, dummy_request):
@@ -162,9 +165,11 @@ def test_more_button_works_as_expected(selenium_driver, testserver):
     # open
 
     more_link.click()
-
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, '.footer-publisher__list'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
     assert more_link.text == u'Schließen'
-
     assert links_first.is_displayed(), 'First footer links must be visible'
     assert links_last.is_displayed(), 'Last footer links must be visible'
     assert pub_first.is_displayed(), 'First publisher links must be visible'
