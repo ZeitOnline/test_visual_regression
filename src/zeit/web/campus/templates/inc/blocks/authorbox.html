@@ -1,0 +1,15 @@
+{% extends "zeit.web.core:templates/inc/blocks/authorbox.html" %}
+
+{% block title %}
+    <h3 class="authorbox__intro">
+        <span class="visually-hidden">&uuml;ber den </span>
+        <span class="authorbox__title">Autor</span>
+    </h3>
+{% endblock %}
+
+{% block summary %}
+    <p class="authorbox__summary" itemprop="description">{{ block.text | default(block.author.summary, True) }}</p>
+{% endblock %}
+
+{% block link %}
+{% endblock %}
