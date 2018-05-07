@@ -1,0 +1,78 @@
+.authorbox
+	overflow: auto
+
+	&__container
+		margin: auto
+		max-width: remify(360px)
+
+	&__intro
+		display: block
+		margin-top: 0
+
+	&__title
+		color: $color-article-primary
+		border-bottom: remify(4px) solid currentColor
+		font-family: $font-beckett
+		font-size: remify($font-xxl)
+		font-weight: 300
+		letter-spacing: $letter-spacing-m
+		text-transform: uppercase
+
+	&__media
+		background-color: $color-background--image
+		float: left
+		margin-bottom: remify($fine)
+		margin-right: remify($fine)
+		width: 30%
+
+	&__name
+		color: $color-text
+		display: block
+		font-family: $font-tabletgothic
+		font-size: remify($little)
+		font-weight: bold
+		letter-spacing: $letter-spacing-s
+		line-height: (16/14)
+		margin-bottom: $tiny
+		text-transform: uppercase
+
+	&__summary
+		color: $color-text--light
+		font-size: remify($font-s)
+		letter-spacing: $letter-spacing-s
+		margin-bottom: $tiny
+		margin-top: 0
+
+	+respond-min($break-tablet-min)
+		overflow: visible
+
+		&__container
+			background-color: $color-background--light
+			display: block
+			padding-bottom: remify($page-padding)
+			margin-top: remify($petite)
+
+		&__intro
+			margin-bottom: 0
+			margin-left: remify($page-padding--small)
+			margin-right: remify($page-padding--small)
+
+		&__title
+			position: relative
+			display: inline
+			top: remify(-$petite)
+
+		&__media
+			background-color: $color-background--image
+			float: none
+			width: 100%
+
+		&__text
+			margin-left: remify($page-padding--small)
+			margin-right: remify($page-padding--small)
+
+		.scaled-image .authorbox__media-item
+			height: remify(100px)
+			margin: 0 auto
+			width: remify(100px)
+
