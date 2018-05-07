@@ -20,7 +20,7 @@
 
 	&__media
 		float: left
-		margin-bottom: remify(10px)
+		margin-bottom: remify(15px)
 		margin-right: remify(10px)
 		max-width: 100%
 		width: 30%
@@ -37,7 +37,7 @@
 		text-transform: uppercase
 
 	&__summary
-		color: $color-text--light
+		color: #525252 // a11y version, matches AAA
 		font-size: remify($font-s)
 		letter-spacing: $letter-spacing-s
 		margin-bottom: 6px
@@ -69,8 +69,7 @@
 			margin-left: remify($page-padding--small)
 			margin-right: remify($page-padding--small)
 
-		.scaled-image .authorbox__media-item
+		&__media-item
 			height: auto
-			margin: 0 auto
 			width: auto
 
