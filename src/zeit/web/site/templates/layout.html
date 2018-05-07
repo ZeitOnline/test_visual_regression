@@ -55,6 +55,7 @@
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
     {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
+    {% block babator_include %}{% endblock %}
 </head>
 <body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
