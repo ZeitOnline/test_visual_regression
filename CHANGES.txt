@@ -16,6 +16,8 @@ POSTDEPLOY
 3.148 (unreleased)
 ------------------
 
+- ZON-4554: Include Babator script on video pages
+
 - ZON-4619: Add script for sending GoogleOptimize tests to Webtrekk
 
 - ZON-4621: Show alexa link in podcast footer
