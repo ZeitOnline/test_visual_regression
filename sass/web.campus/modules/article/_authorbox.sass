@@ -19,10 +19,10 @@
 		text-transform: uppercase
 
 	&__media
-		background-color: $color-background--image
 		float: left
 		margin-bottom: remify($fine)
 		margin-right: remify($fine)
+		max-width: 100%
 		width: 30%
 
 	&__name
@@ -47,7 +47,7 @@
 		overflow: visible
 
 		&__container
-			background-color: $color-background--light
+			background-color: rgba($zco-grey, 0.6)
 			display: block
 			padding-bottom: remify($page-padding)
 			margin-top: remify($petite)
@@ -62,7 +62,6 @@
 			top: remify(-$petite) // pull headline to top
 
 		&__media
-			background-color: $color-background--image
 			float: none
 			width: 100%
 
@@ -71,7 +70,7 @@
 			margin-right: remify($page-padding--small)
 
 		.scaled-image .authorbox__media-item
-			height: remify(100px)
+			height: auto
 			margin: 0 auto
 			width: auto
 

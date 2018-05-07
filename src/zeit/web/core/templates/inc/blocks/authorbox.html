@@ -1,7 +1,9 @@
 <aside class="authorbox article__item article__item--marginalia" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <div class="authorbox__container">
         {% block title %}{% endblock %}
-        {%- include "zeit.web.core:templates/inc/asset/image_authorbox.tpl" -%}
+        {% block image %}
+            {%- include "zeit.web.core:templates/inc/asset/image_authorbox.tpl" -%}
+        {% endblock%}
         <div class="authorbox__text">
             <strong class="authorbox__name" itemprop="name">{{ block.author.display_name }}</strong>
 

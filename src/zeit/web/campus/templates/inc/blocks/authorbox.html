@@ -7,9 +7,14 @@
     </h3>
 {% endblock %}
 
+{% block image %}
+    {%- include "zeit.web.campus:templates/inc/asset/image_authorbox.tpl" -%}
+{% endblock %}
+
 {% block summary %}
     <p class="authorbox__summary" itemprop="description">{{ block.text | default(block.author.summary, True) }}</p>
 {% endblock %}
 
 {% block link %}
 {% endblock %}
+
