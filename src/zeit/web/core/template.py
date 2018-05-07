@@ -891,7 +891,8 @@ def adapt(obj, iface, name=u'', multi=False):
 
 
 @SHORT_TERM_CACHE.cache_on_arguments()
-def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
+def get_svg_from_file_cached(
+        name, class_name, package, cleanup, a11y, remove_title):
     try:
         subpath = '.'.join(package.split('.')[1:3])
     except (AttributeError, TypeError):
@@ -905,7 +906,8 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
         log.debug('Error while reading Icon {}: {}'.format(name, e.message))
         return ''
     try:
-        title = xml.find('{http://www.w3.org/2000/svg}title').text
+        title_elem = xml.find('{http://www.w3.org/2000/svg}title')
+        title = title_elem.text
     except AttributeError:
         title = 'Icon'
     svg = xml.getroot()
@@ -918,6 +920,8 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
     if cleanup:
         lxml.etree.strip_attributes(
             xml, 'fill', 'fill-opacity', 'stroke', 'stroke-width')
+    if remove_title and title_elem is not None:
+        svg.remove(title_elem)
     if a11y:
         svg.set('role', 'img')
         svg.set('aria-label', title)
@@ -927,8 +931,9 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
 
 
 @zeit.web.register_global
-def get_svg_from_file(name, class_name, package, cleanup, a11y):
-    return get_svg_from_file_cached(name, class_name, package, cleanup, a11y)
+def get_svg_from_file(name, class_name, package, cleanup, a11y, remove_title):
+    return get_svg_from_file_cached(
+        name, class_name, package, cleanup, a11y, remove_title)
 
 
 @zeit.web.register_test

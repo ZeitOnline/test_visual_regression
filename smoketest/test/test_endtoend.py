@@ -43,6 +43,7 @@ def test_newsfeeds(config):
 
 def test_login_and_logout(config):
     b = zope.testbrowser.browser.Browser()
+    b.mech_browser.set_handle_robots(False)
     b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
     b.getControl(name='email').value = config['MEMBER_USERNAME']
     b.getControl(name='pass').value = config['MEMBER_PASSWORD']

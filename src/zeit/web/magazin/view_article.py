@@ -39,7 +39,8 @@ import zeit.web.magazin.view
     context=zeit.web.magazin.article.IPhotoclusterArticle,
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
-class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
+class Article(zeit.web.core.view_article.Article,
+              zeit.web.magazin.view.Content):
     pass
 
 

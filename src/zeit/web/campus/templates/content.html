@@ -1,5 +1,11 @@
 {% extends 'zeit.web.campus:templates/layout.html' %}
 
+{% block babator_include %}
+    {% if toggles('babator') and view.contains_video %}
+        {%- include "zeit.web.core:templates/inc/meta/babator.html" -%}
+    {% endif %}
+{% endblock %}
+
 {% block ligatus_include %}
     {%- include "zeit.web.core:templates/inc/meta/ligatus.html" -%}
 {% endblock %}
