@@ -99,7 +99,8 @@ $longform-header-max-height: 1400px
 		+respond-min-h(em(1400px))
 			height: em(1400px) - em($longform-header-offset)
 
-	.meta__date
+	.meta__date:not(:empty)
+		display: inline
 		&:after
 			content: ' — '
 

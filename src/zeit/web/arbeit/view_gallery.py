@@ -8,5 +8,6 @@ import zeit.web.arbeit.view
     context=zeit.content.gallery.interfaces.IGallery,
     vertical='zar',
     renderer='templates/gallery.html')
-class Gallery(zeit.web.core.view_gallery.Gallery, zeit.web.arbeit.view.Base):
+class Gallery(zeit.web.core.view_gallery.Gallery,
+              zeit.web.arbeit.view.Content):
     pass

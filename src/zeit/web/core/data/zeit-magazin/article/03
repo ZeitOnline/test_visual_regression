@@ -8,28 +8,8 @@
             <display_name>Cornelius Lange</display_name>
         </author>
         <references>
-            <reference layout="minimal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/lebensart/essen-trinken/2012-03/link-serie-weinkolumne-lange" year="2012" issue="11" ressort="Lebensart" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/serie/weinkolumne">
-                <supertitle>Die Ausleser </supertitle>
-                <title>Alle Folgen der Weinkolumne von Fabian und Cornelius Lange</title>
-                <text>Fabian und Cornelius Lange sind immer auf der Suche nach ultimativen Weinen. In der Kolumne "Die Ausleser" schreiben sie über Entdeckungen und Trends in aller Welt. </text>
-                <description>Fabian und Cornelius Lange sind immer auf der Suche nach ultimativen Weinen. In der Kolumne "Die Ausleser" schreiben sie über Entdeckungen und Trends in aller Welt. </description>
-                <byline/>
-                <image align="left" base-id="http://xml.zeit.de/lebensart/essen-trinken/2012-03/tesaer-weinkolumne-lange/" type="jpg" publication-date="" expires="">
-                    <bu/>
-                    <copyright>© Bernd Jonkmanns</copyright>
-                </image>
-            </reference>
-            <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2013/30/kunstmarkt-weinauktionen" year="2013" issue="30" ressort="Lebensart" author="Gero von Randow" contenttype="article" publication-date="2013-07-25T02:58:54+00:00" expires="">
-                <supertitle>Weinauktionen</supertitle>
-                <title>Aus dem Keller des Élyséepalasts</title>
-                <text>Bei Weinauktionen werden Millionen umgesetzt. Private Liebhaber können aber auch erschwingliche Schätze ersteigern. Gero von Randow über ein erlesenes Sammelgebiet </text>
-                <description>Bei Weinauktionen werden Millionen umgesetzt. Private Liebhaber können aber auch erschwingliche Schätze ersteigern. Gero von Randow über ein erlesenes Sammelgebiet </description>
-                <byline/>
-                <image align="left" base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-07/teaser-weinauktion/" type="jpg" publication-date="" expires="">
-                    <bu>Diese Weine aus dem Élyséepalast kamen Ende Mai unter den Hammer: Magnumflasche 1981er Pauillac Chateau Lafite, ein 1985er Chateau d'Yquem und ein 1982er Chateau La Mission Haut Brion Graves (von links nach rechts)</bu>
-                    <copyright>© Eric Feferberg/AFP/Getty Images</copyright>
-                </image>
-            </reference>
+            <reference type="intern" href="http://xml.zeit.de/lebensart/essen-trinken/2012-03/link-serie-weinkolumne-lange" />
+            <reference type="intern" href="http://xml.zeit.de/2013/30/kunstmarkt-weinauktionen" />
         </references>
         <rankedTags>
             <tag url_value="wein" uuid="df4baf1f-9491-4dbb-80c2-f8762bf3f2fe" score="4" type="free">Wein</tag>
