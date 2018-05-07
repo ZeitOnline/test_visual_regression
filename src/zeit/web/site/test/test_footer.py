@@ -154,7 +154,7 @@ def test_more_button_works_as_expected(selenium_driver, testserver):
     driver.set_window_size(320, 480)
 
     pub_list = footer.find_elements_by_class_name('footer-publisher__list')
-    pub_list_invisible = expected_conditions.visibility_of_element_located((
+    pub_list_visible = expected_conditions.visibility_of_element_located((
         By.CSS_SELECTOR, '.footer-publisher__list'))
     links_list = footer.find_elements_by_class_name('footer-links__list')
     more_link = footer.find_element_by_class_name('footer-publisher__more')
@@ -170,7 +170,7 @@ def test_more_button_works_as_expected(selenium_driver, testserver):
 
     more_link.click()
     assert WebDriverWait(
-        selenium_driver, 1).until(pub_list_invisible)
+        selenium_driver, 1).until(pub_list_visible)
     assert more_link.text == u'Schließen'
     assert links_first.is_displayed(), 'First footer links must be visible'
     assert links_last.is_displayed(), 'Last footer links must be visible'
