@@ -26,6 +26,8 @@ POSTDEPLOY
 
 - MAINT: Use core function to obfuscate ZMO article date
 
+- SSL-247: Make sure to use http for esi include
+
 
 3.147 (2018-05-03)
 ------------------
