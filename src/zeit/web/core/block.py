@@ -295,7 +295,8 @@ class Liveblog(Module):
         self.is_live = json.get('blog_status') == u'open'
         self.last_modified = self.format_date(json.get('_updated'))
 
-    def _retrieve_auth_token(self):
+    @LONG_TERM_CACHE.cache_on_arguments()
+    def auth_token(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = conf.get('liveblog_api_auth_url_v3')
         try:
@@ -309,31 +310,27 @@ class Liveblog(Module):
         except requests.exceptions.HTTPError as e:
             log.error(e.message)
         except (requests.exceptions.RequestException, ValueError):
-            pass
+            return
 
-    def api_blog_request(self, _retries=0):
+    def api_blog_request(self, retries=0):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         api_url = conf.get('liveblog_api_url_v3')
         url = '{}/{}'.format(api_url, self.blog_id)
 
-        if _retries >= 2:
+        if retries >= 2:
             raise RuntimeError('Maximum retries exceeded for %s' % url)
 
-        token = LONG_TERM_CACHE.get('liveblog_api_auth_token')
-        if token is dogpile.cache.api.NO_VALUE:
-            token = ''
         try:
             with zeit.web.core.metrics.http('liveblog3.api') as record:
-                response = requests.get(url, auth=(token, ''))
+                response = requests.get(url, auth=(self.auth_token(), ''))
                 record(response)
             response.raise_for_status()
         except requests.exceptions.RequestException as err:
             status = getattr(err.response, 'status_code', 510)
             if status == 401:
                 log.debug('Refreshing liveblog3 auth token')
-                LONG_TERM_CACHE.set(
-                    'liveblog_api_auth_token', self._retrieve_auth_token())
-                return self.api_blog_request(_retries=_retries + 1)
+                self.auth_token.invalidate()
+                return self.api_blog_request(retries=retries + 1)
             raise
         try:
             return response.json()
