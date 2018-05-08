@@ -73,6 +73,7 @@
     "svg:sprite:framebuilder:campus": "npm run svg:sprite -- --symbol-sprite 'web.campus/framebuilder.svg' 'sass/web.campus/svg-framebuilder/*.svg'",
     "svg:sprite:framebuilder:site": "npm run svg:sprite -- --symbol-sprite 'web.site/framebuilder.svg' 'sass/web.site/svg-framebuilder/*.svg'",
     "svg:sprite": "svg-sprite --config svg-sprite.json --shape-transform-svgo svgo.json",
+    "presvg": "mkdir -p src/zeit/web/static/css/svg/web.arbeit src/zeit/web/static/css/svg/web.campus src/zeit/web/static/css/svg/web.magazin src/zeit/web/static/css/svg/web.site",
     "svg": "npm-run-all --parallel svgo:* svg:sprite:*:*",
     "prejs": "npm run lint",
     "js": "npm run webpack:dist",
