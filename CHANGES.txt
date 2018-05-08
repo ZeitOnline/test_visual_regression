@@ -30,6 +30,8 @@ POSTDEPLOY
 
 - MAINT: Use core function to obfuscate ZMO article date
 
+- MAINT: Use cache decorator for auth token on liveblog3
+
 
 3.147 (2018-05-03)
 ------------------
