@@ -124,6 +124,9 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
 
         return False
 
+    @zeit.web.reify
+    def author_email(self):
+        return self.context.email
 
 @zeit.web.view_config(name='kommentare')
 class Comments(Author):
