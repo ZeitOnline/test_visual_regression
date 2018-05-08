@@ -318,31 +318,33 @@ def test_cardstack_block_produces_correct_html(testbrowser):
     assert len(block) == 1
 
 
-def test_article_contains_authorbox(testbrowser):
-    browser = testbrowser('/zeit-online/article/authorbox')
+def test_article_contains_campus_authorbox(testbrowser):
+    browser = testbrowser('/campus/article/authorbox')
     authorbox = browser.cssselect('.authorbox')
     assert len(authorbox) == 3
 
-    # test custom biography
+    # test authorbox without image
     author = authorbox[0]
-    description = author.cssselect('.authorbox__summary')[0]
-    assert description.text.strip() == 'Text im Feld Kurzbio'
-    assert description.get('itemprop') == 'description'
+    figure = author.cssselect('.authorbox__media')
+    assert not figure
 
-    # test author content and microdata
+    # test authorbox with image
     author = authorbox[1]
-    image = author.cssselect('[itemprop="image"]')[0]
-    name = author.cssselect('strong[itemprop="name"]')[0]
-    description = author.cssselect('[itemprop="description"]')[0]
-    url = author.cssselect('a[itemprop="url"]')[0]
+    figure = author.cssselect('.authorbox__media')
+    assert len(figure) == 1
 
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.get('itemscope') is not None
-    assert ('http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/square'
-            ) in image.cssselect('[itemprop="url"]')[0].get('content')
-    assert name.text.strip() == 'Jochen Wegner'
-    assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
-    assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
+    # test if no link to author page is available
+    url = author.cssselect('a[itemprop="url"]')
+    assert not url
+
+    # check if mobile and desktop resource are given
+    image = figure[0].cssselect('.authorbox__media-item')
+
+    # Mobile Image has aspect ratio of 1
+    assert image[0].attrib.get('data-mobile-ratio') == '1.0'
+
+    # Desktop Image has aspect ratio of 16 / 9 = 1.77777777778
+    assert image[0].attrib.get('data-ratio') == '1.77777777778'
 
 
 @pytest.mark.parametrize('c1_parameter', [
