@@ -13,7 +13,7 @@ POSTDEPLOY
 - rename `optimize_ab_testing` to `optimize_ab_testing_to_webtrekk` in feature toggles. value = false.
 
 
-3.148 (unreleased)
+3.148 (2018-05-08)
 ------------------
 
 - ZON-2774: Authorbox for Campus
