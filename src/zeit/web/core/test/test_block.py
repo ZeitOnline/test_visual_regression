@@ -390,10 +390,9 @@ def test_liveblog_api_request_is_not_stoped_by_unavailable_auth_server(
 
 
 def test_liveblog_api_request_renews_expired_cache_token(
-        application, liveblog, monkeypatch):
+        application, liveblog):
     new_cache = zeit.web.core.cache.get_region('long_term')
     new_cache.set('liveblog_api_auth_token', '12345')
-    monkeypatch.setattr(zeit.web.core.block, 'LONG_TERM_CACHE', new_cache)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     api_url = conf.get('liveblog_api_url_v3')
