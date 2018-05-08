@@ -16,6 +16,8 @@ POSTDEPLOY
 3.148 (unreleased)
 ------------------
 
+- ZON-2774: Authorbox for Campus
+
 - ZON-4554: Include Babator script on video pages
 
 - ZON-4619: Add script for sending GoogleOptimize tests to Webtrekk
