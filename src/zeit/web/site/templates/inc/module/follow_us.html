@@ -6,7 +6,7 @@
         <li class="{{ self.layout() }}__item">
             <a href="{{ url }}" target="_blank" class="{{ self.layout() }}__link {{ self.layout() }}__link--{{ name }}" title="{{ title }}" data-ct-label="{{ name }}">
                 <div class="{{ self.layout() }}__logo">
-                    {{ lama.use_svg_icon('follow-' ~ name, 'follow-us__icon follow-us__icon--' ~ name, view.package) }}
+                    {{ lama.use_svg_icon('follow-' ~ name, 'follow-us__icon follow-us__icon--' ~ name, view.package, a11y=False) }}
                 </div>
                 <div class="{{ self.layout() }}__linktext">{{ text }}</div>
             </a>

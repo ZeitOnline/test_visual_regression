@@ -16,6 +16,8 @@ POSTDEPLOY
 3.148 (unreleased)
 ------------------
 
+- ZON-2774: Authorbox for Campus
+
 - ZON-4554: Include Babator script on video pages
 
 - ZON-4619: Add script for sending GoogleOptimize tests to Webtrekk
@@ -25,6 +27,8 @@ POSTDEPLOY
 - SSL-247: Make sure to use http for esi include
 
 - BUG-912: Fix sharing-button's horizontal spacing
+
+- FEM-76: consider a11y for svg icons
 
 - MAINT: Upgrade Selenium
 
