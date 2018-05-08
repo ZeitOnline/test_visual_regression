@@ -74,7 +74,7 @@
         },
 
         decode: function( coded ) {
-            coded = coded.replace( /[^A-Za-z0-9\+\/\=]/g, '' );
+            coded = coded.replace( /[^A-Za-z0-9+/=]/g, '' );
             coded = String( coded ).split( '=' );
             var i = coded.length;
             do {
