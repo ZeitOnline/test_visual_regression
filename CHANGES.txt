@@ -22,11 +22,15 @@ POSTDEPLOY
 
 - ZON-4621: Show alexa link in podcast footer
 
+- SSL-247: Make sure to use http for esi include
+
+- BUG-912: Fix sharing-button's horizontal spacing
+
 - MAINT: Upgrade Selenium
 
 - MAINT: Use core function to obfuscate ZMO article date
 
-- SSL-247: Make sure to use http for esi include
+- MAINT: Use cache decorator for auth token on liveblog3
 
 
 3.147 (2018-05-03)
