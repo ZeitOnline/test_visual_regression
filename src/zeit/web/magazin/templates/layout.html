@@ -39,6 +39,7 @@
         {% if settings('livereload') %}
             <script src="//localhost:35729/livereload.js"></script>
         {% endif %}
+        {% block babator_include %}{% endblock %}
     </head>
     <body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
