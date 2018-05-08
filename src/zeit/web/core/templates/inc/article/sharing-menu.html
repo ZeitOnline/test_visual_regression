@@ -4,6 +4,7 @@
 {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.%s.link.x' | format(tracking_id) %}
 {% block sharing_menu -%}
 <div class="{% block layout %}sharing-menu{% endblock %}">
+    <h3 class="visually-hidden" tabindex="0">Jetzt teilen auf:</h3>
     <ul class="{{ self.layout() }}__items" id="sharing-menu-list" data-ct-row="social">
         <li class="{{ self.layout() }}__item">
             <a class="{{ '%s__link' | format(self.layout()) | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}" target="_blank" data-ct-label="facebook" title="Facebook">
