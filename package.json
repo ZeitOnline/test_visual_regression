@@ -77,9 +77,9 @@
     "svg": "npm-run-all --parallel svgo:* svg:sprite:*:*",
     "prejs": "npm run lint",
     "js": "npm run webpack:dist",
-    "webpack": "webpack",
-    "webpack:dist": "webpack -p",
-    "webpack:dev": "webpack -d --debug --display-modules",
+    "webpack": "webpack --mode development",
+    "webpack:dist": "webpack -p --mode production",
+    "webpack:dev": "webpack -d --mode development --display-modules",
     "prebuild": "npm run clean",
     "build": "NODE_ENV=production npm-run-all --parallel modernizr sass:dist js svg",
     "postinstall": "npm prune --no-save"
