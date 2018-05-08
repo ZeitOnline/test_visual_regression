@@ -30,6 +30,8 @@ POSTDEPLOY
 
 - FEM-76: consider a11y for svg icons
 
+- FEM-77: Change contrasts for a better accessibility
+
 - MAINT: Upgrade Selenium
 
 - MAINT: Use core function to obfuscate ZMO article date
