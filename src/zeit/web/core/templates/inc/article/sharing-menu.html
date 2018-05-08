@@ -8,7 +8,7 @@
     <ul class="{{ self.layout() }}__items" id="sharing-menu-list" data-ct-row="social">
         <li class="{{ self.layout() }}__item">
             <a class="{{ '%s__link' | format(self.layout()) | with_mods('facebook') }}" href="https://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}" target="_blank" data-ct-label="facebook" title="Facebook">
-                {{ lama.use_svg_icon('sharing-facebook', '%s__icon' | format(self.layout()) | with_mods('facebook'), view.package) }}
+                {{ lama.use_svg_icon('sharing-facebook', '%s__icon' | format(self.layout()) | with_mods('facebook'), view.package, a11y=False) }}
                 <span class="{{ self.layout() }}__text" aria-hidden="true">{% block sharing_menu_text_facebook %}Facebook{% endblock %}</span>
             </a>
         </li>
