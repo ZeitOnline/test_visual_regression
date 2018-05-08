@@ -326,7 +326,7 @@ class Liveblog(Module):
             status = getattr(err.response, 'status_code', 510)
             if status == 401:
                 log.debug('Refreshing liveblog3 auth token')
-                self.auth_token.invalidate()
+                self.auth_token.invalidate(self)
                 return self.api_blog_request(retries=retries + 1)
             raise
         try:
