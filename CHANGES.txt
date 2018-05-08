@@ -28,6 +28,8 @@ POSTDEPLOY
 
 - BUG-912: Fix sharing-button's horizontal spacing
 
+- FEM-76: consider a11y for svg icons
+
 - MAINT: Upgrade Selenium
 
 - MAINT: Use core function to obfuscate ZMO article date
