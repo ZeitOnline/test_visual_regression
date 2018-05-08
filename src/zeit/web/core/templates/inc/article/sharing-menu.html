@@ -7,13 +7,13 @@
     <h3 class="visually-hidden">Jetzt teilen auf:</h3>
     <ul class="{{ self.layout() }}__items" id="sharing-menu-list" data-ct-row="social">
         <li class="{{ self.layout() }}__item">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}" target="_blank" data-ct-label="facebook" title="Facebook">
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('facebook') }}" href="https://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}" target="_blank" data-ct-label="facebook" title="Facebook">
                 {{ lama.use_svg_icon('sharing-facebook', '%s__icon' | format(self.layout()) | with_mods('facebook'), view.package) }}
                 <span class="{{ self.layout() }}__text" aria-hidden="true">{% block sharing_menu_text_facebook %}Facebook{% endblock %}</span>
             </a>
         </li>
         <li class="{{ self.layout() }}__item">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('twitter') }}" href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via={{ view.twitter_username | urlencode }}&amp;url={{ content_url.format('twitter') | urlencode }}" target="_blank" data-ct-label="twitter" title="Twittern">
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('twitter') }}" href="https://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via={{ view.twitter_username | urlencode }}&amp;url={{ content_url.format('twitter') | urlencode }}" target="_blank" data-ct-label="twitter" title="Twittern">
                 {{ lama.use_svg_icon('sharing-twitter', '%s__icon' | format(self.layout()) | with_mods('twitter'), view.package, a11y=False) }}
                 <span class="{{ self.layout() }}__text" aria-hidden="true">{% block sharing_menu_text_twitter %}Twittern{% endblock %}</span>
             </a>
