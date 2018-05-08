@@ -306,8 +306,8 @@
 }
 
 @mixin zon-button-dark($color: $zon-lighter-grey, $margin: remify(14px 6px)) {
-	@include zon-button($background-color: rgba(0, 0, 0, 0.2),
-	                    $hover-background-color: rgba(0, 0, 0, 0.5),
+	@include zon-button($background-color: rgba(0, 0, 0, 0.6),
+	                    $hover-background-color: rgba(0, 0, 0, 0.9),
 	                    $color: $color,
 	                    $hover-color: $white,
 	                    $visited-color: $color,
