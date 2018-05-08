@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-import base64
 import datetime
-import json
 import logging
 import random
 import re
 import urlparse
 
 import babel.dates
-import dogpile.cache.api
 import grokcore.component
 import lxml.etree
 import lxml.html
