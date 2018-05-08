@@ -58,6 +58,7 @@
         <input type="hidden" name="action" value="mail"/>
         <div id="feedbackerror" class="feedback-form{% if success == 'False' %}__failure{% else %}__error{% endif %}">{% if success == 'False' %}Sie haben das Captcha nicht richtig ausgefüllt. Bitte versuchen Sie es nochmal.{% endif %}</div>
         <div class="feedback-form__inner">
+            {% block inner_title %}{% endblock %}
         {% if block.subject %}
             <input type="hidden" name="subject" value="{{ block.subject_display }}"/>
         {% else %}

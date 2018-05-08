@@ -1,0 +1,8 @@
+{% set block = area.values()[0] %}
+
+{% extends "zeit.web.core:templates/inc/shared/mailform.html" %}
+
+{% block inner_title %}
+    <p>Ihr Feedback an {{ block.author_name }}</p>
+{% endblock %}
+
