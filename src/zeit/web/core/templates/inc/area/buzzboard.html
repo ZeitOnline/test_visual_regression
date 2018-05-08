@@ -21,7 +21,7 @@
                 <th>
                     {% if module.icon %}
                         {% set modifier = module.icon.strip('buzz-') -%}
-                        {{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), view.package) }}
+                        {{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), view.package, a11y=False) }}
                     {% endif %}
                     {{ module.label | safe }}
                 </th>
