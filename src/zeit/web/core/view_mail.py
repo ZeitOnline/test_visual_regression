@@ -86,18 +86,13 @@ class SendMail(zeit.web.core.view.Base):
         return response
 
 @zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor,
-                      request_method='POST', request_param='action=mail')
+                      request_method='POST')
 class AuthorMail(SendMail):
-    def __init__(self):
-        import pdb; pdb.set_trace()
 
     @zeit.web.reify
     def recipient(self):
-        import pdb; pdb.set_trace()
-
-        if not self.context.mail:
+        if not self.context.email:
             message = 'No mail module found for POST to %s' % self.context
             log.error(message)
             raise RuntimeError(message)
-
-        return self.context.mail
+        return self.context.email
