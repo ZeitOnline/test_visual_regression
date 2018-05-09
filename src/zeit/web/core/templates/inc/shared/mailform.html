@@ -54,7 +54,7 @@
         }
     </script>
 
-    <form class="feedback-form" id="feedbackform" name="feedbackform" aria-label="Haben Sie Feedback?" method="POST">
+    <form class="feedback-form" id="feedbackform" name="feedbackform" aria-label="Haben Sie Feedback?" method="POST" action="{{ context | create_url }}">
         <input type="hidden" name="action" value="mail"/>
         <div id="feedbackerror" class="feedback-form{% if success == 'False' %}__failure{% else %}__error{% endif %}">{% if success == 'False' %}Sie haben das Captcha nicht richtig ausgefüllt. Bitte versuchen Sie es nochmal.{% endif %}</div>
         <div class="feedback-form__inner">
