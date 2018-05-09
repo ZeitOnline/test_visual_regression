@@ -2106,7 +2106,7 @@ def test_overscrolling_is_working_as_expected(selenium_driver, testserver):
     condition = expected_conditions.visibility_of_element_located((
         By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
     assert WebDriverWait(
-        selenium_driver, 1).until(condition)
+        selenium_driver, 5).until(condition)
     # overscrolling is inactive in app
     driver.get(
         '%s/zeit-online/article/01?app-content' % testserver.url)
