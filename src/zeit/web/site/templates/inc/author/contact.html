@@ -33,7 +33,7 @@
 
     {% if context.email %}
     <div class="author-contact__item">
-        <a href="{{ view.content_url }}/#feedback" class="author-contact__link">
+        <a href="{{ view.content_url }}/feedback#author-content" class="author-contact__link">
             {{ lama.use_svg_icon('author-email', 'author-contact__icon' | with_mods('email'), view.package) }}
             <span class="author-contact__text">Feedback an {{ context.display_name }}</span>
         </a>
