@@ -1,11 +1,11 @@
 {
   "plugins": [
+  	{"removeViewBox": false},
+  	{"removeTitle": false},
     {
-      "removeTitle": false,
-      "removeViewBox": false,
-      "removeAttrs": {
-        "attrs": "(fill|fill-opacity|stroke|stroke-width)"
-      }
-    }
+    	"removeAttrs": {
+        	"attrs": "(fill|fill-opacity|stroke|stroke-width)"
+    	}
+	}
   ]
 }
