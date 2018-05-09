@@ -5,6 +5,7 @@ import pyramid.request
 import zope.component
 
 import zeit.content.article.interfaces
+import zeit.content.author.interfaces
 import zeit.content.modules.interfaces
 
 import zeit.web
@@ -83,3 +84,20 @@ class SendMail(zeit.web.core.view.Base):
 
         response.cache_expires(0)
         return response
+
+@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor,
+                      request_method='POST', request_param='action=mail')
+class AuthorMail(SendMail):
+    def __init__(self):
+        import pdb; pdb.set_trace()
+
+    @zeit.web.reify
+    def recipient(self):
+        import pdb; pdb.set_trace()
+
+        if not self.context.mail:
+            message = 'No mail module found for POST to %s' % self.context
+            log.error(message)
+            raise RuntimeError(message)
+
+        return self.context.mail

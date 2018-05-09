@@ -147,9 +147,10 @@ class Feedback(Author):
         module = zeit.content.cp.blocks.mail.MailBlock(
             area, lxml.objectify.XML('<dummy/>'))
 
-        module.to = self.context.email
+        module.to = 'hennes.roemmer@zeit.de' # self.context.email
         module.subject = 'Sie haben Feedback erhalten'
         module.author_name = self.context.display_name
+        module.success_message = 'Ihr Feedback wurde erfolgreich verschickt.'
 
         area.append(zeit.web.core.centerpage.get_module(module))
         return area
