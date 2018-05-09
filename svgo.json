@@ -1,6 +1,7 @@
 {
   "plugins": [
     {
+      "removeTitle": false,
       "removeViewBox": false,
       "removeAttrs": {
         "attrs": "(fill|fill-opacity|stroke|stroke-width)"
