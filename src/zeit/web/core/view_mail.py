@@ -13,7 +13,6 @@ import zeit.web.core.article
 import zeit.web.core.interfaces
 import zeit.web.magazin.article
 
-
 log = logging.getLogger(__name__)
 
 
@@ -96,3 +95,24 @@ class AuthorMail(SendMail):
             log.error(message)
             raise RuntimeError(message)
         return self.context.email
+
+    def render_original_view(self, success):
+        subrequest = pyramid.request.Request.blank(
+             self.request.POST['return_url'],
+             headers=dict(self.request.headers))
+        # So the `mail` module template knows to render a success message
+        subrequest.headers['X-Mail-Success'] = str(success)
+        # We cannot simply copy POST into subrequest.POST because webob is too
+        # strict and would require method to be POST as well -- but we want GET
+        for key, value in self.request.POST.items():
+            subrequest.headers['X-POST-%s' % key] = value
+
+
+        response = self.request.invoke_subrequest(subrequest, use_tweens=True)
+        if response.status_int != 200:
+            log.error('Error rendering %s after POST', self.request.url)
+            raise pyramid.httpexceptions.HTTPInternalServerError()
+
+        response.cache_expires(0)
+
+        return response
