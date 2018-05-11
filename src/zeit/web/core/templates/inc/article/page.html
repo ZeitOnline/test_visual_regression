@@ -1,4 +1,9 @@
-{% set ns = namespace(contents_printed=False) %}
+{% if ns is not defined %}
+    {# Preserve previous value if this template is included within another one.
+       e.g. z.w.s:templates/inc/blocks/faqitemblock.html
+    #}
+    {% set ns = namespace(contents_printed=False) %}
+{% endif %}
 {% block before_page %}{% endblock %}
 {% for block in page %}
     {% set type = block | block_type %}
