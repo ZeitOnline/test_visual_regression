@@ -48,11 +48,11 @@ def test_author_page_should_render_feedback(testbrowser):
 
 def test_post_should_trigger_mail_then_render_success(testbrowser):
     # load thomas to make sure no real author gets test mails
-    b = testbrowser('/autoren/S/Thomas_Strothjohann/index/feedback')
+    browser = testbrowser('/autoren/S/Thomas_Strothjohann/index/feedback')
 
-    b.getControl(name='body').value = 'Testfeedback body'
+    browser.getControl(name='body').value = 'Testfeedback body'
     # submit form
-    b.getForm(name='feedbackform').submit()
+    browser.getForm(name='feedbackform').submit()
 
     mail = zope.component.getUtility(zeit.web.core.interfaces.IMail)
     mail.send.assert_called_with('', 'thomas.strothjohann@zeit.de',
@@ -60,8 +60,8 @@ def test_post_should_trigger_mail_then_render_success(testbrowser):
         'Testfeedback body\n\n-- \nGesendet von ' +
         'http://localhost/autoren/S/Thomas_Strothjohann/index')
 
-    assert 'Ihr Feedback wurde erfolgreich verschickt.' in b.contents
-    assert 'Ihr Feedback an' not in b.contents
+    assert 'Ihr Feedback wurde erfolgreich verschickt.' in browser.contents
+    assert 'Ihr Feedback an' not in browser.contents
 
 def test_author_missing_captcha_should_render_error_and_preserve_body(
         testbrowser, request):
@@ -72,10 +72,10 @@ def test_author_missing_captcha_should_render_error_and_preserve_body(
         captcha.verify.return_value = True
     request.addfinalizer(reset_mock_captcha)
 
-    b = testbrowser('/autoren/S/Thomas_Strothjohann/index/feedback')
-    b.getControl(name='subject').value = 'Sie haben Feedback erhalten.'
-    b.getControl(name='body').value = 'Emailbody'
-    b.getForm(name='feedbackform').submit()
+    browser = testbrowser('/autoren/S/Thomas_Strothjohann/index/feedback')
+    browser.getControl(name='subject').value = 'Sie haben Feedback erhalten.'
+    browser.getControl(name='body').value = 'Emailbody'
+    browser.getForm(name='feedbackform').submit()
 
-    assert 'Sie haben das Captcha' in b.contents
-    assert b.getControl(name='body').value == 'Emailbody'
+    assert 'Sie haben das Captcha' in browser.contents
+    assert browser.getControl(name='body').value == 'Emailbody'
