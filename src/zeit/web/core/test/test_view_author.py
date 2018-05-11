@@ -20,3 +20,32 @@ def test_author_page_should_render_bio_questions(testbrowser):
     assert question7 == ('Mit diesem Menschen hatte ich als Journalist einen '
                          'unvergesslichen Moment')
     assert question8 == u'Diese Recherche hat etwas verändert'
+
+def test_author_has_contact_link(testbrowser):
+    browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
+
+    # has contact link
+    feedbackLinkArray = browser.cssselect('.author-contact__link')
+    hasFeedbackLink = False
+    for feedbackLink in feedbackLinkArray:
+        if feedbackLink.attrib.get('href').endswith(
+            'autoren/D/Tobias_Dorfer/index/feedback#author-content'):
+            hasFeedbackLink = True
+
+    assert hasFeedbackLink
+
+def test_author_page_should_render_feedback(testbrowser):
+    browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
+
+    # has feedback section
+    feedbackBox = browser.cssselect('.feedback-section')
+    assert len(feedbackBox) == 1
+
+    # has section intro text
+    feedbackIntro = browser.cssselect('.feedback-form__inner p')[0].text
+    assert feedbackIntro.startswith('Ihr Feedback an')
+
+    # has required textarea
+    feedbackTextarea = browser.cssselect('.feedback-form__textarea')[0]
+    assert feedbackTextarea.attrib.has_key('required')
+
