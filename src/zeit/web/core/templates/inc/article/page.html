@@ -12,6 +12,7 @@
         {% block table_of_contents %}
             {% include [
                 "{0}:templates/inc/article/table-of-contents.html".format(view.package),
+                "zeit.web.core:templates/inc/article/table-of-contents_{0}.html".format(view.template),
                 "zeit.web.core:templates/inc/article/table-of-contents.html"] %}
 
         {% endblock %}

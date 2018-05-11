@@ -1,46 +1,3 @@
-{% if view.template == 'faq' %}
-<aside class="article-flexible-toc article__item article__item--wide">
-    <div class="article-flexible-toc__container">
-        <h3 class="article-flexible-toc__headline" id="article-flexible-toc-label">
-            Alle Fragen im Überblick:
-        </h3>
-        <div class="article-flexible-toc__seperator" id="article-flexible-toc-box">
-            <ul class="article-flexible-toc__list" id="article-flexible-toc-list">
-            {% set morequestions = [] %}
-            {%- for subheading in view.subheadings %}
-                {%- if loop.index > 8 %}
-                    {% if morequestions.append(True) %}{% endif %}
-                {% endif %}
-                <li class="article-flexible-toc__item article-flexible-toc__item--empty {% if morequestions %}article-flexible-toc__item--hide{% endif %}">
-                    <a class="article-flexible-toc__link js-scroll" href="{{ view.content_url}}#{{ subheading.text|format_faq }}" data-ct-label="{{ subheading.text }}">{{ subheading.text }}</a>
-                </li>
-            {%- endfor -%}
-            </ul>
-            {% if morequestions %}
-                <a href="#article-flexible-toc-label" class="js-scroll" id="showall" data-ct-label="mehr anzeigen">
-                    <div class="article-flexible-toc__fadeout"></div>
-                    <div class="article-flexible-toc__showall">Mehr anzeigen</div>
-                </a>
-            {% endif %}
-        </div>
-    </div>
-</aside>
-<script>
-    document.getElementById('showall').onclick = function () {
-        if (document.getElementById('showall')) {
-            // show hidden elements
-            var elements = document.getElementsByClassName('article-flexible-toc__item--hide');
-            while (elements.length > 0) {
-                elements[0].classList.remove('article-flexible-toc__item--hide');
-            }
-
-            // remove showall
-            var showall = document.getElementById('showall');
-            showall.classList.add('article-flexible-toc__item--hide');
-        }
-    }
-</script>
-{% elif view.pagination and view.pagination.total > 1 %}
 <aside class="article-toc article__item article__item--wide" data-ct-area="article-toc" data-ct-row="{{ 'page_%s_of_%s' | format(view.pagination.current, view.pagination.total) }}" data-ct-column="false">
     <div class="article-toc__container">
         <h3 class="article-toc__headline" id="article-toc-label" aria-controls="{% block toc_expandable_region %}article-toc-list{% endblock %}" data-constrained="mobile,phablet">
@@ -78,4 +35,3 @@
         </div>
     </div>
 </aside>
-{% endif %}
