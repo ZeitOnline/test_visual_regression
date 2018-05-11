@@ -13,7 +13,13 @@ POSTDEPLOY
 - rename `optimize_ab_testing` to `optimize_ab_testing_to_webtrekk` in feature toggles. value = false.
 
 
-3.148 (unreleased)
+3.149 (unreleased)
+------------------
+
+- PERF: Don't additionally retrieve body for TMS/ES results
+
+
+3.148 (2018-05-08)
 ------------------
 
 - ZON-2774: Authorbox for Campus
@@ -27,6 +33,10 @@ POSTDEPLOY
 - SSL-247: Make sure to use http for esi include
 
 - BUG-912: Fix sharing-button's horizontal spacing
+
+- FEM-76: consider a11y for svg icons
+
+- FEM-77: Change contrasts for a better accessibility
 
 - MAINT: Upgrade Selenium
 
