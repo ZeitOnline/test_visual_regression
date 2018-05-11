@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import zope.component
+
+import zeit.web.core.interfaces
 
 def test_author_page_should_render_bio_questions(testbrowser):
     browser = testbrowser('/autoren/D/Tobias_Dorfer')
@@ -49,3 +52,36 @@ def test_author_page_should_render_feedback(testbrowser):
     feedbackTextarea = browser.cssselect('.feedback-form__textarea')[0]
     assert feedbackTextarea.attrib.has_key('required')
 
+def test_post_should_trigger_mail_then_render_success(testbrowser):
+    # load thomas to make sure no real author gets test mails
+    b = testbrowser('/autoren/S/Thomas_Strothjohann/index/feedback')
+
+    b.getControl(name='body').value = 'Testfeedback body'
+    # submit form
+    b.getForm(name='feedbackform').submit()
+
+    mail = zope.component.getUtility(zeit.web.core.interfaces.IMail)
+    mail.send.assert_called_with('', 'thomas.strothjohann@zeit.de',
+        'Sie haben Feedback erhalten',
+        'Testfeedback body\n\n-- \nGesendet von ' +
+        'http://localhost/autoren/S/Thomas_Strothjohann/index')
+
+    assert 'Ihr Feedback wurde erfolgreich verschickt.' in b.contents
+    assert 'Ihr Feedback an' not in b.contents
+
+def test_author_missing_captcha_should_render_error_and_preserve_body(
+        testbrowser, request):
+    captcha = zope.component.getUtility(zeit.web.core.interfaces.ICaptcha)
+    captcha.verify.return_value = False
+
+    def reset_mock_captcha():
+        captcha.verify.return_value = True
+    request.addfinalizer(reset_mock_captcha)
+
+    b = testbrowser('/autoren/S/Thomas_Strothjohann/index/feedback')
+    b.getControl(name='subject').value = 'Sie haben Feedback erhalten.'
+    b.getControl(name='body').value = 'Emailbody'
+    b.getForm(name='feedbackform').submit()
+
+    assert 'Sie haben das Captcha' in b.contents
+    assert b.getControl(name='body').value == 'Emailbody'
