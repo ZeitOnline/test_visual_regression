@@ -130,6 +130,7 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
     def author_email(self):
         return self.context.email
 
+
 @zeit.web.view_config(name='feedback')
 class Feedback(Author):
 
@@ -153,6 +154,7 @@ class Feedback(Author):
 
         area.append(zeit.web.core.centerpage.get_module(module))
         return area
+
 
 @zeit.web.view_config(name='kommentare')
 class Comments(Author):

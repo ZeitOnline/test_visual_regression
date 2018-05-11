@@ -80,9 +80,9 @@ class SendMail(zeit.web.core.view.Base):
         if response.status_int != 200:
             log.error('Error rendering %s after POST', self.request.url)
             raise pyramid.httpexceptions.HTTPInternalServerError()
-
         response.cache_expires(0)
         return response
+
 
 @zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor,
                       request_method='POST')
@@ -107,12 +107,11 @@ class AuthorMail(SendMail):
         for key, value in self.request.POST.items():
             subrequest.headers['X-POST-%s' % key] = value
 
-
         response = self.request.invoke_subrequest(subrequest, use_tweens=True)
+
         if response.status_int != 200:
             log.error('Error rendering %s after POST', self.request.url)
             raise pyramid.httpexceptions.HTTPInternalServerError()
 
         response.cache_expires(0)
-
         return response
