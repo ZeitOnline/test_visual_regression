@@ -4,6 +4,7 @@ import zope.component
 
 import zeit.web.core.interfaces
 
+
 def test_author_page_should_render_bio_questions(testbrowser):
     browser = testbrowser('/autoren/D/Tobias_Dorfer')
     question1 = browser.cssselect('.author-questions__title')[0].text
@@ -24,12 +25,15 @@ def test_author_page_should_render_bio_questions(testbrowser):
                          'unvergesslichen Moment')
     assert question8 == u'Diese Recherche hat etwas verändert'
 
+
 def test_author_has_contact_link(testbrowser):
     browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
-
+    path = 'autoren/D/Tobias_Dorfer/index/feedback#author-content'
     # has contact link
-    feedbackLink = browser.cssselect('.author-contact__link[href$="autoren/D/Tobias_Dorfer/index/feedback#author-content"]')
+    feedbackLink = browser.cssselect(
+        '.author-contact__link[href$="' + path + '"]')
     assert len(feedbackLink) == 1
+
 
 def test_author_page_should_render_feedback(testbrowser):
     browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
@@ -44,7 +48,8 @@ def test_author_page_should_render_feedback(testbrowser):
 
     # has required textarea
     feedbackTextarea = browser.cssselect('.feedback-form__textarea')[0]
-    assert feedbackTextarea.attrib.has_key('required')
+    assert feedbackTextarea.attrib.in('required')
+
 
 def test_post_should_trigger_mail_then_render_success(testbrowser):
     # load thomas to make sure no real author gets test mails
@@ -55,13 +60,16 @@ def test_post_should_trigger_mail_then_render_success(testbrowser):
     browser.getForm(name='feedbackform').submit()
 
     mail = zope.component.getUtility(zeit.web.core.interfaces.IMail)
-    mail.send.assert_called_with('', 'thomas.strothjohann@zeit.de',
+    mail.send.assert_called_with(
+        '',
+        'thomas.strothjohann@zeit.de',
         'Sie haben Feedback erhalten',
         'Testfeedback body\n\n-- \nGesendet von ' +
         'http://localhost/autoren/S/Thomas_Strothjohann/index')
 
     assert 'Ihr Feedback wurde erfolgreich verschickt.' in browser.contents
     assert 'Ihr Feedback an' not in browser.contents
+
 
 def test_author_missing_captcha_should_render_error_and_preserve_body(
         testbrowser, request):
