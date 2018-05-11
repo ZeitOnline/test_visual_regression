@@ -3,7 +3,7 @@
 {% for block in page %}
     {% set type = block | block_type %}
     {% if not (ns.contents_printed or view.is_all_pages_view) and type in [
-        'paragraph', 'unorderedlist', 'orderedlist', 'intertitle', 'portraitbox', 'authorbox'] %}
+        'paragraph', 'unorderedlist', 'orderedlist', 'intertitle', 'portraitbox', 'authorbox', 'faqitemblock'] %}
         {% block table_of_contents %}
             {% include [
                 "{0}:templates/inc/article/table-of-contents.html".format(view.package),
