@@ -261,13 +261,10 @@ class FAQItemBlock(Page):
         self.blocks = []
 
 
-def restructure_faq_article(pages):
-    # FAQs by definition consist only of a single page. Since multi page FAQs
-    # may break rendering logic further along the way, let's just handle the
-    # first page only. Of course there's also a validation rule in vivi, but
-    # you never know...
+def restructure_faq_article(page):
+    # FAQs by definition consist only of a single page.
     restructured_blocks = []
-    for block in pages[0].blocks:
+    for block in page.blocks:
         if isinstance(block, zeit.web.core.block.Intertitle):
             faq_item_block = FAQItemBlock()
             faq_item_block.append(block)
@@ -277,8 +274,8 @@ def restructure_faq_article(pages):
             restructured_blocks.append(block)
         else:
             restructured_blocks[-1].append(block)
-        pages[0].blocks = restructured_blocks
-    return pages
+        page.blocks = restructured_blocks
+    return page
 
 
 def convert_authors(article):

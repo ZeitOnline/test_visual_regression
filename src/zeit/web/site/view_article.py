@@ -215,16 +215,20 @@ class FAQArticle(Article):
     # reached the end of the page.
     @zeit.web.reify
     def pages(self):
-        pages = super(FAQArticle, self).pages
-        return zeit.web.core.article.restructure_faq_article(
-            pages)
+        # FAQs by definition consist only of a single page. Since multi page
+        # FAQs will break rendering logic further along the way, let's just
+        # handle the first page only. Of course there's also a validation rule
+        # in vivi, but you never know...
+        page = super(FAQArticle, self).pages[0]
+        return [zeit.web.core.article.restructure_faq_article(
+            page)]
 
     @zeit.web.reify
     def subheadings(self):
-        for page in self.pages:
-            for block in page.blocks[:]:
-                if isinstance(block, zeit.web.core.block.Intertitle):
-                    yield block.context
+        for block in self.pages[0].blocks:
+            if isinstance(block, zeit.web.core.article.FAQItemBlock):
+                if isinstance(block[0], zeit.web.core.block.Intertitle):
+                    yield block[0].context
 
 
 @zeit.web.view_config(
