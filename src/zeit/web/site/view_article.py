@@ -205,6 +205,20 @@ class AFPArticle(Article):
     renderer='templates/faq.html')
 class FAQArticle(Article):
 
+    # FAQs consist of a question, represented by an intertitle block, and an
+    # answer, represented by one or more blocks that are anything but an
+    # intertitle (e.g. paragraphs, images, etc.).
+    # schema.org optimization dictates, that each question and answer is
+    # bundled together inside a seperate block. Therefore we need to loop
+    # through all blocks, searching for intertitles and wrap them together with
+    # all consecutive blocks until another intertitle is found or we have
+    # reached the end of the page.
+    @zeit.web.reify
+    def pages(self):
+        pages = super(FAQArticle, self).pages
+        return zeit.web.core.article.restructure_faq_article(
+            pages)
+
     @zeit.web.reify
     def subheadings(self):
         for page in self.pages:

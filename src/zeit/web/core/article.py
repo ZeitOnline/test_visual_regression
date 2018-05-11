@@ -249,6 +249,38 @@ def pages_of_article(article, advertising_enabled=True):
     return _inject_banner_code(pages, pubtype)
 
 
+@zope.interface.implementer(zeit.web.core.interfaces.IArticleModule)
+class FAQItemBlock(Page):
+
+    """A block for FAQs, wrapped around questions and corresponding answers.
+    This may be placed in z.w.c.block instead, but will result in
+    circular imports.
+    """
+
+    def __init__(self):
+        self.blocks = []
+
+
+def restructure_faq_article(pages):
+    # FAQs by definition consist only of a single page. Since multi page FAQs
+    # may break rendering logic further along the way, let's just handle the
+    # first page only. Of course there's also a validation rule in vivi, but
+    # you never know...
+    restructured_blocks = []
+    for block in pages[0].blocks:
+        if isinstance(block, zeit.web.core.block.Intertitle):
+            faq_item_block = FAQItemBlock()
+            faq_item_block.append(block)
+            restructured_blocks.append(faq_item_block)
+        elif zeit.web.core.interfaces.IPlace.providedBy(block) or (
+                zeit.web.core.interfaces.IContentAdBlock.providedBy(block)):
+            restructured_blocks.append(block)
+        else:
+            restructured_blocks[-1].append(block)
+        pages[0].blocks = restructured_blocks
+    return pages
+
+
 def convert_authors(article):
     is_longform = zeit.web.magazin.article.ILongformArticle.providedBy(article)
     author_list = []
