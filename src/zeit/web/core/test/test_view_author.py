@@ -48,7 +48,7 @@ def test_author_page_should_render_feedback(testbrowser):
 
     # has required textarea
     feedbackTextarea = browser.cssselect('.feedback-form__textarea')[0]
-    assert feedbackTextarea.attrib.in('required')
+    assert 'required' in feedbackTextarea.attrib
 
 
 def test_post_should_trigger_mail_then_render_success(testbrowser):
