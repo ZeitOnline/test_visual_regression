@@ -340,9 +340,12 @@ class InstantArticleFeed(Base):
                         None, content, self.request))
 
                 scheme, netloc, path, _, _, _ = urlparse.urlparse(content_url)
+
+                # content_url has an `https` scheme. Varnish
+                # won't resolve this scheme, which is why we set it to `http`
+                # statically.
                 instant_articles_url = (
-                    '{}://{}/instantarticle-item{}'.format(
-                        scheme, netloc, path))
+                    'http://{}/instantarticle-item{}'.format(netloc, path))
 
                 channel.append(EN(
                     'esi', 'include',

@@ -43,6 +43,7 @@ def test_newsfeeds(config):
 
 def test_login_and_logout(config):
     b = zope.testbrowser.browser.Browser()
+    b.mech_browser.set_handle_robots(False)
     b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
     b.getControl(name='email').value = config['MEMBER_USERNAME']
     b.getControl(name='pass').value = config['MEMBER_PASSWORD']
@@ -191,14 +192,14 @@ def test_configured_redirects(config):
     current_year = datetime.now().year
     resp = requests.head('{}/archiv'.format(config['BASE_URL']),
                          allow_redirects=False)
-    assert resp.headers['Location'] == 'http://www.zeit.de/{}/index'.format(
+    assert resp.headers['Location'] == 'https://www.zeit.de/{}/index'.format(
         current_year)
     resp = requests.head('{}/ZEITmagazin/'.format(config['BASE_URL']),
                          allow_redirects=False)
-    assert resp.headers['Location'] == 'http://www.zeit.de/zeit-magazin/index'
+    assert resp.headers['Location'] == 'https://www.zeit.de/zeit-magazin/index'
     resp = requests.head('{}/archiv/2000/foo'.format(config['BASE_URL']),
                          allow_redirects=False)
-    assert resp.headers['Location'] == 'http://www.zeit.de/2000/foo'
+    assert resp.headers['Location'] == 'https://www.zeit.de/2000/foo'
 
 
 def test_iq_ehash_returns_expected_string(

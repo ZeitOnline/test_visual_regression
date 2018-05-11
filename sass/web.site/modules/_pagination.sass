@@ -143,3 +143,12 @@
 				padding: 0 1.2em
 		&--overview
 			border-width: 1px 0
+
+
+// hide "single quotation mark" from being read by screen readers
+@media speech
+	.article-pagination__button
+		&--previous:before,
+		&--next:after
+        	display: none
+        	visibility: hidden

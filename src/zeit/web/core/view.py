@@ -649,8 +649,7 @@ class Base(object):
             ('cp28', access),  #
             ('cp29', first_click_free),  # First click free
             ('cp30', self.paywall or 'open'),  # Paywall Schranke
-            ('cp32', 'unfeasible'),  # Protokoll (set via JS in webtrekk.html)
-            ('cp36', 'unfeasible')  # Google Optimize
+            ('cp32', 'unfeasible')  # Protokoll (set via JS in webtrekk.html)
         ])
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
@@ -911,21 +910,12 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             return date.astimezone(self.timezone)
 
     @zeit.web.reify
-    def date_format(self):
-        if self.product_id in ('ZEI', 'ZMLB'):
-            return 'short'
-        return 'long'
-
-    @zeit.web.reify
     def show_date_format(self):
         if self.date_last_published_semantic:
             return 'long'
-        else:
-            return self.date_format
-
-    @zeit.web.reify
-    def show_date_format_seo(self):
-        return self.date_format
+        elif self.product_id in ('ZEI', 'ZMLB'):
+            return 'short'
+        return 'long'
 
     @zeit.web.reify
     def adwords(self):
@@ -981,7 +971,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
     def obfuscated_date(self):
         if self.last_modified_label:
             date = zeit.web.core.template.format_date(
-                self.date_first_released, 'long')
+                self.date_first_released, self.show_date_format)
             return base64.b64encode(date.encode('latin-1'))
 
     @zeit.web.reify
@@ -1025,13 +1015,11 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
     @zeit.web.reify
     def unobfuscated_source(self):
         if self.context.product and self.context.product.show == 'issue':
-            if self.source_label:
-                label = self.source_label
-                if self.date_print_published:
-                    label += ', ' + babel.dates.format_date(
-                        self.date_print_published,
-                        "d. MMMM yyyy", locale="de_De")
-                return label
+            if self.source_label and self.date_print_published:
+                return u'{}, {}'.format(
+                    self.source_label,
+                    babel.dates.format_date(self.date_print_published,
+                                            "d. MMMM yyyy", locale="de_De"))
 
     @zeit.web.reify
     def webtrekk(self):
@@ -1068,6 +1056,10 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             ligatus_special_output.append(self.serie)
 
         return ligatus_special_output
+
+    @zeit.web.reify
+    def contains_video(self):
+        return False
 
     @zeit.web.reify
     def ligatus_do_not_index(self):

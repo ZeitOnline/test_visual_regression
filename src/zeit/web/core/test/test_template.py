@@ -390,8 +390,9 @@ def test_get_svg_from_file_should_return_svg(application):
     package = 'zeit.web.site'
     cleanup = True
     a11y = True
+    remove_title = False
     svg = zeit.web.core.template.get_svg_from_file(
-        name, class_name, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y, remove_title)
     assert '<svg xmlns="http://www.w3.org/2000/svg"' in svg
     assert 'width="14" height="13" viewBox="0 0 14 13"' in svg
     assert 'class="svg-symbol reload-test"' in svg
@@ -405,8 +406,9 @@ def test_get_svg_from_file_should_return_no_a11y_svg(application):
     package = 'zeit.web.site'
     a11y = False
     cleanup = True
+    remove_title = False
     svg = zeit.web.core.template.get_svg_from_file(
-        name, class_name, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y, remove_title)
     assert 'aria-hidden="true"' in svg
     assert 'aria-label="Neu laden"' not in svg
 
@@ -416,10 +418,26 @@ def test_get_svg_without_package_should_be_empty_str(application):
     class_name = 'reload-test'
     a11y = False
     cleanup = True
+    remove_title = False
     package = ''
     svg = zeit.web.core.template.get_svg_from_file(
-        name, class_name, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y, remove_title)
     assert svg == ''
+
+
+def test_get_svg_from_file_can_remove_title(application):
+    name = 'follow-newsletter'
+    class_name = 'follow-newsletter'
+    package = 'zeit.web.site'
+    a11y = False
+    cleanup = True
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, class_name, package, cleanup, a11y, remove_title=False)
+    assert '<title>' in svg
+
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, class_name, package, cleanup, a11y, remove_title=True)
+    assert '<title>' not in svg
 
 
 def test_zplus_is_false_for_free_articles(application):

@@ -2,25 +2,12 @@
 import re
 
 import mock
-import pytest
-import pyramid.threadlocal
 
 import zeit.cms.interfaces
 
 import zeit.web.core.centerpage
 import zeit.web.core.template
 import zeit.web.core.utils
-
-
-@pytest.fixture
-def monkeyreq(monkeypatch):
-    def request():
-        m = mock.Mock()
-        m.route_url = lambda x: "http://example.com/"
-        m.image_host = 'http://example.com'
-        return m
-
-    monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
 
 
 def test_cp_should_have_buzz_module(testbrowser):

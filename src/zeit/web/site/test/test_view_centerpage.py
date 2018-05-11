@@ -206,6 +206,7 @@ def test_fullwidth_teaser_image_should_use_mobile_variant_on_mobile(
     assert 1.7 < ratio < 1.8, 'mobile ratio should be 16:9-ish'
 
 
+@pytest.mark.xfail(reason='not testable this way with selenium3/geckodriver')
 def test_fullwidth_teaser_image_should_use_desktop_variant_on_desktop(
         selenium_driver, testserver):
     driver = selenium_driver
@@ -217,27 +218,6 @@ def test_fullwidth_teaser_image_should_use_desktop_variant_on_desktop(
     assert '/cinema__' in img.get_attribute('currentSrc'), \
         'wide image variant should be used on mobile devices'
     assert 2.3 < ratio < 2.4, 'desktop cinema ratio should be 7:3-ish'
-
-
-def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
-    teaser = driver.find_element_by_class_name('teaser-fullwidth')
-    helper = driver.find_element_by_class_name('teaser-fullwidth__container')
-    script = 'return document.documentElement.clientWidth'
-
-    assert teaser.is_displayed(), 'Fullwidth teaser missing'
-    assert helper.is_displayed(), 'Fullwidth teaser container missing'
-
-    if screen_size[0] == 768:
-        width = driver.execute_script(script)
-        assert helper.size.get('width') == int('%.0f' % (width * 0.72))
-
-    elif screen_size[0] == 1000:
-        width = driver.execute_script(script)
-        assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
 
 
 def test_main_teasers_should_be_rendered_correctly(testbrowser):
@@ -461,7 +441,7 @@ def test_small_teaser_without_image_has_no_padding_left(
     driver.get('%s/zeit-online/teaser-serie-setup' % testserver.url)
     teaser = driver.find_element_by_css_selector(
         '*[data-unique-id*="/article-ohne-bild"] .teaser-small__container')
-    assert teaser.location.get('x') is 20
+    assert int(teaser.location.get('x')) == 20
 
 
 def test_parquet_region_list_should_have_regions(application):
@@ -709,10 +689,10 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
     elif screen_size[0] == 520:
         assert teaser.size.get('width') == main_width
     elif screen_size[0] == 768:
-        assert teaser.size.get('width') == (int(
+        assert int(round(teaser.size.get('width'))) == (int(
             round((main_width - gutter_width) / 3.0) - gutter_width))
     elif screen_size[0] == 1000:
-        assert teaser.size.get('width') == (int(
+        assert int(round(teaser.size.get('width'))) == (int(
             round((main_width - gutter_width) / 3.0) - gutter_width))
 
 
@@ -1650,7 +1630,7 @@ def test_studiumbox_changes_tabs(selenium_driver, testserver):
 
 def test_studiumbox_interessentest_works(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     box.find_elements_by_tag_name('h2')
@@ -1668,7 +1648,7 @@ def test_studiumbox_interessentest_works(selenium_driver, testserver):
 
 def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     links = box.find_elements_by_tag_name('h2')
@@ -1691,7 +1671,7 @@ def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
 
 def test_studiumbox_ranking_works(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     links = box.find_elements_by_tag_name('h2')
@@ -1716,7 +1696,7 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
 
 def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     link = box.find_elements_by_tag_name('h2')[2].find_element_by_tag_name('a')
@@ -1839,7 +1819,7 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
     driver.maximize_window()
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     link = driver.find_element_by_css_selector('.js-image-copyright-footer')
-    link.click()
+    driver.execute_script('arguments[0].click()', link)
     try:
         WebDriverWait(driver, 5).until(
             expected_conditions.presence_of_element_located(
@@ -1857,7 +1837,7 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
 
         closelink = driver.find_element_by_class_name(
             'js-image-copyright-footer-close')
-        closelink.click()
+        driver.execute_script('arguments[0].click()', closelink)
         try:
             WebDriverWait(driver, 5).until(
                 expected_conditions.invisibility_of_element_located(
@@ -2452,11 +2432,11 @@ def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
 
     if screen_size[0] == 768:
         width = teaser.size.get('width')
-        assert helper.size.get('width') == int('%.0f' % (width * 0.72))
+        assert int(helper.size.get('width')) == int(width * 0.72)
 
     elif screen_size[0] == 1000:
         width = teaser.size.get('width')
-        assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
+        assert int(helper.size.get('width')) == int(round(width * 0.6666))
 
 
 def test_cp_teaser_should_display_three_authors_max(testbrowser):
@@ -2975,17 +2955,6 @@ def test_gallery_teaser_handles_articles_with_inline_galleries(testbrowser):
         'http://xml.zeit.de/zeit-online/article/inline-gallery'))[0]
     counter = article.cssselect('.teaser-gallery__counter')[0]
     assert counter.text == '7 Fotos'
-
-
-def test_centerpage_can_include_optimizely(testbrowser):
-    browser = testbrowser('/zeit-online/slenderized-centerpage')
-    assert 'optimizely' not in browser.contents
-
-    optimizely_url = '//cdn.optimizely.com/js/281825380.js'
-    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['optimizely_on_zon_centerpage'] = optimizely_url
-    browser = testbrowser('/zeit-online/slenderized-centerpage')
-    assert optimizely_url in browser.contents
 
 
 def test_ressortpage_returns_is_ressortpage_correctly(

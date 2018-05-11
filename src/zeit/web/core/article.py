@@ -173,8 +173,9 @@ def get_retresco_body(article):
     seo = zeit.seo.interfaces.ISEO(article)
 
     if (toggles.find('enable_intext_links') and
-            not seo.disable_intext_links and
+            not zeit.retresco.interfaces.ITMSContent.providedBy(article) and
             not ILocalContent.providedBy(article) and
+            not seo.disable_intext_links and
             not suppress_intextlinks(article)):
         if hasattr(article, '_v_retresco_body'):
             xml = article._v_retresco_body

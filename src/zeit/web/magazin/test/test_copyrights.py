@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
+import selenium.webdriver
 import time
+
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 def test_copyright_entries_are_rendered_correcly(selenium_driver, testserver):
@@ -11,10 +18,12 @@ def test_copyright_entries_are_rendered_correcly(selenium_driver, testserver):
     assert len(driver.find_elements_by_css_selector(
         '.image-copyright-footer__item')) == 3
     # copyright text itself
-    copyright_label = driver.find_element_by_css_selector(
-        '.image-copyright-footer__item > span').text
-    assert copyright_label.startswith(u'©')
-    assert copyright_label.endswith(u'Karl Lagerfeld')
+    wait = WebDriverWait(driver, 10)
+    span = wait.until(expected_conditions.presence_of_element_located(
+        (By.CSS_SELECTOR, '.image-copyright-footer__item > span')))
+    label = driver.execute_script('return arguments[0].textContent', span)
+    assert label.startswith(u'©')
+    assert label.endswith(u'Karl Lagerfeld')
     # linked copyrights
     copyright_link = driver.find_element_by_css_selector(
         '.image-copyright-footer__item > a').get_attribute('href')

@@ -1,8 +1,10 @@
 {% extends 'zeit.web.site:templates/layout.html' %}
 
-{# Sometimes (if the author has no image), colums are rendered as default
-   articles (instead of column.html). In this case, we need to adjust a few
-   Things inside the article template (here). #}
+{% block babator_include %}
+    {% if toggles('babator') and view.contains_video %}
+        {%- include "zeit.web.core:templates/inc/meta/babator.html" -%}
+    {% endif %}
+{% endblock %}
 
 {% block ligatus_include %}
     {%- include "zeit.web.core:templates/inc/meta/ligatus.html" -%}

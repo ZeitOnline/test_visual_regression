@@ -79,6 +79,23 @@ class Base(zeit.web.core.view.Base):
     def ressort_literally(self):
         return 'Campus'
 
+    @zeit.web.reify
+    def topic_page(self):
+        try:
+            return zeit.campus.interfaces.ITopic(self.context).page
+        except TypeError:
+            return None
+
+    @zeit.web.reify
+    def topic_label(self):
+        try:
+            topic = zeit.campus.interfaces.ITopic(self.context)
+        except TypeError:
+            return ''
+        if topic.label:
+            return topic.label
+        return getattr(topic.page, 'title', '')
+
 
 @zeit.web.view_config(
     route_name='login_state',
@@ -104,23 +121,6 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
 
 
 class Content(Base):
-
-    @zeit.web.reify
-    def topic_page(self):
-        try:
-            return zeit.campus.interfaces.ITopic(self.context).page
-        except TypeError:
-            return None
-
-    @zeit.web.reify
-    def topic_label(self):
-        try:
-            topic = zeit.campus.interfaces.ITopic(self.context)
-        except TypeError:
-            return ''
-        if topic.label:
-            return topic.label
-        return getattr(topic.page, 'title', '')
 
     @zeit.web.reify
     def article_layout(self):

@@ -37,5 +37,11 @@ def test_nav_dropdowns_are_working_as_expected(
     more.click()
     assert more_list.is_displayed()
 
+    old_page = driver.find_element_by_tag_name('html')
+    stale = expected_conditions.staleness_of(old_page)
     dropdown.click()
-    assert 'teaser-topic-variant' not in driver.current_url
+    try:
+        WebDriverWait(driver, 20).until(stale)
+        assert 'teaser-topic-variant' not in driver.current_url
+    except TimeoutException:
+        assert False, 'New page not visited'

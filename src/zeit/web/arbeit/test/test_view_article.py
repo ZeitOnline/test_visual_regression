@@ -463,6 +463,14 @@ def test_zar_sharebert_has_correct_attributes(testbrowser):
         '_ext&utm_campaign=ref&utm_content=zeitde_share_link_x')
 
 
+def test_zar_sharequote_renders_standalone(testbrowser):
+    browser = testbrowser('/arbeit/article/sharequote/module/17/sharequote')
+    assert browser.cssselect('.quote__text')
+    # make sure this is not a whole page
+    assert not browser.cssselect('nav')
+    assert not browser.cssselect('article')
+
+
 def test_zar_series_without_series_image_have_correct_series_header_styles(
         testbrowser):
     browser = testbrowser('/arbeit/article/series-no-image')
@@ -497,3 +505,64 @@ def test_zar_canonical_url_should_contain_first_page_on_full_view(testbrowser):
     browser = testbrowser('/arbeit/article/paginated/komplettansicht')
     canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
     assert canonical_url.endswith('arbeit/article/paginated')
+
+
+def test_zar_article_has_correct_meta_line(testserver, selenium_driver):
+    selenium_driver.get('{}/arbeit/article/simple'.format(testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
+
+    assert dates[0].text == u'1. Juni 2015, 17:12 Uhr'
+    assert len(dates) == 1
+
+
+def test_zar_changed_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/arbeit/article/simple-modified'.format(
+        testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
+
+    assert dates[0].text == u'1. Juni 2015, 17:12 Uhr'
+    assert dates[1].text == u'Aktualisiert am 26. April 2018, 13:49 Uhr'
+    assert len(dates) == 2
+
+
+def test_zar_print_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/arbeit/article/simple-print'.format(
+        testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
+    source = selenium_driver.find_element_by_css_selector('.metadata__source')
+
+    assert dates[0].text == u'1. April 2017'
+    assert source.text == u'DIE ZEIT Nr. 14/2017, 30. März 2017'
+    assert len(dates) == 1
+
+
+def test_zar_print_changed_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/arbeit/article/simple-print-modified'.format(
+        testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
+    source = selenium_driver.find_element_by_css_selector('.metadata__source')
+
+    assert dates[0].text == '1. April 2017, 17:12 Uhr'
+    assert dates[1].text == 'Editiert am 26. April 2017, 13:49 Uhr'
+    assert source.text == u'DIE ZEIT Nr. 14/2017, 30. März 2017'
+    assert len(dates) == 2
+
+
+def test_zar_article_sourcecode_doesnt_contain_creation_date(testbrowser):
+    select = testbrowser('/arbeit/article/simple-modified').cssselect
+    dates = select('.metadata__date')
+    assert dates[0].text == '26. April 2018, 13:49 Uhr'
+    assert dates[1].text == 'Aktualisiert am 26. April 2018, 13:49 Uhr'
+
+
+def test_zar_print_article_sourcecode_doesnt_contain_date_print_published(
+        testbrowser):
+    select = testbrowser('/arbeit/article/simple-print-modified').cssselect
+    dates = select('.metadata__date')
+    source = select('.metadata__source')
+    assert dates[0].text == '26. April 2017, 13:49 Uhr'
+    assert dates[1].text == 'Editiert am 26. April 2017, 13:49 Uhr'
+    assert source[0].text == u'DIE ZEIT Nr. 14/2017'
