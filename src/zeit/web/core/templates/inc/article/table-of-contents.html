@@ -1,3 +1,4 @@
+{% if view.pagination and view.pagination.total > 1 %}
 <aside class="article-toc article__item article__item--wide" data-ct-area="article-toc" data-ct-row="{{ 'page_%s_of_%s' | format(view.pagination.current, view.pagination.total) }}" data-ct-column="false">
     <div class="article-toc__container">
         <h3 class="article-toc__headline" id="article-toc-label" aria-controls="{% block toc_expandable_region %}article-toc-list{% endblock %}" data-constrained="mobile,phablet">
@@ -35,3 +36,4 @@
         </div>
     </div>
 </aside>
+{% endif %}
