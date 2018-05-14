@@ -1,4 +1,5 @@
 {% if toggles('push_for_author_in_app') %}
-    {# TODO: ID definieren. #}
-    <div class="js-FollowPush" data-followpush-segment="authors" data-followpush-id="[author-id]"></div>
+    <div class="js-FollowPush"
+        data-followpush-segment="authors"
+        data-followpush-id="{{ context.display_name | format_iqd }}"></div>
 {% endif %}

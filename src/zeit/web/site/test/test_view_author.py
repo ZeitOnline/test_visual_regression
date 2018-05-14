@@ -378,4 +378,4 @@ def test_authorpage_has_follow_push_button(selenium_driver, testserver):
     select = driver.find_elements_by_css_selector
     driver.get('%s/autoren/j_random?app-content' % testserver.url)
     assert len(
-        select('a[href^="zeitapp://subscribe/authors/[author-id]"]')) == 1
+        select('a[href^="zeitapp://subscribe/authors/j_random_hacker"]')) == 1
