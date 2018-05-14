@@ -417,7 +417,7 @@ def test_liveblog_get_info(application, liveblog):
 
 
 def test_liveblog_get_amp_id(application, liveblog):
-    amp_id = liveblog.get_amp_themed_id(liveblog.blog_id)
+    amp_id = liveblog.get_amp_themed_id(liveblog.id)
     assert amp_id == u'amp/59fc6d566aa4f500e7c68bd7'
 
 
