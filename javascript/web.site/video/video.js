@@ -60,10 +60,10 @@ var video = {
                     return;
                 } else {
                     snippet = templates[ defaults.type ]
-                            .replace( /\{{accountId}}/g, defaults.playerData.accountId )
-                            .replace( /\{{playerId}}/g, defaults.playerData.playerId )
-                            .replace( /\{{videoId}}/g, videoId )
-                            .replace( /\{{embed}}/g, 'default' );
+                        .replace( /\{{accountId}}/g, defaults.playerData.accountId )
+                        .replace( /\{{playerId}}/g, defaults.playerData.playerId )
+                        .replace( /\{{videoId}}/g, videoId )
+                        .replace( /\{{embed}}/g, 'default' );
 
                     defaults.elem.empty().html( snippet );
 
