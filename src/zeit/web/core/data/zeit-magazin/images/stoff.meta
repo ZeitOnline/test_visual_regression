@@ -15,7 +15,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2017-01-26T13:36:52.546885+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2017-01-26T13:36:09.919642+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_to">2017-05-12T12:36:46+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="nofollow">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_images">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;desktop&lt;/unicode&gt; &lt;unicode&gt;stil.jpg&lt;/unicode&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>

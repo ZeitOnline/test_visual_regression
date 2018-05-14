@@ -8,13 +8,77 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
+- remove `optimizely` from settings in vivi xml
 
-3.146 (unreleased)
+- rename `optimize_ab_testing` to `optimize_ab_testing_to_webtrekk` in feature toggles. value = false.
+
+
+3.149 (unreleased)
+------------------
+
+- PERF: Don't additionally retrieve body for TMS/ES results
+
+- MAINT: Node modules update
+
+
+3.148 (2018-05-08)
+------------------
+
+- ZON-2774: Authorbox for Campus
+
+- ZON-4554: Include Babator script on video pages
+
+- ZON-4619: Add script for sending GoogleOptimize tests to Webtrekk
+
+- ZON-4621: Show alexa link in podcast footer
+
+- SSL-247: Make sure to use http for esi include
+
+- BUG-912: Fix sharing-button's horizontal spacing
+
+- FEM-76: consider a11y for svg icons
+
+- FEM-77: Change contrasts for a better accessibility
+
+- MAINT: Upgrade Selenium
+
+- MAINT: Use core function to obfuscate ZMO article date
+
+- MAINT: Use cache decorator for auth token on liveblog3
+
+
+3.147 (2018-05-03)
+------------------
+
+- ZON-4600: Set C1 adblocker headers on specific test articles
+  /digital/internet/2017-11/firefox-quantum-browser-test-vergleich-google-chrome
+  /digital/internet/2018-04/adblocker-urteil-bgh-springer-adblock-plus
+
+- ZON-4551: Always show article source
+
+- ZON-4631: Adjust modified date for article with liveblog
+
+- BUG-904: Decode obfuscated article date in ZEIT Arbeit
+
+- BUG-908: Prevent rendering Unicode-Icon as Emoji
+
+- MAINT: Remove Optimizely
+
+
+3.146.1 (2018-04-26)
+--------------------
+
+- OPS-877: Fix community uniqueIds for creating commentsections
+
+
+3.146 (2018-04-26)
 ------------------
 
 - ZON-4478: Use genre source to determine the complete byline prefix
 
 - BUG-901: Fix canonical URL on full view in verticals
+
+- BUG-872: Fix view_config specificity for amp/liveblog articles
 
 - MAINT: Use core mechanic to render ZMO byline
 

@@ -358,18 +358,19 @@ def liveblog():
 
 
 def test_liveblog_auth(application, liveblog):
-    token = liveblog._retrieve_auth_token()
+    token = liveblog.auth_token()
     assert token == u'3b4b508e-66e4-4977-910c-c8bd5b985d09'
 
 
 def test_liveblog_auth_fail(application, caplog, liveblog, monkeypatch):
+    # Undo fixture setup
+    liveblog.auth_token.invalidate(liveblog)
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     auth_url = conf.get('liveblog_api_auth_url_v3')
 
     with requests_mock.Mocker() as m:
-        m.post(
-            auth_url, reason='Unauthorized', status_code=401)
-        token = liveblog._retrieve_auth_token()
+        m.post(auth_url, reason='Unauthorized', status_code=401)
+        token = liveblog.auth_token()
         assert token is None
         assert '401 Client Error' in caplog.text
 
@@ -390,10 +391,10 @@ def test_liveblog_api_request_is_not_stoped_by_unavailable_auth_server(
 
 
 def test_liveblog_api_request_renews_expired_cache_token(
-        application, liveblog, monkeypatch):
-    new_cache = zeit.web.core.cache.get_region('long_term')
-    new_cache.set('liveblog_api_auth_token', '12345')
-    monkeypatch.setattr(zeit.web.core.block, 'LONG_TERM_CACHE', new_cache)
+        application, liveblog):
+    cache_key = 'zeit.web.core.block.Liveblog.auth_token|'
+    cache = zeit.web.core.cache.get_region('long_term')
+    cache.set(cache_key, '12345')
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     api_url = conf.get('liveblog_api_url_v3')
@@ -407,7 +408,7 @@ def test_liveblog_api_request_renews_expired_cache_token(
         m.post(auth_url, json={"token": "78901"}, status_code=200)
         liveblog.api_blog_request()
         # the (new) token ends up in the cache...
-        assert '78901' == new_cache.get('liveblog_api_auth_token')
+        assert '78901' == cache.get(cache_key)
 
 
 def test_liveblog_get_info(application, liveblog):
@@ -721,7 +722,8 @@ def test_podcast_header_should_provide_podlove_data(application):
 def test_podcast_should_show_podcast_links(testbrowser):
     browser = testbrowser('/zeit-online/article/podcast-header')
     podcast_links = browser.cssselect('.podcast-links__link')
+    assert len(podcast_links) == 4
     assert podcast_links[0].get('href') == 'http://xml.zeit.de/podcast/id1656'
     assert podcast_links[1].get('href') == 'http://xml.zeit.de/spotify_url'
-    # There's only two links, since no deezer url has been provided.
-    assert len(podcast_links) == 2
+    assert podcast_links[2].get('href') == 'http://xml.zeit.de/deezer_url'
+    assert podcast_links[3].get('href') == 'http://xml.zeit.de/alexa_url'

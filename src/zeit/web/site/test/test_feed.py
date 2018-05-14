@@ -160,7 +160,10 @@ def test_instant_article_feed_should_be_rendered(testserver):
     parser = lxml.etree.XMLParser(strip_cdata=False)
     xml = lxml.etree.fromstring(res.content, parser)
     source = xml.xpath('./channel/*[local-name()="include"]/@src')[0]
-    assert source == ('https://www.zeit.de/'
+
+    # This is an URL from an esi include, which needs to have an http scheme,
+    # even though we deliver www.zeit.de via https.
+    assert source == ('http://www.zeit.de/'
                       'instantarticle-item/zeit-magazin/'
                       'centerpage/article_image_asset')
 

@@ -3,6 +3,8 @@
   <access_status_ivw>true</access_status_ivw>
   <amp_advertising>true</amp_advertising>
   <arbeit_quote_sharing>true</arbeit_quote_sharing>
+  <babator>false</babator>
+  <c1_adblocker_blocker>true</c1_adblocker_blocker>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
   <dtag_navigation>true</dtag_navigation>
   <campus_toolbox>true</campus_toolbox>
@@ -26,7 +28,7 @@
   <ligatus_on_magazin>false</ligatus_on_magazin>
   <ligatus_on_site>false</ligatus_on_site>
 
-  <optimize_ab_testing>false</optimize_ab_testing>
+  <optimize_ab_testing_to_webtrekk>false</optimize_ab_testing_to_webtrekk>
   <podlove_button>true</podlove_button>
   <preload_webfonts>true</preload_webfonts>
   <rawr_iframe>true</rawr_iframe>

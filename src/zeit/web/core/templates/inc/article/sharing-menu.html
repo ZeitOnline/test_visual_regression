@@ -4,41 +4,42 @@
 {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.%s.link.x' | format(tracking_id) %}
 {% block sharing_menu -%}
 <div class="{% block layout %}sharing-menu{% endblock %}">
+    <h3 class="visually-hidden">Jetzt teilen auf:</h3>
     <ul class="{{ self.layout() }}__items" id="sharing-menu-list" data-ct-row="social">
         <li class="{{ self.layout() }}__item">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}" target="_blank" data-ct-label="facebook">
-                {{ lama.use_svg_icon('sharing-facebook', '%s__icon' | format(self.layout()) | with_mods('facebook'), view.package) }}
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('facebook') }}" href="https://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}" target="_blank" data-ct-label="facebook" title="Facebook">
+                {{ lama.use_svg_icon('sharing-facebook', '%s__icon' | format(self.layout()) | with_mods('facebook'), view.package, a11y=False) }}
                 <span class="{{ self.layout() }}__text">{% block sharing_menu_text_facebook %}Facebook{% endblock %}</span>
             </a>
         </li>
         <li class="{{ self.layout() }}__item">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('twitter') }}" href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via={{ view.twitter_username | urlencode }}&amp;url={{ content_url.format('twitter') | urlencode }}" target="_blank" data-ct-label="twitter">
-                {{ lama.use_svg_icon('sharing-twitter', '%s__icon' | format(self.layout()) | with_mods('twitter'), view.package) }}
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('twitter') }}" href="https://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via={{ view.twitter_username | urlencode }}&amp;url={{ content_url.format('twitter') | urlencode }}" target="_blank" data-ct-label="twitter" title="Twittern">
+                {{ lama.use_svg_icon('sharing-twitter', '%s__icon' | format(self.layout()) | with_mods('twitter'), view.package, a11y=False) }}
                 <span class="{{ self.layout() }}__text">{% block sharing_menu_text_twitter %}Twittern{% endblock %}</span>
             </a>
         </li>
         <li class="{{ self.layout() }}__item">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('flipboard') }}" href="https://share.flipboard.com/bookmarklet/popout?v=2&title={{ view.title | urlencode }}&url={{ content_url.format('flipboard') | urlencode | replace('sm.ext', 'soref.ext') }}" target="_blank" data-ct-label="flipboard">
-                {{ lama.use_svg_icon('sharing-flipboard', '%s__icon' | format(self.layout()) | with_mods('flipboard'), view.package) }}
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('flipboard') }}" href="https://share.flipboard.com/bookmarklet/popout?v=2&title={{ view.title | urlencode }}&url={{ content_url.format('flipboard') | urlencode | replace('sm.ext', 'soref.ext') }}" target="_blank" data-ct-label="flipboard" title="Flippen">
+                {{ lama.use_svg_icon('sharing-flipboard', '%s__icon' | format(self.layout()) | with_mods('flipboard'), view.package, a11y=False) }}
                 <span class="{{ self.layout() }}__text">{% block sharing_menu_text_flipboard %}Flippen{% endblock %}</span>
             </a>
         </li>
         <li class="{{ '%s__item' | format(self.layout()) | with_mods('whatsapp') }}">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('whatsapp') }}" href="whatsapp://send?text={{ '%s - Artikel auf %s: %s' | format(view.title, view.publisher_name, content_url.format('whatsapp')) | urlencode }}" data-ct-label="whatsapp">
-                {{ lama.use_svg_icon('sharing-whatsapp', '%s__icon' | format(self.layout()) | with_mods('whatsapp'), view.package) }}
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('whatsapp') }}" href="whatsapp://send?text={{ '%s - Artikel auf %s: %s' | format(view.title, view.publisher_name, content_url.format('whatsapp')) | urlencode }}" data-ct-label="whatsapp" title="Whatsapp">
+                {{ lama.use_svg_icon('sharing-whatsapp', '%s__icon' | format(self.layout()) | with_mods('whatsapp'), view.package, a11y=False) }}
                 <span class="{{ self.layout() }}__text">{% block sharing_menu_text_whatsapp %}WhatsApp{% endblock %}</span>
             </a>
         </li>
         <li class="{{ '%s__item' | format(self.layout()) | with_mods('messenger') }}">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('messenger') }}" href="fb-messenger://share/?link={{ content_url.format('fb-messenger') | urlencode }}&amp;app_id=638028906281625" data-ct-label="fb-messenger">
-                {{ lama.use_svg_icon('sharing-messenger', '%s__icon' | format(self.layout()) | with_mods('messenger'), view.package) }}
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('messenger') }}" href="fb-messenger://share/?link={{ content_url.format('fb-messenger') | urlencode }}&amp;app_id=638028906281625" data-ct-label="fb-messenger" title="Facebook Messenger">
+                {{ lama.use_svg_icon('sharing-messenger', '%s__icon' | format(self.layout()) | with_mods('messenger'), view.package, a11y=False) }}
                 <span class="{{ self.layout() }}__text">{% block sharing_menu_text_messenger %}Facebook Messenger{% endblock %}</span>
             </a>
         </li>
         {% block sharing_menu_item_mail -%}
         <li class="{{ '%s__item' | format(self.layout()) | with_mods('mail') }}">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('mail') }}" href="mailto:?subject={{ '%s - Artikel auf %s' | format(view.title, view.publisher_name) | urlencode }}&amp;body={{ 'Artikel auf %s lesen: %s' | format(view.publisher_name, content_url.format('mail')) | urlencode }}" data-ct-label="mail">
-                {{ lama.use_svg_icon('sharing-mail', '%s__icon' | format(self.layout()) | with_mods('mail'), view.package) }}
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('mail') }}" href="mailto:?subject={{ '%s - Artikel auf %s' | format(view.title, view.publisher_name) | urlencode }}&amp;body={{ 'Artikel auf %s lesen: %s' | format(view.publisher_name, content_url.format('mail')) | urlencode }}" data-ct-label="mail" title="Mailen">
+                {{ lama.use_svg_icon('sharing-mail', '%s__icon' | format(self.layout()) | with_mods('mail'), view.package, a11y=False) }}
                 <span class="{{ self.layout() }}__text">{% block sharing_menu_text_mail %}Mailen{% endblock %}</span>
             </a>
         </li>

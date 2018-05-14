@@ -12,15 +12,7 @@
       <display_name>Wolfgang Schmidbauer</display_name>
     </author>
     <references>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/online/2009/36/liebeskolumne-serie-link" year="2009" issue="36" ressort="Lebensart" contenttype="link" publication-date="2009-09-05T04:04:23+00:00" expires="" ns0:href="http://www.zeit.de/themen/serie/index?q=liebeskolumne">
-        <supertitle>Partnerschaftsserie</supertitle>
-        <teaser_supertitle xsi:nil="true"/>
-        <title>Die großen Fragen der Liebe</title>
-        <text>Der Paartherapeut Wolfgang Schmidbauer beantwortet die großen Fragen der Liebe</text>
-        <description>Der Paartherapeut Wolfgang Schmidbauer beantwortet die großen Fragen der Liebe</description>
-        <byline xsi:nil="true"/>
-        <breadcrumb_title xsi:nil="true"/>
-      </reference>
+      <reference type="intern" href="http://xml.zeit.de/online/2009/36/liebeskolumne-serie-link" />
     </references>
     <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/paar-abgewendet-streit/" type="jpg" title="Emotionale Kälte" alt="Paar steht abgewendet nebeneinander" align="left" publication-date="" expires="">
       <bu>Paar steht abgewendet nebeneinander</bu>
@@ -36,7 +28,10 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-15T09:47:48.536670+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-05-03T17:07:53.914205+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-04-16T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-05-06T11:32:56.519863+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-04-16T07:12:30.042689+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">16.04.2014</attribute>
     <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>

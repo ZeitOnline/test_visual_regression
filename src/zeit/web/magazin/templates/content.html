@@ -1,5 +1,11 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
 
+{% block babator_include %}
+    {% if toggles('babator') and view.contains_video %}
+        {%- include "zeit.web.core:templates/inc/meta/babator.html" -%}
+    {% endif %}
+{% endblock %}
+
 {% block ligatus_include %}
     {%- include "zeit.web.core:templates/inc/meta/ligatus.html" -%}
 {% endblock %}
@@ -57,23 +63,6 @@
             {% endblock article_google_ad %}
         {% endif %}
     </article>
-
-    {% if view.product_id not in ('TGS', 'ZEI', 'ZMLB') and view.date_last_published_semantic %}
-        <!-- seo article date modification -->
-        <script type="text/javascript">
-            {# Due to seo reasons, original publish date is added later #}
-            var time = document.querySelector('.meta__date'),
-                content = time.textContent != undefined ? time.textContent : time.innerText,
-                published = document.createTextNode('{{ view.date_first_released | format_date(view.show_date_format_seo) }} — '),
-                linebreak = document.createElement('br'),
-                text = "{% if view.show_date_format_seo == 'long' %}zuletzt aktualisiert am {% else %}editiert: {% endif %}" + content;
-            if ( content != undefined ) {
-                time.parentNode.insertBefore(published, time);
-                time.parentNode.insertBefore(linebreak, time);
-                time.firstChild.nodeValue = text;
-            }
-        </script>
-    {% endif %}
 
     {% block comments %}
         {% include "zeit.web.core:templates/inc/article/comments.html" %}

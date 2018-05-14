@@ -2,23 +2,13 @@ const webpack = require('webpack'); // to access built-in plugins
 const path = require('path');
 const production = process.env.NODE_ENV === 'production';
 
-let plugins = [
+const plugins = [
     new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',
         'window.jQuery': 'jquery' // needed only for Velocity
     })
 ];
-
-if ( false ) {
-    plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-            output: {
-                comments: false
-            }
-        })
-    );
-}
 
 module.exports = {
     context: path.resolve(__dirname, 'javascript'),
@@ -44,12 +34,30 @@ module.exports = {
             { test: require.resolve('masonry-layout'), loader: 'imports-loader?define=>false' },
             { test: require.resolve('requirejs/require'), loader: 'exports-loader?requirejs,require,define' },
             { test: /\.html$/, exclude: /node_modules/, loader: "mustache-loader" },
-            { test: /\.js$/, exclude: /node_modules/, loader: "eslint-loader", options: { failOnError: true } },
-            { test: /\.js$/, exclude: /node_modules/, loader: "jshint-loader", options: { emitErrors: true, failOnHint: true } }
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: "eslint-loader",
+                        options: { fix: true, failOnError: true }
+                    // Disabled until jshint-loader > 0.8.4 to work with webpack 4
+                    // @see https://github.com/webpack-contrib/jshint-loader/pull/53
+                    // },
+                    // {
+                    //     loader: "jshint-loader",
+                    //     options: { emitErrors: true, failOnHint: true }
+                    }
+                ]
+            }
         ]
     },
     externals: {
         'modernizr': 'Modernizr'
+    },
+    performance: {
+        maxAssetSize: 300000,
+        maxEntrypointSize: 300000,
     },
     plugins: plugins,
     resolve: {

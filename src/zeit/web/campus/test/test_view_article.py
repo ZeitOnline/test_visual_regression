@@ -318,31 +318,33 @@ def test_cardstack_block_produces_correct_html(testbrowser):
     assert len(block) == 1
 
 
-def test_article_contains_authorbox(testbrowser):
-    browser = testbrowser('/zeit-online/article/authorbox')
+def test_article_contains_campus_authorbox(testbrowser):
+    browser = testbrowser('/campus/article/authorbox')
     authorbox = browser.cssselect('.authorbox')
     assert len(authorbox) == 3
 
-    # test custom biography
+    # test authorbox without image
     author = authorbox[0]
-    description = author.cssselect('.authorbox__summary')[0]
-    assert description.text.strip() == 'Text im Feld Kurzbio'
-    assert description.get('itemprop') == 'description'
+    figure = author.cssselect('.authorbox__media')
+    assert not figure
 
-    # test author content and microdata
+    # test authorbox with image
     author = authorbox[1]
-    image = author.cssselect('[itemprop="image"]')[0]
-    name = author.cssselect('strong[itemprop="name"]')[0]
-    description = author.cssselect('[itemprop="description"]')[0]
-    url = author.cssselect('a[itemprop="url"]')[0]
+    figure = author.cssselect('.authorbox__media')
+    assert len(figure) == 1
 
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.get('itemscope') is not None
-    assert ('http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/square'
-            ) in image.cssselect('[itemprop="url"]')[0].get('content')
-    assert name.text.strip() == 'Jochen Wegner'
-    assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
-    assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
+    # test if no link to author page is available
+    url = author.cssselect('a[itemprop="url"]')
+    assert not url
+
+    # check if mobile and desktop resource are given
+    image = figure[0].cssselect('.authorbox__media-item')
+
+    # Mobile Image has aspect ratio of 1
+    assert image[0].attrib.get('data-mobile-ratio') == '1.0'
+
+    # Desktop Image has aspect ratio of 16 / 9 = 1.77777777778
+    assert image[0].attrib.get('data-ratio') == '1.77777777778'
 
 
 @pytest.mark.parametrize('c1_parameter', [
@@ -379,8 +381,8 @@ def test_campus_print_article_has_correct_meta_line(
     date = selenium_driver.find_element_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'10. Januar 2016')
-    assert source.text.strip() == u'DIE ZEIT Nr. 1/2015, 5. Mai 2015'
+    assert date.text == u'30. März 2017'
+    assert source.text == u'DIE ZEIT Nr. 14/2017, 30. März 2017'
 
 
 def test_campus_print_changed_article_has_correct_meta_line(
@@ -390,9 +392,9 @@ def test_campus_print_changed_article_has_correct_meta_line(
     dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert dates[0].text == u'10. Februar 2016, 10:39 Uhr'
-    assert dates[1].text == u'Editiert am 22. Februar 2016, 18:18 Uhr'
-    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
+    assert dates[0].text == u'30. März 2017, 11:13 Uhr'
+    assert dates[1].text == u'Editiert am 31. März 2017, 9:16 Uhr'
+    assert source.text == u'DIE ZEIT Nr. 14/2017, 30. März 2017'
 
 
 def test_campus_changed_article_has_correct_meta_line(
@@ -416,3 +418,21 @@ def test_canonical_url_should_contain_first_page_on_full_view(testbrowser):
     browser = testbrowser('/campus/article/paginated/komplettansicht')
     canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
     assert canonical_url.endswith('campus/article/paginated')
+
+
+def test_campus_leserarticle_renders_correct_header(testbrowser):
+    cssselect = testbrowser('/campus/article/leserartikel').cssselect
+    assert cssselect('.article-header--leserartikel')
+    assert cssselect('.article-header__topic--leserartikel')
+    assert cssselect('.article-header__title--leserartikel')
+    assert cssselect('.article-header__leserartikel-info')
+    'Ein Leserartikel von' in cssselect('.article-header__byline')[0].text
+
+
+def test_campus_column_renders_correct_header(testbrowser):
+    cssselect = testbrowser('/campus/article/column').cssselect
+    assert cssselect('.article-header--column')
+    assert cssselect('.article-header__topic--column')
+    assert cssselect('.article-header__title--column')
+    assert cssselect('.article-header__column-info')
+    'Eine Kolumne von' in cssselect('.article-header__byline')[0].text

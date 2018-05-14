@@ -7,8 +7,8 @@ var $ = require( 'jquery' ),
     visibilityTracking = require( 'web.core/visibilityTracking' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
+    articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
-    errors = require( 'web.magazin/errors' ),
     cards = require( 'web.magazin/cards' ),
     photocluster = require( 'web.magazin/photocluster' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
@@ -24,16 +24,17 @@ menu.init();
 clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
-errors.init();
 cards.init();
-saveGetToCookie.init();
-zeit.clearQueue();
 
 if ( article ) {
+    articledate.init();
     comments.init();
     photocluster.init();
     visibilityTracking.init();
 }
+
+saveGetToCookie.init();
+zeit.clearQueue();
 
 // add required jQuery plugins
 require( 'web.core/vendor/modernizr-custom' );

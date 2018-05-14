@@ -2,6 +2,7 @@ import logging
 
 import lxml.etree
 import lxml.objectify
+import zope.component
 
 import zeit.cms.content.interfaces
 import zeit.cms.interfaces
@@ -14,6 +15,7 @@ import zeit.content.video.interfaces
 
 import zeit.web
 import zeit.web.core.article
+import zeit.web.core.interfaces
 import zeit.web.core.view
 
 
@@ -109,13 +111,22 @@ class XMLArticle(XMLContent):
                 'publication-date', infobox.get('publication-date', ''))
             infobox.set('expires', infobox.get('expires', ''))
 
+    # who needs this?
     def _include_liveblogs(self, xml):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
         for liveblog in xml.xpath('/article/body/division/liveblog'):
+            blog_id = liveblog.get('blogID', '')
+            version = liveblog.get('version', '')
             el = lxml.objectify.SubElement(
                 liveblog, '{http://www.edge-delivery.org/esi/1.0}include',
                 nsmap={'esi': 'http://www.edge-delivery.org/esi/1.0'})
-            url = 'http://www.zeit.de/liveblog-backend/{}.html'.format(
-                liveblog.get('blogID', ''))
+            if version == '3':
+                url = '{}/{}/index.html'.format(
+                    conf.get('liveblog_backend_url_v3', ''), blog_id)
+            else:
+                url = '{}/{}.html'.format(
+                    conf.get('liveblog_backend_url', ''), blog_id)
             el.set('src', url)
             liveblog.set('data-type', 'esi-content')
             liveblog.attrib.pop('blogID')

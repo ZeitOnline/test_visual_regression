@@ -272,7 +272,8 @@ def test_login_status_is_set_as_class(
 
     # add_cookie() only works for the domain of the last get(), sigh.
     driver.get('{}/zeit-online/article/simple'.format(testserver.url))
-    driver.add_cookie({'name': 'my_sso_cookie', 'value': sso_cookie})
+    driver.add_cookie(
+        {'name': 'my_sso_cookie', 'value': sso_cookie, 'path': '/'})
     driver.get('{}/zeit-online/article/simple'.format(testserver.url))
 
     condition = expected_conditions.visibility_of_element_located((
@@ -297,7 +298,8 @@ def test_loggedin_status_hides_register_link_on_gate(
     # add_cookie() only works for the domain of the last get(), sigh.
     driver.get('{}/zeit-online/article/zplus-zeit-register{}'.format(
         testserver.url, '?C1-Meter-Status=always_paid'))
-    driver.add_cookie({'name': 'my_sso_cookie', 'value': sso_cookie})
+    driver.add_cookie(
+        {'name': 'my_sso_cookie', 'value': sso_cookie, 'path': '/'})
     driver.get('{}/zeit-online/article/zplus-zeit-register{}'.format(
         testserver.url, '?C1-Meter-Status=always_paid'))
 
@@ -327,3 +329,11 @@ def test_breaking_news_banner_shows_date_first_released(testbrowser):
     browser = testbrowser('/breaking-news?debug=eilmeldung')
     assert browser.cssselect('.breaking-news-banner__time')[0].text == (
         '19:11 Uhr')
+
+
+def test_page_1_of_ranking_redirects(testserver):
+    resp = requests.get(
+        '%s/dynamic/es-berlin?p=1' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 301
+    assert resp.headers['Location'] == '%s/dynamic/es-berlin' % testserver.url
