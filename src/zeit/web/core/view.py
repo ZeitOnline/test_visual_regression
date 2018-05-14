@@ -514,25 +514,13 @@ class Base(object):
 
     @zeit.web.reify
     def date_last_modified(self):
-        return self.date_last_published_semantic or self.date_first_released
+        return zeit.web.core.date.mod_date(self.context)
 
     @zeit.web.reify
     def date_first_released(self):
         date = self.publish_info.date_first_released
         if date:
             return date.astimezone(self.timezone)
-
-    @zeit.web.reify
-    def date_last_published_semantic(self):
-        modified = self.publish_info.date_last_published_semantic
-        released = self.date_first_released
-        # use 60s of tolerance before displaying a modification date
-        # whould be unnecessary if date_last_published_semantic is never before
-        # first_released and initially undefined or equal first_released
-        # but it's not like that [ms]
-        if (released is not None and modified is not None and
-                modified - released > datetime.timedelta(seconds=60)):
-            return modified.astimezone(self.timezone)
 
     @zeit.web.reify
     def has_cardstack(self):
@@ -935,7 +923,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def show_date_format(self):
-        if self.date_last_published_semantic:
+        if self.date_last_modified != self.date_first_released:
             return 'long'
         elif self.product_id in ('ZEI', 'ZMLB'):
             return 'short'
@@ -985,11 +973,11 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def last_modified_label(self):
-        if self.date_last_published_semantic:
+        if self.date_last_modified != self.date_first_released:
             return u'{} am {}'.format(
                 self.last_modified_wording,
                 zeit.web.core.template.format_date(
-                    self.date_last_published_semantic, 'long'))
+                    self.date_last_modified, 'long'))
 
     @zeit.web.reify
     def obfuscated_date(self):
