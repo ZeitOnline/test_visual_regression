@@ -28,10 +28,9 @@ def test_author_page_should_render_bio_questions(testbrowser):
 
 def test_author_has_contact_link(testbrowser):
     browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
-    path = 'autoren/D/Tobias_Dorfer/index/feedback#author-content'
-    # has contact link
     feedbackLink = browser.cssselect(
-        '.author-contact__link[href$="' + path + '"]')
+        '.author-contact__link[href$="autoren/D/Tobias_Dorfer/index'
+        '/feedback#author-content"]')
     assert len(feedbackLink) == 1
 
 
