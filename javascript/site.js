@@ -12,6 +12,7 @@ var $ = require( 'jquery' ),
     comments = require( 'web.core/comments' ),
     adblockCount = require( 'web.site/adblockCount' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
+    followPushButton = require( 'web.core/followPushButton' ),
     article = $( '#js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     isHp = document.body.getAttribute( 'data-is-hp' );
@@ -34,6 +35,7 @@ if ( article.length ) {
     visibilityTracking.init();
 }
 
+followPushButton.init();
 adblockCount.init();
 saveGetToCookie.init();
 zeit.clearQueue();
