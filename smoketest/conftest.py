@@ -15,7 +15,7 @@ from selenium.webdriver.support import expected_conditions as EC  # NOQA
 
 TESTCONFIG_STAGING = {
     'ENV': 'STAGING',
-    'BASE_URL': 'http://www.staging.zeit.de',
+    'BASE_URL': 'https://www.staging.zeit.de',
     'TIMEOUT': 20,
     'NEWSFEED_BASE_URL': 'http://newsfeed.staging.zeit.de',
     'MEMBER_BASE_URL': 'https://meine.staging.zeit.de',
