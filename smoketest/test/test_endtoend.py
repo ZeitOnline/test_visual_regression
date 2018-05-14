@@ -125,7 +125,7 @@ def test_video_should_load_on_video_single_page(config, selenium_driver):
     driver = selenium_driver
     driver.get(
         '{}/video/2018-04/5773677245001/'
-        'antisemitismus-hast-du-keine-angst.format(
+        'antisemitismus-hast-du-keine-angst'.format(
             config['BASE_URL']))
     video_visible_ec = expected_conditions.presence_of_element_located(
         (By.CLASS_NAME, 'vjs-control-bar'))
