@@ -1,11 +1,10 @@
-// Author Feedback container shall be outside of the container
-.feedback-section-container
-	margin-left: remify(20px)
-	margin-right: remify(20px)
-
 .feedback-section
 	margin-bottom: remify(50px)
 	margin-top: remify(50px)
+
+	&--padded
+		@include padded
+
 	&__headline
 		font-size: remify(24px)
 		text-align: center

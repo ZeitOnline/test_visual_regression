@@ -150,6 +150,7 @@ class Feedback(Author):
 
         module.subject = 'Sie haben Feedback erhalten'
         module.author_name = self.context.display_name
+        module.feedbackModifier = 'padded'
         module.success_message = 'Ihr Feedback wurde erfolgreich verschickt.'
 
         area.append(zeit.web.core.centerpage.get_module(module))

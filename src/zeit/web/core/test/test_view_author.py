@@ -51,6 +51,13 @@ def test_author_page_should_render_feedback(testbrowser):
     assert 'required' in feedbackTextarea.attrib
 
 
+def test_author_feedback_has_modifier_class(testbrowser):
+    browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
+    # has author class modifier
+    feedbackModifier = browser.cssselect('.feedback-section--padded')
+    assert len(feedbackModifier) == 1
+
+
 def test_post_should_trigger_mail_then_render_success(testbrowser):
     # load thomas to make sure no real author gets test mails
     browser = testbrowser('/autoren/S/Thomas_Strothjohann/index/feedback')
