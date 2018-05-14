@@ -254,7 +254,7 @@ class Liveblog(Module):
             self.context.collapse_preceding_content)
         self.is_live = False
         self.last_modified = None
-        self.id = None
+        self.id = self.blog_id
         self.seo_id = None
 
         if self.version == '3':
