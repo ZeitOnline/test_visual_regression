@@ -3,7 +3,8 @@
 	margin-top: remify(50px)
 
 	&--padded
-		@include padded
+		+respond-max($break-tablet-min)
+			+padded
 
 	&__headline
 		font-size: remify(24px)

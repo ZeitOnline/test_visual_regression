@@ -1,5 +1,5 @@
 {% set success = request.headers.get('X-Mail-Success') %}
-<div class=" {{ 'feedback-section' | with_mods(block.feedbackModifier if block.feedbackModifier) }}" data-ct-area="feedback_form" id="feedback-form">
+<div class=" {{ 'feedback-section' | with_mods ('padded' if padded_mobile_inputs) }}" data-ct-area="feedback_form" id="feedback-form">
 
     {% if block.title or block.subtitle %}
         <div class="feedback-section__header">
