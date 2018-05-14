@@ -280,8 +280,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             },
             dataType: 'json',
             method: 'POST'
-        })
-        .done( function( response ) {
+        }).done( function( response ) {
             if ( response ) {
                 if ( response.response.error === false ) {
                     link.removeClass( 'comment__moderation--sending' );
@@ -298,8 +297,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                     link.text( failText );
                 }
             }
-        })
-        .fail( function() {
+        }).fail( function() {
             link.text( failText );
         });
     }
