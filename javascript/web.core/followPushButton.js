@@ -18,7 +18,16 @@ define([ ], function() {
 
             if ( followButtons ) {
                 for ( i = 0; i < followButtons.length; i++ ) {
-                    followButtons[ i ].innerHTML = '<a href="zeitapp://subscribe/authors/[author-id]" class="button">Folgen</a>';
+
+                    var buttonContainer = followButtons[ i ],
+                        segment = buttonContainer.getAttribute( 'data-followpush-segment' ) || null,
+                        id = buttonContainer.getAttribute( 'data-followpush-id' ) || null;
+
+                    if ( segment && id ) {
+                        buttonContainer.innerHTML = '<a href="zeitapp://subscribe/' + segment + '/' + id + '" class="button">Folgen</a>';
+                    }
+
+
                 }
             }
         }
