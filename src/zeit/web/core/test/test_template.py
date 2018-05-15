@@ -394,7 +394,8 @@ def test_get_svg_from_file_should_return_svg(application):
     svg = zeit.web.core.template.get_svg_from_file(
         name, class_name, package, cleanup, a11y, remove_title)
     assert '<svg xmlns="http://www.w3.org/2000/svg"' in svg
-    assert 'width="14" height="13" viewBox="0 0 14 13"' in svg
+    assert 'width="14" height="13"' in svg
+    assert 'viewBox="0 0 14 13"' in svg
     assert 'class="svg-symbol reload-test"' in svg
     assert 'role="img"' in svg
     assert 'aria-label="Neu laden"' in svg

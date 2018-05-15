@@ -39,7 +39,7 @@
 		display: block
 
 	// special case: update time (http://localhost:9090/zeit-magazin/article/04) breaks the flex layout
-	&__date--has-series:not(:empty)
+	&__date + &__date--has-series:not(:empty)
 		display: inline
 		&:before
 			content: ' — '
