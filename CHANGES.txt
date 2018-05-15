@@ -13,6 +13,8 @@ POSTDEPLOY
 3.149 (unreleased)
 ------------------
 
+- ZON-4258: Render feedback form on author detail page
+
 - PERF: Don't additionally retrieve body for TMS/ES results
 
 - BUG-923: Fix display of modification date for ZMO series article
