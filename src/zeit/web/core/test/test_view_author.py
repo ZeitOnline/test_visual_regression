@@ -70,8 +70,8 @@ def test_post_should_trigger_mail_then_render_success(testbrowser):
         '',
         'thomas.strothjohann@zeit.de',
         'Sie haben Feedback erhalten',
-        'Testfeedback body\n\n-- \nGesendet von ' +
-        'http://localhost/autoren/S/Thomas_Strothjohann/index')
+        'Testfeedback body\n\n-- \nGesendet von '
+        'http://localhost/autoren/S/Thomas_Strothjohann/index/feedback')
 
     assert 'Ihr Feedback wurde erfolgreich verschickt.' in browser.contents
     assert 'Ihr Feedback an' not in browser.contents
