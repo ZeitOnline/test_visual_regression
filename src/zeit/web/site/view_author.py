@@ -124,6 +124,18 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
 
         return False
 
+    @zeit.web.reify
+    def followpush_segment(self):
+        return 'authors'
+
+    @zeit.web.reify
+    def followpush_id(self):
+        uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
+        uuid = getattr(uuid, 'id', None)
+        if uuid:
+            uuid = uuid.strip('{}').replace('urn:uuid:', '')
+            return uuid
+
 
 @zeit.web.view_config(name='kommentare')
 class Comments(Author):

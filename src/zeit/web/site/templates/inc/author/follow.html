@@ -1,6 +1,6 @@
 {# TODO: Remove Thomas after testing phase #}
 {% if toggles('push_for_author_in_app') or view.context.uniqueId == 'http://xml.zeit.de/autoren/S/Thomas_Strothjohann/index' %}</pre>
     <div class="author-follow js-FollowPush"
-        data-followpush-segment="authors"
-        data-followpush-id="{{ context.display_name | format_iqd }}"></div>
+        data-followpush-segment="{{ view.followpush_segment }}"
+        data-followpush-id="{{ view.followpush_id }}"></div>
 {% endif %}
