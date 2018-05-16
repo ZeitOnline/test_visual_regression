@@ -202,7 +202,7 @@ def test_author_contact_should_be_fully_rendered(testbrowser):
     facebook = container.cssselect('.author-contact__icon--facebook')
     instagram = container.cssselect('.author-contact__icon--instagram')
 
-    assert len(items) == 3
+    assert len(items) == 4
     assert len(twitter) == 1
     assert len(facebook) == 1
     assert len(instagram) == 1

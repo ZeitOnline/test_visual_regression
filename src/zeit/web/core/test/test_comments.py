@@ -14,6 +14,7 @@ import pytest
 import pytz
 import requests
 import requests.exceptions
+import requests_mock
 import zope.component
 
 from zeit.cms.checkout.helper import checked_out
@@ -998,19 +999,22 @@ def test_request_thread_should_be_called_only_once_by_article_and_comment_esi(
 
 
 def test_post_comment_should_create_commentsection_with_correct_x_unique_id(
-        application, dummy_request):
+        application):
+    unique_id = 'http://xml.zeit.de/zeit-online/article/01'
     zeit.web.core.application.FEATURE_TOGGLES.set('https')
 
-    dummy_request.method = 'POST'
-    dummy_request.POST.update({
-        'path': 'zeit-magazin/article/01', 'action': 'comment', 'comment': ' '
-    })
-    dummy_request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
-
-    view = zeit.web.core.view_comment.PostComment(mock.Mock(), dummy_request)
-    headers = view._create_community_headers("http://xml.zeit.de/foo/batz")
-    assert dummy_request.route_url('home') == "https://example.com/"
-    assert headers['X-uniqueId'] == "http://example.com/foo/batz"
+    with requests_mock.Mocker() as m:
+        zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        host = zwcs.get('community_host')
+        m.get('{}/agatho/health_check'.format(host), status_code=200)
+        m.post('{}/agatho/commentsection'.format(host), status_code=204)
+        m.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
+        m.params = {
+            'path': 'zeit-magazin/article/01',
+            'action': 'comment', 'comment': ' '}
+        view = zeit.web.core.view_comment.PostComment(mock.Mock(), m)
+        view._ensure_comment_thread(unique_id)
+        assert unique_id in view.status[0]
 
 
 def test_thread_template_should_render_adplace(
