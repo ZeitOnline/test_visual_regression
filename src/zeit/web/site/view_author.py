@@ -2,17 +2,21 @@
 import logging
 import math
 
+import lxml.objectify
 import pyramid.httpexceptions
 import zope.component
 import zope.interface
 
 import zeit.content.author.interfaces
+import zeit.content.cp.blocks.mail
 
 from zeit.web.core.view import is_paginated
 import zeit.web
 import zeit.web.core.area.ranking
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
+import zeit.web.core.view_mail
+
 
 log = logging.getLogger(__name__)
 
@@ -123,6 +127,50 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
             log.warn('An exception occured, while trying to fetch comments.')
 
         return False
+
+    @zeit.web.reify
+    def author_email(self):
+        return self.context.email
+
+
+@zeit.web.view_config(name='feedback')
+class Feedback(Author):
+
+    current_tab_name = 'feedback'
+
+    @zeit.web.reify
+    def tab_areas(self):
+        return [self.area_feedback]
+
+    @zeit.web.reify
+    def area_feedback(self):
+        if not self.context.email:
+            return None
+        area = zeit.web.core.centerpage.Area([], kind='author-feedback')
+        module = zeit.content.cp.blocks.mail.MailBlock(
+            area, lxml.objectify.XML('<dummy/>'))
+
+        module.subject = 'Sie haben Feedback erhalten'
+        module.author_name = self.context.display_name
+        module.success_message = 'Ihr Feedback wurde erfolgreich verschickt.'
+
+        area.append(zeit.web.core.centerpage.get_module(module))
+        return area
+
+
+@zeit.web.view_config(
+    context=zeit.content.author.interfaces.IAuthor,
+    name='feedback',
+    request_method='POST')
+class SendMail(zeit.web.core.view_mail.SendMail):
+
+    @zeit.web.reify
+    def recipient(self):
+        if not self.context.email:
+            message = 'Author has no email for POST to %s' % self.context
+            log.error(message)
+            raise RuntimeError(message)
+        return self.context.email
 
 
 @zeit.web.view_config(name='kommentare')

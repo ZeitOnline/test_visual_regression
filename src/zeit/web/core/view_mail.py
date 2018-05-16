@@ -12,7 +12,6 @@ import zeit.web.core.article
 import zeit.web.core.interfaces
 import zeit.web.magazin.article
 
-
 log = logging.getLogger(__name__)
 
 
@@ -80,6 +79,5 @@ class SendMail(zeit.web.core.view.Base):
         if response.status_int != 200:
             log.error('Error rendering %s after POST', self.request.url)
             raise pyramid.httpexceptions.HTTPInternalServerError()
-
         response.cache_expires(0)
         return response
