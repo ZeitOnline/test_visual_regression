@@ -133,11 +133,11 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
         return self.context.email
 
     @zeit.web.reify
-    def followpush_segment(self):
+    def followpush_taggroup(self):
         return 'authors'
 
     @zeit.web.reify
-    def followpush_id(self):
+    def followpush_tag(self):
         uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
         uuid = getattr(uuid, 'id', None)
         if uuid:

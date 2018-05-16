@@ -16,18 +16,14 @@ define([ ], function() {
             var followButtons = document.querySelectorAll( '.js-FollowPush' ),
                 i;
 
-            if ( followButtons ) {
-                for ( i = 0; i < followButtons.length; i++ ) {
+            for ( i = 0; i < followButtons.length; i++ ) {
 
-                    var buttonContainer = followButtons[ i ],
-                        segment = buttonContainer.getAttribute( 'data-followpush-segment' ) || null,
-                        id = buttonContainer.getAttribute( 'data-followpush-id' ) || null;
+                var buttonContainer = followButtons[ i ],
+                    taggroup = buttonContainer.getAttribute( 'data-followpush-taggroup' ) || null,
+                    tag = buttonContainer.getAttribute( 'data-followpush-tag' ) || null;
 
-                    if ( segment && id ) {
-                        buttonContainer.innerHTML = '<a href="zeitapp://subscribe/' + segment + '/' + id + '" class="button">Folgen</a>';
-                    }
-
-
+                if ( taggroup && tag ) {
+                    buttonContainer.innerHTML = '<a href="zeitapp://subscribe/' + taggroup + '/' + tag + '" class="button">Folgen</a>';
                 }
             }
         }
