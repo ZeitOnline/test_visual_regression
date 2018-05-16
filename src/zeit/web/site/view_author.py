@@ -15,6 +15,8 @@ import zeit.web
 import zeit.web.core.area.ranking
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
+import zeit.web.core.view_mail
+
 
 log = logging.getLogger(__name__)
 
@@ -154,6 +156,21 @@ class Feedback(Author):
 
         area.append(zeit.web.core.centerpage.get_module(module))
         return area
+
+
+@zeit.web.view_config(
+    context=zeit.content.author.interfaces.IAuthor,
+    name='feedback',
+    request_method='POST')
+class SendMail(zeit.web.core.view_mail.SendMail):
+
+    @zeit.web.reify
+    def recipient(self):
+        if not self.context.email:
+            message = 'Author has no email for POST to %s' % self.context
+            log.error(message)
+            raise RuntimeError(message)
+        return self.context.email
 
 
 @zeit.web.view_config(name='kommentare')
