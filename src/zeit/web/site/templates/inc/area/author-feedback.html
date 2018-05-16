@@ -1,0 +1,9 @@
+{% set block = area.values()[0] %}
+{% set padded_mobile_inputs = True %}
+{% extends "zeit.web.core:templates/inc/shared/mailform.html" %}
+
+{% block reload_anchor %}#author-content{% endblock %}
+{% block inner_title %}
+    <p>Ihr Feedback an {{ block.author_name }}</p>
+{% endblock %}
+
