@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4634: Use uniqueId for POSTing comments
 
+- ZON-4667: Avoid <amp-timeago> warning for liveblog AMP theme
+
 - PERF: Don't additionally retrieve body for TMS/ES results
 
 - BUG-923: Fix display of modification date for ZMO series article

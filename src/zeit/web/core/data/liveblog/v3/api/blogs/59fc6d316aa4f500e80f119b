@@ -19,11 +19,11 @@
 	"_updated": "2017-12-22T13:17:23+00:00",
 	"blog_preferences": {
 		"language": "en",
-		"theme": "test_broken_author"
+		"theme": "zon-default-solo"
 	},
 	"blog_status": "open",
 	"category": "",
-	"description": "Test default theme and AMP theme as an outputchannel.<br>",
+	"description": "Test default solo theme and AMP solo theme as an outputchannel.<br>",
 	"last_created_post": {
 		"_id": "urn:newsml:localhost:2017-12-05T16:12:54.634174:30810b37-6b94-414b-a1bb-d903625590ef",
 		"_updated": "2017-12-05T15:12:54+00:00"
@@ -71,9 +71,7 @@
 	"public_url": "https://zeit.liveblog.pro/zeit/blogs/59fc6d316aa4f500e80f119b/index.html",
 	"public_urls": {
 		"output": {
-			"59fc6d566aa4f500e7c68bd7": "https://zeit.liveblog.pro/zeit/blogs/59fc6d316aa4f500e80f119b/amp/59fc6d566aa4f500e7c68bd7/index.html",
-			"5a3d05af6aa4f500f30315d3": "https://zeit.liveblog.pro/zeit/blogs/59fc6d316aa4f500e80f119b/zon-default-solo/5a3d05af6aa4f500f30315d3/index.html",
-			"5a3d05e26aa4f500eb91feb1": "https://zeit.liveblog.pro/zeit/blogs/59fc6d316aa4f500e80f119b/amp/5a3d05e26aa4f500eb91feb1/index.html",
+			"5a3d05af6aa4f500f30315d3": "https://zeit.liveblog.pro/zeit/blogs/59fc6d316aa4f500e80f119b/zon-amp-solo/5a3d05af6aa4f500f30315d3/index.html",
 			"undefined": ""
 		},
 		"theme": {}
@@ -86,32 +84,33 @@
 		"autoApplyUpdates": true,
 		"blockSearchEngines": true,
 		"canComment": false,
-		"datetimeFormat": "lll",
+		"clientDatetimeOnly": false,
+		"datetimeFormat": "ago",
 		"gaCode": "",
-		"hasHighlights": false,
+		"hasHighlights": true,
 		"infinitScroll": true,
-		"language": "en",
+		"language": "de",
 		"livestream": false,
 		"livestreamAutoplay": false,
 		"loadNewPostsManually": true,
 		"permalinkDelimiter": "?",
-		"postOrder": "editorial",
+		"postOrder": "newest_first",
 		"postsPerPage": 10,
-		"removeStylesESI": true,
-		"renderForESI": false,
-		"showAuthor": true,
+		"removeStylesESI": false,
+		"renderForESI": true,
+		"showAuthor": false,
 		"showAuthorAvatar": true,
 		"showDescription": false,
-		"showGallery": false,
+		"showGallery": true,
 		"showImage": false,
-		"showLiveblogLogo": true,
+		"showLiveblogLogo": false,
 		"showSocialShare": true,
 		"showSyndicatedAuthor": false,
 		"showTitle": false,
 		"showUpdateDatetime": false,
 		"stickyPosition": "bottom"
 	},
-	"title": "Testing Blog",
+	"title": "Testing Solo Theme",
 	"total_posts": 7,
 	"version_creator": "596f7d516aa4f573efa7b4ab",
 	"versioncreated": "2017-12-22T13:17:22+00:00"
