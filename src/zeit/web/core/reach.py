@@ -89,6 +89,8 @@ class Reach(object):
 
 class MockReach(Reach):
 
+    # Tests use the `mockserver` fixture to serve `z.w.core/data` via HTTP, but
+    # the local sandbox can't use that, so its config uses `file://` instead.
     session = requests.Session()
     session.mount('file://', requests_file.FileAdapter())
 
