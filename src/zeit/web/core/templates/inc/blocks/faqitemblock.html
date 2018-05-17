@@ -1,5 +1,19 @@
+{% set first_block = block[0] %}
+
 <div itemscope itemtype="http://schema.org/Question">
-    {% with page = block %}
+{# The first block represents the question. #}
+<h2 class="article__subheading article__item article-flexible-toc__subheading" id="{{ first_block.text | striptags | format_faq }}" itemprop="name">
+    {{- first_block | striptags -}}
+    <a class="article-flexible-toc__subheading-link js-scroll" href="{{ view.content_url}}#article-flexible-toc-label" data-ct-label="oben">
+        <span class="article-flexible-toc__subheading-arrow"></span>
+    </a>
+</h2>
+
+{% if block | length > 1 %}
+    {# Everything thereafter represents the answer. #}
+    <div itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+    {% with page = block[1:] %}
         {% include "zeit.web.core:templates/inc/article/page.html" %}
     {% endwith %}
+{% endif %}
 </div>
