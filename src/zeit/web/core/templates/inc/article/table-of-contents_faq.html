@@ -11,7 +11,7 @@
                     {% if morequestions.append(True) %}{% endif %}
                 {% endif %}
                 <li class="article-flexible-toc__item article-flexible-toc__item--empty {% if morequestions %}article-flexible-toc__item--hide{% endif %}">
-                    <a class="article-flexible-toc__link js-scroll" href="{{ view.content_url}}#{{ subheading.text|format_faq }}" data-ct-label="{{ subheading.text }}">{{ subheading.text }}</a>
+                    <a class="article-flexible-toc__link js-scroll" href="{{ view.content_url}}#{{ subheading.text | striptags | format_faq }}" data-ct-label="{{ subheading.text | safe }}">{{ subheading.text | safe }}</a>
                 </li>
             {%- endfor -%}
             </ul>
