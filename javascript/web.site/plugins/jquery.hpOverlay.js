@@ -237,6 +237,10 @@
         document.removeEventListener( 'visibilitychange', this.visibilityListener );
     };
 
+    Overlay.prototype.addCancelCookie = function() {
+        this.cookieValue = 'canceled';
+        Zeit.cookieCreate( 'overlaycanceled', this.cookieValue, this.options.cookieTimeInDays, '' );
+    };
     // jquery plugin
     $.extend({
         hpOverlay: function() {
