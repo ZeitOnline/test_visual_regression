@@ -2275,8 +2275,74 @@ def test_dpa_afp_article_should_have_notice(testbrowser, parameter):
     assert len(browser.cssselect('.article-notice')) == 1
 
 
-def test_faq_page_renders_items_and_show_more_btn(testbrowser):
-    browser = testbrowser('/zeit-online/article/faq').cssselect
+def test_faq_page_should_present_a_link_for_each_intertitle(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
 
-    if len(browser('.article-flexible-toc__item')) > 8:
-        assert len(browser('#showall')) == 1
+    assert len(select('.article-flexible-toc__link')) == 14
+
+
+def test_faq_page_should_present_links_to_intertitles(testbrowser):
+    browser = testbrowser('/zeit-online/article/faq')
+
+    browser.cssselect('.article-flexible-toc__item')[0]
+    for index, subheading in enumerate(
+            browser.cssselect('.article__subheading')):
+        link_text = browser.cssselect(
+            '.article-flexible-toc__link')[index].get('href')
+        assert link_text == ("{}#{}".format(
+            browser.url,
+            zeit.web.core.template.format_faq(subheading.text)))
+
+
+def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
+        monkeypatch, testbrowser):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/faq')
+    intertitle = mock.Mock()
+    monkeypatch.setattr(
+        zeit.web.site.view_article.FAQArticle, u'subheadings', [intertitle])
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select('#showall')) == 0
+
+
+def test_faq_page_should_render_show_more_button(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select('#showall')) == 1
+
+
+def test_faq_page_should_follow_schema_org(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    question_wrapper = select('div[itemtype="http://schema.org/Question"]')[0]
+
+    # Questions are represented by h2.
+    assert len(question_wrapper.cssselect('h2')) == 1
+
+    # Answers are wrapped inside questions.
+    assert len(question_wrapper.cssselect(
+        'div[itemtype="http://schema.org/Answer"]')) == 1
+
+
+def test_faq_page_should_enable_blocks_outside_of_questions(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    # No div around the first paragraph, which appears before the first
+    # question.
+    assert select('.article-page > p')[0].text == u'Einleitungstext\n'
+
+
+def test_faq_page_should_wrap_multiple_blocks_into_one_answer(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    question = select('div[itemtype="http://schema.org/Question"]')[0]
+    assert len(question.cssselect('div > p')) == 2
+
+
+def test_faq_page_should_handle_multiple_block_types(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    question = select('div[itemtype="http://schema.org/Question"]')[1]
+    assert len(question.cssselect('div > video')) == 1
+    assert len(question.cssselect('div > p')) == 1

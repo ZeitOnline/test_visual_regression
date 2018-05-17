@@ -286,6 +286,24 @@ def test_format_iqd_returns_safe_text(application):
     assert zeit.web.core.template.format_iqd(text) == target
 
 
+def test_format_faq_returns_safe_text(application):
+    text = u'Studium'
+    target = 'studium'
+    assert zeit.web.core.template.format_faq(text) == target
+
+    text = u'DIE ZEIT Archiv'
+    target = 'die-zeit-archiv'
+    assert zeit.web.core.template.format_faq(text) == target
+
+    text = u'Ausgabe: 30, für Ü-30 Leser!'
+    target = 'ausgabe-30-fuer-ue-30-leser-'
+    assert zeit.web.core.template.format_faq(text) == target
+
+    text = u'Ä-Ö-Ü á à é è ß_!?)&'
+    target = 'ae-oe-ue-a-a-e-e-ss-'
+    assert zeit.web.core.template.format_faq(text) == target
+
+
 def test_filter_append_get_params_should_create_params():
     request = mock.Mock()
     request.url = 'http://example.com'
