@@ -254,6 +254,29 @@
         );
     };
 
+    Overlay.prototype.listenToPostMessages = function() {
+        var that = this;
+        window.addEventListener( 'message', function( event ) {
+            if ( that.cookieValue === 'canceled' ) {
+                return;
+            }
+            var data =  JSON.parse( event.data );
+            var matches = false;
+            // quiz
+            if ( data.name === 'quiz' && data.message === 'started' ) {
+                matches = true;
+            }
+            // podcast
+            if ( data.context === 'player.js' && data.event === 'play' ) {
+                matches = true;
+            }
+
+            if ( matches ) {
+                that.addCancelCookie();
+                that.log( 'Added Cookie' );
+            }
+        }, false );
+    };
     Overlay.prototype.addCancelCookie = function() {
         this.cookieValue = 'canceled';
         Zeit.cookieCreate( 'overlaycanceled', this.cookieValue, this.options.cookieTimeInDays, '' );
