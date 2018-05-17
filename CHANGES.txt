@@ -10,7 +10,13 @@ POSTDEPLOY
 
 
 
-3.149 (unreleased)
+3.150 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.149 (2018-05-17)
 ------------------
 
 - ZON-4258: Render feedback form on author detail page
