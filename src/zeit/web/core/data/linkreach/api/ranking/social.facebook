@@ -1,50 +1,20 @@
 [
 	{
-		"location": "/politik/ausland/2015-09/fluechtlinge-ungarn-orban-grenzen",
+		"location": "/zeit-online/article/zeit",
 		"score": 422,
-		"uniqueId": "http://xml.zeit.de/zeit-online/article/zeit",
-		"ressort": "politik",
-		"sub_ressort": "ausland",
-		"date_first_released": "2015-09-07T00:16:07Z",
-		"product_id": "ZEDE",
-		"supertitle": "Flüchtlinge",
-		"title": "Orbán verlangt Schließung der Grenzen",
-		"subtitle": "Ungarns Regierungschef fordert von Deutschland und Österreich, keine Flüchtlinge mehr aufzunehmen. Ansonsten würden \"mehrere Millionen\" Menschen nach Europa kommen.",
-		"channels": ["Politik Ausland"],
 		"fetchedAt": 1441585081229,
-		"timestamp": 1441584967000,
-		"access": "free"
+		"timestamp": 1441584967000
 	},
 	{
-		"location": "/gesellschaft/zeitgeschehen/2015-09/fluchthilfe-fluechtlinge-wien-budapest-auto-konvoi",
+		"location": "/zeit-online/cp-content/article-02",
 		"score": 408,
-		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-02",
-		"ressort": "gesellschaft",
-		"sub_ressort": "zeitgeschehen",
-		"date_first_released": "2015-09-06T17:37:16Z",
-		"product_id": "ZEDE",
-		"supertitle": "Wien",
-		"title": "Fluchthilfe ganz privat",
-		"subtitle": "Obwohl das Schleusen von Menschen strafbar ist, sind Österreicher in einem Konvoi nach Ungarn fahren, um Flüchtlinge außer Landes zu bringen. Das Ergebnis überrascht.",
-		"channels": ["Gesellschaft Zeitgeschehen"],
 		"fetchedAt": 1441561201442,
-		"timestamp": 1441561036000,
-		"access": "free"
+		"timestamp": 1441561036000
 	},
 	{
-		"location": "/gesellschaft/zeitgeschehen/2015-09/fluechtlinge-oesterreich-schleuser-ungarn",
+		"location": "/zeit-online/cp-content/article-03",
 		"score": 393,
-		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-03",
-		"ressort": "gesellschaft",
-		"sub_ressort": "zeitgeschehen",
-		"date_first_released": "2015-09-06T20:32:32Z",
-		"product_id": "ZEDE",
-		"supertitle": "Flüchtligshilfe",
-		"title": "Schleuser im Ehrenamt",
-		"subtitle": "Die gebildete Mittelschicht übertritt das Gesetz: Im Autokonvoi fahren einige nach Ungarn, um Flüchtlinge über die Grenze zu schleusen. Doch so leicht ist das nicht.",
-		"channels": ["Gesellschaft Zeitgeschehen"],
 		"fetchedAt": 1441571761651,
-		"timestamp": 1441571552000,
-		"access": "free"
+		"timestamp": 1441571552000
 	}
 ]

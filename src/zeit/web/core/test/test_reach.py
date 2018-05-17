@@ -4,7 +4,7 @@ import requests_file
 import zope.component
 
 import zeit.cms.interfaces
-import zeit.content.article.interfaces
+import zeit.retresco.interfaces
 
 import zeit.web.core.interfaces
 import zeit.web.core.reach
@@ -70,3 +70,24 @@ def test_reach_should_return_none_on_timeout(application, mockserver):
     reach = zeit.web.core.reach.Reach()
     social = reach.get_social()
     assert social == []
+
+
+def test_reach_should_retrieve_metadata_from_elasticsearch(application):
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'doc_type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
+         'doc_type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
+         'doc_type': 'article'},
+    ]
+    # All other tests have patched this aspect away since it is irrelevant,
+    # so we have to use a fresh instance for this test
+    reach = zeit.web.core.reach.Reach()
+    data = reach.get_views()
+    assert len(data) == 3
+    assert all(
+        [zeit.retresco.interfaces.ITMSContent.providedBy(a) for a in data])
+    assert all(
+        [zeit.web.core.interfaces.IInternalUse.providedBy(a) for a in data])
