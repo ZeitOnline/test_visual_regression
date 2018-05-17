@@ -237,6 +237,23 @@
         document.removeEventListener( 'visibilitychange', this.visibilityListener );
     };
 
+    Overlay.prototype.sendPodcastPlayEventPostMessage = function() {
+        // send postMessage with value play to get the message once the player starts
+        Array.from( document.querySelectorAll( '.podigee-podcast-player' ) ).forEach(
+            function( element ) {
+                element.contentWindow.postMessage(
+                    JSON.stringify({
+                        context: 'player.js',
+                        version: 'version',
+                        method: 'addEventListener',
+                        value: 'play'
+                    }),
+                    '*'
+                );
+            }
+        );
+    };
+
     Overlay.prototype.addCancelCookie = function() {
         this.cookieValue = 'canceled';
         Zeit.cookieCreate( 'overlaycanceled', this.cookieValue, this.options.cookieTimeInDays, '' );
