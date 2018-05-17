@@ -182,7 +182,7 @@
         this.visible = false;
         // write cookie
         this.cookieValue = 'canceled';
-        Zeit.cookieCreate( 'overlaycanceled', 'canceled', this.options.cookieTimeInDays, '' );
+        Zeit.cookieCreate( 'overlaycanceled', this.cookieValue, this.options.cookieTimeInDays, '' );
         // restore last focused element
         if ( this.activeElement ) {
             this.activeElement.focus();
