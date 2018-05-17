@@ -712,7 +712,7 @@ def format_faq(string):
         u'è', 'e').replace(
         u'ß', 'ss')
     string = re.sub(u'[^-a-zA-Z0-9]', '-', string)
-    string = re.sub(u'_+', '-', string)
+    string = re.sub(u'-+', '-', string)
     string = re.sub(u'^_|_$', '', string)
     return string
 
