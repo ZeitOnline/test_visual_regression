@@ -265,15 +265,26 @@ def restructure_faq_article(page):
     # FAQs by definition consist only of a single page.
     restructured_blocks = []
     for block in page.blocks:
+        try:
+            previous_block = restructured_blocks[-1]
+        except IndexError:
+            previous_block = None
+
         if isinstance(block, zeit.web.core.block.Intertitle):
+            # Handle intertitles, representing a FAQ question.
             faq_item_block = FAQItemBlock()
             faq_item_block.append(block)
             restructured_blocks.append(faq_item_block)
-        elif zeit.web.core.interfaces.IPlace.providedBy(block) or (
-                zeit.web.core.interfaces.IContentAdBlock.providedBy(block)):
+        elif zeit.web.core.interfaces.IContentAdBlock.providedBy(block):
+            # Ad blocks should never be part of an answer.
             restructured_blocks.append(block)
+        elif isinstance(previous_block, FAQItemBlock):
+            # Add further blocks as answers to their corresponding question.
+            previous_block.append(block)
         else:
-            restructured_blocks[-1].append(block)
+            # Everything else is just a regular block (e.g. paragraphs that
+            # appear before the first intertitle question).
+            restructured_blocks.append(block)
         page.blocks = restructured_blocks
     return page
 
