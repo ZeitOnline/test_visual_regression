@@ -69,6 +69,8 @@
         // bind this on runtime to make it revokable
         this.visibilityListener = visibilityListener.bind( this );
         document.addEventListener( 'visibilitychange', this.visibilityListener );
+        // add Podcast Event Listener
+        this.addPostMessageEventListener();
         // fetchData initially
         this.fetchData();
     };
@@ -277,10 +279,17 @@
             }
         }, false );
     };
+
+    Overlay.prototype.addPostMessageEventListener = function() {
+        this.sendPodcastPlayEventPostMessage();
+        this.listenToPostMessages();
+    };
+
     Overlay.prototype.addCancelCookie = function() {
         this.cookieValue = 'canceled';
         Zeit.cookieCreate( 'overlaycanceled', this.cookieValue, this.options.cookieTimeInDays, '' );
     };
+
     // jquery plugin
     $.extend({
         hpOverlay: function() {
