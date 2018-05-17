@@ -51,19 +51,6 @@ def test_data_for_mostread_should_be_fetched(application):
     assert all([hasattr(a, 'uniqueId') for a in data])
 
 
-def test_counts_per_url_are_fetchable(application):
-    reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
-    data = reach.get_buzz('http://xml.zeit.de/index')
-    assert {'social', 'comments', 'views', 'score', 'trends'}.issubset(
-        data.keys())
-
-
-def test_non_ascii_url_fails_gracefully(application):
-    reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
-    data = reach.get_buzz(u'http://xml.zeit.de/ümläut')
-    assert data.get('score') == 3.535
-
-
 def test_buzz_module_should_extract_ressort_from_centerpage(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/zeitonline')
