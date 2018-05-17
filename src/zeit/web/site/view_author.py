@@ -134,8 +134,7 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
 
     @zeit.web.reify
     def followpush_available(self):
-        # TODO: include author information from vivi
-        return True
+        return bool(self.context.enable_followpush)
 
     @zeit.web.reify
     def followpush_taggroup(self):
