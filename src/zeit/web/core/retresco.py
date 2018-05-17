@@ -62,7 +62,7 @@ def tms_request(self, *args, **kw):
         'zeit.web-%s/retresco/python-requests' % request.registry.settings.get(
             'version', 'unknown'))
     with zeit.web.core.metrics.timer(
-            'zeit.retresco.connection.tms.reponse_time'):
+            'zeit.retresco.connection.tms.response_time'):
         return original_request(self, *args, **kw)
 
 
