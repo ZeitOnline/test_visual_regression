@@ -1,5 +1,9 @@
 {% extends "zeit.web.magazin:templates/content.html" %}
 
+{% block content_ad_script -%}
+    {%- include "zeit.web.core:templates/inc/ads/content-ad.html" -%}
+{%- endblock %}
+
 {% block comments_balloon %}
     {%- include "zeit.web.magazin:templates/inc/article/comment-balloon.html" -%}
 {% endblock comments_balloon %}
