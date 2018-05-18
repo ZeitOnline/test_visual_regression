@@ -132,7 +132,7 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
     def author_email(self):
         return self.context.email
 
-
+if (zeit.web.core.application.FEATURE_TOGGLES.find('author_feedback'))
 @zeit.web.view_config(name='feedback')
 class Feedback(Author):
 
@@ -152,7 +152,8 @@ class Feedback(Author):
 
         module.subject = 'Sie haben Feedback erhalten'
         module.author_name = self.context.display_name
-        module.success_message = 'Ihr Feedback wurde erfolgreich verschickt.'
+        module.success_message = 'Ihr Feedback wurde erfolgreich ' \
+            'verschickt.'
 
         area.append(zeit.web.core.centerpage.get_module(module))
         return area
