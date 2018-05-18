@@ -132,9 +132,15 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
     def author_email(self):
         return self.context.email
 
-if (zeit.web.core.application.FEATURE_TOGGLES.find('author_feedback'))
+
 @zeit.web.view_config(name='feedback')
 class Feedback(Author):
+
+    def __call__(self):
+        if not zeit.web.core.application.FEATURE_TOGGLES.find(
+                'author_feedback'):
+            return pyramid.httpexceptions.HTTPNotFound()
+        return super(Feedback, self).__call__()
 
     current_tab_name = 'feedback'
 
