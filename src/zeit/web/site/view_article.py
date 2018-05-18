@@ -236,6 +236,21 @@ class FAQArticle(Article):
 
 
 @zeit.web.view_config(
+    context=zeit.web.core.article.IFlexibleTOCArticle,
+    renderer='templates/flexible_toc.html')
+class FlexibleTOCArticle(Article):
+
+    @zeit.web.reify
+    def subheadings(self):
+        """Like FAQs, flexible tables of content are by definition only able to
+        present intertitles from the first page.
+        """
+        for block in self.pages[0].blocks:
+            if isinstance(block, zeit.web.core.block.Intertitle):
+                yield block.context
+
+
+@zeit.web.view_config(
     context=zeit.web.core.article.ILiveblogArticle,
     renderer='templates/liveblog.html')
 class LiveblogArticle(Article):

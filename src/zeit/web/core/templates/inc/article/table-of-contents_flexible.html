@@ -1,8 +1,10 @@
 <aside class="article-flexible-toc article__item article__item--wide">
     <div class="article-flexible-toc__container">
+        {% block flexible_toc_headline -%}
         <h3 class="article-flexible-toc__headline" id="article-flexible-toc-label">
-            Alle Fragen im Überblick:
+            Überblick:
         </h3>
+        {%- endblock -%}
         <div class="article-flexible-toc__seperator" id="article-flexible-toc-box">
             <ul class="article-flexible-toc__list" id="article-flexible-toc-list">
             {% set morequestions = [] %}

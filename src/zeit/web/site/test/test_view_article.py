@@ -2367,3 +2367,22 @@ def test_faq_page_should_render_flexible_toc_above_first_question(testbrowser):
     first_question = flexible_toc.getnext().getnext()
     assert 'http://schema.org/Question' in (
         flexible_toc.getnext().getnext().get('itemtype'))
+
+
+def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
+    """Functionality is pretty much completely covered by faq tests above,
+    so just cover some basics here."""
+
+    select = testbrowser('/zeit-online/article/flexible_toc').cssselect
+
+    assert len(select('.article-flexible-toc')) == 1
+
+    first_block = select('.article-page')[0].getchildren()[0]
+    assert 'article__item' in first_block.get('class')
+
+    flexible_toc = first_block.getnext()
+    assert 'article-flexible-toc' in flexible_toc.get('class')
+    assert flexible_toc.getnext().tag == 'script'
+
+    first_question = flexible_toc.getnext().getnext()
+    assert 'article__item' in first_block.get('class')

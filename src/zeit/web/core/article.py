@@ -34,6 +34,12 @@ class IColumnArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that belong to a "column" series."""
 
 
+class IFlexibleTOCArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that contain a flexible table of
+    contents.
+    """
+
+
 class IFAQArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that contain a FAQ."""
 
@@ -45,7 +51,8 @@ class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
 class ISeriesArticleWithFallbackImage(
         zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that are part of a series with a
-    fallback image."""
+    fallback image.
+    """
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
@@ -422,6 +429,7 @@ class LiveblogInfo(object):
 
 TEMPLATE_INTERFACES = {
     'faq': (IFAQArticle,),
+    'flexible_toc': (IFlexibleTOCArticle,),
     'zon-liveblog': (ILiveblogArticle,),
     # Should we check that the article provides IZMOContent? Because those
     # templates are only available there.
