@@ -18,7 +18,7 @@ $timeline-padding: remify(24px)
 	&__content
 		border-left: 1px $timeline-line-color solid
 		margin: 0 auto
-		max-width: remify(660px)
+		max-width: $medium-content-width
 		padding: remify(16px 0 16px 14px)
 		+default-article-textlink($color: $zon-dark-grey, $hover: $zon-dark-grey, $border-color: rgba($zon-dark-grey, 0.4), $border-color--hover: rgba($zon-dark-grey, 1))
 
@@ -55,7 +55,7 @@ $timeline-padding: remify(24px)
 		padding-left: $timeline-padding--small
 		position: relative
 		+respond-min($break-tablet-min)
-			max-width: remify(660px)
+			max-width: $medium-content-width
 			padding-left: $timeline-padding
 		&--header
 			padding-bottom: $vertical-space
