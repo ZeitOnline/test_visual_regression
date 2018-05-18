@@ -2330,7 +2330,7 @@ def test_faq_page_should_enable_blocks_outside_of_questions(testbrowser):
 
     # No div around the first paragraph, which appears before the first
     # question.
-    assert select('.article-page > p')[0].text == u'Einleitungstext\n'
+    assert 'Einleitungstext' in select('.article-page > p')[0].text
 
 
 def test_faq_page_should_wrap_multiple_blocks_into_one_answer(testbrowser):
@@ -2346,3 +2346,24 @@ def test_faq_page_should_handle_multiple_block_types(testbrowser):
     question = select('div[itemtype="http://schema.org/Question"]')[1]
     assert len(question.cssselect('div > video')) == 1
     assert len(question.cssselect('div > p')) == 1
+
+
+def test_faq_page_should_contain_exactly_one_flexible_toc(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select('.article-flexible-toc')) == 1
+
+
+def test_faq_page_should_render_flexible_toc_above_first_question(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    first_block = select('.article-page')[0].getchildren()[0]
+    assert 'article__item' in first_block.get('class')
+
+    flexible_toc = first_block.getnext()
+    assert 'article-flexible-toc' in flexible_toc.get('class')
+    assert flexible_toc.getnext().tag == 'script'
+
+    first_question = flexible_toc.getnext().getnext()
+    assert 'http://schema.org/Question' in (
+        flexible_toc.getnext().getnext().get('itemtype'))

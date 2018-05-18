@@ -1,5 +1,13 @@
 {% set first_block = block[0] %}
 
+{% if not ns.toc_faq_printed %}
+    {# Place flexible table of contents right above the first question, which
+       may or may not be the first block, so we cannot rely on the toc logic in
+       page.html #}
+    {% include "zeit.web.core:templates/inc/article/table-of-contents_flexible.html" %}
+    {% set ns.toc_faq_printed = True %}
+{% endif %}
+
 <div itemscope itemtype="http://schema.org/Question">
 {# The first block represents the question. #}
 <h2 class="article__subheading article__item article-flexible-toc__subheading" id="{{ first_block.text | striptags | format_faq }}" itemprop="name">
