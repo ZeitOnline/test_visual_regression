@@ -46,7 +46,7 @@ var video = {
                                 'data-player="{{playerId}}" data-embed="{{embed}}" data-video-id="{{videoId}}" ' +
                                 'class="video-js video-player__videotag" preload="none" controls></video></div>',
                     snippet,
-                    scriptSrc = window.location.protocol + '//players.brightcove.net/{{accountId}}/{{playerId}}_{{embed}}/index.min.js';
+                    scriptSrc = 'https://players.brightcove.net/{{accountId}}/{{playerId}}_{{embed}}/index.min.js';
                 if ( typeof videoId === 'undefined' && defaults.elem.length < 1 ) {
                     return;
                 } else {
