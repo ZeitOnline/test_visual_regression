@@ -139,7 +139,7 @@ class Feedback(Author):
     def __call__(self):
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
                 'author_feedback'):
-            return pyramid.httpexceptions.HTTPNotFound()
+            raise pyramid.httpexceptions.HTTPNotFound()
         return super(Feedback, self).__call__()
 
     current_tab_name = 'feedback'
