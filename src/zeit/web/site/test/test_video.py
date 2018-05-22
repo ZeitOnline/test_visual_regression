@@ -93,7 +93,8 @@ def test_video_page_should_embed_sharing_menu(testbrowser):
 
 def test_video_page_video_player_should_exist(testserver, testbrowser):
     browser = testbrowser('/zeit-online/video/3537342483001')
-    assert len(browser.cssselect('.video-player video')) == 1
+    assert len(browser.cssselect(
+        '.js-videoplayer[data-video-id="3537342483001"]')) == 1
 
 
 def test_create_url_filter_should_append_seo_slug_to_all_video_links(
@@ -244,10 +245,9 @@ def test_video_comment_pagination_should_contain_seo_slug(
 
 
 def test_video_has_no_ads(testbrowser):
-    browser = testbrowser(
-        '/zeit-online/article/video-ads')
-    playerdata = browser.cssselect('video')[0].get('data-player')
-    assert playerdata == ("SJENxUNKe")
+    browser = testbrowser('/zeit-online/article/video-ads')
+    playerdata = browser.cssselect('.js-videoplayer')[0]
+    assert playerdata.get('data-video-advertising') == ("withoutAds")
 
 
 def test_expired_video_should_show_404(testserver):
