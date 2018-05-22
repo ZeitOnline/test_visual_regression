@@ -166,10 +166,9 @@ def test_banner_content_enabled_shows_all_ads(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(
-        browser.cssselect('article.article script[id|="ad-desktop"]')) == 2
+        browser.cssselect('article.article script[id|="ad-desktop"]')) == 3
     assert len(
         browser.cssselect('article.article script[id|="ad-mobile"]')) == 2
-    assert len(browser.cssselect('article.article #iq-artikelanker')) == 1
 
 
 def test_banner_content_disabled_exclude_body_ads(testbrowser):
