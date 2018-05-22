@@ -10,10 +10,19 @@ define([ 'jquery', 'web.site/video/video' ], function( $, video ) {
     return {
         init: function() {
             var elem = $( '.js-videosinglepage' ),
-                videoId;
+                videoId,
+                videoAdvertising,
+                videoPlayertype;
             if ( elem.length ) {
                 videoId = elem.data( 'video-id' );
-                video.displayVideo( videoId, { elem: elem });
+                videoAdvertising = elem.data( 'video-advertising' );
+                videoPlayertype = elem.data( 'video-playertype' );
+
+                video.displayVideo( videoId, {
+                    elem: elem,
+                    advertising: videoAdvertising,
+                    playertype: videoPlayertype
+                });
             }
         }
     };

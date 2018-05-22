@@ -25,7 +25,10 @@
         {% endrequire %}
 
         <div class="article__item article__item--wide article__item--rimless">
-            <div class="js-videosinglepage" data-video-id="{{ view.context.__name__ }}"></div>
+            <div class="js-videosinglepage"
+                 data-video-id="{{ view.context.__name__ }}"
+                 data-video-advertising="{{ 'withAds' if view.has_advertisement else 'withoutAds' }}"
+                 data-video-playertype="cp"></div>
         </div>
 
         {% if view.advertising_enabled %}

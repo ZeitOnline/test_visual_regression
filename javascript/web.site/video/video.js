@@ -20,8 +20,9 @@ var video = {
              */
             displayVideo: function( videoId, config ) {
 
-                var videoPlayerId = ( window.Zeit.cookieRead( 'gdpr' ) === 'dnt' ) ?
-                    window.Zeit.cpVideoPlayerIdWithoutAds : window.Zeit.cpVideoPlayerId;
+                var advertising = ( window.Zeit.cookieRead( 'gdpr' ) === 'dnt' ) ?
+                        'withoutAdvertising' : config.advertising,
+                    videoPlayerId = window.Zeit.videoPlayers[ config.playertype ][ advertising ];
 
                 /**
                  * configuration object, extends config
