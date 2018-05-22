@@ -25,12 +25,7 @@
         {% endrequire %}
 
         <div class="article__item article__item--wide article__item--rimless">
-            {% if view.has_advertisement %}
-                {% set player = settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') %}
-            {% else %}
-                {% set player = settings('brightcove_videoplayer_hp_cp_single_wo_ads', 'r1xb937iwZ') %}
-            {% endif %}
-            {{ vima.brightcove_video_tag(view.context.__name__, brightcove_player=player) }}
+            <div class="js-videosinglepage" data-video-id="{{ view.context.__name__ }}"></div>
         </div>
 
         {% if view.advertising_enabled %}
