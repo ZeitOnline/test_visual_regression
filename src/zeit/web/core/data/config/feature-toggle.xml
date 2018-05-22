@@ -43,9 +43,7 @@
   <track_gate_visibility>true</track_gate_visibility>
   <update_signals>true</update_signals>
   <volume_teaser>true</volume_teaser>
-  <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
   <zon_admark>false</zon_admark>
-  <zon_videosinglepage_via_html5>true</zon_videosinglepage_via_html5>
   <zplus_badge_gray>true</zplus_badge_gray>
   <zplus_badge_on_registration_paywall>true</zplus_badge_on_registration_paywall>
 </features>

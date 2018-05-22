@@ -30,11 +30,7 @@
             {% else %}
                 {% set player = settings('brightcove_videoplayer_hp_cp_single_wo_ads', 'r1xb937iwZ') %}
             {% endif %}
-            {% if toggles('zon_videosinglepage_via_html5') %}
-                {{ vima.brightcove_video_tag(view.context.__name__, iframe=False, brightcove_player=player) }}
-            {% else %}
-                {{ vima.brightcove_video_tag(view.context.__name__, iframe=True, brightcove_player=player) }}
-            {% endif %}
+            {{ vima.brightcove_video_tag(view.context.__name__, brightcove_player=player) }}
         </div>
 
         {% if view.advertising_enabled %}

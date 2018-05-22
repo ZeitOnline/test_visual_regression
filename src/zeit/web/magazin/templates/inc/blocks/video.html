@@ -16,11 +16,7 @@
     data-video-provider="brightcove"
     data-video-page-url="{{ block.video | create_url }}">
     {% set player = settings('brightcove_videoplayer_article', 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9') %}
-    {% if toggles('zon_inline_video_via_html5') %}
-        {{ vima.brightcove_video_tag(block.id, iframe=False, brightcove_player=player) }}
-    {% else %}
-        {{ vima.brightcove_video_tag(block.id, iframe=True, brightcove_player=player) }}
-    {% endif %}
+    {{ vima.brightcove_video_tag(block.id, brightcove_player=player) }}
 
     {% block video_caption -%}
     <figcaption class="figure__caption">
