@@ -10,12 +10,20 @@ POSTDEPLOY
 
 
 
-3.150 (unreleased)
+3.151 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.150 (2018-05-22)
 ------------------
 
 - BUG-903: Align content width to 660 pixel again
 
 - MAINT: Fix selenium tests
+
+- FIX: ZON-4258: Toggle author feedback
 
 
 3.149 (2018-05-17)

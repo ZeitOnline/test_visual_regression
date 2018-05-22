@@ -136,6 +136,12 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
 @zeit.web.view_config(name='feedback')
 class Feedback(Author):
 
+    def __call__(self):
+        if not zeit.web.core.application.FEATURE_TOGGLES.find(
+                'author_feedback'):
+            raise pyramid.httpexceptions.HTTPNotFound()
+        return super(Feedback, self).__call__()
+
     current_tab_name = 'feedback'
 
     @zeit.web.reify
@@ -152,7 +158,8 @@ class Feedback(Author):
 
         module.subject = 'Sie haben Feedback erhalten'
         module.author_name = self.context.display_name
-        module.success_message = 'Ihr Feedback wurde erfolgreich verschickt.'
+        module.success_message = 'Ihr Feedback wurde erfolgreich ' \
+            'verschickt.'
 
         area.append(zeit.web.core.centerpage.get_module(module))
         return area

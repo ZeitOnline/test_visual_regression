@@ -12,6 +12,7 @@
   <elasticsearch_zoca>false</elasticsearch_zoca>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
+  <author_feedback>false</author_feedback>
 
   <!-- Produce https link, when set to true (only for certain domains, when
   'transform_to_secure_links_for[cs-list_with_fqdn]` is configured in web-settings) -->
