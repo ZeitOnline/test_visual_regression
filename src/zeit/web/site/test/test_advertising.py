@@ -148,20 +148,6 @@ def test_adplaces_have_no_banner_label_data_attribute(testbrowser):
     assert labelstring not in browser.contents
 
 
-def test_adplace5_depends_on_ligatus_toggle_on(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set(
-        'third_party_modules', 'iqd', 'ligatus', 'ligatus_on_site')
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert not browser.cssselect('#ad-desktop-5')
-
-
-def test_adplace5_depends_on_ligatus_toggle_off(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
-    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert browser.cssselect('#ad-desktop-5')
-
-
 def test_banner_content_enabled_shows_all_ads(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/zeit-online/article/zeit')
