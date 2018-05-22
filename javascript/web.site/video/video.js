@@ -20,6 +20,9 @@ var video = {
              */
             displayVideo: function( videoId, config ) {
 
+                var videoPlayerId = ( window.Zeit.cookieRead( 'gdpr' ) === 'dnt' ) ?
+                    window.Zeit.cpVideoPlayerIdWithoutAds : window.Zeit.cpVideoPlayerId;
+
                 /**
                  * configuration object, extends config
                  * @type {object}
@@ -30,7 +33,7 @@ var video = {
                         elem: [],
                         playerData: {
                             'accountId': '18140073001',
-                            'playerId': window.Zeit.cpVideoPlayerId,
+                            'playerId': videoPlayerId,
                             'embed': 'default'
                         }
                     }, config ),
