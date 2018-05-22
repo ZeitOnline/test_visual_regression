@@ -10,7 +10,7 @@ POSTDEPLOY
 
 
 
-3.150 (unreleased)
+3.150 (2018-05-22)
 ------------------
 
 - BUG-903: Align content width to 660 pixel again
