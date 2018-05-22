@@ -34,9 +34,7 @@ if ( article.length ) {
     overscrolling.init({ livePreview: true });
     visibilityTracking.init();
 
-    if ( article.hasClass( 'article--video' ) ) {
-        videoSinglepage.init();
-    }
+    videoSinglepage.init();
 }
 
 adblockCount.init();

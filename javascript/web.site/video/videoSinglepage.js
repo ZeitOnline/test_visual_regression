@@ -9,21 +9,24 @@
 define([ 'jquery', 'web.site/video/video' ], function( $, video ) {
     return {
         init: function() {
-            var elem = $( '.js-videosinglepage' ),
+            var $videos = $( '.js-videosinglepage' ),
                 videoId,
                 videoAdvertising,
                 videoPlayertype;
-            if ( elem.length ) {
-                videoId = elem.data( 'video-id' );
-                videoAdvertising = elem.data( 'video-advertising' );
-                videoPlayertype = elem.data( 'video-playertype' );
+
+            $videos.each( function() {
+                var $video = $( this );
+
+                videoId = $video.data( 'video-id' );
+                videoAdvertising = $video.data( 'video-advertising' );
+                videoPlayertype = $video.data( 'video-playertype' );
 
                 video.displayVideo( videoId, {
-                    elem: elem,
+                    elem: $video,
                     advertising: videoAdvertising,
                     playertype: videoPlayertype
                 });
-            }
+            });
         }
     };
 });

@@ -82,8 +82,9 @@ var video = {
                     script.onload = script.onreadystatechange = function() {
                         if ( !done && ( !this.readyState || this.readyState === 'loaded' || this.readyState === 'complete' ) ) {
                             done = true;
-                            /*global videojs*/
-                            videojs( 'player-' + videoId ).play();
+                            // autoplay is handled via the players and plugins
+                            // /*global videojs*/
+                            // videojs( 'player-' + videoId ).play();
                             window.define = _define; // reset previous state
                             script.onload = script.onreadystatechange = null;
                         }

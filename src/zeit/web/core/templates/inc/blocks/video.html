@@ -6,12 +6,12 @@
     data-video-size="large"
     data-video-provider="brightcove"
     data-video-page-url="{{ block.video | create_url }}">
-    {% if block.video.has_advertisement %}
-        {% set player = settings('brightcove_videoplayer_article', 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9') %}
-    {% else %}
-        {% set player = settings('brightcove_videoplayer_article_wo_ads', 'NykzeyfYg') %}
-    {% endif %}
-    {{ vima.brightcove_video_tag(block.id, brightcove_player=player) }}
+
+    <div class="js-videosinglepage"
+         data-video-id="{{ block.id }}"
+         data-video-advertising="{{ 'withAds' if block.video.has_advertisement else 'withoutAds' }}"
+         data-video-playertype="article"></div>
+
     {% block video_caption -%}
     <figcaption class="figure__caption">
         <span class="figure__title">{{ [block.supertitle, block.title] | join_if_exists(' - ') }}</span>
