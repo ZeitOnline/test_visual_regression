@@ -26,7 +26,10 @@ def test_author_page_should_render_bio_questions(testbrowser):
     assert question8 == u'Diese Recherche hat etwas verändert'
 
 
-def test_author_has_contact_link(testbrowser):
+def test_author_has_contact_link(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'author_feedback': True}.get)
+
     browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
     feedbackLink = browser.cssselect(
         '.author-contact__link[href$="autoren/D/Tobias_Dorfer/index'
@@ -34,7 +37,9 @@ def test_author_has_contact_link(testbrowser):
     assert len(feedbackLink) == 1
 
 
-def test_author_page_should_render_feedback(testbrowser):
+def test_author_page_should_render_feedback(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'author_feedback': True}.get)
     browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
 
     # has feedback section
@@ -50,14 +55,19 @@ def test_author_page_should_render_feedback(testbrowser):
     assert 'required' in feedbackTextarea.attrib
 
 
-def test_author_feedback_has_modifier_class(testbrowser):
+def test_author_feedback_has_modifier_class(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'author_feedback': True}.get)
     browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
     # has author class modifier
     feedbackModifier = browser.cssselect('.feedback-section--padded')
     assert len(feedbackModifier) == 1
 
 
-def test_post_should_trigger_mail_then_render_success(testbrowser):
+def test_post_should_trigger_mail_then_render_success(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'author_feedback': True}.get)
     # load thomas to make sure no real author gets test mails
     browser = testbrowser('/autoren/S/Thomas_Strothjohann/index/feedback')
 
@@ -78,7 +88,9 @@ def test_post_should_trigger_mail_then_render_success(testbrowser):
 
 
 def test_author_missing_captcha_should_render_error_and_preserve_body(
-        testbrowser, request):
+        testbrowser, request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'author_feedback': True}.get)
     captcha = zope.component.getUtility(zeit.web.core.interfaces.ICaptcha)
     captcha.verify.return_value = False
 

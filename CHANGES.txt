@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - MAINT: Fix selenium tests
 
+- HOTFIX: ZON-4258
+
 
 3.149 (2018-05-17)
 ------------------
