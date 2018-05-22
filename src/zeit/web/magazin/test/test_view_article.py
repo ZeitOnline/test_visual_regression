@@ -55,7 +55,6 @@ def test_article_page_should_contain_blocks(httpbrowser):
 
     assert len(portraitbox) == 1
     assert len(raw) == 1
-    assert len(contentadblock) == 1
 
     # liveblog
     assert page.cssselect('.liveblog')
