@@ -1,15 +1,12 @@
 /**
- * @fileOverview Module for the video single pages
+ * @fileOverview Module for loading video player on page load (video single pages and articles)
  * @version  0.1
- */
-/**
- * Module for the video single pages
- * @module videoSinglepage
+ * @module videoPlayer
  */
 define([ 'jquery', 'web.site/video/video' ], function( $, video ) {
     return {
         init: function() {
-            var $videos = $( '.js-videosinglepage' ),
+            var $videos = $( '.js-videoplayer' ),
                 videoId,
                 videoAdvertising,
                 videoPlayertype;

@@ -1,5 +1,4 @@
 {% extends 'zeit.web.site:templates/content.html' %}
-{% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
 
 {% block content %}
     <article class="article article--padded article--video" id="js-article"
@@ -25,7 +24,7 @@
         {% endrequire %}
 
         <div class="article__item article__item--wide article__item--rimless">
-            <div class="js-videosinglepage"
+            <div class="js-videoplayer"
                  data-video-id="{{ view.context.__name__ }}"
                  data-video-advertising="{{ 'withAds' if view.has_advertisement else 'withoutAds' }}"
                  data-video-playertype="cp"></div>

@@ -1,5 +1,3 @@
-{% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
-
 {% if block.id and 'header' not in block.layout | default('') -%}
 <figure class="
     {% if block.layout == 'zmo-small-left' or block.layout == 'small' %}
@@ -15,8 +13,12 @@
     data-video-size="large"
     data-video-provider="brightcove"
     data-video-page-url="{{ block.video | create_url }}">
-    {% set player = settings('brightcove_videoplayer_article', 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9') %}
-    {{ vima.brightcove_video_tag(block.id, brightcove_player=player) }}
+
+
+    <div class="js-videoplayer"
+         data-video-id="{{ block.id }}"
+         data-video-advertising="{{ 'withAds' if block.video.has_advertisement else 'withoutAds' }}"
+         data-video-playertype="article"></div>
 
     {% block video_caption -%}
     <figcaption class="figure__caption">

@@ -8,6 +8,7 @@ var $ = require( 'jquery' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
     comments = require( 'web.core/comments' ),
+    videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
     article = document.getElementById( 'js-article' ),
@@ -29,6 +30,7 @@ zeit.clearQueue();
 if ( article ) {
     comments.init();
     articledate.init();
+    videoPlayer.init();
 }
 
 // add required jQuery plugins
