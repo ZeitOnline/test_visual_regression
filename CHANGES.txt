@@ -13,7 +13,7 @@ POSTDEPLOY
 3.151 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4714: Add gdpr-Param to Adcontroller SiteInfo if cookie is present
 
 
 3.150 (2018-05-22)
