@@ -7,6 +7,7 @@ var $ = require( 'jquery' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
+    videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
     main = $( '#main' ),
@@ -24,6 +25,7 @@ if ( article.length ) {
     articledate.init();
     comments.init();
     visibilityTracking.init();
+    videoPlayer.init();
 }
 
 saveGetToCookie.init();

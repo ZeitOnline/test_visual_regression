@@ -1,5 +1,4 @@
 {% extends 'zeit.web.site:templates/content.html' %}
-{% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
 
 {% block content %}
     <article class="article article--padded article--video" id="js-article"
@@ -25,16 +24,10 @@
         {% endrequire %}
 
         <div class="article__item article__item--wide article__item--rimless">
-            {% if view.has_advertisement %}
-                {% set player = settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') %}
-            {% else %}
-                {% set player = settings('brightcove_videoplayer_hp_cp_single_wo_ads', 'r1xb937iwZ') %}
-            {% endif %}
-            {% if toggles('zon_videosinglepage_via_html5') %}
-                {{ vima.brightcove_video_tag(view.context.__name__, iframe=False, brightcove_player=player) }}
-            {% else %}
-                {{ vima.brightcove_video_tag(view.context.__name__, iframe=True, brightcove_player=player) }}
-            {% endif %}
+            <div class="js-videoplayer"
+                 data-video-id="{{ view.context.__name__ }}"
+                 data-video-advertising="{{ 'withAds' if view.has_advertisement else 'withoutAds' }}"
+                 data-video-playertype="cp"></div>
         </div>
 
         {% if view.advertising_enabled %}

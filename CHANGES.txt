@@ -8,12 +8,29 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
+- remove `zon_inline_video_via_html5` from feature toggles
+
+- remove `zon_videosinglepage_via_html5` from feature toggles
 
 
-3.150 (unreleased)
+3.151 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4714: Add gdpr-Param to Adcontroller SiteInfo if cookie is present
+
+- ZON-4715: Use brightcove without ads if GDPR opt-out cookie is set
+
+- ZON-4622: Remove content marketing ad, bring back adplace5 instead
+
+
+3.150 (2018-05-22)
+------------------
+
+- BUG-903: Align content width to 660 pixel again
+
+- MAINT: Fix selenium tests
+
+- FIX: ZON-4258: Toggle author feedback
 
 
 3.149 (2018-05-17)

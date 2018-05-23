@@ -4,6 +4,8 @@ import zeit.web.site.view
 import jwt
 import zope.component
 
+import time
+
 
 def test_framebuilder_should_set_ressort(application, dummy_request):
     dummy_request.GET['ressort'] = 'kultur'
@@ -356,9 +358,12 @@ def test_framebuilder_does_not_render_login_data(
         {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
 
     # add_cookie() only works for the domain of the last get(), sigh.
+    # janky timeouts needed to calm down the test-procedure on lightning-
+    # fast developer machines. jenkins is slow enough though.
     driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    time.sleep(5)
     driver.add_cookie({'name': 'my_sso_cookie', 'value': sso_cookie})
-
+    time.sleep(5)
     driver.get('{}/zeit-online/article/simple'.format(testserver.url))
     assert len(select('.nav__user-name')) == 1
 

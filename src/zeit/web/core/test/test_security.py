@@ -1,5 +1,6 @@
 import json
 import urllib
+import time
 
 import jwt
 import mock
@@ -246,11 +247,15 @@ def test_rawr_config_should_contain_user_data_as_base64_encoded_json(
         selenium_driver, testserver):
     driver = selenium_driver
     # add_cookie() only works for the domain of the last get(), sigh.
+    # janky timeouts needed to calm down the test-procedure on lightning-
+    # fast developer machines. jenkins is slow enough though.
     driver.get('%s/zeit-online/article/01' % testserver.url)
+    time.sleep(5)
     driver.add_cookie({
         'name': 'my_sso_cookie',
         'value': 'just be present',
     })
+    time.sleep(5)
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
         get_user.return_value = {
             'ssoid': '123',
