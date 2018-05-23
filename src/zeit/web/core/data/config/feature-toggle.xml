@@ -32,6 +32,7 @@
   <optimize_ab_testing_to_webtrekk>false</optimize_ab_testing_to_webtrekk>
   <podlove_button>true</podlove_button>
   <preload_webfonts>true</preload_webfonts>
+  <push_for_author_in_app>true</push_for_author_in_app>
   <rawr_iframe>true</rawr_iframe>
   <reader_revenue>true</reader_revenue>
   <reader_revenue_handle_celeraone_login_inconsistency>true</reader_revenue_handle_celeraone_login_inconsistency>

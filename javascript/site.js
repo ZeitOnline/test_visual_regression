@@ -14,6 +14,7 @@ var $ = require( 'jquery' ),
     adblockCount = require( 'web.site/adblockCount' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
     dataProtectionPopOver = require( 'web.core/dataProtectionPopover' ),
+    followPushButton = require( 'web.core/followPushButton' ),
     article = $( '#js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     isHp = document.body.getAttribute( 'data-is-hp' );
@@ -38,6 +39,7 @@ if ( article.length ) {
     videoPlayer.init();
 }
 
+followPushButton.init();
 adblockCount.init();
 saveGetToCookie.init();
 zeit.clearQueue();

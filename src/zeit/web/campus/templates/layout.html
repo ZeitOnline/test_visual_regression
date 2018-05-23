@@ -26,7 +26,6 @@
     {% endif -%}
     {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
-        {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
     {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
     {% if settings('livereload') %}
