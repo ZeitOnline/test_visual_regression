@@ -8,6 +8,7 @@ var $ = require( 'jquery' ),
     menu = require( 'web.core/menu' ),
     overscrolling = require( 'web.core/overscrolling' ),
     videoStage = require( 'web.site/video/videoStage' ),
+    videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
     adblockCount = require( 'web.site/adblockCount' ),
@@ -33,6 +34,7 @@ if ( article.length ) {
     comments.init();
     overscrolling.init({ livePreview: true });
     visibilityTracking.init();
+    videoPlayer.init();
 }
 
 followPushButton.init();

@@ -66,9 +66,8 @@ def test_video_block_should_produce_markup(layout, klass, tplbrowser):
     assert figure.get('class').strip() == klass
     assert figure.get('data-video-provider') == 'brightcove'
 
-    video = browser.cssselect('video')[0]
+    video = browser.cssselect('.js-videoplayer')[0]
     assert video.get('data-video-id') == '42'
-    assert video.get('class') == 'video-js video-player__videotag'
 
     caption = browser.cssselect('figcaption')[0]
     assert caption.get('class') == 'figure__caption'

@@ -194,7 +194,9 @@ def test_author_comments_should_correctly_validate_pagination(
     assert mock_comments.call_args[1]['page'] == 3
 
 
-def test_author_contact_should_be_fully_rendered(testbrowser):
+def test_author_contact_should_be_fully_rendered(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'author_feedback': True}.get)
     browser = testbrowser('/autoren/j_random')
     container = browser.cssselect('.author-contact')[0]
     items = container.cssselect('.author-contact__item')
