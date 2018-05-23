@@ -112,6 +112,8 @@
 		padding: 0
 		&--showall .article-flexible-toc__item--secondary
 			display: block
+		&--showall + .article-flexible-toc__item--showall
+			display: none
 
 	&__item
 		border-bottom: 1px solid #CCCCCF
@@ -168,6 +170,7 @@
 		position: relative
 		text-decoration: underline
 		width: 100%
+
 		&:hover
 			color: $zon-grey
 		&:before

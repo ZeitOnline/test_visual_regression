@@ -6,7 +6,7 @@
         </h3>
         {%- endblock -%}
         <div class="article-flexible-toc__seperator">
-            <ul class="article-flexible-toc__list" id="article-flexible-toc-list">
+            <ul class="article-flexible-toc__list">
             {% set morequestions = [] %}
             {%- for subheading in view.subheadings %}
                 {%- if loop.index > 8 %}
@@ -18,7 +18,7 @@
             {%- endfor -%}
             </ul>
             {% if morequestions %}
-                <a href="#article-flexible-toc-label" class="js-scroll" id="showall" data-ct-label="mehr anzeigen">
+                <a href="#article-flexible-toc-label" class="js-scroll article-flexible-toc__item--showall" data-ct-label="mehr anzeigen">
                     <div class="article-flexible-toc__fadeout"></div>
                     <div class="article-flexible-toc__showall">Mehr anzeigen</div>
                 </a>
@@ -27,13 +27,9 @@
     </div>
 </aside>
 <script>
-    document.getElementById('showall').onclick = function () {
-        // show hidden elements
-        var flexibleTocList = document.getElementById('article-flexible-toc-list');
+    document.querySelector('.article-flexible-toc__item--showall').onclick = function () {
+        // hide button and overlay and show hidden elements
+        var flexibleTocList = document.querySelector('.article-flexible-toc__list');
         flexibleTocList.classList.add('article-flexible-toc__list--showall');
-
-        // remove showall and fadeout
-        var showall = document.getElementById('showall');
-        showall.classList.add('article-flexible-toc__item--secondary');
     }
 </script>
