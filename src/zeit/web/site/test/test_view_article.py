@@ -2319,7 +2319,7 @@ def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
 def test_faq_page_should_render_show_more_button(testbrowser):
     select = testbrowser('/zeit-online/article/faq').cssselect
 
-    assert len(select('#showall')) == 1
+    assert len(select('.article-flexible-toc__item--showall')) == 1
 
 
 def test_faq_page_should_follow_schema_org(testbrowser):
@@ -2354,8 +2354,8 @@ def test_faq_page_should_handle_multiple_block_types(testbrowser):
     select = testbrowser('/zeit-online/article/faq').cssselect
 
     question = select('div[itemtype="http://schema.org/Question"]')[1]
-    assert len(question.cssselect('div > video')) == 1
-    assert len(question.cssselect('div > p')) == 1
+    assert len(question.cssselect('div > video')) >= 1
+    assert len(question.cssselect('div > p')) >= 1
 
 
 def test_faq_page_should_contain_exactly_one_flexible_toc(testbrowser):
