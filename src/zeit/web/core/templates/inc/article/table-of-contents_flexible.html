@@ -12,7 +12,7 @@
                 {%- if loop.index > 8 %}
                     {% if morequestions.append(True) %}{% endif %}
                 {% endif %}
-                <li class="article-flexible-toc__item article-flexible-toc__item--empty {% if morequestions %}article-flexible-toc__item--hide{% endif %}">
+                <li class="article-flexible-toc__item article-flexible-toc__item--empty {% if morequestions %}article-flexible-toc__item--secondary{% endif %}">
                     <a class="article-flexible-toc__link js-scroll" href="{{ view.content_url}}#{{ subheading.text | striptags | format_faq }}" data-ct-label="{{ subheading.text | safe }}">{{ subheading.text | safe }}</a>
                 </li>
             {%- endfor -%}
@@ -28,16 +28,12 @@
 </aside>
 <script>
     document.getElementById('showall').onclick = function () {
-        if (document.getElementById('showall')) {
-            // show hidden elements
-            var elements = document.getElementsByClassName('article-flexible-toc__item--hide');
-            while (elements.length > 0) {
-                elements[0].classList.remove('article-flexible-toc__item--hide');
-            }
+        // show hidden elements
+        var flexibleTocList = document.getElementById('article-flexible-toc-list');
+        flexibleTocList.classList.add('article-flexible-toc__list--showall');
 
-            // remove showall
-            var showall = document.getElementById('showall');
-            showall.classList.add('article-flexible-toc__item--hide');
-        }
+        // remove showall and fadeout
+        var showall = document.getElementById('showall');
+        showall.classList.add('article-flexible-toc__item--secondary');
     }
 </script>
