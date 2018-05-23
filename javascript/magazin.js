@@ -13,6 +13,7 @@ var $ = require( 'jquery' ),
     cards = require( 'web.magazin/cards' ),
     photocluster = require( 'web.magazin/photocluster' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
+    dataProtectionPopOver = require( 'web.core/dataProtectionPopOver' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     article = document.getElementById( 'js-article' );
 
@@ -26,6 +27,7 @@ clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
 cards.init();
+dataProtectionPopOver.init();
 
 if ( article ) {
     articledate.init();
