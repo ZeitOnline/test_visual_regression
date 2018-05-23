@@ -429,7 +429,7 @@ class LiveblogInfo(object):
 
 TEMPLATE_INTERFACES = {
     'faq': (IFAQArticle,),
-    'flexible_toc': (IFlexibleTOCArticle,),
+    'flexible-toc': (IFlexibleTOCArticle,),
     'zon-liveblog': (ILiveblogArticle,),
     # Should we check that the article provides IZMOContent? Because those
     # templates are only available there.

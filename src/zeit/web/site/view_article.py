@@ -237,7 +237,7 @@ class FAQArticle(Article):
 
 @zeit.web.view_config(
     context=zeit.web.core.article.IFlexibleTOCArticle,
-    renderer='templates/flexible_toc.html')
+    renderer='templates/flexible-toc.html')
 class FlexibleTOCArticle(Article):
 
     @zeit.web.reify

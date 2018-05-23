@@ -2373,7 +2373,7 @@ def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
     """Functionality is pretty much completely covered by faq tests above,
     so just cover some basics here."""
 
-    select = testbrowser('/zeit-online/article/flexible_toc').cssselect
+    select = testbrowser('/zeit-online/article/flexible-toc').cssselect
 
     assert len(select('.article-flexible-toc')) == 1
 
