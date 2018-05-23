@@ -18,11 +18,11 @@ POSTDEPLOY
 
 - ZON-4714: Add gdpr-Param to Adcontroller SiteInfo if cookie is present
 
+- ZON-4715: Use brightcove without ads if GDPR opt-out cookie is set
+
 
 3.150 (2018-05-22)
 ------------------
-
-- ZON-4715: Use brightcove without ads if GDPR opt-out cookie is set
 
 - BUG-903: Align content width to 660 pixel again
 
