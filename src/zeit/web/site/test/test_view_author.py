@@ -372,3 +372,14 @@ def test_author_comments_page_contains_pagination_information(testbrowser):
     assert select('link[rel="prev"]')[0].get('href') == url + '?p=2'
     assert select('meta[name="robots"]')[0].get('content') == (
         'noindex,follow,noarchive')
+
+
+def test_authorpage_has_follow_push_button(selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('push_for_author_in_app')
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+    driver.get('%s/autoren/j_random?app-content' % testserver.url)
+    expected_link = 'zeitapp://subscribe/{segment}/{id}'.format(
+        segment='authors', id='c5520263-4393-43d3-b6a9-3d390e12ad11')
+    assert len(
+        select('a[href^="{}"]'.format(expected_link))) == 1
