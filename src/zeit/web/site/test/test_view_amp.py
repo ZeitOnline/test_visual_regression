@@ -67,9 +67,9 @@ def test_amp_liveblog_v3_article_contains_required_markup(testbrowser):
     assert head.cssselect('script[custom-element="amp-live-list"]')
     assert head.cssselect('script[custom-element="amp-social-share"]')
     assert head.cssselect('script[custom-element="amp-soundcloud"]')
-    assert head.cssselect('script[custom-element="amp-timeago"]')
     assert head.cssselect('script[custom-element="amp-twitter"]')
     assert head.cssselect('script[custom-element="amp-youtube"]')
+    assert not head.cssselect('script[custom-element="amp-timeago"]')
     # structured data for LiveBlogPosting
     assert article.get('itemtype') == 'http://schema.org/LiveBlogPosting'
     # main image before article header
@@ -79,16 +79,43 @@ def test_amp_liveblog_v3_article_contains_required_markup(testbrowser):
     assert article.cssselect('[itemprop="coverageStartTime"]')[0].get(
         'content') == '2018-02-09T13:00:00+01:00'
     assert article.cssselect('[itemprop="coverageEndTime"]')[0].get(
-        'content') == '2018-02-09T14:01:26+01:00'
+        'content') == '2018-02-02T14:31:50+01:00'
+
+
+def test_amp_liveblog_v3_solo_article_contains_required_markup(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/liveblog3-solo-theme')
+    article = browser.cssselect('article.article')[0]
+    head = browser.cssselect('head')[0]
+    # required script for AMP live list
+    assert head.cssselect('script[custom-element="amp-facebook"]')
+    assert head.cssselect('script[custom-element="amp-iframe"]')
+    assert head.cssselect('script[custom-element="amp-image-lightbox"]')
+    assert head.cssselect('script[custom-element="amp-instagram"]')
+    assert head.cssselect('script[custom-element="amp-live-list"]')
+    assert head.cssselect('script[custom-element="amp-social-share"]')
+    assert head.cssselect('script[custom-element="amp-soundcloud"]')
+    assert head.cssselect('script[custom-element="amp-twitter"]')
+    assert head.cssselect('script[custom-element="amp-youtube"]')
+    assert head.cssselect('script[custom-element="amp-timeago"]')
+    # structured data for LiveBlogPosting
+    assert article.get('itemtype') == 'http://schema.org/LiveBlogPosting'
+    # main image before article header
+    assert article.cssselect('[itemprop="mainEntity"] [itemprop="image"]')
+    assert not article.cssselect('[itemprop="articleBody"] [itemprop="image"]')
+    # structured data for coverage time
+    assert article.cssselect('[itemprop="coverageStartTime"]')[0].get(
+        'content') == '2018-02-09T13:00:00+01:00'
+    assert article.cssselect('[itemprop="coverageEndTime"]')[0].get(
+        'content') == '2017-12-05T16:12:54+01:00'
 
 
 def test_amp_liveblog_v3_article_last_modified_date(testbrowser, clock):
-    clock.freeze(datetime.datetime(2018, 2, 9, 14, 0))
+    clock.freeze(datetime.datetime(2018, 2, 2, 14, 0))
     browser = testbrowser('/amp/zeit-online/article/liveblog3')
 
     # liveblog status for liveblog article template
     assert browser.cssselect('.liveblog-status')
     assert browser.cssselect('.liveblog-status__meta-date')[0].text == (
-        '9. Februar 2018')
+        '2. Februar 2018')
     assert browser.cssselect('.liveblog-status__meta-updated')[0].text == (
-        'vor 59 Minuten aktualisiert')
+        'vor 28 Minuten aktualisiert')

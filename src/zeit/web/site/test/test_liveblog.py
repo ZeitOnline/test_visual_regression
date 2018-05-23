@@ -67,14 +67,14 @@ def test_liveblog_v3_updates_modified_date(testbrowser):
     date_modified = select('time[itemprop="dateModified"]')[0]
 
     assert select('meta[name="date"]')[0].get('content') == (
-        '2018-02-09T14:01:26+01:00')
+        '2018-02-02T14:31:50+01:00')
     assert select('meta[name="last-modified"]')[0].get('content') == (
-        '2018-02-09T14:01:26+01:00')
-    assert select('.liveblog-status__meta-date')[0].text == '9. Februar 2018'
-    assert date_published.get('datetime') == '2018-02-09T14:01:26+01:00'
-    assert date_published.text == '9. Februar 2018, 14:01 Uhr'
-    assert date_modified.get('datetime') == '2018-02-09T14:01:26+01:00'
-    assert date_modified.text == 'Aktualisiert am 9. Februar 2018, 14:01 Uhr'
+        '2018-02-02T14:31:50+01:00')
+    assert select('.liveblog-status__meta-date')[0].text == '2. Februar 2018'
+    assert date_published.get('datetime') == '2018-02-02T14:31:50+01:00'
+    assert date_published.text == '2. Februar 2018, 14:31 Uhr'
+    assert date_modified.get('datetime') == '2018-02-02T14:31:50+01:00'
+    assert date_modified.text == 'Aktualisiert am 2. Februar 2018, 14:31 Uhr'
 
 
 def test_liveblog_teaser_updates_modified_date(testbrowser, clock):

@@ -124,8 +124,8 @@ def test_videostage_thumbnail_should_be_replaced(config, selenium_driver):
 def test_video_should_load_on_video_single_page(config, selenium_driver):
     driver = selenium_driver
     driver.get(
-        '{}/video/2017-11/5645749814001/berlinale-shorts-dissonance-'
-        'ein-kurzfilm-von-till-nowak'.format(
+        '{}/video/2018-04/5773677245001/'
+        'antisemitismus-hast-du-keine-angst'.format(
             config['BASE_URL']))
     video_visible_ec = expected_conditions.presence_of_element_located(
         (By.CLASS_NAME, 'vjs-control-bar'))

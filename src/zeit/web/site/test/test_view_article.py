@@ -2102,11 +2102,21 @@ def test_overscrolling_is_working_as_expected(selenium_driver, testserver):
         By.CSS_SELECTOR, '#overscrolling'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
+
+    # execute overscroll and test, if we leave the page
+    old_page = driver.find_element_by_tag_name('html')
+    stale_condition = expected_conditions.staleness_of(old_page)
     driver.execute_script('window.scrollBy(0, 801)')
-    condition = expected_conditions.visibility_of_element_located((
-        By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
-    assert WebDriverWait(
-        selenium_driver, 5).until(condition)
+    try:
+        WebDriverWait(driver, 10).until(stale_condition)
+        assert 'article/01' not in driver.current_url
+        # test if we try to load homepage
+        condition = expected_conditions.visibility_of_element_located((
+            By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
+        assert WebDriverWait(selenium_driver, 5).until(condition)
+    except TimeoutException:
+        assert False, 'Article page not left by overscroll'
+
     # overscrolling is inactive in app
     driver.get(
         '%s/zeit-online/article/01?app-content' % testserver.url)

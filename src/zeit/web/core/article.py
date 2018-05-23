@@ -426,6 +426,13 @@ class LiveblogInfo(object):
         if self.liveblog:
             return self.liveblog.collapse_preceding_content
 
+    @property
+    def has_relative_dates(self):
+        if self.liveblog:
+            theme = self.liveblog.get_amp_themed_id(self.liveblog.id)
+            if theme:
+                return theme.startswith('zon-amp-solo')
+
 
 TEMPLATE_INTERFACES = {
     'faq': (IFAQArticle,),

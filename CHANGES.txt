@@ -8,15 +8,38 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- remove `optimizely` from settings in vivi xml
-
-- rename `optimize_ab_testing` to `optimize_ab_testing_to_webtrekk` in feature toggles. value = false.
 
 
-3.149 (unreleased)
+3.151 (unreleased)
 ------------------
 
+- Nothing changed yet.
+
+
+3.150 (2018-05-22)
+------------------
+
+- BUG-903: Align content width to 660 pixel again
+
+- MAINT: Fix selenium tests
+
+- FIX: ZON-4258: Toggle author feedback
+
+
+3.149 (2018-05-17)
+------------------
+
+- ZON-4258: Render feedback form on author detail page
+
+- ZON-4634: Use uniqueId for POSTing comments
+
+- ZON-4667: Avoid <amp-timeago> warning for liveblog AMP theme
+
 - PERF: Don't additionally retrieve body for TMS/ES results
+
+- BUG-923: Fix display of modification date for ZMO series article
+
+- MAINT: Node modules update
 
 
 3.148 (2018-05-08)

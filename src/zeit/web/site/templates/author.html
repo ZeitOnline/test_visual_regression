@@ -23,6 +23,18 @@
                 <a class="tabbar__link" href="{{ view.content_url }}/kommentare#author-content">Kommentare</a>
             </li>
             {% endif %}
+
+            {% if toggles('author_feedback') %}
+                {% if view.current_tab_name == 'feedback' %}
+                <li class="tabbar__item">
+                    <span class="{{ 'tabbar__link' | with_mods('active') }}">Feedback</span>
+                </li>
+                {% elif view.author_email is not none %}
+                <li class="tabbar__item">
+                    <a class="tabbar__link" href="{{ view.content_url }}/feedback#author-content">Feedback</a>
+                </li>
+                {% endif %}
+            {% endif %}
         </ul>
     </div>
 

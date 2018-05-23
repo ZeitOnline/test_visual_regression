@@ -9,8 +9,6 @@
 .vscode/
 Gemfile.lock
 /bower_components/
-/javascript/documentation/
-/javascript/vendor/
 /node_modules/
 /npm-debug.log*
 /sass/web.*/*/_minified/
