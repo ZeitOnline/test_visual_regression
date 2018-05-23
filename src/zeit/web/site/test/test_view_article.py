@@ -894,7 +894,8 @@ def test_article_doesnt_show_modified_date(testbrowser):
 
 def test_video_in_article_is_there(testbrowser):
     article = testbrowser('/zeit-online/article/video')
-    assert len(article.cssselect('.video-player__videotag')) == 1
+    assert len(article.cssselect(
+        '.js-videoplayer[data-video-id="3035864892001"]')) == 1
 
 
 def test_advertorial_marker_is_present(testbrowser):
@@ -1346,7 +1347,8 @@ def test_article_has_image_header_embed(testbrowser):
 def test_article_has_video_header_embed(testbrowser):
     browser = testbrowser('/zeit-online/article/embed-header-video')
     embed = browser.cssselect('.article-embed')[0]
-    assert len(embed.cssselect('.video-player')) == 1
+    assert len(embed.cssselect(
+        '.js-videoplayer[data-video-id="4193594095001"]')) == 1
 
 
 def test_article_has_quiz_header_embed(testbrowser):

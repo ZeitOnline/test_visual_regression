@@ -7,6 +7,7 @@ var $ = require( 'jquery' ),
     visibilityTracking = require( 'web.core/visibilityTracking' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
+    videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
     cards = require( 'web.magazin/cards' ),
@@ -31,6 +32,7 @@ if ( article ) {
     comments.init();
     photocluster.init();
     visibilityTracking.init();
+    videoPlayer.init();
 }
 
 saveGetToCookie.init();
