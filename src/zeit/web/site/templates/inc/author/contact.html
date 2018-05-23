@@ -1,6 +1,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-{% if context.twitter or context.facebook or context.instagram %}
+{% if context.twitter or context.facebook or context.instagram or (context.email and context.enable_feedback and toggles('author_feedback')) %}
 <div class="author-contact">
     <h2 class="author-contact__title author__subheadline">Kontakt</h2>
 
@@ -31,7 +31,7 @@
     </div>
     {% endif %}
 
-    {% if context.email and toggles('author_feedback') %}
+    {% if context.email and context.enable_feedback and toggles('author_feedback') %}
     <div class="author-contact__item">
         <a href="{{ view.content_url }}/feedback#author-content" class="author-contact__link">
             {{ lama.use_svg_icon('author-email', 'author-contact__icon' | with_mods('email'), view.package) }}

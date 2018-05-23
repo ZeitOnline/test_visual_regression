@@ -24,7 +24,7 @@
             </li>
             {% endif %}
 
-            {% if toggles('author_feedback') %}
+            {% if toggles('author_feedback') and view.enable_feedback %}
                 {% if view.current_tab_name == 'feedback' %}
                 <li class="tabbar__item">
                     <span class="{{ 'tabbar__link' | with_mods('active') }}">Feedback</span>
