@@ -98,10 +98,6 @@ def join_queries(url, join_query):
     return urlparse.urlunparse([scheme, netloc, path, params, query, fragment])
 
 
-def make_guid(content):
-    return zeit.cms.content.interfaces.IUUID(content).id
-
-
 @zeit.web.view_defaults(renderer='string')
 class Base(zeit.web.core.view.Base):
 
@@ -151,35 +147,8 @@ class Base(zeit.web.core.view.Base):
         content_url = create_public_url(content_url)
         return content_url
 
-    # This is a bit comlicated. We do want to use immutable guids in our feeds,
-    # which do not change if an article URI is changed. But we cannot release
-    # that new code suddenly, because that would create new guids for all items
-    # in the feed, producing duplicates in the clients. (The RSS reader stored
-    # an article yesterday, today it has another guid, so it gets stored
-    # again and the user sees two items with the same title and URI, but
-    # different guids.)
-    #
-    # So we define a cutoff-date for old vs new guid creation. And in a few
-    # weeks or so (when no old article is shown in our newsfeeds any more) we
-    # can remove the code and serve the new guid for all articles in all feeds.
-    # Then, every feed can simply use `make_guid`.
-
-    GUID_START = datetime.datetime(2018, 1, 16, tzinfo=pytz.UTC)
-
-    def guid_is_needed(self, content):
-        return first_released(content) > self.GUID_START
-
-    def make_guid_or_contenturl(self, content):
-        if self.guid_is_needed(content):
-            return make_guid(content)
-        else:
-            return self.make_content_url(content)
-
-    def make_guid_or_contentuid(self, content):
-        if self.guid_is_needed(content):
-            return make_guid(content)
-        else:
-            return content.uniqueId
+    def make_guid(self, content):
+        return zeit.cms.content.interfaces.IUUID(content).id
 
 
 @zeit.web.view_config(
@@ -258,8 +227,7 @@ class Newsfeed(Base):
                         u', '.join(self.make_author_list(content)))),
                     E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
-                    E('guid', self.make_guid_or_contenturl(content),
-                        isPermaLink='false'),
+                    E('guid', self.make_guid(content), isPermaLink='false'),
                 )
                 channel.append(item)
             except:
@@ -405,8 +373,7 @@ class SpektrumFeed(Base):
                     E('description', content.teaserText),
                     E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
-                    E('guid', self.make_guid_or_contentuid(content),
-                        isPermaLink='false'),
+                    E('guid', self.make_guid(content), isPermaLink='false'),
                 )
                 image = zeit.web.core.template.get_image(content,
                                                          fallback=False)
@@ -461,8 +428,7 @@ class SocialFeed(Base):
                     E('description', content.teaserText),
                     E('pubDate',
                       format_rfc822_date(last_published_semantic(content))),
-                    E('guid', self.make_guid_or_contentuid(content),
-                        isPermaLink='false'),
+                    E('guid', self.make_guid(content), isPermaLink='false'),
                 )
                 social_value = self.social_value(content)
                 if social_value:
@@ -574,8 +540,7 @@ class YahooFeed(Base):
                     E('description', content.teaserText or content.subtitle),
                     E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
-                    E('guid', self.make_guid_or_contentuid(content),
-                        isPermaLink='false'),
+                    E('guid', self.make_guid(content), isPermaLink='false'),
                     E('category', content.ressort)
                 )
 
@@ -713,8 +678,7 @@ class MsnFeed(Base):
                     E('webUrl', content_url),
                     E('abstract', content.teaserText or content.subtitle),
                     E('publishedDate', item_published_date),
-                    E('guid', self.make_guid_or_contenturl(content),
-                        isPermaLink='false'),
+                    E('guid', self.make_guid(content), isPermaLink='false'),
                     E('publisher', 'ZEIT Online')
                 )
 
@@ -843,8 +807,7 @@ class GoogleEditorsPicksFeed(Base):
                     e('description', content.teaserText or content.subtitle),
                     e('pubDate', format_rfc822_date_gmt(
                         first_released(content))),
-                    e('guid', self.make_guid_or_contentuid(content),
-                        isPermaLink='false'),
+                    e('guid', self.make_guid(content), isPermaLink='false'),
                     e('category', content.ressort)
                 )
 
