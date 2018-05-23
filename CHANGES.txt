@@ -16,6 +16,8 @@ POSTDEPLOY
 3.150 (unreleased)
 ------------------
 
+- ZON-4715: Use brightcove without ads if GDPR opt-out cookie is set
+
 - BUG-903: Align content width to 660 pixel again
 
 - MAINT: Fix selenium tests
