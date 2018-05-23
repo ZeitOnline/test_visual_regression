@@ -8,6 +8,9 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
+- remove `zon_inline_video_via_html5` from feature toggles
+
+- remove `zon_videosinglepage_via_html5` from feature toggles
 
 
 3.150 (unreleased)
