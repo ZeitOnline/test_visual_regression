@@ -1586,19 +1586,6 @@ def test_infographics_mobile_should_have_proper_asset_source(
            u'original__450x563__mobile' in img_src
 
 
-def test_contentad_is_rendered_once_on_article_pages(testbrowser):
-    selector = '#iq-artikelanker'
-
-    browser = testbrowser('/zeit-online/article/fischer')
-    assert len(browser.cssselect(selector)) == 1
-
-    browser = testbrowser('/zeit-online/article/fischer/seite-2')
-    assert len(browser.cssselect(selector)) == 1
-
-    browser = testbrowser('/zeit-online/article/fischer/komplettansicht')
-    assert len(browser.cssselect(selector)) == 1
-
-
 def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-zplus')
 
