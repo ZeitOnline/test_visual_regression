@@ -264,3 +264,41 @@ def test_video_page_has_no_print_menu(testbrowser):
     browser = testbrowser('/zeit-online/video/3537342483001')
     assert not browser.cssselect('.sharing-menu__item--printbutton')
     assert not browser.cssselect('.print-menu')
+
+
+def test_video_has_correct_attributes(testbrowser):
+    browser = testbrowser('/zeit-online/article/videos')
+    players = browser.cssselect('.js-videoplayer')
+    assert len(players) == 3
+
+    assert players[0].get('data-video-id') == ("3035864892001")
+    assert players[0].get('data-video-advertising') == ("withAds")
+    assert players[0].get('data-video-playertype') == ("article")
+
+    assert players[1].get('data-video-id') == ("3537342483001")
+    assert players[1].get('data-video-advertising') == ("withoutAds")
+    assert players[1].get('data-video-playertype') == ("article")
+
+    assert players[2].get('data-video-id') == ("3089721834001")
+    assert players[2].get('data-video-advertising') == ("withAds")
+    assert players[2].get('data-video-playertype') == ("article")
+
+
+def test_gdpr_dnt_cookie_works_on_videos(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+
+    # add_cookie() only works for the domain of the last get(), sigh.
+    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    driver.add_cookie({'name': 'gdpr', 'value': 'dnt'})
+
+    driver.get('{}/zeit-online/article/video'.format(testserver.url))
+
+    # HTML (the video itself) says "withAds"
+    assert select('.js-videoplayer')[0].get_attribute(
+        'data-video-advertising') == 'withAds'
+
+    # JS (the cookie) loads the Player without Ads
+    assert select('.video-player__videotag')[0].get_attribute(
+        'data-player') == 'SJENxUNKe'
