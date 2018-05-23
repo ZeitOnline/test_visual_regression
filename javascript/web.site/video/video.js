@@ -21,7 +21,7 @@ var video = {
             displayVideo: function( videoId, config ) {
 
                 var advertising = ( window.Zeit.cookieRead( 'gdpr' ) === 'dnt' ) ?
-                        'withoutAdvertising' : config.advertising,
+                        'withoutAds' : config.advertising,
                     videoPlayerId = window.Zeit.videoPlayers[ config.playertype ][ advertising ];
 
                 /**
