@@ -24,6 +24,8 @@ POSTDEPLOY
 
 - ZON-4657: Follow-button for push on authorpages in apps
 
+- ZON-4673: Flexible table of contents
+
 
 3.150 (2018-05-22)
 ------------------

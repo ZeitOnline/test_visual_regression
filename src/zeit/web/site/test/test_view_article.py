@@ -51,8 +51,8 @@ def test_article_single_page_has_no_pagination(testbrowser):
 
 
 def test_article_full_view_has_no_pagination(testbrowser):
-    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
 
+    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
     assert len(select('.summary, .byline, .metadata')) == 3
     assert len(select('.article-pagination')) == 1
     assert len(select('.article-pager')) == 0
@@ -2272,3 +2272,117 @@ def test_dpa_noimage_article_renders_empty_image_block(testbrowser):
 def test_dpa_afp_article_should_have_notice(testbrowser, parameter):
     browser = testbrowser('/zeit-online/article/' + parameter)
     assert len(browser.cssselect('.article-notice')) == 1
+
+
+def test_faq_page_should_present_a_link_for_each_intertitle(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select('.article-flexible-toc__link')) == 14
+
+
+def test_faq_page_should_present_links_to_intertitles(testbrowser):
+    browser = testbrowser('/zeit-online/article/faq')
+
+    browser.cssselect('.article-flexible-toc__item')[0]
+    for index, subheading in enumerate(
+            browser.cssselect('.article__subheading')):
+        link_text = browser.cssselect(
+            '.article-flexible-toc__link')[index].get('href')
+        assert link_text == ("{}#{}".format(
+            browser.url,
+            zeit.web.core.template.format_faq(subheading.text)))
+
+
+def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
+        monkeypatch, testbrowser):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/faq')
+    intertitle = mock.Mock()
+    monkeypatch.setattr(
+        zeit.web.site.view_article.FAQArticle, u'subheadings', [intertitle])
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select('#showall')) == 0
+
+
+def test_faq_page_should_render_show_more_button(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select('.article-flexible-toc__item--showall')) == 1
+
+
+def test_faq_page_should_follow_schema_org(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    question_wrapper = select('div[itemtype="http://schema.org/Question"]')[0]
+
+    # Questions are represented by h2.
+    assert len(question_wrapper.cssselect('h2')) == 1
+
+    # Answers are wrapped inside questions.
+    assert len(question_wrapper.cssselect(
+        'div[itemtype="http://schema.org/Answer"]')) == 1
+
+
+def test_faq_page_should_enable_blocks_outside_of_questions(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    # No div around the first paragraph, which appears before the first
+    # question.
+    assert 'Einleitungstext' in select('.article-page > p')[0].text
+
+
+def test_faq_page_should_wrap_multiple_blocks_into_one_answer(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    question = select('div[itemtype="http://schema.org/Question"]')[0]
+    assert len(question.cssselect('div > p')) == 2
+
+
+def test_faq_page_should_handle_multiple_block_types(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select(
+        'div[itemtype="http://schema.org/Question"] .js-videoplayer')) >= 1
+    assert len(select(
+        'div[itemtype="http://schema.org/Question"] p')) >= 1
+
+
+def test_faq_page_should_contain_exactly_one_flexible_toc(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select('.article-flexible-toc')) == 1
+
+
+def test_faq_page_should_render_flexible_toc_above_first_question(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    first_block = select('.article-page')[0].getchildren()[0]
+    assert 'article__item' in first_block.get('class')
+
+    flexible_toc = first_block.getnext()
+    assert 'article-flexible-toc' in flexible_toc.get('class')
+    assert flexible_toc.getnext().tag == 'script'
+
+    first_question = flexible_toc.getnext().getnext()
+    assert 'http://schema.org/Question' in (
+        flexible_toc.getnext().getnext().get('itemtype'))
+
+
+def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
+    """Functionality is pretty much completely covered by faq tests above,
+    so just cover some basics here."""
+
+    select = testbrowser('/zeit-online/article/flexible-toc').cssselect
+
+    assert len(select('.article-flexible-toc')) == 1
+
+    first_block = select('.article-page')[0].getchildren()[0]
+    assert 'article__item' in first_block.get('class')
+
+    flexible_toc = first_block.getnext()
+    assert 'article-flexible-toc' in flexible_toc.get('class')
+    assert flexible_toc.getnext().tag == 'script'
+
+    first_question = flexible_toc.getnext().getnext()
+    assert 'article__item' in first_block.get('class')

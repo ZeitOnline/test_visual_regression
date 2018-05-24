@@ -34,6 +34,16 @@ class IColumnArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that belong to a "column" series."""
 
 
+class IFlexibleTOCArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that contain a flexible table of
+    contents.
+    """
+
+
+class IFAQArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that contain a FAQ."""
+
+
 class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that contain a liveblog."""
 
@@ -41,7 +51,8 @@ class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
 class ISeriesArticleWithFallbackImage(
         zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that are part of a series with a
-    fallback image."""
+    fallback image.
+    """
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
@@ -245,6 +256,46 @@ def pages_of_article(article, advertising_enabled=True):
     return _inject_banner_code(pages, pubtype)
 
 
+@zope.interface.implementer(zeit.web.core.interfaces.IArticleModule)
+class FAQItemBlock(Page):
+
+    """A block for FAQs, wrapped around questions and corresponding answers.
+    This may be placed in z.w.c.block instead, but will result in
+    circular imports.
+    """
+
+    def __init__(self):
+        self.blocks = []
+
+
+def restructure_faq_article(page):
+    # FAQs by definition consist only of a single page.
+    restructured_blocks = []
+    for block in page.blocks:
+        try:
+            previous_block = restructured_blocks[-1]
+        except IndexError:
+            previous_block = None
+
+        if isinstance(block, zeit.web.core.block.Intertitle):
+            # Handle intertitles, representing a FAQ question.
+            faq_item_block = FAQItemBlock()
+            faq_item_block.append(block)
+            restructured_blocks.append(faq_item_block)
+        elif zeit.web.core.interfaces.IContentAdBlock.providedBy(block):
+            # Ad blocks should never be part of an answer.
+            restructured_blocks.append(block)
+        elif isinstance(previous_block, FAQItemBlock):
+            # Add further blocks as answers to their corresponding question.
+            previous_block.append(block)
+        else:
+            # Everything else is just a regular block (e.g. paragraphs that
+            # appear before the first intertitle question).
+            restructured_blocks.append(block)
+        page.blocks = restructured_blocks
+    return page
+
+
 def convert_authors(article):
     is_longform = zeit.web.magazin.article.ILongformArticle.providedBy(article)
     author_list = []
@@ -384,6 +435,8 @@ class LiveblogInfo(object):
 
 
 TEMPLATE_INTERFACES = {
+    'faq': (IFAQArticle,),
+    'flexible-toc': (IFlexibleTOCArticle,),
     'zon-liveblog': (ILiveblogArticle,),
     # Should we check that the article provides IZMOContent? Because those
     # templates are only available there.
