@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - remove `zon_videosinglepage_via_html5` from feature toggles
 
+- add feature toggle `dataprotection_popover`
+
 
 3.151 (unreleased)
 ------------------
