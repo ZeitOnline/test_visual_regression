@@ -57,12 +57,6 @@
                 {% include "zeit.web.campus:templates/inc/article/nextread.html" %}
             {% endif %}
         {% endblock %}
-        {% block article_google_ad %}
-            {% if view.has_comment_area -%}
-                <!-- P5 -->
-                {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
-            {% endif %}
-        {% endblock article_google_ad %}
     {% endif %}
 
     {% block comments %}

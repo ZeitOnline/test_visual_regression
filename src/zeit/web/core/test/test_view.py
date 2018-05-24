@@ -995,3 +995,17 @@ def test_response_has_surrogate_key_header(testserver):
         '%s/zeit-online/article/simple' % testserver.url)
     assert response.headers.get('surrogate-key') == (
         'http://xml.zeit.de/zeit-online/article/simple')
+
+
+def test_gdpr_cookie_sets_adcontroller_siteinfo(selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/simple' % testserver.url)
+    driver.add_cookie({
+        'name': 'gdpr',
+        'value': 'dnt',
+        'path': '/'
+    })
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    gdpr = driver.execute_script('return adcSiteInfo.gdpr')
+    assert gdpr == 'dnt'

@@ -43,7 +43,6 @@ def test_article_page_should_contain_blocks(httpbrowser):
 
     paragraph = browser.cssselect('.paragraph')
     intertitle = browser.cssselect('.article__subheading')
-    contentadblock = browser.cssselect('#iq-artikelanker')
     portraitbox = page.cssselect('.portraitbox')
     raw = page.cssselect('.raw')
 
@@ -55,7 +54,6 @@ def test_article_page_should_contain_blocks(httpbrowser):
 
     assert len(portraitbox) == 1
     assert len(raw) == 1
-    assert len(contentadblock) == 1
 
     # liveblog
     assert page.cssselect('.liveblog')
