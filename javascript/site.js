@@ -13,6 +13,7 @@ var $ = require( 'jquery' ),
     comments = require( 'web.core/comments' ),
     adblockCount = require( 'web.site/adblockCount' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
+    dataProtectionPopOver = require( 'web.core/dataProtectionPopOver' ),
     followPushButton = require( 'web.core/followPushButton' ),
     article = $( '#js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
@@ -28,6 +29,7 @@ clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
 videoStage.init();
+dataProtectionPopOver.init();
 
 if ( article.length ) {
     articledate.init();

@@ -10,6 +10,7 @@ var $ = require( 'jquery' ),
     videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
+    dataProtectionPopOver = require( 'web.core/dataProtectionPopOver' ),
     main = $( '#main' ),
     article = $( '#js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' );
@@ -20,6 +21,7 @@ menu.init();
 clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
+dataProtectionPopOver.init();
 
 if ( article.length ) {
     articledate.init();

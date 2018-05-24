@@ -76,6 +76,9 @@
             {% endblock footer %}
         </div>
     </div>
+
+    {%- include "zeit.web.core:templates/inc/data-protection-popover.html" -%}
+
     {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
     {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
     {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}
