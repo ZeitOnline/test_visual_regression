@@ -22,10 +22,11 @@ POSTDEPLOY
 
 - ZON-4714: Add gdpr-Param to Adcontroller SiteInfo if cookie is present
 
+- ZON-4673: Flexible table of contents
+
 - ZON-4657: Follow-button for push on authorpages in apps
 
 - ZON-4622: Remove content marketing ad, bring back adplace5 instead
-
 
 
 3.150 (2018-05-22)
