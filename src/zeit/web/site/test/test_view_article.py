@@ -2353,9 +2353,10 @@ def test_faq_page_should_wrap_multiple_blocks_into_one_answer(testbrowser):
 def test_faq_page_should_handle_multiple_block_types(testbrowser):
     select = testbrowser('/zeit-online/article/faq').cssselect
 
-    question = select('div[itemtype="http://schema.org/Question"]')[1]
-    assert len(question.cssselect('div > video')) >= 1
-    assert len(question.cssselect('div > p')) >= 1
+    assert len(select(
+        'div[itemtype="http://schema.org/Question"] video')) >= 1
+    assert len(select(
+        'div[itemtype="http://schema.org/Question"] p')) >= 1
 
 
 def test_faq_page_should_contain_exactly_one_flexible_toc(testbrowser):
