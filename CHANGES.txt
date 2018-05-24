@@ -15,7 +15,7 @@ POSTDEPLOY
 - add feature toggle `dataprotection_popover`
 
 
-3.151 (unreleased)
+3.151 (2018-05-24)
 ------------------
 
 - ZON-4719: Dataprotection Info Bar
