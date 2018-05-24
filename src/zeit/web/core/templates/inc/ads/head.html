@@ -30,6 +30,9 @@
            kws.push('diuqilon');
            adcSiteInfo.keywords = kws.join(',');
         }
+        if ( window.Zeit.cookieRead( 'gdpr' ) === 'dnt' ) {
+            adcSiteInfo.gdpr = 'dnt';
+        }
         AdController.setPageInfo(adcSiteInfo);
     }
     try {
