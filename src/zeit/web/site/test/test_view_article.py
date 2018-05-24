@@ -2343,7 +2343,7 @@ def test_faq_page_should_handle_multiple_block_types(testbrowser):
     select = testbrowser('/zeit-online/article/faq').cssselect
 
     assert len(select(
-        'div[itemtype="http://schema.org/Question"] video')) >= 1
+        'div[itemtype="http://schema.org/Question"] .js-videoplayer')) >= 1
     assert len(select(
         'div[itemtype="http://schema.org/Question"] p')) >= 1
 
