@@ -103,8 +103,4 @@
   <setting name="podcast_theme_article_body" xsi:type="xsd:string">zon-standalone</setting>
   <setting name="podcast_theme_article_header" xsi:type="xsd:string">zon-minimal</setting>
 
-  <setting name="dataprotection_headline" xsi:type="xsd:string">Unsere Datenschutzerklärung hat sich geändert</setting>
-  <setting name="dataprotection_text" xsi:type="xsd:string">Im Rahmen der ab dem 25. Mai geltenden neuen Datenschutzgrundverordnung (DSGVO) zum verbesserten Schutz persönlicher Daten haben wir unsere Datenschutzbestimmung angepasst</setting>
-  <setting name="dataprotection_button" xsi:type="xsd:string">Ausblenden</setting>
-
 </settings>
