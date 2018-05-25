@@ -44,12 +44,12 @@ class Form(zeit.web.core.centerpage.Module):
         ('video', 'Video')
     ])
     FIELDS = [
-        'title^4',
-        'teaser^2',
+        'title',
+        'teaser',
         'body',
         'payload.body.supertitle',
         'payload.body.subtitle',
-        'payload.body.byline^6',
+        'payload.body.byline',
         'teaser_img_subline'
     ]
 
