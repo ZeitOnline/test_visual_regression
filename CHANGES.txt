@@ -17,12 +17,20 @@ POSTDEPLOY
 - remove dataprotection settings from all zeitweb-settings.xml
 
 
-3.152 (unreleased)
+3.153 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.152 (2018-05-25)
 ------------------
 
 - ZON-4258: Add Author Feedback Toggle to each author
 
 - TMS-224: Author index page teaser polishing
+
+- TMS-229: Configure fields for fulltext search
 
 - FEM-82: Align Author Contact Icons
 

@@ -177,7 +177,9 @@ def test_search_form_should_create_valid_fulltext_elasticsearch_query(
     assert json.loads(search_form.elasticsearch_raw_query) == {
         u'bool': {
             u'must': [{
-                u'simple_query_string': {u'query': u'pfannkuchen OR müsli'}
+                u'simple_query_string': {
+                    u'query': u'pfannkuchen OR müsli',
+                    u'fields': search_form.FIELDS}
             }, {
                 u'terms': {
                     u'payload.meta.type': [
@@ -289,7 +291,8 @@ def test_search_form_should_boost_elasticsearch_query_by_relevancy(
                 u'function_score': {
                     u'query': {
                         u'simple_query_string': {
-                            u'query': u'beans AND toast'}},
+                            u'query': u'beans AND toast',
+                            u'fields': search_form.FIELDS}},
                     u'linear': {
                         u'payload.document.date-last-modified': {
                             u'scale': u'365d'
