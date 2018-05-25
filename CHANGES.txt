@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - add feature toggle `dataprotection_popover`
 
+- remove dataprotection settings from all zeitweb-settings.xml
+
 
 3.152 (unreleased)
 ------------------
@@ -23,6 +25,8 @@ POSTDEPLOY
 - TMS-224: Author index page teaser polishing
 
 - FEM-82: Align Author Contact Icons
+
+- BUG-927: Fix Layout and effect bug in dataprotection layer
 
 - MAINT: Remove transition code for feed guids
 
