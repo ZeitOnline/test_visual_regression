@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+import urllib2
 
+import pytest
 import zope.component
 
 import zeit.web.core.interfaces
@@ -26,9 +28,8 @@ def test_author_page_should_render_bio_questions(testbrowser):
     assert question8 == u'Diese Recherche hat etwas verändert'
 
 
-def test_author_has_contact_link(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'author_feedback': True}.get)
+def test_author_has_contact_link(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('author_feedback')
 
     browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
     feedbackLink = browser.cssselect(
@@ -37,9 +38,8 @@ def test_author_has_contact_link(testbrowser, monkeypatch):
     assert len(feedbackLink) == 1
 
 
-def test_author_page_should_render_feedback(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'author_feedback': True}.get)
+def test_author_page_should_render_feedback(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('author_feedback')
     browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
 
     # has feedback section
@@ -55,9 +55,30 @@ def test_author_page_should_render_feedback(testbrowser, monkeypatch):
     assert 'required' in feedbackTextarea.attrib
 
 
-def test_author_feedback_has_modifier_class(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'author_feedback': True}.get)
+def test_author_has_no_feedback_view_if_feedback_disabled(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('author_feedback')
+
+    with pytest.raises(urllib2.HTTPError):
+        browser = testbrowser('/autoren/F/Thomas_Fischer/index/feedback')
+
+
+def test_author_page_does_not_render_feedback_elements_if_disabled_for_author(
+        testbrowser):
+    browser = testbrowser('/autoren/F/Thomas_Fischer/index')
+
+    feedback_contact_link = browser.cssselect(
+        '.author-contact__link[href$="autoren/F/Thomas_Fischer/index'
+        '/feedback#author-content"]')
+    assert len(feedback_contact_link) == 0
+
+    feedback_tab_link = browser.cssselect(
+        '.tabbar__link[href$="autoren/F/Thomas_Fischer/index'
+        '/feedback#author-content"]')
+    assert len(feedback_tab_link) == 0
+
+
+def test_author_feedback_has_modifier_class(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('author_feedback')
     browser = testbrowser('/autoren/D/Tobias_Dorfer/index/feedback')
     # has author class modifier
     feedbackModifier = browser.cssselect('.feedback-section--padded')
@@ -65,9 +86,8 @@ def test_author_feedback_has_modifier_class(testbrowser, monkeypatch):
 
 
 def test_post_should_trigger_mail_then_render_success(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'author_feedback': True}.get)
+        testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('author_feedback')
     # load thomas to make sure no real author gets test mails
     browser = testbrowser('/autoren/S/Thomas_Strothjohann/index/feedback')
 
@@ -88,9 +108,8 @@ def test_post_should_trigger_mail_then_render_success(
 
 
 def test_author_missing_captcha_should_render_error_and_preserve_body(
-        testbrowser, request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'author_feedback': True}.get)
+        testbrowser, request):
+    zeit.web.core.application.FEATURE_TOGGLES.set('author_feedback')
     captcha = zope.component.getUtility(zeit.web.core.interfaces.ICaptcha)
     captcha.verify.return_value = False
 
