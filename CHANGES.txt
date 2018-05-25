@@ -20,6 +20,12 @@ POSTDEPLOY
 
 - ZON-4258: Add Author Feedback Toggle to each author
 
+- TMS-224: Author index page teaser polishing
+
+- FEM-82: Align Author Contact Icons
+
+- MAINT: Remove transition code for feed guids
+
 
 3.151 (2018-05-24)
 ------------------
