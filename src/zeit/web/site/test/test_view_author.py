@@ -258,6 +258,7 @@ def test_author_handles_missing_profile_data_right(jinja2_env):
     author.topiclink_url_2 = None
     author.topiclink_url_3 = None
     author.biography = ''
+    author.email = ''
     author.twitter = ''
     author.facebook = ''
     author.instagram = ''

@@ -18,6 +18,8 @@ POSTDEPLOY
 3.152 (unreleased)
 ------------------
 
+- ZON-4258: Add Author Feedback Toggle to each author
+
 - TMS-224: Author index page teaser polishing
 
 - FEM-82: Align Author Contact Icons
