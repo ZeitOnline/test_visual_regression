@@ -124,7 +124,8 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
                 self.context, page=1, rows=page_size)
             return comments and comments.get('page_total', 0) > 0
         except zeit.web.core.comments.UserCommentsException:
-            log.warning('An exception occured, while trying to fetch comments.')
+            log.warning(
+                'An exception occured, while trying to fetch comments.')
 
         return False
 
