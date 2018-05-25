@@ -15,7 +15,7 @@ POSTDEPLOY
 - add feature toggle `dataprotection_popover`
 
 
-3.152 (unreleased)
+3.152 (2018-05-25)
 ------------------
 
 - ZON-4258: Add Author Feedback Toggle to each author
