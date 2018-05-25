@@ -2,11 +2,13 @@
     <div id="data-protection-overlay" aria-hidden="true" class="data-protection data-protection--hidden">
         <div class="data-protection__wrapper">
             <div class="data-protection__main">
-                <h3 class="data-protection__headline">{{ settings('dataprotection_headline') }}</h3>
-                <p class="data-protection__description">{{ settings('dataprotection_text') }}</p>
+                <p class="data-protection__description">
+                {{ settings('dataprotection_text', 'Wir haben unsere Datenschutzerklärung aktualisiert.') }}
+                <a href="{{ settings('dataprotection_linktarget') }}">{{ settings('dataprotection_linktext', 'Hier können Sie sich über die geänderten Bestimmungen informieren.') }}</a>
+            </p>
             </div>
             <div class="data-protection__aside">
-                <button class="data-protection__button" id="dataProtection-popover-dismiss">{{ settings('dataprotection_button') }}</button>
+                <button class="data-protection__button" id="dataProtection-popover-dismiss">{{ settings('dataprotection_button', 'Ausblenden') }}</button>
             </div>
         </div>
     </div>
