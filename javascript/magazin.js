@@ -7,11 +7,13 @@ var $ = require( 'jquery' ),
     visibilityTracking = require( 'web.core/visibilityTracking' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
+    videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
     cards = require( 'web.magazin/cards' ),
     photocluster = require( 'web.magazin/photocluster' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
+    dataProtectionPopOver = require( 'web.core/dataProtectionPopOver' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     article = document.getElementById( 'js-article' );
 
@@ -25,12 +27,14 @@ clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
 cards.init();
+dataProtectionPopOver.init();
 
 if ( article ) {
     articledate.init();
     comments.init();
     photocluster.init();
     visibilityTracking.init();
+    videoPlayer.init();
 }
 
 saveGetToCookie.init();

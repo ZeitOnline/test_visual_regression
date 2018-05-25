@@ -14,6 +14,6 @@
             </div>
         </a>
     {% else %}
-        <a class="{{ module_layout }}__textitem" href="{{ teaser | create_url }}">{{ teaser.display_name }}</a>
+        <a class="{{ module_layout }}__textitem" href="{{ teaser | create_url }}">{{ teaser.display_name | trim }}</a>
     {% endif %}
 </li>
