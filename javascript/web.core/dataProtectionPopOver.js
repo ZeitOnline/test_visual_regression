@@ -11,7 +11,7 @@ define([
         cookieName: 'Data-Protection-Popover-Dismissed',
         popOver: document.getElementById( 'data-protection-overlay' ),
         popOverButton: document.getElementById( 'dataProtection-popover-dismiss' ),
-        inViewElement: 'footer'
+        inViewElement: '.footer'
     };
 
     function hidePopOver() {
