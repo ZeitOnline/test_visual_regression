@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - FEM-82: Align Author Contact Icons
 
+- MAINT: Remove transition code for feed guids
+
 
 3.151 (2018-05-24)
 ------------------
