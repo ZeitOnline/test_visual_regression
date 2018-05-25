@@ -132,9 +132,31 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
     def author_email(self):
         return self.context.email
 
+    @zeit.web.reify
+    def followpush_available(self):
+        return bool(self.context.enable_followpush)
+
+    @zeit.web.reify
+    def followpush_taggroup(self):
+        return 'authors'
+
+    @zeit.web.reify
+    def followpush_tag(self):
+        uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
+        uuid = getattr(uuid, 'id', None)
+        if uuid:
+            uuid = uuid.strip('{}').replace('urn:uuid:', '')
+            return uuid
+
 
 @zeit.web.view_config(name='feedback')
 class Feedback(Author):
+
+    def __call__(self):
+        if not zeit.web.core.application.FEATURE_TOGGLES.find(
+                'author_feedback'):
+            raise pyramid.httpexceptions.HTTPNotFound()
+        return super(Feedback, self).__call__()
 
     current_tab_name = 'feedback'
 
@@ -152,7 +174,8 @@ class Feedback(Author):
 
         module.subject = 'Sie haben Feedback erhalten'
         module.author_name = self.context.display_name
-        module.success_message = 'Ihr Feedback wurde erfolgreich verschickt.'
+        module.success_message = 'Ihr Feedback wurde erfolgreich ' \
+            'verschickt.'
 
         area.append(zeit.web.core.centerpage.get_module(module))
         return area

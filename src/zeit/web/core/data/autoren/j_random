@@ -3,6 +3,7 @@
   <lastname>Hacker</lastname>
   <status>Online</status>
   <external>false</external>
+  <enable_followpush>true</enable_followpush>
   <display_name>J. Random Hacker</display_name>
   <summary>Random Hacker ist Redakteur im Ressort Digital von ZEIT ONLINE</summary>
   <email>info@anikaszuppa.de</email>

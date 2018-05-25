@@ -188,17 +188,3 @@ def test_zar_adcontroller_values_return_values_on_advertorial_article(
         ('tma', '')]
     view = zeit.web.arbeit.view_article.Article(content, dummy_request)
     assert adcv == view.adcontroller_values
-
-
-def test_zar_adplace5_depends_on_ligatus_toggle_off(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
-    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
-    browser = testbrowser('/arbeit/article/01-digitale-nomaden')
-    assert browser.cssselect('#ad-desktop-5')
-
-
-def test_zar_adplace5_depends_on_ligatus_toggle_on(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set(
-        'third_party_modules', 'iqd', 'ligatus', 'ligatus_on_arbeit')
-    browser = testbrowser('/arbeit/article/01-digitale-nomaden')
-    assert not browser.cssselect('#ad-desktop-5')

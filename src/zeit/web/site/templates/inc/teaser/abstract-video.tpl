@@ -3,7 +3,7 @@
 <article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{ teaser.__name__ }}"
     {% if teaser.serie and teaser.serie.serienname %} data-video-series="{{ teaser.serie.serienname | format_webtrekk }}"{% endif %}
     {% block data_video_size %}{% endblock %}
-    {% if not teaser.has_advertisement%} data-video-player-id="{{ settings('brightcove_videoplayer_hp_cp_single_wo_ads', 'r1xb937iwZ') }}"{% endif %}
+    data-video-advertising="{{ 'withAds' if teaser.has_advertisement else 'withoutAds' }}"
     data-video-provider="brightcove" {# only brightcove is used currently #}
     data-video-page-url="{{ teaser_url }}" data-meetrics="{{ area.kind }}">
     <a class="{{ self.layout() }}__combined-link" href="{{ teaser_url }}">

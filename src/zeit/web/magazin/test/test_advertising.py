@@ -120,17 +120,3 @@ def test_adplace4_on_articles(testbrowser):
 def test_adplace16_on_articles(testbrowser):
     browser = testbrowser('/zeit-magazin/article/01')
     assert len(browser.cssselect('#ad-desktop-16')) == 1
-
-
-def test_zmo_adplace5_depends_on_ligatus_toggle_on(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set(
-        'third_party_modules', 'iqd', 'ligatus', 'ligatus_on_magazin')
-    browser = testbrowser('/zeit-magazin/article/03')
-    assert not browser.cssselect('#ad-desktop-5')
-
-
-def test_zmo_adplace5_depends_on_ligatus_toggle_off(testbrowser, monkeypatch):
-    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
-    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
-    browser = testbrowser('/zeit-magazin/article/03')
-    assert browser.cssselect('#ad-desktop-5')
