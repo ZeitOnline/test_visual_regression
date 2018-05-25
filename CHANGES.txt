@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - TMS-224: Author index page teaser polishing
 
+- TMS-229: Configure fields for fulltext search
+
 - FEM-82: Align Author Contact Icons
 
 - MAINT: Remove transition code for feed guids
