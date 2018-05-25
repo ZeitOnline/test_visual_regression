@@ -18,7 +18,7 @@ POSTDEPLOY
 3.152 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4258: Add Author Feedback Toggle to each author
 
 
 3.151 (2018-05-24)
