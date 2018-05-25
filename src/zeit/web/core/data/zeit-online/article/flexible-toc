@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <keywordset>
+      <keyword src="manual">Tennis</keyword>
+      <keyword src="manual">Paris</keyword>
+      <keyword src="manual"/>
+    </keywordset>
+    <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
+      <display_name>Heike Jahberg</display_name>
+    </author>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">flexible-toc</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">sid</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-01T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-01T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-01T15:12:09.866518+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-01T15:13:09.811283+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-01T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.newspublish</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn:newsml:afp.com:20150601:doc-2n64x</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">SID</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Sport-Informations-Dienst</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">1159bddc254242769fbbe1fa1c0e380d</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Sport</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:85c42592-3840-41c6-b039-83cd16de67d6}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2018</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Tennis</supertitle>
+    <title>Williams wackelt weiter, steht aber im Viertelfinale</title>
+    <byline>SID</byline>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00" is_empty="False" title_local="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" alt_local="Kultur, &quot;Der Hobbit&quot;, Film, Peter Jackson, Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott" title="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" alt="Kultur, &quot;Der Hobbit&quot;, Film, Peter Jackson, Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott">
+        <bu>Bernie Sanders kommt Hillary Clinton gefährlich nahe. Wenn der Sozialist sie weiter bedrängt, könnte sie nach links ausscheren.</bu>
+        <copyright>© Warner Bros.</copyright>
+      </image>
+      <p>Einleitungstext Williams wackelt weiter, steht aber im Viertelfinale Einleitungstext Williams wackelt weiter, steht aber im Viertelfinale Einleitungstext</p>
+      <intertitle>Unter der Kritik wegducken Teil 1</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <p>Will sagen: Es haben viele Menschen, Medien und Institutionen dazu beigetragen, dass die Gesellschaft sich an die Existenz von Künstlern wie Kollegah und Bushido gewöhnt hat, an ihr reaktionäres Weltbild und die widerliche Rhetorik. Im Zweifelsfall hörte man nicht so genau hin. Man ahnte, dass es da ein popkulturelles Paralleluniversum gibt, in dem Dinge passieren, mit denen man lieber nichts zu tun haben möchte, aber beließ es beim Ignorieren. Darum dauert diese Debatte jetzt auch so erstaunlich lange, darum ist ihre Dimension so groß.</p>
+      <intertitle>Mehrzeilige Frage/Antwort: Wie gehts, wie stehts? Whats cookin' good lookin'?</intertitle>
+      <video format="large" is_empty="True" href="http://xml.zeit.de/video/2014-01/3035864892001" expires="" />
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 3</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Sonderzeichen Galore > ä, ü, ö > ? $ % % # * ` " !</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 5</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 6</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 7</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 8</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 9</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 10</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 11</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 12</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 13</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+      <intertitle>Unter der Kritik wegducken Teil 14</intertitle>
+      <p>Tatsächlich konnte sich die Deutschlandchefin der Bertelsmann Music Group, Dominique Kulling, damals gar nicht einkriegen vor Freude über ihren gelungenen Coup. "Das ist eine exzeptionelle Platte", sagte sie in einer Pressemitteilung, "und sie zeigt, wie wichtig es ist, wenn man als Label an seine Künstler und ihre Visionen glaubt."</p>
+    </division>
+  </body>
+</article>

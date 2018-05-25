@@ -154,9 +154,9 @@ def test_campus_article_renders_video_with_correct_markup(testbrowser):
     bro = testbrowser('/campus/article/video')
     select = bro.cssselect
     assert select(
-        'figure.article__item > .video-player#video-player-3035864892001')
+        'figure.article__item > .js-videoplayer')
     assert select(
-        'video[data-video-id="3035864892001"]')
+        '.js-videoplayer[data-video-id="3035864892001"]')
     assert select(
         '.video-caption > .video-caption__kicker')[0].text == 'Reporter On Ice'
     assert select('.video-caption > .video-caption__title')[0].text == (

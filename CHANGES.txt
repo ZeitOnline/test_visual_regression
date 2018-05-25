@@ -8,12 +8,33 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
+- remove `zon_inline_video_via_html5` from feature toggles
+
+- remove `zon_videosinglepage_via_html5` from feature toggles
+
+- add feature toggle `dataprotection_popover`
 
 
-3.151 (unreleased)
+3.152 (unreleased)
 ------------------
 
+- Nothing changed yet.
+
+
+3.151 (2018-05-24)
+------------------
+
+- ZON-4719: Dataprotection Info Bar
+
+- ZON-4715: Use brightcove without ads if GDPR opt-out cookie is set
+
 - ZON-4714: Add gdpr-Param to Adcontroller SiteInfo if cookie is present
+
+- ZON-4673: Flexible table of contents
+
+- ZON-4657: Follow-button for push on authorpages in apps
+
+- ZON-4622: Remove content marketing ad, bring back adplace5 instead
 
 
 3.150 (2018-05-22)

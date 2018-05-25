@@ -124,7 +124,7 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
                 self.context, page=1, rows=page_size)
             return comments and comments.get('page_total', 0) > 0
         except zeit.web.core.comments.UserCommentsException:
-            log.warn('An exception occured, while trying to fetch comments.')
+            log.warning('An exception occured, while trying to fetch comments.')
 
         return False
 
@@ -135,6 +135,22 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
     @zeit.web.reify
     def enable_feedback(self):
         return self.context.enable_feedback
+
+    @zeit.web.reify
+    def followpush_available(self):
+        return bool(self.context.enable_followpush)
+
+    @zeit.web.reify
+    def followpush_taggroup(self):
+        return 'authors'
+
+    @zeit.web.reify
+    def followpush_tag(self):
+        uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
+        uuid = getattr(uuid, 'id', None)
+        if uuid:
+            uuid = uuid.strip('{}').replace('urn:uuid:', '')
+            return uuid
 
 
 @zeit.web.view_config(name='feedback')
