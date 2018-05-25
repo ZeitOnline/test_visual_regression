@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - TMS-224: Author index page teaser polishing
 
+- FEM-82: Align Author Contact Icons
+
 
 3.151 (2018-05-24)
 ------------------
