@@ -11,6 +11,7 @@ var $ = require( 'jquery' ),
     videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
+    dataProtectionPopOver = require( 'web.core/dataProtectionPopOver' ),
     article = document.getElementById( 'js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     main = $( '#main' );
@@ -26,6 +27,7 @@ triggeredEventTracking.init();
 adReload.init();
 saveGetToCookie.init();
 zeit.clearQueue();
+dataProtectionPopOver.init();
 
 if ( article ) {
     comments.init();

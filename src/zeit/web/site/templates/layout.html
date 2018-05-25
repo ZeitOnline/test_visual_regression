@@ -124,6 +124,8 @@
         {%- include "zeit.web.site:templates/inc/overlay.html" -%}
     {% endif %}
 
+    {%- include "zeit.web.core:templates/inc/data-protection-popover.html" -%}
+
     {% block adblocker_count %}
         {%- include "zeit.web.core:templates/inc/tracking/adblocker_count.html" -%}
     {% endblock %}
