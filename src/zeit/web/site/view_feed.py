@@ -14,6 +14,7 @@ import lxml.etree
 import zope.interface
 
 import zeit.cms.interfaces
+import zeit.cms.content.interfaces
 import zeit.content.author.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
