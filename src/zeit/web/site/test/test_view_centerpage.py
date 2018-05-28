@@ -3102,3 +3102,9 @@ def test_brandeins_teaser_should_display_its_image_on_mobile(
         assert ('teaser-small__media--force-mobile' in
                 image.get_attribute('class'))
         assert image.is_displayed()
+
+
+def test_if_series_is_podcast(testbrowser):
+    browser = testbrowser('/serie/ist-das-normal')
+    link = browser.cssselect('link[rel="alternate"]')
+    assert link[0].get('href') == 'https://istdasnormal.podigee.io/feed/mp3'
