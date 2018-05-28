@@ -114,6 +114,7 @@
     <series title="Im Urlaub mit" serienname="Im Urlaub mit" url="Im-Urlaub-mit" encoded="Im%20Urlaub%20mit" />
     <series title="In 10 Fragen um die Welt" serienname="In 10 Fragen um die Welt" url="in-10-fragen-um-die-welt" encoded="In%2010%20Fragen%20um%20die%20Welt" />
     <series title="Internet woanders" serienname="Internet woanders" url="internet-woanders" encoded="Internet%20woanders" />
+    <series title="Ist das normal?" serienname="Ist das normal" url="ist-das-normal" encoded="Ist%20das%20normal?" format-label="Podcast" kind="Podcast" fallback_image="yes" />
     <series title="Italienische Lektionen" serienname="Italienische Lektionen" url="italienische-lektionen" encoded="Italienische%20Lektionen" />
     <series title="Jahresrückblick 2012" serienname="Jahresrückblick 2012" url="jahresrueckblick-2012" encoded="Jahresr%C3%BCckblick%202012" />
     <series title="Jungpolitiker" serienname="Jungpolitiker" url="jungpolitiker" />
