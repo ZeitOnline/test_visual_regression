@@ -359,14 +359,14 @@ class Serie(object):
         self.context = context
 
     @zeit.web.reify
-    def seriekind(self):
+    def kind(self):
         try:
             return self.context.serie.kind
         except AttributeError:
             return True
 
     @zeit.web.reify
-    def serietitle(self):
+    def title(self):
         return self.context.serie.title
 
     @zeit.web.reify

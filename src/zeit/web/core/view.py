@@ -187,7 +187,7 @@ class Base(object):
     def serietitle(self):
         serie = zeit.web.core.interfaces.ISerie(self.context, [])
         try:
-            return serie.serietitle
+            return serie.title
         except AttributeError:
             return True
 
@@ -203,7 +203,7 @@ class Base(object):
     def is_podcastserie(self):
         serie = zeit.web.core.interfaces.ISerie(self.context, [])
         try:
-            return serie.seriekind == "Podcast"
+            return serie.kind == "Podcast"
         except AttributeError:
             return True
 
