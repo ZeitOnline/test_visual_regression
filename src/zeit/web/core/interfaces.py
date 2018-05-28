@@ -337,3 +337,16 @@ class IContentMarkerInterfaces(zope.interface.Interface):
     """Returns a list of marker interfaces that are added to ICMSContent
     objects.
     """
+
+
+class ISerie(zope.interface.Interface):
+    """A interface for zeit.web series"""
+
+    def seriekind():
+        """Returns the kind of a series (e.g. podcast)"""
+
+    def serietitle():
+        """Returns the title of a series"""
+
+    def serieurl():
+        """Returns the url of a series"""
