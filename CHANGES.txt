@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - ZON-4638: Markup for podcast-series
 
+- TMS-226: Change channel queries to ES, update to changed ContentQuery API
+
 
 3.153 (2018-05-25)
 ------------------
