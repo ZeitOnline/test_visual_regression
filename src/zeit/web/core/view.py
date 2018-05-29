@@ -184,6 +184,30 @@ class Base(object):
         return self.context.serie.serienname
 
     @zeit.web.reify
+    def series_title(self):
+        series = zeit.web.core.interfaces.ISeries(self.context, [])
+        try:
+            return series.title
+        except AttributeError:
+            return True
+
+    @zeit.web.reify
+    def podcastseries_feed(self):
+        series = zeit.web.core.interfaces.ISeries(self.context, [])
+        try:
+            return series.podcastseries_feed.replace("-", "")
+        except AttributeError:
+            return True
+
+    @zeit.web.reify
+    def is_podcastseries(self):
+        series = zeit.web.core.interfaces.ISeries(self.context, [])
+        try:
+            return series.kind == "Podcast"
+        except AttributeError:
+            return None
+
+    @zeit.web.reify
     def cap_title(self):
         if not self.context.cap_title:
             return 'Anzeige'

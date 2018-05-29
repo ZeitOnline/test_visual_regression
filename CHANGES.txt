@@ -4,6 +4,10 @@ Change log for zeit.web
 PREDEPLOY
 ---------
 
+- add feature toggle `dataprotection_popover`
+
+- remove dataprotection settings from all zeitweb-settings.xml
+
 
 POSTDEPLOY
 ----------
@@ -12,15 +16,11 @@ POSTDEPLOY
 
 - remove `zon_videosinglepage_via_html5` from feature toggles
 
-- add feature toggle `dataprotection_popover`
-
-- remove dataprotection settings from all zeitweb-settings.xml
-
 
 3.154 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4638: Markup for podcast-series
 
 
 3.153 (2018-05-25)

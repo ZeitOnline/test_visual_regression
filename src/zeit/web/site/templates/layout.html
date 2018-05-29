@@ -27,7 +27,12 @@
 
     <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
+
+    {% if view.is_podcastseries %}
+    <link type="application/rss+xml" rel="alternate" title="{{ view.series_title }}" href="https://{{ view.podcastseries_feed }}.podigee.io/feed/mp3"/>
+    {% else %}
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+    {% endif %}
 
     {% block css_link %}
         <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">

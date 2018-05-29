@@ -350,3 +350,26 @@ zeit.content.cp.blocks.automatic.AutomaticTeaserBlock.layout = property(
     zeit.content.cp.blocks.automatic.AutomaticTeaserBlock.layout.__set__)
 
 zeit.content.cp.layout.BlockLayout.is_allowed = lambda *args, **kw: True
+
+
+@grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
+@grokcore.component.implementer(zeit.web.core.interfaces.ISeries)
+class Series(object):
+    def __init__(self, context):
+        self.context = context
+
+    @zeit.web.reify
+    def kind(self):
+        try:
+            return self.context.serie.kind
+        except AttributeError:
+            return True
+
+    @zeit.web.reify
+    def title(self):
+        return self.context.serie.title
+
+    @zeit.web.reify
+    def podcastseries_feed(self):
+        podcastfeed = self.context.serie.url
+        return podcastfeed.replace("-", "")
