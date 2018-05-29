@@ -353,8 +353,8 @@ zeit.content.cp.layout.BlockLayout.is_allowed = lambda *args, **kw: True
 
 
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
-@grokcore.component.implementer(zeit.web.core.interfaces.ISerie)
-class Serie(object):
+@grokcore.component.implementer(zeit.web.core.interfaces.ISeries)
+class Series(object):
     def __init__(self, context):
         self.context = context
 
@@ -370,6 +370,6 @@ class Serie(object):
         return self.context.serie.title
 
     @zeit.web.reify
-    def podcastseriefeed(self):
+    def podcastseries_feed(self):
         podcastfeed = self.context.serie.url
         return podcastfeed.replace("-", "")

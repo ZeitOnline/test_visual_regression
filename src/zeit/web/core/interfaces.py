@@ -339,14 +339,14 @@ class IContentMarkerInterfaces(zope.interface.Interface):
     """
 
 
-class ISerie(zope.interface.Interface):
+class ISeries(zope.interface.Interface):
     """A interface for zeit.web series"""
 
-    def seriekind():
+    def series_kind():
         """Returns the kind of a series (e.g. podcast)"""
 
-    def serietitle():
+    def series_title():
         """Returns the title of a series"""
 
-    def serieurl():
+    def series_url():
         """Returns the url of a series"""
