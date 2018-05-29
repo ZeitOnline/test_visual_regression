@@ -33,8 +33,8 @@ def test_buzz_mostread_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--mostread .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--mostread .teaser-buzz__title')
-    assert kicker and u'Flüchtlinge' in kicker[1].text
-    assert titles and u'Fluchthilfe ganz privat' in titles[2].text
+    assert 'Arbeitswelt' == kicker[2].text.strip()
+    assert 'Der Terror der guten Laune' == titles[2].text
 
 
 def test_buzz_comments_should_render_correct_article_count(testbrowser):
@@ -53,8 +53,8 @@ def test_buzz_comments_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--comments .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--comments .teaser-buzz__title')
-    assert u'Asylbewerber' in kicker[0].text
-    assert u'Orbán verlangt Schließung der Grenzen' in titles[2].text
+    assert 'Steuerhinterziehung' == kicker[0].text.strip()
+    assert u'"Die Schweiz ist die größte Fluchtburg"' == titles[0].text
 
 
 def test_buzz_mostshared_should_render_correct_article_count(testbrowser):
@@ -73,8 +73,8 @@ def test_buzz_mostshared_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--shared .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--shared .teaser-buzz__title')
-    assert u'Studienwahl' in kicker[0].text
-    assert u'Zuwanderer haben häufiger Abitur' in titles[1].text
+    assert 'Gender Studies' == kicker[0].text.strip()
+    assert 'Born to be wild' == titles[1].text
 
 
 def test_buzzboard_renders(testbrowser):

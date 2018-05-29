@@ -932,7 +932,7 @@ class MockES(MockSearch):
 
     zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
 
-    def search(self, query, order, rows=25, **kw):
+    def search(self, query, order=None, rows=25, **kw):
         result = zeit.cms.interfaces.Result(self.pop_results(rows))
         result.hits = self._hits
         return result
