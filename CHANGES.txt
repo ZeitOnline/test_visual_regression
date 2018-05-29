@@ -20,6 +20,9 @@ POSTDEPLOY
 3.154 (unreleased)
 ------------------
 
+- TMS-220: Retrieve metadata directly from elasticsearch, instead of whatever
+  reach passes through
+
 - ZON-4638: Markup for podcast-series
 
 - TMS-226: Change channel queries to ES, update to changed ContentQuery API
