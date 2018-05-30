@@ -20,7 +20,7 @@ POSTDEPLOY
 3.155 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FIX: Enhance schema.org markup for FAQ articles
 
 
 3.154 (2018-05-30)
