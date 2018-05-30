@@ -17,7 +17,7 @@ POSTDEPLOY
 - remove `zon_videosinglepage_via_html5` from feature toggles
 
 
-3.155 (unreleased)
+3.155 (2018-05-30)
 ------------------
 
 - FIX: Enhance schema.org markup for FAQ articles
