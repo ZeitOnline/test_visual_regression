@@ -30,14 +30,22 @@ $longform-header-max-height: 1400px
 			font-size: em(50px)
 
 	.article__head__meta
-		font-size: .75em
+		color: $white
+		font-size: $font-xs
 		font-weight: bold
-		letter-spacing: 1px
+		letter-spacing: 2px
 		line-height: 1.7
-		margin-top: .5em
+		margin: .5em auto 3em
 		max-width: 40em
-		text-align: left
+		text-align: center
 		text-transform: uppercase
+		+respond-min($break-2)
+			font-size: $font-s
+		+respond-min($break-4)
+			font-size: $font-m
+		a
+			border-bottom: 1px solid currentColor
+			color: inherit
 
 	.article__head__subtitle
 		color: $grey--dark
@@ -127,22 +135,6 @@ $longform-header-max-height: 1400px
 		padding-right: 5%
 		width: 100%
 		z-index: 2
-		.article__head__meta
-			font-size: $font-xs
-			letter-spacing: $hair
-			color: $white
-			margin-bottom: 3em
-			margin-left: auto
-			text-align: center
-			letter-spacing: 2px
-			margin-right: auto
-			+respond-min($break-2)
-				font-size: $font-s
-			+respond-min($break-4)
-				font-size: $font-m
-			a
-				border-bottom: 1px solid currentColor
-				color: inherit
 
 	.article__subpage-head
 		@extend %headline
