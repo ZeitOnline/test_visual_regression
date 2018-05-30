@@ -150,11 +150,6 @@ $longform-header-max-height: 1400px
 		font-size: $font-xl
 		+respond-min($break-1)
 			font-size: $font-xxl
-		a
-			display: block
-			position: relative
-			top: -$large
-			border-bottom: 0
 
 	//there is a strange ff rendering bug, therefore
 	//we have an earlier breakpoint for index
@@ -191,40 +186,6 @@ $longform-header-max-height: 1400px
 		float: left
 		min-width: em(40px)
 
-	.article__subpage-chapter
-		@extend %meta
-		position: relative
-		top: -$medium
-		width: 100%
-		background-color: $grey--bright
-		span
-			letter-spacing: $hair
-			font-size: $font-s
-			text-transform: uppercase
-			margin: auto
-			display: block
-			text-align: center
-			&:first-child
-				font-family: $font-tabletgothic
-				font-weight: bold
-				padding-top: $large
-			&:last-child
-				padding-bottom: $large
-			+respond-min($break-2) // 720px
-				min-width: $longform-content-max-width // 615px - who needs this?
-
-	.article__supertitle
-		display: none
-
-	.article__title
-		font-family: $sans-serif-base-font
-		color: $white
-		line-height: 1.2
-		margin-bottom: $tiny
-		font-size: em(50px)
-		+respond-min($break-2)
-			font-size: em(64px)
-
 	.article__body
 		background-color: $white
 
@@ -241,10 +202,6 @@ $longform-header-max-height: 1400px
 			margin: remify(46px auto 118px)
 			&:first-child
 				margin-bottom: remify(82px)
-
-	.article__opener
-		margin-left: auto
-		margin-right: auto
 
 	.article__item,
 	.is-constrained,
