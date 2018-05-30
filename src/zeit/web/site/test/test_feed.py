@@ -2,11 +2,10 @@ import requests
 import lxml.etree
 import zope.component
 
+import zeit.retresco.interfaces
 import zeit.solr.interfaces
 
 import zeit.web.site.view_feed
-
-import zeit.content.article.testing
 
 
 def test_newsfeed_should_only_render_cp2015(testserver):
@@ -87,10 +86,11 @@ def test_newsfeed_should_concat_supertitle_and_title(testserver):
 
 
 def test_newsfeed_should_render_an_authorfeed(testserver):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
-         'title': 'Mei, is des traurig!'}
+         'doc_type': 'article',
+         'payload': {'body': {'title': 'Mei, is des traurig!'}}}
     ]
     res = requests.get(
         '{}/autoren/author3'.format(testserver.url),

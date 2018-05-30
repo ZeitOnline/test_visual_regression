@@ -1,4 +1,5 @@
 # coding: utf-8
+import json
 import logging
 import math
 
@@ -249,11 +250,20 @@ def create_author_article_area(
 
     area = cp.body.create_item('region').create_item('area')
     area.kind = 'author-articles'
-    area.automatic_type = 'query'
+
+    area.automatic_type = conf.get(
+        'author_articles_query_type', 'elasticsearch-query')
+    area.elasticsearch_raw_query = conf.get(
+        'author_articles_query_es', """{"query": {"bool": {"filter": [
+            {"term": {"payload.head.authors": "%s"}}
+        ]}}}""") % context.uniqueId
+    area.elasticsearch_raw_order = 'payload.document.date_first_released:desc'
+    # BBB
     area.raw_query = unicode(
         conf.get('author_articles_query', 'author:"{}"')).format(
             context.display_name)
     area.raw_order = 'date-first-released desc'
+
     if count is not None:
         area.count = count
     else:
