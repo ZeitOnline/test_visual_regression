@@ -99,14 +99,22 @@ def _inject_banner_code(pages, pubtype):
             'ads': [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
                     {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
                     {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
-                    {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
-                    {'tile': 5, 'paragraph': 6, 'type': 'desktop'}]
+                    {'tile': 4, 'paragraph': 4, 'type': 'desktop'}]
         },
         'longform': {
             'pages': [2],
             'ads': [{'tile': 7, 'paragraph': 5, 'type': 'desktop'}]
         }
     }
+
+    # change place5 against ctm if configured
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    place5 = ({'tile': 5, 'paragraph': 6, 'type': 'desktop'},
+              {'tile': 'content_ad', 'paragraph': 6, 'type': ''},)
+    if toggles.find('iqd_contentmarketing_ad'):
+        adconfig['zon']['ads'].append(place5[1])
+    else:
+        adconfig['zon']['ads'].append(place5[0])
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)
