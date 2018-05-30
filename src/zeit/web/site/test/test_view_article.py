@@ -2386,3 +2386,10 @@ def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
 
     first_question = flexible_toc.getnext().getnext()
     assert 'article__item' in first_block.get('class')
+
+
+def test_faq_answer_has_itemprop_text(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    answer_prop = select('div[itemprop="text"]')[0]
+    assert len(answer_prop) >= 1
