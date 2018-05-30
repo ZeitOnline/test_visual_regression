@@ -103,6 +103,12 @@ class LazyProxy(object):
             zope.interface.alsoProvides(
                 self, zeit.web.core.article.IColumnArticle)
 
+    def __cmp__(self, other):
+        # Just like zeit.cms.repository.repository.ContentBase
+        if not zeit.cms.interfaces.ICMSContent.providedBy(other):
+            return -1
+        return cmp(self.uniqueId, other.uniqueId)
+
     def __getattr__(self, key):
         if not self.__exposed__ or not hasattr(self.__origin__, key):
             try:
