@@ -27,6 +27,8 @@ POSTDEPLOY
 
 - TMS-226: Change channel queries to ES, update to changed ContentQuery API
 
+- FIX: Add link to evidon in all verticals and edit wording
+
 
 3.153 (2018-05-25)
 ------------------
