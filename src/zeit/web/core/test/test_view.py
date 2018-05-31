@@ -1009,3 +1009,11 @@ def test_gdpr_cookie_sets_adcontroller_siteinfo(selenium_driver, testserver):
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     gdpr = driver.execute_script('return adcSiteInfo.gdpr')
     assert gdpr == 'dnt'
+
+
+def test_view_should_return_channels(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/arbeit/article/01-digitale-nomaden')
+    view = zeit.web.arbeit.view_article.Article(
+        context, pyramid.testing.DummyRequest())
+    assert view.channels == u'entdecken;reisen'
