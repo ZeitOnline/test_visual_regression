@@ -1,49 +1,20 @@
 [
 	{
-		"location": "/gesellschaft/zeitgeschehen/2015-09/rottenburg-brand-fluechtlingsheim",
+		"location": "/zeit-online/article/zeit",
 		"score": 271,
-		"uniqueId": "http://xml.zeit.de/zeit-online/article/zeit",
-		"ressort": "gesellschaft",
-		"sub_ressort": "zeitgeschehen",
-		"date_first_released": "2015-09-07T03:11:55Z",
-		"product_id": "ZEDE",
-		"supertitle": "Rottenburg",
-		"title": "Fünf Verletzte bei Brand in Asylbewerber-Unterkunft",
-		"subtitle": "In Baden-Württemberg ist in einem Flüchtlingsheim ein Feuer ausgebrochen. Mehrere Bewohner sprangen aus den Fenstern. Die Brandursache ist unklar.",
-		"channels": ["Gesellschaft Zeitgeschehen"],
 		"fetchedAt": 1441595521529,
-		"timestamp": 1441595515000,
-		"access": "free"
+		"timestamp": 1441595515000
 	},
 	{
-		"location": "/politik/ausland/2015-09/tuerkei-pkk-bombenanschlag",
+		"location": "/zeit-online/cp-content/article-02",
 		"score": 84,
-		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-02",
-		"ressort": "politik",
-		"sub_ressort": "ausland",
-		"date_first_released": "2015-09-06T23:12:37Z",
-		"product_id": "ZEDE",
-		"supertitle": "Türkei",
-		"title": "Mehrere Soldaten sterben bei Bombenanschlag",
-		"subtitle": "Kurdische Rebellen bekennen sich zu der Attacke. Ihren Angaben zufolge war es der schwerste Anschlag seit dem Scheitern des Waffenstillstands.",
-		"channels": ["Politik Ausland"],
 		"fetchedAt": 1441581361709,
-		"timestamp": 1441581157000,
-		"access": "free"
+		"timestamp": 1441581157000
 	},
 	{
-		"location": "/gesellschaft/2015-09/fluechtlinge-helfer-gemeinnuetzigkeit-interview",
+		"location": "/zeit-online/cp-content/article-03",
 		"score": 82,
-		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-03",
-		"ressort": "gesellschaft",
-		"date_first_released": "2015-09-07T08:52:19Z",
-		"product_id": "ZEDE",
-		"supertitle": "Flüchtlinge",
-		"title": "\"Angela Merkel? Ich kümmer mich lieber selbst\"",
-		"subtitle": "Die Hilfsbewegung für die Flüchtlinge organisiert und vernetzt sich selbst, weil der Staat versagt. Der Forscher Christian Schuldt sieht darin einen grundlegenden Trend.",
-		"channels": ["Gesellschaft"],
 		"fetchedAt": 1441616161326,
-		"timestamp": 1441615939000,
-		"access": "free"
+		"timestamp": 1441615939000
 	}
 ]
