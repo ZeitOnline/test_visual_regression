@@ -20,6 +20,8 @@ POSTDEPLOY
 3.156 (unreleased)
 ------------------
 
+- BUG-933: Add config for adplace5 vs. content marketing ad
+
 - MAINT: Reuse `mod_date` instead of duplicating its code in `view.date_last_published_semantic`
 
 - MAINT: Update parameter for abo shop link
