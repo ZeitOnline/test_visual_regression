@@ -126,7 +126,6 @@ def test_mobile_ad_place_right_behind_the_first_teaser(
 def test_adplaces_have_banner_label_data_attribute(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set(
         'third_party_modules', 'iqd', 'zon_admark')
-    zeit.web.core.application.FEATURE_TOGGLES.unset('iqd_contentmarketing_ad')
     browser = testbrowser('/zeit-online/article/zeit')
     labelstring = "elem.setAttribute('data-banner-label', 'Anzeige');"
     assert labelstring not in browser.cssselect('#ad-desktop-1')[0].text
@@ -151,12 +150,12 @@ def test_adplaces_have_no_banner_label_data_attribute(testbrowser):
 
 def test_banner_content_enabled_shows_all_ads(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
-    zeit.web.core.application.FEATURE_TOGGLES.unset('iqd_contentmarketing_ad')
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(
         browser.cssselect('article.article script[id|="ad-desktop"]')) == 3
     assert len(
         browser.cssselect('article.article script[id|="ad-mobile"]')) == 2
+    assert not browser.cssselect('#iq-artikelanker')
 
     zeit.web.core.application.FEATURE_TOGGLES.set('iqd_contentmarketing_ad')
     browser = testbrowser('/zeit-online/article/zeit')
