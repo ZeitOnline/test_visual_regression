@@ -175,7 +175,7 @@ class Base(object):
 
     @zeit.web.reify
     def channels(self):
-        """ A string with a semicolon seperated list of channels """
+        """ A string with a semicolon seperated list of all channels """
         channels = self.context.channels
         if isinstance(channels, (list, tuple)):
             channel_list = [item for tuples in channels for item in tuples]
@@ -671,7 +671,8 @@ class Base(object):
             ('cp28', access),  #
             ('cp29', first_click_free),  # First click free
             ('cp30', self.paywall or 'open'),  # Paywall Schranke
-            ('cp32', 'unfeasible')  # Protokoll (set via JS in webtrekk.html)
+            ('cp32', 'unfeasible'),  # Protokoll (set via JS in webtrekk.html)
+            ('cp38', self.channels or 'undefined')  # Channel-Liste
         ])
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
