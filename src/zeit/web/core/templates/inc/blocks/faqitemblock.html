@@ -21,7 +21,9 @@
     {# Everything thereafter represents the answer. #}
     <div itemprop="acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
     {% with page = block[1:] %}
-        {% include "zeit.web.core:templates/inc/article/page.html" %}
+        <div itemprop="text">
+            {% include "zeit.web.core:templates/inc/article/page.html" %}
+        </div>
     {% endwith %}
     </div>
 {% endif %}

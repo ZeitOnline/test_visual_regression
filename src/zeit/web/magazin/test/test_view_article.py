@@ -3,6 +3,7 @@ import datetime
 
 import mock
 import pytest
+import pytz
 
 import zeit.cms.interfaces
 
@@ -204,8 +205,9 @@ def test_modified_print_article_has_correct_dates(application):
 
 
 @pytest.mark.parametrize('released, modified', [
-    (datetime.datetime(2014, 1, 1), None),
-    (datetime.datetime(2014, 1, 1), datetime.datetime(2014, 5, 2))])
+    (datetime.datetime(2014, 1, 1, tzinfo=pytz.UTC), None),
+    (datetime.datetime(2014, 1, 1, tzinfo=pytz.UTC),
+     datetime.datetime(2014, 5, 2, tzinfo=pytz.UTC))])
 def test_date_published_should_be_obfuscated_for_modified_content(
         modified, released, dummy_request, tplbrowser):
 
@@ -213,8 +215,9 @@ def test_date_published_should_be_obfuscated_for_modified_content(
         'http://xml.zeit.de/zeit-magazin/article/03')
     view = zeit.web.magazin.view_article.Article(context, dummy_request)
 
-    view.date_last_published_semantic = modified
-    view.date_first_released = released
+    info = zeit.cms.workflow.interfaces.IPublishInfo(context)
+    info.date_last_published_semantic = modified
+    info.date_first_released = released
 
     browser = tplbrowser(
         'zeit.web.magazin:templates/content.html',
@@ -223,11 +226,13 @@ def test_date_published_should_be_obfuscated_for_modified_content(
     dates = browser.cssselect('.meta__date')
 
     if modified:
-        assert dates[0].get('datetime') == isoformat(modified)
+        assert dates[0].get('datetime') == isoformat(
+            modified.astimezone(pytz.timezone('Europe/Berlin')))
         assert 'encoded-date' in dates[0].get('class')
-        assert dates[1].text == 'zuletzt aktualisiert am 2. Mai 2014, 0:00 Uhr'
+        assert dates[1].text == 'zuletzt aktualisiert am 2. Mai 2014, 2:00 Uhr'
     else:
-        assert dates[0].get('datetime') == isoformat(released)
+        assert dates[0].get('datetime') == isoformat(
+            released.astimezone(pytz.timezone('Europe/Berlin')))
         assert 'encoded-date' not in dates[0].get('class')
         assert not dates[1].text
 
