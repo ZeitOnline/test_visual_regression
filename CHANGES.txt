@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - MAINT: Reuse `mod_date` instead of duplicating its code in `view.date_last_published_semantic`
 
+- MAINT: Update parameter for abo shop link
+
 
 3.155 (2018-05-30)
 ------------------
