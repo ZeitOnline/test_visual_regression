@@ -143,10 +143,8 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
     @zeit.web.reify
     def followpush_tag(self):
         uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
-        uuid = getattr(uuid, 'id', None)
         if uuid:
-            uuid = uuid.strip('{}').replace('urn:uuid:', '')
-            return uuid
+            return uuid.shortened
 
 
 @zeit.web.view_config(name='feedback')
