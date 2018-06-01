@@ -775,18 +775,32 @@ class CommentMixin(object):
         except IndexError:
             return False
 
+    def _get_comment_sorting(self):
+        # Basic comment sort is ascending.
+        sort = 'asc'
+
+        # This might be overwriteen by context specific default.
+        if getattr(self.context, 'recent_comments_first', False):
+            sort = 'desc'
+
+        # User might change sort order as well, but fall back to
+        # derived default, if it hasn't.
+        return self.request.params.get('sort', sort)
+
     @zeit.web.reify
     def comments(self):
         if not self.show_commentthread:
             return
-        sort = self.request.params.get('sort', 'asc')
+
         try:
             page = int(self.request.params.get('page', 1))
         except ValueError:
             return
         cid = self.request.params.get('cid', None)
         return self.community.get_thread(
-            self.context.uniqueId, sort=sort, page=page, cid=cid)
+            self.context.uniqueId,
+            sort=self._get_comment_sorting(),
+            page=page, cid=cid)
 
     def get_comment(self, cid):
         return self.community.get_comment(self.context.uniqueId, cid)

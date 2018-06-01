@@ -420,6 +420,29 @@ def test_comments_should_have_correct_order_when_paginated():
         [(1, '3'), (2, '4'), (3, '4.1')])
 
 
+def test_sort_order_should_be_derived_correctly():
+    view = zeit.web.core.view.CommentMixin()
+    view.request = mock.Mock()
+    view.context = mock.Mock()
+
+    # Sort order should be desc, if recent_comments_first is true
+    # and no user parameter is set.
+    view.request.params = {}
+    view.context.recent_comments_first = True;
+    assert view._get_comment_sorting() == 'desc'
+
+    # Sort order should be asc, if recent_comments_first is true,
+    # but user parameter indicates asc.
+    view.request.params = {'sort': 'asc'}
+    view.context.recent_comments_first = True;
+    assert view._get_comment_sorting() == 'asc'
+
+    # Defaul sort order should be asc, if recent_comments_first is False
+    view.request.params = {}
+    view.context.recent_comments_first = False;
+    assert view._get_comment_sorting() == 'asc'
+
+
 def _create_poster(monkeypatch):
     request = mock.Mock()
     request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
