@@ -145,3 +145,10 @@ def test_zco_adplace5_is_off_on_campus(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/campus/article/01-countdown-studium')
     assert not browser.cssselect('#ad-desktop-5')
+
+
+def test_zco_ctm_is_off_on_campus(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'third_party_modules', 'iqd', 'iqd_contentmarketing_ad')
+    browser = testbrowser('/campus/article/01-countdown-studium')
+    assert not browser.cssselect('#iq-artikelanker')

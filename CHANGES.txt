@@ -17,10 +17,20 @@ POSTDEPLOY
 - remove `zon_videosinglepage_via_html5` from feature toggles
 
 
-3.156 (unreleased)
+3.157 (unreleased)
 ------------------
 
+- Nothing changed yet.
+
+
+3.156 (2018-06-01)
+------------------
+
+- BUG-933: Add config for adplace5 vs. content marketing ad
+
 - MAINT: Reuse `mod_date` instead of duplicating its code in `view.date_last_published_semantic`
+
+- MAINT: Update parameter for abo shop link
 
 
 3.155 (2018-05-30)
