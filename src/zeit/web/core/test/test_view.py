@@ -15,6 +15,7 @@ import zeit.web.magazin.view
 import zeit.web.magazin.view_article
 import zeit.web.magazin.view_centerpage
 import zeit.web.site.view_article
+import zeit.web.site.view_author
 import zeit.web.site.view_centerpage
 
 from selenium.common.exceptions import TimeoutException
@@ -1017,3 +1018,11 @@ def test_view_should_return_channels(application):
     view = zeit.web.arbeit.view_article.Article(
         context, pyramid.testing.DummyRequest())
     assert view.channels == u'entdecken;reisen'
+
+
+def test_view_should_return_none_if_it_has_no_channels(application):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/j_random')
+    request = pyramid.testing.DummyRequest()
+    view = zeit.web.site.view_author.Author(author, request)
+    assert view.channels is None
