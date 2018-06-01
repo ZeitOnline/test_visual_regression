@@ -176,12 +176,11 @@ class Base(object):
     @zeit.web.reify
     def channels(self):
         """ A string with a semicolon seperated list of all channels """
-        channels = self.context.channels
+        channels = getattr(self.context, 'channels', None)
         if isinstance(channels, (list, tuple)):
             channel_list = [item for tuples in channels for item in tuples]
-            return ';'.join(
-                zeit.web.core.template.format_webtrekk(
-                    str(item)) for item in channel_list if item is not None)
+            return ';'.join(zeit.web.core.template.format_webtrekk(str(
+                item)) for item in channel_list if item is not None)
 
     @zeit.web.reify
     def is_advertorial(self):
