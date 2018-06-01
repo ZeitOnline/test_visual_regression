@@ -17,10 +17,10 @@ POSTDEPLOY
 - remove `zon_videosinglepage_via_html5` from feature toggles
 
 
-3.157 (unreleased)
+3.156.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FIX: Quickfix ES query with url param "sort=None"
 
 
 3.156 (2018-06-01)
