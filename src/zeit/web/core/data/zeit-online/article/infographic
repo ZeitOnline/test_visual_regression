@@ -59,6 +59,7 @@
     <title>Infographic</title>
     <subtitle>Liquorice donut powder bear claw cupcake. Wafer candy canes tootsie roll. Danish dessert marshmallow jujubes pudding. Jelly-o lollipop ice cream cake tiramisu.</subtitle>
     <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/bertelsmann-infographic/" type="png" display_mode="column-width"/>
       <p>Achtung jetzt kommt ein Karton.</p>
       <image base-id="http://xml.zeit.de/zeit-online/image/bertelsmann-infographic/" type="png" display_mode="large"/>
       <p>Modi eaque quidem, ipsa, consequatur sequi itaque ad iusto vel cumque architecto, maiores accusantium dolores veniam. Praesentium perspiciatis sit, aspernatur?</p>

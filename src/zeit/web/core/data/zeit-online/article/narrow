@@ -32,6 +32,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">es</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-01T15:12:07+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.newspublish</attribute>
@@ -76,7 +77,7 @@
     <title>Williams wackelt weiter, steht aber im Viertelfinale</title>
     <byline>SID</byline>
     <division type="page">
-      <image is_empty="False" src="http://xml.zeit.de/exampleimages/artikel/advertorial-01/wochenmarkt-43.jpg">
+      <image src="http://xml.zeit.de/zeit-online/image/scrabble-12-580.jpg" type="jpg" title="Scrabble" is_empty="False" variant_name="original" display_mode="column-width" title_local="Scrabble">
         <bu/>
         <copyright>© Warner Bros.</copyright>
       </image>
