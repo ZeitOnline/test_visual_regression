@@ -25,9 +25,8 @@
             <meta itemprop="url" content="{{ request.image_host + image.fallback_path }}">
             <meta itemprop="width" content="{{ image_width }}">
             <meta itemprop="height" content="{{ image_height }}">
-
-            {% block caption %}
-            <figcaption class="figure__caption">
+            {% block caption -%}
+            <figcaption class="figure__caption" {%- if not image.caption and not image.copyrights | length %} hidden{% endif %}>
                 <span class="figure__text" itemprop="caption">{{ image.caption }}</span>
                 {% for item in image.copyrights %}
                 <span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
