@@ -20,7 +20,7 @@ POSTDEPLOY
 3.156.2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- TMS-226: Update ES fulltext search to changed ContentQuery API
 
 
 3.156.1 (2018-06-01)
