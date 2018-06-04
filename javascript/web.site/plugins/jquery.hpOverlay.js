@@ -240,9 +240,9 @@
 
     Overlay.prototype.sendPodcastPlayEventPostMessage = function() {
         // send postMessage with value play to get the message once the player starts
-        Array.from( document.querySelectorAll( '.podigee-podcast-player' ) ).forEach(
-            function( element ) {
-                element.contentWindow.postMessage(
+        $( '.podigee-podcast-player' ).each(
+            function() {
+                $( this ).context.contentWindow.postMessage(
                     JSON.stringify({
                         context: 'player.js',
                         version: 'version',
