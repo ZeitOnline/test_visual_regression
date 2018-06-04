@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - remove `zon_videosinglepage_via_html5` from feature toggles
 
+- change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
+
 
 3.156.2 (unreleased)
 --------------------
@@ -24,6 +26,7 @@ POSTDEPLOY
 
 - MAINT: Remove ES sort quickfix
 
+- TMS-233: Support elasticsearch for author articles tab
 
 3.156.1 (2018-06-01)
 --------------------

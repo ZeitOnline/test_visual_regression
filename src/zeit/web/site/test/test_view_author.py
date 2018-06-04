@@ -6,7 +6,7 @@ import mock
 import pyramid.testing
 import zope.component
 
-import zeit.solr.interfaces
+import zeit.retresco.interfaces
 
 import zeit.web.core.interfaces
 
@@ -50,8 +50,8 @@ def test_author_page_should_feature_schema_org_props(testbrowser):
 
 
 def test_author_page_should_show_articles_by_author(testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/anne_mustermann')
@@ -61,8 +61,8 @@ def test_author_page_should_show_articles_by_author(testbrowser):
 def test_articles_by_author_should_paginate(testbrowser):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['author_articles_page_size'] = 1
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/anne_mustermann?p=2')
@@ -88,17 +88,17 @@ def test_author_area_articles_should_offset_correctly(
 
 def test_author_page_with_favourite_content_should_get_total_pages_correctly(
         testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
     # case 1: 7 articles on page 1, 10 articles on page 2
-    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
-                    for i in range(17)])
+    es.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                   for i in range(17)])
     select = testbrowser('/autoren/j_random').cssselect
     assert len(select('.cp-area--author-favourite-content article')) == 3
     assert len(select('.pager__pages .pager__page')) == 2
 
     # case 2: 7 articles on page 1, 10 articles on page 2, 1 article on page 3
-    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
-                    for i in range(18)])
+    es.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                   for i in range(18)])
     select = testbrowser('/autoren/j_random').cssselect
     assert len(select('.cp-area--author-favourite-content article')) == 3
     assert len(select('.pager__pages .pager__page')) == 3
@@ -108,8 +108,8 @@ def test_author_page_should_hide_favourite_content_on_further_pages(
         testbrowser):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['author_articles_page_size'] = 4
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'},
@@ -140,20 +140,22 @@ def test_articles_by_author_should_not_repeat_favourite_content(
         testbrowser, monkeypatch):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/j_random')
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
     mock_search = mock.Mock()
-    monkeypatch.setattr(solr, 'search', mock_search)
+    monkeypatch.setattr(es, 'search', mock_search)
     testbrowser('/autoren/j_random')
     for fav in author.favourite_content:
-        assert fav.uniqueId in mock_search.call_args[1]['fq']
+        assert (zeit.cms.content.interfaces.IUUID(fav).id in
+                mock_search.call_args[0][0]['query']['bool']['must_not']
+                ['ids']['values'])
 
 
 def test_first_page_shows_fewer_solr_results_since_it_shows_favourite_content(
         testbrowser):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['author_articles_page_size'] = 4
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/j_random')
@@ -290,9 +292,9 @@ def test_author_has_correct_open_graph_image(testbrowser):
 
 def test_author_page_has_correct_pagination_information(
         application, dummy_request):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
-                    for i in range(22)])
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                   for i in range(22)])
 
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/j_random')
@@ -329,9 +331,9 @@ def test_author_page_has_correct_pagination_information(
 
 
 def test_author_page_contains_pagination_information(testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
-                    for i in range(22)])
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                   for i in range(22)])
 
     url = 'http://localhost/autoren/j_random'
 
