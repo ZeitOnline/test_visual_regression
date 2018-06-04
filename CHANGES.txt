@@ -19,7 +19,37 @@ POSTDEPLOY
 - change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
 
 
-3.154 (unreleased)
+3.156.2 (unreleased)
+--------------------
+
+- TMS-226: Update ES fulltext search to changed ContentQuery API
+
+- MAINT: Remove ES sort quickfix
+
+
+3.156.1 (2018-06-01)
+--------------------
+
+- FIX: Quickfix ES query with url param "sort=None"
+
+
+3.156 (2018-06-01)
+------------------
+
+- BUG-933: Add config for adplace5 vs. content marketing ad
+
+- MAINT: Reuse `mod_date` instead of duplicating its code in `view.date_last_published_semantic`
+
+- MAINT: Update parameter for abo shop link
+
+
+3.155 (2018-05-30)
+------------------
+
+- FIX: Enhance schema.org markup for FAQ articles
+
+
+3.154 (2018-05-30)
 ------------------
 
 - TMS-220: Retrieve metadata directly from elasticsearch, instead of whatever
@@ -28,6 +58,8 @@ POSTDEPLOY
 - ZON-4638: Markup for podcast-series
 
 - TMS-226: Change channel queries to ES, update to changed ContentQuery API
+
+- FIX: Add link to evidon in all verticals and edit wording
 
 
 3.153 (2018-05-25)
