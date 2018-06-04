@@ -68,11 +68,8 @@ class Reach(object):
     @DEFAULT_TERM_CACHE.cache_on_arguments(should_cache_fn=bool)
     def _get_metadata(self, path):
         es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
-        # XXX Set sort order explicitly to fix bad default handling
-        # "sort_order=None" by zeit.retresco.search
-        # We should fix it there.
-        return es.search({'query': {'term': {'url': path}}},
-                         sort_order='_score', rows=1, include_payload=True)
+        return es.search(
+            {'query': {'term': {'url': path}}}, rows=1, include_payload=True)
 
     def get_comments(self, **kw):
         return self._get_ranking('comments', **kw)

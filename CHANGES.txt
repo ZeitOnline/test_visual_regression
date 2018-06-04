@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - TMS-226: Update ES fulltext search to changed ContentQuery API
 
+- MAINT: Remove ES sort quickfix
+
 
 3.156.1 (2018-06-01)
 --------------------
