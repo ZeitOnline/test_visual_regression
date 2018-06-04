@@ -138,24 +138,19 @@ class DateElasticsearchContentQuery(
 
     grokcore.component.context(Overview)
 
-    def __init__(self, context):
-        super(DateElasticsearchContentQuery, self).__init__(context)
-        self.query = json.dumps({
-            'bool': {
-                'must': [json.loads(self.query), self._range_query()]
-            }
-        })
-
-    def _range_query(self):
+    @property
+    def _additional_clauses(self):
         start, finish = self._date_range()
-        return {
+        clauses = super(
+            DateElasticsearchContentQuery, self)._additional_clauses
+        return clauses + [{
             'range': {
                 'payload.document.date_first_released': {
                     'gt': start.isoformat(),
                     'lte': finish.isoformat()
                 }
             }
-        }
+        }]
 
 
 class DateSolrContentQuery(

@@ -75,7 +75,7 @@ def app_settings(mockserver):
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
         'liveblog_backend_url_v3': mockserver.url + '/liveblog/v3',
-        'liveblog_amp_theme_v3': 'amp',
+        'liveblog_amp_theme_v3': 'zon-amp',
         'liveblog_api_auth_url_v3': mockserver.url + '/liveblog/v3/api/auth',
         'liveblog_api_auth_username_v3': 'apiuser',
         'liveblog_api_auth_password_v3': 'geheim',
@@ -932,7 +932,7 @@ class MockES(MockSearch):
 
     zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
 
-    def search(self, query, order, rows=25, **kw):
+    def search(self, query, order=None, rows=25, **kw):
         result = zeit.cms.interfaces.Result(self.pop_results(rows))
         result.hits = self._hits
         return result

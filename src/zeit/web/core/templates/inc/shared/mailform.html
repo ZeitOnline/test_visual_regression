@@ -1,5 +1,5 @@
 {% set success = request.headers.get('X-Mail-Success') %}
-<div class="feedback-section" data-ct-area="feedback_form" id="feedback-form">
+<div class=" {{ 'feedback-section' | with_mods ('padded' if padded_mobile_inputs) }}" data-ct-area="feedback_form" id="feedback-form">
 
     {% if block.title or block.subtitle %}
         <div class="feedback-section__header">
@@ -54,10 +54,11 @@
         }
     </script>
 
-    <form class="feedback-form" id="feedbackform" name="feedbackform" aria-label="Haben Sie Feedback?" method="POST">
+    <form class="feedback-form" id="feedbackform" name="feedbackform" aria-label="Haben Sie Feedback?" method="POST" action="{{ request.url }}{% block reload_anchor %}{% endblock %}">
         <input type="hidden" name="action" value="mail"/>
         <div id="feedbackerror" class="feedback-form{% if success == 'False' %}__failure{% else %}__error{% endif %}">{% if success == 'False' %}Sie haben das Captcha nicht richtig ausgefüllt. Bitte versuchen Sie es nochmal.{% endif %}</div>
         <div class="feedback-form__inner">
+            {% block inner_title %}{% endblock %}
         {% if block.subject %}
             <input type="hidden" name="subject" value="{{ block.subject_display }}"/>
         {% else %}
@@ -72,7 +73,7 @@
         {% endif %}
             <div id="feedbackerrortextarea" class="feedback-form__errortextarea"></div>
             <textarea id="feedbacktext" name="body" class="feedback-form__textarea" rows="10" aria-label="Textfeld für Ihr Feedback" required>{% if success == 'False' %}{{ request.headers.get('X-POST-body') }}{% endif %}</textarea>
-            <input id="feedbackmail" type="email" name="from" placeholder="Ihre E-Mail-Adresse (freiwillig)" class="feedback-form__input" aria-label="Ihre E-Mail-Adresse (freiwillig)" />
+            <input id="feedbackmail" type="email" name="from" placeholder="Ihre E-Mail-Adresse (freiwillig)" class="feedback-form__input" aria-label="Ihre E-Mail-Adresse (freiwillig)"/>
             <noscript>
                 <input type="hidden" name="nojs" value="True">
                 <p>Um Missbrauch des Mailformulars vorzubeugen, nutzen wir ein sogenanntes Captcha. Damit Sie Ihre Nachricht absenden können, lösen Sie bitte folgende Aufgabe. Sie bekommen dann einen Code angezeigt, den Sie in das leere Feld darunter kopieren. Danach können Sie Ihre Nachricht absenden.</p>

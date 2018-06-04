@@ -10,6 +10,7 @@ import pkg_resources
 import pyramid.threadlocal
 import requests
 import requests.utils
+import urllib3
 import zope.interface
 
 import zeit.retresco.connection
@@ -61,7 +62,7 @@ def tms_request(self, *args, **kw):
         'zeit.web-%s/retresco/python-requests' % request.registry.settings.get(
             'version', 'unknown'))
     with zeit.web.core.metrics.timer(
-            'zeit.retresco.connection.tms.reponse_time'):
+            'zeit.retresco.connection.tms.response_time'):
         return original_request(self, *args, **kw)
 
 
@@ -84,6 +85,25 @@ orig_get_intextlink_data = zeit.retresco.connection.TMS._get_intextlink_data
 zeit.retresco.connection.TMS._get_intextlink_data = cached_intextlink_data
 zeit.retresco.connection.TMS._intextlink_data = TransactionBoundCache(
     '_v_intextlink_data', dict)
+
+
+def es_user_agent(self):
+    return 'zeit.web-%s/retresco/python-urllib3-%s' % (
+        pkg_resources.get_distribution('zeit.web').version,
+        urllib3.__version__)
+
+
+zeit.retresco.search.Connection._user_agent = es_user_agent
+
+
+def es_request(self, *args, **kw):
+    with zeit.web.core.metrics.timer(
+            'zeit.retresco.search.elasticsearch.response_time'):
+        return original_es_request(self, *args, **kw)
+
+
+original_es_request = zeit.retresco.search.Connection.perform_request
+zeit.retresco.search.Connection.perform_request = es_request
 
 
 # Test helpers ##############################

@@ -91,26 +91,6 @@ def test_breadcrumbs_should_be_shorter_if_ressort_or_sub_ressort_is_unknown(
     assert article.breadcrumbs == crumbs
 
 
-def test_linkreach_property_should_be_set(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/03')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    article_view.request.url = 'index'
-    article_view.request.traversed = ('index',)
-    article_view.request.route_url = lambda *args: ''
-    assert isinstance(article_view.linkreach, dict)
-
-
-def test_linkreach_property_should_fetch_correct_data(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/03')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    article_view.request.url = 'index'
-    article_view.request.traversed = ('index',)
-    article_view.request.route_url = lambda *args: ''
-    assert article_view.linkreach['total'] == 92
-
-
 def test_header_module_should_be_first_image_of_content_blocks(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/05')

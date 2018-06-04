@@ -254,7 +254,7 @@ class Liveblog(Module):
             self.context.collapse_preceding_content)
         self.is_live = False
         self.last_modified = None
-        self.id = None
+        self.id = self.blog_id
         self.seo_id = None
 
         if self.version == '3':
@@ -289,8 +289,10 @@ class Liveblog(Module):
 
     def set_blog_info(self):
         json = self.api_blog_request()
+        updated = json.get('last_created_post').get('_updated') or json.get(
+            '_updated')
         self.is_live = json.get('blog_status') == u'open'
-        self.last_modified = self.format_date(json.get('_updated'))
+        self.last_modified = self.format_date(updated)
 
     @LONG_TERM_CACHE.cache_on_arguments()
     def auth_token(self):

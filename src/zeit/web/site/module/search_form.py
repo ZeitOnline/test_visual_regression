@@ -43,6 +43,15 @@ class Form(zeit.web.core.centerpage.Module):
         ('gallery', 'Fotostrecke'),
         ('video', 'Video')
     ])
+    FIELDS = [
+        'title',
+        'teaser',
+        'body',
+        'payload.body.supertitle',
+        'payload.body.subtitle',
+        'payload.body.byline',
+        'teaser_img_subline'
+    ]
 
     @zeit.web.reify
     def search_term(self):
@@ -179,7 +188,8 @@ class Form(zeit.web.core.centerpage.Module):
         if self.search_term:
             query = {
                 'simple_query_string': {
-                    'query': self.search_term
+                    'query': self.search_term,
+                    'fields': self.FIELDS
                 }
             }
         else:
@@ -217,10 +227,10 @@ class Form(zeit.web.core.centerpage.Module):
         if self.mode:
             must_clause.append(self.elasticsearch_raw_mode)
 
-        query = {
+        query = {'query': {
             'bool': {
                 'must_not': must_not_clause,
                 'must': must_clause
             }
-        }
+        }}
         return json.dumps(query)

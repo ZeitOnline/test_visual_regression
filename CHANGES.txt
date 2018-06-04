@@ -4,14 +4,119 @@ Change log for zeit.web
 PREDEPLOY
 ---------
 
+- add feature toggle `dataprotection_popover`
+
+- remove dataprotection settings from all zeitweb-settings.xml
+
 
 POSTDEPLOY
 ----------
 
+- remove `zon_inline_video_via_html5` from feature toggles
+
+- remove `zon_videosinglepage_via_html5` from feature toggles
+
+- change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
 
 
-3.149 (unreleased)
+3.156.2 (unreleased)
+--------------------
+
+- TMS-226: Update ES fulltext search to changed ContentQuery API
+
+- MAINT: Remove ES sort quickfix
+
+- TMS-233: Support elasticsearch for author articles tab
+
+3.156.1 (2018-06-01)
+--------------------
+
+- FIX: Quickfix ES query with url param "sort=None"
+
+
+3.156 (2018-06-01)
 ------------------
+
+- BUG-933: Add config for adplace5 vs. content marketing ad
+
+- MAINT: Reuse `mod_date` instead of duplicating its code in `view.date_last_published_semantic`
+
+- MAINT: Update parameter for abo shop link
+
+
+3.155 (2018-05-30)
+------------------
+
+- FIX: Enhance schema.org markup for FAQ articles
+
+
+3.154 (2018-05-30)
+------------------
+
+- TMS-220: Retrieve metadata directly from elasticsearch, instead of whatever
+  reach passes through
+
+- ZON-4638: Markup for podcast-series
+
+- TMS-226: Change channel queries to ES, update to changed ContentQuery API
+
+- FIX: Add link to evidon in all verticals and edit wording
+
+
+3.153 (2018-05-25)
+------------------
+
+- BUG-927: Fix Layout and effect bug in dataprotection layer
+
+
+3.152 (2018-05-25)
+------------------
+
+- ZON-4258: Add Author Feedback Toggle to each author
+
+- TMS-224: Author index page teaser polishing
+
+- TMS-229: Configure fields for fulltext search
+
+- FEM-82: Align Author Contact Icons
+
+- MAINT: Remove transition code for feed guids
+
+
+3.151 (2018-05-24)
+------------------
+
+- ZON-4719: Dataprotection Info Bar
+
+- ZON-4715: Use brightcove without ads if GDPR opt-out cookie is set
+
+- ZON-4714: Add gdpr-Param to Adcontroller SiteInfo if cookie is present
+
+- ZON-4673: Flexible table of contents
+
+- ZON-4657: Follow-button for push on authorpages in apps
+
+- ZON-4622: Remove content marketing ad, bring back adplace5 instead
+
+
+3.150 (2018-05-22)
+------------------
+
+- BUG-903: Align content width to 660 pixel again
+
+- MAINT: Fix selenium tests
+
+- FIX: ZON-4258: Toggle author feedback
+
+
+3.149 (2018-05-17)
+------------------
+
+- ZON-4258: Render feedback form on author detail page
+
+- ZON-4634: Use uniqueId for POSTing comments
+
+- ZON-4667: Avoid <amp-timeago> warning for liveblog AMP theme
 
 - PERF: Don't additionally retrieve body for TMS/ES results
 

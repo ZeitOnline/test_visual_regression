@@ -1,0 +1,15 @@
+{% if toggles('dataprotection_popover') %}
+    <div id="data-protection-overlay" aria-hidden="true" class="data-protection data-protection--hidden">
+        <div class="data-protection__wrapper">
+            <div class="data-protection__main">
+                <p class="data-protection__description">
+                {{ settings('dataprotection_text', 'Wir haben unsere Datenschutzerklärung aktualisiert.') }}
+                <a href="{{ settings('dataprotection_linktarget', 'https://www.zeit.de/hilfe/datenschutz') }}">{{ settings('dataprotection_linktext', 'Hier können Sie sich über die geänderten Bestimmungen informieren.') }}</a>
+            </p>
+            </div>
+            <div class="data-protection__aside">
+                <button class="data-protection__button" id="dataProtection-popover-dismiss">{{ settings('dataprotection_button', 'Ausblenden') }}</button>
+            </div>
+        </div>
+    </div>
+{% endif %}

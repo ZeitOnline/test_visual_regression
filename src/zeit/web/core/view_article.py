@@ -186,11 +186,6 @@ class Article(zeit.web.core.view.Content):
         return ''
 
     @zeit.web.reify
-    def linkreach(self):
-        reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
-        return reach.get_buzz(self.context.uniqueId).get('social')
-
-    @zeit.web.reify
     def text_length(self):
         return self.context.textLength
 

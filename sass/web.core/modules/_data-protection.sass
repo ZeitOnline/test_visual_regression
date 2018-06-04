@@ -1,0 +1,61 @@
+.data-protection
+	background-color: #fff
+	bottom: 0
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.1)
+	color: $grey--mid-dark
+	left: 0
+	min-height: remify(80px)
+	padding: 18px 0
+	position: fixed
+	right: 0
+	transform: translateY(0)
+	transition: transform .75s ease-in-out, visibility .75s
+	z-index: 100
+
+	&--hidden
+		transform: translateY(100%)
+		visibility: hidden
+
+	&__wrapper
+		+padded
+		margin: 0 auto
+
+	&__main
+		margin-bottom: remify(20px)
+		max-width: 100%
+
+	&__aside
+		text-align: center
+
+	&__description
+		font-size: remify(15px)
+		letter-spacing: 0.3
+		line-height: 1.4
+		margin: 0
+		text-align: center
+
+		a
+			border-bottom: 1px solid #cccccf
+			color: $grey--mid-dark
+			text-decoration: none
+			+on-interaction
+				border-bottom-color: $grey--mid-dark
+
+	&__button
+		+zon-button-light
+
+	+respond-min($break-tablet-min)
+		&__wrapper
+			align-items: center
+			display: flex
+			flex-wrap: wrap
+			justify-content: space-between
+			margin: 0 auto
+			max-width: 100%
+			width: remify($max-overview-width)
+		&__main
+			margin-bottom: 0
+			max-width: remify(590px)
+		&__description
+			text-align: left
+

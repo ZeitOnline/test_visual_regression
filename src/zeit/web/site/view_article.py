@@ -89,15 +89,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return zeit.web.core.interfaces.ILiveblogInfo(self.context)
 
     @zeit.web.reify
-    def date_last_published_semantic(self):
-        modified = super(Article, self).date_last_published_semantic
-        if self.liveblog.last_modified:
-            if not modified or modified < self.liveblog.last_modified:
-                return self.liveblog.last_modified
-
-        return modified
-
-    @zeit.web.reify
     def advertising_in_article_body_enabled(self):
         if self.advertising_enabled:
             if self.liveblog.collapse_preceding_content:
@@ -198,6 +189,56 @@ class DPAArticle(Article):
 class AFPArticle(Article):
 
     news_type = 'afp'
+
+
+@zeit.web.view_config(
+    context=zeit.web.core.article.IFAQArticle,
+    renderer='templates/faq.html')
+class FAQArticle(Article):
+    """FAQs consist of a question, represented by an intertitle block, and an
+    answer, represented by one or more blocks that are anything but an
+    intertitle (e.g. paragraphs, images, etc.).  schema.org optimization
+    dictates, that each question and answer is bundled together inside a
+    seperate block. Therefore we need to loop through all blocks, searching for
+    intertitles and wrap them together with all consecutive blocks until
+    another intertitle is found or we have reached the end of the page.
+    """
+
+    @zeit.web.reify
+    def pages(self):
+        """FAQs by definition consist only of a single page. Since multi page
+        FAQs will break rendering logic further along the way, let's just
+        handle the first page only. Of course there's also a validation rule in
+        vivi, but you never know...
+        This improves readability a lot, getting rid of an additional
+        loop in both view and model!
+        """
+
+        page = super(FAQArticle, self).pages[0]
+        return [zeit.web.core.article.restructure_faq_article(
+            page)]
+
+    @zeit.web.reify
+    def subheadings(self):
+        for block in self.pages[0].blocks:
+            if isinstance(block, zeit.web.core.article.FAQItemBlock):
+                if isinstance(block[0], zeit.web.core.block.Intertitle):
+                    yield block[0].context
+
+
+@zeit.web.view_config(
+    context=zeit.web.core.article.IFlexibleTOCArticle,
+    renderer='templates/flexible-toc.html')
+class FlexibleTOCArticle(Article):
+
+    @zeit.web.reify
+    def subheadings(self):
+        """Like FAQs, flexible tables of content are by definition only able to
+        present intertitles from the first page.
+        """
+        for block in self.pages[0].blocks:
+            if isinstance(block, zeit.web.core.block.Intertitle):
+                yield block.context
 
 
 @zeit.web.view_config(

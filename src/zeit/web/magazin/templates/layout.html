@@ -33,7 +33,6 @@
         {% endif -%}
         {% if toggles('third_party_modules', 'iqd') %}
             {% include "zeit.web.core:templates/inc/ads/head.html" %}
-            {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}
         {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
         {% if settings('livereload') %}
@@ -112,7 +111,7 @@
                                     <ul data-ct-row="2">
                                         <li><a class="js-image-copyright-footer" href="#bildrechte">Bildrechte</a></li>
                                         <li><a href="{{ request.route_url('home') }}hilfe/datenschutz">Datenschutz</a></li>
-                                        <li><a href="https://www.iqm.de/digital/nutzungsbasierte-onlinewerbung/">Cookies</a></li>
+                                        <li><a href="https://l3.evidon.com/site/5335/1772/3">Cookies & Tracking</a></li>
                                         <li><a href="{{ request.route_url('home') }}administratives/agb-kommentare-artikel">AGB</a></li>
                                         <li><a href="{{ request.route_url('home') }}impressum/index">Impressum</a></li>
                                         <li><a href="{{ request.route_url('home') }}hilfe/hilfe">Hilfe/ Kontakt</a></li>
@@ -128,6 +127,8 @@
             </div>
 
         </div>
+
+        {%- include "zeit.web.core:templates/inc/data-protection-popover.html" -%}
 
         {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
         {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}

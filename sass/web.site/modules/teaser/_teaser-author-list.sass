@@ -58,14 +58,17 @@
 		font-weight: bold
 		line-height: 1.2
 		margin: remify(8px 0)
+		overflow: hidden
+		white-space: nowrap
+		text-overflow: ellipsis
 		&--without-summary
 			padding-top: remify(25px)
 	&__summary
 		color: #707070
 		font-size: em(14px)
-		height: remify(52px) // 3 lines for overflow:hidden
+		height: remify(3 * 17px) // 3 lines for overflow:hidden
 		letter-spacing: $zon-letter-spacing-s
-		line-height: 1.2
+		line-height: (17 / 14)
 		margin: 0
 		overflow: hidden
 		// multiline ellipsis for webkit browsers:

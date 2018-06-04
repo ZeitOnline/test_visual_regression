@@ -2575,7 +2575,7 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
 
     # test minor area teasers
     teasers = browser.cssselect('.cp-area--minor article[data-zplus]')
-    assert len(teasers) == 7
+    assert len(teasers) == 8
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert (teaser.cssselect('.{}__kicker-logo--zplus'.format(layout)) or
@@ -3102,3 +3102,9 @@ def test_brandeins_teaser_should_display_its_image_on_mobile(
         assert ('teaser-small__media--force-mobile' in
                 image.get_attribute('class'))
         assert image.is_displayed()
+
+
+def test_if_series_is_podcast(testbrowser):
+    browser = testbrowser('/serie/ist-das-normal')
+    link = browser.cssselect('link[rel="alternate"]')
+    assert link[0].get('href') == 'https://istdasnormal.podigee.io/feed/mp3'

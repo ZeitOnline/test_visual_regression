@@ -1,50 +1,20 @@
 [
     {
-        "location": "/politik/deutschland/2015-09/fluechtlinge-bundesregierung-milliardenpaket",
+        "location": "/zeit-online/article/tagesspiegel",
         "score": 531,
-        "uniqueId": "http://xml.zeit.de/zeit-online/article/tagesspiegel",
-        "ressort": "politik",
-        "sub_ressort": "deutschland",
-        "date_first_released": "2015-09-07T01:29:23Z",
-        "product_id": "ZEDE",
-        "supertitle": "Asylbewerber",
-        "title": "Koalition beschließt Milliardenpaket für Flüchtlingshilfe",
-        "subtitle": "Die Bundesregierung stellt sechs Milliarden Euro für die Versorgung von Asylbewerbern bereit. Zudem präsentiert sie einen Plan, der Fehlanreize beseitigen soll.",
-        "channels": ["Politik Deutschland"],
         "fetchedAt": 1441589401554,
-        "timestamp": 1441589363000,
-        "access": "free"
+        "timestamp": 1441589363000
     },
     {
-        "location": "/politik/deutschland/2015-09/muenchen-fluechtlinge-unterstuetzung-verteilung",
+        "location": "/blogs/nsu-blog-bouffier",
         "score": 461,
-        "uniqueId": "http://xml.zeit.de/blogs/nsu-blog-bouffier",
-        "ressort": "politik",
-        "sub_ressort": "deutschland",
-        "date_first_released": "2015-09-06T15:23:29Z",
-        "product_id": "ZEDE",
-        "supertitle": "Flüchtlinge",
-        "title": "München fordert Unterstützung von anderen Bundesländern",
-        "subtitle": "Tausende Flüchtlinge aus Ungarn sind am Wochenende in Bayern angekommen und nur zum Teil bereits weitergefahren. Die Zahl der Neuankömmlinge geht deutlich zurück.",
-        "channels": ["Politik Deutschland"],
         "fetchedAt": 1441553041418,
-        "timestamp": 1441553009000,
-        "access": "free"
+        "timestamp": 1441553009000
     },
     {
-        "location": "/politik/ausland/2015-09/fluechtlinge-ungarn-orban-grenzen",
+        "location": "/zeit-online/article/zplus-zeit-register",
         "score": 265,
-        "uniqueId": "http://xml.zeit.de/zeit-online/article/zplus-zeit-register",
-        "ressort": "politik",
-        "sub_ressort": "ausland",
-        "date_first_released": "2015-09-07T00:16:07Z",
-        "product_id": "ZEDE",
-        "supertitle": "Flüchtlinge",
-        "title": "Orbán verlangt Schließung der Grenzen",
-        "subtitle": "Ungarns Regierungschef fordert von Deutschland und Österreich, keine Flüchtlinge mehr aufzunehmen. Ansonsten würden \"mehrere Millionen\" Menschen nach Europa kommen.",
-        "channels": ["Politik Ausland"],
         "fetchedAt": 1441585081229,
-        "timestamp": 1441584967000,
-        "access": "registration"
+        "timestamp": 1441584967000
     }
 ]
