@@ -261,7 +261,7 @@
             if ( that.cookieValue === 'canceled' ) {
                 return;
             }
-            var data =  JSON.parse( event.data );
+            var data =  typeof( event.data ) === 'string' ? JSON.parse( event.data ) : event.data;
             var matches = false;
             // quiz
             if ( data.name === 'quiz' && data.message === 'started' ) {
@@ -280,8 +280,12 @@
     };
 
     Overlay.prototype.addPostMessageEventListener = function() {
-        this.sendPodcastPlayEventPostMessage();
-        this.listenToPostMessages();
+        // add postMessage listeners only if either Podcast or Quiz are present
+        var trigger = $( '.podigee-podcast-player' ) || $( 'iframe[src*="quiz.zeit.de"]' );
+        if ( trigger ) {
+            this.sendPodcastPlayEventPostMessage();
+            this.listenToPostMessages();
+        }
     };
 
     Overlay.prototype.addCancelCookie = function() {
