@@ -1022,17 +1022,27 @@ def test_breaking_news_should_have_their_own_sharing_image_if_present(
 
 
 def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
-    main_image = browser.cssselect('.article__item img')[0]
-    figure = main_image.xpath('./ancestor::figure')[0]
-    assert 'article__item--wide' in figure.get('class')
-
     browser = testbrowser('/zeit-online/article/image-column-width')
-    article = browser.cssselect('main article')[0]
-    figure = article.cssselect('figure[itemprop="image"]')[0]
+    figure = browser.cssselect('main article figure[itemprop="image"]')[1]
     classname = figure.get('class')
     assert 'article__item--wide' not in classname
     assert 'article__item--rimless' not in classname
+    assert 'article__item--apart' in classname
+
+
+def test_article_should_ignore_display_mode_of_header_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    figure = browser.cssselect('main header figure[itemprop="image"]')[0]
+    classname = figure.get('class')
+    assert 'article__item--wide' in classname
+    assert 'article__item--rimless' in classname
+    assert 'article__item--apart' in classname
+
+    browser = testbrowser('/zeit-online/article/image-column-width')
+    figure = browser.cssselect('main header figure[itemprop="image"]')[0]
+    classname = figure.get('class')
+    assert 'article__item--wide' in classname
+    assert 'article__item--rimless' in classname
     assert 'article__item--apart' in classname
 
 
@@ -1523,6 +1533,8 @@ def test_infographics_should_display_origin_instead_of_caption(testbrowser):
 def test_infographics_should_render_html_correctly(
         tplbrowser, dummy_request):
     template = 'zeit.web.core:templates/inc/blocks/infographic.html'
+    view = mock.Mock()
+    request = dummy_request
     image = zeit.web.core.image.Image(mock.Mock())
     image.ratio = 1
     image.group = mock.Mock()
@@ -1534,34 +1546,42 @@ def test_infographics_should_render_html_correctly(
     image.origin = True
     image.copyrights = {'text': 'FOO'}
     image.caption = True
-    browser = tplbrowser(template, block=image, request=dummy_request)
+    browser = tplbrowser(template, block=image, view=view, request=request)
     assert browser.cssselect('.infographic__text')
     assert browser.cssselect('.infographic__caption')
     assert browser.cssselect('.infographic__media.high-resolution')
 
     # borderless subheadline
     image.caption = False
-    browser = tplbrowser(template, block=image, request=dummy_request)
+    browser = tplbrowser(template, block=image, view=view, request=request)
     assert not browser.cssselect('.infographic__text')
 
     # footer has border
     image.origin = True
     image.copyrights = {}
-    browser = tplbrowser(template, block=image, request=dummy_request)
+    browser = tplbrowser(template, block=image, view=view, request=request)
     assert browser.cssselect('.infographic__caption')
 
     image.origin = False
     image.copyrights = {'text': 'FOO'}
-    browser = tplbrowser(template, block=image, request=dummy_request)
+    browser = tplbrowser(template, block=image, view=view, request=request)
     assert browser.cssselect('.infographic__caption')
 
     # no border styles present
     image.copyrights = {}
     image.origin = False
     image.caption = False
-    browser = tplbrowser(template, block=image, request=dummy_request)
+    browser = tplbrowser(template, block=image, view=view, request=request)
     assert not browser.cssselect('.infographic__text')
     assert not browser.cssselect('.infographic__caption')
+
+    # header module
+    image.display_mode = 'column-width'
+    view.header_module = image
+    browser = tplbrowser(template, block=image, view=view, request=request)
+    assert browser.cssselect('.infographic__media.high-resolution')
+    assert browser.cssselect('.infographic__media.infographic__media--large')
+    assert not browser.cssselect('.infographic__media--column-width')
 
 
 def test_infographics_desktop_should_have_proper_asset_source(
@@ -2206,6 +2226,7 @@ def test_narrow_header_should_render_image_column_width(testbrowser):
     browser = testbrowser('/zeit-online/article/narrow')
     figure = browser.cssselect('.article-header figure')[0]
     assert 'article__item--wide' not in figure.get('class')
+    assert 'article__item--rimless' not in figure.get('class')
     assert 'article__item--apart' in figure.get('class')
 
 
