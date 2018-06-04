@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/2018-05/karte-hamburg-sperrung</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">text</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2018-05-18T10:03:21.415914+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-05-31T05:19:07.295117+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:0bc9a11a-33c5-470a-a1ef-7e5da92fba06}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Text" module="zeit.content.text.text"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.troeger</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2018-05-31T05:19:40.429108+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2018-05-22T07:50:59.841911+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2018-05-22T07:50:59.810435+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2018-05-31T05:19:37Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">5303</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Thu, 31 May 2018 05:19:37 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"14b7-56d799d180277"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
