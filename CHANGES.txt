@@ -26,6 +26,7 @@ POSTDEPLOY
 
 - MAINT: Remove ES sort quickfix
 
+- TMS-233: Support elasticsearch for author articles tab
 
 3.156.1 (2018-06-01)
 --------------------
