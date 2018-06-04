@@ -428,18 +428,18 @@ def test_sort_order_should_be_derived_correctly():
     # Sort order should be desc, if recent_comments_first is true
     # and no user parameter is set.
     view.request.params = {}
-    view.context.recent_comments_first = True;
+    view.context.recent_comments_first = True
     assert view._get_comment_sorting() == 'desc'
 
     # Sort order should be asc, if recent_comments_first is true,
     # but user parameter indicates asc.
     view.request.params = {'sort': 'asc'}
-    view.context.recent_comments_first = True;
+    view.context.recent_comments_first = True
     assert view._get_comment_sorting() == 'asc'
 
     # Defaul sort order should be asc, if recent_comments_first is False
     view.request.params = {}
-    view.context.recent_comments_first = False;
+    view.context.recent_comments_first = False
     assert view._get_comment_sorting() == 'asc'
 
 
