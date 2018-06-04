@@ -76,50 +76,39 @@ var video = {
             return;
         }
 
-        // We have to take care of the brightcove plaver if loaded as AMD
-        // https://support.brightcove.com/requirejs-and-brightcove-player
-        // brighcove checks for global define to recognize RequireJS
-        // This is ill. It will break the internet.
-        if ( typeof window.define === 'function' && window.define.amd ) {
-            loadAmdModule( videoId, scriptSrc );
-        } else {
-            // add script with callback
-            var script = document.createElement( 'script' ),
-                done = false;
+        // add script with callback
+        var script = document.createElement( 'script' ),
+            done = false;
 
-            this.scripts[ scriptSrc ] = true;
-            script.src = scriptSrc;
-            script.onload = script.onreadystatechange = function() {
-                if ( !done && ( !this.readyState || this.readyState === 'loaded' || this.readyState === 'complete' ) ) {
-                    done = true;
+        this.scripts[ scriptSrc ] = true;
+        script.src = scriptSrc;
+        script.onload = script.onreadystatechange = function() {
+            if ( !done && ( !this.readyState || this.readyState === 'loaded' || this.readyState === 'complete' ) ) {
+                done = true;
 
-                    // Check again if require was defined *after* adding the script but before execution
-                    // and thus brightcove module was loaded as AMD
-                    // This is ill. It will break the internet.
-                    if ( typeof window.bc !== 'function' && typeof window.define === 'function' && window.define.amd ) {
-                        loadAmdModule( videoId, scriptSrc );
-                    }
-
-                    script.onload = script.onreadystatechange = null;
+                // We have to take care of the brightcove plaver if loaded as AMD
+                // https://support.brightcove.com/requirejs-and-brightcove-player
+                // brighcove checks for global define to recognize RequireJS
+                // This is ill. It will break the internet.
+                if ( typeof window.bc !== 'function' && typeof window.define === 'function' && window.define.amd ) {
+                    // add encapsuled require config per videoId
+                    // http://requirejs.org/docs/api.html#multiversion
+                    var rjs = window.require.config({
+                        'paths': { 'bc': scriptSrc },
+                        'timeout': 30,
+                        'context': videoId
+                    });
+                    // require the script
+                    rjs([ 'require', 'bc' ]);
                 }
-            };
 
-            document.body.appendChild( script );
-        }
+                script.onload = script.onreadystatechange = null;
+            }
+        };
+
+        document.body.appendChild( script );
     }
 
 };
-
-function loadAmdModule( videoId, scriptSrc ) {
-    // add encapsuled require config per videoId
-    // http://requirejs.org/docs/api.html#multiversion
-    var rjs = window.require.config({
-        'paths': { 'bc': scriptSrc },
-        'timeout': 30,
-        'context': videoId
-    });
-    // require the script
-    rjs([ 'require', 'bc' ]);
-}
 
 module.exports = video;
