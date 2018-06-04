@@ -168,9 +168,8 @@ def test_centerpages_contain_teasers(config, testbrowser):
 
 def test_topicpage_contains_teasers(config, testbrowser):
     browser = testbrowser('{}/thema/us-wahl'.format(config['BASE_URL']))
-    assert len(browser.cssselect('article[class*=teaser-small]')) == 6
-    if config['ENV'] == 'PRODUCTION':
-        assert len(browser.cssselect('article[class*=newsteaser]')) == 7
+    assert len(browser.cssselect('article[class*=newsteaser]')) == 8
+    assert len(browser.cssselect('article[class*=teaser-small]')) == 26
 
 
 def test_search_results_page_contains_teasers(config, testbrowser):
