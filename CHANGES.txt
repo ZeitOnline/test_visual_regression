@@ -22,11 +22,14 @@ POSTDEPLOY
 3.156.2 (unreleased)
 --------------------
 
+- ZON-4641: Disable HP Overlay on Podcast Play and Quiz 
+
 - TMS-226: Update ES fulltext search to changed ContentQuery API
 
 - MAINT: Remove ES sort quickfix
 
 - TMS-233: Support elasticsearch for author articles tab
+
 
 3.156.1 (2018-06-01)
 --------------------
