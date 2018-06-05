@@ -1,0 +1,41 @@
+<header class="{{ 'article__header' | with_mods('has-volume' if view.zplus_label) }}">
+    {% block embed %}{% endblock -%}
+
+    <h1 class="headline article__item" itemprop="headline">
+        <span class="headline__kicker">
+            {%- if view.context is column -%}
+                {{- '%s / ' | format(view.serie) -}}
+            {%- endif -%}
+            {{- view.supertitle -}}
+        </span>
+        {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
+        <span class="headline__title">
+            {{- view.title -}}
+        </span>
+    </h1>
+    {% include ["{}:templates/amp/article/zplus-badge.html".format(view.package),
+                "zeit.web.core:templates/amp/article/zplus-badge.html"] %}
+    <div class="article__item">
+        <div class="summary" itemprop="description">
+            {{ view.subtitle }}
+        </div>
+        {% set byline = view.context | get_byline('main') -%}
+        {% if byline | length -%}
+        <div class="byline">
+            {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
+        </div>
+        {% else -%}
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <meta itemprop="name" content="{% if view.context.product %}{{ view.context.product.title }}{% else %}ZEIT ONLINE{% endif %}">
+        </span>
+        {% endif -%}
+        <div class="metadata">
+            {% include "zeit.web.core:templates/amp/article/metadata.html" %}
+        </div>
+    </div>
+
+    {% block headermodule %}
+        {% set display_mode = display_mode | default('large') -%}
+        {% include "zeit.web.core:templates/amp/article/header-module.html" %}
+    {% endblock %}
+</header>
