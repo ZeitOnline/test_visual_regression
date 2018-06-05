@@ -19,8 +19,8 @@ POSTDEPLOY
 - change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
 
 
-3.156.2 (unreleased)
---------------------
+3.157 (2018-06-05)
+------------------
 
 - ZON-4641: Disable HP Overlay on Podcast Play and Quiz 
 
