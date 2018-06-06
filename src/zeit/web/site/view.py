@@ -115,7 +115,7 @@ class UserDashboard(Base):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         if not self.request.user:
             raise pyramid.httpexceptions.HTTPFound(
-                location=u'{}?{}'.format(
+                location=u'{}/anmelden?{}'.format(
                     conf.get('sso_url'),
                     urllib.urlencode({'url': self.request.url})))
         # XXX There's nothing in ICommonMetadata that's relevant for the

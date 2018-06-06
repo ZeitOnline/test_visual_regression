@@ -227,10 +227,10 @@ class Form(zeit.web.core.centerpage.Module):
         if self.mode:
             must_clause.append(self.elasticsearch_raw_mode)
 
-        query = {
+        query = {'query': {
             'bool': {
                 'must_not': must_not_clause,
                 'must': must_clause
             }
-        }
+        }}
         return json.dumps(query)

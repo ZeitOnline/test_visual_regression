@@ -458,12 +458,6 @@ class HeaderImage(Image):
 
     def __init__(self, model_block, header):
         super(HeaderImage, self).__init__(model_block)
-        if getattr(self, 'block_type', None) == 'infographic':
-            # XXX Annoying special case, header images don't usually use
-            # display_mode but rather handle their display in the respective
-            # header template, but infographics have their own template that
-            # does not distinguish between header and body (at the moment).
-            self.display_mode = 'large'
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
