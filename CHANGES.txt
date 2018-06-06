@@ -24,6 +24,8 @@ POSTDEPLOY
 
 - BUG-932: Fix display mode for header images in AMPs
 
+- FIX: Use correct sso url redirect in the user dashboard view
+
 
 3.157 (2018-06-05)
 ------------------
