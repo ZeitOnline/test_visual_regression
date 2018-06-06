@@ -22,6 +22,8 @@ POSTDEPLOY
 3.158 (unreleased)
 ------------------
 
+- ZON-4720: Override comment sort order default, if indicated by content
+
 - BUG-932: Fix display mode for header images in AMPs
 
 - FIX: Use correct sso url redirect in the user dashboard view
@@ -30,7 +32,7 @@ POSTDEPLOY
 3.157 (2018-06-05)
 ------------------
 
-- ZON-4641: Disable HP Overlay on Podcast Play and Quiz 
+- ZON-4641: Disable HP Overlay on Podcast Play and Quiz
 
 - TMS-226: Update ES fulltext search to changed ContentQuery API
 
