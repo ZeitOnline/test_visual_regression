@@ -779,7 +779,7 @@ class CommentMixin(object):
         # Basic comment sort is ascending.
         sort = 'asc'
 
-        # This might be overwriteen by context specific default.
+        # This might be overwritten by context specific default.
         if getattr(self.context, 'recent_comments_first', False):
             sort = 'desc'
 
