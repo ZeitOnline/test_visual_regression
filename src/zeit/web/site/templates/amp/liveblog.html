@@ -5,9 +5,7 @@
 {% endblock %}
 
 {% block article_head %}
-    {% set image_modifier = 'column-width' %}
-    {% include "zeit.web.core:templates/amp/asset/image_liveblog.html" %}
-    {{ super() }}
+    {%- include "zeit.web.core:templates/amp/article-header/liveblog.html" -%}
 {% endblock %}
 
 {% block article_main_image %}{% endblock %}

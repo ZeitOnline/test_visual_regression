@@ -210,8 +210,8 @@ def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
         b.open('/konto')
     except urllib2.HTTPError, e:
         assert e.getcode() == 302
-        assert (e.hdrs.get('location') ==
-                'http://sso.example.org?url=http%3A%2F%2Flocalhost%2Fkonto')
+        assert (e.hdrs.get('location') == 'http://sso.example.org/anmelden'
+                '?url=http%3A%2F%2Flocalhost%2Fkonto')
 
     # browser with sso session
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
