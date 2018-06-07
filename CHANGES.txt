@@ -22,6 +22,8 @@ POSTDEPLOY
 3.158 (unreleased)
 ------------------
 
+- ZON-4668: Add channel list to webtrekk tracking
+
 - ZON-4720: Override comment sort order default, if indicated by content
 
 - ZON-4708: Unify "back to homepage" buttons
