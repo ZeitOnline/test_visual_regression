@@ -19,8 +19,8 @@ POSTDEPLOY
 - change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
 
 
-3.158.1 (unreleased)
-------------------
+3.158.1 (2018-06-07)
+--------------------
 
 - FIX: CSS release due to deployment issues.
 
