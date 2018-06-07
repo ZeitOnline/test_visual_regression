@@ -24,6 +24,8 @@ POSTDEPLOY
 
 - ZON-4720: Override comment sort order default, if indicated by content
 
+- ZON-4708: Unify "back to homepage" buttons
+
 - BUG-932: Fix display mode for header images in AMPs
 
 - FIX: Use correct sso url redirect in the user dashboard view
