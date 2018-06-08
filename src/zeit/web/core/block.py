@@ -522,7 +522,7 @@ class Citation(Module):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPuzzleForm)
-class Puzzleform(Module):
+class PuzzleForm(Module):
 
     @pyramid.decorator.reify
     def success_message(self):
