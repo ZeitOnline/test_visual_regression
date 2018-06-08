@@ -21,10 +21,12 @@ class FormPostMixin(object):
     Mixin for views which work with form data.
     """
 
-    def render_original_view(self, success, success_header_name):
+    success_header_name = 'X-Post-Success'
+
+    def render_original_view(self, success):
         subrequest = pyramid.request.Request.blank(
             self.request.path, headers=dict(self.request.headers))
-        subrequest.headers['X-%s-Success' % success_header_name] = str(success)
+        subrequest.headers[self.success_header_name] = str(success)
         for key, value in self.request.POST.items():
             subrequest.headers['X-POST-%s' % key] = value
 
@@ -59,6 +61,8 @@ class FormPostMixin(object):
                       request_method='POST')
 class SendMail(FormPostMixin, zeit.web.core.view.Base):
 
+    success_header_name = 'X-Mail-Success'
+
     def __call__(self):
         super(SendMail, self).__call__()
         captcha = zope.component.getUtility(zeit.web.core.interfaces.ICaptcha)
@@ -67,7 +71,7 @@ class SendMail(FormPostMixin, zeit.web.core.view.Base):
             self.request.POST.get('nojs'))
         if success:
             self.send()
-        return self.render_original_view(success, 'Mail')
+        return self.render_original_view(success)
 
     def send(self):
         mail = zope.component.getUtility(zeit.web.core.interfaces.IMail)
@@ -110,10 +114,12 @@ class SendMail(FormPostMixin, zeit.web.core.view.Base):
                       request_method='POST')
 class SendPuzzleSolution(FormPostMixin, zeit.web.core.view.Base):
 
+    success_header_name = 'X-Puzzle-Success'
+
     def __call__(self):
         super(SendPuzzleSolution, self).__call__()
         success = self.send()
-        return self.render_original_view(success, 'Puzzle')
+        return self.render_original_view(success)
 
     def send(self):
         """
