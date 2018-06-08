@@ -22,7 +22,7 @@ POSTDEPLOY
 3.159 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4730: Add new Schulportal link to services
 
 
 3.158.1 (2018-06-07)
