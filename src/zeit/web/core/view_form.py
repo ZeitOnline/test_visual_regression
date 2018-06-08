@@ -113,15 +113,14 @@ class SendPuzzleSolution(FormPostMixin, zeit.web.core.view.Base):
 
     def send(self):
         """
-        Send data to puzzle backend
+        Send data to puzzle backend.
         """
         json_data = self._build_data()
-        log.info('Sending puzzle solution to %s at %s',
-                 json_data, self.request.path)
+        log.info('Sending puzzle solution from %s', self.request.path)
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         backend_url = conf.get('puzzle_backend')
-        # Otherwise a SELECT is triggered by postgREST to return the created
-        # row and this route does not have this privilege
+        # We need to set a prefer header to prevent postgREST from triggering a
+        # SELECT statement, which is prohibited for user anon.
         response = requests.post(backend_url, json=json_data,
                                  headers={"Prefer": "return=minimal"})
         return response.status_code < 300
