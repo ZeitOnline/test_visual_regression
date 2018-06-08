@@ -85,7 +85,7 @@ def test_puzzle_form_posts_data_to_backend_and_renders_content_again(
         m.post(backend_url, status_code=201)
         b = add_inputs_and_submit(testbrowser)
         assert m.called
-        assert 'Vielen Dank f\xc3\xbcr ihre Einsendung' in b.contents
+        assert 'Vielen Dank f\xc3\xbcr Ihre Einsendung' in b.contents
         assert 'Und das sind diese Woche unsere Preise' in b.contents
 
 
@@ -97,7 +97,7 @@ def test_puzzle_form_renders_error_message_if_post_fails(
         m.post(backend_url, status_code=500)
         b = add_inputs_and_submit(testbrowser)
         assert m.called
-        assert 'Vielen Dank f\xc3\xbcr ihre Einsendung' not in b.contents
+        assert 'Vielen Dank f\xc3\xbcr Ihre Einsendung' not in b.contents
         assert 'Leider ist ein technisches Problem aufgetreten' in b.contents
         assert 'Und das sind diese Woche unsere Preise' in b.contents
 

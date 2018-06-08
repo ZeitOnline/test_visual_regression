@@ -526,12 +526,12 @@ class PuzzleForm(Module):
 
     @pyramid.decorator.reify
     def success_message(self):
-        return u"Vielen Dank für ihre Einsendung."
+        return u"Vielen Dank für Ihre Einsendung."
 
     @pyramid.decorator.reify
     def failure_message(self):
-        return u"Leider ist ein technisches Problem aufgetreten. " \
-               u"Versuchen sie es später erneut oder kontaktieren sie uns."
+        return u"Leider ist ein technisches Problem aufgetreten." \
+               u"Bitte versuchen Sie es später erneut."
 
     @pyramid.decorator.reify
     def is_multiple(self):
