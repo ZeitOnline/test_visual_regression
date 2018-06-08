@@ -5,141 +5,35 @@
     {% elif success == 'False' %}
         <div class="feedback-form__success"> {{ block.failure_message}}</div>
     {% else %}
-        <h1>Gewinnspielformular</h1>
-        <form accept-charset="UTF-8" method="post" aria-label="Schicken Sie uns ihre Lösung" class="gewinnspiel-signup">
-            <div>
-                <input type="hidden" name="action" value="puzzle"/>
-                <input type="hidden" name="type" value="{{ block.puzzle_type.id }}"/>
-                <input type="hidden" name="year" type="number" value="{{ block.year }}"/>
-                <div>
-                    <label for="solution" class="feedback-form__label">
-                        <span><strong>Lösungswort*</strong></span>
-                    </label>
-                </div>
-                <div>
-                    <input type="text" maxlength="128" name="solution"
-                           id="solution" size="40" required="required" class="feedback-form__input"/>
-                </div>
+        <form accept-charset="UTF-8" method="post" aria-label="Schicken Sie uns ihre Lösung" class="feedback-form">
+            <input type="hidden" name="action" value="puzzle"/>
+            <input type="hidden" name="type" value="{{ block.puzzle_type.id }}"/>
+            <input type="hidden" name="year" type="number" value="{{ block.year }}"/>
+            <div class="feedback-form__inner">
+                <h2 class="feedback-form__headline">Gewinnspielformular</h2>
+                <input type="text" name="solution" placeholder="Lösungswort*" required="required" class="feedback-form__input" aria-label="Textfeld für das Lösungswort" />
                 {% if block.puzzle_type.id == 'scrabble' %}
-                <div>
-                    <label for="coordinates" class="feedback-form__label">
-                        <span><strong>Koordinaten (z.b. A1-A7)*</strong></span>
-                    </label>
-                </div>
-                <div>
-                    <input type="text" maxlength="128" name="coordinates"
-                           id="coordinates" size="40" required="required" class="feedback-form__input"/>
-                </div>
-                <div>
-                    <label for="points" class="feedback-form__label">
-                        <span><strong>Punkte</strong></span>
-                    </label>
-                </div>
-                <div>
-                    <input type="number" min="1" name="points"
-                           id="points" class="feedback-form__input"/>
-                </div>
+                    <input type="text" name="coordinates" placeholder="Koordinaten (z.b. A1-A7)*" required="required" class="feedback-form__input" aria-label="Koordinaten" />
+                    <input type="number" min="1" name="points" placeholder="Punkte" class="feedback-form__input" aria-label="Punkte" />
                 {% endif %}
                 {% if block.is_mulitple %}
-                <div>
-                    <label for="episode" class="feedback-form__label">
-                        <span><strong>Folge*</strong></span>
-                    </label>
-                </div>
-                <div>
-                    <input type="number" min="1" name="episode"
-                           id="episode" size="40" required="required" class="feedback-form__input"/>
-                </div>
+                    <input type="number" min="1" name="episode" placeholder="Folge*" required="required" class="feedback-form__input" aria-label="Folge" />
                 {% endif %}
-                <div>
-                    <label for="first_name" class="feedback-form__label">
-                        <span><strong>Vorname*</strong></span>
-                    </label>
-                    <div>
-                        <input type="text" maxlength="128" name="first_name"
-                               id="first_name" size="40" required="required" class="feedback-form__input"/>
-                    </div>
-                </div>
-                <div>
-                    <label for="edit-name" class="feedback-form__label">
-                        <span><strong>Nachname*</strong></span>
-                    </label>
-                    <div>
-                        <input type="text" maxlength="128" name="name"
-                               id="edit-name" size="40" required="required" class="feedback-form__input"/>
-                    </div>
-                </div>
-                <div>
-                    <label for="edit-email" class="feedback-form__label">
-                        <span><strong>E-Mail-Adresse*</strong></span>
-                    </label>
-                    <div>
-                        <input type="email" maxlength="128" name="e_mail"
-                               id="edit-email" size="40" required="required" class="feedback-form__input"/>
-                    </div>
-                </div>
-                <div>
-                    <label for="edit-street" class="feedback-form__label" >
-                        <span><strong>Straße + Hausnummer*</strong></span>
-                    </label>
-                    <div>
-                        <input type="text" maxlength="128" name="street"
-                               id="edit-street" size="40" required="required" class="feedback-form__input"/>
-                    </div>
-                </div>
-                <div>
-                    <label for="edit-zipcode" class="feedback-form__label">
-                        <span><strong>PLZ*</strong></span>
-                    </label>
-                    <div>
-                        <input type="text" maxlength="128" name="zipcode" id="edit-zipcode"
-                               size="8" required="required" class="feedback-form__input"/>
-                    </div>
-                </div>
-                <div>
-                    <label for="edit-city" class="feedback-form__label">
-                        <span><strong>Wohnort*</strong></span>
-                    </label>
-                    <div>
-                        <input type="text" maxlength="128" name="city" id="edit-city"
-                               size="25" required="required" class="feedback-form__input"/>
-                    </div>
-                </div>
-                <div>
-                    <label for="edit-country" class="feedback-form__label">
-                        <span><strong>Land</strong></span>
-                    </label>
-                    <div>
-                        <input type="text" maxlength="128" name="country"
-                               id="edit-country" size="40" value="Deutschland" class="feedback-form__input"/>
-                    </div>
-                </div>
-                <div>
-                    <label for="edit-phone" class="feedback-form__label">
-                        <span ><strong>Telefon (inkl. Vorwahl)</strong></span>
-                    </label>
-                    <div>
-                        <input type="tel" name="phone" id="edit-phone"
-                               size="40" class="feedback-form__input"/>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label for="edit-agreement" class="feedback-form__label">
-                            <input type="checkbox" name="agreement"
-                                   id="edit-agreement" value="1"/>
-                            Ich bin damit einverstanden, dass mich DIE ZEIT per
-                            Post, Telefon oder
-                            E-Mail über interessante Medienangebote und
-                            Veranstaltungen informiert.
-                        </label>
-                    </div>
-                </div>
-                <br/>
-                <span>* Pflichtfelder </span>
-                <br/>
-                <input type="submit" id="puzzle-submit" value="Senden" class="feedback-form__button" />
+                <input type="text" name="first_name" placeholder="Vorname*" required="required" class="feedback-form__input" aria-label="Ihr Vorname" />
+                <input type="text" name="name" placeholder="Nachname*" required="required" class="feedback-form__input" aria-label="Ihr Nachname" />
+                <input type="email" name="e_mail" placeholder="E-Mail-Adresse*" required="required" class="feedback-form__input" aria-label="Ihre E-Mail-Adresse" />
+                <input type="text" name="street" placeholder="Straße + Hausnummer*" required="required" class="feedback-form__input" aria-label="Straße und Hausnummer" />
+                <input type="text" name="zipcode" placeholder="PLZ*" size="8" required="required" class="feedback-form__input" aria-label="Postleitzahl" />
+                <input type="text" name="city" placeholder="Wohnort" required="required" class="feedback-form__input" aria-label="Ihr Wohnort" />
+                <input type="text" name="country" placeholder="Land" value="Deutschland" class="feedback-form__input" aria-label="Land" />
+                <input type="tel" name="phone" placeholder="Telefon (inkl. Vorwahl)" class="feedback-form__input" aria-label="Telefonnummer inklusive Vorwahl" />
+                <label for="edit-agreement" class="feedback-form__label--agreement">
+                    <input type="checkbox" class="feedback-form__checkbox" name="agreement" id="edit-agreement" value="1" aria-label="Checkbox Einwilligung" />
+                    Ich bin damit einverstanden, dass mich DIE ZEIT per Post, Telefon oder E-Mail über interessante Medienangebote und Veranstaltungen informiert.
+                </label>
+                <div class="feedback-form__mandatory">* Pflichtfelder</div>
+                <input type="submit" value="Senden" class="feedback-form__button" />
             </div>
         </form>
-    </div>
-{% endif %}
+    {% endif %}
+</div>
