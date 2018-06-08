@@ -102,16 +102,6 @@ class SendMail(FormPostMixin, zeit.web.core.view.Base):
 @zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
                       name='seite',
                       request_method='POST')
-@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle,
-                      request_method='POST')
-@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
-                      request_method='POST')
-@zeit.web.view_config(context=zeit.web.magazin.article.IShortformArticle,
-                      request_method='POST')
-@zeit.web.view_config(context=zeit.web.magazin.article.IColumnArticle,
-                      request_method='POST')
-@zeit.web.view_config(context=zeit.web.magazin.article.IPhotoclusterArticle,
-                      request_method='POST')
 class SendPuzzleSolution(FormPostMixin, zeit.web.core.view.Base):
 
     success_header_name = 'X-Puzzle-Success'
