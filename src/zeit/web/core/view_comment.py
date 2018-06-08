@@ -309,6 +309,13 @@ class PostComment(zeit.web.core.view.Base):
         return comment['uid'], filter(None, comment['fans'].split(','))
 
     def _ensure_comment_thread(self, unique_id):
+        """Check whether comment thread exists in community, and create it if
+        not. This is only a safety belt, the main responsibility for creating
+        new threads lies with zeit.publisher, which is also responsible for
+        updating existing threads when metadata changes in vivi -- since we
+        cannot do that here easily/cheaply (we'd have to "re-create" the
+        thread every time we post a comment, which is too expensive).
+        """
         community = zope.component.getUtility(
             zeit.web.core.interfaces.ICommunity)
         if community.get_comment_count(unique_id):
