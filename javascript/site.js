@@ -102,7 +102,6 @@ if ( pageType === 'centerpage' ) {
     article.find( '.js-liveblog' ).liveblog();
     article.find( '.article-toc' ).toggleRegions();
     $.picturefill();
-    $( '.sharing-menu' ).toggleRegions();
     $( '.comment-section' ).countFormchars();
 } else if ( pageType === 'author' ) {
     $( '.author-questions' ).longTextWrapper();

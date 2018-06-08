@@ -19,7 +19,19 @@ POSTDEPLOY
 - change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
 
 
-3.158 (unreleased)
+3.159 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.158.1 (2018-06-07)
+--------------------
+
+- FIX: CSS release due to deployment issues.
+
+
+3.158 (2018-06-07)
 ------------------
 
 - ZON-4668: Add channel list to webtrekk tracking
