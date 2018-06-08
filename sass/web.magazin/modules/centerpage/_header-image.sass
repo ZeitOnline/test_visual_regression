@@ -1,0 +1,52 @@
+.header-image
+	margin: remify(20px 20px 0)
+	position: relative
+	+respond-min($break-2)
+		margin: remify(25px 25px 10px)
+
+	&__heading
+		color: $white
+		font-size: remify(28px)
+		margin: 0
+		text-align: center
+		+respond-min($break-0)
+			font-size: remify(48px)
+		&--overlay
+			display: flex
+			flex-direction: column
+			bottom: 15%
+			left: 0
+			padding-bottom: 0
+			padding-top: 0
+			position: absolute
+			right: 0
+			+respond-min($break-0)
+				bottom: 12%
+
+	&__kicker
+		+font-smoothing
+		color: $white
+		display: block
+		font-size: remify(18px)
+		font-weight: normal
+		text-transform: uppercase
+
+	// TABLET //
+	+respond-min($break-2)
+		&:after
+			$paper-clip-height: remify(50px)
+			bottom: $paper-clip-height / -2
+			height: $paper-clip-height
+
+		&__heading
+			padding: remify(30px 0 15px)
+			&--overlay
+				padding: remify(0 $page-padding)
+
+		&__media
+			height: remify(270px)
+			overflow: hidden
+
+.markup
+	&__text
+		font-family: $article-body-font
