@@ -147,7 +147,7 @@ def app_settings(mockserver):
         'vivi_zeit.content.article_image-display-mode-source': (
             'egg://zeit.web.core/data/config/article-image-display-modes.xml'),
         'vivi_zeit.content.article_puzzleforms-source': (
-            'egg://zeit.web.core/data/config/article-puzzleforms.xml'),
+            'egg://zeit.web.core/data/config/puzzleforms.xml'),
         'vivi_zeit.content.article_legacy-display-mode-source': (
             'egg://zeit.web.core/data/config/article-legacy-display-modes.xml'
         ),
