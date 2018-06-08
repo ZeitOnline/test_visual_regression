@@ -1,0 +1,39 @@
+{% set success = request.headers.get('X-Puzzle-Success') %}
+<div class="article__item">
+    {% if success == 'True' %}
+        <div class="feedback-form__success"> {{ block.success_message}}</div>
+    {% elif success == 'False' %}
+        <div class="feedback-form__success"> {{ block.failure_message}}</div>
+    {% else %}
+        <form accept-charset="UTF-8" method="post" aria-label="Schicken Sie uns ihre Lösung" class="feedback-form">
+            <input type="hidden" name="action" value="puzzle"/>
+            <input type="hidden" name="type" value="{{ block.puzzle_type.id }}"/>
+            <input type="hidden" name="year" type="number" value="{{ block.year }}"/>
+            <div class="feedback-form__inner">
+                <h2 class="feedback-form__headline">Gewinnspielformular</h2>
+                <input type="text" name="solution" placeholder="Lösungswort*" required="required" class="feedback-form__input" aria-label="Textfeld für das Lösungswort" />
+                {% if block.puzzle_type.id == 'scrabble' %}
+                    <input type="text" name="coordinates" placeholder="Koordinaten (z.b. A1-A7)*" required="required" class="feedback-form__input" aria-label="Koordinaten" />
+                    <input type="number" min="1" name="points" placeholder="Punkte" class="feedback-form__input" aria-label="Punkte" />
+                {% endif %}
+                {% if block.is_multiple %}
+                    <input type="number" min="1" name="episode" placeholder="Folge*" required="required" class="feedback-form__input" aria-label="Folge" />
+                {% endif %}
+                <input type="text" name="first_name" placeholder="Vorname*" required="required" class="feedback-form__input" aria-label="Ihr Vorname" />
+                <input type="text" name="name" placeholder="Nachname*" required="required" class="feedback-form__input" aria-label="Ihr Nachname" />
+                <input type="email" name="e_mail" placeholder="E-Mail-Adresse*" required="required" class="feedback-form__input" aria-label="Ihre E-Mail-Adresse" />
+                <input type="text" name="street" placeholder="Straße + Hausnummer*" required="required" class="feedback-form__input" aria-label="Straße und Hausnummer" />
+                <input type="text" name="zipcode" placeholder="PLZ*" size="8" required="required" class="feedback-form__input" aria-label="Postleitzahl" />
+                <input type="text" name="city" placeholder="Wohnort" required="required" class="feedback-form__input" aria-label="Ihr Wohnort" />
+                <input type="text" name="country" placeholder="Land" value="Deutschland" class="feedback-form__input" aria-label="Land" />
+                <input type="tel" name="phone" placeholder="Telefon (inkl. Vorwahl)" class="feedback-form__input" aria-label="Telefonnummer inklusive Vorwahl" />
+                <label for="edit-agreement" class="feedback-form__label--agreement">
+                    <input type="checkbox" class="feedback-form__checkbox" name="agreement" id="edit-agreement" value="1" aria-label="Checkbox Einwilligung" />
+                    Ich bin damit einverstanden, dass mich DIE ZEIT per Post, Telefon oder E-Mail über interessante Medienangebote und Veranstaltungen informiert.
+                </label>
+                <div class="feedback-form__mandatory">* Pflichtfelder</div>
+                <input type="submit" value="Senden" class="feedback-form__button" />
+            </div>
+        </form>
+    {% endif %}
+</div>

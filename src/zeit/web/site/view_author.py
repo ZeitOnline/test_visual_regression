@@ -15,7 +15,7 @@ import zeit.web
 import zeit.web.core.area.ranking
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
-import zeit.web.core.view_mail
+import zeit.web.core.view_form
 
 
 log = logging.getLogger(__name__)
@@ -190,7 +190,7 @@ class Feedback(Author):
     context=zeit.content.author.interfaces.IAuthor,
     name='feedback',
     request_method='POST')
-class SendMail(zeit.web.core.view_mail.SendMail):
+class SendMail(zeit.web.core.view_form.SendMail):
 
     @zeit.web.reify
     def recipient(self):

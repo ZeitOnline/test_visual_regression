@@ -22,13 +22,13 @@ POSTDEPLOY
 3.159 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- SSL-160: Add puzzle solution form
 
 
 3.158.1 (2018-06-07)
 --------------------
 
-- FIX: CSS release due to deployment issues.
+- FIX: CSS release due to deployment issues
 
 
 3.158 (2018-06-07)
