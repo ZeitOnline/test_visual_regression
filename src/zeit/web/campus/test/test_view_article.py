@@ -24,8 +24,8 @@ def test_article_pagination_on_single_page(testbrowser):
     # assert len(select('.article-toc')) == 0
     button = select('.article-pagination__button')[0]
     link = select('.article-pagination__link')[0].get('href')
-    assert button.text.strip() == 'Mehr ZEIT Campus'
-    assert 'campus/index' in link
+    assert button.text.strip() == 'Startseite'
+    assert 'index' in link
 
 
 def test_article_pagination_on_second_page(testbrowser):
@@ -51,7 +51,7 @@ def test_article_pagination_on_last_paginated_page(testbrowser):
     assert len(select('.article-pager')) == 1
     # assert len(select('.article-toc')) == 1
     button = select('.article-pagination__button')[0]
-    assert button.text.strip() == 'Mehr ZEIT Campus'
+    assert button.text.strip() == 'Startseite'
 
 
 def test_article_pagination_on_komplettansicht(testbrowser):
@@ -63,7 +63,7 @@ def test_article_pagination_on_komplettansicht(testbrowser):
     assert len(select('.article-pager')) == 0
     # assert len(select('.article-toc')) == 0
     button = select('.article-pagination__button')[0]
-    assert button.text.strip() == 'Mehr ZEIT Campus'
+    assert button.text.strip() == 'Startseite'
 
 
 def test_article_pagination(testbrowser):
@@ -154,9 +154,9 @@ def test_campus_article_renders_video_with_correct_markup(testbrowser):
     bro = testbrowser('/campus/article/video')
     select = bro.cssselect
     assert select(
-        'figure.article__item > .video-player#video-player-3035864892001')
+        'figure.article__item > .js-videoplayer')
     assert select(
-        'video[data-video-id="3035864892001"]')
+        '.js-videoplayer[data-video-id="3035864892001"]')
     assert select(
         '.video-caption > .video-caption__kicker')[0].text == 'Reporter On Ice'
     assert select('.video-caption > .video-caption__title')[0].text == (
@@ -205,7 +205,7 @@ def test_campus_article_has_sharing_menu(testbrowser):
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
-    assert len(sharing_menu.cssselect('.sharing-menu__item')) == 5
+    assert len(sharing_menu.cssselect('.sharing-menu__item')) == 6
     assert labels[0].text == 'Facebook'
     assert labels[1].text == 'Twittern'
     assert labels[2].text == 'Flippen'
@@ -239,16 +239,16 @@ def test_article_header_default_considers_image_layout(testbrowser):
     assert image.get('data-ratio') == '1.77777777778'
 
 
-def test_article_has_print_function(testbrowser):
+def test_article_has_print_menu(testbrowser):
     browser = testbrowser('/campus/article/debate')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/campus/article/debate?print'))
 
 
-def test_multi_page_article_has_print_link(testbrowser):
+def test_multi_page_article_has_print_menu(testbrowser):
     browser = testbrowser('/campus/article/paginated')
-    links = browser.cssselect('.print-menu__link')
+    links = browser.cssselect('.print-menu')
     assert (links[0].get('href').endswith(
         '/campus/article/paginated/komplettansicht?print'))
 
@@ -318,31 +318,33 @@ def test_cardstack_block_produces_correct_html(testbrowser):
     assert len(block) == 1
 
 
-def test_article_contains_authorbox(testbrowser):
-    browser = testbrowser('/zeit-online/article/authorbox')
+def test_article_contains_campus_authorbox(testbrowser):
+    browser = testbrowser('/campus/article/authorbox')
     authorbox = browser.cssselect('.authorbox')
     assert len(authorbox) == 3
 
-    # test custom biography
+    # test authorbox without image
     author = authorbox[0]
-    description = author.cssselect('.authorbox__summary')[0]
-    assert description.text.strip() == 'Text im Feld Kurzbio'
-    assert description.get('itemprop') == 'description'
+    figure = author.cssselect('.authorbox__media')
+    assert not figure
 
-    # test author content and microdata
+    # test authorbox with image
     author = authorbox[1]
-    image = author.cssselect('[itemprop="image"]')[0]
-    name = author.cssselect('strong[itemprop="name"]')[0]
-    description = author.cssselect('[itemprop="description"]')[0]
-    url = author.cssselect('a[itemprop="url"]')[0]
+    figure = author.cssselect('.authorbox__media')
+    assert len(figure) == 1
 
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.get('itemscope') is not None
-    assert ('http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/square'
-            ) in image.cssselect('[itemprop="url"]')[0].get('content')
-    assert name.text.strip() == 'Jochen Wegner'
-    assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
-    assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
+    # test if no link to author page is available
+    url = author.cssselect('a[itemprop="url"]')
+    assert not url
+
+    # check if mobile and desktop resource are given
+    image = figure[0].cssselect('.authorbox__media-item')
+
+    # Mobile Image has aspect ratio of 1
+    assert image[0].attrib.get('data-mobile-ratio') == '1.0'
+
+    # Desktop Image has aspect ratio of 16 / 9 = 1.77777777778
+    assert image[0].attrib.get('data-ratio') == '1.77777777778'
 
 
 @pytest.mark.parametrize('c1_parameter', [
@@ -370,3 +372,67 @@ def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
 def test_campus_advertorial_has_no_home_button_as_pagination(testbrowser):
     browser = testbrowser('/campus/article/advertorial-onepage')
     assert len(browser.cssselect('.article-pagination__link')) == 0
+
+
+def test_campus_print_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple_date_print'.format(
+        testserver.url))
+    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    source = selenium_driver.find_element_by_css_selector('.metadata__source')
+
+    assert date.text == u'30. März 2017'
+    assert source.text == u'DIE ZEIT Nr. 14/2017, 30. März 2017'
+
+
+def test_campus_print_changed_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple_date_print_changed'.format(
+        testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
+    source = selenium_driver.find_element_by_css_selector('.metadata__source')
+
+    assert dates[0].text == u'30. März 2017, 11:13 Uhr'
+    assert dates[1].text == u'Editiert am 31. März 2017, 9:16 Uhr'
+    assert source.text == u'DIE ZEIT Nr. 14/2017, 30. März 2017'
+
+
+def test_campus_changed_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple_date_changed'.format(
+        testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
+
+    assert dates[0].text == u'10. Januar 2016, 10:39 Uhr'
+    assert dates[1].text == u'Aktualisiert am 10. Februar 2016, 10:39 Uhr'
+
+
+def test_campus_article_has_correct_meta_line(testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple'.format(testserver.url))
+    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+
+    assert date.text.strip() == (u'10. Januar 2016, 10:39 Uhr')
+
+
+def test_canonical_url_should_contain_first_page_on_full_view(testbrowser):
+    browser = testbrowser('/campus/article/paginated/komplettansicht')
+    canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
+    assert canonical_url.endswith('campus/article/paginated')
+
+
+def test_campus_leserarticle_renders_correct_header(testbrowser):
+    cssselect = testbrowser('/campus/article/leserartikel').cssselect
+    assert cssselect('.article-header--leserartikel')
+    assert cssselect('.article-header__topic--leserartikel')
+    assert cssselect('.article-header__title--leserartikel')
+    assert cssselect('.article-header__leserartikel-info')
+    'Ein Leserartikel von' in cssselect('.article-header__byline')[0].text
+
+
+def test_campus_column_renders_correct_header(testbrowser):
+    cssselect = testbrowser('/campus/article/column').cssselect
+    assert cssselect('.article-header--column')
+    assert cssselect('.article-header__topic--column')
+    assert cssselect('.article-header__title--column')
+    assert cssselect('.article-header__column-info')
+    'Eine Kolumne von' in cssselect('.article-header__byline')[0].text

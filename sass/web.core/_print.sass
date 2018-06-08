@@ -1,0 +1,207 @@
+$zon-print-grey: #444
+$print-media-width: 100mm
+$print-media-margin: 14pt 0
+$print-articleitem-margin: 28pt
+// using this zoom factor to make fonts bigger
+// in opposition to designs
+$print-zoom: 1.263157895
+
+@media print
+
+	// --------------------------------------------
+	// page layout
+
+	@page
+		margin: 15mm 25mm
+		size: auto
+
+	body,
+	.page__content
+		background: white !important
+		box-shadow: none !important
+
+
+	// --------------------------------------------
+	// generic styles
+
+	p
+		orphans: 2 // TODO: rtfd
+		widows: 3 // TODO: rtfd
+
+	h1, h2, h3, h4, h5, h6
+		break-after: avoid
+		page-break-after: avoid
+		page-break-inside: avoid
+
+	acronym[title]:after,
+	abbr[title]:after
+		content: " (" attr(title) ")"
+
+	.visually-hidden,
+	#pDebug
+		display: none !important
+
+	// --------------------------------------------
+	// print link targets
+	a[href^="http"]
+		color: $zon-print-grey
+		page-break-inside: avoid
+		&:after
+			border-bottom: 1px solid white // To visibly hide grey border of <a>
+			color: $zon-print-grey
+			content: " [" attr(href) "]"
+			font-size: inherit
+			word-wrap: break-word
+
+	// ... except for
+	a[href^="#"]:after,
+	.zplus-badge a:after, // this is full of tracking-params
+	.header__publisher a:after
+		content: ""
+
+
+	// --------------------------------------------
+	// ads
+	#ads,
+	#adunit,
+	#comments,
+	#iqadtileOOP,
+	#iqd_mainAd,
+	#iqdLastNode,
+	#iqdSitebarWrapper,
+	#iqdInfoBox,
+	.ad,
+	.ads,
+	.ad-container,
+	#ligatus,
+	iframe[id^="google_ads"]
+		display: none !important
+		// TODO: wollen wir Tweets zeigen?
+
+
+	// --------------------------------------------
+	// site layout basics
+	#main
+		padding: 0
+		margin: 0
+
+	.footer
+		display: none !important
+
+
+	// --------------------------------------------
+	// only show the logo as header
+	.header
+		background: none
+
+	.header__brand
+		border-bottom: 1pt solid $zon-print-grey
+		margin-bottom: remify(13px)
+		padding-bottom: remify(13px)
+		padding-left: 0
+		.header__teaser,
+		.header__menu-link
+			display: none
+
+	.header__logo
+		fill: #313131
+
+
+	// --------------------------------------------
+	// article sections
+	.article-footer,
+	.article-pagination,
+	.nextread,
+	.nextread-advertisement,
+		display: none !important
+
+	// --------------------------------------------
+	// article elements
+	.video-player,
+	.video-player + .figure__caption,
+	#bp-container, // teaser for browser-push
+	.article-page .raw, // raw elements
+	.newsletter-teaser-box, // via raw-code in articles
+	.article-toc
+		display: none !important
+
+	// paywall
+	.paragraph--faded:before
+		content: none // faded paragraph would not be printed at all, so we dont fade it
+
+	// portraitbox (ZON+ZCO)
+	.portraitbox
+		&__heading,
+		&__body
+			font-size: 7pt * $print-zoom
+			line-height: 11pt * $print-zoom
+			margin-bottom: 6pt * $print-zoom
+		a,
+		a:after
+			color: $zon-print-grey
+			font-size: 7pt * $print-zoom
+
+	// infobox
+	.infobox
+		background-color: transparent
+		border: 1pt solid $zon-print-grey
+		margin: $print-media-margin
+		padding: 0
+		page-break-inside: avoid
+		max-width: $print-media-width
+
+	.infobox-tab
+		border-bottom: 1pt solid $zon-print-grey
+		padding: 9pt * $print-zoom
+
+		&__link,
+		&__title,
+		&__content p
+			font-size: 7pt * $print-zoom
+			line-height: 11pt * $print-zoom
+			margin-bottom: 6pt * $print-zoom
+
+		&__title
+			padding: 0
+
+		&__link
+			font-weight: bold
+
+		&__content[aria-hidden='true']
+			max-height: none // always show all infobox content (ignore script)
+
+	// --------------------------------------------
+	// galleries. beat JS-set styles with !important
+	.gallery,
+	.inline-gallery
+		+pie-clearfix
+		background: none
+		margin: 0
+		.bx-controls,
+		.bx-zone-next,
+		.bx-zone-prev
+			display: none !important
+		.bx-viewport
+			overflow: visible !important
+			margin: 0 auto !important
+			max-width: 70% !important
+		.gallery-slides
+			position: relative !important
+			transform: none !important
+			width: auto !important
+		.slide
+			margin: 20pt 0 !important
+			&:first-child(),
+			&:last-child()
+				display: none
+	.gallery-container,
+	.inline-gallery-container
+		margin: 0
+		max-width: none
+
+	// --------------------------------------------
+	// z-plus svg-logos
+	.zplus-logo,
+	.zplus-logo-register
+		background-color: $white
+		color: $black

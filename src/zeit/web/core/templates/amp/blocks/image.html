@@ -1,5 +1,5 @@
 {% extends "zeit.web.core:templates/amp/asset/image_linked.html" %}
-{% set image = get_image(block, variant_id="wide", fallback=False) %}
+{% set image = get_image(block, fallback=False) %}
 {% set href = image.href %}
 
 {% block itemprop %} itemprop="image"{% endblock %}

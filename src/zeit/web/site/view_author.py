@@ -2,17 +2,21 @@
 import logging
 import math
 
+import lxml.objectify
 import pyramid.httpexceptions
 import zope.component
 import zope.interface
 
 import zeit.content.author.interfaces
+import zeit.content.cp.blocks.mail
 
 from zeit.web.core.view import is_paginated
 import zeit.web
 import zeit.web.core.area.ranking
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
+import zeit.web.core.view_mail
+
 
 log = logging.getLogger(__name__)
 
@@ -120,9 +124,81 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
                 self.context, page=1, rows=page_size)
             return comments and comments.get('page_total', 0) > 0
         except zeit.web.core.comments.UserCommentsException:
-            log.warn('An exception occured, while trying to fetch comments.')
+            log.warning(
+                'An exception occured, while trying to fetch comments.')
 
         return False
+
+    @zeit.web.reify
+    def author_email(self):
+        return self.context.email
+
+    @zeit.web.reify
+    def enable_feedback(self):
+        return self.context.enable_feedback
+
+    @zeit.web.reify
+    def followpush_available(self):
+        return bool(self.context.enable_followpush)
+
+    @zeit.web.reify
+    def followpush_taggroup(self):
+        return 'authors'
+
+    @zeit.web.reify
+    def followpush_tag(self):
+        uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
+        uuid = getattr(uuid, 'id', None)
+        if uuid:
+            uuid = uuid.strip('{}').replace('urn:uuid:', '')
+            return uuid
+
+
+@zeit.web.view_config(name='feedback')
+class Feedback(Author):
+
+    def __call__(self):
+        if not (zeit.web.core.application.FEATURE_TOGGLES.find(
+                'author_feedback') and self.context.enable_feedback):
+            raise pyramid.httpexceptions.HTTPNotFound()
+        return super(Feedback, self).__call__()
+
+    current_tab_name = 'feedback'
+
+    @zeit.web.reify
+    def tab_areas(self):
+        return [self.area_feedback]
+
+    @zeit.web.reify
+    def area_feedback(self):
+        if not self.context.email:
+            return None
+        area = zeit.web.core.centerpage.Area([], kind='author-feedback')
+        module = zeit.content.cp.blocks.mail.MailBlock(
+            area, lxml.objectify.XML('<dummy/>'))
+
+        module.subject = 'Sie haben Feedback erhalten'
+        module.author_name = self.context.display_name
+        module.success_message = 'Ihr Feedback wurde erfolgreich ' \
+            'verschickt.'
+
+        area.append(zeit.web.core.centerpage.get_module(module))
+        return area
+
+
+@zeit.web.view_config(
+    context=zeit.content.author.interfaces.IAuthor,
+    name='feedback',
+    request_method='POST')
+class SendMail(zeit.web.core.view_mail.SendMail):
+
+    @zeit.web.reify
+    def recipient(self):
+        if not self.context.email:
+            message = 'Author has no email for POST to %s' % self.context
+            log.error(message)
+            raise RuntimeError(message)
+        return self.context.email
 
 
 @zeit.web.view_config(name='kommentare')
@@ -173,11 +249,20 @@ def create_author_article_area(
 
     area = cp.body.create_item('region').create_item('area')
     area.kind = 'author-articles'
-    area.automatic_type = 'query'
+
+    area.automatic_type = conf.get(
+        'author_articles_query_type', 'elasticsearch-query')
+    area.elasticsearch_raw_query = conf.get(
+        'author_articles_query_es', """{"query": {"bool": {"filter": [
+            {"term": {"payload.head.authors": "%s"}}
+        ]}}}""") % context.uniqueId
+    area.elasticsearch_raw_order = 'payload.document.date_first_released:desc'
+    # BBB
     area.raw_query = unicode(
         conf.get('author_articles_query', 'author:"{}"')).format(
             context.display_name)
     area.raw_order = 'date-first-released desc'
+
     if count is not None:
         area.count = count
     else:

@@ -7,9 +7,12 @@ var $ = require( 'jquery' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
+    videoPlayer = require( 'web.core/video/videoPlayer' ),
+    articledate = require( 'web.core/articledate' ),
+    comments = require( 'web.core/comments' ),
+    dataProtectionPopOver = require( 'web.core/dataProtectionPopOver' ),
     main = $( '#main' ),
     article = $( '#js-article' ),
-    comments = require( 'web.core/comments' ),
     pageType = document.body.getAttribute( 'data-page-type' );
 
 // initialize modules
@@ -18,6 +21,15 @@ menu.init();
 clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
+dataProtectionPopOver.init();
+
+if ( article.length ) {
+    articledate.init();
+    comments.init();
+    visibilityTracking.init();
+    videoPlayer.init();
+}
+
 saveGetToCookie.init();
 zeit.clearQueue();
 
@@ -43,10 +55,8 @@ if ( pageType === 'centerpage' ) {
     main.find( '.js-toggle-region' ).toggleRegions();
     main.find( '.js-gallery' ).inlinegallery();
     main.find( '.js-infobox' ).infobox();
-    comments.init();
     $( '.comment-section' ).countFormchars();
     main.find( '.js-shareblock' ).shareBlocks();
-    visibilityTracking.init();
 }
 
 // more ("non critical") global stuff

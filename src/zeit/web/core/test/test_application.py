@@ -22,8 +22,14 @@ def test_asset_host_allows_specifying_full_host(dummy_request):
 def test_asset_host_supports_url_prefix(dummy_request):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['asset_prefix'] = '/assets'
-    dummy_request.application_url = 'http://example.com/foo'
+    dummy_request.environ['SCRIPT_NAME'] = '/foo'
     assert dummy_request.asset_host == 'http://example.com/foo/assets'
+
+
+def test_asset_host_should_be_neutral_to_protocol(dummy_request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['asset_prefix'] = '//assets.example.com/'
+    assert dummy_request.asset_host == '//assets.example.com'
 
 
 def test_acceptable_pagination_should_not_redirect(testserver):
@@ -95,8 +101,8 @@ def test_salvageable_pagination_should_redirect_to_article_page(testserver):
     assert resp.status_code == 301
 
 
-def test_vgwort_pixel_should_be_present(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_vgwort_pixel_should_be_present(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-magazin/article/01')
     pixel = browser.cssselect('body img[src^="http://example.com"]')
     assert len(pixel) == 1
@@ -126,7 +132,7 @@ def test_assets_have_configurable_cache_control_header(testbrowser):
 
 
 def test_feature_toggle_source_should_be_parsed(application):
-    assert zeit.web.core.application.FEATURE_TOGGLES.find('article_lineage')
+    assert zeit.web.core.application.FEATURE_TOGGLES.find('dtag_navigation')
     assert not zeit.web.core.application.FEATURE_TOGGLES.find('dummy')
     assert not zeit.web.core.application.FEATURE_TOGGLES.find('nonexistent')
 
@@ -162,11 +168,8 @@ def test_pyramid_settings_and_settings_utility_are_the_same(application):
 
 
 def test_scheme_for_home_route_urls_depends_on_https_feature_toggle(
-        dummy_request,
-        togglepatch):
-    togglepatch({'https': True})
-    # This has to be set for our dummy request
-    dummy_request.environ['SERVER_NAME'] = "foo"
+        dummy_request):
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
     assert dummy_request.route_url('home').startswith('https:')
-    togglepatch({'https': False})
+    zeit.web.core.application.FEATURE_TOGGLES.unset('https')
     assert not dummy_request.route_url('home').startswith('https:')

@@ -1,0 +1,17 @@
+.liveblog-text-wrapper
+	transition: max-height .5s
+	overflow: hidden
+	position: relative
+
+.liveblog-text-wrapper--wrapped
+	margin: 0 auto
+	max-width: $medium-content-width
+	+text-wrapper()
+
+	// display content if focus moves to hidden elements
+	&:focus-within:not(:focus)
+		max-height: none
+
+		&::before,
+		&::after
+			content: none

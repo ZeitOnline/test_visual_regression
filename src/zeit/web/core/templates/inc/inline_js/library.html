@@ -3,10 +3,19 @@
     document.createElement( 'picture' );
     window.Zeit = {
         publicPath: '{{ request.asset_host }}/js/',
-        jsconfHost: '{{ request.jsconf_host | rewrite_for_ssl_if_required(view.framebuilder_requires_ssl) }}',
+        jsconfHost: '{{ request.jsconf_host }}',
         cookieFallbackDomain: '{{ settings('cookie_fallback_domain', 'zeit.de') }}',
         moderationURL: '{{ view.moderation_url }}',
-        cpVideoPlayerId: '{{ settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') }}',
+        videoPlayers: {
+            'cp': {
+                'withAds': '{{ settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') }}',
+                'withoutAds': '{{ settings('brightcove_videoplayer_hp_cp_single_wo_ads', 'r1xb937iwZ') }}'
+            },
+            'article': {
+                'withAds': '{{ settings('brightcove_videoplayer_article', 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9') }}',
+                'withoutAds': '{{ settings('brightcove_videoplayer_article_wo_ads', 'NykzeyfYg') }}'
+            }
+        },
         hpOverlay: {
             active: {{ 'true' if settings('hp_overlay_active', False) else 'false' }},
             interval: '{{ settings('hp_overlay_interval') }}'
@@ -80,26 +89,6 @@
             portrait: 'width=1000',
             set: function( key ) {
                 this.meta.setAttribute( 'content', this[ key ] );
-            },
-            isLandscape: function() {
-                if ( window.matchMedia ) {
-                    return window.matchMedia( '(orientation: landscape)' ).matches;
-                }
-
-                var orientation = screen.orientation || screen.mozOrientation || screen.msOrientation,
-                    angle;
-
-                if ( typeof orientation === 'string' ) {
-                    return /^landscape/.test( orientation );
-                }
-
-                if ( typeof orientation === 'object' ) {
-                    angle = orientation.angle;
-                } else if ( 'orientation' in window ) {
-                    angle = window.orientation;
-                }
-
-                return Math.abs( angle ) === 90;
             }
         },
         breakpoint: {
@@ -119,7 +108,8 @@
         require: function() {
             this.queue.push( arguments );
         },
-        setFontSize: function(size, updateStorage = true) {
+        setFontSize: function(size, updateStorage) {
+            updateStorage = (typeof updateStorage !== 'undefined') ?  updateStorage : true;
             size = parseInt(size, 10);
             if (size >= 30 && size <= 300 && window.localStorage) {
                 document.querySelector('html').style.fontSize = size + '%';
@@ -135,6 +125,24 @@
                     return size;
                 }
             }
+        },
+        cookieCreate: function( name, value, days, domain ) {
+            var expires = '';
+
+            if ( arguments.length < 4 ) {
+                domain = window.Zeit.cookieFallbackDomain;
+            }
+
+            if ( days ) {
+                var date = new Date();
+                date.setTime( date.getTime() + ( days * 24 * 60 * 60 * 1000 ) );
+                expires = '; expires=' + date.toGMTString();
+            }
+
+            document.cookie = name + '=' + value + expires + '; path=/; domain=' + domain;
+        },
+        cookieRead: function( name ) {
+            return ( document.cookie.match( '(?:^|;) ?' + name + '\\s*=\\s*([^;]*)' ) || 0 )[ 1 ];
         }
     };
 
@@ -143,33 +151,17 @@
         window.Zeit.setFontSize( storedFontSize, false );
     }
 
-{%- if view.advertising_enabled %}
-    {% if toggles('iqd_tablet_transformation') -%}
-        {%- if view.package == 'zeit.web.site' %}
-            {%- if view.is_hp %}
-                {# ZON HP: inflate 768-1000 screens always to 1280px #}
-                if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.maxWidth ) {
-                    window.Zeit.viewport.set( 'banner' );
-                }
-            {%- else %}
-                {# ZON other pages: inflate portrait tablets (768-1000px) to 1000px #}
-                if ( window.matchMedia( '(orientation: portrait)' ).matches && screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.tabletSmallMinWidth) {
-                    window.Zeit.viewport.set( 'portrait' );
-                }
-            {%- endif %}
-        {%- endif %}
-    {% else %}
-        {%- if view.package == 'zeit.web.site' %}
-        {# /* ZON style: set viewport for tablets */ #}
+    {%- if view.advertising_enabled %}
+        {%- if view.package == 'zeit.web.site' and view.is_hp %}
+            {# ZON HP: inflate 768-1000 screens always to 1280px #}
             if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.maxWidth ) {
                 window.Zeit.viewport.set( 'banner' );
             }
-        {%- elif view.package == 'zeit.web.magazin' %}
-        {# /* ZMO style: set viewport for tablets in landscape mode */ #}
-            if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.maxWidth && window.Zeit.viewport.isLandscape() ) {
-                window.Zeit.viewport.set( 'banner' );
+        {%- else %}
+            {# All other pages: inflate portrait tablets (768-1000px) to 1000px #}
+            if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.tabletSmallMinWidth ) {
+                window.Zeit.viewport.set( 'portrait' );
             }
         {%- endif %}
     {%- endif %}
-{%- endif %}
 </script>

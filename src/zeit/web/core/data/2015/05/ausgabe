@@ -1,0 +1,37 @@
+<volume>
+  <head>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2017-03-29T13:16:32.756331+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_digital_published">2015-01-29T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2017-03-28T19:35:55.502316+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2017-03-29T13:16:33.139377+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2017-03-28T20:44:51.606658+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.manager</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">volume</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:cc71e9ac-8927-4a34-a579-6c0c691e0d70}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">5</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Volume" module="zeit.content.volume.volume"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-04-27T09:55:57.306219+00:00</attribute>
+  </head>
+  <body/>
+  <covers>
+    <cover href="http://xml.zeit.de/zeit-online/image/zeitcover" id="printcover" product_id="ZEI"/>
+  </covers>
+</volume>

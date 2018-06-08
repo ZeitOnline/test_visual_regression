@@ -11,6 +11,7 @@ import pkg_resources
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
+import pyramid.request
 import pyramid.interfaces
 import pyramid_jinja2
 import pyramid_zodbconn
@@ -54,9 +55,6 @@ class Application(object):
         self.settings.update(settings)
         self.settings['app_servers'] = filter(
             None, settings['app_servers'].split(','))
-        self.settings['transform_to_secure_links_for'] = (
-            settings.get(
-                'transform_to_secure_links_for', '')).split(',')
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             settings.get('linkreach_host', ''))
         self.settings['sso_key'] = self.load_sso_key(
@@ -82,9 +80,6 @@ class Application(object):
 
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
-
-        mapper = zeit.web.core.routing.RoutesMapper()
-        registry.registerUtility(mapper, pyramid.interfaces.IRoutesMapper)
 
         self.settings['version'] = pkg_resources.get_distribution(
             'zeit.web').version
@@ -119,7 +114,6 @@ class Application(object):
         config.add_route_predicate(
             'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
             weighs_more_than=('traverse',))
-
         # For every new request, the site manager is reset. It might have been
         # modified at runtime, e.g. another solr utility was registered
         config.add_subscriber(register_standard_site_manager,
@@ -153,26 +147,13 @@ class Application(object):
         config.add_route(
             'invalidate_community_maintenance',
             '/-comments/invalidate-maintenance')
-        config.add_route(
-            'home', '/',
-            pregenerator=zeit.web.core.routing.https_url_pregenerator)
-        config.add_route(
-            'breaking_news', '/breaking-news',
-            pregenerator=zeit.web.core.routing.https_url_pregenerator)
+        config.add_route('home', '/')
+        config.add_route('breaking_news', '/breaking-news')
         config.add_route('login_state', '/login-state')
         config.add_route('health_check', '/health-check')
-        # XXX align-route-config-uris: Ensure downward compatibility until
-        # corresponding varnish changes have been deployed. Remove afterwards.
-        config.add_route('health_check_XXX', '/health_check')  # XXX remove
         config.add_route('brandeins-image', '/brandeins-image/*path')
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route('zett-image', '/zett-image/*path')
-        config.add_route('blacklist', '/-blacklist', factory=lambda x: None)
-        config.add_route(
-            'schlagworte_index',
-            '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}')
-        config.add_view(
-            zeit.web.core.view.surrender, route_name='schlagworte_index')
         config.add_route(
             'schlagworte',
             '/schlagworte/{category}/{item}'
@@ -187,12 +168,12 @@ class Application(object):
                 path='zeit.web.static:', cache_max_age=ast.literal_eval(
                     self.settings['assets_max_age']))
 
+        config.set_request_factory(SSLRequest)
         config.add_request_method(configure_host('asset'), reify=True)
         config.add_request_method(configure_host('image'), reify=True)
         config.add_request_method(configure_host('jsconf'), reify=True)
         config.add_request_method(configure_host('fbia'), reify=True)
-        config.add_request_method(
-            configure_host('framebuilder_ssl_asset'), reify=True)
+        config.add_request_method(configure_host('ssl_asset'), reify=True)
 
         config.add_request_method(
             zeit.web.core.security.get_user, name='user', reify=True)
@@ -319,10 +300,11 @@ class Application(object):
             config[setting] = value
 
     def configure_overrides(self, context):
-        """Local development environments use an overrides zcml to allow
-        us to mock external dependencies or tweak the zope product config.
+        """For development environments using the test data repository within
+        the egg, we congiure overrides for external data source connectors.
         """
-        if self.settings.get('mock_solr'):
+        repository_path = self.settings['vivi_zeit.connector_repository-path']
+        if 'zeit.web.core' in repository_path:
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
 
@@ -418,7 +400,7 @@ def configure_host(key):
         prefix = conf.get(key + '_prefix', '')
         version = conf.get('version', 'latest')
         prefix = prefix.format(version=version)
-        if not prefix.startswith('http'):
+        if not (prefix.startswith('http') or prefix.startswith('//')):
             prefix = join_url_path(
                 request.application_url, '/' + prefix.strip('/'))
         return request.route_url('home', _app_url=prefix).rstrip('/')
@@ -434,7 +416,7 @@ def register_standard_site_manager(event):
     zope.component.hooks.setSite()
 
 
-class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
+class FeatureToggleSource(zeit.cms.content.sources.XMLSource):
     # Only contextual so we can customize source_class
 
     product_configuration = 'zeit.web'
@@ -445,10 +427,41 @@ class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
         def find(self, name):
             return self.factory.find(name)
 
+        def set(self, *args):  # only for tests
+            self.factory.override(*args, value=True)
+
+        def unset(self, *args):  # only for tests
+            self.factory.override(*args, value=False)
+
     def find(self, name):
         try:
             return bool(getattr(self._get_tree(), name, False))
         except TypeError:
             return False
 
+    def override(self, *names, **kw):
+        for name in names:
+            # Changes are discarded between tests by `reset_cache` fixture.
+            setattr(self._get_tree(), name, kw['value'])
+
+
 FEATURE_TOGGLES = FeatureToggleSource()(None)
+
+
+class SSLRequest(pyramid.request.Request):
+
+    @property
+    def host_url(self):
+        if FEATURE_TOGGLES.find('https'):
+            self.environ['wsgi.url_scheme'] = 'https'
+        else:
+            self.environ['wsgi.url_scheme'] = 'http'
+        return super(SSLRequest, self).host_url
+
+    @property
+    def host_port(self):
+        if FEATURE_TOGGLES.find('https'):
+            self.environ['wsgi.url_scheme'] = 'https'
+        else:
+            self.environ['wsgi.url_scheme'] = 'http'
+        return super(SSLRequest, self).host_port

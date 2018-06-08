@@ -91,26 +91,6 @@ def test_breadcrumbs_should_be_shorter_if_ressort_or_sub_ressort_is_unknown(
     assert article.breadcrumbs == crumbs
 
 
-def test_linkreach_property_should_be_set(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/03')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    article_view.request.url = 'index'
-    article_view.request.traversed = ('index',)
-    article_view.request.route_url = lambda *args: ''
-    assert isinstance(article_view.linkreach, dict)
-
-
-def test_linkreach_property_should_fetch_correct_data(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/03')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    article_view.request.url = 'index'
-    article_view.request.traversed = ('index',)
-    article_view.request.route_url = lambda *args: ''
-    assert article_view.linkreach['total'] == 92
-
-
 def test_header_module_should_be_first_image_of_content_blocks(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/05')
@@ -286,48 +266,6 @@ def test_article05_has_set_text_length(application):
     assert article_view.text_length is not None
 
 
-def test_article05_has_correct_dates(application):
-    # updated article
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.date_last_published_semantic.isoformat() == (
-        '2013-11-03T08:10:00.626737+01:00')
-    assert article_view.date_first_released.isoformat() == (
-        '2013-10-24T08:00:00+02:00')
-    assert article_view.date_last_modified.isoformat() == (
-        '2013-11-03T08:10:00.626737+01:00')
-
-
-def test_article03_has_correct_dates(application):
-    # not updated article
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/03')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.date_first_released.isoformat() == (
-        '2013-07-30T17:20:50.176115+02:00')
-    assert article_view.date_last_modified.isoformat() == (
-        '2013-07-30T17:20:50.176115+02:00')
-
-
-def test_article09_has_correct_date_formats(application):
-    # print article, updated
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/09')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.show_date_format == 'long'
-    assert article_view.show_date_format_seo == 'short'
-
-
-def test_article10_has_correct_date_formats(application):
-    # online article, updated
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/10')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.show_date_format == 'long'
-    assert article_view.show_date_format_seo == 'long'
-
-
 def test_article08_has_first_author(application):
     xml = 'http://xml.zeit.de/zeit-magazin/article/08'
     context = zeit.cms.interfaces.ICMSContent(xml)
@@ -346,30 +284,6 @@ def test_article08_has_second_author(application):
     assert article_view.authors[1]['suffix'] == ''
     assert article_view.authors[1]['prefix'] == ''
     assert article_view.authors[1]['location'] == ', London'
-
-
-def test_article08_has_correct_genre(application):
-    # 'ein'
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/08')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.genre == 'ein Kommentar'
-
-
-def test_article09_has_correct_genre(application):
-    # 'eine'
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/09')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.genre == 'eine Glosse'
-
-
-def test_article05_has_no_genre(application):
-    # no genre
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/05')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.genre is None
 
 
 def test_article08_has_correct_source_label(application):
@@ -483,8 +397,6 @@ def test_pagination_dict_should_have_correct_entries(application):
 
 def test_pagination_next_title_should_be_in_html(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03/seite-2')
-
-    assert 'Auf Seite 3' in browser.contents
     assert 'Sogar die eckige Flasche kommt' in browser.contents
 
 

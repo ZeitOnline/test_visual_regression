@@ -6,6 +6,7 @@ import babel.dates
 import zope.interface
 
 import zeit.web
+import zeit.web.core.article
 import zeit.web.core.interfaces
 import zeit.web.core.template
 
@@ -30,13 +31,14 @@ def parse_date(date,
 def mod_date(resource):
     try:
         pub_info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
-        # mimic zeit.web.core.view.date_last_published_semantic
-        # whould be unnecessary if date_last_published_semantic is never before
-        # first_released and initially undefined or equal first_released
-        # but it's not like that [ms]
         modified = pub_info.date_last_published_semantic
         released = pub_info.date_first_released
         tz = babel.dates.get_timezone('Europe/Berlin')
+        if zeit.web.core.article.ILiveblogArticle.providedBy(resource):
+            liveblog = zeit.web.core.interfaces.ILiveblogInfo(resource)
+            if liveblog.last_modified:
+                if not modified or modified < liveblog.last_modified:
+                    return liveblog.last_modified
         # use 60s of tolerance before displaying a modification date
         if (released and modified and
                 modified - released > datetime.timedelta(seconds=60)):
@@ -47,7 +49,7 @@ def mod_date(resource):
             return released.astimezone(tz)
         elif modified:
             return modified.astimezone(tz)
-    except TypeError:
+    except (TypeError, AttributeError):
         return
 
 

@@ -65,7 +65,7 @@ def test_dynamic_folder_traversal_should_rewrite_traversal_dictionary(
 
 
 def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
-        application, dummy_request, datasolr):
+        application, dummy_request, data_solr):
     dummy_request.GET['p'] = '2'
 
     tdict = zeit.web.core.routing.RepositoryTraverser.invoke(
@@ -86,46 +86,6 @@ def test_preview_can_traverse_workingcopy_directly(my_traverser, workingcopy):
         tdict = my_traverser(req)
         assert zeit.content.article.interfaces.IArticle.providedBy(
             tdict['context'])
-
-
-def test_routesmapper_should_make_friedbert_surrender_to_blacklisted_routes(
-        testbrowser):
-    with pytest.raises(urllib2.HTTPError) as info:
-        browser = testbrowser('/studium/rankings/index')
-        assert browser.headers.get('X-Render-With') == 'default'
-        assert info.value.getcode() == 501
-
-
-def test_routesmapper_should_make_friedbert_unblacklist_newsfeed_host(
-        testserver):
-    resp = requests.get(testserver.url + '/angebote/printkiosk/index',
-                        headers={'Host': 'newsfeed.zeit.de'})
-    assert 'X-Render-With' not in resp.headers
-
-
-def test_blacklist_entry_should_match_everything_but_image_urls(testbrowser):
-    with pytest.raises(urllib2.HTTPError) as info:
-        resp = testbrowser('/angebote/autosuche/foo/bar/index')
-        assert resp.headers.get('X-Render-With') == 'default'
-    assert info.value.getcode() == 501
-
-    with pytest.raises(urllib2.HTTPError) as info:
-        resp = testbrowser('/angebote/autosuche/foo/bar/my_logo')
-        assert resp.headers.get('X-Render-With') == 'default'
-    assert info.value.getcode() == 501
-
-    with pytest.raises(urllib2.HTTPError) as info:
-        testbrowser('/angebote/autosuche/foo/bar/wide__123x456')
-    assert info.value.getcode() == 404
-
-
-def test_errors_on_blacklist_configuration_should_be_ignored(
-        testserver, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.routing.BlacklistSource, 'getValues', None)
-    zeit.web.core.routing.BlacklistSource()(None)
-    # Just make sure blacklist compilation failures won't breaking anything.
-    assert requests.get(testserver.url + '/index').ok is True
 
 
 @pytest.mark.parametrize('path, moved', [

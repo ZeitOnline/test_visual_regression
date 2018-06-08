@@ -8,23 +8,16 @@ import zeit.web.core.banner
 import zeit.web.site
 
 
-def test_homepage_should_have_proper_ivw_script_integration(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
-
+def test_homepage_should_have_proper_ivw_script_integration(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/zeit-online/slenderized-index')
     ivw = browser.cssselect('script[src="https://script.ioam.de/iam.js"]')
     assert len(ivw) == 1
 
 
-def test_adcontroller_head_code_is_present(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
-
+def test_adcontroller_head_code_is_present(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/zeit-online/slenderized-index')
-
     assert '<!-- ad controller head start -->' in browser.contents
     assert '<!-- adcontroller load -->' in browser.contents
     assert '<!-- mandanten object -->' in browser.contents
@@ -42,29 +35,22 @@ def test_adcontroller_adtags_are_present(testbrowser):
     assert 'ad-mobile-8' in browser.contents
 
 
-def test_adcontroller_finanlizer_is_present(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+def test_adcontroller_finanlizer_is_present(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/zeit-online/slenderized-index')
-
     assert 'AdController.finalize();' in browser.contents
 
 
-def test_adcontroller_js_var_isset(selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+def test_adcontroller_js_var_isset(selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver = selenium_driver
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
-
     adctrl = driver.execute_script("return typeof window.AdController")
     assert adctrl == "object"
 
 
-def test_adplaces_present_on_pages(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
-
+def test_adplaces_present_on_pages(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/zeit-online/slenderized-index')
     assert len(browser.cssselect('#iqadtileOOP')) == 1
     assert len(browser.cssselect('#ad-desktop-1')) == 1
@@ -87,11 +73,8 @@ def test_adplaces_present_before_buzzboard(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-desktop-5')) == 1
 
 
-def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True,
-        'iqd': True
-    }.get)
+def test_adplaces_present_on_zmo_cp(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/zeit-magazin/centerpage/lebensart')
     assert len(browser.cssselect('#iqadtileOOP')) == 1
     assert len(browser.cssselect('#ad-desktop-1')) == 1
@@ -105,11 +88,8 @@ def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-mobile-4')) == 1
 
 
-def test_adplaces_present_on_zco_cp(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True,
-        'iqd': True
-    }.get)
+def test_adplaces_present_on_zco_cp(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
 
     # test homepage
     browser = testbrowser('/campus/index')
@@ -143,35 +123,59 @@ def test_mobile_ad_place_right_behind_the_first_teaser(
         '.main > div > div > article:nth-child(2) + div > script#ad-mobile-3 ')
 
 
-def test_adplaces_have_banner_label_data_attribute(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True,
-        'iqd': True
-    }.get)
-
+def test_adplaces_have_banner_label_data_attribute(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'third_party_modules', 'iqd', 'zon_admark')
     browser = testbrowser('/zeit-online/article/zeit')
-
     labelstring = "elem.setAttribute('data-banner-label', 'Anzeige');"
-
     assert labelstring not in browser.cssselect('#ad-desktop-1')[0].text
     assert labelstring not in browser.cssselect('#ad-desktop-2')[0].text
     assert labelstring in browser.cssselect('#ad-desktop-3')[0].text
     assert labelstring in browser.cssselect('#ad-desktop-5')[0].text
-    assert labelstring not in browser.cssselect('#ad-mobile-1')[0].text
-    assert labelstring not in browser.cssselect('#ad-mobile-3')[0].text
-    assert labelstring not in browser.cssselect('#ad-mobile-4')[0].text
+    assert labelstring in browser.cssselect('#ad-mobile-1')[0].text
+    assert labelstring in browser.cssselect('#ad-mobile-3')[0].text
+    assert labelstring in browser.cssselect('#ad-mobile-4')[0].text
+
+
+def test_adplaces_have_no_banner_label_data_attribute(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
+    labelstring = "elem.setAttribute('data-banner-label', 'Anzeige');"
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert labelstring not in browser.contents
+
+    browser = testbrowser('/zeit-online/index')
+    assert labelstring not in browser.contents
+
+
+def test_banner_content_enabled_shows_all_ads(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(
+        browser.cssselect('article.article script[id|="ad-desktop"]')) == 3
+    assert len(
+        browser.cssselect('article.article script[id|="ad-mobile"]')) == 2
+    assert not browser.cssselect('#iq-artikelanker')
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('iqd_contentmarketing_ad')
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(
+        browser.cssselect('article.article script[id|="ad-desktop"]')) == 2
+    assert len(browser.cssselect('article.article #iq-artikelanker')) == 1
+
+
+def test_banner_content_disabled_exclude_body_ads(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
+    browser = testbrowser('/zeit-online/article/banner_content_no')
+    assert not browser.cssselect('article.article script[id|="ad-desktop"]')
+    assert not browser.cssselect('article.article script[id|="ad-mobile"]')
+    assert not browser.cssselect('article.article #iq-artikelanker')
 
 
 def test_iqd_adtile2_should_not_be_inserted_on_small_screens(
-        selenium_driver, testserver, monkeypatch):
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True,
-        'iqd': True
-    }.get)
-
+        selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver = selenium_driver
-
     driver.set_window_size(920, 800)
     driver.get('%s/zeit-online/article/zeit/seite-2' % testserver.url)
     try:
@@ -334,6 +338,27 @@ def test_iqd_adtile8_on_article_new_placement_alternative(
     assert body[2].cssselect('script')[0].get('id') == 'ad-desktop-8'
 
 
-def test_p5_not_displayed_when_there_are_no_comments(testbrowser):
-    browser = testbrowser('/zeit-online/article/quiz')
+def test_adtile5_is_empty_on_zmo_paywall(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'third_party_modules', 'iqd', 'reader_revenue')
+    zeit.web.core.application.FEATURE_TOGGLES.unset(
+        'ligatus', 'iqd_contentmarketing_ad')
+    param = "?C1-Meter-Status=paywall&C1-Meter-User-Status=always-paid"
+    browser = testbrowser('/zeit-magazin/article/01' + param)
     assert not browser.cssselect('#ad-desktop-5')
+
+
+def test_contentad_is_rendered_once_on_article_pages(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'third_party_modules', 'iqd', 'iqd_contentmarketing_ad')
+
+    selector = '#iq-artikelanker'
+
+    browser = testbrowser('/zeit-online/article/fischer')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/fischer/seite-2')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/fischer/komplettansicht')
+    assert len(browser.cssselect(selector)) == 1

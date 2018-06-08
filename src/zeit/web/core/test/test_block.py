@@ -8,8 +8,6 @@ import mock
 import pyramid_dogpile_cache2
 import pyramid.testing
 import pytest
-import requests
-import requests.exceptions
 import requests_mock
 import zope.interface.declarations
 
@@ -25,7 +23,7 @@ def test_inline_html_replaces_http_protocol_if_https_toggle_set(monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'https': True}.get)
 
-    rewrite_links = []
+    rewrite_links = ''
 
     def getUtility(utility):
         if utility is zeit.web.core.interfaces.ISettings:
@@ -44,12 +42,37 @@ def test_inline_html_replaces_http_protocol_if_https_toggle_set(monkeypatch):
     assert xml_str == (
         str(zeit.web.core.block._inline_html(xml)).replace('\n', ''))
 
-    rewrite_links = ['www.zeit.de']
+    rewrite_links = 'www.zeit.de'
     xml_str = ('Text <a href="https://www.zeit.de/foo'
                '?foo=bar#fragment" class="myclass" '
                'rel="nofollow" data-foo="bar"> ba </a> und mehr Text')
     assert xml_str == (
         str(zeit.web.core.block._inline_html(xml)).replace('\n', ''))
+
+
+def test_raw_html_should_replace_secure_urls(monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'https': True}.get)
+
+    rewrite_links = ''
+
+    def getUtility(utility):
+        if utility is zeit.web.core.interfaces.ISettings:
+            return {'transform_to_secure_links_for': rewrite_links}
+        if utility is zeit.web.core.interfaces.IMetrics:
+            return zeit.web.core.metrics.Metrics('test', 'localhost', 0)
+
+    monkeypatch.setattr(zope.component, 'getUtility', getUtility)
+
+    raw = '<raw><x>http://interactive.zeit.de/foo</x></raw>'
+    xml = lxml.etree.fromstring(raw)
+    assert '<x>http://interactive.zeit.de/foo</x>' == (
+        str(zeit.web.core.block._raw_html(xml)).replace('\n', ''))
+
+    rewrite_links = 'interactive.zeit.de'
+    xml = lxml.etree.fromstring(raw)
+    assert '<x>https://interactive.zeit.de/foo</x>' == (
+        str(zeit.web.core.block._raw_html(xml)).replace('\n', ''))
 
 
 def test_inline_html_should_filter_to_valid_html():
@@ -335,29 +358,43 @@ def liveblog():
 
 
 def test_liveblog_auth(application, liveblog):
-    token = liveblog.api_auth_token()
+    token = liveblog.auth_token()
     assert token == u'3b4b508e-66e4-4977-910c-c8bd5b985d09'
 
 
-def test_liveblog_auth_fail(application, liveblog, monkeypatch):
-    def post(url, data, headers):
-        response = requests.Response()
-        response.status_code = 401
-        return response
+def test_liveblog_auth_fail(application, caplog, liveblog, monkeypatch):
+    # Undo fixture setup
+    liveblog.auth_token.invalidate(liveblog)
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    auth_url = conf.get('liveblog_api_auth_url_v3')
 
-    monkeypatch.setattr(requests, 'post', post)
-    monkeypatch.setattr(
-        zeit.web.core.block.Liveblog, 'set_blog_info', lambda x: [])
+    with requests_mock.Mocker() as m:
+        m.post(auth_url, reason='Unauthorized', status_code=401)
+        token = liveblog.auth_token()
+        assert token is None
+        assert '401 Client Error' in caplog.text
 
-    with pytest.raises(requests.exceptions.HTTPError):
-        liveblog.api_auth_token()
+
+def test_liveblog_api_request_is_not_stoped_by_unavailable_auth_server(
+        application, caplog, liveblog, monkeypatch):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    api_url = conf.get('liveblog_api_url_v3')
+    api_url = '{}/{}'.format(api_url, liveblog.blog_id)
+    auth_url = conf.get('liveblog_api_auth_url_v3')
+
+    with requests_mock.Mocker() as m:
+        m.get(api_url, json={'blog_id': '123'}, status_code=200)
+        m.post(
+            auth_url, reason='Service unavailable', status_code=503)
+        blog_object = liveblog.api_blog_request()
+        assert '123' == blog_object['blog_id']
 
 
 def test_liveblog_api_request_renews_expired_cache_token(
-        application, liveblog, monkeypatch):
-    new_cache = zeit.web.core.cache.get_region('long_term')
-    new_cache.set('liveblog_api_auth_token', '12345')
-    monkeypatch.setattr(zeit.web.core.block, 'LONG_TERM_CACHE', new_cache)
+        application, liveblog):
+    cache_key = 'zeit.web.core.block.Liveblog.auth_token|'
+    cache = zeit.web.core.cache.get_region('long_term')
+    cache.set(cache_key, '12345')
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     api_url = conf.get('liveblog_api_url_v3')
@@ -371,17 +408,17 @@ def test_liveblog_api_request_renews_expired_cache_token(
         m.post(auth_url, json={"token": "78901"}, status_code=200)
         liveblog.api_blog_request()
         # the (new) token ends up in the cache...
-        assert '78901' == new_cache.get('liveblog_api_auth_token')
+        assert '78901' == cache.get(cache_key)
 
 
 def test_liveblog_get_info(application, liveblog):
-    assert liveblog.last_modified.isoformat() == u'2017-12-22T14:17:23+01:00'
+    assert liveblog.last_modified.isoformat() == u'2017-12-05T16:12:54+01:00'
     assert liveblog.is_live is True
 
 
 def test_liveblog_get_amp_id(application, liveblog):
-    amp_id = liveblog.get_amp_themed_id(liveblog.blog_id)
-    assert amp_id == u'amp/59fc6d566aa4f500e7c68bd7'
+    amp_id = liveblog.get_amp_themed_id(liveblog.id)
+    assert amp_id == u'zon-amp-solo/5a3d05af6aa4f500f30315d3'
 
 
 def test_block_breaking_news_has_correct_date(application):
@@ -408,15 +445,18 @@ def test_block_citation_should_contain_expected_structure(tplbrowser):
 
 def test_block_contentadblock_should_contain_expected_structure(tplbrowser):
     view = mock.Mock()
+    page = mock.Mock()
+    page.number = 0
     browser = tplbrowser(
-        'zeit.web.core:templates/inc/blocks/contentadblock.html', view=view)
+        'zeit.web.core:templates/inc/blocks/contentadblock.html',
+        view=view, page=page)
     assert browser.cssselect('div#iq-artikelanker')
 
 
 def test_block_contentadblock_isnt_shown_when_content_ad_enabled_is_false(
         tplbrowser):
     view = mock.Mock()
-    view.content_ad_enabled = False
+    view.advertising_in_article_body_enabled = False
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/contentadblock.html', view=view)
     assert not browser.cssselect('div#iq-artikelanker')
@@ -682,7 +722,8 @@ def test_podcast_header_should_provide_podlove_data(application):
 def test_podcast_should_show_podcast_links(testbrowser):
     browser = testbrowser('/zeit-online/article/podcast-header')
     podcast_links = browser.cssselect('.podcast-links__link')
+    assert len(podcast_links) == 4
     assert podcast_links[0].get('href') == 'http://xml.zeit.de/podcast/id1656'
     assert podcast_links[1].get('href') == 'http://xml.zeit.de/spotify_url'
-    # There's only two links, since no deezer url has been provided.
-    assert len(podcast_links) == 2
+    assert podcast_links[2].get('href') == 'http://xml.zeit.de/deezer_url'
+    assert podcast_links[3].get('href') == 'http://xml.zeit.de/alexa_url'

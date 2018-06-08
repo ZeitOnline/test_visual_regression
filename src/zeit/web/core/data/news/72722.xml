@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, Tagesspiegel | 01.09.2006 18:45</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2006-09-01T06:45Z</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">News</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="pagelabel">News</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">News</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">5000</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">imported</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2006-09-01T06:45:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e0148356-37ad-4836-9792-8af74c008cff}</attribute>
+  </head>
+  <body>
+    <title>Verkehr: Keine Strafe für armlosen Autofahrer</title>
+    <subtitle>In Neuseeland hat ein armloser Autofahrer keine Strafe wegen gefährlichen Fahrens bekommen. Der 31-Jährige bewies der Polizei, dass er fähig ist ein Auto sicher zu führen.</subtitle>
+    <p>Tauranga - Für das Steuern eines normalen Autos mit seinen Füßen ist ein ohne Arme geborener Neuseeländer ohne Strafe davongekommen. Die Ermittlungen wegen gefährlichen Fahrens gegen den 31-jährigen Colin Smith seien eingestellt worden, teilte  die Polizei in Tauranga mit. Smith habe den Beamten  bewiesen, dass er tatsächlich ein normales Auto mit  Automatikschaltung sicher steuern kann. Die Polizei hatte Smith im  März wegen zu schnellen Fahrens gestoppt. Dem diensthabenden  Beamten fiel nach eigenen Angaben zunächst auf, dass die Lehne des  Fahrersitzes weit zurückgeschraubt war und der Fahrer einen Fuß auf  dem Armaturenbrett hatte. Dann sah der schockierte Polizist, dass  der junge Mann keine Arme hat.</p>
+    <p>Smith habe ihm daraufhin erzählt, dass er schon seit Jahren ohne  Probleme Auto fahre, indem er mit einem Fuß lenke und mit dem  anderen Gas- und Bremspedal bediene. Smith musste lediglich für die  Geschwindigkeitsüberschreitung eine Geldbuße zahlen. Die Polizei  forderte ihn auf, in Zukunft nur mit einem eigens für ihn  umgebauten Auto zu fahren.</p>
+    <p>(tso/AFP)</p>
+    <p>
+      <a href="http://www.zeit.de/news">
+        <strong>mehr Nachrichten »</strong>
+      </a>
+    </p>
+    <teaser>
+      <title/>
+      <text>In Neuseeland hat ein armloser Autofahrer keine Strafe wegen gefährlichen Fahrens bekommen. Der 31-Jährige bewies der Polizei, dass er fähig ist ein Auto sicher zu führen.</text>
+    </teaser>
+  </body>
+</article>

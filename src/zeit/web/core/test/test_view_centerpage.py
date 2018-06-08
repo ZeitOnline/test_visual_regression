@@ -204,7 +204,7 @@ def test_next_page_url_should_be_set_on_page_based_paginated_centerpages(
     dummy_request.GET['p'] = '8'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
-    assert view.next_page_url == 'http://example.com?p=9'
+    assert view.next_page_url == 'http://example.com/?p=9'
 
 
 def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
@@ -217,7 +217,7 @@ def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
     dummy_request.GET['p'] = '2'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
-    assert view.prev_page_url == 'http://example.com'
+    assert view.prev_page_url == 'http://example.com/'
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
@@ -226,7 +226,7 @@ def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
     dummy_request.GET['p'] = '3'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
-    assert view.prev_page_url == 'http://example.com?p=2'
+    assert view.prev_page_url == 'http://example.com/?p=2'
 
 
 def test_next_page_url_should_be_set_on_date_based_paginated_centerpages(
@@ -237,7 +237,7 @@ def test_next_page_url_should_be_set_on_date_based_paginated_centerpages(
 
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/news/index')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
-    assert view.next_page_url == 'http://example.com?date=2016-05-09'
+    assert view.next_page_url == 'http://example.com/?date=2016-05-09'
 
 
 def test_prev_page_url_should_be_set_on_date_based_paginated_centerpages(
@@ -249,12 +249,12 @@ def test_prev_page_url_should_be_set_on_date_based_paginated_centerpages(
     dummy_request.GET['date'] = '2016-05-09'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/news/index')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
-    assert view.prev_page_url == 'http://example.com'
+    assert view.prev_page_url == 'http://example.com/'
 
     dummy_request.GET['date'] = '2016-05-08'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/news/index')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
-    assert view.prev_page_url == 'http://example.com?date=2016-05-09'
+    assert view.prev_page_url == 'http://example.com/?date=2016-05-09'
 
 
 def test_dynamic_centerpage_contains_webtrekk_pagenumber(
@@ -296,7 +296,7 @@ def test_materialized_topic_cp_contains_correct_webtrekk_param(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/thema/jurastudium')
     view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
-    assert view.webtrekk['customParameter']['cp26'] == 'centerpage.topicpage'
+    assert view.webtrekk['customParameter']['cp26'] == 'centerpage.manualtopic'
 
 
 def test_dynamic_topic_cp_contains_correct_webtrekk_param(dummy_request):
@@ -304,7 +304,7 @@ def test_dynamic_topic_cp_contains_correct_webtrekk_param(dummy_request):
         'http://xml.zeit.de/thema/berlin')
     view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
     assert view.webtrekk['customParameter'][
-        'cp26'] == 'centerpage.keywordpage.location'
+        'cp26'] == 'centerpage.autotopic.location'
 
 
 def test_invisible_region_should_not_be_rendered(application, testbrowser):
@@ -344,7 +344,7 @@ def test_invisible_module_should_not_be_rendered(application, testbrowser):
 
 
 def test_centerpage_should_update_webtrekk_content_id_for_search_results(
-        application, dummy_request, datasolr):
+        application, dummy_request, data_es):
     dummy_request.GET['q'] = 'test'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)

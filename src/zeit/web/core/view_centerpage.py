@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import urlparse
 
 import pyramid.httpexceptions
 import zope.component
@@ -162,8 +163,8 @@ class Centerpage(AreaProvidingPaginationMixin,
         # Video CP
         elif self.ressort == 'video':
             breadcrumbs.extend([('Video', self.context.uniqueId)])
-        # Topicpage
-        elif self.context.type == 'topicpage':
+        # Topicpages
+        elif self.context.type in ['autotopic', 'manualtopic']:
             self.breadcrumbs_by_navigation(breadcrumbs)
             breadcrumbs.extend([(
                 u'Thema: {}'.format(self.supertitle), None)])
@@ -201,7 +202,9 @@ class Centerpage(AreaProvidingPaginationMixin,
         if zeit.content.cp.interfaces.ISearchpage.providedBy(self.context):
             area = self.area_providing_pagination
             if area and getattr(area, 'query_string', None):
-                content_url = self.content_url.replace('http://', '')
+                _, netloc, path, _, _, _ = urlparse.urlparse(
+                    self.content_url)
+                content_url = '{}{}'.format(netloc, path)
                 if content_url.endswith('/index'):
                     content_url = content_url[:-len('/index')]
                 if area.hits:
@@ -255,8 +258,8 @@ class Centerpage(AreaProvidingPaginationMixin,
     @zeit.web.reify
     def jsonld_listing(self):
         allowed_cp_types = [
-            'topicpage',
-            'keywordpage',
+            'autotopic',
+            'manualtopic',
             'serienseite',
             'ins_serienseite']
         if self.context.type in allowed_cp_types:

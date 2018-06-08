@@ -2,7 +2,10 @@ import mock
 import pyramid.testing
 import pytest
 import requests
+
+from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
+
 import zeit.web.core.view_article
 
 from selenium.common.exceptions import TimeoutException
@@ -19,6 +22,19 @@ def test_amp_disabled_articles_should_redirect_accordingly(testserver):
     assert resp.status_code == 302
 
 
+def test_amp_disabled_specialized_articles_should_redirect_accordingly(
+        testserver, workingcopy):
+    with checked_out(zeit.cms.interfaces.ICMSContent(
+            'http://xml.zeit.de/zeit-online/article/liveblog3')) as co:
+        co.is_amp = False
+    resp = requests.get(
+        testserver.url + '/amp/zeit-online/article/liveblog3?foo=42',
+        allow_redirects=False)
+    assert resp.headers.get('Location') == (
+        testserver.url + '/zeit-online/article/liveblog3?foo=42')
+    assert resp.status_code == 302
+
+
 def test_article_tags_template_renders_rel_attribute(
         tplbrowser, dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
@@ -32,13 +48,11 @@ def test_article_tags_template_renders_rel_attribute(
         assert tag.get('rel') == 'tag'
 
 
-def test_adc_keywords_are_sanitized_correctly(selenium_driver,
-                                              testserver, monkeypatch):
+def test_adc_keywords_are_sanitized_correctly(selenium_driver, testserver):
     driver = selenium_driver
     # avoid "diuquilon", which is added by JS for specific screen sizes
     driver.set_window_size(1200, 800)
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver.get('%s/zeit-online/article/tags' % testserver.url)
     assert ('zeitonline,mailand,claudioabbado,johannsebastianbach,oper,'
             'opernhaus,10slze42foo' == driver.execute_script(
@@ -67,10 +81,15 @@ def test_url_of_image_groups_is_suffixed_with_mobile_on_small_browser_size(
 def test_url_of_image_groups_is_suffixed_with_desktop_on_big_browser_size(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/article/01' % testserver.url)
-    body_image = driver.find_element_by_css_selector('.article__media img')
-    assert body_image.get_attribute('src').endswith('desktop')
+    try:
+        body_image = WebDriverWait(driver, 2).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.article__media img')))
+        assert body_image.get_attribute('src').endswith('desktop')
+    except TimeoutException:
+        assert False
 
 
 def test_app_user_feedback_is_working(selenium_driver, testserver):

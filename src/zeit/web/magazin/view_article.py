@@ -39,16 +39,9 @@ import zeit.web.magazin.view
     context=zeit.web.magazin.article.IPhotoclusterArticle,
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
-class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
-
-    @zeit.web.reify
-    def genre(self):
-        prefix = 'ein'
-        if self.context.genre in (
-                'analyse', 'glosse', 'nachricht', 'reportage'):
-            prefix = 'eine'
-        if self.context.genre:
-            return prefix + ' ' + self.context.genre.title()
+class Article(zeit.web.core.view_article.Article,
+              zeit.web.magazin.view.Content):
+    pass
 
 
 @zeit.web.view_defaults(vertical='zmo')

@@ -165,7 +165,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             if ( element.type === 'submit' ) {
                 href = element.form.action + '?' + $( element.form ).serialize();
-                type = sanitizeString( element.value );
+                type = element.value;
             } else {
                 href = $element.attr( 'href' );
             }
@@ -443,7 +443,6 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                         '#servicebox',
                         '.teaser-topic-variant__media',
                         '.breaking-news-banner',
-                        '.article-lineage',
                         '.js-truncate-region'
                     ].join(),
                     'a[data-id]:not([data-wt-click])'

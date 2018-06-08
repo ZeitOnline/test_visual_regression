@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 import datetime
+import json
 
 import pytest
 import zope.component
@@ -11,7 +13,7 @@ import zeit.web.core.utils
 import zeit.web.site.module.search_form
 
 
-@pytest.fixture
+@pytest.fixture(scope='function')
 def search_form(application, dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/suche/index')
@@ -20,8 +22,18 @@ def search_form(application, dummy_request):
     return zeit.web.core.centerpage.get_module(block)
 
 
-@pytest.fixture
-def search_area(application, dummy_request):
+@pytest.fixture(scope='function')
+def search_area(application, dummy_request, monkeypatch):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/suche/index')
+    area = zeit.web.core.utils.find_block(
+        context, attrib='area', kind='ranking')
+    monkeypatch.setattr(area, 'automatic_type', 'query')
+    return zeit.web.core.centerpage.get_area(area)
+
+
+@pytest.fixture(scope='function')
+def elasticsearch_area(application, dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/suche/index')
     area = zeit.web.core.utils.find_block(
@@ -29,16 +41,16 @@ def search_area(application, dummy_request):
     return zeit.web.core.centerpage.get_area(area)
 
 
-def test_search_form_should_allow_empty_query(
+def test_search_form_should_allow_empty_search_term(
         dummy_request, search_form):
     dummy_request.GET['q'] = ''
-    assert search_form.query is None
+    assert search_form.search_term is None
 
 
-def test_search_form_should_allow_valid_query_string(
+def test_search_form_should_allow_valid_search_term(
         dummy_request, search_form):
-    dummy_request.GET['q'] = 'pfannkuchen'
-    assert search_form.query == 'pfannkuchen'
+    dummy_request.GET['q'] = 'pfannkuchen AND ahornsirup'
+    assert search_form.search_term == 'pfannkuchen AND ahornsirup'
 
 
 def test_search_form_should_allow_empty_type_setting(
@@ -76,46 +88,45 @@ def test_search_form_should_default_to_recency_sort_order(
         dummy_request, search_form):
     dummy_request.GET['q'] = ''
     dummy_request.GET['sort'] = ''
-    assert search_form.sort_order == 'aktuell'
+    assert search_form.order == 'aktuell'
 
 
 def test_search_form_should_default_to_recency_sort_order_with_query(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'foo'
     dummy_request.GET['sort'] = ''
-    assert search_form.sort_order == 'aktuell'
+    assert search_form.order == 'aktuell'
 
 
 def test_search_form_should_sort_valid_queries_by_relevancy(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'pfannkuchen'
     dummy_request.GET['sort'] = ''
-    assert search_form.sort_order == 'aktuell'
+    assert search_form.order == 'aktuell'
 
 
 def test_search_form_should_ignore_invalid_sort_orders(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'pfannkuchen'
     dummy_request.GET['sort'] = 'pfannkuchen'
-    assert search_form.sort_order == 'aktuell'
+    assert search_form.order == 'aktuell'
 
 
 def test_search_form_should_allow_valid_search_order_aktuell(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'pfannkuchen'
     dummy_request.GET['sort'] = 'aktuell'
-    assert search_form.sort_order == 'aktuell'
+    assert search_form.order == 'aktuell'
 
 
 def test_search_form_should_allow_valid_search_order_relevanz(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'pfannkuchen'
     dummy_request.GET['sort'] = 'relevanz'
-    assert search_form.sort_order == 'relevanz'
+    assert search_form.order == 'relevanz'
 
 
-def test_search_form_should_create_valid_empty_query_string(
-        dummy_request, search_form):
+def test_search_form_should_create_valid_empty_solr_query(search_form):
     assert search_form.raw_query == (
         'type:(article OR gallery OR video) '
         'NOT product_id:(News OR afp OR SID OR ADV) '
@@ -123,43 +134,188 @@ def test_search_form_should_create_valid_empty_query_string(
         'NOT expires:[* TO NOW]')
 
 
-def test_search_form_should_create_valid_fulltext_query_string(
+def test_search_form_should_make_valid_empty_elasticsearch_query(search_form):
+    assert json.loads(search_form.elasticsearch_raw_query) == {'query': {
+        u'bool': {
+            u'must': [{
+                u'match_all': {}
+            }, {
+                u'terms': {
+                    u'payload.meta.type': [
+                        u'article', u'gallery', u'video']}
+            }, {
+                u'term': {u'payload.workflow.published': True}
+            }],
+            u'must_not': [{
+                u'terms': {
+                    u'payload.workflow.product-id': [
+                        u'ADV', u'News', u'SID', u'afp']}
+            }, {
+                u'terms': {
+                    u'payload.document.ressort': [
+                        u'Administratives', u'Aktuelles', u'News']}
+            }]
+        }
+    }}
+
+
+def test_search_form_should_create_valid_fulltext_solr_query(
         dummy_request, search_form):
-    dummy_request.GET['q'] = 'pfannkuchen AND ahornsirup'
+    dummy_request.GET['q'] = u'pfannkuchen OR müsli'
     assert search_form.raw_query == (
-        '{!boost b=recip(ms(NOW,last-semantic-change),3.16e-11,1,1)}'
-        '{!type=IntrafindQueryParser}(pfannkuchen AND ahornsirup) '
-        'type:(article OR gallery OR video) '
-        'NOT product_id:(News OR afp OR SID OR ADV) '
-        'NOT ressort:(Administratives OR News OR Aktuelles) '
-        'NOT expires:[* TO NOW]')
+        u'{!boost b=recip(ms(NOW,last-semantic-change),3.16e-11,1,1)}'
+        u'{!type=IntrafindQueryParser}(pfannkuchen OR müsli) '
+        u'type:(article OR gallery OR video) '
+        u'NOT product_id:(News OR afp OR SID OR ADV) '
+        u'NOT ressort:(Administratives OR News OR Aktuelles) '
+        u'NOT expires:[* TO NOW]')
 
 
-def test_search_form_should_create_valid_date_range_query_string(
-        dummy_request, monkeypatch, search_form):
-    def year_range():
-        return datetime.datetime(2000, 1, 1), datetime.datetime(2010, 1, 1)
+def test_search_form_should_create_valid_fulltext_elasticsearch_query(
+        dummy_request, search_form):
+    dummy_request.GET['q'] = u'pfannkuchen OR müsli'
+    assert json.loads(search_form.elasticsearch_raw_query) == {'query': {
+        u'bool': {
+            u'must': [{
+                u'simple_query_string': {
+                    u'query': u'pfannkuchen OR müsli',
+                    u'fields': search_form.FIELDS}
+            }, {
+                u'terms': {
+                    u'payload.meta.type': [
+                        u'article', u'gallery', u'video']}
+            }, {
+                u'term': {u'payload.workflow.published': True}
+            }],
+            u'must_not': [{
+                u'terms': {
+                    u'payload.workflow.product-id': [
+                        u'ADV', u'News', u'SID', u'afp']}
+            }, {
+                u'terms': {
+                    u'payload.document.ressort': [
+                        u'Administratives', u'Aktuelles', u'News']}
+            }]
+        }
+    }}
 
-    monkeypatch.setattr(
-        zeit.web.site.module.search_form, 'MODES', {'1y': (year_range,)})
 
+def test_search_form_should_create_valid_date_range_solr_query(
+        dummy_request, search_form, clock, monkeypatch):
+    clock.freeze(datetime.datetime(2010, 3, 2))
+    monkeypatch.setattr(zeit.find.daterange, 'datetime', clock)
     dummy_request.GET['mode'] = '1y'
     assert search_form.raw_query == (
-        'last-semantic-change:[2000-01-01T00:00:00Z TO 2010-01-01T00:00:00Z] '
+        'last-semantic-change:[2009-03-01T00:00:00Z TO 2010-03-02T00:00:00Z] '
         'type:(article OR gallery OR video) '
         'NOT product_id:(News OR afp OR SID OR ADV) '
         'NOT ressort:(Administratives OR News OR Aktuelles) '
         'NOT expires:[* TO NOW]')
 
 
-def test_search_form_should_create_valid_type_restricted_query(
+def test_search_form_should_create_valid_date_range_elasticsearch_query(
         dummy_request, search_form):
-    dummy_request.GET['mode'] = 'article gallery'
+    dummy_request.GET['mode'] = '1y'
+    assert json.loads(search_form.elasticsearch_raw_query) == {'query': {
+        u'bool': {
+            u'must': [{
+                u'match_all': {}
+            }, {
+                u'terms': {
+                    u'payload.meta.type': [
+                        u'article', u'gallery', u'video']}
+            }, {
+                u'term': {u'payload.workflow.published': True}
+            }, {
+                u'range': {
+                    u'payload.document.last-semantic-change': {u'gte': u'1y'}}
+            }],
+            u'must_not': [{
+                u'terms': {
+                    u'payload.workflow.product-id': [
+                        u'ADV', u'News', u'SID', u'afp']}
+            }, {
+                u'terms': {
+                    u'payload.document.ressort': [
+                        u'Administratives', u'Aktuelles', u'News']}
+            }]
+        }
+    }}
+
+
+def test_search_form_should_create_valid_type_restricted_solr_query(
+        dummy_request, search_form):
+    dummy_request.GET.add('type', 'article')
+    dummy_request.GET.add('type', 'gallery')
     assert search_form.raw_query == (
-        'type:(article OR gallery OR video) '
+        'type:(article OR gallery) '
         'NOT product_id:(News OR afp OR SID OR ADV) '
         'NOT ressort:(Administratives OR News OR Aktuelles) '
         'NOT expires:[* TO NOW]')
+
+
+def test_search_form_should_create_valid_type_restricted_elasticsearch_query(
+        dummy_request, search_form):
+    dummy_request.GET.add('type', 'article')
+    dummy_request.GET.add('type', 'gallery')
+    assert json.loads(search_form.elasticsearch_raw_query) == {'query': {
+        u'bool': {
+            u'must': [{
+                u'match_all': {}
+            }, {
+                u'terms': {
+                    u'payload.meta.type': [u'article', u'gallery']}
+            }, {
+                u'term': {u'payload.workflow.published': True}
+            }],
+            u'must_not': [{
+                u'terms': {
+                    u'payload.workflow.product-id': [
+                        u'ADV', u'News', u'SID', u'afp']}
+            }, {
+                u'terms': {
+                    u'payload.document.ressort': [
+                        u'Administratives', u'Aktuelles', u'News']}
+            }]
+        }
+    }}
+
+
+def test_search_form_should_boost_elasticsearch_query_by_relevancy(
+        dummy_request, search_form):
+    dummy_request.GET['q'] = 'beans AND toast'
+    dummy_request.GET['sort'] = 'relevanz'
+    assert json.loads(search_form.elasticsearch_raw_query) == {'query': {
+        u'bool': {
+            u'must': [{
+                u'function_score': {
+                    u'query': {
+                        u'simple_query_string': {
+                            u'query': u'beans AND toast',
+                            u'fields': search_form.FIELDS}},
+                    u'linear': {
+                        u'payload.document.date-last-modified': {
+                            u'scale': u'365d'
+                        }
+                    }
+                }
+            }, {
+                u'terms': {u'payload.meta.type': [
+                    u'article', u'gallery', u'video']}
+            }, {
+                u'term': {u'payload.workflow.published': True}
+            }],
+            u'must_not': [{
+                u'terms': {
+                    u'payload.workflow.product-id': [
+                        u'ADV', u'News', u'SID', u'afp']}
+            }, {
+                u'terms': {
+                    u'payload.document.ressort': [
+                        u'Administratives', u'Aktuelles', u'News']}
+            }]
+        }
+    }}
 
 
 def test_search_area_should_delegate_sort_order_to_search_form(
@@ -167,8 +323,6 @@ def test_search_area_should_delegate_sort_order_to_search_form(
     dummy_request.GET['q'] = 'irgendetwas'
     dummy_request.GET['sort'] = 'publikation'
     assert search_area.sort_order == 'publikation'
-    orders = zeit.web.site.module.search_form.ORDERS
-    assert search_area.raw_order == orders['publikation']
 
 
 def test_ranking_area_should_use_default_order_when_no_search_form(
@@ -188,29 +342,58 @@ def test_ranking_area_should_use_its_own_query_when_no_search_form(
     assert 'umbrien' in area.raw_query
 
 
-def test_search_area_should_produce_valid_set_of_search_results(search_area):
+def test_search_area_should_produce_valid_set_of_solr_results(
+        search_area):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': 'foo://zeit.de'}]
-    assert list(search_area.values()[0])[0].uniqueId == 'foo://zeit.de'
+    solr.results = [{'uniqueId': 'http://xml.zeit.de/arbeit/article/quotes'}]
+    assert list(search_area.values()[0])[0].uniqueId == (
+        'http://xml.zeit.de/arbeit/article/quotes')
 
 
-def test_empty_search_result_should_produce_zero_hit_counter(search_area):
+def test_search_area_should_produce_valid_set_of_elasticsearch_results(
+        elasticsearch_area):
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [{'uniqueId': 'http://xml.zeit.de/campus/article/simple'}]
+    assert list(elasticsearch_area.values()[0])[0].uniqueId == (
+        'http://xml.zeit.de/campus/article/simple')
+
+
+def test_empty_solr_result_should_produce_zero_hit_counter(search_area):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = []
     assert search_area.hits == 0
 
 
-def test_successful_search_result_should_produce_nonzero_hit_counter(
+def test_empty_elasticsearch_result_should_produce_zero_hit_counter(
+        elasticsearch_area):
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = []
+    assert elasticsearch_area.hits == 0
+
+
+def test_successful_solr_result_should_produce_nonzero_hit_counter(
         search_area):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': ('http://xml.zeit.de/zeit-magazin/article/0%s'
-                                  % i)}
-                    for i in range(1, 74)]
+    solr.results = [{'uniqueId': ('http://xml.zeit.de/article/0%s' % i)
+                     } for i in range(1, 74)]
     assert search_area.hits == 73
 
 
-def test_empty_search_result_should_produce_valid_resultset(search_area):
+def test_successful_elasticsearch_result_should_produce_nonzero_hit_counter(
+        elasticsearch_area):
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [{'url': ('http://xml.zeit.de/article/0%s' % i)
+                   } for i in range(1, 43)]
+    assert elasticsearch_area.hits == 42
+
+
+def test_empty_solr_result_should_produce_valid_resultset(search_area):
     assert len([a for b in search_area.values() for a in b if b]) == 0
+
+
+def test_empty_elasticsearch_result_should_produce_valid_resultset(
+        elasticsearch_area):
+    assert len([a for b in elasticsearch_area.values() for a in b if b]) == 0
 
 
 def get_result_dict(unique_id):
@@ -222,11 +405,10 @@ def get_result_dict(unique_id):
         'uniqueId': unique_id}
 
 
-def test_successful_search_result_should_produce_valid_resultset(search_area):
+def test_successful_solr_result_should_produce_valid_resultset(search_area):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': ('http://xml.zeit.de/zeit-magazin/article/0%s'
-                                  % i)}
-                    for i in range(1, 9)]
+    uid = 'http://xml.zeit.de/zeit-magazin/article/0%s'
+    solr.results = [{'uniqueId': (uid % i)} for i in range(1, 9)]
     assert len([a for b in search_area.values() for a in b if b]) == 8
     solr.results = [{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}]
     block = iter(search_area.values()).next()
@@ -234,47 +416,19 @@ def test_successful_search_result_should_produce_valid_resultset(search_area):
     assert zeit.cms.interfaces.ICMSContent.providedBy(iter(block).next())
 
 
+def test_successful_elasticsearch_result_should_produce_valid_resultset(
+        elasticsearch_area):
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    uid = 'http://xml.zeit.de/zeit-magazin/article/0%s'
+    es.results = [{'uniqueId': (uid % i)} for i in range(1, 9)]
+    assert len([a for b in elasticsearch_area.values() for a in b if b]) == 8
+    es.results = [{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}]
+    block = iter(elasticsearch_area.values()).next()
+    assert zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(block)
+    assert zeit.cms.interfaces.ICMSContent.providedBy(iter(block).next())
+
+
 def test_successful_search_result_should_render_in_browser(
-        testbrowser, datasolr):
+        testbrowser, data_es):
     browser = testbrowser('/suche/index')
     assert browser.cssselect('.cp-area--ranking .teaser-small')
-
-
-def test_campus_print_article_has_correct_meta_line(
-        testserver, selenium_driver):
-    selenium_driver.get('{}/campus/article/simple_date_print'.format(
-        testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
-    source = selenium_driver.find_element_by_css_selector('.metadata__source')
-
-    assert date.text.strip() == (u'10. Januar 2016')
-    assert source.text.strip() == u'DIE ZEIT Nr. 1/2015, 5. Mai 2015'
-
-
-def test_campus_print_changed_article_has_correct_meta_line(
-        testserver, selenium_driver):
-    selenium_driver.get('{}/campus/article/simple_date_print_changed'.format(
-        testserver.url))
-    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
-    source = selenium_driver.find_element_by_css_selector('.metadata__source')
-
-    assert dates[0].text == u'10. Februar 2016, 10:39 Uhr'
-    assert dates[1].text == u'Editiert am 22. Februar 2016, 18:18 Uhr'
-    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
-
-
-def test_campus_changed_article_has_correct_meta_line(
-        testserver, selenium_driver):
-    selenium_driver.get('{}/campus/article/simple_date_changed'.format(
-        testserver.url))
-    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
-
-    assert dates[0].text == u'10. Januar 2016, 10:39 Uhr'
-    assert dates[1].text == u'Aktualisiert am 10. Februar 2016, 10:39 Uhr'
-
-
-def test_campus_article_has_correct_meta_line(testserver, selenium_driver):
-    selenium_driver.get('{}/campus/article/simple'.format(testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
-
-    assert date.text.strip() == (u'10. Januar 2016, 10:39 Uhr')

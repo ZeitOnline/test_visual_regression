@@ -1,4 +1,4 @@
-{% if view.has_series_attached and view.context is not longform %}
+{% if view.serie and view.context is not longform %}
     {% set series_cp = context | find_series_cp %}
     <a href="{{ series_cp | create_url }}" class="meta__serie" itemprop="isPartOf" data-ct-row="series" data-ct-column="false" data-ct-label="{{ view.serie }}">
         Aus der Serie: {{ view.serie }}
@@ -6,17 +6,25 @@
 {% endif %}
 
 <span>{# for display:flex arrangement #}
-    {% if view.source_label %}
+    {% if view.source_label -%}
     <span class="meta__source" data-ct-row="source" data-ct-column="false">
-    	{%- if view.source_url -%}
-    	<a href="{{ view.source_url }}">{{ view.source_label }}</a>
-    	{%- else -%}
-    	{{ view.source_label }}
-    	{%- endif -%}
-    	{%- if advertorial_byline %} {{ advertorial_byline }}{% endif -%}
+        {%- if view.source_url -%}
+            <a href="{{ view.source_url }}">{{ view.source_label }}</a>
+        {%- else -%}
+            {{ view.source_label }}
+        {%- endif -%}
     </span>
-    {% endif %}
-    <time itemprop="datePublished" content="{{ view.date_last_modified | format_date('iso8601') }}" datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="meta__date">
-        {{ view.date_last_modified | format_date(view.show_date_format) }}
+    {% endif -%}
+
+    <time itemprop="datePublished" datetime="
+        {{- view.date_last_modified | format_date('iso8601') }}" class="meta__date
+        {%- if view.obfuscated_date %} encoded-date" data-obfuscated="{{ view.obfuscated_date }}{% endif %}">
+        {{- view.date_last_modified | format_date(view.show_date_format) -}}
+    </time>
+
+    <time itemprop="dateModified" datetime="
+        {{- view.date_last_modified | format_date('iso8601') }}" class="
+        {{- 'meta__date' | with_mods('has-series' if series_cp) }}">
+        {{- view.last_modified_label -}}
     </time>
 </span>

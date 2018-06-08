@@ -1,81 +1,16 @@
-$zon-print-grey: #707070
-$print-media-width: 100mm
-$print-media-margin: 14pt 0
-// using this zoom factor to make fonts bigger
-// in opposition to designs
-$print-zoom: 1.263157895
-
 @media print
 
-	@page
-		margin: 15mm 25mm
-		size: auto
-
-	body,
-	.page__content
-		background: white !important
-		box-shadow: none !important
-
-	p
-		orphans: 2
-		widows: 3
-
-	h1, h2, h3, h4, h5, h6
-		break-after: avoid
-		page-break-after: avoid
-		page-break-inside: avoid
-
-	acronym[title]:after,
-	abbr[title]:after
-		content: " (" attr(title) ")"
-
-	a[href^="http"]
-		color: $zon-print-grey
-		page-break-inside: avoid
-		&:after
-			border-bottom: 1px solid white // To visibly hide grey border of <a>
-			content: " [" attr(href) "]"
-			font-family: $font-tabletgothic
-			font-size: inherit
-			word-wrap: break-word
-
-	a[href^="#"]:after
-		content: ""
-
-	#ads,
-	#adunit,
-	#comments,
-	#iqadtileOOP,
-	#iqd_mainAd,
-	#iqdLastNode,
+	// --------------------------------------------
+	// article elements
 	#nextread,
-	#pDebug,
-	.ad,
-	.ads,
-	.article-footer,
-	.article-lineage,
-	.article-pagination,
-	.article-toc,
 	.column-heading__author,
 	.comment-section,
-	.footer,
-	.header__brand,
 	.newsletter-teaser-box, // raw-code in articles comes with own stylesheets
-	.nextread,
-	.nextread-advertisement,
-	.video-player,
-	.visually-hidden,
-	iframe[id^="google_ads"]
+	.breaking-news-banner,
 		display: none !important
 
-	#main
-		padding: 0
-		margin: 0
-
-	.header:after
-		border-bottom: 1pt solid $zon-print-grey
-		content: url("../../images/logo-zon-print.svg")
-		display: block
+	// --------------------------------------------
+	// article sections
 
 	.article-heading
 		margin: 6mm 0 0
@@ -102,6 +37,7 @@ $print-zoom: 1.263157895
 		content: ""
 
 	.metadata
+		color: $zon-print-grey
 		font-size: 7pt * $print-zoom
 		line-height: 9pt * $print-zoom
 		margin-bottom: 14pt * $print-zoom
@@ -126,8 +62,9 @@ $print-zoom: 1.263157895
 
 	.figure
 		&__caption
-			margin-left: 0
 			font-size: 7pt * $print-zoom
+			margin-left: 0
+			padding-left: 0 !important
 
 	.article__subheading
 		font-size: 11pt * $print-zoom
@@ -143,42 +80,14 @@ $print-zoom: 1.263157895
 		line-height: 14pt * $print-zoom
 		margin-bottom: 7pt * $print-zoom
 
-	.portraitbox
-
-		&__heading,
-		&__body
-			font-size: 7pt * $print-zoom
-			line-height: 11pt * $print-zoom
-			margin-bottom: 6pt * $print-zoom
-		a,
-		a:after
-			color: $zon-print-grey
-			font-size: 7pt * $print-zoom
-
-	.infobox
-		background-color: transparent
-		border: 1pt solid $zon-print-grey
-		margin: $print-media-margin
-		padding: 0
-		page-break-inside: avoid
-		max-width: $print-media-width
-
-	.infobox-tab
-		border-bottom: 1pt solid $zon-print-grey
-		padding: 9pt * $print-zoom
-
-		&__link,
-		&__title,
-		&__content p
-			font-size: 7pt * $print-zoom
-			line-height: 11pt * $print-zoom
-			margin-bottom: 6pt * $print-zoom
-
-		&__title
-			padding: 0
-
-		&__link
-			font-weight: bold
-
-		&__content[aria-hidden='true']
-			max-height: none // always show all infobox content (ignore script)
+	// --------------------------------------------
+	// column articles
+	.column-heading *
+		background: white !important
+		color: $zon-print-grey !important
+	.column-heading,
+	.column-heading__information,
+	.column-heading__lower
+		padding-bottom: 0
+	.column-heading__title
+		max-width: none

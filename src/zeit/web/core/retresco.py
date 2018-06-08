@@ -2,6 +2,7 @@ import collections
 import logging
 import random
 
+from gocept.cache.property import TransactionBoundCache
 import grokcore.component
 import lxml.etree
 import mock
@@ -9,6 +10,7 @@ import pkg_resources
 import pyramid.threadlocal
 import requests
 import requests.utils
+import urllib3
 import zope.interface
 
 import zeit.retresco.connection
@@ -34,19 +36,16 @@ def is_healthy(self):
     timeout = float(conf.get('tms_timeout', 0.5))
     response = None
     try:
-        with zeit.web.core.metrics.timer(
-                'zeit.retresco.connection.health_check.tms.reponse_time'):
+        with zeit.web.core.metrics.http(
+                'zeit.retresco.connection.health_check.tms') as record:
             response = requests.get(
                 self.url + '/health-check', timeout=timeout)
+            record(response)
         response.raise_for_status()
         return True
     except Exception:
         log.warning('Health check failed', exc_info=True)
         return False
-    finally:
-        status = response.status_code if response else 599
-        zeit.web.core.metrics.increment(
-            'zeit.retresco.connection.health_check.tms.status.%s' % status)
 
 
 zeit.retresco.connection.TMS.is_healthy = is_healthy
@@ -63,12 +62,48 @@ def tms_request(self, *args, **kw):
         'zeit.web-%s/retresco/python-requests' % request.registry.settings.get(
             'version', 'unknown'))
     with zeit.web.core.metrics.timer(
-            'zeit.retresco.connection.tms.reponse_time'):
+            'zeit.retresco.connection.tms.response_time'):
         return original_request(self, *args, **kw)
 
 
 original_request = zeit.retresco.connection.TMS._request
 zeit.retresco.connection.TMS._request = tms_request
+
+
+def cached_intextlink_data(self, content, timeout):
+    """Cache TMS response until the end of the request.
+    This mainly prevents request duplication from get_article_body and
+    get_article_keywords, which are both used when displaying an IArticle page.
+    """
+    if content.uniqueId not in self._intextlink_data:
+        response = orig_get_intextlink_data(self, content, timeout)
+        self._intextlink_data[content.uniqueId] = response
+    return self._intextlink_data[content.uniqueId]
+
+
+orig_get_intextlink_data = zeit.retresco.connection.TMS._get_intextlink_data
+zeit.retresco.connection.TMS._get_intextlink_data = cached_intextlink_data
+zeit.retresco.connection.TMS._intextlink_data = TransactionBoundCache(
+    '_v_intextlink_data', dict)
+
+
+def es_user_agent(self):
+    return 'zeit.web-%s/retresco/python-urllib3-%s' % (
+        pkg_resources.get_distribution('zeit.web').version,
+        urllib3.__version__)
+
+
+zeit.retresco.search.Connection._user_agent = es_user_agent
+
+
+def es_request(self, *args, **kw):
+    with zeit.web.core.metrics.timer(
+            'zeit.retresco.search.elasticsearch.response_time'):
+        return original_es_request(self, *args, **kw)
+
+
+original_es_request = zeit.retresco.search.Connection.perform_request
+zeit.retresco.search.Connection.perform_request = es_request
 
 
 # Test helpers ##############################

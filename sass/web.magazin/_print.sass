@@ -1,0 +1,208 @@
+$zon-print-grey: #252525
+$stamp-margin: 20pt 30pt 20pt 0
+
+@media print
+	// hide ZMO-specific things
+	.article__footer,
+	.comment-section,
+	.cp_comment__counter,
+	.cp-region .teaser-card,
+	.follow-us,
+	.main--centerpage .scaled-image,
+	.main-footer,
+	.newsletter-card,
+	.teaser-upright
+		display: none !important
+
+	.header__brand
+		border-color: #CCCCCF
+
+	// full width
+	.page__content,
+	.article__item,
+	.is-constrained,
+	.header-article
+		max-width: $max-page-width
+
+	.header-article__caption
+		opacity: 1
+		background-color: #fff
+		color: $zon-print-grey
+		position: relative
+		text-align: center
+
+	// no negative margins
+	.header-article--leinwand > figure
+		margin-left: 0
+		margin-right: 0
+
+	.header-article--traum > figure
+		width: 70%
+
+	.header-article--mode > figure
+		float: left
+		margin: 26pt 2.5rem 1.5rem 0
+		width: 32%
+	.header-article--mode
+		+pie-clearfix
+		.headline
+			margin-bottom: 1.5rem
+
+	.header-article--briefmarke > figure
+		margin-bottom: -2.5rem
+		margin-left: 50%
+
+	// dont print url after links for ...
+	.header-article a:after
+		content: ""
+
+	// --------------------------------------------
+	// article elements
+	.volume-teaser
+		display: none
+
+	.article__item.quote
+		margin-left: $print-articleitem-margin
+
+	.article-pagination__pager
+		display: none
+
+	.article-pagination__nexttitle
+		border-top: 1pt solid $zon-print-grey
+		font-weight: normal
+
+	.figure-stamp,
+	.figure-stamp--right
+		clear: both
+		float: left
+		margin: $stamp-margin
+		width: $stamp-width
+	.figure__caption
+		font-size: 7pt * $print-zoom
+		margin-left: 0
+		padding-left: 0 !important
+
+	.figure
+		margin-left: 0
+		max-width: 70%
+
+	// dont style the media for print, because we styled the figure already
+	.figure-stamp .figure__media,
+	.figure-stamp--right .figure__media
+		float: none
+		margin: 0
+		max-width: none
+		width: 100%
+
+	figure[data-video-provider]
+		display: none
+
+	.article-page
+		margin-bottom: 0
+
+	// --------------------------------------------
+	// cp elements
+	.teaser-landscape-large,
+	.teaser-landscape-small,
+	.teaser-mtb-square
+		height: auto
+		margin-bottom: 2.0rem
+		max-width: $max-page-width
+		min-height: initial
+		padding: 0
+		width: 100%
+
+	.teaser-landscape-large__text,
+	.teaser-square-large,
+	.teaser-square-large__text
+		margin: 0
+		padding: 0
+		position: initial
+
+	// --------------------------------------------
+	// marginalia text boxes
+	.portraitbox,
+	.authorbox
+		color: $zon-print-grey
+		float: left
+		margin: $stamp-margin
+		width: $stamp-width
+	.authorbox__container
+		all: unset // TODO: IE + Edge egal?
+	.portraitbox__heading,
+	.authorbox__name,
+	.infobox-tab__title
+			font-size: 9pt
+			letter-spacing: 0.5pt
+			line-height: 11pt
+			margin: 0 0 6pt 0
+	.authorbox__text
+		margin: 0
+	.portraitbox__body,
+	.authorbox__summary,
+	.infobox__content
+		color: $zon-print-grey
+		font-size: 10pt
+		line-height: 14pt
+		p
+			margin: 0 0 6pt 0
+	.authorbox__text:only-child
+		text-align: left
+	.authorbox__summary
+		font-style: normal
+	.authorbox__button
+		display: none
+
+	// TODO: das zeigt, dass man die Boxen auch mal refactorn sollte
+
+	.infobox
+		max-width: 70%
+		&-tab__link
+			margin: 0
+			color: inherit
+		&-tab__panel
+			margin-bottom: 0
+
+	// on ZMO we can show "next page", because that does not lead to HP on last page
+	.article-pagination,
+	.article-pagination__nexttitle
+		display: block !important
+	.article-pagination__pager
+		display: none
+
+	// --------------------------------------------
+	// override all font sizes
+	.headline__supertitle
+		font-size: 10pt
+		letter-spacing: 0.5pt
+		line-height: 12pt
+	.headline__title
+		font-size: 18pt
+		line-height: 21pt
+	.header-article__subtitle
+		font-size: 13pt
+		line-height: 18pt
+	.meta
+		font-size: 8pt
+		letter-spacing: 0.5pt
+		line-height: 10pt
+	.article__item
+		font-size: 11pt
+		line-height: 17pt
+	.header-article__caption,
+	.figure__caption
+		font-size: 10pt
+		line-height: 13pt
+
+	// --------------------------------------------
+	// undo the nifty flexbox stuff of series-vs-date arrangement
+	.meta
+		display: block
+		&__serie:after
+			all: unset
+	// lowercase URLs in uppercase linktexts
+	.meta,
+	.byline
+		a:after
+			font-weight: normal
+			text-transform: none

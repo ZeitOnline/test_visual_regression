@@ -100,6 +100,7 @@ class CeleraOneMixin(object):
         resp = super(CeleraOneMixin, self).__call__()
         self.request.response.headers.update(self.c1_header)
         self.set_c1_meter_response_headers()
+        self.set_c1_adblocker_response_headers()
         return resp
 
     @zeit.web.reify
@@ -205,3 +206,21 @@ class CeleraOneMixin(object):
                 res_name = 'X-Debug-{}'.format(name)
                 value = headers.get(name, '')
                 request.response.headers[res_name] = value
+
+    def set_c1_adblocker_response_headers(self):
+        if zeit.web.core.application.FEATURE_TOGGLES.find(
+                'c1_adblocker_blocker'):
+
+            # First test implementation with two hardcoded articles.
+            # Logic will follow.
+            response = self.request.response
+            if self.context.uniqueId == 'http://xml.zeit.de/digital/' \
+                    'internet/2017-11/firefox-quantum-browser-test-' \
+                    'vergleich-google-chrome':
+                response.headers['C1-Track-Adblocker-Targeting'] = 'false'
+                return True
+            if self.context.uniqueId == 'http://xml.zeit.de/digital/' \
+                    'internet/2018-04/adblocker-urteil-bgh-springer-' \
+                    'adblock-plus':
+                response.headers['C1-Track-Adblocker-Targeting'] = 'true'
+                return True

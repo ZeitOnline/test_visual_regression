@@ -22,8 +22,11 @@
     <header name="liveblog">
       <title>Standard</title>
     </header>
-    <header name="liveblog-closed">
-      <title>Offline</title>
+  </template>
+  <template name="faq" available="zeit.cms.section.interfaces.IZONContent">
+    <title>FAQ</title>
+    <header name="faq">
+      <title>Standard</title>
     </header>
   </template>
   <!--

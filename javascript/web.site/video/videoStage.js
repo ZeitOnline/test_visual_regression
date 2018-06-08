@@ -19,6 +19,8 @@ define([ 'jquery', 'web.site/video/video' ], function( $, video ) {
                         container = article.find( '.video-large__container' ),
                         elem = article.find( '.video-thumbnail' ),
                         videoId = article.data( 'video-id' ),
+                        videoAdvertising = article.data( 'video-advertising' ),
+                        // id is only given via attribute, if the teaser/player is set to be ad-free
                         playerId = article.data( 'video-player-id' );
                     if ( typeof videoId !== 'undefined' ) {
                         article.find( '.video-text-playbutton' ).addClass( 'video-text-playbutton--hidden' );
@@ -28,6 +30,8 @@ define([ 'jquery', 'web.site/video/video' ], function( $, video ) {
                         if ( playerId ) {
                             options = {
                                 elem: elem,
+                                advertising: videoAdvertising,
+                                playertype: 'cp',
                                 playerData: {
                                     'accountId': '18140073001',
                                     'playerId': playerId,
@@ -35,7 +39,11 @@ define([ 'jquery', 'web.site/video/video' ], function( $, video ) {
                                 }
                             };
                         } else {
-                            options = { elem: elem };
+                            options = {
+                                elem: elem,
+                                advertising: videoAdvertising,
+                                playertype: 'cp'
+                            };
                         }
                         video.displayVideo( videoId, options );
                     }

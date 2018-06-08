@@ -16,6 +16,7 @@
     {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
     {%- include "zeit.web.campus:templates/inc/meta/sharing.html" -%}
     {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
+    {% block ligatus_include %}{% endblock %}
     {% block schemaorg_data %}{% endblock %}
 
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
@@ -25,7 +26,6 @@
     {% endif -%}
     {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
-        {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
     {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
     {% if settings('livereload') %}
@@ -33,9 +33,13 @@
     {% endif %}
 
     {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
+    {% block babator_include %}{% endblock %}
 </head>
 <body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
+    {% if toggles('third_party_modules', 'tracking', 'optimize_ab_testing_to_webtrekk') -%}
+        {% include "zeit.web.core:templates/inc/tracking/webtrekk_googleoptimize.html" %}
+    {% endif -%}
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
     {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
@@ -74,6 +78,9 @@
             {% endblock footer %}
         </div>
     </div>
+
+    {%- include "zeit.web.core:templates/inc/data-protection-popover.html" -%}
+
     {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
     {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
     {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}

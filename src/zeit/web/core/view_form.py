@@ -13,7 +13,6 @@ import zeit.web.core.article
 import zeit.web.core.interfaces
 import zeit.web.magazin.article
 
-
 log = logging.getLogger(__name__)
 
 

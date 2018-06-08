@@ -16,9 +16,23 @@
 
     {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
 
+    {% if toggles('preload_webfonts') %}
+        {# ../latest/ for escaping the version number. Same is used in CSS. #}
+        <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/tabletgothic/TabletGothic-Regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/tabletgothic/TabletGothic-Bold.woff2" as="font" type="font/woff2" crossorigin>
+        {% if not view.is_hp %}
+            <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/franziska/FranziskaWebPro.woff" as="font" type="font/woff" crossorigin>
+        {% endif %}
+    {% endif %}
+
     <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
+
+    {% if view.is_podcastseries %}
+    <link type="application/rss+xml" rel="alternate" title="{{ view.series_title }}" href="https://{{ view.podcastseries_feed }}.podigee.io/feed/mp3"/>
+    {% else %}
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+    {% endif %}
 
     {% block css_link %}
         <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">
@@ -28,6 +42,7 @@
     {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
     {%- include "zeit.web.site:templates/inc/meta/sharing.html" -%}
     {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
+    {% block ligatus_include %}{% endblock %}
     {% block schemaorg_data %}{% endblock %}
 
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
@@ -36,22 +51,21 @@
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif -%}
 
-    {% if view.include_optimizely -%}
-        <script src="{{ view.include_optimizely }}"></script>
-    {% endif -%}
-
     {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
-        {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
     {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
     {% if settings('livereload') %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
     {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
+    {% block babator_include %}{% endblock %}
 </head>
 <body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
+    {% if toggles('third_party_modules', 'tracking', 'optimize_ab_testing_to_webtrekk') -%}
+        {% include "zeit.web.core:templates/inc/tracking/webtrekk_googleoptimize.html" %}
+    {% endif -%}
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
     {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
@@ -114,6 +128,8 @@
     {% if view.is_hp %}
         {%- include "zeit.web.site:templates/inc/overlay.html" -%}
     {% endif %}
+
+    {%- include "zeit.web.core:templates/inc/data-protection-popover.html" -%}
 
     {% block adblocker_count %}
         {%- include "zeit.web.core:templates/inc/tracking/adblocker_count.html" -%}

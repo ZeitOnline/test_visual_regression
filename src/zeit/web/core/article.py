@@ -7,10 +7,12 @@ import bugsnag
 import gocept.lxml.objectify
 import grokcore.component
 import xml.sax.saxutils
+import zc.sourcefactory.source
 import zope.component
 import zope.interface
 import zope.security.proxy
 
+from zeit.cms.checkout.interfaces import ILocalContent
 import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.content.article.edit.interfaces
@@ -32,6 +34,16 @@ class IColumnArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that belong to a "column" series."""
 
 
+class IFlexibleTOCArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that contain a flexible table of
+    contents.
+    """
+
+
+class IFAQArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that contain a FAQ."""
+
+
 class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that contain a liveblog."""
 
@@ -39,7 +51,8 @@ class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
 class ISeriesArticleWithFallbackImage(
         zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that are part of a series with a
-    fallback image."""
+    fallback image.
+    """
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
@@ -86,14 +99,22 @@ def _inject_banner_code(pages, pubtype):
             'ads': [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
                     {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
                     {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
-                    {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
-                    {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
+                    {'tile': 4, 'paragraph': 4, 'type': 'desktop'}]
         },
         'longform': {
             'pages': [2],
             'ads': [{'tile': 7, 'paragraph': 5, 'type': 'desktop'}]
         }
     }
+
+    # change place5 against ctm if configured
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    place5 = ({'tile': 5, 'paragraph': 6, 'type': 'desktop'},
+              {'tile': 'content_ad', 'paragraph': 6, 'type': ''},)
+    if toggles.find('iqd_contentmarketing_ad'):
+        adconfig['zon']['ads'].append(place5[1])
+    else:
+        adconfig['zon']['ads'].append(place5[0])
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)
@@ -155,50 +176,62 @@ def _paragraphs_by_length(paragraphs, sufficient_length=10):
     return filtered_paragraphs
 
 
-@zope.component.adapter(zeit.content.article.interfaces.IArticle)
-@zope.interface.implementer(zeit.content.article.edit.interfaces.IEditableBody)
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(
+    zeit.content.article.edit.interfaces.IEditableBody)
 def get_retresco_body(article):
     # We want to be very cautious here and retreat to static XML as a
     # source for our article body if anything goes wrong/ takes too long
     # with the TMS body.
-
     xml = zope.security.proxy.removeSecurityProxy(article.xml['body'])
-
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conn = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     toggles = zeit.web.core.application.FEATURE_TOGGLES
+    seo = zeit.seo.interfaces.ISEO(article)
 
-    if toggles.find('enable_intext_links'):
-        try:
-            assert not zeit.seo.interfaces.ISEO(article).disable_intext_links
-
-            uuid = zeit.cms.content.interfaces.IUUID(article).id
-            timeout = conf.get('retresco_timeout', 0.1)
-            body = conn.get_article_body(uuid, timeout=timeout)
-
-            if unichr(65533) in body:
-                # XXX Stopgap until tms encoding issues are resolved
-                raise ValueError(
-                    'Encountered encoding issues in retresco body')
-
-            xml = gocept.lxml.objectify.fromstring(body)
-        except AssertionError:
-            log.debug('Retresco body disabled for %s', article.uniqueId)
-        except:
-            log.warning(
-                'Retresco body failed for %s', article.uniqueId, exc_info=True)
+    if (toggles.find('enable_intext_links') and
+            not zeit.retresco.interfaces.ITMSContent.providedBy(article) and
+            not ILocalContent.providedBy(article) and
+            not seo.disable_intext_links and
+            not suppress_intextlinks(article)):
+        if hasattr(article, '_v_retresco_body'):
+            xml = article._v_retresco_body
+        else:
+            conf = zope.component.getUtility(
+                zeit.web.core.interfaces.ISettings)
+            tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
+            try:
+                body = tms.get_article_body(
+                    article, timeout=conf.get('retresco_timeout', 0.1))
+                xml = gocept.lxml.objectify.fromstring(body)
+            except Exception:
+                log.warning(
+                    'Retresco body failed for %s', article.uniqueId,
+                    exc_info=True)
+            else:
+                article._v_retresco_body = xml
 
     return zope.component.queryMultiAdapter(
         (article, xml),
         zeit.content.article.edit.interfaces.IEditableBody)
 
 
+class ValuesCachingEditableBody(zeit.content.article.edit.body.EditableBody):
+
+    def values(self):
+        if zeit.cms.checkout.interfaces.ILocalContent.providedBy(
+                self.__parent__):
+            return super(ValuesCachingEditableBody, self).values()
+        self.ensure_division()  # Old articles don't always have divisions.
+        if not hasattr(self.__parent__, '_v_body_values'):
+            self.__parent__._v_body_values = super(
+                ValuesCachingEditableBody, self).values()
+        # Return a copy, as e.g. pages_of_article below deletes modules from it
+        return self.__parent__._v_body_values[:]
+
+
 def pages_of_article(article, advertising_enabled=True):
-    body = zope.component.getAdapter(
-        article,
-        zeit.content.article.edit.interfaces.IEditableBody,
-        name='retresco')
-    body.ensure_division()  # Old articles don't always have divisions.
+    body = zeit.content.article.edit.interfaces.IEditableBody(article)
+    # Call values() first, to ensure that ensure_divsion() was called.
+    blocks = body.values()
 
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
@@ -207,7 +240,6 @@ def pages_of_article(article, advertising_enabled=True):
     pages = []
     page = Page(first_division)
     pages.append(page)
-    blocks = body.values()
 
     try:
         if blocks[0] == article.header.module:
@@ -232,6 +264,46 @@ def pages_of_article(article, advertising_enabled=True):
     return _inject_banner_code(pages, pubtype)
 
 
+@zope.interface.implementer(zeit.web.core.interfaces.IArticleModule)
+class FAQItemBlock(Page):
+
+    """A block for FAQs, wrapped around questions and corresponding answers.
+    This may be placed in z.w.c.block instead, but will result in
+    circular imports.
+    """
+
+    def __init__(self):
+        self.blocks = []
+
+
+def restructure_faq_article(page):
+    # FAQs by definition consist only of a single page.
+    restructured_blocks = []
+    for block in page.blocks:
+        try:
+            previous_block = restructured_blocks[-1]
+        except IndexError:
+            previous_block = None
+
+        if isinstance(block, zeit.web.core.block.Intertitle):
+            # Handle intertitles, representing a FAQ question.
+            faq_item_block = FAQItemBlock()
+            faq_item_block.append(block)
+            restructured_blocks.append(faq_item_block)
+        elif zeit.web.core.interfaces.IContentAdBlock.providedBy(block):
+            # Ad blocks should never be part of an answer.
+            restructured_blocks.append(block)
+        elif isinstance(previous_block, FAQItemBlock):
+            # Add further blocks as answers to their corresponding question.
+            previous_block.append(block)
+        else:
+            # Everything else is just a regular block (e.g. paragraphs that
+            # appear before the first intertitle question).
+            restructured_blocks.append(block)
+        page.blocks = restructured_blocks
+    return page
+
+
 def convert_authors(article):
     is_longform = zeit.web.magazin.article.ILongformArticle.providedBy(article)
     author_list = []
@@ -249,10 +321,7 @@ def convert_authors(article):
                 author['location'] = u', {}'.format(location)
             # add prefix
             if index == 0:
-                if is_longform:
-                    author['prefix'] = u'\u2014 von'
-                else:
-                    author['prefix'] = u' von'
+                author['prefix'] = u' von'
             # add suffix
             if index == len(author_ref) - 2:
                 author['suffix'] = u' und'
@@ -324,15 +393,16 @@ def cms_content_type(context):
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 @grokcore.component.implementer(zeit.web.core.interfaces.IDetailedContentType)
 def content_type(context):
-    typ = cms_content_type(context)
-    subtyp = 'article'
+    parts = [cms_content_type(context), 'article']
     if zeit.web.core.view.is_advertorial(context, None):
-        subtyp = 'advertorial'
+        parts[1] = 'advertorial'
     elif getattr(context, 'serie', None):
-        subtyp = "serie"
+        parts[1] = 'serie'
         if context.serie.column:
-            subtyp = "column"
-    return '{}.{}'.format(typ, subtyp)
+            parts[1] = 'column'
+    if getattr(context, 'genre', None):
+        parts.append(context.genre)
+    return '.'.join(parts)
 
 
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
@@ -351,24 +421,30 @@ class LiveblogInfo(object):
 
     @property
     def is_live(self):
-        if self.context.header_layout == 'liveblog-closed':
-            return False
-        elif self.liveblog:
-            return self.liveblog.is_live
-
-    @property
-    def is_slow(self):
         if self.liveblog:
-            return (self.liveblog.is_live and
-                    self.context.header_layout == 'liveblog-closed')
+            return self.liveblog.is_live
 
     @property
     def last_modified(self):
         if self.liveblog:
             return self.liveblog.last_modified
 
+    @property
+    def collapse_preceding_content(self):
+        if self.liveblog:
+            return self.liveblog.collapse_preceding_content
+
+    @property
+    def has_relative_dates(self):
+        if self.liveblog:
+            theme = self.liveblog.get_amp_themed_id(self.liveblog.id)
+            if theme:
+                return theme.startswith('zon-amp-solo')
+
 
 TEMPLATE_INTERFACES = {
+    'faq': (IFAQArticle,),
+    'flexible-toc': (IFlexibleTOCArticle,),
     'zon-liveblog': (ILiveblogArticle,),
     # Should we check that the article provides IZMOContent? Because those
     # templates are only available there.
@@ -401,3 +477,76 @@ def mark_according_to_series(context):
     if context.serie.fallback_image:
         result.append(ISeriesArticleWithFallbackImage)
     return result
+
+
+def get_keywords(context):
+    if zeit.web.core.application.FEATURE_TOGGLES.find('keywords_from_tms'):
+        conf = zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings)
+        tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
+        try:
+            timeout = conf.get('retresco_timeout', 0.1)
+            return tms.get_article_keywords(context, timeout=timeout)
+        except Exception:
+            log.warning(
+                'Retresco keywords failed for %s', context.uniqueId,
+                exc_info=True)
+            # Fall back to the vivi-stored keywords, i.e. without any links
+            # since only the TMS knows about those.
+            if not hasattr(context, 'keywords'):
+                return []
+            result = []
+            for keyword in context.keywords:
+                if not keyword.label:
+                    continue
+                keyword.link = None
+                result.append(keyword)
+            return result
+    else:
+        if not hasattr(context, 'keywords'):
+            return []
+        result = []
+        for keyword in context.keywords:
+            if not keyword.label:
+                continue
+            if not keyword.url_value:
+                uuid = keyword.uniqueId.replace('tag://', '')
+                keyword = zope.component.getUtility(
+                    zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
+                if keyword is None:
+                    continue
+            if keyword.url_value:
+                keyword.link = u'thema/{}'.format(keyword.url_value)
+            else:
+                keyword.link = None
+            result.append(keyword)
+        return result
+
+
+class IntextlinkBlacklistSource(zeit.cms.content.sources.XMLSource):
+    # Only contextual so we can customize source_class
+
+    product_configuration = 'zeit.web'
+    config_url = 'intextlink-blacklist-url'
+
+    class source_class(zc.sourcefactory.source.FactoredContextualSource):
+
+        def __contains__(self, value):
+            return value in self.factory
+
+    # This is the one case where the zc.sourcefactory abstractions are rather
+    # unhelpful: we don't want to enumerate the values, but do a targeted
+    # "contains" check instead.
+    def __contains__(self, x):
+        return bool(self._get_tree().xpath(
+            '//entity[@type="%s" and text()="%s"]' % (x.entity_type, x.label)))
+
+
+INTEXTLINK_BLACKLIST = IntextlinkBlacklistSource()(None)
+
+
+def suppress_intextlinks(article):
+    for keyword in get_keywords(article):
+        if keyword in INTEXTLINK_BLACKLIST:
+            return True
+    return False

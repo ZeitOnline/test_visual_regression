@@ -78,3 +78,7 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
     @zeit.web.reify
     def has_advertisement(self):
         return self.context.has_advertisement
+
+    @zeit.web.reify
+    def contains_video(self):
+        return True

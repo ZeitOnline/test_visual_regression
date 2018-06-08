@@ -14,6 +14,7 @@ import pytest
 import pytz
 import requests
 import requests.exceptions
+import requests_mock
 import zope.component
 
 from zeit.cms.checkout.helper import checked_out
@@ -419,6 +420,29 @@ def test_comments_should_have_correct_order_when_paginated():
         [(1, '3'), (2, '4'), (3, '4.1')])
 
 
+def test_sort_order_should_be_derived_correctly():
+    view = zeit.web.core.view.CommentMixin()
+    view.request = mock.Mock()
+    view.context = mock.Mock()
+
+    # Sort order should be desc, if recent_comments_first is true
+    # and no user parameter is set.
+    view.request.params = {}
+    view.context.recent_comments_first = True
+    assert view._get_comment_sorting() == 'desc'
+
+    # Sort order should be asc, if recent_comments_first is true,
+    # but user parameter indicates asc.
+    view.request.params = {'sort': 'asc'}
+    view.context.recent_comments_first = True
+    assert view._get_comment_sorting() == 'asc'
+
+    # Defaul sort order should be asc, if recent_comments_first is False
+    view.request.params = {}
+    view.context.recent_comments_first = False
+    assert view._get_comment_sorting() == 'asc'
+
+
 def _create_poster(monkeypatch):
     request = mock.Mock()
     request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
@@ -679,8 +703,9 @@ def test_post_comment_should_not_expose_requests_timeout_exception(
         application, monkeypatch, dummy_request):
 
     dummy_request.method = 'POST'
-    dummy_request.POST = dummy_request.params = {
-        'path': 'zeit-magazin/article/01', 'action': 'comment', 'comment': ' '}
+    dummy_request.POST.update({
+        'path': 'zeit-magazin/article/01', 'action': 'comment', 'comment': ' '
+    })
     dummy_request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
 
     def post(url, **kw):
@@ -996,6 +1021,25 @@ def test_request_thread_should_be_called_only_once_by_article_and_comment_esi(
         assert req_thread.call_count == 2
 
 
+def test_post_comment_should_create_commentsection_with_correct_x_unique_id(
+        application):
+    unique_id = 'http://xml.zeit.de/zeit-online/article/01'
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
+
+    with requests_mock.Mocker() as m:
+        zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        host = zwcs.get('community_host')
+        m.get('{}/agatho/health_check'.format(host), status_code=200)
+        m.post('{}/agatho/commentsection'.format(host), status_code=204)
+        m.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
+        m.params = {
+            'path': 'zeit-magazin/article/01',
+            'action': 'comment', 'comment': ' '}
+        view = zeit.web.core.view_comment.PostComment(mock.Mock(), m)
+        view._ensure_comment_thread(unique_id)
+        assert unique_id in view.status[0]
+
+
 def test_thread_template_should_render_adplace(
         application, dummy_request, tplbrowser):
     context = zeit.cms.interfaces.ICMSContent(
@@ -1041,16 +1085,17 @@ def test_smoke_post_on_article(testserver, application):
 
 
 @pytest.mark.parametrize('toggle, host, path', [
-    (True, 'community_host', '/comment/edit/%cid%'),
-    (False, 'community_admin_host',
+    ('set', 'community_profile_url', '/comment/edit/%cid%'),
+    ('unset', 'community_admin_host',
      '/9e7bf051-2299-43e4-b5e6-1fa81d097dbd/thread/%cid%')])
 def test_moderation_url_should_be_set_according_to_toggle(
-        application, togglepatch, toggle, host, path):
+        application, toggle, host, path):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     mixin = zeit.web.core.view.CommentMixin()
     mixin.context = context
 
-    togglepatch({'zoca_moderation_launch': toggle})
+    getattr(zeit.web.core.application.FEATURE_TOGGLES, toggle)(
+        'zoca_moderation_launch')
     assert mixin.moderation_url == conf.get(host) + path

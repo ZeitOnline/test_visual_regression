@@ -96,3 +96,11 @@
 			display: inline-block // needed for text-transform to work
 			&:first-letter
 				text-transform: uppercase
+
+// hide "single quotation mark" from being read by screen readers
+@media speech
+	.pager__button
+		&--previous:before,
+		&--next:after
+        	display: none
+        	visibility: hidden

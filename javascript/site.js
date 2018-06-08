@@ -8,10 +8,13 @@ var $ = require( 'jquery' ),
     menu = require( 'web.core/menu' ),
     overscrolling = require( 'web.core/overscrolling' ),
     videoStage = require( 'web.site/video/videoStage' ),
+    videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
     adblockCount = require( 'web.site/adblockCount' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
+    dataProtectionPopOver = require( 'web.core/dataProtectionPopOver' ),
+    followPushButton = require( 'web.core/followPushButton' ),
     article = $( '#js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     isHp = document.body.getAttribute( 'data-is-hp' );
@@ -26,14 +29,17 @@ clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
 videoStage.init();
+dataProtectionPopOver.init();
 
 if ( article.length ) {
     articledate.init();
     comments.init();
     overscrolling.init({ livePreview: true });
     visibilityTracking.init();
+    videoPlayer.init();
 }
 
+followPushButton.init();
 adblockCount.init();
 saveGetToCookie.init();
 zeit.clearQueue();
@@ -45,7 +51,6 @@ require( 'web.core/plugins/jquery.animatescroll' );
 require( 'web.core/plugins/jquery.infobox' );
 require( 'web.core/plugins/jquery.inlinegallery' );
 require( 'web.core/plugins/jquery.picturefill' );
-require( 'web.core/plugins/jquery.referrerCount' );
 require( 'web.core/plugins/jquery.toggleRegions' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
@@ -56,7 +61,6 @@ require( 'web.site/plugins/jquery.adaptnav' );
 require( 'web.core/plugins/jquery.animateJobs' );
 require( 'web.site/plugins/jquery.autoclick' );
 require( 'web.site/plugins/jquery.extendfooter' );
-require( 'web.site/plugins/jquery.fixPosition' );
 require( 'web.site/plugins/jquery.hpOverlay' );
 require( 'web.site/plugins/jquery.liveblog' );
 require( 'web.site/plugins/jquery.searchTools' );
@@ -68,7 +72,6 @@ require( 'web.site/plugins/jquery.tabs' );
 require( 'web.site/plugins/jquery.togglesearch' );
 require( 'web.site/plugins/jquery.updateSignals' );
 
-$( window ).referrerCount();
 // global and "above the fold"
 $( '.nav__search' ).toggleSearch();
 $( '.nav__ressorts-list' ).adaptToSpace();
@@ -96,12 +99,11 @@ if ( pageType === 'centerpage' ) {
     // article, gallery etc.
     article.find( '.js-gallery' ).inlinegallery();
     article.find( '.js-infobox' ).infobox();
-    article.find( '.liveblog' ).liveblog();
+    article.find( '.js-liveblog' ).liveblog();
     article.find( '.article-toc' ).toggleRegions();
     $.picturefill();
     $( '.sharing-menu' ).toggleRegions();
     $( '.comment-section' ).countFormchars();
-    $( '.js-fix-position' ).fixPosition();
 } else if ( pageType === 'author' ) {
     $( '.author-questions' ).longTextWrapper();
 }

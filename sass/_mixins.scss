@@ -306,8 +306,8 @@
 }
 
 @mixin zon-button-dark($color: $zon-lighter-grey, $margin: remify(14px 6px)) {
-	@include zon-button($background-color: rgba(0, 0, 0, 0.2),
-	                    $hover-background-color: rgba(0, 0, 0, 0.5),
+	@include zon-button($background-color: rgba(0, 0, 0, 0.6),
+	                    $hover-background-color: rgba(0, 0, 0, 0.9),
 	                    $color: $color,
 	                    $hover-color: $white,
 	                    $visited-color: $color,
@@ -555,15 +555,15 @@ $inline-block-alignment: none !default;
 
 // Avoid jumping while the image gets lazy-loaded
 @mixin reserve-space-for-article-media($ratio) {
-	position: relative;
-	&:before {
+	&::before {
 		content: '';
-		display: block;
+		float: left;
 		padding-bottom: $ratio;
 	}
-	& .article__media-container {
-		position: absolute;
-		top: 0;
+	&::after {
+		content: '';
+		display: block;
+		clear: both;
 	}
 }
 
@@ -577,7 +577,7 @@ $inline-block-alignment: none !default;
 
 
 @mixin outlined-font($color) {
-	@include font-smoothing()
+	@include font-smoothing();
 	color: $color; // fallback
 	text-fill-color: transparent;
 	text-stroke-width: remify(1.25px);
@@ -585,4 +585,12 @@ $inline-block-alignment: none !default;
 	-webkit-text-fill-color: transparent;
 	-webkit-text-stroke-width: remify(1.25px);
 	-webkit-text-stroke-color: $color;
+}
+
+
+@mixin zon-adlabel {
+	&[data-banner-label]:before{
+		@content;
+		content: attr(data-banner-label);
+	}
 }

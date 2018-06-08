@@ -17,14 +17,12 @@ import pyramid.view
 import pyramid.httpexceptions
 import zope.component
 
-from zeit.solr import query as lq
 import zeit.cms.content.interfaces
 import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.push.interfaces
-import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.application
@@ -96,6 +94,10 @@ def is_paywalled(context, request):
 
 def is_dpa_article(context, request):
     return context.product and context.product.id == 'News'
+
+
+def is_afp_article(context, request):
+    return context.product and context.product.id == 'afp'
 
 
 class Base(object):
@@ -172,6 +174,15 @@ class Base(object):
             return ''
 
     @zeit.web.reify
+    def channels(self):
+        """ A string with a semicolon seperated list of all channels """
+        channels = getattr(self.context, 'channels', None)
+        if isinstance(channels, (list, tuple)):
+            channel_list = [item for tuples in channels for item in tuples]
+            return ';'.join(zeit.web.core.template.format_webtrekk(str(
+                item)) for item in channel_list if item is not None)
+
+    @zeit.web.reify
     def is_advertorial(self):
         return is_advertorial(self.context, self.request)
 
@@ -180,6 +191,30 @@ class Base(object):
         if self.context.serie is None:
             return ''
         return self.context.serie.serienname
+
+    @zeit.web.reify
+    def series_title(self):
+        series = zeit.web.core.interfaces.ISeries(self.context, [])
+        try:
+            return series.title
+        except AttributeError:
+            return True
+
+    @zeit.web.reify
+    def podcastseries_feed(self):
+        series = zeit.web.core.interfaces.ISeries(self.context, [])
+        try:
+            return series.podcastseries_feed.replace("-", "")
+        except AttributeError:
+            return True
+
+    @zeit.web.reify
+    def is_podcastseries(self):
+        series = zeit.web.core.interfaces.ISeries(self.context, [])
+        try:
+            return series.kind == "Podcast"
+        except AttributeError:
+            return None
 
     @zeit.web.reify
     def cap_title(self):
@@ -253,11 +288,11 @@ class Base(object):
             return True
 
     @zeit.web.reify
-    def content_ad_enabled(self):
+    def advertising_in_article_body_enabled(self):
         if self.context.banner_content is False:
             return False
         else:
-            return True
+            return self.advertising_enabled
 
     @zeit.web.reify
     def adcontroller_handle(self):
@@ -418,48 +453,7 @@ class Base(object):
 
     @zeit.web.reify
     def keywords(self):
-        if zeit.web.core.application.FEATURE_TOGGLES.find('keywords_from_tms'):
-            conf = zope.component.getUtility(
-                zeit.web.core.interfaces.ISettings)
-            tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
-            try:
-                uuid = zeit.cms.content.interfaces.IUUID(self.context).id
-                timeout = conf.get('retresco_timeout', 0.1)
-                return tms.get_article_keywords(uuid, timeout=timeout)
-            except Exception:
-                log.warning(
-                    'Retresco keywords failed for %s', self.context.uniqueId,
-                    exc_info=True)
-                # Fall back to the vivi-stored keywords, i.e. without any links
-                # since only the TMS knows about those.
-                if not hasattr(self.context, 'keywords'):
-                    return []
-                result = []
-                for keyword in self.context.keywords:
-                    if not keyword.label:
-                        continue
-                    keyword.link = None
-                    result.append(keyword)
-                return result
-        else:
-            if not hasattr(self.context, 'keywords'):
-                return []
-            result = []
-            for keyword in self.context.keywords:
-                if not keyword.label:
-                    continue
-                if not keyword.url_value:
-                    uuid = keyword.uniqueId.replace('tag://', '')
-                    keyword = zope.component.getUtility(
-                        zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
-                    if keyword is None:
-                        continue
-                if keyword.url_value:
-                    keyword.link = u'thema/{}'.format(keyword.url_value)
-                else:
-                    keyword.link = None
-                result.append(keyword)
-            return result
+        return zeit.web.core.article.get_keywords(self.context)
 
     @zeit.web.reify
     def meta_keywords(self):
@@ -529,25 +523,13 @@ class Base(object):
 
     @zeit.web.reify
     def date_last_modified(self):
-        return self.date_last_published_semantic or self.date_first_released
+        return zeit.web.core.date.mod_date(self.context)
 
     @zeit.web.reify
     def date_first_released(self):
         date = self.publish_info.date_first_released
         if date:
             return date.astimezone(self.timezone)
-
-    @zeit.web.reify
-    def date_last_published_semantic(self):
-        modified = self.publish_info.date_last_published_semantic
-        released = self.date_first_released
-        # use 60s of tolerance before displaying a modification date
-        # whould be unnecessary if date_last_published_semantic is never before
-        # first_released and initially undefined or equal first_released
-        # but it's not like that [ms]
-        if (released is not None and modified is not None and
-                modified - released > datetime.timedelta(seconds=60)):
-            return modified.astimezone(self.timezone)
 
     @zeit.web.reify
     def has_cardstack(self):
@@ -688,12 +670,9 @@ class Base(object):
             ('cp28', access),  #
             ('cp29', first_click_free),  # First click free
             ('cp30', self.paywall or 'open'),  # Paywall Schranke
-            ('cp32', 'unfeasible')  # Protokoll (set via JS in webtrekk.html)
+            ('cp32', 'unfeasible'),  # Protokoll (set via JS in webtrekk.html)
+            ('cp38', self.channels or 'undefined')  # Channel-Liste
         ])
-
-        if not zeit.web.core.application.FEATURE_TOGGLES.find(
-                'access_status_webtrekk'):
-            del custom_parameter['cp28']
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
                 'reader_revenue'):
@@ -715,8 +694,9 @@ class Base(object):
 
     @zeit.web.reify
     def webtrekk_content_id(self):
-        content_url = self.content_url.replace(u'http://', u'')
-        return u'{}|{}'.format(self.webtrekk_identifier, content_url)
+        _, netloc, path, _, _, _ = urlparse.urlparse(
+            self.content_url)
+        return u'{}|{}{}'.format(self.webtrekk_identifier, netloc, path)
 
     @zeit.web.reify
     def webtrekk_assets(self):
@@ -805,18 +785,32 @@ class CommentMixin(object):
         except IndexError:
             return False
 
+    def _get_comment_sorting(self):
+        # Basic comment sort is ascending.
+        sort = 'asc'
+
+        # This might be overwritten by context specific default.
+        if getattr(self.context, 'recent_comments_first', False):
+            sort = 'desc'
+
+        # User might change sort order as well, but fall back to
+        # derived default, if it hasn't.
+        return self.request.params.get('sort', sort)
+
     @zeit.web.reify
     def comments(self):
         if not self.show_commentthread:
             return
-        sort = self.request.params.get('sort', 'asc')
+
         try:
             page = int(self.request.params.get('page', 1))
         except ValueError:
             return
         cid = self.request.params.get('cid', None)
         return self.community.get_thread(
-            self.context.uniqueId, sort=sort, page=page, cid=cid)
+            self.context.uniqueId,
+            sort=self._get_comment_sorting(),
+            page=page, cid=cid)
 
     def get_comment(self, cid):
         return self.community.get_comment(self.context.uniqueId, cid)
@@ -919,12 +913,15 @@ class CommentMixin(object):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
         if not toggles.find('zoca_moderation_launch'):
             uuid = zeit.cms.content.interfaces.IUUID(
-                self.context).id.strip('{}').replace('urn:uuid:', '')
+                self.context).id
+            if not uuid:
+                return None
+            uuid = uuid.strip('{}').replace('urn:uuid:', '')
             return u'{}/{}/thread/%cid%'.format(
                 conf.get('community_admin_host').rstrip('/'), uuid)
         else:
             return u'{}/comment/edit/%cid%'.format(
-                conf.get('community_host').rstrip('/'))
+                conf.get('community_profile_url').rstrip('/'))
 
 
 class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
@@ -949,21 +946,12 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             return date.astimezone(self.timezone)
 
     @zeit.web.reify
-    def date_format(self):
-        if self.product_id in ('ZEI', 'ZMLB'):
+    def show_date_format(self):
+        if self.date_last_modified != self.date_first_released:
+            return 'long'
+        elif self.product_id in ('ZEI', 'ZMLB'):
             return 'short'
         return 'long'
-
-    @zeit.web.reify
-    def show_date_format(self):
-        if self.date_last_published_semantic:
-            return 'long'
-        else:
-            return self.date_format
-
-    @zeit.web.reify
-    def show_date_format_seo(self):
-        return self.date_format
 
     @zeit.web.reify
     def adwords(self):
@@ -1009,17 +997,17 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def last_modified_label(self):
-        if self.date_last_published_semantic:
+        if self.date_last_modified != self.date_first_released:
             return u'{} am {}'.format(
                 self.last_modified_wording,
                 zeit.web.core.template.format_date(
-                    self.date_last_published_semantic, 'long'))
+                    self.date_last_modified, 'long'))
 
     @zeit.web.reify
     def obfuscated_date(self):
         if self.last_modified_label:
             date = zeit.web.core.template.format_date(
-                self.date_first_released, 'long')
+                self.date_first_released, self.show_date_format)
             return base64.b64encode(date.encode('latin-1'))
 
     @zeit.web.reify
@@ -1063,60 +1051,11 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
     @zeit.web.reify
     def unobfuscated_source(self):
         if self.context.product and self.context.product.show == 'issue':
-            if self.source_label:
-                label = self.source_label
-                if self.date_print_published:
-                    label += ', ' + babel.dates.format_date(
-                        self.date_print_published,
-                        "d. MMMM yyyy", locale="de_De")
-                return label
-
-    @zeit.web.reify('default_term')
-    def lineage(self):
-        if self.is_advertorial or not self.context.channels or (
-                self.ressort == 'administratives'):
-            return None
-
-        conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-
-        def next(from_, to, sort):
-            query = lq.and_(
-                lq.datetime_range(
-                    'date_first_released', from_, to),
-                lq.bool_field(
-                    'breaking_news', False),
-                lq.field_raw(
-                    'type', 'article'),
-                lq.not_(
-                    lq.field('uniqueId', self.context.uniqueId)),
-                lq.not_(
-                    lq.field('ressort', 'zeit-magazin')),
-                lq.not_(
-                    lq.field('ressort', 'Campus')),
-                lq.text_range('channels', None, None),
-                lq.field_raw(
-                    'product_id', lq.or_(
-                        'ZEDE', 'ZEI', 'ZECH', 'ZEC', 'ZEOE', 'ZES', 'ZTWI',
-                        'ZTGS', 'ZTCS', 'CSRG', 'ZSF', 'KINZ')),
-                lq.field(
-                    'published', 'published'))
-            with zeit.web.core.metrics.timer('lineage.solr.reponse_time'):
-                return conn.search(query, sort='date_first_released ' + sort,
-                                   fl='title supertitle uniqueId', rows=1).docs
-
-        date = zeit.cms.workflow.interfaces.IPublishInfo(
-            self.context).date_first_released
-
-        default = [{
-            'title': 'Startseite',
-            'supertitle': '',
-            'uniqueId': 'http://xml.zeit.de/index'}]
-        predecessor = next(None, date, 'desc') or default
-        successor = next(date, None, 'asc') or default
-        if predecessor is default or successor is default:
-            return zeit.web.dont_cache(predecessor + successor)
-
-        return predecessor + successor
+            if self.source_label and self.date_print_published:
+                return u'{}, {}'.format(
+                    self.source_label,
+                    babel.dates.format_date(self.date_print_published,
+                                            "d. MMMM yyyy", locale="de_De"))
 
     @zeit.web.reify
     def webtrekk(self):
@@ -1128,6 +1067,53 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             custom_parameter['cp33'] = ''.join(parsed[1:3])
 
         return webtrekk
+
+    @zeit.web.reify
+    def ligatus(self):
+        # self.package is "zeit.web.arbeit"
+        shortpackage = self.package.replace('zeit.web.', '')
+        verticaltoggle = 'ligatus_on_{}'.format(shortpackage)
+        return (
+            zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
+            zeit.web.core.application.FEATURE_TOGGLES.find(verticaltoggle) and
+            self.advertising_enabled and
+            not getattr(self.context, 'hide_ligatus_recommendations', False))
+
+    @zeit.web.reify
+    def ligatus_special(self):
+        ligatus_special_output = []
+
+        ligatus_special_taglist = ['D17', 'D18']
+        for keyword in self.context.keywords:
+            if keyword.label in ligatus_special_taglist:
+                ligatus_special_output.append(keyword.label)
+
+        if self.serie:
+            ligatus_special_output.append(self.serie)
+
+        return ligatus_special_output
+
+    @zeit.web.reify
+    def contains_video(self):
+        return False
+
+    @zeit.web.reify
+    def ligatus_do_not_index(self):
+        if getattr(self.context, 'no_ligatus_indexing_allowed', False):
+            return True
+        if getattr(self, 'is_advertorial', None):
+            return True
+        # galleries or videos do not have pagination: so be defensive!
+        if getattr(self, 'pagination', None):
+            if getattr(self, 'is_all_pages_view', False):
+                return True
+            elif self.pagination.get('current') > 1:
+                return True
+        # actually we aim for comment pagination, but it is also good to
+        # not trigger indexing with campaign params and stuff
+        if self.request.query_string:
+            return True
+        return False
 
     @zeit.web.reify
     def nextread(self):
@@ -1146,10 +1132,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             *[t.uniqueId for t in self.nextread])
 
 
-# XXX align-route-config-uris: Ensure downward compatibility until
-# corresponding varnish changes have been deployed. Remove afterwards.
 @zeit.web.view_config(route_name='health_check')
-@zeit.web.view_config(route_name='health_check_XXX')  # XXX remove
 def health_check(request):
     """ View callable to perform a health a check by checking,
         if the configured repository path exists.
@@ -1197,18 +1180,9 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     inline_svg_icons = True
 
-    def __call__(self):
-        resp = super(FrameBuilder, self).__call__()
-        # as long as we use the dirty ssl.zeit.de/* thing
-        # we can only hack it into the asset pipeline
-        # and hope for the best. We'll need https://www.zeit.de!
-        if self.framebuilder_requires_ssl:
-            try:
-                self.request.asset_host = (
-                    self.request.framebuilder_ssl_asset_host)
-            except AttributeError:
-                pass
-        return resp
+    def __init__(self, context, request):
+        super(FrameBuilder, self).__init__(context, request)
+        self.request.response.headers.add('Access-Control-Allow-Origin', '*')
 
     @zeit.web.reify
     def framebuilder_is_minimal(self):
@@ -1224,12 +1198,9 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     @zeit.web.reify
     def framebuilder_loginstatus_disabled(self):
-        # This (featuretoggle and GET param) is double-negative, so we can
+        # This (GET param) is double-negative, so we can
         # remove everything as soon as we do not need the safety net any longer
-        return (zeit.web.core.application.FEATURE_TOGGLES.find(
-            'framebuilder_loginstatus_disabled') or (
-            'loginstatus_disabled' in self.request.GET)) and (
-            'loginstatus_enforced' not in self.request.GET)
+        return 'loginstatus_disabled' in self.request.GET
 
     @zeit.web.reify
     def advertising_enabled(self):
@@ -1288,10 +1259,6 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
         return self.request.GET.get('adlabel') or 'Anzeige'
 
     @zeit.web.reify
-    def framebuilder_requires_ssl(self):
-        return 'useSSL' in self.request.GET
-
-    @zeit.web.reify
     def adcontroller_values(self):
         if not self.banner_channel:
             return []
@@ -1313,13 +1280,6 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
 @pyramid.view.notfound_view_config()
 def not_found(request):
-    # BBB: Remove this once we're satisfied with rendering it ourselves.
-    if not zeit.web.core.application.FEATURE_TOGGLES.find('render_404'):
-        return pyramid.response.Response(
-            'Status 404: Dokument nicht gefunden.', 404,
-            [('X-Render-With', 'default'),
-             ('Content-Type', 'text/plain; charset=utf-8')])
-
     if request.path.startswith('/error/404'):  # Safetybelt
         log.warn('404 for /error/404, returning synthetic response instead')
         return pyramid.response.Response(
@@ -1350,18 +1310,6 @@ def render_not_found_body(hostname):
 def invalid_unicode_in_request(request):
     body = 'Status 400: Invalid unicode data in request.'
     return pyramid.response.Response(body, 400)
-
-
-def surrender(context, request):
-    return pyramid.response.Response(
-        'OK', 303, headerlist=[('X-Render-With', 'default')])
-
-
-@zeit.web.view_config(route_name='blacklist')
-def blacklist(context, request):
-    return pyramid.httpexceptions.HTTPNotImplemented(
-        headers=[('X-Render-With', 'default'),
-                 ('Content-Type', 'text/plain; charset=utf-8')])
 
 
 @zeit.web.view_config(

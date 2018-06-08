@@ -3,6 +3,7 @@
 
 .article-header--dark
 	+font-smoothing
+	+unpadded
 	+padded
 	background-color: $primary-color
 	color: #fff
@@ -25,16 +26,7 @@
 		+on-interaction
 			color: $zar-whitesmoke
 
-.article-header--dark + .article__media
-	margin-top: 0
-	max-width: none
-	.article__media-container
-		background-color: $primary-color
-
 +respond-max($break-tablet-min)
-	.article-header--dark,
-	.article-header--dark + .article__media
-		+unpadded
 	.article-header--dark
 		border-top: 1px $zar-battleship-grey solid
 		&.article-header--has-series
@@ -46,11 +38,11 @@
 
 +respond-min($break-tablet-min)
 	.article-header--dark
+		margin-left: auto
+		margin-right: auto
 		margin-top: $vertical-space
 		.article-heading__title--underlined-skip
 			text-shadow: -4px 6px $primary-color, 4px 6px $primary-color
-
-
 
 .article-header--centered
 	.article-heading,

@@ -179,25 +179,26 @@ def test_amp_article_shows_tags_correctly(testbrowser):
         u'Arbeitsmarkt, Migration, Europäische Union')
 
 
-def test_amp_article_shows_ads_correctly(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'amp_advertising': True}.get)
+def test_amp_article_shows_ads_correctly(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('amp_advertising')
     browser = testbrowser('/amp/zeit-online/article/amp')
     ads = browser.cssselect('.advertising')
     assert len(ads) == 4
 
 
-def test_amp_article_should_have_ivw_tracking(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'tracking': True}.get)
+def test_amp_article_should_have_ivw_tracking(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'third_party_modules', 'tracking')
     browser = testbrowser('/amp/zeit-online/article/amp')
     ivw = browser.cssselect('amp-analytics[type="infonline"]')
     assert len(ivw) == 1
-    ivw_text = lxml.etree.tostring(ivw[0])
-    assert '"st":  "mobzeit"' in ivw_text
-    assert '"cp":  "wirtschaft/bild-text"' in ivw_text
-    assert '"url": "https://ssl.' in ivw_text
-    assert 'static/latest/html/amp-analytics-infonline.html' in ivw_text
+    json_source = ivw[0].cssselect('script')[0].text
+    analytics = json.loads(json_source)
+
+    assert analytics['vars']['st'] == 'mobzeit'
+    assert analytics['vars']['cp'] == 'wirtschaft/bild-text'
+    assert analytics['requests']['url'] == (
+        'http://localhost/static/latest/html/amp-analytics-infonline.html')
 
 
 def test_amp_article_links_contain_tracking_data_attributes(testbrowser):
@@ -227,7 +228,7 @@ def test_amp_article_shows_volume_badge_for_registration(testbrowser):
     volume_badge = browser.cssselect('.zplus-badge')[0]
     volume_text = volume_badge.cssselect('.zplus-badge__text')[0]
 
-    assert volume_text.text.strip() == u'Aus der ZEIT Nr. 49/2014'
+    assert volume_text.text.strip() == u'Aus der ZEIT Nr. 05/2015'
     assert not volume_badge.cssselect('.zplus-badge__icon')
     assert volume_badge.cssselect('.zplus-badge__media')
 

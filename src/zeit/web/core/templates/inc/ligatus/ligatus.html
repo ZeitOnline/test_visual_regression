@@ -1,0 +1,7 @@
+<aside id="ligatus" class="ad-container">
+    {# OPTIMIZE: The Script could now be included at the very end of the body.
+       But that would need a "block ligatus"-override for paywalls, at layout
+       level, but paywall extends content, so we would have rearrange a lot ...
+       #}
+    <script async src="https://a-ssl.ligatus.com/?ids={{ ligatus_id }}&t=js&s=1"></script>
+</aside>

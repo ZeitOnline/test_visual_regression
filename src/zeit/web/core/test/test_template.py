@@ -286,6 +286,24 @@ def test_format_iqd_returns_safe_text(application):
     assert zeit.web.core.template.format_iqd(text) == target
 
 
+def test_format_faq_returns_safe_text(application):
+    text = u'Studium'
+    target = 'studium'
+    assert zeit.web.core.template.format_faq(text) == target
+
+    text = u'DIE ZEIT Archiv'
+    target = 'die-zeit-archiv'
+    assert zeit.web.core.template.format_faq(text) == target
+
+    text = u'Ausgabe: 30, für Ü-30 Leser!'
+    target = 'ausgabe-30-fuer-ue-30-leser'
+    assert zeit.web.core.template.format_faq(text) == target
+
+    text = u'Ä-Ö-Ü á à é è ß_!?)&'
+    target = 'ae-oe-ue-a-a-e-e-ss'
+    assert zeit.web.core.template.format_faq(text) == target
+
+
 def test_filter_append_get_params_should_create_params():
     request = mock.Mock()
     request.url = 'http://example.com'
@@ -390,10 +408,12 @@ def test_get_svg_from_file_should_return_svg(application):
     package = 'zeit.web.site'
     cleanup = True
     a11y = True
+    remove_title = False
     svg = zeit.web.core.template.get_svg_from_file(
-        name, class_name, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y, remove_title)
     assert '<svg xmlns="http://www.w3.org/2000/svg"' in svg
-    assert 'width="14" height="13" viewBox="0 0 14 13"' in svg
+    assert 'width="14" height="13"' in svg
+    assert 'viewBox="0 0 14 13"' in svg
     assert 'class="svg-symbol reload-test"' in svg
     assert 'role="img"' in svg
     assert 'aria-label="Neu laden"' in svg
@@ -405,8 +425,9 @@ def test_get_svg_from_file_should_return_no_a11y_svg(application):
     package = 'zeit.web.site'
     a11y = False
     cleanup = True
+    remove_title = False
     svg = zeit.web.core.template.get_svg_from_file(
-        name, class_name, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y, remove_title)
     assert 'aria-hidden="true"' in svg
     assert 'aria-label="Neu laden"' not in svg
 
@@ -416,10 +437,26 @@ def test_get_svg_without_package_should_be_empty_str(application):
     class_name = 'reload-test'
     a11y = False
     cleanup = True
+    remove_title = False
     package = ''
     svg = zeit.web.core.template.get_svg_from_file(
-        name, class_name, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y, remove_title)
     assert svg == ''
+
+
+def test_get_svg_from_file_can_remove_title(application):
+    name = 'follow-newsletter'
+    class_name = 'follow-newsletter'
+    package = 'zeit.web.site'
+    a11y = False
+    cleanup = True
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, class_name, package, cleanup, a11y, remove_title=False)
+    assert '<title>' in svg
+
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, class_name, package, cleanup, a11y, remove_title=True)
+    assert '<title>' not in svg
 
 
 def test_zplus_is_false_for_free_articles(application):
@@ -477,25 +514,22 @@ def test_zplus_is_true_for_registration_articles(application):
     assert zeit.web.core.template.zplus_content(content) is True
 
 
-def test_zplus_should_be_toggleable(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'reader_revenue': False}.get)
+def test_zplus_should_be_toggleable(application):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('reader_revenue')
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/fischer')
     assert zeit.web.core.template.zplus_content(content) is False
 
 
-def test_zplus_abo_should_be_toggleable(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'reader_revenue': False}.get)
+def test_zplus_abo_should_be_toggleable(application):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('reader_revenue')
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/fischer')
     assert zeit.web.core.template.zplus_abo_content(content) is False
 
 
-def test_zplus_register_icon_should_be_toggleable(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'zplus_badge_gray': False}.get)
+def test_zplus_register_icon_should_be_toggleable(application):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('zplus_badge_gray')
     path = ('http://xml.zeit.de/zeit-online/cp-content/register/'
             'article-zeit-register')
     content = zeit.cms.interfaces.ICMSContent(path)

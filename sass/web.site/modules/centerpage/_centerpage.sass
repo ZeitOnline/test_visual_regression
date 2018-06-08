@@ -50,8 +50,8 @@
 		+respond-min($break-tablet-min)
 			display: block
 
-	&--newsticker-on-keywordpage,
-	&--newsticker-on-topicpage
+	&--newsticker-on-autotopic,
+	&--newsticker-on-manualtopic
 		+pie-clearfix
 		border-color: $color-border
 		border-style: solid
@@ -89,16 +89,16 @@
 			clear: both
 			margin: 0 auto
 			padding: 0 $page-padding
-		&--newsticker-on-keywordpage,
-		&--newsticker-on-topicpage
+		&--newsticker-on-autotopic,
+		&--newsticker-on-manualtopic
 			padding: remify(20px) $page-padding
 		&--author-list
 			max-width: $max-author-list-width + 2 * $page-padding
 		&--overview
 			max-width: $max-overview-width + 2 * $page-padding
 		&--ranking,
-		&--newsticker-on-keywordpage,
-		&--newsticker-on-topicpage
+		&--newsticker-on-autotopic,
+		&--newsticker-on-manualtopic
 			$max-ranking-width: $medium-content-width + 2 * $page-padding
 			$ranking-box-shadow-width: (remify(780px) - $max-ranking-width) / 2
 			background-color: $color-page-bg

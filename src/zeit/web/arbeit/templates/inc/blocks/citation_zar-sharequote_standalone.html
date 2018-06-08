@@ -11,11 +11,11 @@
         /* PhantomJS only supports woff(1).*/
         @font-face {
                 font-family: 'TabletGothic';
-                  src:  url('http://www.zeit.de/static/latest/fonts/tabletgothic/TabletGothic-Bold.woff') format('woff');
+                  src:  url('{{ request.ssl_asset_host }}/fonts/tabletgothic/TabletGothic-Bold.woff') format('woff');
               }
         @font-face {
                 font-family: 'PatronBold';
-                  src:  url('http://www.zeit.de/static/latest/fonts/patron_bold/PatronWEB-Bold.woff') format('woff');
+                  src:  url('{{ request.ssl_asset_host }}/fonts/patron_bold/PatronWEB-Bold.woff') format('woff');
               }
 
         body {

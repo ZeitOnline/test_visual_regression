@@ -8,8 +8,8 @@
     <title>ZEIT ONLINE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    {# XXX: One of the things to clean up once we have SSL/https #}
-    <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') | rewrite_for_ssl_if_required(view.framebuilder_requires_ssl) }}favicon.ico">
+
+    <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.asset_host }}/icons/favicon.ico">
 
     {% block css_link -%}
         {% if view.is_advertorial -%}

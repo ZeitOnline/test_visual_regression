@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import copy
 import datetime
+import json
 import logging
 
 import dateutil
@@ -94,17 +95,10 @@ class Overview(zeit.web.core.area.ranking.Ranking):
         return (self.today - date).days + 1
 
 
-class DateContentQuery(zeit.web.core.area.automatic.SolrContentQuery):
-
-    grokcore.component.context(Overview)
-
-    def __init__(self, context):
-        super(DateContentQuery, self).__init__(context)
-        self.query_string = zeit.solr.query.and_(
-            self.query_string, self._range_query())
+class OverviewContentQueryMixin(object):
 
     def __call__(self):
-        result = super(DateContentQuery, self).__call__()
+        result = super(OverviewContentQueryMixin, self).__call__()
         self._fill_up_blocks_to_match_total_hits()
         return result
 
@@ -120,20 +114,58 @@ class DateContentQuery(zeit.web.core.area.automatic.SolrContentQuery):
             for clone in self.clone_factory(values[-1], overhang):
                 area.add(clone)
 
+    def _date_range(self):
+        # Returns a tuple of start and finish dates for the range query
+        # as datetime.datetime objects
+        offset = datetime.timedelta(days=self.context.current_page - 1)
+        start = self.context.today - offset
+        finish = start + datetime.timedelta(days=1)
+        return start, finish
+
     @staticmethod
     def clone_factory(jango, count):
+        """Clone a zeit.content.cp.interfaces.ITeaserBlock `count` times."""
         for _ in range(count):
             xml = copy.copy(jango.xml)
             xml.attrib.pop('{http://namespaces.zeit.de/CMS/cp}__name__', None)
             clone = type(jango)(jango.__parent__, xml)
             yield clone
 
+
+class DateElasticsearchContentQuery(
+        OverviewContentQueryMixin,
+        zeit.web.core.area.automatic.ElasticsearchContentQuery):
+
+    grokcore.component.context(Overview)
+
+    @property
+    def _additional_clauses(self):
+        start, finish = self._date_range()
+        clauses = super(
+            DateElasticsearchContentQuery, self)._additional_clauses
+        return clauses + [{
+            'range': {
+                'payload.document.date_first_released': {
+                    'gt': start.isoformat(),
+                    'lte': finish.isoformat()
+                }
+            }
+        }]
+
+
+class DateSolrContentQuery(
+        OverviewContentQueryMixin,
+        zeit.web.core.area.automatic.SolrContentQuery):
+
+    grokcore.component.context(Overview)
+
+    def __init__(self, context):
+        super(DateSolrContentQuery, self).__init__(context)
+        self.query = zeit.solr.query.and_(self.query, self._range_query())
+
     def _range_query(self):
-        offset = datetime.timedelta(days=self.context.current_page - 1)
-        today = self.context.today - offset
-        tomorrow = today + datetime.timedelta(days=1)
-        range_ = zeit.solr.query.datetime_range(
+        start, finish = self._date_range()
+        return zeit.solr.query.datetime_range(
             'date_first_released',
-            datetime.datetime.combine(today, datetime.time()),
-            datetime.datetime.combine(tomorrow, datetime.time()))
-        return range_
+            datetime.datetime.combine(start, datetime.time()),
+            datetime.datetime.combine(finish, datetime.time()))

@@ -90,10 +90,10 @@ $font-xxxl:  em($font-xxxl--px)
 $font-xxxxl: em($font-xxxxl--px)
 
 // letter-spacing
-$letter-spacing-xl: 0.125em // 2px
-$letter-spacing-l: 0.08em // 1.28px
-$letter-spacing-m: 0.05em // 0.8px
-$letter-spacing-s: 0.03em // a half of a pixel
+$letter-spacing-xl: 0.125em !default // 2px
+$letter-spacing-l:  0.08em !default  // 1.28px
+$letter-spacing-m:  0.05em !default  // 0.8px
+$letter-spacing-s:  0.03em !default  // a half of a pixel
 
 // utility colors
 $yellow:         #ffe117 !default
@@ -165,7 +165,7 @@ $color-border:              $silver !default
 $color-overlay:             #26262C
 
 // content lengths
-$medium-content-width:  remify(680px) !default
+$medium-content-width:  remify(660px) !default
 $max-page-width:        remify(1000px) !default
 $max-longform-width:    remify(1364px) !default
 $max-overview-width:    remify(820px) !default
@@ -187,7 +187,7 @@ $break-page-padding: $break-tablet-min !default
 $break-mobile-ad-width: em(768px) !default
 
 // element sizes
-$stamp-width: em(240px)
+$stamp-width: rem(240px)
 
 //------ Sitewide Modules ---------//
 // These vars are used by modules in web.core,

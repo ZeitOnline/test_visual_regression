@@ -1,5 +1,15 @@
 {% extends 'zeit.web.arbeit:templates/layout.html' %}
 
+{% block babator_include %}
+    {% if toggles('babator') and view.contains_video %}
+        {%- include "zeit.web.core:templates/inc/meta/babator.html" -%}
+    {% endif %}
+{% endblock %}
+
+{% block ligatus_include %}
+    {%- include "zeit.web.core:templates/inc/meta/ligatus.html" -%}
+{% endblock %}
+
 {% block schemaorg_data %}
     {%- include "zeit.web.core:templates/inc/meta/schemaorg.html" -%}
 {% endblock %}
@@ -28,9 +38,6 @@
                 {% include "zeit.web.core:templates/inc/article/sharing-menu.html" %}
             {% endblock %}
 
-            {% block print %}
-            {% endblock %}
-
             {% block article_tags %}
                 {% include "zeit.web.core:templates/inc/article/tags.html" %}
             {% endblock %}
@@ -39,22 +46,22 @@
     </article>
     {% endblock content %}
 
-    {% block nextread %}
-        {% set module = view.nextread %}
-        {% include "zeit.web.arbeit:templates/inc/article/nextread.tpl" %}
-    {% endblock %}
+    {% if view.ligatus %}
+        {% block ligatus %}
+            {% set ligatus_id = '101842' %}
+            {% include 'zeit.web.core:templates/inc/ligatus/ligatus.html' %}
+        {% endblock %}
+    {% else %}
+        {% block nextread %}
+            {% set module = view.nextread %}
+            {% include "zeit.web.arbeit:templates/inc/article/nextread.tpl" %}
+        {% endblock %}
 
-    {% block nextread_ad %}
-        {% set module = view.nextread_ad %}
-        {% include "zeit.web.arbeit:templates/inc/article/nextread.tpl" %}
-    {% endblock %}
-
-    {% block article_google_ad %}
-        {% if view.has_comment_area -%}
-            <!-- P5 -->
-            {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
-        {% endif %}
-    {% endblock article_google_ad %}
+        {% block nextread_ad %}
+            {% set module = view.nextread_ad %}
+            {% include "zeit.web.arbeit:templates/inc/article/nextread.tpl" %}
+        {% endblock %}
+    {% endif %}
 
     {% block comments %}
         {% profile %}

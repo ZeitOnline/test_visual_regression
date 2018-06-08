@@ -8,8 +8,10 @@ var $ = require( 'jquery' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
     comments = require( 'web.core/comments' ),
+    videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
+    dataProtectionPopOver = require( 'web.core/dataProtectionPopOver' ),
     article = document.getElementById( 'js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     main = $( '#main' );
@@ -25,10 +27,12 @@ triggeredEventTracking.init();
 adReload.init();
 saveGetToCookie.init();
 zeit.clearQueue();
+dataProtectionPopOver.init();
 
 if ( article ) {
     comments.init();
     articledate.init();
+    videoPlayer.init();
 }
 
 // add required jQuery plugins
@@ -39,11 +43,9 @@ require( 'web.core/plugins/jquery.toggleRegions' );
 require( 'web.core/plugins/jquery.infobox' );
 require( 'web.core/plugins/jquery.inlinegallery' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
-require( 'web.core/plugins/jquery.referrerCount' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.notifications' );
 
-$( window ).referrerCount();
 $.notifications();
 $( '.js-scroll' ).animateScroll();
 

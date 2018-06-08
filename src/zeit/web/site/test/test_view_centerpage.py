@@ -184,8 +184,9 @@ def test_fullwidth_teaser_should_be_rendered(testbrowser):
 
 
 def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
-        testbrowser, togglepatch):
-    togglepatch({'responsive_image_leadteaser': False})
+        testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset(
+        'responsive_image_leadteaser')
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     img = browser.cssselect('.teaser-fullwidth__media-item')[0]
     assert img.get('data-mobile-ratio').startswith('1.77')
@@ -205,6 +206,7 @@ def test_fullwidth_teaser_image_should_use_mobile_variant_on_mobile(
     assert 1.7 < ratio < 1.8, 'mobile ratio should be 16:9-ish'
 
 
+@pytest.mark.xfail(reason='not testable this way with selenium3/geckodriver')
 def test_fullwidth_teaser_image_should_use_desktop_variant_on_desktop(
         selenium_driver, testserver):
     driver = selenium_driver
@@ -216,27 +218,6 @@ def test_fullwidth_teaser_image_should_use_desktop_variant_on_desktop(
     assert '/cinema__' in img.get_attribute('currentSrc'), \
         'wide image variant should be used on mobile devices'
     assert 2.3 < ratio < 2.4, 'desktop cinema ratio should be 7:3-ish'
-
-
-def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
-        selenium_driver, testserver, screen_size):
-    driver = selenium_driver
-    driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
-    teaser = driver.find_element_by_class_name('teaser-fullwidth')
-    helper = driver.find_element_by_class_name('teaser-fullwidth__container')
-    script = 'return document.documentElement.clientWidth'
-
-    assert teaser.is_displayed(), 'Fullwidth teaser missing'
-    assert helper.is_displayed(), 'Fullwidth teaser container missing'
-
-    if screen_size[0] == 768:
-        width = driver.execute_script(script)
-        assert helper.size.get('width') == int('%.0f' % (width * 0.72))
-
-    elif screen_size[0] == 1000:
-        width = driver.execute_script(script)
-        assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
 
 
 def test_main_teasers_should_be_rendered_correctly(testbrowser):
@@ -318,7 +299,7 @@ def test_topic_links_title_schould_have_a_value_and_default_value(application):
 def test_centerpage_view_should_have_topic_links(
         application, preserve_settings):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['transform_to_secure_links_for'] = ['www.zeit.de']
+    settings['transform_to_secure_links_for'] = 'www.zeit.de'
 
     mycp = zeit.content.cp.centerpage.CenterPage()
     mycp.topiclink_label_1 = 'Label 1'
@@ -460,7 +441,7 @@ def test_small_teaser_without_image_has_no_padding_left(
     driver.get('%s/zeit-online/teaser-serie-setup' % testserver.url)
     teaser = driver.find_element_by_css_selector(
         '*[data-unique-id*="/article-ohne-bild"] .teaser-small__container')
-    assert teaser.location.get('x') is 20
+    assert int(teaser.location.get('x')) == 20
 
 
 def test_parquet_region_list_should_have_regions(application):
@@ -708,14 +689,14 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
     elif screen_size[0] == 520:
         assert teaser.size.get('width') == main_width
     elif screen_size[0] == 768:
-        assert teaser.size.get('width') == (int(
+        assert int(round(teaser.size.get('width'))) == (int(
             round((main_width - gutter_width) / 3.0) - gutter_width))
     elif screen_size[0] == 1000:
-        assert teaser.size.get('width') == (int(
+        assert int(round(teaser.size.get('width'))) == (int(
             round((main_width - gutter_width) / 3.0) - gutter_width))
 
 
-def test_canonical_ruleset_on_cps(testbrowser, datasolr):
+def test_canonical_ruleset_on_cps(testbrowser, data_solr):
     browser = testbrowser('/dynamic/ukraine')
 
     # no param
@@ -739,7 +720,7 @@ def test_canonical_ruleset_on_article_pages(testbrowser):
     assert link[0].get('href') == 'http://localhost/zeit-online/index'
 
 
-def test_canonical_ruleset_on_ranking_pages(testbrowser, datasolr):
+def test_canonical_ruleset_on_ranking_pages(testbrowser, data_solr):
     browser = testbrowser('/suche/index')
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == 'http://localhost/suche/index'
@@ -860,7 +841,7 @@ def test_meta_rules_for_keyword_paths(application):
         'von ZEIT ONLINE zu dem Thema Ausdauersport.')
 
 
-def test_newsticker_should_have_expected_dom(testbrowser, datasolr):
+def test_newsticker_should_have_expected_dom(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/news-teaser')
 
     cols = browser.cssselect('.cp-area--newsticker .newsticker__column')
@@ -876,7 +857,7 @@ def test_newsticker_should_have_expected_dom(testbrowser, datasolr):
         teaser[0].cssselect('a .newsteaser__text .newsteaser__product')) == 1
 
 
-def test_newspage_has_expected_elements(testbrowser, datasolr):
+def test_newspage_has_expected_elements(testbrowser, data_es):
     browser = testbrowser('/news/index')
     area = browser.cssselect('.cp-area--overview')[0]
     assert len(area.cssselect('.pager--overview')) == 1
@@ -887,7 +868,8 @@ def test_servicebox_present_in_wide_breakpoints(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    driver.get(
+        '%s/zeit-online/slenderized-index-with-newsbox' % testserver.url)
     servicebox = driver.find_element_by_id('servicebox')
 
     if screen_size[0] == 320:
@@ -1082,18 +1064,16 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
         'teaser-gallery-setup/area/id-5fe59e73-e388-42a4-a8d4-750b0bf96812?p=')
 
 
-def test_homepage_should_have_proper_meetrics_integration(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_homepage_should_have_proper_meetrics_integration(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/slenderized-index')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
 
 
-def test_centerpage_should_have_meetrics_integration(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_centerpage_should_have_meetrics_integration(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/main-teaser-setup')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -1143,7 +1123,7 @@ def test_breadcrumbs_should_handle_non_ascii(application, monkeypatch):
     monkeypatch.setattr(
         zeit.content.cp.centerpage.CenterPage, u'supertitle', u'umläut')
     monkeypatch.setattr(
-        zeit.content.cp.centerpage.CenterPage, u'type', u'topicpage')
+        zeit.content.cp.centerpage.CenterPage, u'type', u'manualtopic')
     view = zeit.web.site.view_centerpage.Centerpage(
         context, pyramid.testing.DummyRequest())
     assert (u'Thema: umläut', None) in view.breadcrumbs
@@ -1650,7 +1630,7 @@ def test_studiumbox_changes_tabs(selenium_driver, testserver):
 
 def test_studiumbox_interessentest_works(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     box.find_elements_by_tag_name('h2')
@@ -1668,7 +1648,7 @@ def test_studiumbox_interessentest_works(selenium_driver, testserver):
 
 def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     links = box.find_elements_by_tag_name('h2')
@@ -1691,7 +1671,7 @@ def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
 
 def test_studiumbox_ranking_works(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     links = box.find_elements_by_tag_name('h2')
@@ -1716,7 +1696,7 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
 
 def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
     driver = selenium_driver
-    driver.maximize_window()
+    driver.set_window_size(1280, 860)
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     link = box.find_elements_by_tag_name('h2')[2].find_element_by_tag_name('a')
@@ -1839,7 +1819,7 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
     driver.maximize_window()
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     link = driver.find_element_by_css_selector('.js-image-copyright-footer')
-    link.click()
+    driver.execute_script('arguments[0].click()', link)
     try:
         WebDriverWait(driver, 5).until(
             expected_conditions.presence_of_element_located(
@@ -1857,7 +1837,7 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
 
         closelink = driver.find_element_by_class_name(
             'js-image-copyright-footer-close')
-        closelink.click()
+        driver.execute_script('arguments[0].click()', closelink)
         try:
             WebDriverWait(driver, 5).until(
                 expected_conditions.invisibility_of_element_located(
@@ -2138,7 +2118,7 @@ def test_centerpage_page_should_require_ranking(application, dummy_request):
         list(view.regions)
 
 
-def test_centerpage_page_integration(testbrowser, datasolr):
+def test_centerpage_page_integration(testbrowser, data_solr):
     browser = testbrowser('/dynamic/umbrien?p=2')
     # Curated content is not shown
     assert 'Ich bin nicht intellektuell' not in browser.contents
@@ -2154,7 +2134,7 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
     solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(35)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
-    dummy_request.GET['p'] = 2
+    dummy_request.GET['p'] = '2'
     area = zeit.web.core.centerpage.get_area(context)
     assert len(area.values()) == 10
     assert area.total_pages == 5
@@ -2183,7 +2163,7 @@ def test_ranking_area_should_handle_various_page_values(
     solr.results = [{'uniqueId': 'http://zeit.de/%s' % i} for i in range(12)]
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
-    dummy_request.GET = params
+    dummy_request.GET.update(params)
     area = zeit.web.core.centerpage.get_area(context)
     assert area.page == page
 
@@ -2340,9 +2320,8 @@ def test_author_list_should_show_authors(testbrowser):
     assert len(browser.cssselect('.author-list__item')) == 1
 
 
-def test_centerpage_contains_webtrekk_parameter_asset(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/centerpage/cardstack')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -2453,11 +2432,11 @@ def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
 
     if screen_size[0] == 768:
         width = teaser.size.get('width')
-        assert helper.size.get('width') == int('%.0f' % (width * 0.72))
+        assert int(helper.size.get('width')) == int(width * 0.72)
 
     elif screen_size[0] == 1000:
         width = teaser.size.get('width')
-        assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
+        assert int(helper.size.get('width')) == int(round(width * 0.6666))
 
 
 def test_cp_teaser_should_display_three_authors_max(testbrowser):
@@ -2596,7 +2575,7 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
 
     # test minor area teasers
     teasers = browser.cssselect('.cp-area--minor article[data-zplus]')
-    assert len(teasers) == 7
+    assert len(teasers) == 8
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert (teaser.cssselect('.{}__kicker-logo--zplus'.format(layout)) or
@@ -2622,6 +2601,16 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
     assert len(teasers) == 3
     for teaser in teasers:
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus')
+
+
+def test_zplus_teaser_should_force_mobile_images(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/zplus')
+    figures = browser.cssselect('figure.teaser-small__media, '
+                                'figure.teaser-small-minor__media')
+
+    assert figures
+    for figure in figures:
+        assert '__media--force-mobile' in figure.get('class')
 
 
 def test_register_teaser_has_zplus_register_badge(testbrowser):
@@ -2675,20 +2664,20 @@ def test_register_teaser_has_zplus_register_badge(testbrowser):
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus-register')
 
 
-def test_zplus_teaser_has_no_badge_in_ressort_area(testbrowser, datasolr):
+def test_zplus_teaser_has_no_badge_in_ressort_area(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     teaser = browser.cssselect(
         '.cp-region--solo:nth-child(3) article.teaser-large')[0]
     assert not teaser.cssselect('.teaser-large__kicker-logo--zplus')
 
 
-def test_campus_teaser_has_no_badge_in_ressort_area(testbrowser, datasolr):
+def test_campus_teaser_has_no_badge_in_ressort_area(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort-with-campus')
     assert not browser.cssselect('.teaser-small__kicker-logo--zco')
     assert not browser.cssselect('.teaser-large__kicker-logo--zco')
 
 
-def test_ressort_areas_have_ressort_title(testbrowser, datasolr):
+def test_ressort_areas_have_ressort_title(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     areas = browser.cssselect('.cp-area--print-ressort')
     assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
@@ -2807,16 +2796,15 @@ def test_hpoverlay_html_output_is_not_on_articles(testbrowser):
     assert not browser.cssselect('#overlay-wrapper')
 
 
-def test_d17_icon_feature_toggle_is_working(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': False}.get)
+def test_d17_icon_feature_toggle_is_working(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('tag_logos')
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     assert not browser.cssselect('*[data-taglogo="true"]')
 
 
-def test_d17_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d17_icon_is_displayed_on_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     assert browser.cssselect('*[data-taglogo="true"]')
     assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--tag')) == 1
@@ -2834,9 +2822,9 @@ def test_d17_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
     assert text in browser.cssselect(selector)[0].getparent().text_content()
 
 
-def test_d17_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d17_icon_is_not_display_on_zplus_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zplus + .teaser-small__kicker-logo--tag')
@@ -2844,9 +2832,9 @@ def test_d17_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
         '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zplus')
 
 
-def test_d17_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d17_icon_is_not_display_on_zmo_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zmo + .teaser-small__kicker-logo--tag')
@@ -2854,17 +2842,17 @@ def test_d17_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
         '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zmo')
 
 
-def test_d17_icon_is_not_display_on_d17_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d17_icon_is_not_display_on_d17_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/parquet')
     assert not browser.cssselect(
         '.cp-area--d17-parquet .teaser-large__kicker-logo--tag')
 
 
-def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d17_icon_is_display_on_auto_area(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     query = ('.cp-region--solo + .cp-region--duo article:first-child '
              '.teaser-small__kicker-logo--tag')
@@ -2876,16 +2864,15 @@ def test_d17_icon_is_display_on_nextread(testbrowser):
     assert browser.cssselect('article.nextread .nextread__kicker-logo--tag')
 
 
-def test_d18_icon_feature_toggle_is_working(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': False}.get)
+def test_d18_icon_feature_toggle_is_working(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('tag_logos')
     browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
     assert not browser.cssselect('*[data-taglogo="true"]')
 
 
-def test_d18_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d18_icon_is_displayed_on_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
     assert browser.cssselect('*[data-taglogo="true"]')
     assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--tag')) == 1
@@ -2903,9 +2890,9 @@ def test_d18_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
     assert text in browser.cssselect(selector)[0].getparent().text_content()
 
 
-def test_d18_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d18_icon_is_not_display_on_zplus_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zplus + .teaser-small__kicker-logo--tag')
@@ -2913,9 +2900,9 @@ def test_d18_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
         '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zplus')
 
 
-def test_d18_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d18_icon_is_not_display_on_zmo_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zmo + .teaser-small__kicker-logo--tag')
@@ -2923,17 +2910,17 @@ def test_d18_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
         '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zmo')
 
 
-def test_d18_icon_is_not_display_on_d18_teaser(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d18_icon_is_not_display_on_d18_teaser(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/parquet')
     assert not browser.cssselect(
         '.cp-area--d18-parquet .teaser-large__kicker-logo--tag')
 
 
-def test_d18_icon_is_display_on_auto_area(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tag_logos': True, 'reader_revenue': True}.get)
+def test_d18_icon_is_display_on_auto_area(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tag_logos', 'reader_revenue')
     browser = testbrowser('/zeit-online/centerpage/taglogo-d18')
     query = ('.cp-region--solo + .cp-region--duo article:first-child')
     assert browser.cssselect(query)
@@ -2968,17 +2955,6 @@ def test_gallery_teaser_handles_articles_with_inline_galleries(testbrowser):
         'http://xml.zeit.de/zeit-online/article/inline-gallery'))[0]
     counter = article.cssselect('.teaser-gallery__counter')[0]
     assert counter.text == '7 Fotos'
-
-
-def test_centerpage_can_include_optimizely(testbrowser):
-    browser = testbrowser('/zeit-online/slenderized-centerpage')
-    assert 'optimizely' not in browser.contents
-
-    optimizely_url = '//cdn.optimizely.com/js/281825380.js'
-    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['optimizely_on_zon_centerpage'] = optimizely_url
-    browser = testbrowser('/zeit-online/slenderized-centerpage')
-    assert optimizely_url in browser.contents
 
 
 def test_ressortpage_returns_is_ressortpage_correctly(
@@ -3068,13 +3044,13 @@ def test_responsive_image_teaser_only_in_first_region(testbrowser):
     assert len(sel('div.teaser-classic__media-container')) == 2
 
 
-def test_topicpage_has_jsonld(testbrowser, datasolr):
+def test_topicpage_has_jsonld(testbrowser, data_solr):
     browser = testbrowser('/thema/jurastudium')
     assert browser.cssselect('script[type="application/ld+json"]')
     assert '"@type": "ItemList"' in browser.contents
 
 
-def test_centerpage_has_no_jsonld(testbrowser, datasolr):
+def test_centerpage_has_no_jsonld(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/index')
     assert 'ld+json' not in browser.contents
 
@@ -3101,3 +3077,34 @@ def test_brandeins_teaser_kicker_should_contain_logo(testbrowser):
     assert len(teaser_small_logo) == 4
     assert len(teaser_small_minor_logo) == 2
     assert len(teaser_square_logo) == 2
+
+
+def test_brandeins_teaser_should_force_mobile_images(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/teasers-to-brandeins')
+    figures = browser.cssselect('.cp-area--brandeins .teaser-small__media')
+
+    assert figures
+    for figure in figures:
+        assert 'teaser-small__media--force-mobile' in figure.get('class')
+
+
+def test_brandeins_teaser_should_display_its_image_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/zeit-online/parquet-feeds' % testserver.url)
+    teaser_images = driver.find_elements_by_css_selector(
+        '.cp-area--brandeins .teaser-small__media')
+
+    assert len(teaser_images)
+
+    for image in teaser_images:
+        assert ('teaser-small__media--force-mobile' in
+                image.get_attribute('class'))
+        assert image.is_displayed()
+
+
+def test_if_series_is_podcast(testbrowser):
+    browser = testbrowser('/serie/ist-das-normal')
+    link = browser.cssselect('link[rel="alternate"]')
+    assert link[0].get('href') == 'https://istdasnormal.podigee.io/feed/mp3'

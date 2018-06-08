@@ -1,5 +1,6 @@
 import json
 import urllib
+import time
 
 import jwt
 import mock
@@ -120,7 +121,6 @@ def test_empty_cache_triggers_backend_fills_cache(
     server = mockserver_factory(user_xml)
     dummy_request.registry.settings['community_host'] = server.url
     dummy_request.cookies['my_sso_cookie'] = 'foo'
-    dummy_request.headers['Cookie'] = ''
     assert 'user' not in dummy_request.session
     assert dummy_request.user['ssoid'] == 'foo'
     policy = zeit.web.core.security.AuthenticationPolicy()
@@ -154,7 +154,7 @@ def test_unreachable_agatho_should_not_produce_error():
 def test_unreachable_community_should_not_produce_error(dummy_request):
     dummy_request.registry.settings['community_host'] = (
         'http://thisurlshouldnotexist.moep/')
-    dummy_request.cookies['drupal-userid'] = 23
+    dummy_request.cookies['drupal-userid'] = '23'
     dummy_request.headers['Cookie'] = ''
     user_info = dict(uid=0, name=None, picture=None, roles=[],
                      mail=None, premoderation=False, should_invalidate=False,
@@ -247,11 +247,15 @@ def test_rawr_config_should_contain_user_data_as_base64_encoded_json(
         selenium_driver, testserver):
     driver = selenium_driver
     # add_cookie() only works for the domain of the last get(), sigh.
+    # janky timeouts needed to calm down the test-procedure on lightning-
+    # fast developer machines. jenkins is slow enough though.
     driver.get('%s/zeit-online/article/01' % testserver.url)
+    time.sleep(5)
     driver.add_cookie({
         'name': 'my_sso_cookie',
         'value': 'just be present',
     })
+    time.sleep(5)
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
         get_user.return_value = {
             'ssoid': '123',

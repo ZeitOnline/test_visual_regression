@@ -46,7 +46,7 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def pages(self):
         return zeit.web.core.article.pages_of_article(
-            self.context, self.advertising_enabled)
+            self.context, self.advertising_in_article_body_enabled)
 
     @zeit.web.reify
     def is_all_pages_view(self):
@@ -167,6 +167,14 @@ class Article(zeit.web.core.view.Content):
         return self.request.resource_url(self.context).rstrip('/')
 
     @zeit.web.reify
+    def canonical_url(self):
+        """ Canonical for komplettansicht is first page """
+        if not self.is_all_pages_view:
+            return super(Article, self).canonical_url
+        else:
+            return self.resource_url
+
+    @zeit.web.reify
     def authors(self):
         return zeit.web.core.article.convert_authors(self.context)
 
@@ -176,11 +184,6 @@ class Article(zeit.web.core.view.Content):
             return u';'.join([
                 rt['name'] for rt in self.authors if rt.get('name')])
         return ''
-
-    @zeit.web.reify
-    def linkreach(self):
-        reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
-        return reach.get_buzz(self.context.uniqueId).get('social')
 
     @zeit.web.reify
     def text_length(self):
@@ -245,6 +248,12 @@ class Article(zeit.web.core.view.Content):
     def volume(self):
         return zeit.content.volume.interfaces.IVolume(self.context, None)
 
+    @zeit.web.reify
+    def volumepage_is_published(self):
+        cp = zeit.content.cp.interfaces.ICenterPage(self.volume, None)
+        pubinfo = zeit.cms.workflow.interfaces.IPublishInfo(cp, None)
+        return getattr(pubinfo, 'published', False)
+
     # this property returns all the information for the article header badge
     @zeit.web.reify
     def zplus_label(self):
@@ -255,8 +264,8 @@ class Article(zeit.web.core.view.Content):
 
         # default values
         badge = {
+            'show': False,  # show volume badge
             'cover': False,  # volume cover
-            'hide_source_label': False,  # state of source label
             'intro': '',  # intro text for article badge
             'link': None,  # link to archiv or exclusiv page
             'link_text': '',  # link text
@@ -269,26 +278,32 @@ class Article(zeit.web.core.view.Content):
 
             if access == 'abo':
                 badge.update({
-                    'link': 'http://{}/exklusive-zeit-artikel'.format(
-                            self.request.host),
+                    'show': True,
+                    'link': '{}exklusive-zeit-artikel'.format(
+                        self.request.route_url('home')),
                     'link_text': u'Exklusiv für Abonnenten',
                     'zplus': True
                 })
 
             if self.volume:
                 badge.update({
+                    'show': True,
                     'cover': self.volume.get_cover('printcover'),
                     'link': self.volume.fill_template(
-                        'http://%s/{year}/{name}' % self.request.host),
+                        '%s{year}/{name}' % self.request.route_url('home')),
                     'volume_exists': True
                 })
 
                 if access != 'abo':
                     badge.update({
-                        'hide_source_label': True,
                         'intro': 'Aus der',
                         'link_text': self.volume.fill_template(
                             'ZEIT Nr. {name}/{year}'),
+                    })
+
+                if not self.volumepage_is_published:
+                    badge.update({
+                        'link': None
                     })
 
             if badge['link']:
@@ -297,6 +312,8 @@ class Article(zeit.web.core.view.Content):
                     'cover.{0}&utm_medium=fix&utm_source=zeitde_zonpme_int&utm'
                     '_campaign=wall_abo&utm_content=premium_packshot_cover_{0}'
                 ).format(self.product_id.lower())
+
+            if badge['show']:
                 return badge
             return False
         except:
@@ -373,6 +390,21 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def has_series_attached(self):
         return getattr(self.context, 'serie', None)
+
+    @zeit.web.reify
+    def contains_video(self):
+        if self.is_all_pages_view:
+            pages_to_iterate = self.pages
+        else:
+            pages_to_iterate = [self.current_page]
+
+        for nr, page in enumerate(pages_to_iterate):
+            for block in page:
+                block_type = zeit.web.core.template.block_type(block)
+                if block_type == 'video' and not (
+                    block.video is None or zeit.web.core.template.expired(
+                        block.video)):
+                            return True
 
 
 class AcceleratedMobilePageArticle(Article):

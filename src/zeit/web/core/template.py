@@ -175,6 +175,24 @@ def tag_with_logo_content(content, area_kind=None):
 
 
 @zeit.web.register_filter
+def branding(context):
+    if zeit.content.link.interfaces.ILink.providedBy(context):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        zett_host = urlparse.urlparse(conf.get('zett_host')).netloc
+        brandeins_host = urlparse.urlparse(conf.get('brandeins_host')).netloc
+
+        context_host = urlparse.urlparse(context.url).netloc
+
+        if brandeins_host == context_host:
+            return 'brandeins'
+
+        if zett_host == context_host:
+            return 'zett'
+
+    return zeit.web.core.interfaces.IVertical(context)
+
+
+@zeit.web.register_filter
 def logo_icon(teaser, area_kind=None, zplus=None):
     """Function to add a list of icon templates to a teaser
     :param teaser:      Teaser to which the icons are added
@@ -199,27 +217,27 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         if zplus == 'only':
             return templates
 
-    vertical = zeit.web.core.interfaces.IVertical(teaser)
+    brand = branding(teaser)
     # exclusive icons, set and return
-    if vertical == 'zmo' and area_kind != 'zmo-parquet':
+    if brand == 'zmo' and area_kind != 'zmo-parquet':
         templates.append('logo-zmo-zm')
         return templates
     if liveblog(teaser):
         templates.append('liveblog')
         return templates
-    if vertical == 'zett':
+    if brand == 'zett':
         templates.append('logo-zett-small')
         return templates
-    if vertical == 'brandeins':
+    if brand == 'brandeins':
         templates.append('logo-brandeins')
         return templates
 
     # inclusive icons may appear both
     if tag_with_logo_content(teaser, area_kind) and not zplus_icon:
         templates.append('taglogo')
-    if vertical == 'zco' and area_kind != 'zco-parquet':
+    if brand == 'zco' and area_kind != 'zco-parquet':
         templates.append('logo-zco')
-    if vertical == 'zar' and area_kind != 'zar-parquet':
+    if brand == 'zar' and area_kind != 'zar-parquet':
         templates.append('logo-zar')
 
     return templates
@@ -269,11 +287,6 @@ def framebuilder(view):
 @zeit.web.register_test
 def paragraph(block):
     return block_type(block) == 'paragraph'
-
-
-@zeit.web.register_filter
-def vertical(content):
-    return zeit.web.core.interfaces.IVertical(content)
 
 
 @zeit.web.register_filter
@@ -393,11 +406,10 @@ def format_date(date, type='short', pattern=None):
                                             add_direction=True, locale="de_DE")
         return text[:1].lower() + text[1:] if text else ''
     elif type == 'switch_from_hours_to_date':
-        delta = datetime.datetime.now(date.tzinfo) - date
-        if delta.days >= int(1):
-            pattern = 'dd. MM. yyyy'
-        elif delta.days < int(1):
+        if datetime.datetime.today().date() == date.date():
             pattern = "'Heute,' HH:mm"
+        else:
+            pattern = 'dd. MM. yyyy'
     if pattern is None:
         pattern = formats[type]
     # adjust UTC dates to local time
@@ -543,6 +555,14 @@ def remove_break(string):
 
 
 @zeit.web.register_filter
+def remove_schema(url):
+    if isinstance(url, basestring):
+        parsed = urlparse.urlparse(url)
+        return ''.join(parsed[1:3])
+    return url
+
+
+@zeit.web.register_filter
 def is_gallery(context):
     return zeit.content.gallery.interfaces.IGallery.providedBy(context)
 
@@ -674,6 +694,26 @@ def format_webtrekk(string):
     string = re.sub(u'[^-a-zA-Z0-9]', '_', string)
     string = re.sub(u'_+', '_', string)
     string = re.sub(u'^_|_$', '', string)
+    return string
+
+
+@zeit.web.register_filter
+def format_faq(string):
+    """Returns a string that is save for the faq site."""
+    if not isinstance(string, basestring):
+        return string
+    string = string.lower().replace(
+        u'ä', 'ae').replace(
+        u'ö', 'oe').replace(
+        u'ü', 'ue').replace(
+        u'á', 'a').replace(
+        u'à', 'a').replace(
+        u'é', 'e').replace(
+        u'è', 'e').replace(
+        u'ß', 'ss')
+    string = re.sub(u'[^-a-zA-Z0-9]', '-', string)
+    string = re.sub(u'-+', '-', string)
+    string = re.sub(u'^_|_$ ^-|-$', '', string)
     return string
 
 
@@ -871,7 +911,8 @@ def adapt(obj, iface, name=u'', multi=False):
 
 
 @SHORT_TERM_CACHE.cache_on_arguments()
-def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
+def get_svg_from_file_cached(
+        name, class_name, package, cleanup, a11y, remove_title):
     try:
         subpath = '.'.join(package.split('.')[1:3])
     except (AttributeError, TypeError):
@@ -885,7 +926,8 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
         log.debug('Error while reading Icon {}: {}'.format(name, e.message))
         return ''
     try:
-        title = xml.find('{http://www.w3.org/2000/svg}title').text
+        title_elem = xml.find('{http://www.w3.org/2000/svg}title')
+        title = title_elem.text
     except AttributeError:
         title = 'Icon'
     svg = xml.getroot()
@@ -898,6 +940,8 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
     if cleanup:
         lxml.etree.strip_attributes(
             xml, 'fill', 'fill-opacity', 'stroke', 'stroke-width')
+    if remove_title and title_elem is not None:
+        svg.remove(title_elem)
     if a11y:
         svg.set('role', 'img')
         svg.set('aria-label', title)
@@ -907,8 +951,9 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
 
 
 @zeit.web.register_global
-def get_svg_from_file(name, class_name, package, cleanup, a11y):
-    return get_svg_from_file_cached(name, class_name, package, cleanup, a11y)
+def get_svg_from_file(name, class_name, package, cleanup, a11y, remove_title):
+    return get_svg_from_file_cached(
+        name, class_name, package, cleanup, a11y, remove_title)
 
 
 @zeit.web.register_test
@@ -932,17 +977,6 @@ def urlquote_plus(text):
 @zeit.web.register_global
 def debugger():
     pdb.set_trace()
-
-
-# XXX: Remove ASAP
-# Temporary hack, needed until we deliver www.zeit.de via SSL.
-# We use this mainly for framebuilder?useSSL context.
-@zeit.web.register_filter
-def rewrite_for_ssl_if_required(url, rewrite_required=False):
-    if rewrite_required:
-        return url.replace(
-            'http://www.zeit.de/', 'https://ssl.zeit.de/www.zeit.de/')
-    return url
 
 
 # Use case: The view.adcontroller_values are a list of tuples,

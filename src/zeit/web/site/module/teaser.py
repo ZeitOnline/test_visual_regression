@@ -11,7 +11,7 @@ import zeit.web.core.module.teaser
 @grokcore.component.adapter(
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.content.author.interfaces.IAuthor)
-class AuthorTeaserBlock(zeit.web.core.module.teaser.LayoutOverrideTeaserBlock):
+class AuthorTeaserBlock(zeit.web.core.module.teaser.TeaserBlock):
 
     @property
     def layout(self):
@@ -66,14 +66,15 @@ class StoryStreamTeaserBlock(
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.content.infobox.interfaces.IInfobox)
 class InfoboxTeaserBlock(
-        zeit.web.core.module.teaser.TeaserBlock,
+        zeit.web.core.module.teaser.ContentTeaserBlock,
         zeit.web.core.block.Infobox,
         grokcore.component.MultiAdapter):
 
     grokcore.component.provides(zeit.web.core.interfaces.IBlock)
 
     def __init__(self, module, content):
-        zeit.web.core.module.teaser.TeaserBlock.__init__(self, module, content)
+        zeit.web.core.module.teaser.ContentTeaserBlock.__init__(
+            self, module, content)
         # z.w.core.block Infobox API
         self.context = module
         self.content = content

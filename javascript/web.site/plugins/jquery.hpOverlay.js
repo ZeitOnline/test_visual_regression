@@ -69,6 +69,8 @@
         // bind this on runtime to make it revokable
         this.visibilityListener = visibilityListener.bind( this );
         document.addEventListener( 'visibilitychange', this.visibilityListener );
+        // add Podcast Event Listener
+        this.addPostMessageEventListener();
         // fetchData initially
         this.fetchData();
     };
@@ -181,8 +183,7 @@
         // set state
         this.visible = false;
         // write cookie
-        this.cookieValue = 'canceled';
-        Zeit.cookieCreate( 'overlaycanceled', 'canceled', this.options.cookieTimeInDays, '' );
+        this.addCancelCookie();
         // restore last focused element
         if ( this.activeElement ) {
             this.activeElement.focus();
@@ -235,6 +236,61 @@
         $( window ).off( '.hpoverlay' );
         $( document ).off( '.hpoverlay' );
         document.removeEventListener( 'visibilitychange', this.visibilityListener );
+    };
+
+    Overlay.prototype.sendPodcastPlayEventPostMessage = function() {
+        // send postMessage with value play to get the message once the player starts
+        $( '.podigee-podcast-player' ).each(
+            function() {
+                $( this ).context.contentWindow.postMessage(
+                    JSON.stringify({
+                        context: 'player.js',
+                        version: 'version',
+                        method: 'addEventListener',
+                        value: 'play'
+                    }),
+                    '*'
+                );
+            }
+        );
+    };
+
+    Overlay.prototype.listenToPostMessages = function() {
+        var that = this;
+        window.addEventListener( 'message', function( event ) {
+            if ( that.cookieValue === 'canceled' ) {
+                return;
+            }
+            var data =  typeof( event.data ) === 'string' ? JSON.parse( event.data ) : event.data;
+            var matches = false;
+            // quiz
+            if ( data.name === 'quiz' && data.message === 'started' ) {
+                matches = true;
+            }
+            // podcast
+            if ( data.context === 'player.js' && data.event === 'play' ) {
+                matches = true;
+            }
+
+            if ( matches ) {
+                that.addCancelCookie();
+                that.log( 'Added Cookie' );
+            }
+        }, false );
+    };
+
+    Overlay.prototype.addPostMessageEventListener = function() {
+        // add postMessage listeners only if either Podcast or Quiz are present
+        var trigger = $( '.podigee-podcast-player' ) || $( 'iframe[src*="quiz.zeit.de"]' );
+        if ( trigger ) {
+            this.sendPodcastPlayEventPostMessage();
+            this.listenToPostMessages();
+        }
+    };
+
+    Overlay.prototype.addCancelCookie = function() {
+        this.cookieValue = 'canceled';
+        Zeit.cookieCreate( 'overlaycanceled', this.cookieValue, this.options.cookieTimeInDays, '' );
     };
 
     // jquery plugin

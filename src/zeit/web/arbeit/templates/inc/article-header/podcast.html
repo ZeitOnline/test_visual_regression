@@ -7,11 +7,11 @@
     {% set fill_color = imgref.fill_color if imgref else None %}
     {% set card_style = 'background-color: #{};'.format(fill_color) -%}
 
-    <header class="{{ 'article-heading' | with_mods('podcast') }}" itemprop="headline" data-ct-area="articleheader" {% if card_style %} style="{{ card_style }}"{% endif %}>
+    <header class="{{ 'article-heading' | with_mods('podcast') }}" data-ct-area="articleheader" {% if card_style %} style="{{ card_style }}"{% endif %}>
         <div class="{{ 'article-heading__container' | with_mods('podcast') }}">
             {% include "zeit.web.arbeit:templates/inc/asset/image_article-header-podcast.html" %}
-            <div>
-                <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}">
+            <div class="article-heading__podcast">
+                <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}" itemprop="headline">
                     {%- if view.serie -%}
                     <span class="{{ 'article-heading__series' | with_mods('podcast') }}">
                         Podcast: {{ view.serie -}}
@@ -36,3 +36,5 @@
         </div>
     </header>
 {% endblock %}
+
+{% block header_image %}{% endblock %}

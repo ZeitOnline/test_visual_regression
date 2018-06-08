@@ -58,10 +58,7 @@ class Base(zeit.web.core.view.Base):
 
 
 class Content(Base):
-
-    @zeit.web.reify
-    def article_layout(self):
-        return 'default'
+    pass
 
 
 @zeit.web.view_config(

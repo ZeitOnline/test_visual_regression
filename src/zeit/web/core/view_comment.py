@@ -190,8 +190,7 @@ class PostComment(zeit.web.core.view.Base):
         # GET/POST the request to the community
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         response = None
-        with zeit.web.core.metrics.timer(
-                'post_comment.community.reponse_time'):
+        with zeit.web.core.metrics.http('post_comment.community') as record:
             try:
                 response = getattr(requests, method)(
                     action_url,
@@ -200,6 +199,7 @@ class PostComment(zeit.web.core.view.Base):
                     cookies=dict(request.cookies),
                     allow_redirects=False,
                     timeout=float(conf.get('community_host_timeout_secs', 5)))
+                record(response)
                 if not 200 <= response.status_code <= 303:
                     raise requests.exceptions.HTTPError()
             except requests.exceptions.HTTPError as err:
@@ -228,10 +228,6 @@ class PostComment(zeit.web.core.view.Base):
                 log.warning(message + u' ' + detail)
                 raise pyramid.httpexceptions.HTTPInternalServerError(
                     title=message, explanation=detail)
-            finally:
-                status = response.status_code if response else 599
-                zeit.web.core.metrics.increment(
-                    'post_comment.community.status.%s' % status)
 
         self.status.append('Action {} was performed for {}'
                            ' (with pid {})'.format(method, unique_id, pid))
@@ -329,32 +325,26 @@ class PostComment(zeit.web.core.view.Base):
 
         xml_str = lxml.etree.tostring(content.xml)
         headers = {
-            'X-uniqueId': '{}{}'.format(
-                self.request.route_url('home').rstrip('/'),
-                urlparse.urlparse(unique_id)[2]),
+            'X-uniqueId': unique_id,
             'Content-Type': 'text/xml'}
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         error = None
         response = None
-        with zeit.web.core.metrics.timer(
-                'create_thread.community.reponse_time'):
+        with zeit.web.core.metrics.http('create_thread.community') as record:
             try:
                 response = requests.post(
                     '{}/agatho/commentsection'.format(self.community_host),
                     headers=headers,
                     data=xml_str,
                     timeout=float(conf.get('community_host_timeout_secs', 5)))
+                record(response)
                 if not (response.status_code >= 200 and
                         response.status_code < 300):
                     error = 'Community returned HTTP {}'.format(
                         response.status_code)
             except requests.exceptions.RequestException, err:
                 error = type(err).__name__
-            finally:
-                status = response.status_code if response else 599
-                zeit.web.core.metrics.increment(
-                    'create_thread.community.status.%s' % status)
         if error:
             log.warning(
                 'Could not create commentsection for %s: %s', unique_id, error)

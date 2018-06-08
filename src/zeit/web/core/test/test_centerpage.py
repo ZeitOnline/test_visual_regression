@@ -25,6 +25,20 @@ def test_get_module_filter_should_correctly_extract_cpextra_id(application):
     assert module.layout.id == 'search-form'
 
 
+def test_teaser_layout_should_be_read_from_xml_by_default(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    cp = zeit.content.cp.centerpage.CenterPage()
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'
+    block = area.create_item('teaser')
+    block.layout = zeit.content.cp.layout.get_layout('zon-small')
+    block.append(article)
+
+    module = zeit.web.core.centerpage.get_module(block)
+    assert module.layout.id == 'zon-small'
+
+
 def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/feature/feature_longform')

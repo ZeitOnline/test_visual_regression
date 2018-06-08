@@ -7,10 +7,13 @@ import zope.component
 
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
+import zeit.retresco.interfaces
+import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.article
 import zeit.web.core.interfaces
+import zeit.web.core.metrics
 import zeit.web.core.utils
 import zeit.web.core.view
 import zeit.web.core.view_article
@@ -48,14 +51,6 @@ log = logging.getLogger(__name__)
 class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
-    def canonical_url(self):
-        """ Canonical for komplettansicht is first page """
-        if not self.is_all_pages_view:
-            return super(Article, self).canonical_url
-        else:
-            return self.resource_url
-
-    @zeit.web.reify
     def meta_keywords(self):
         return [x for x in ([self.ressort.title(), self.supertitle] +
                 super(Article, self).meta_keywords) if x]
@@ -90,15 +85,16 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return atoms[pos - 1:pos + 2]
 
     @zeit.web.reify
-    def include_optimizely(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('optimizely_on_zon_article', None)
+    def liveblog(self):
+        return zeit.web.core.interfaces.ILiveblogInfo(self.context)
 
     @zeit.web.reify
-    def volumepage_is_published(self):
-        cp = zeit.content.cp.interfaces.ICenterPage(self.volume, None)
-        pubinfo = zeit.cms.workflow.interfaces.IPublishInfo(cp, None)
-        return getattr(pubinfo, 'published', False)
+    def advertising_in_article_body_enabled(self):
+        if self.advertising_enabled:
+            if self.liveblog.collapse_preceding_content:
+                return False
+
+        return super(Article, self).advertising_in_article_body_enabled
 
 
 @zeit.web.view_defaults(vertical='zon')
@@ -179,10 +175,70 @@ class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
 
 @zeit.web.view_config(
     custom_predicates=(zeit.web.core.view.is_dpa_article,),
+    # just render the first page because we expect only one page for DPA-news
     renderer='zeit.web.site:templates/article.html')
 class DPAArticle(Article):
 
-    header_layout = 'dpa'
+    header_layout = news_type = 'dpa'
+
+
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_afp_article,),
+    # just render the first page because we expect only one page for AFP-news
+    renderer='zeit.web.site:templates/article.html')
+class AFPArticle(Article):
+
+    news_type = 'afp'
+
+
+@zeit.web.view_config(
+    context=zeit.web.core.article.IFAQArticle,
+    renderer='templates/faq.html')
+class FAQArticle(Article):
+    """FAQs consist of a question, represented by an intertitle block, and an
+    answer, represented by one or more blocks that are anything but an
+    intertitle (e.g. paragraphs, images, etc.).  schema.org optimization
+    dictates, that each question and answer is bundled together inside a
+    seperate block. Therefore we need to loop through all blocks, searching for
+    intertitles and wrap them together with all consecutive blocks until
+    another intertitle is found or we have reached the end of the page.
+    """
+
+    @zeit.web.reify
+    def pages(self):
+        """FAQs by definition consist only of a single page. Since multi page
+        FAQs will break rendering logic further along the way, let's just
+        handle the first page only. Of course there's also a validation rule in
+        vivi, but you never know...
+        This improves readability a lot, getting rid of an additional
+        loop in both view and model!
+        """
+
+        page = super(FAQArticle, self).pages[0]
+        return [zeit.web.core.article.restructure_faq_article(
+            page)]
+
+    @zeit.web.reify
+    def subheadings(self):
+        for block in self.pages[0].blocks:
+            if isinstance(block, zeit.web.core.article.FAQItemBlock):
+                if isinstance(block[0], zeit.web.core.block.Intertitle):
+                    yield block[0].context
+
+
+@zeit.web.view_config(
+    context=zeit.web.core.article.IFlexibleTOCArticle,
+    renderer='templates/flexible-toc.html')
+class FlexibleTOCArticle(Article):
+
+    @zeit.web.reify
+    def subheadings(self):
+        """Like FAQs, flexible tables of content are by definition only able to
+        present intertitles from the first page.
+        """
+        for block in self.pages[0].blocks:
+            if isinstance(block, zeit.web.core.block.Intertitle):
+                yield block.context
 
 
 @zeit.web.view_config(
@@ -192,25 +248,22 @@ class LiveblogArticle(Article):
 
     header_layout = 'liveblog'
 
-    @zeit.web.reify
-    def liveblog(self):
-        return zeit.web.core.interfaces.ILiveblogInfo(self.context)
-
 
 @zeit.web.view_config(
     route_name='amp',
     renderer='templates/amp/article.html')
 class AcceleratedMobilePageArticle(
         zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
-
-    @zeit.web.reify
-    def liveblog(self):
-        return zeit.web.core.interfaces.ILiveblogInfo(self.context)
+    pass
 
 
 @zeit.web.view_config(
     route_name='amp',
     context=zeit.web.core.article.ILiveblogArticle,
+    # XXX Since `context` is evaluated *before* everything else, we cannot
+    # rely on `z.w.core.redirect_amp_disabled` trumping us with its predicate,
+    # and have to repeat the appropriate predicate here.
+    custom_predicates=(lambda context, _: context.is_amp,),
     renderer='templates/amp/liveblog.html')
 class AcceleratedMobilePageLiveblogArticle(
         LiveblogArticle, AcceleratedMobilePageArticle):

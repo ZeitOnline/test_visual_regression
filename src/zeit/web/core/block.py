@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 import datetime
+import logging
 import random
+import re
+import urlparse
 
 import babel.dates
-import base64
 import grokcore.component
-import json
 import lxml.etree
 import lxml.html
 import pyramid
-import re
 import requests
 import requests.exceptions
-import urlparse
 import zope.component
 import zope.interface
 
@@ -30,6 +29,7 @@ import zeit.web.core.metrics
 import zeit.web.core.template
 import zeit.web.core.utils
 
+log = logging.getLogger(__name__)
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 LONG_TERM_CACHE = zeit.web.core.cache.get_region('long_term')
@@ -249,10 +249,12 @@ class Liveblog(Module):
     def __init__(self, context):
         super(Liveblog, self).__init__(context)
         self.blog_id = self.context.blog_id
-        self.version = getattr(self.context, 'version', None)
+        self.version = self.context.version
+        self.collapse_preceding_content = (
+            self.context.collapse_preceding_content)
         self.is_live = False
         self.last_modified = None
-        self.id = None
+        self.id = self.blog_id
         self.seo_id = None
 
         if self.version == '3':
@@ -287,47 +289,53 @@ class Liveblog(Module):
 
     def set_blog_info(self):
         json = self.api_blog_request()
+        updated = json.get('last_created_post').get('_updated') or json.get(
+            '_updated')
         self.is_live = json.get('blog_status') == u'open'
-        self.last_modified = self.format_date(json.get('_updated'))
+        self.last_modified = self.format_date(updated)
 
-    def api_auth_token(self):
+    @LONG_TERM_CACHE.cache_on_arguments()
+    def auth_token(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = conf.get('liveblog_api_auth_url_v3')
+        try:
+            with zeit.web.core.metrics.http('liveblog3.auth') as record:
+                response = requests.post(url, json={
+                    'username': conf.get('liveblog_api_auth_username_v3'),
+                    'password': conf.get('liveblog_api_auth_password_v3')})
+                record(response)
+            response.raise_for_status()
+            return response.json().get('token')
+        except requests.exceptions.HTTPError as e:
+            log.error(e.message)
+        except (requests.exceptions.RequestException, ValueError):
+            return
 
-        username = conf.get('liveblog_api_auth_username_v3')
-        password = conf.get('liveblog_api_auth_password_v3')
-        headers = {'Content-Type': 'application/json;charset=UTF-8'}
-        payload = {'username': username, 'password': password}
+    def api_blog_request(self, retries=0):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        api_url = conf.get('liveblog_api_url_v3')
+        url = '{}/{}'.format(api_url, self.blog_id)
 
-        r = requests.post(url, data=json.dumps(payload), headers=headers)
-        r.raise_for_status()
-        token = r.json().get('token')
-        LONG_TERM_CACHE.set('liveblog_api_auth_token', token)
-        return token
+        if retries >= 2:
+            raise RuntimeError('Maximum retries exceeded for %s' % url)
 
-    def api_blog_request(self):
-        token = LONG_TERM_CACHE.get('liveblog_api_auth_token')
-        if not token:
-            token = self.api_auth_token()
-
-        if isinstance(token, basestring):
-            conf = zope.component.getUtility(
-                zeit.web.core.interfaces.ISettings)
-            api_url = conf.get('liveblog_api_url_v3')
-            url = '{}/{}'.format(api_url, self.blog_id)
-            headers = {
-                'Authorization': 'basic ' + base64.b64encode(token + ':')}
-            r = requests.get(url, headers=headers)
-
-            if r.status_code == 200:
-                return r.json()
-            else:
-                token = self.api_auth_token()
-                headers = {
-                    'Authorization': 'basic ' + base64.b64encode(token + ':')}
-                r = requests.get(url, headers=headers)
-                r.raise_for_status()
-                return r.json()
+        try:
+            with zeit.web.core.metrics.http('liveblog3.api') as record:
+                response = requests.get(url, auth=(self.auth_token(), ''))
+                record(response)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as err:
+            status = getattr(err.response, 'status_code', 510)
+            if status == 401:
+                log.debug('Refreshing liveblog3 auth token')
+                self.auth_token.invalidate(self)
+                return self.api_blog_request(retries=retries + 1)
+            raise
+        try:
+            return response.json()
+        except Exception:
+            log.error('%s returned invalid json %r', url, response.text)
+            raise ValueError('No valid JSON found for %s' % url)
 
     def format_date(self, date):
         tz = babel.dates.get_timezone('Europe/Berlin')
@@ -350,15 +358,13 @@ class Liveblog(Module):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         response = None
         try:
-            with zeit.web.core.metrics.timer('liveblog.reponse_time'):
+            with zeit.web.core.metrics.http('liveblog') as record:
                 response = requests.get(
                     url, timeout=conf.get('liveblog_timeout', 1))
-                return response.json()
+                record(response)
+            return response.json()
         except (requests.exceptions.RequestException, ValueError):
             pass
-        finally:
-            status = response.status_code if response else 599
-            zeit.web.core.metrics.increment('liveblog.status.%s' % status)
 
     @LONG_TERM_CACHE.cache_on_arguments()
     def get_amp_themed_id(self, blog_id):
@@ -452,12 +458,6 @@ class HeaderImage(Image):
 
     def __init__(self, model_block, header):
         super(HeaderImage, self).__init__(model_block)
-        if getattr(self, 'block_type', None) == 'infographic':
-            # XXX Annoying special case, header images don't usually use
-            # display_mode but rather handle their display in the respective
-            # header template, but infographics have their own template that
-            # does not distinguish between header and body (at the moment).
-            self.display_mode = 'large'
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
@@ -508,7 +508,10 @@ class Raw(Module):
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawText)
 class RawText(Module):
-    pass
+
+    @zeit.web.reify
+    def raw_code(self):
+        return _raw_text(self.context.raw_code)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
@@ -620,16 +623,18 @@ class JobTicker(Module):
 
     @zeit.web.reify
     def items(self):
+        if not self.content:
+            return ()
         return list(zeit.web.site.area.rss.parse_feed(
             self.content.feed_url, 'jobbox_ticker'))
 
     @zeit.web.reify
     def teaser_text(self):
-        return self.content.teaser
+        return self.content and self.content.teaser
 
     @zeit.web.reify
     def landing_page_url(self):
-        return self.content.landing_url
+        return self.content and self.content.landing_url
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
@@ -757,10 +762,9 @@ class NewsletterTeaser(Module):
             self.context.reference, None)
         if body is None:
             return []
-        return [zeit.web.core.interfaces.IArticleModule(element)
-                for element in body.values()
-                if zeit.content.article.edit.interfaces.IVideo.providedBy(
-                    element)]
+        return [
+            zeit.web.core.interfaces.IArticleModule(x) for x in
+            body.filter_values(zeit.content.article.edit.interfaces.IVideo)]
 
     @property
     def url(self):
@@ -801,7 +805,19 @@ def _raw_html(xml):
         </xsl:stylesheet>
     """)
     transform = lxml.etree.XSLT(filter_xslt)
-    return transform(xml)
+    return _raw_text(unicode(transform(xml)))
+
+
+def _raw_text(text):
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('https'):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        rewrite_https_links = conf.get(
+            'transform_to_secure_links_for', '').split(',')
+        for link in rewrite_https_links:
+            if link:
+                text = text.replace("http://%s" % link, "https://%s" % link)
+    return text
 
 
 def _inline_html(xml, elements=None):

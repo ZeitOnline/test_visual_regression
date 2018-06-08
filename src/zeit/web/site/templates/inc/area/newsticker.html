@@ -3,15 +3,15 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% set cp_type = view.context.type if view.context.type else '' %}
-{% set cp_area_modifier = ('newsticker-on-' ~ cp_type) if cp_type in ['keywordpage', 'topicpage'] and 'newsticker' == area.kind %}
+{% set cp_area_modifier = ('newsticker-on-' ~ cp_type) if cp_type in ['autotopic', 'manualtopic'] and 'newsticker' == area.kind %}
 
 {% block before_module_list %}
     {% set tracking_slug = '{}.{}..newsteaser.alle_schlagzeilen'.format(area.kind, region_loop.index) %}
-    {{ cp.section_heading(area.title, 'Alle Schlagzeilen', '' if cp_type in ['keywordpage', 'topicpage'] else 'news/index' , view, tracking_slug) }}
+    {{ cp.section_heading(area.title, 'Alle Schlagzeilen', '' if cp_type in ['autotopic', 'manualtopic'] else 'news/index' , view, tracking_slug) }}
 {% endblock %}
 
 {% block module_list %}
-    {% if cp_type in ['keywordpage', 'topicpage'] %}
+    {% if cp_type in ['autotopic', 'manualtopic'] %}
         <div>
             {% for module in area.values() %}
                 {% set teaser = module | first_child %}

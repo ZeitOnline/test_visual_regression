@@ -1,14 +1,540 @@
 Change log for zeit.web
 =======================
 
+PREDEPLOY
+---------
+
+- add feature toggle `dataprotection_popover`
+
+- remove dataprotection settings from all zeitweb-settings.xml
+
+
 POSTDEPLOY
 ----------
 
+- remove `zon_inline_video_via_html5` from feature toggles
 
-3.127 (unreleased)
+- remove `zon_videosinglepage_via_html5` from feature toggles
+
+- change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
+
+
+3.159 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.158.1 (2018-06-07)
+--------------------
+
+- FIX: CSS release due to deployment issues.
+
+
+3.158 (2018-06-07)
+------------------
+
+- ZON-4668: Add channel list to webtrekk tracking
+
+- ZON-4720: Override comment sort order default, if indicated by content
+
+- ZON-4708: Unify "back to homepage" buttons
+
+- BUG-932: Fix display mode for header images in AMPs
+
+- FIX: Use correct sso url redirect in the user dashboard view
+
+
+3.157 (2018-06-05)
+------------------
+
+- ZON-4641: Disable HP Overlay on Podcast Play and Quiz
+
+- TMS-226: Update ES fulltext search to changed ContentQuery API
+
+- MAINT: Remove ES sort quickfix
+
+- TMS-233: Support elasticsearch for author articles tab
+
+
+3.156.1 (2018-06-01)
+--------------------
+
+- FIX: Quickfix ES query with url param "sort=None"
+
+
+3.156 (2018-06-01)
+------------------
+
+- BUG-933: Add config for adplace5 vs. content marketing ad
+
+- MAINT: Reuse `mod_date` instead of duplicating its code in `view.date_last_published_semantic`
+
+- MAINT: Update parameter for abo shop link
+
+
+3.155 (2018-05-30)
+------------------
+
+- FIX: Enhance schema.org markup for FAQ articles
+
+
+3.154 (2018-05-30)
+------------------
+
+- TMS-220: Retrieve metadata directly from elasticsearch, instead of whatever
+  reach passes through
+
+- ZON-4638: Markup for podcast-series
+
+- TMS-226: Change channel queries to ES, update to changed ContentQuery API
+
+- FIX: Add link to evidon in all verticals and edit wording
+
+
+3.153 (2018-05-25)
+------------------
+
+- BUG-927: Fix Layout and effect bug in dataprotection layer
+
+
+3.152 (2018-05-25)
+------------------
+
+- ZON-4258: Add Author Feedback Toggle to each author
+
+- TMS-224: Author index page teaser polishing
+
+- TMS-229: Configure fields for fulltext search
+
+- FEM-82: Align Author Contact Icons
+
+- MAINT: Remove transition code for feed guids
+
+
+3.151 (2018-05-24)
+------------------
+
+- ZON-4719: Dataprotection Info Bar
+
+- ZON-4715: Use brightcove without ads if GDPR opt-out cookie is set
+
+- ZON-4714: Add gdpr-Param to Adcontroller SiteInfo if cookie is present
+
+- ZON-4673: Flexible table of contents
+
+- ZON-4657: Follow-button for push on authorpages in apps
+
+- ZON-4622: Remove content marketing ad, bring back adplace5 instead
+
+
+3.150 (2018-05-22)
+------------------
+
+- BUG-903: Align content width to 660 pixel again
+
+- MAINT: Fix selenium tests
+
+- FIX: ZON-4258: Toggle author feedback
+
+
+3.149 (2018-05-17)
+------------------
+
+- ZON-4258: Render feedback form on author detail page
+
+- ZON-4634: Use uniqueId for POSTing comments
+
+- ZON-4667: Avoid <amp-timeago> warning for liveblog AMP theme
+
+- PERF: Don't additionally retrieve body for TMS/ES results
+
+- BUG-923: Fix display of modification date for ZMO series article
+
+- MAINT: Node modules update
+
+
+3.148 (2018-05-08)
+------------------
+
+- ZON-2774: Authorbox for Campus
+
+- ZON-4554: Include Babator script on video pages
+
+- ZON-4619: Add script for sending GoogleOptimize tests to Webtrekk
+
+- ZON-4621: Show alexa link in podcast footer
+
+- SSL-247: Make sure to use http for esi include
+
+- BUG-912: Fix sharing-button's horizontal spacing
+
+- FEM-76: consider a11y for svg icons
+
+- FEM-77: Change contrasts for a better accessibility
+
+- MAINT: Upgrade Selenium
+
+- MAINT: Use core function to obfuscate ZMO article date
+
+- MAINT: Use cache decorator for auth token on liveblog3
+
+
+3.147 (2018-05-03)
+------------------
+
+- ZON-4600: Set C1 adblocker headers on specific test articles
+  /digital/internet/2017-11/firefox-quantum-browser-test-vergleich-google-chrome
+  /digital/internet/2018-04/adblocker-urteil-bgh-springer-adblock-plus
+
+- ZON-4551: Always show article source
+
+- ZON-4631: Adjust modified date for article with liveblog
+
+- BUG-904: Decode obfuscated article date in ZEIT Arbeit
+
+- BUG-908: Prevent rendering Unicode-Icon as Emoji
+
+- MAINT: Remove Optimizely
+
+
+3.146.1 (2018-04-26)
+--------------------
+
+- OPS-877: Fix community uniqueIds for creating commentsections
+
+
+3.146 (2018-04-26)
+------------------
+
+- ZON-4478: Use genre source to determine the complete byline prefix
+
+- BUG-901: Fix canonical URL on full view in verticals
+
+- BUG-872: Fix view_config specificity for amp/liveblog articles
+
+- MAINT: Use core mechanic to render ZMO byline
+
+- MAINT: Remove unused DOM element id attribute
+
+- FIX: Fix path for webfont preloads
+
+
+3.145 (2018-04-24)
+------------------
+
+- SSL-227: Remove non-ssl links to live0.zeit.de
+
+- SSL-223: Repair webtrekk contentId
+
+- SSL-222: Make Z+ badge protocol aware
+
+- SSL-228: Use SSL hosts in framebuilder login status
+
+- SSL-229: Remove schema in HP overlay webtrekk content id
+
+- SSL-225: Use HTTPS for external links if appropriate
+
+- SSL-226: Remove ssl.zeit.de from amp tracking
+
+- PERF: Preload webfonts on ZON
+
+
+3.144 (2018-04-23)
+------------------
+
+- ZON-4609: Do not index comment-paginated pages in Ligatus
+
+- ZON-4434: Transmit article genre to webtrekk
+
+- ZON-4599: Polish ZMO article footer
+
+- ZON-4589: Remove article navigation (aka "lineage")
+
+- ZON-4610: Force images on video teaser in mobile view
+
+- ZON-4591: Migrate zoca json endpoint to elasticsearch
+
+- ZON-4516: Add request metrics for Liveblog3
+
+- SSL-205: Load all assets from https://static.zeit.de
+
+- SSL-220: Replace links in raw, if referenced by file
+
+- BUG-897: Adjust tablet viewport on all verticals
+
+- BUG-898: Fix date error in news teasers
+
+- MAINT: Use core styles for ZCO sharing buttons
+
+- MAINT: Remove `framebuilder_loginstatus_disabled` feature toggle
+
+- MAINT: Fix contrast in ZON footer for A11y
+
+- MAINT: Add margin to Ligatus on video page
+
+- MAINT: Fix D18 nav-badge on IE
+
+
+3.143.3 (2018-04-20)
+--------------------
+
+- FIX: Wrong css
+
+
+3.143.2 (2018-04-20)
+--------------------
+
+- SSL-221: Make all requests ssl aware
+
+
+3.143.1 (2018-04-18)
+--------------------
+
+- FIX: Ensure ensure_division is called before we interact with the
+  article body, for all possible code paths
+
+
+3.143 (2018-04-17)
+------------------
+
+- ZON-4532: Remove zeit.intrafind and the zeit.retresco.tms featuretoggle
+
+- SSL-215: Rewrite certain URLs in RAW
+
+
+3.142 (2018-04-16)
+------------------
+
+- ZON-4508: Force images on zplus-abo teaser in mobile view
+
+- ZON-4580: Remove additional liveblog header layout
+
+- ZON-4582: Implement exclusion for article body ads
+
+- BUG-891: Fix print button on advertorials
+
+- BUG-893: Clear floating advertisements before fullwidth block content
+
+- MAINT: Remove obsolete route config for `/health_check`
+
+- MAINT: Move 'transform_to_secure_links_for' setting to web-settings
+
+
+3.141 (2018-04-12)
+------------------
+
+- SSL-206: Implement protocol neutrality on configured hosts
+
+- MAINT: Replace `togglepatch` fixture by built-in override functionality from 8fe69a5
+
+
+3.140 (2018-04-12)
+------------------
+
+- ZON-4583: Ligatus Enhancements
+
+- TMS-203: Migrate lineage to elasticsearch (toggle `elasticsearch_lineage`)
+
+- SSL-201: Use correct community host setting to create links to userprofile
+
+- SSL-198: Switch to ssl asset host for css loading
+
+
+3.139 (2018-04-09)
+------------------
+
+- ZON-4558: Make ZMO article pagination more core-ish
+
+- ZON-4476: Add liveblog property to collapse preceding content
+
+- ZON-4567: Suppress retresco body if article has keywords on a configured blacklist
+
+- SSL-165: Remove "send to XSLT" blacklist
+
+- MAINT: Ligatus can be toggled for each vertical
+
+
+3.138 (2018-04-05)
+------------------
+
+- ZON-4550: Fix ligatus positioning
+
+- ZON-4507: Polish news article transparency notice
+
+- SSL-196: Transform navigation links to https if configured
+
+- FIX: Change brandeins topiclink according as requested
+
+
+3.137.1 (2018-04-04)
+--------------------
+
+- BUG-889: Change wording of dpa/afp infotext
+
+
+3.137 (2018-04-04)
+------------------
+
+- ZON-4578: Show brandeins parquet teaser images on mobile
+
+- FIX: Handle non-ascii uniqueIds in synthetic image groups
+
+
+3.136 (2018-04-03)
+------------------
+
+- SSL-174: Framebuilder uses https://static.zeit.de instead of ssl.zeit.de-Proxy
+
+- HOTFIX: Introduce community_profile_url for external linking
+
+
+3.135.2 (2018-04-03)
+--------------------
+
+- HOTFIX: Make channel queries work in ranking areas again after typo in TMS-164
+
+
+3.135.1 (2018-03-29)
+--------------------
+
+- FIX: Fix building daterange solr querries
+
+
+3.135 (2018-03-28)
+------------------
+
+- ZON-4464: Consider ze.tt and brandeins kicker logo badges in all teasers
+
+- ZON-4507: Infotext for dpa and afp articles
+
+- ZON-4500: Print styles for ZMO
+
+- ZON-4550: Add ligatus container element to DOM
+
+- ZON-4547: Render liveblog from Varnish when Liveblog API server is down
+
+- ZON-4545: Add new meta tags for ligatus
+
+- BUG-881: Fix overlay-slide buttons in gallery for Firefox ≥ 59
+
+
+3.134 (2018-03-23)
+------------------
+
+- ZON-4495: Webtrekk tracking for Google Optimize A/B tests
+
+- ZON-4496: Use Ligatus as nextread
+
+- TMS-181: Update topicpage CP types to current usage
+
+- FEM-80: Improve accessibility of buzz-box accordion
+
+- BUG-868: Fix bug in bugfix for liveblog header
+
+- FIX: Be defensive about missing uuid for old-style moderation_url
+
+- FIX: Be defensive when parsing mod_date
+
+- FIX: Adjust core.IImage to LazyProxy's adapter behaviour
+
+- FIX: Be defensive about missing jobticker feed setting
+
+- PERF: Calcluate article body values only once per request
+
+
+3.133 (2018-03-22)
+------------------
+
+- TMS-164: Enable search support for Solr and ES backends
+
+- TMS-165: Add support for elasticsearch overview areas
+
+- TMS-192: Use TMS body generally, not only for article pages
+
+- BUG-868: Fix liveblog header
+
+- BUG-878: Remove padding top in app for iPhoneX/6
+
+- MAINT: Update stellenmarkt link in ZAR (https, campaign tracking)
+
+
+3.132 (2018-03-16)
+------------------
+
+- ZON-4488: Clear floating elements before liveblog
+
+- ZON-4501: Improve ZON print stylesheet
+
+- BUG-875: Align coverless Z+ badge in article header
+
+- BUG-849: Don’t render adtile5 in ZMO with paywall
+
+- MAINT: Stop sending proxy KeyError to Bugsnag
+
+- Fix: Align mobile D18 nav badge
+
+
+3.131 (2018-03-13)
+------------------
+
+- BUG-830: Change adlabel placement in AMP
+
+- MAINT: Remove unused feature toggle `access_status_webtrekk`
+
+- FIX: Toggle mobile ZON adlabel
+
+
+3.130 (2018-03-09)
+------------------
+
+- ZON-4459: Inject SSO ID into the DOM to be consumed by Webtrekk
+
+- ZON-4465: Small fixes for brandeins parquet
+
+
+3.129.1 (2018-03-13)
+--------------------
+
+- TMS-187: Call TMS intextlink endpoint only once when rendering an article page
+
+
+3.129 (2018-03-08)
+------------------
+
+- ZON-4483: iPhoneX landscape-fix
+
+- BUG-815: Remove misplaced ad tile on ZAR homepage
+
+
+3.128 (2018-03-07)
+------------------
+
+- ZON-4398: Do not render Adlabel (it is served by IQD now)
+
+- BUG-864: Support Gallery in ZAR
+
+- BUG-860: Fix dpa-articles w/o images
+
+- MAINT: Remove unused referrerCount script
+
+- MAINT: Hide titles from servicebox icons
+
+- MAINT: Add default values for (solr) proxy
+
+
+3.127.1 (2018-03-02)
+--------------------
+
+- HOTFIX: Do not use default param in JS function (because of IE11)
+
+
+3.127 (2018-03-02)
 ------------------
 
 - TMS-162: Use ITMSContent instead of LazyProxy for TMS and ES query results
+
+- FIX: Request `ressort` and `id` as solr result so LazyProxy can use it
 
 
 3.126 (2018-02-27)

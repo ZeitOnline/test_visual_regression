@@ -15,7 +15,7 @@
 		+respond_min($break-tablet-min)
 			margin-top: remify(40px)
 		&__kicker
-			color: $zon-mid-grey
+			color: $zon-silver
 		&__title
 			color: $zon-lighter-grey
 			+respond-min($break-desktop-min)
@@ -27,22 +27,8 @@
 			font-size: remify(18px)
 
 	.metadata
-		color: $zon-mid-grey
+		color: $zon-silver
 		margin-bottom: 0
-
-		.sharing-menu
-			font-size: 1rem
-
-		.sharing-menu__title
-			color: inherit
-			white-space: nowrap
-			+on-interaction
-				color: $zon-light-grey
-
-		// sharing menu on dark background
-		.sharing-menu--active .sharing-menu__title
-			color: $zon-light-grey
-
 
 	// TODO: ad-div should have ".ad-desktop--7-on-video" and then we could
 	// apply the styles to this class.
@@ -66,3 +52,8 @@
 +respond-min($break-desktop-min)
 	.article--video .article__item
 		max-width: remify(820px)
+
+.article--video + #ligatus
+	margin-top: remify(32px)
+	+respond-min($break-tablet-min)
+		margin-top: remify(48px)

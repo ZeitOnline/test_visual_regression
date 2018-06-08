@@ -1,6 +1,7 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% if block.blog_id -%}
-    <div class="liveblog">
+    <div class="liveblog
+        {%- if block.collapse_preceding_content %} js-liveblog{% endif %}">
         {% if block.version == '3' %}
             {% set esi_source = '{}/{}/index.html'.format(settings('liveblog_backend_url_v3'), block.blog_id) %}
         {% else %}

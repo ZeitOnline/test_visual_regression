@@ -111,8 +111,8 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
         'pixel for IVW not in DOM')
 
 
-def test_article03_has_correct_webtrekk_values(httpbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article03_has_correct_webtrekk_values(httpbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = httpbrowser('/zeit-magazin/article/03')
     source = browser.cssselect(
         'img[src^="https://audev.zeit.de/"]')[0].get('src')
@@ -195,11 +195,12 @@ def test_article03_has_correct_webtrekk_values(httpbrowser, togglepatch):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp32': 'unfeasible'}
+        'cp32': 'unfeasible',
+        'cp38': 'undefined'}
 
 
-def test_article03_page2_has_correct_webtrekk_values(httpbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = httpbrowser('/zeit-magazin/article/03/seite-2')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -253,11 +254,12 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser, togglepatch):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp32': 'unfeasible'}
+        'cp32': 'unfeasible',
+        'cp38': 'undefined'}
 
 
-def test_cp_has_correct_webtrekk_values(httpbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_cp_has_correct_webtrekk_values(httpbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = httpbrowser('/zeit-magazin/index')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -338,11 +340,12 @@ def test_cp_has_correct_webtrekk_values(httpbrowser, togglepatch):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp32': 'unfeasible'}
+        'cp32': 'unfeasible',
+        'cp38': 'undefined'}
 
 
-def test_webtrekk_series_tag_is_set_corectly(httpbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = httpbrowser('/zeit-magazin/article/06')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -352,17 +355,17 @@ def test_webtrekk_series_tag_is_set_corectly(httpbrowser, togglepatch):
 
     host = browser.host.replace('http://', '')
     assert ('wt.contentId = "redaktion.zeit-magazin..toedlichekeime'
-            '.article.zei|{}/zeit-magazin/article/06";'
+            '.article.zede|{}/zeit-magazin/article/06";'
             .format(host)) in webtrekk_config
     assert u'6: "tödlichekeime",' in webtrekk_config
 
-    assert ('redaktion.zeit-magazin..toedlichekeime.article.zei%7C'
+    assert ('redaktion.zeit-magazin..toedlichekeime.article.zede%7C'
             '{}/zeit-magazin/article/06,0,0,0,0,0,0,0,0'
             .format(urllib.quote(host))) in source
 
 
-def test_webtrekk_has_session_parameter(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_webtrekk_has_session_parameter(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/slenderized-index?app-content')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -387,11 +390,9 @@ def test_webtrekk_noscript_contains_user_info(httpbrowser):
 
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')
 def test_ivw_tracking_for_mobile_and_desktop_and_wrapper(
-        selenium_driver, testserver, monkeypatch):
+        selenium_driver, testserver):
 
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True}.get)
-
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver = selenium_driver
 
     # ipad landscape
@@ -453,62 +454,53 @@ def test_article_has_correct_page_meta_keywords(testbrowser):
         ' Toskana, Bologna, Bozen, Florenz, Tübingen">' in browser.contents
 
 
-def test_article08_has_correct_date(testbrowser):
+def test_print_article_has_correct_date(testbrowser):
     # not updated print article
     browser = testbrowser('/zeit-magazin/article/08')
-    date = browser.cssselect('.meta__date')[0].text
-    assert date.strip() == '19. Februar 2014'
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == '19. Februar 2014'
+    assert not dates[1].text
 
 
-def test_article09_has_correct_date(testbrowser):
+def test_modified_print_article_has_correct_date(testbrowser):
     # updated print article
     browser = testbrowser('/zeit-magazin/article/09')
-    date = browser.cssselect('.meta__date')[0].text
-    assert date.strip() == u'4. März 2014, 14:35 Uhr'
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == u'4. März 2014, 14:35 Uhr'
+    assert dates[1].text == u'editiert am 4. März 2014, 14:35 Uhr'
 
 
-def test_article03_has_correct_date(testbrowser):
+def test_article_has_correct_date(testbrowser):
     # not updated online article
     browser = testbrowser('/zeit-magazin/article/03')
-    date = browser.cssselect('.meta__date')[0].text
-    assert date.strip() == '30. Juli 2013, 17:20 Uhr'
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == '30. Juli 2013, 17:20 Uhr'
+    assert not dates[1].text
 
 
-def test_article10_has_correct_date(testbrowser):
+def test_modified_article_has_correct_date(testbrowser):
     # updated online article
     browser = testbrowser('/zeit-magazin/article/10')
-    date = browser.cssselect('.meta__date')[0].text
-    assert date.strip() == '20. Februar 2014, 17:59 Uhr'
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == '20. Februar 2014, 17:59 Uhr'
+    assert dates[1].text == (
+        'zuletzt aktualisiert am 20. Februar 2014, 17:59 Uhr')
 
 
-def test_article05_has_correct_date(testbrowser):
-    # longform
-    browser = testbrowser('/zeit-magazin/article/05')
-    date = browser.cssselect('.meta__date')[0].text
-    assert date.strip() == '3. November 2013'
+def test_longform_article_has_correct_date(testbrowser):
+    # not updated longform
+    browser = testbrowser('/zeit-magazin/article/06')
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == '24. Oktober 2013'
+    assert not dates[1].text
 
 
-def test_print_article_has_no_last_changed_date(testbrowser):
-    # print articles should omit the last semantic change date
-    article = testbrowser('/zeit-magazin/article/01').contents
-    assert '26. September 2013<span>editiert' not in article
-
-
-def test_online_article_has_last_changed_date(selenium_driver, testserver):
-    # online articles should include the last semantic change date
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/article/10' % testserver.url)
-    meta_date = driver.find_element_by_class_name("meta__date")
-    assert 'ZULETZT AKTUALISIERT AM 20. FEBRUAR 2014, '\
-        '17:59 UHR' in meta_date.text
-
-
-def test_gallery_has_last_changed_date(selenium_driver, testserver):
-    # galleries should include the last semantic change date
-    driver = selenium_driver
-    driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
-    meta_date = driver.find_element_by_class_name("meta__date")
-    assert 'ZULETZT AKTUALISIERT AM 3. APRIL 2014, 16:17 UHR' in meta_date.text
+def test_modified_longform_article_has_correct_date(testbrowser):
+    # updated longform
+    browser = testbrowser('/zeit-magazin/article/07')
+    dates = browser.cssselect('.meta__date')
+    assert dates[0].text == '3. November 2013'
+    assert dates[1].text == 'editiert am 3. November 2013, 8:10 Uhr'
 
 
 def test_article03_has_no_source(testbrowser):
@@ -873,8 +865,8 @@ def test_zmo_should_not_render_advertisement_nextread(
     assert len(browser.cssselect('.nextread-advertisement')) == 0
 
 
-def test_article_contains_zeit_clickcounter(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_article_contains_zeit_clickcounter(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-magazin/article/03')
     counter = browser.cssselect('body noscript img[src^="https://cc.zeit.de"]')
     assert ("img.src = 'https://cc.zeit.de/cc.gif?banner-channel="
@@ -983,9 +975,8 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[5].text == 'Mailen'
 
 
-def test_webtrekk_paywall_status_is_set_on_paid_article(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     url = ('/zeit-online/article/zplus-zeit'
            '?C1-Meter-Status=always_paid')
     browser = testbrowser(url)

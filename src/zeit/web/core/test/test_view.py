@@ -15,6 +15,7 @@ import zeit.web.magazin.view
 import zeit.web.magazin.view_article
 import zeit.web.magazin.view_centerpage
 import zeit.web.site.view_article
+import zeit.web.site.view_author
 import zeit.web.site.view_centerpage
 
 from selenium.common.exceptions import TimeoutException
@@ -60,9 +61,9 @@ def test_c1_cms_id_should_correspond_to_context_uuid(
 
 
 def test_c1_content_id_should_correspond_to_webtrekk_content_id(
-        application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tracking': True, 'iqd': True, 'third_party_modules': True}.get)
+        application, dummy_request):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tracking', 'iqd', 'third_party_modules')
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -125,11 +126,9 @@ def test_c1_service_id_should_be_included_in_tracking_parameters(
 
 
 def test_c1_origin_should_trigger_js_call_for_cre_client(
-        testbrowser, dummy_request, monkeypatch):
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tracking': True, 'iqd': True, 'third_party_modules': True}.get)
-
+        testbrowser, dummy_request):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tracking', 'iqd', 'third_party_modules')
     browser = testbrowser('/zeit-online/article/simple')
     assert 'cre_client.set_origin( window.Zeit.getCeleraOneOrigin() );' in (
         browser.contents)
@@ -140,10 +139,9 @@ def test_text_file_content_should_be_rendered(testbrowser):
     assert browser.contents == 'zeit.web\n'
 
 
-def test_c1_include_script_gets_appended(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tracking': True, 'third_party_modules': True}.get)
+def test_c1_include_script_gets_appended(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tracking', 'third_party_modules')
     browser = testbrowser('/zeit-online/article/simple')
     inline = u''.join(browser.xpath('//script/text()'))
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -151,17 +149,15 @@ def test_c1_include_script_gets_appended(
         conf.get('c1_prefix')) in inline
 
 
-def test_c1_correct_ressort_on_homepage(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tracking': True, 'iqd': True, 'third_party_modules': True}.get)
+def test_c1_correct_ressort_on_homepage(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'tracking', 'iqd', 'third_party_modules')
     browser = testbrowser('/zeit-online/slenderized-index')
-
     assert 'cre_client.set_channel( "homepage" );' in (browser.contents)
 
 
-def test_c1_client_should_receive_entitlement(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tracking': True}.get)
+def test_c1_client_should_receive_entitlement(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('tracking')
     access_source = zeit.cms.content.sources.ACCESS_SOURCE.factory
     assert 'cre_client.set_entitlement( "{}" );'.format(
         access_source.translate_to_c1('free')) in (
@@ -174,9 +170,8 @@ def test_c1_client_should_receive_entitlement(testbrowser, monkeypatch):
             testbrowser('zeit-online/article/zplus-zeit').contents)
 
 
-def test_http_header_should_contain_c1_entitlement(testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tracking': True}.get)
+def test_http_header_should_contain_c1_entitlement(testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('tracking')
     access_source = zeit.cms.content.sources.ACCESS_SOURCE.factory
     assert requests.head(
         testserver.url + '/zeit-online/article/01').headers.get(
@@ -191,9 +186,8 @@ def test_http_header_should_contain_c1_entitlement(testserver, monkeypatch):
             'C1-Track-Entitlement') == access_source.translate_to_c1('abo')
 
 
-def test_http_header_should_contain_c1_entitlement_id(testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'tracking': True}.get)
+def test_http_header_should_contain_c1_entitlement_id(testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('tracking')
 
     free_article = testserver.url + '/zeit-online/article/01'
     assert not requests.head(free_article).headers.get(
@@ -427,15 +421,6 @@ def test_cp2015_redirect_can_be_disabled(application):
     view()
 
 
-def test_content_view_should_provide_lineage_property(
-        application, dummy_request):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    content = zeit.web.core.view.Content(context, dummy_request)
-    assert len(content.lineage) == 2
-    assert all(isinstance(l, dict) for l in content.lineage)
-
-
 def test_ispaginated_predicate_should_handle_get_parameter():
     ip = zeit.web.core.view.is_paginated
     assert ip(None, mock.Mock(GET={})) is False
@@ -507,16 +492,6 @@ def test_health_check_should_response_and_have_status_200(testbrowser):
     assert resp.status_code == 200
 
 
-# XXX align-route-config-uris: Ensure downward compatibility until
-# corresponding varnish changes have been deployed.
-# Remove this test afterwards!
-def test_health_check_should_response_and_have_status_200_XXX(testbrowser):
-    browser = testbrowser('/health_check')
-    assert browser.headers['Content-Length'] == '2'
-    resp = zeit.web.core.view.health_check('request')
-    assert resp.status_code == 200
-
-
 def test_health_check_should_fail_if_repository_does_not_exist(testbrowser):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['vivi_zeit.connector_repository-path'] = '/i_do_not_exist'
@@ -536,16 +511,6 @@ def test_health_check_with_fs_should_be_configurable(testbrowser):
     conf['health_check_with_fs'] = True
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         zeit.web.core.view.health_check('request')
-
-
-def test_reader_revenue_status_should_utilize_feature_toggle(
-        dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'access_status_webtrekk': False}.get)
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert 'cp28' not in view.webtrekk['customParameter'].keys()
 
 
 def test_reader_revenue_status_should_reflect_access_right(dummy_request):
@@ -608,8 +573,8 @@ def test_jquery_not_in_window_scope(testserver, selenium_driver):
     assert 'undefined' == selenium_driver.execute_script(script)
 
 
-def test_webtrekk_tracking_id_is_defined(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True})
+def test_webtrekk_tracking_id_is_defined(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules')
     browser = testbrowser('/zeit-online/article/simple')
     assert 'window.webtrekkConfig.trackId = "674229970930653";' in (
         browser.contents)
@@ -711,6 +676,10 @@ def test_notification_script_does_not_edit_unknown_hashes(
         assert url_hash in driver.current_url
 
 
+# mock state ist not resetted in local env
+# when running in chain, maybe future versions of
+# Chromedriver fix this
+@pytest.mark.xfail(reason='Fails locally')
 def test_user_name_and_email_are_displayed_correctly(
         testserver, selenium_driver):
     driver = selenium_driver
@@ -719,6 +688,7 @@ def test_user_name_and_email_are_displayed_correctly(
     driver.add_cookie({
         'name': 'my_sso_cookie',
         'value': 'just be present',
+        'path': '/',
     })
     # check if user email is displayed if no name provided
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
@@ -751,6 +721,7 @@ def test_notification_after_account_confirmation_renders_correctly(
     driver.add_cookie({
         'name': 'my_sso_cookie',
         'value': 'just be present',
+        'path': '/',
     })
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
         get_user.return_value = {
@@ -784,6 +755,7 @@ def test_notification_after_account_change_renders_correctly(
     driver.add_cookie({
         'name': 'my_sso_cookie',
         'value': 'just be present',
+        'path': '/',
     })
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
         get_user.return_value = {
@@ -807,6 +779,7 @@ def test_notification_after_account_change_renders_correctly(
             assert url_hash not in driver.current_url
 
 
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
 def test_notification_renders_correctly_in_wrapper(
         testserver, selenium_driver):
     driver = selenium_driver
@@ -815,6 +788,7 @@ def test_notification_renders_correctly_in_wrapper(
     driver.add_cookie({
         'name': 'my_sso_cookie',
         'value': 'just be present',
+        'path': '/',
     })
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
         with mock.patch('zeit.web.core.view.Base.is_wrapped') as is_wrapped:
@@ -863,22 +837,17 @@ def test_c1_get_param_should_trump_http_header(testserver):
     assert 'gate--register' in response.content
 
 
-def test_js_toggles_are_correctly_returned(
-        application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'update_signals': False}.get)
+def test_js_toggles_are_correctly_returned(application, dummy_request):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('update_signals')
     view = zeit.web.core.view.Base(None, None)
     assert ('update_signals', False) in view.js_toggles
 
 
-def test_js_toggles_are_correctly_displayed(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'update_signals': False}.get)
+def test_js_toggles_are_correctly_displayed(selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('update_signals')
     driver = selenium_driver
     driver.get('%s/zeit-online/index' % testserver.url)
     uds = driver.execute_script('return Zeit.toggles.update_signals')
-
     assert not uds
 
 
@@ -947,9 +916,8 @@ def test_404_page_should_have_fallback_for_errors(testbrowser):
     assert 'Status 404: Dokument nicht gefunden.' in browser.contents
 
 
-def test_retrieve_keywords_from_tms(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'keywords_from_tms': True}.get)
+def test_retrieve_keywords_from_tms(application):
+    zeit.web.core.application.FEATURE_TOGGLES.set('keywords_from_tms')
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['retresco_timeout'] = 0.42
 
@@ -963,14 +931,11 @@ def test_retrieve_keywords_from_tms(application, monkeypatch):
             tms.return_value = [mock.sentinel.tag]
             assert view.keywords == [mock.sentinel.tag]
             assert not kw.called
-            tms.assert_called_with(
-                '{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}',
-                timeout=0.42)
+            tms.assert_called_with(article, timeout=0.42)
 
 
-def test_fall_back_on_vivi_keywords_on_tms_failure(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'keywords_from_tms': True}.get)
+def test_fall_back_on_vivi_keywords_on_tms_failure(application):
+    zeit.web.core.application.FEATURE_TOGGLES.set('keywords_from_tms')
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -1031,3 +996,33 @@ def test_response_has_surrogate_key_header(testserver):
         '%s/zeit-online/article/simple' % testserver.url)
     assert response.headers.get('surrogate-key') == (
         'http://xml.zeit.de/zeit-online/article/simple')
+
+
+def test_gdpr_cookie_sets_adcontroller_siteinfo(selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/simple' % testserver.url)
+    driver.add_cookie({
+        'name': 'gdpr',
+        'value': 'dnt',
+        'path': '/'
+    })
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    gdpr = driver.execute_script('return adcSiteInfo.gdpr')
+    assert gdpr == 'dnt'
+
+
+def test_view_should_return_channels(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/arbeit/article/01-digitale-nomaden')
+    view = zeit.web.arbeit.view_article.Article(
+        context, pyramid.testing.DummyRequest())
+    assert view.channels == u'entdecken;reisen'
+
+
+def test_view_should_return_none_if_it_has_no_channels(application):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/j_random')
+    request = pyramid.testing.DummyRequest()
+    view = zeit.web.site.view_author.Author(author, request)
+    assert view.channels is None

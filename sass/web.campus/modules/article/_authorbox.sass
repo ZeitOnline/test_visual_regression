@@ -1,0 +1,75 @@
+.authorbox
+	overflow: auto
+
+	&__container
+		margin: auto
+		max-width: remify(360px)
+
+	&__intro
+		display: block
+		margin-top: 0
+
+	&__title
+		color: $color-article-primary
+		border-bottom: remify(4px) solid currentColor
+		font-family: $font-beckett
+		font-size: remify($font-xxl)
+		font-weight: 300
+		letter-spacing: $letter-spacing-m
+		text-transform: uppercase
+
+	&__media
+		float: left
+		margin-bottom: remify(15px)
+		margin-right: remify(10px)
+		max-width: 100%
+		width: 30%
+
+	&__name
+		color: $color-text
+		display: block
+		font-family: $font-tabletgothic
+		font-size: remify(14px)
+		font-weight: bold
+		letter-spacing: $letter-spacing-s
+		line-height: (16/14)
+		margin-bottom: 6px
+		text-transform: uppercase
+
+	&__summary
+		color: #525252 // a11y version, matches AAA
+		font-size: remify($font-s)
+		letter-spacing: $letter-spacing-s
+		margin-bottom: 6px
+		margin-top: 0
+
+	+respond-min($break-tablet-min)
+		overflow: visible
+
+		&__container
+			background-color: rgba($zco-grey, 0.6)
+			display: block
+			padding-bottom: remify($page-padding)
+			margin-top: remify(20px)
+
+		&__intro
+			margin-bottom: 0
+			margin-left: remify($page-padding--small)
+			margin-right: remify($page-padding--small)
+
+		&__title
+			position: relative
+			top: remify(-20px) // pull headline to top
+
+		&__media
+			float: none
+			width: 100%
+
+		&__text
+			margin-left: remify($page-padding--small)
+			margin-right: remify($page-padding--small)
+
+		&__media-item
+			height: auto
+			width: auto
+

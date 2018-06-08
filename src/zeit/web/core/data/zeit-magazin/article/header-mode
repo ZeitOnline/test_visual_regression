@@ -20,7 +20,7 @@
     <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">reportage</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">kommentar</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">mode</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>

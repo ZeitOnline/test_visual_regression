@@ -39,7 +39,7 @@ def test_xml_renders_iso_8859_1(testserver):
 
 def test_xml_renders_unicode_as_codepoints(testserver):
     res = requests.get(
-        '%s/zeit-magazin/article/03' % testserver.url,
+        '%s/zeit-magazin/article/03a' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
     assert (
         '<title>Aus dem Keller des \xc9lys\xe9epalasts</title>' in res.content)

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import datetime
 import urllib2
 
 import lxml.html
@@ -12,9 +12,6 @@ import zeit.solr.interfaces
 
 import zeit.web.site.view_centerpage
 
-import babel
-from datetime import datetime
-from datetime import timedelta
 from zeit.web.core.template import format_date
 
 
@@ -36,8 +33,8 @@ def test_buzz_mostread_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--mostread .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--mostread .teaser-buzz__title')
-    assert kicker and u'Flüchtlinge' in kicker[1].text
-    assert titles and u'Fluchthilfe ganz privat' in titles[2].text
+    assert 'Arbeitswelt' == kicker[2].text.strip()
+    assert 'Der Terror der guten Laune' == titles[2].text
 
 
 def test_buzz_comments_should_render_correct_article_count(testbrowser):
@@ -56,8 +53,8 @@ def test_buzz_comments_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--comments .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--comments .teaser-buzz__title')
-    assert u'Asylbewerber' in kicker[0].text
-    assert u'Orbán verlangt Schließung der Grenzen' in titles[2].text
+    assert 'Steuerhinterziehung' == kicker[0].text.strip()
+    assert u'"Die Schweiz ist die größte Fluchtburg"' == titles[0].text
 
 
 def test_buzz_mostshared_should_render_correct_article_count(testbrowser):
@@ -76,8 +73,8 @@ def test_buzz_mostshared_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--shared .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--shared .teaser-buzz__title')
-    assert u'Studienwahl' in kicker[0].text
-    assert u'Zuwanderer haben häufiger Abitur' in titles[1].text
+    assert 'Gender Studies' == kicker[0].text.strip()
+    assert 'Born to be wild' == titles[1].text
 
 
 def test_buzzboard_renders(testbrowser):
@@ -178,10 +175,22 @@ def test_dynamic_centerpage_collection_should_output_teasers(
     assert counter == 8
 
 
-def test_dynamic_centerpage_should_be_paginatable(testbrowser, datasolr):
+def test_dynamic_centerpage_should_be_paginatable(testbrowser, data_solr):
     browser = testbrowser('/dynamic/angela-merkel?p=2')
     current = browser.cssselect('.pager__page--current')[0]
     assert current.text_content().strip() == '2'
+
+
+def test_dynamic_centerpage_paginator_has_https_links(testbrowser, data_solr):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('https')
+    browser = testbrowser('/dynamic/angela-merkel?p=2')
+    current = browser.cssselect('.pager__page a')[0]
+    assert 'http://' in current.attrib.get('href')
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('https')
+    browser = testbrowser('/dynamic/angela-merkel?p=2')
+    current = browser.cssselect('.pager__page a')[0]
+    assert 'https://' in current.attrib.get('href')
 
 
 def test_pagination_should_be_validated(testbrowser):
@@ -242,7 +251,8 @@ def test_ad_label_should_be_displayed(testbrowser):
     assert labels[0].text == 'Anzeige'
 
 
-def test_link_rel_should_be_set_according_to_pagination(testbrowser, datasolr):
+def test_link_rel_should_be_set_according_to_pagination(
+        testbrowser, data_solr):
     select = testbrowser('/dynamic/angela-merkel?p=3').cssselect
     rel_next = select('link[rel="next"]')
     rel_prev = select('link[rel="prev"]')
@@ -253,7 +263,7 @@ def test_link_rel_should_be_set_according_to_pagination(testbrowser, datasolr):
 
 
 def test_link_rel_to_prev_page_should_not_exist_on_first_page(
-        testbrowser, datasolr):
+        testbrowser, data_solr):
     select = testbrowser('/dynamic/angela-merkel').cssselect
     rel_next = select('link[rel="next"]')
     rel_prev = select('link[rel="prev"]')
@@ -266,7 +276,8 @@ def test_hp_hides_popover_per_default(selenium_driver, testserver):
     driver = selenium_driver
 
     # default
-    driver.get('%s/index?debug-popover' % testserver.url)
+    driver.get('{}/zeit-online/slenderized-index?debug-popover'.format(
+        testserver.url))
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
@@ -281,7 +292,8 @@ def test_hp_shows_popover(selenium_driver, testserver):
     driver = selenium_driver
 
     # default
-    driver.get('%s/index?force-popover' % testserver.url)
+    driver.get('{}/zeit-online/slenderized-index?force-popover'.format(
+        testserver.url))
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
@@ -365,24 +377,37 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
     assert len(offline) == 8
 
 
-def test_format_date_returns_expected_value_in_newsbox():
-    tz = babel.dates.get_timezone('Europe/Berlin')
-    now = datetime.now(tz)
-    before = now - timedelta(hours=5)
-    yesterday = now - timedelta(days=1)
+def test_format_date_returns_expected_value_in_newsbox(clock):
+    # we tell the test that it is currently 14 o clock in June 2015
+    # (to be indepentent from the actual runtime)
+    clock.freeze(datetime.datetime(2015, 6, 1, 14, 0))
 
-    assert 'Heute, ' + str(before.strftime('%H:%M'))\
-        == format_date(before, type="switch_from_hours_to_date")
+    date_today = datetime.datetime(2015, 6, 1, 10, 21)
+    assert 'Heute, 10:21' == format_date(
+        date_today, type='switch_from_hours_to_date')
+    assert '10:21' == format_date(
+        date_today, pattern='HH:mm')
 
-    day = str(yesterday.strftime('%d'))
-    assert day + '. ' + str(yesterday.strftime('%m. %Y')) \
-        == format_date(yesterday, type="switch_from_hours_to_date")
+    date_yesterday_less_than_24h_ago = datetime.datetime(2015, 5, 31, 18, 2)
+    assert '31. 05. 2015' == format_date(
+        date_yesterday_less_than_24h_ago, type='switch_from_hours_to_date')
+    assert '18:02' == format_date(
+        date_yesterday_less_than_24h_ago, pattern='HH:mm')
 
-    assert str(yesterday.strftime('%H:%M'))\
-        == format_date(yesterday, pattern="HH:mm")
+    date_yesterday_more_than_24h_ago = datetime.datetime(2015, 5, 31, 9, 30)
+    assert '31. 05. 2015' == format_date(
+        date_yesterday_more_than_24h_ago, type='switch_from_hours_to_date')
+    assert '09:30' == format_date(
+        date_yesterday_more_than_24h_ago, pattern='HH:mm')
+
+    date_long_time_ago = datetime.datetime(2015, 4, 3, 1, 52)
+    assert '03. 04. 2015' == format_date(
+        date_long_time_ago, type='switch_from_hours_to_date')
+    assert '01:52' == format_date(
+        date_long_time_ago, pattern='HH:mm')
 
 
-def test_newsbox_renders_correctly_on_homepage(testbrowser, datasolr):
+def test_newsbox_renders_correctly_on_homepage(testbrowser, data_solr):
     browser = testbrowser('/zeit-online/slenderized-index-with-newsbox')
     wrapper = browser.cssselect('.newsticker__column')
     section_heading_link = browser.cssselect('.section-heading__link')
@@ -390,22 +415,22 @@ def test_newsbox_renders_correctly_on_homepage(testbrowser, datasolr):
     assert len(section_heading_link) == 1
 
 
-def test_newsbox_renders_correctly_on_keywordpage(testbrowser, datasolr):
+def test_newsbox_renders_correctly_on_auto_topicpage(testbrowser, data_solr):
     browser = testbrowser('/thema/oper')
     newsbox = browser.cssselect(
-        '.cp-area--newsticker.cp-area--newsticker-on-keywordpage')
-    linktext = browser.cssselect('.newsteaser__text--on-keywordpage')
+        '.cp-area--newsticker.cp-area--newsticker-on-autotopic')
+    linktext = browser.cssselect('.newsteaser__text--on-autotopic')
     section_heading_link = browser.cssselect('.section-heading__link')
     assert len(newsbox) == 1
     assert len(linktext) == 8
     assert len(section_heading_link) == 0
 
 
-def test_newsbox_renders_correctly_on_topicpage(testbrowser, datasolr):
+def test_newsbox_renders_correctly_on_manual_topicpage(testbrowser, data_solr):
     browser = testbrowser('/thema/jurastudium')
     newsbox = browser.cssselect(
-        '.cp-area--newsticker.cp-area--newsticker-on-topicpage')
-    linktext = browser.cssselect('.newsteaser__text--on-topicpage')
+        '.cp-area--newsticker.cp-area--newsticker-on-manualtopic')
+    linktext = browser.cssselect('.newsteaser__text--on-manualtopic')
     section_heading_link = browser.cssselect('.section-heading__link')
     assert len(newsbox) == 1
     assert len(linktext) == 8

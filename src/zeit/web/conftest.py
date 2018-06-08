@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
-from contextlib import contextmanager
 import copy
 import json
 import logging
@@ -11,9 +10,8 @@ import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
-from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
-from selenium.webdriver.support.ui import WebDriverWait
 import cryptography.hazmat.backends
 import cssselect
 import gocept.httpserverlayer.wsgi
@@ -27,13 +25,10 @@ import pyramid.testing
 import pyramid_dogpile_cache2
 import pysolr
 import pytest
-import _pytest.logging
 import requests
 import selenium.webdriver
-import selenium.webdriver.firefox.firefox_binary
 import transaction
 import waitress
-import webob.multidict
 import webtest
 import wesgi
 import zope.browserpage.metaconfigure
@@ -43,6 +38,7 @@ import zope.processlifetime
 import zope.testbrowser.wsgi
 
 import zeit.content.image.interfaces
+import zeit.retresco.interfaces
 import zeit.solr.interfaces
 
 import zeit.web.core.application
@@ -79,7 +75,7 @@ def app_settings(mockserver):
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
         'liveblog_backend_url_v3': mockserver.url + '/liveblog/v3',
-        'liveblog_amp_theme_v3': 'amp',
+        'liveblog_amp_theme_v3': 'zon-amp',
         'liveblog_api_auth_url_v3': mockserver.url + '/liveblog/v3/api/auth',
         'liveblog_api_auth_username_v3': 'apiuser',
         'liveblog_api_auth_password_v3': 'geheim',
@@ -91,6 +87,7 @@ def app_settings(mockserver):
         'cookie_fallback_domain': 'localhost',
         'comment_page_size': '4',
         'community_host': mockserver.url + '/comments',
+        'community_profile_url': 'https://community.zeit.de',
         'community_admin_host': 'http://community_admin',
         'community_static_host': 'http://static_community',
         'community_maintenance': (
@@ -120,7 +117,6 @@ def app_settings(mockserver):
         'redirect_volume_cp': 'http://redirect.example.com',
         'breaking_news_config': (
             'http://xml.zeit.de/eilmeldung/homepage-banner'),
-        'transform_to_secure_links_for': 'www.zeit.de,blog.zeit.de',
         'breaking_news_fallback_image': (
             'http://xml.zeit.de/administratives/eilmeldung-share-image'),
         'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
@@ -229,10 +225,10 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/series.xml'),
         'vivi_zeit.web_feature-toggle-source': (
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
-        'vivi_zeit.web_blacklist-url': (
-            'egg://zeit.web.core/data/config/blacklist.xml'),
         'vivi_zeit.imp_scale-source':
             'egg://zeit.web.core/data/config/scales.xml',
+        'vivi_zeit.web_intextlink-blacklist-url': (
+            'egg://zeit.web.core/data/config/intextlink-blacklist.xml'),
         'vivi_zeit.content.link_source-blogs': (
             'egg://zeit.web.core/data/config/blogs_meta.xml'),
         'vivi_zeit.push_facebook-accounts': (
@@ -253,8 +249,8 @@ def app_settings(mockserver):
         'vivi_zeit.solr_solr-url': 'http://mock.solr',
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
-        'vivi_zeit.content.author_biography-questions':
-            'egg://zeit.web.core/data/config/author-biography-questions.xml',
+        'vivi_zeit.content.author_biography-questions': (
+            'egg://zeit.web.core/data/config/author-biography-questions.xml'),
         'vivi_zeit.cms_celery-config': '/dev/null',
         'vivi_zeit.brightcove_playback-url': mockserver.url + '/brightcove',
         'vivi_zeit.brightcove_playback-policy-key': 'None',
@@ -267,7 +263,6 @@ def app_settings(mockserver):
         'jinja2.enable_profiler': False,
         'use_wesgi': True,
         'serve_assets': True,
-        'mock_solr': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
         'vivi_zeit.web_runtime-settings-source': (
@@ -277,10 +272,26 @@ def app_settings(mockserver):
         'webtrekk_version': '3',
     }
 
-
+# 'chrome': selenium.webdriver.Chrome
+# needs Chromedriver, install via brew install chromedriver
+# or from https://sites.google.com/a/chromium.org/chromedriver/downloads
+# Also needs Chrome or Chromium, if you use chromium,
+# set path to Chromium in envorinment variable `ZEIT_WEB_CHROMIUM_BINARY`
 browsers = {
-    'firefox': selenium.webdriver.Firefox
+    'chrome': selenium.webdriver.Chrome
 }
+
+
+def pytest_collection_modifyitems(items):
+    """Mark all selenium tests by use of fixture selenium_driver
+    to run only selenium test by invoking pytest -m selenium"""
+    for item in items:
+        try:
+            fixtures = item.fixturenames
+            if 'selenium_driver' in fixtures:
+                item.add_marker(pytest.mark.selenium)
+        except:
+            pass
 
 
 def test_asset_path(*parts):
@@ -347,15 +358,18 @@ def application_session(app_settings, set_loglevel, request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     factory = zeit.web.core.application.Application()
     app = factory({}, **app_settings)
-    zope.component.provideUtility(MockSolr(),)
+    zope.component.provideUtility(MockSolr(),
+                                  zeit.solr.interfaces.ISolr)
     zope.component.provideUtility(MockSitemapSolr(),
                                   zeit.web.core.solr.ISitemapSolrConnection)
+    zope.component.provideUtility(MockES(),
+                                  zeit.retresco.interfaces.IElasticsearch)
     zope.component.provideUtility(mock.Mock(),
                                   zeit.objectlog.interfaces.IObjectLog)
-    zope.component.provideUtility(mock.Mock(), zeit.web.core.interfaces.IMail)
-    captcha = mock.Mock()
-    captcha.verify.return_value = True
-    zope.component.provideUtility(captcha, zeit.web.core.interfaces.ICaptcha)
+    zope.component.provideUtility(mock.Mock(),
+                                  zeit.web.core.interfaces.IMail)
+    zope.component.provideUtility(mock.Mock(**{'verify.return_value': True}),
+                                  zeit.web.core.interfaces.ICaptcha)
     # ZODB needs to come after ZCML is set up by the Application.
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
@@ -397,14 +411,21 @@ def reset_solr(application_session, request):
 
 
 @pytest.fixture
+def reset_es(application_session, request):
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    if isinstance(es, MockES):
+        es.reset()
+
+
+@pytest.fixture
 def reset_cache(application_session, request):
     pyramid_dogpile_cache2.clear()
 
 
 @pytest.fixture
 def application(
-        application_session, preserve_settings, reset_solr, reset_cache,
-        zodb, request):
+        application_session, preserve_settings, reset_solr, reset_es,
+        reset_cache, zodb, request):
     # This application_session/application split is a bit clumsy, but some
     # things (e.g. reset connector, teardown zodb) needs to be called after
     # each test (i.e. in 'function' scope). The many diverse fixtures make this
@@ -433,14 +454,24 @@ def workingcopy(application, zodb, request):
 
 @pytest.fixture
 def dummy_request(application, request):
-    req = pyramid.testing.DummyRequest(is_xhr=False)
-    # XXX DummyRequest is not life-like enough out-of-the-box, sigh.
-    req.GET = webob.multidict.MultiDict(req.GET)
-    req.response.headers = set()
-    req.matched_route = None
+    config = application.zeit_app.config
+    # pyramid's DummyRequest is too dissimilar, so we use a real one.
+    factory = config.registry.getUtility(pyramid.interfaces.IRequestFactory)
+    req = factory({
+        'SERVER_NAME': 'example.com',
+        'PATH_INFO': '/',
+        'REQUEST_METHOD': 'GET',
+    })
+
+    # A real request object only works properly after IRouter.handle_request()
+    # has set some attributes on it like `view_name`. We fake these, just like
+    # DummyRequest does.
+    dummy = pyramid.testing.DummyRequest()
+    for name in ['root', 'context', 'view_name', 'subpath', 'traversed',
+                 'virtual_root', 'virtual_root_path', 'session']:
+        req.__dict__[name] = getattr(dummy, name)
 
     # See pyramid.router.Router.invoke_subrequest()
-    config = application.zeit_app.config
     req.registry = config.registry
     pyramid.request.apply_request_extensions(req, config.registry.getUtility(
         pyramid.interfaces.IRequestExtensions))
@@ -590,37 +621,19 @@ def http_testserver(request):
 
 @pytest.fixture(scope='session', params=browsers.keys())
 def selenium_driver(request):
-    if request.param == 'firefox':
-        parameters = {}
-        profile = selenium.webdriver.FirefoxProfile(
-            os.environ.get('ZEIT_WEB_FF_PROFILE'))
-        profile.default_preferences.update({
-            'network.http.use-cache': False,
-            'browser.startup.page': 0,
-            'browser.startup.homepage_override.mstone': 'ignore'})
-        profile.update_preferences()
-        parameters['firefox_profile'] = profile
-        # Old versions: <https://ftp.mozilla.org/pub/firefox/releases/>
-        ff_binary = os.environ.get('ZEIT_WEB_FF_BINARY')
-        if ff_binary:
-            parameters['firefox_binary'] = (
-                selenium.webdriver.firefox.firefox_binary.FirefoxBinary(
-                    ff_binary))
-        browser = browsers[request.param](**parameters)
-    else:
-        browser = browsers[request.param]()
+    parameters = {}
+    if request.param == 'chrome':
+        opts = Options()
+        if not request.config.getoption('--visible'):
+            opts.add_argument('headless')
+        opts.add_argument('disable-gpu')
+        opts.add_argument('window-size=1200x800')
+        chromium_binary = os.environ.get('ZEIT_WEB_CHROMIUM_BINARY')
+        if chromium_binary:
+            opts.binary_location = chromium_binary
+        parameters['chrome_options'] = opts
+    browser = browsers[request.param](**parameters)
     request.addfinalizer(lambda *args: browser.quit())
-
-    timeout = int(os.environ.get('ZEIT_WEB_FF_TIMEOUT', 30))
-    original_get = browser.get
-
-    def get_and_wait_for_body(self, *args, **kw):
-        result = original_get(*args, **kw)
-        WebDriverWait(self, timeout).until(
-            EC.presence_of_element_located((By.TAG_NAME, "body")))
-        return result
-    browser.get = get_and_wait_for_body.__get__(browser)
-
     return browser
 
 
@@ -669,6 +682,7 @@ def clock(monkeypatch):
     original = datetime.datetime
 
     class FreezeMeta(type):
+
         def __instancecheck__(self, instance):
             if type(instance) == original or type(instance) == Freeze:
                 return True
@@ -715,32 +729,6 @@ def mock_metrics(monkeypatch):
         zeit.web.core.metrics.mock_contextmanager)
     monkeypatch.setattr(
         zeit.web.core.metrics, 'increment', lambda *args: None)
-
-
-@pytest.fixture
-def togglepatch(monkeypatch):
-
-    class ToggleOverride(object):
-        def __init__(self, toggles):
-            self.original_find = zeit.web.core.application.FEATURE_TOGGLES.find
-            self.toggles = toggles
-
-        def find(self, arg):
-            try:
-                return self.toggles[arg]
-            except KeyError:
-                return self.original_find(arg)
-
-    def patch(patched_toggles):
-        # We alter the "find" method of the original FEATURE_TOGGLE Source.
-        # As a result, Friedbert will use our "find" method to determine
-        # the value of a toggle. And our "find" method looks into the
-        # patched dict first, and then into the original Source.
-        monkeypatch.setattr(
-            zeit.web.core.application.FEATURE_TOGGLES,
-            'find', ToggleOverride(patched_toggles).find)
-
-    return patch
 
 
 @pytest.fixture
@@ -872,9 +860,7 @@ class HttpBrowser(BaseBrowser):
         self.contents = r.text
 
 
-class MockSolr(object):
-
-    zope.interface.implements(zeit.solr.interfaces.ISolr)
+class MockSearch(object):
 
     def __init__(self):
         self.reset()
@@ -882,14 +868,17 @@ class MockSolr(object):
     def reset(self):
         self.results = []
 
-    def search(self, q, rows=10, **kw):
+    def pop_results(self, size):
         results = []
-        for i in range(rows):
+        for i in range(size):
             try:
                 results.insert(0, self.results.pop())
             except IndexError:
                 break
-        return pysolr.Results(results, self._hits)
+        return results
+
+    def search(self, q, rows=10, **kw):
+        return self.pop_results(rows)
 
     def update_raw(self, xml, **kw):
         pass
@@ -906,8 +895,21 @@ class MockSolr(object):
         self._hits = len(value)
         self._results = value
 
-MockSolr.timeout = property(
-    zeit.web.core.solr.solr_timeout_from_settings, lambda self, value: None)
+
+class MockSolr(MockSearch):
+
+    zope.interface.implements(zeit.solr.interfaces.ISolr)
+
+    def search(self, q, rows=10, **kw):
+        return pysolr.Results(self.pop_results(rows), self._hits)
+
+    @property
+    def timeout(self):
+        return zeit.web.core.solr.solr_timeout_from_settings(self)
+
+    @timeout.setter
+    def timeout(self, value):
+        pass
 
 
 class MockSitemapSolr(MockSolr):
@@ -915,25 +917,57 @@ class MockSitemapSolr(MockSolr):
     zope.interface.implements(zeit.web.core.solr.ISitemapSolrConnection)
 
     def __init__(self):
-        self._sitemap_sorl = zeit.web.core.solr.SitemapSolrConnection()
+        self._sitemap_solr = zeit.web.core.solr.SitemapSolrConnection()
         super(MockSitemapSolr, self).__init__()
 
     @property
     def timeout(self):
         # Delegate to non mocked sitemap solr object
-        return self._sitemap_sorl.timeout
+        return self._sitemap_solr.timeout
 
     @timeout.setter
     def timeout(self, value):
         pass
 
 
+class MockES(MockSearch):
+
+    zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
+
+    def search(self, query, order=None, rows=25, **kw):
+        result = zeit.cms.interfaces.Result(self.pop_results(rows))
+        result.hits = self._hits
+        return result
+
+    @MockSearch.results.setter
+    def results(self, value):
+        # Tries to rewrite uniqueIds into tms-style url paths
+        for result in value:
+            try:
+                path = result.pop('uniqueId').replace(
+                    zeit.cms.interfaces.ID_NAMESPACE.rstrip('/'), '')
+                result.setdefault('url', path)
+            except KeyError:
+                continue
+        self._hits = len(value)
+        self._results = value
+
+
 @pytest.fixture
-def datasolr(request):
+def data_solr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
     zope.component.provideUtility(zeit.web.core.solr.DataSolr())
+
+
+@pytest.fixture
+def data_es(request):
+    previous = zope.component.queryUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    if previous is not None:
+        request.addfinalizer(lambda: zope.component.provideUtility(previous))
+    zope.component.provideUtility(zeit.web.core.retresco.DataES())
 
 
 @pytest.fixture(scope='session')

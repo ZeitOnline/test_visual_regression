@@ -3,11 +3,13 @@ import datetime
 import pytest
 import mock
 
+import zeit.web.core.application
 import zeit.web.core.navigation
 import selenium.webdriver
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -35,7 +37,7 @@ def test_nav_markup_should_match_css_selectors(tplbrowser, dummy_request):
 
 
 def test_nav_ressorts_should_produce_markup(
-        tplbrowser, dummy_request, togglepatch):
+        tplbrowser, dummy_request):
     view = mock.MagicMock()
     view.request = dummy_request
     nav = zeit.web.core.navigation.NavigationItem('top', '', '')
@@ -43,7 +45,7 @@ def test_nav_ressorts_should_produce_markup(
         zeit.web.core.navigation.NavigationItem(
             'hp.global.topnav.links.jobs',
             'Jobs',
-            'http://jobs.zeit.de/'))
+            'https://jobs.zeit.de/'))
     nav['hp.global.topnav.links.partnersuche'] = (
         zeit.web.core.navigation.NavigationItem(
             'hp.global.topnav.links.partnersuche',
@@ -52,7 +54,7 @@ def test_nav_ressorts_should_produce_markup(
 
     # cowardish workaround, because tplbrowser cannot render macros,
     # which are needed for D18 tag (lama.render_svg)
-    togglepatch({'dtag_navigation': False})
+    zeit.web.core.application.FEATURE_TOGGLES.unset('dtag_navigation')
 
     browser = tplbrowser(
         'zeit.web.site:templates/inc/navigation/navigation-list.tpl',
@@ -127,11 +129,10 @@ def test_nav_contains_essential_elements(tplbrowser, dummy_request):
         'Search input must be present')
 
 
-def test_nav_should_contain_schema_org_markup(testbrowser, togglepatch):
-
+def test_nav_should_contain_schema_org_markup(testbrowser):
     # cowardish workaround, because tplbrowser cannot render macros,
     # which are needed for D18 tag (lama.render_svg)
-    togglepatch({'dtag_navigation': False})
+    zeit.web.core.application.FEATURE_TOGGLES.unset('dtag_navigation')
 
     browser = testbrowser('/zeit-online/zeitonline')
     select = browser.cssselect
@@ -373,10 +374,15 @@ def test_nav_search_is_working_as_expected(
             assert False, 'Input must be visible'
 
     # test if search form gets submitted
-    search__input.send_keys('test')
-    search__button.click()
-
-    assert driver.current_url.endswith('/zeit-online/zeitonline?q=test')
+    old_page = driver.find_element_by_tag_name('html')
+    stale = expected_conditions.staleness_of(old_page)
+    driver.execute_script('arguments[0].value="test"', search__input)
+    driver.execute_script('arguments[0].click()', search__button)
+    try:
+        WebDriverWait(driver, 20).until(stale)
+        assert driver.current_url.endswith('/zeit-online/zeitonline?q=test')
+    except TimeoutException:
+        assert False, 'Search page not visited'
 
 
 def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
@@ -542,8 +548,8 @@ def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
     assert len(header_date) == 0
 
 
-def test_d18_link_exists(testbrowser, togglepatch):
-    togglepatch({'dtag_navigation': True})
+def test_d18_link_exists(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('dtag_navigation')
     browser = testbrowser('/zeit-online/zeitonline')
     select = browser.cssselect
     d18_navigation_badge = select('nav a[href$="thema/d18"]')

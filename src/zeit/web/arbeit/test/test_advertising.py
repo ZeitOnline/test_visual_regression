@@ -8,26 +8,22 @@ import zeit.web.core.banner
 import zeit.web.site
 
 
-def test_zar_homepage_should_have_proper_ivw_script_integration(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True, 'iqd': True})
+def test_zar_homepage_should_have_proper_ivw_script_integration(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/arbeit/slenderized-index')
     ivw = browser.cssselect('script[src="https://script.ioam.de/iam.js"]')
     assert len(ivw) == 1
 
 
-def test_zar_adcontroller_head_code_is_present(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True, 'iqd': True})
-
+def test_zar_adcontroller_head_code_is_present(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/arbeit/slenderized-index')
-
     assert '<!-- ad controller head start -->' in browser.contents
     assert '<!-- adcontroller load -->' in browser.contents
     assert '<!-- mandanten object -->' in browser.contents
 
 
-def test_zar_adcontroller_adtags_are_present(testbrowser, togglepatch):
+def test_zar_adcontroller_adtags_are_present(testbrowser):
     browser = testbrowser('/arbeit/slenderized-index')
     assert 'ad-desktop-1' in browser.contents
     assert 'ad-desktop-2' in browser.contents
@@ -37,16 +33,14 @@ def test_zar_adcontroller_adtags_are_present(testbrowser, togglepatch):
     assert 'ad-mobile-8' in browser.contents
 
 
-def test_zar_adcontroller_finalizer_is_present(
-        testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True, 'iqd': True})
+def test_zar_adcontroller_finalizer_is_present(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/arbeit/slenderized-index')
     assert 'AdController.finalize();' in browser.contents
 
 
-def test_zar_adcontroller_js_var_isset(
-        selenium_driver, testserver, togglepatch):
-    togglepatch({'third_party_modules': True, 'iqd': True})
+def test_zar_adcontroller_js_var_isset(selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     driver = selenium_driver
     driver.get('%s/arbeit/slenderized-index' % testserver.url)
 
@@ -54,9 +48,8 @@ def test_zar_adcontroller_js_var_isset(
     assert adctrl == "object"
 
 
-def test_zar_adplaces_present_on_empty_cp(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True, 'iqd': True})
-
+def test_zar_adplaces_present_on_empty_cp(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/arbeit/slenderized-index')
     assert len(browser.cssselect('#iqadtileOOP')) == 1
     assert len(browser.cssselect('#ad-desktop-1')) == 1
@@ -68,16 +61,14 @@ def test_zar_adplaces_present_on_empty_cp(testbrowser, togglepatch):
     assert len(browser.cssselect('#ad-mobile-8')) == 1
 
 
-def test_zar_adplaces_present_on_cp(testbrowser, togglepatch):
-    togglepatch({'third_party_modules': True, 'iqd': True})
-
+def test_zar_adplaces_present_on_cp(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/arbeit/index')
     assert len(browser.cssselect('#iqadtileOOP')) == 1
     assert len(browser.cssselect('#ad-desktop-1')) == 1
     assert len(browser.cssselect('#ad-desktop-2')) == 1
     assert len(browser.cssselect('#ad-desktop-3')) == 1
     assert len(browser.cssselect('#ad-desktop-4')) == 1
-    assert len(browser.cssselect('#ad-desktop-5')) == 1
     assert len(browser.cssselect('#ad-desktop-16')) == 1
 
     assert len(browser.cssselect('#ad-mobile-1')) == 1
@@ -153,25 +144,17 @@ def test_zar_ads_are_rendered_on_articles_with_multiple_pages(
     assert len(browser.cssselect(selector[3])) == 1
 
 
-def test_zar_tile8_is_rendered_on_cp(testbrowser, togglepatch):
-    togglepatch({
-        'third_party_modules': True,
-        'iqd': True
-    })
+def test_zar_tile8_is_rendered_on_cp(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/arbeit/centerpage/adplace8')
     assert len(browser.cssselect('#ad-desktop-8')) == 1
 
 
-def test_zar_desktop_ads_are_rendered_on_cp(testbrowser, togglepatch):
-    togglepatch({
-        'third_party_modules': True,
-        'iqd': True
-    })
+def test_zar_desktop_ads_are_rendered_on_cp(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/arbeit/index')
-
     assert len(browser.cssselect('#ad-desktop-3')) == 1
     assert len(browser.cssselect('#ad-desktop-4')) == 1
-    assert len(browser.cssselect('#ad-desktop-5')) == 1
     assert len(browser.cssselect('#ad-desktop-16')) == 1
 
 

@@ -2,25 +2,12 @@
 import re
 
 import mock
-import pytest
-import pyramid.threadlocal
 
 import zeit.cms.interfaces
 
 import zeit.web.core.centerpage
 import zeit.web.core.template
 import zeit.web.core.utils
-
-
-@pytest.fixture
-def monkeyreq(monkeypatch):
-    def request():
-        m = mock.Mock()
-        m.route_url = lambda x: "http://example.com/"
-        m.image_host = 'http://example.com'
-        return m
-
-    monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
 
 
 def test_cp_should_have_buzz_module(testbrowser):
@@ -210,9 +197,9 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
         '201401/1105/18140073001_3035966678001_Beitrag'\
         '-Skispringen-f-r-Anf-nger.mp4'
     src2_val = \
-        'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
+        'https://live0.zeit.de/multimedia/videos/3035864892001.webm'
     src_img = \
-        'http://live0.zeit.de/multimedia/'\
+        'https://live0.zeit.de/multimedia/'\
         'videos/3035864892001.jpg'
 
     # structure
@@ -252,9 +239,9 @@ def test_teaser_fullwidth_light_with_video_has_correct_markup(
         '201401/1105/18140073001_3035966678001_Beitrag'\
         '-Skispringen-f-r-Anf-nger.mp4'
     src2_val = \
-        'http://live0.zeit.de/multimedia/videos/3035864892001.webm'
+        'https://live0.zeit.de/multimedia/videos/3035864892001.webm'
     src_img = \
-        'http://live0.zeit.de/multimedia/'\
+        'https://live0.zeit.de/multimedia/'\
         'videos/3035864892001.jpg'
 
     # structure

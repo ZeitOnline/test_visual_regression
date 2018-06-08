@@ -1,4 +1,5 @@
-<configure xmlns="http://namespaces.zope.org/zope">
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:meta="http://namespaces.zope.org/meta">
     <utility factory="zeit.web.core.solr.DataSolr" provides="zeit.solr.interfaces.ISolr"/>
     <utility factory="zeit.web.core.reach.MockReach" provides="zeit.web.core.interfaces.IReach"/>
     <utility factory="zeit.web.core.retresco.DataTMS" provides="zeit.retresco.interfaces.ITMS"/>
