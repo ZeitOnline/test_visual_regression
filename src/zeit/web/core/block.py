@@ -534,7 +534,7 @@ class PuzzleForm(Module):
                u"Versuchen sie es später erneut oder kontaktieren sie uns."
 
     @pyramid.decorator.reify
-    def is_mulitple(self):
+    def is_multiple(self):
         return self.puzzle_type.multiple
 
 
