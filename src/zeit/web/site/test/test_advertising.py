@@ -261,7 +261,7 @@ def test_adcontroller_values_return_values_on_hp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline'),
         ('tma', '')]
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+    view = zeit.web.site.view_centerpage.Centerpage(
         cp, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 
@@ -277,7 +277,7 @@ def test_adcontroller_values_return_values_on_cp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,sashawaltz,interpol'),
         ('tma', '')]
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+    view = zeit.web.site.view_centerpage.Centerpage(
         cp, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 
@@ -302,7 +302,7 @@ def test_tile8_is_rendered_on_correct_position(testbrowser):
 
 def test_tile8_for_fullwidth_is_rendered_on_correct_position(
         testbrowser):
-    browser = testbrowser('/zeit-online/index')
+    browser = testbrowser('/zeit-online/slenderized-index')
     tile8_on_first_position = browser.cssselect(
         '.cp-area--minor > div:first-child > script[id="ad-desktop-8"]')
     assert tile8_on_first_position, (

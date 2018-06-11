@@ -127,7 +127,7 @@ def test_printbox_is_present_and_has_digital_offerings(
     content = zeit.cms.interfaces.ICMSContent(uri)
     with checked_out(content) as co:
         co.byline = 'mo-mi'
-    browser = testbrowser('/zeit-online/index')
+    browser = testbrowser('/zeit-online/printbox')
     printbox = browser.cssselect('.print-box:not(.print-box--angebot)')
     anbebotsbox = browser.cssselect('.print-box--angebot')
 
@@ -141,7 +141,7 @@ def test_printbox_is_present_and_has_newsprint_offerings(
     content = zeit.cms.interfaces.ICMSContent(uri)
     with checked_out(content) as co:
         co.byline = ''
-    browser = testbrowser('/zeit-online/index')
+    browser = testbrowser('/zeit-online/printbox')
     printbox = browser.cssselect('.print-box:not(.print-box--angebot)')
     anbebotsbox = browser.cssselect('.print-box--angebot')
 

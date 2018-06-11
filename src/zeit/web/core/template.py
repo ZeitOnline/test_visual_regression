@@ -330,7 +330,7 @@ def create_url(context, obj, request=None):
 
     if isinstance(obj, basestring):
         return zeit.web.core.utils.maybe_convert_http_to_https(obj.replace(
-            zeit.cms.interfaces.ID_NAMESPACE, host, 1).replace('.cp2015', ''))
+            zeit.cms.interfaces.ID_NAMESPACE, host, 1))
     elif zeit.content.link.interfaces.ILink.providedBy(obj):
         return zeit.web.core.utils.maybe_convert_http_to_https(obj.url)
     elif zeit.content.video.interfaces.IVideo.providedBy(obj):
