@@ -12,7 +12,7 @@ POSTDEPLOY
 - change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
 
 
-3.159.2 (unreleased)
+3.159.2 (2018-06-11)
 --------------------
 
 - FIX: Changed SVG Flag paths
