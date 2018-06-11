@@ -24,6 +24,8 @@ POSTDEPLOY
 
 - SSL-160: Add puzzle solution form
 
+- ZON-4663: Add WM Ticker
+
 - ZON-4730: Add new Schulportal link to services
 
 

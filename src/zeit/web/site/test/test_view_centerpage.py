@@ -3108,3 +3108,12 @@ def test_if_series_is_podcast(testbrowser):
     browser = testbrowser('/serie/ist-das-normal')
     link = browser.cssselect('link[rel="alternate"]')
     assert link[0].get('href') == 'https://istdasnormal.podigee.io/feed/mp3'
+
+
+def test_wm_ticker_is_not_empty(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1000, 1024)
+    driver.get(('%s/zeit-online/index-with-wmticker#debug-wm-ticker-locally'
+                % testserver.url))
+    matches = driver.find_elements_by_class_name('wm-ticker__matches')
+    assert len(matches) == 1

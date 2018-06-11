@@ -1,0 +1,58 @@
+.wm-ticker
+	&__country
+		text-transform: uppercase
+
+	&__country-flag
+		border-radius: remify(4px)
+		box-shadow: 0 0 remify(1px) remify(1px) rgba(200, 200, 200, 0.6)
+		color: #000 // flag inherit color.. reset here
+		display: block
+		height: remify(36px)
+		margin: 0 auto
+		width: remify(48px)
+
+	&__list-flag
+		border-radius: remify(3px)
+		box-shadow: 0 0 remify(1px) remify(1px) rgba(200, 200, 200, 0.6)
+		color: #000 // flag inherit color.. reset here
+		display: block
+		height: remify(21px)
+		width: remify(28px)
+
+	+respond-min($break-desktop-min)
+		&__country
+			align-items: center
+			display: flex
+
+		&__country-flag
+			border-radius: remify(4px)
+			box-shadow: 0 0 remify(1px) remify(1px) rgba(200, 200, 200, 0.6)
+			display: block
+			height: remify(60px)
+			width: remify(80px)
+
+		&__country--home img
+			margin-left: $little
+			order: 1
+
+		&__country--away img
+			margin-right: $little
+
+	/* overwrite multi game stuff - here because nesting is cleaner */
++respond-min($break-phablet-min)
+	.wm-ticker__match-detail--multi
+		.wm-ticker__country
+			display: block
+			text-align: center
+
+		.wm-ticker__country--home img
+				margin-left: 0
+				order: -1
+
+		.wm-ticker__country--away img
+				margin-right: 0
+
+		.wm-ticker__country-flag
+				width: remify(44px)
+				height: remify(33px)
+
