@@ -9,7 +9,7 @@ function wmTicker( element ) {
         dataURL: 'https://kickerticker.zeit.de/matchday',
         dataPath: '?today=eq.true',
         debugURL: 'http://kickerticker.devel.zeit.de/matchday',
-        webSocketURL: 'ws://ws.zeit.de:3003/',
+        webSocketURL: 'ws://ws.zeit.de:80/',
         webSocketPath: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
         'eyJjaGFubmVsIjoid20iLCJtb2RlIjoiciJ9.' +
         'c791lyW1KxWajSmmmnHSjjR5hJPkGn2ZNSsQGG072WQ',
@@ -190,7 +190,7 @@ function wmTicker( element ) {
      * Get Difference between hours in Minutes
      * between current date and some date
      * @param  {string | Date }  date that shall be compared
-     * @return {integer}
+     * @return {integer} negative if game is in past!
      */
     function getMinuteDifference( date ) {
         date = new Date( date );
@@ -217,7 +217,7 @@ function wmTicker( element ) {
         data.forEach( function( game ) {
             var teams = self.mapCountryCodes( game.away_name, game.home_name );
 
-            var time = self.timeString( game.date, game.kickoff, game.status );
+            var time = self.timeString( game.date, game.kickoff, game.period, game.status );
 
             // set hour or game status time
             var gameHour = new Date( game.date ).getHours();
@@ -245,6 +245,10 @@ function wmTicker( element ) {
             };
 
             if ( game.running || gameShallBeBig ) {
+                if ( game.running ) {
+                    gameData.awayPoints = gameData.awayPoints > 0 ? gameData.awayPoints : '0';
+                    gameData.homePoints = gameData.homePoints > 0 ? gameData.homePoints : '0';
+                }
                 returnData.current.push( gameData );
             } else if ( game.status === 'FULL' ) {
                 returnData.finished.push( gameData );
@@ -277,7 +281,7 @@ function wmTicker( element ) {
      * @param  {string}  date string supplied by API
      * @return {string}
      */
-    WmTicker.prototype.timeString = function( date, kickoff, status ) {
+    WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
         date = new Date( date );
         kickoff = new Date( kickoff );
         var hour = date.getHours();
@@ -285,20 +289,24 @@ function wmTicker( element ) {
         var time = 'um ' + hour + ':' + minutes;
 
         if ( status === 'LIVE' ) {
-            // if beginDate and kickoff different:
-            // calc minute difference between kickoff and current date and add 45
-            // else calculate minute difference
+            // if kickoff is in past
             if ( getMinuteDifference( kickoff ) < 0 ) {
-                if ( date.getTime() !== kickoff.getTime() ) {
+                time = ( getMinuteDifference( kickoff ) * -1 ) + '"';
+                if ( parseInt( period ) === 1 ) {
                     time = ( 45 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
-                } else {
-                    time = ( getMinuteDifference( kickoff ) * -1 ) + '"';
+                } else if ( parseInt( period ) === 2 ) {
+                    time = ( 90 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
+                } else if ( parseInt( period ) === 3 ) {
+                    time = ( 105 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
                 }
+
+                /* eslint-disable */
+                debugger;
+
             }
         } else if ( status === 'HALF-TIME' ) {
             time = 'Halbzeit';
         } else if ( status === 'HALF-EXTRATIME' ) {
-            // @TODO Review bitte!
             time = '45" + ' +  ( 45 - ( getMinuteDifference( kickoff ) * -1 ) ) * -1;
         } else if ( status === 'PENALTY-SHOOTOUT' ) {
             time = 'Elfmeterschießen';
