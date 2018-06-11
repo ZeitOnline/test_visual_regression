@@ -197,7 +197,7 @@ class TopicLink(zeit.web.core.utils.nslist):
 
 @zeit.web.register_module(u'')
 class Module(object):
-    """Base class for RAM-style modules to be used in cp2015 centerpages.
+    """Base class for RAM-style modules.
 
     See `zeit.web.core.decorator.register_module` for doc and example.
     """
