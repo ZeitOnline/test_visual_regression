@@ -192,6 +192,23 @@ function wmTicker( element ) {
         return countries;
     };
 
+
+    /**
+     * Get Difference between hours in Minutes
+     * between current date and some date
+     * @param  {string | Date }  date that shall be compared
+     * @return {integer} negative if game is in past!
+     */
+    function getMinuteDifference( date ) {
+        date = new Date( date );
+        var today = new Date();
+        today.setHours( date.getHours() );
+        today.setMinutes( date.getMinutes() );
+        var difference = today.getTime() - new Date().getTime();
+        return ( Math.round( difference / 60000 ) ) * -1;
+    }
+
+
     /**
      * Map Data from API to needed format to use in further code
      * @param  {object}  data from Kickerticker Backend
@@ -208,7 +225,7 @@ function wmTicker( element ) {
         data.forEach( function( game ) {
             var teams = self.mapCountryCodes( game.away_name, game.home_name );
 
-            var time = self.timeString( game.date, game.kickoff, game.status );
+            var time = self.timeString( game.date, game.kickoff, game.period, game.status );
 
             // set hour or game status time
             var gameHour = new Date( game.date ).getHours();
@@ -272,26 +289,38 @@ function wmTicker( element ) {
      * @param  {string}  date string supplied by API
      * @return {string}
      */
-    WmTicker.prototype.timeString = function( date, kickoff, status ) {
-        date = new Date( date );
+    WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
+        var begin = new Date( date );
         kickoff = new Date( kickoff );
-        var hour = date.getHours();
-        var minutes = ( date.getMinutes() < 10 ? '0' : '' ) + date.getMinutes();
-        var time = 'um ' + hour + ':' + minutes; // Game is in future
 
-        if ( status === 'LIVE' ) {
-            return '';
-        } else if ( status === 'HALF-TIME' ) {
-            return 'Halbzeit';
-        } else if ( status === 'HALF-EXTRATIME' ) {
-            return '';
-        } else if ( status === 'PENALTY-SHOOTOUT' ) {
-            return 'Elfmeterschießen';
-        } else if ( status === 'FULL' ) {
-            return '';
+        if ( defaults.showRunningGameTime ) {
+            if ( status === 'LIVE' ) {
+                // kickoff and start do not match
+                if ( kickoff.getTime() !== begin.getTime() ) {
+                    if ( period === 2 ) {
+                        return ( ( 45 ) + getMinuteDifference( kickoff ) ) + '"';
+                    } else if ( period === 3 ) {
+                        return ( ( 90 ) + getMinuteDifference( kickoff ) ) + '"';
+                    } else if ( period === 4 ) {
+                        return ( ( 105 ) + getMinuteDifference( kickoff ) ) + '"';
+                    }
+                }
+
+                // kickoff and start match. propably first half
+                return getMinuteDifference( kickoff ) + '"';
+            } else if ( status === 'HALF-TIME' ) {
+                return 'Halbzeit';
+            } else if ( status === 'HALF-EXTRATIME' ) {
+                return '45" + ' + ( ( 45 - getMinuteDifference( kickoff ) ) * -1 );
+            } else if ( status === 'PENALTY-SHOOTOUT' ) {
+                return 'Elfmeterschießen';
+            } else if ( status === 'FULL' ) {
+                return '';
+            }
         }
 
-        return time;
+        var minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes();
+        return 'um ' + begin.getHours() + ':' + minutes; // Game is in future
     };
 
     /**
