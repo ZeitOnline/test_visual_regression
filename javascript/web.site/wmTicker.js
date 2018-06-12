@@ -299,7 +299,7 @@ function wmTicker( element ) {
         } else if ( status === 'HALF-TIME' ) {
             return 'Halbzeit';
         } else if ( status === 'HALF-EXTRATIME' ) {
-            return '45" + ' +  ( 45 - ( getMinuteDifference( kickoff ) ) );
+            return '';
         } else if ( status === 'PENALTY-SHOOTOUT' ) {
             return 'Elfmeterschießen';
         } else if ( status === 'FULL' ) {
