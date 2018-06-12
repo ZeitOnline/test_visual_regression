@@ -9,13 +9,14 @@ function wmTicker( element ) {
         dataURL: 'https://kickerticker.zeit.de/matchday',
         dataPath: '?today=eq.true',
         debugURL: 'http://kickerticker.devel.zeit.de/matchday',
-        webSocketURL: 'ws://ws.zeit.de:3003/',
+        webSocketURL: 'ws://ws.zeit.de:80/',
         webSocketPath: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
         'eyJjaGFubmVsIjoid20iLCJtb2RlIjoiciJ9.' +
         'c791lyW1KxWajSmmmnHSjjR5hJPkGn2ZNSsQGG072WQ',
         moreLink: [ 'https://www.zeit.de/thema/fussball-wm' ],
         wsEnabled: false,
         refreshSeconds: 10,
+        showRunningGameTime: true,
         countries: [
             { name: 'Russland', short: 'ru', long: 'rus' },
             { name: 'Saudi-Arabien', short: 'sa', long: 'ksa' },
@@ -132,6 +133,7 @@ function wmTicker( element ) {
         var link = element.getAttribute( 'data-link' ),
             headline = element.getAttribute( 'data-headline' ),
             refreshSeconds = element.getAttribute( 'data-refresh-seconds' ),
+            showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
             wsenabled = element.getAttribute( 'data-wsenabled' );
 
         if ( link !== '' ) {
@@ -144,6 +146,10 @@ function wmTicker( element ) {
 
         if ( parseInt( refreshSeconds ) > 0 ) {
             defaults.refreshSeconds = parseInt( refreshSeconds );
+        }
+
+        if ( showRunningGameTime ) {
+            defaults.showRunningGameTime = showRunningGameTime.toLowerCase() === 'true';
         }
 
         if ( wsenabled ) {
@@ -185,21 +191,6 @@ function wmTicker( element ) {
         }
         return countries;
     };
-
-    /**
-     * Get Difference between hours in Minutes
-     * between current date and some date
-     * @param  {string | Date }  date that shall be compared
-     * @return {integer}
-     */
-    function getMinuteDifference( date ) {
-        date = new Date( date );
-        var today = new Date();
-        today.setHours( date.getHours() );
-        today.setMinutes( date.getMinutes() );
-        var difference = today.getTime() - new Date().getTime();
-        return Math.round( difference / 60000 );
-    }
 
     /**
      * Map Data from API to needed format to use in further code
@@ -245,6 +236,10 @@ function wmTicker( element ) {
             };
 
             if ( game.running || gameShallBeBig ) {
+                if ( game.running ) {
+                    gameData.awayPoints = gameData.awayPoints > 0 ? gameData.awayPoints : '0';
+                    gameData.homePoints = gameData.homePoints > 0 ? gameData.homePoints : '0';
+                }
                 returnData.current.push( gameData );
             } else if ( game.status === 'FULL' ) {
                 returnData.finished.push( gameData );
@@ -282,28 +277,18 @@ function wmTicker( element ) {
         kickoff = new Date( kickoff );
         var hour = date.getHours();
         var minutes = ( date.getMinutes() < 10 ? '0' : '' ) + date.getMinutes();
-        var time = 'um ' + hour + ':' + minutes;
+        var time = 'um ' + hour + ':' + minutes; // Game is in future
 
         if ( status === 'LIVE' ) {
-            // if beginDate and kickoff different:
-            // calc minute difference between kickoff and current date and add 45
-            // else calculate minute difference
-            if ( getMinuteDifference( kickoff ) < 0 ) {
-                if ( date.getTime() !== kickoff.getTime() ) {
-                    time = ( 45 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
-                } else {
-                    time = ( getMinuteDifference( kickoff ) * -1 ) + '"';
-                }
-            }
+            return '';
         } else if ( status === 'HALF-TIME' ) {
-            time = 'Halbzeit';
+            return 'Halbzeit';
         } else if ( status === 'HALF-EXTRATIME' ) {
-            // @TODO Review bitte!
-            time = '45" + ' +  ( 45 - ( getMinuteDifference( kickoff ) * -1 ) ) * -1;
+            return '';
         } else if ( status === 'PENALTY-SHOOTOUT' ) {
-            time = 'Elfmeterschießen';
+            return 'Elfmeterschießen';
         } else if ( status === 'FULL' ) {
-            time = '';
+            return '';
         }
 
         return time;
@@ -397,6 +382,7 @@ function wmTicker( element ) {
                 data.matches[ i ].status = receivedData.status;
                 data.matches[ i ].homePoints = receivedData.home_score; // eslint-disable-line camelcase
                 data.matches[ i ].awayPoints = receivedData.away_score; // eslint-disable-line camelcase
+                data.matches[ i ].period = receivedData.period; // eslint-disable-line camelcase
 
                 this.renderView( data );
                 break;
