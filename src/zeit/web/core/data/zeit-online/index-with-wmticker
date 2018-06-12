@@ -67,7 +67,8 @@
         <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True" kind="solo">
             <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
                 <container cp:type="rawtext" module="rawtext" visible="True" visible_mobile="True" cp:__name__="id-2f4417b0-58fb-4923-a4cb-1b4fc779d44a">
-                    <text>&lt;div class="wm-ticker" data-date="2018-06-14" data-wsenabled="false" data-refresh-seconds="15" data-link="https://www.zeit.de/thema/fussball-wm" data-headline="" data-ct-area="wmticker"&gt;&lt;/div&gt;</text>
+                    <text>&lt;div class="wm-ticker" data-date="2018-06-16" data-wsenabled="false" data-refresh-seconds="15" data-link="https://www.zeit.de/thema/fussball-wm" data-headline=""
+                    data-show-running-time="true" data-ct-area="wmticker"&gt;&lt;/div&gt;</text>
                 </container>
                 <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
