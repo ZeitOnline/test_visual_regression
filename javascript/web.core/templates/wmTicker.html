@@ -1,0 +1,54 @@
+<div class="wm-ticker__header" data-ct-row="header" data-ct-column="false">
+    <h3 class="wm-ticker__headline">{{ headline }}</h3>
+    {{#link}}
+        <a href="{{ link }}" class="wm-ticker__link" title="Mehr Informationen anzeigen" data-ct-label="link">mehr</a>
+    {{/link}}
+</div>
+
+<div class="wm-ticker__matches" data-ct-row="matches" data-ct-column="false">
+    {{#matches}}
+        <div class="wm-ticker__match-detail {{ matchesModifier }}">
+            <div class="wm-ticker__match-detail-content">
+                <div class="wm-ticker__country wm-ticker__country--home">
+                    <img alt="Flagge {{ home }}" class="wm-ticker__country-flag" src="/static/latest/images/svg/flags/{{ homeShort }}.svg">
+                    <span class="wm-ticker__text">{{ homeLong }}</span>
+                </div>
+                <div>
+                    <div class="wm-ticker__score">
+                        <span class="wm-ticker__text--large wm-ticker__score--home">{{ homePoints }}</span>
+                        <span class="wm-ticker__dots">:</span>
+                        <span class="wm-ticker__text--large wm-ticker__score--away">{{ awayPoints }}</span>
+                    </div>
+                    <div class="wm-ticker__match-time">{{ time }}</div>
+                </div>
+                <div class="wm-ticker__country wm-ticker__country--away">
+                    <img alt="Flagge {{ away }}" class="wm-ticker__country-flag" src="/static/latest/images/svg/flags/{{ awayShort }}.svg">
+                    <span class="wm-ticker__text">{{ awayLong }}</span>
+                </div>
+            </div>
+        </div>
+    {{/matches}}
+
+    {{#listIterator}}
+        <button class="wm-ticker__button" data-ct-label="button">alle Spiele heute anzeigen</button>
+        <div class="wm-ticker__list wm-ticker__list--hidden">
+            <ol class="wm-ticker__list-content">
+                {{#list}}
+                    <li class="wm-ticker__match {{ matchFinishedModifier }}">
+                        <div class="wm-ticker__match-info">
+                            <div class="wm-ticker__match-score {{ scoreFinishedModifier }}"> {{ homePoints }} : {{ awayPoints }}</div>
+                            <div class="wm-ticker__list-country wm-ticker__list-country--home">
+                                <img alt="Flagge {{ home }}" class="wm-ticker__list-flag" src="/static/latest/images/svg/flags/{{ homeShort }}.svg">
+                            </div>
+                            <p class="wm-ticker__list-teams">{{ homeLong }} : {{ awayLong }}</p>
+                            <div class="wm-ticker__list-country wm-ticker__list-country--away">
+                                <img alt="Flagge {{ away }}" class="wm-ticker__list-flag" src="/static/latest/images/svg/flags/{{ awayShort }}.svg">
+                            </div>
+                        </div>
+                        <div class="wm-ticker__list-time">{{ time }}</div>
+                    </li>
+                {{/list}}
+            </ol>
+        </div>
+    {{/listIterator}}
+</div>

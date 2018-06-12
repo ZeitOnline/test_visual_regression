@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/R/Arndt-Fabian_Rohlfing/index" publication-date="" expires="">
+      <display_name>Arndt-Fabian Rohlfing</display_name>
+    </author>
+    <author href="http://xml.zeit.de/autoren/F/Oliver_Fritsch-2/index" publication-date="" expires="">
+      <display_name>Oliver Fritsch</display_name>
+    </author>
+    <references></references>
+    <rankedTags>
+      <tag uuid="dc176d0f-0f66-4618-be8d-6a3263bdf8f0" url_value="" type="Person">Pep Guardiola</tag>
+      <tag uuid="a7564f25-99a7-4573-9012-593297014cbd" url_value="" type="free">Champions League</tag>
+      <tag uuid="c454966c-8bf1-41de-96e6-9a49dfa52ab7" url_value="" type="Organization">FC Bayern München</tag>
+      <tag type="Organization" score="5" uuid="71def803-0c8b-4c36-8f7b-085137a2a187" url_value="fc-barcelona">FC Barcelona</tag>
+    </rankedTags>
+    <image base-id="http://xml.zeit.de/zeit-online/liveblog/champions-league-bilder/messi/" type="jpg" title="Messi" alt="Messi" align="left" publication-date="" expires="">
+      <bu>Lionel Messi feiert sein Tor gegen die Bayern. </bu>
+      <copyright>© Reuters / Albert Gea</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Arndt-Fabian Rohlfing;Oliver Fritsch</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Sport</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-05-06T22:08:10.316525+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-06T18:11:02.806202+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-05-06T22:08:36.258293+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-05-06T22:09:36.165529+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-05-06T21:52:15.953384+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-05-06T21:52:16.001552+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-05-06T22:08:33.337605+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.rvd-spaet-ersatz</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Wer siegt: Original oder Kopie?</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/sport/2015-05/b09d29a0-0e09-478a-9a1c-d34ed8ff7607.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">343efef53c6c49e5a198957a872bf56d</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Sport</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Messi war verboten gut. #FCBFCB</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">2616</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e888f61c-5ee0-49e7-82ab-febb9c955342}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">18</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Rätselspaß</supertitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/liveblog/champions-league-bilder/messi/" type="jpg" title="Um die Ecke gedacht Nr. 2290" alt="Um die Ecke gedacht Nr. 2290" align="left" publication-date="" expires="" layout="large" is_empty="False">
+        <bu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <copyright pytype="str">© Illustration: Siri Matthey</copyright>
+      </image>
+      <p>
+        <a href="http://www.zeit.de/spiele/gewinner-sommerraetsel" target="_blank">ZEITmagazin-Sommerpreisrätsel – Gewinner und Lösungen</a>
+        <br/>
+        <a class="" href="http://spiele.zeit.de/ecke/" target="_blank">Lösen Sie das aktuelle Rätsel online</a>
+        <br/>
+        <a class="" href="http://zeus.zeit.de/spiele/pdf/kreuzwortraetsel/2015/um-die-ecke-gedacht-35.pdf" target="_blank">Das Kreuzworträtsel als PDF</a>
+      </p>
+      <p><strong>Waagerecht:</strong><br/><strong>6</strong> Kann sein, dass es das Sein-Können absteckt  <strong>9</strong> Mischt metallisch mit, wo man Porzellan satte Farben mitgibt  <strong>12</strong> Ist irgendwie ganz Reklame – die sie für saubere, fangflottenfreie Meere machen würde <strong>15</strong> Richtungswahl ohne Rücksicht auf Weg und Steg und Scholle und Stoppel <strong>18</strong> In Göteborg relativ leicht  geborgt <strong>19</strong> Angesteuert insbesondere der Atemwegehege wegen  <strong>20</strong> Lange Geschichte gibt’s um die aus der Elbenschmiede <strong>21</strong> Die halbe Wahrheit, wo’s kurz fürs lange Land steht <strong>22</strong> Verstärkt den Strom noch vor Frankfurt, oder? <strong>23</strong> In Insektenkundlers Metier kein Marotteur <strong>26</strong> Die fahren mit, damit mitkann, was uns weiterbringt <strong>29 Revier von Wellenschnellen  31</strong> Einer der deftigeren Faustrechtsfälle des Lebens? <strong>33</strong> Spitznamentlich auch in der Halle besichtigt, meisterlichen Handballs wegen <strong>35</strong> Begeben sich zum Behuf des Vorwärtskommens in erhöhte Position <strong>38</strong> Will er nicht ..., ist der Fall nicht der Fall <strong>43</strong> Zwei Silben von Stuttgarts Zoo, und sie ist mit der Unterschrift fertig <strong>44</strong> Der Nachnachnachfolger in Tiberius’ Namen <strong>45</strong> Bucht – manch einer der Vorgeschichte von Rio und Brasilia wegen <strong>46</strong> In Baikal-nahen Quellenangaben Erwähnte <strong>47</strong> Ward Glockenspielergefährtin, denn Vogelfänger flog auf sie <strong>48</strong> Gehört zu den Sperenzchen der Käfigbauer</p>
+      <p><strong>Senkrecht:</strong><br/><strong>1</strong> Eigenheim von sich Entlarvenden <strong>2</strong> Jenseits von ihr geht’s wieder weiter weiter mit dem Weitesten auf Erden <strong>3</strong> Sache des Bedarfsdeckzwecks, im Allgemeinen <strong>4</strong> Sieht so – ja, eiweißlich aus <strong>5</strong> Wann ist Uranus erdferner denn Jupiter? <strong>6</strong> Was eine Meringue ist, braucht man in der wohl nicht zu éclairen <strong>7</strong> Von Freunden  erdverbundenen Nächtigens immer mal wieder entfaltet <strong>8</strong> Court-Vorfall, einen halben Buchstaben lang <strong>9</strong> In der Adria: Nachsingsport nach Vokalentzug <strong>10</strong> Ist gut zur Haut, wenn auch nicht bei Blattkantenkontakt <strong>11</strong> Bringt bescheidenen Ausgleich, wollen sich Wolken nicht regen <strong>13</strong> Bringt manch einen Kniff ein ins Drehgeschehen <strong>14</strong> Gehört zu steinloser Wand, andererseits zum 35 waagerecht hoch am Himmel <strong>15</strong> Hochsaison bedeutet Vollsaison, was die betrifft <strong>16</strong> In ihr zeigt sich’s, ob langes Ackern fruchtete <strong>17</strong> Cool, wenn der zum Finish der Durststrecke dasteht <strong>24</strong> Lässt bei Ablauf der Ablaufzeit kaum ahnen, watt er für’n Starkstrom sein kann  <strong>25</strong> Sonnige Spanne in Calais oder Cannes <strong>27</strong> Ein Resultat essigsäuerlicher Reaktionen <strong>28</strong> Eher ein Neuling zwischen Elbling und Riesling <strong>30</strong> Touris Muss z. B. in Pula, Capua, Nîmes <strong>32</strong> Funkers Stadt zwischen India und Quebec <strong>34</strong> Nachweislich hilfreich, sofern vorweisbar <strong>36</strong> Geht hier um Parcel, bannt da den Sound <strong>37</strong> Interesse-Qualität bei Engagierten <strong>39</strong> Eine weitere im regionalen Umfeld von Mull und Staffa <strong>40</strong> Im Staaten-Ballsport: Heimat von Mavericks und Bulls und Celtics <strong>41</strong> Und ist im Erdumdrehen wieder rum <strong>42</strong> Ein anderes Ende in der Rhône-Kanal-Schifffahrt</p>
+      <p><strong>So können Sie gewinnen:</strong> Finden Sie im Kreuzworträtsel das Lösungswort der Woche (heute 29 waagerecht)! Es ergibt sich, wenn Sie die Buchstaben des in der Mitte des Kreuzwortgitters abgebildeten Vogels (in einer geeigneten Reihenfolge!) mit den Buchstaben in den getönten Feldern kombinieren. Ein Beispiel: Aus BA, einem FINKen im Bild und LIALE ergibt sich BANKFILIALE.</p>
+      <p>Entweder teilen Sie uns diese Lösung über unten stehendes Formular mit  oder Sie senden sie auf einer Postkarte an DIE ZEIT, Stichwort Sommerpreisrätsel ZEITmagazin, Postfach 10 68 08, 20045 Hamburg </p>
+      <p>Teilnahmeschluss für die Folge 8 ist <strong>Dienstag, der 8. September 2015</strong></p>
+      <p><strong>Hinweis: </strong> Sie können über dieses Formular auch die Lösung der vorherigen Rätselfolge eingeben. Geben Sie bitte in jedem Fall die <strong>Nummer der Rätselfolge</strong> ein, da Ihre Lösung sonst nicht gewertet werden kann.</p>
+      <puzzleform id="scrabble" year="2018"/>
+      <p>Aus allen richtigen Einsendungen werden die Gewinner durch das Los ermittelt. Sie werden schriftlich verständigt, und ihre Namen werden vom 15. September 2015 an unter <a href="http://www.zeit.de/sommerpreisraetsel">www.zeit.de/sommerpreisraetsel</a> bekannt gegeben.  Die Auflösung finden Sie im ZEITmagazin Nr. 37/15 vom  10. September 2015. Mitarbeiter des Zeitverlages und ihre  Angehörigen dürfen nicht teilnehmen. Der Rechtsweg ist  ausgeschlossen. Die Gewinne sind nicht in Geld  einlösbar. Namen und Adressen der Teilnehmer kann der  Zeitverlag für eigene Werbezwecke verwenden.</p>
+      <p>
+        <strong>Und das sind diese Woche unsere Preise:</strong>
+      </p>
+      <p><strong>1. Preis: Drei Nächte im Grand Hotel Heiligendamm</strong><br/>
+Die Architektur der Weißen Stadt am Meer ist einzigartig in Mecklenburg-Vorpommern. Sie wohnen zu zweit drei Nächte im Grand Hotel Heiligendamm inklusive Halbpension und je einer Anwendung im Spa. Der weiße Ostseestrand liegt direkt vor der Tür</p>
+      <p><strong>2. und 3. Preis: Je ein Paket von "Gaumenfreuden"</strong><br/>
+Wir verlosen eine Auswahl mit elf Produkten aus dem exklusiven Sortiment des niederrheinischen Spezialitätengeschäfts Gaumenfreuden, u. a. Wein, Öl, Nudeln, Granatapfelessig, Antipasti, Pesto und Kräuter</p>
+      <p><strong>4. bis 8. Preis: Je ein "Eckstein"-Band 21</strong><br/>
+Auch in diesem Sommer erscheint bei den S. Fischer Verlagen wieder ein Kreuzworträtsel-Band mit 66 "Um die Ecke gedacht"-Rätseln</p>
+      <p>
+        <strong>Lösung von Nr. 2288 (ZEITmagazin-Sommerpreisrätsel Folge 6, Nr. 33/2015):</strong>
+      </p>
+      <p><strong>Waagerecht:</strong><br/><strong>6</strong> GOLDREGEN <strong>11</strong> GEWERBE <strong>14</strong> DASEIN, Leben und Ankommen <strong>15</strong> Mittelrhein-BURGEN <strong>17</strong> ARBEIT  <strong>19</strong> RESPEKTIEREN <strong>20</strong> »penn!« und Sean PENN <strong>21</strong> JANE <strong>22</strong> NUSS <strong>23</strong> (Neben-)GELASS <strong>24 BR-ANDUN-GSWELLEN mit Nandu 26</strong> GELB  <strong>27</strong> MEET = treffen (engl.) <strong>29</strong> ISMAEL (1. Mose 21) und in »Moby Dick« <strong>32</strong> »NUR 1 Euro« <strong>33</strong> ETHOS <strong>35</strong> TAXI <strong>37</strong> STEINADLER aus  L-a-n-d-e-s-t-i-e-r <strong>42</strong> ERTRAEGE, Gewerbeertragsteuer <strong>43</strong> »teile!« und TEILE <strong>44</strong> orange: die ORANGE <strong>45</strong> ALLE <strong>46</strong> REFLEKTOR <strong>47</strong> CANNES
+      </p>
+      <p><strong>Senkrecht:</strong><br/><strong>1</strong> ROSENBLUETEN <strong>2</strong> ARNE in W-arne-münde <strong>3</strong> BERINGMEER <strong>4</strong> GENESE <strong>5</strong> das O: OBENAN <strong>6</strong> gar, Ara, Rage, Gent, Tor:  GARAGENTOR <strong>7</strong> LESERBRIEF <strong>8</strong> DIP zum Einstippen <strong>9</strong> EBK = Einbauküche <strong>10</strong> GUT <strong>11</strong> Garonnezuflüsse Lot und GERS <strong>12</strong> Entenhausen: ERPEL  <strong>13</strong> EINSTEIGEN <strong>16</strong> GEUSE <strong>17</strong> ANGLISTEN aus I-n-s-e-l-n-t-a-g <strong>18</strong> BELEM, Portugal und Brasilien <strong>25</strong> die und das WEHEN <strong>28</strong> TORGAU  <strong>30</strong> STRAND <strong>31</strong> AXEL in kr-axel-n <strong>34</strong> TRARA <strong>36</strong> AALE <strong>38</strong> NILS Holgersson <strong>39</strong> a + le = ALE <strong>40</strong> DEKA-gramm, Dekadenz <strong>41</strong> LOT
+      </p>
+    </division>
+  </body>
+</article>

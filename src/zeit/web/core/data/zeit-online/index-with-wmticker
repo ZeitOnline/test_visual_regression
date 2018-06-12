@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <head>
+        <header_image/>
+        <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+        <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:03.346120+00:00</attribute>
+        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:09:09.014473+00:00</attribute>
+        <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:08:09.170784+00:00</attribute>
+        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2015-03-24T17:09:09.014473+00:00</attribute>
+        <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+        <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:00.932648+00:00</attribute>
+        <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.bruenjes</attribute>
+        <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+        <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+        <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+        <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
+        <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
+        <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
+        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;CenterPage&quot; module=&quot;zeit.content.cp.centerpage&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;ICP2015&quot; module=&quot;zeit.content.cp.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+        <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noarchive</attribute>
+        <topiclinks>
+            <topiclink_title>Schwerpunkte</topiclink_title>
+            <topiclink>
+                <topiclink_label_1>Islamischer Staat</topiclink_label_1>
+                <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
+                <topiclink_label_2>Bundeswehr</topiclink_label_2>
+                <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
+                <topiclink_label_3>Hongkong</topiclink_label_3>
+                <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
+            </topiclink>
+        </topiclinks>
+    </head>
+    <body>
+        <title>CP-Editor 0.4</title>
+        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True" kind="solo">
+            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
+                <container cp:type="rawtext" module="rawtext" visible="True" visible_mobile="True" cp:__name__="id-2f4417b0-58fb-4923-a4cb-1b4fc779d44a">
+                    <text>&lt;div class="wm-ticker" data-date="2018-06-16" data-wsenabled="false" data-refresh-seconds="15" data-link="https://www.zeit.de/thema/fussball-wm" data-headline=""
+                    data-show-running-time="true" data-ct-area="wmticker"&gt;&lt;/div&gt;</text>
+                </container>
+                <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
+                        <supertitle>CP-Editor</supertitle>
+                        <title>Universaler Testartikel 2.0</title>
+                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
+                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
+                        <byline/>
+                        <breadcrumb_title/>
+                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
+                            <bu>Jelly danish pudding chocolate cake.</bu>
+                            <copyright>© ZEIT ONLINE</copyright>
+                        </image>
+                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
+                            <display_name>Test Mann</display_name>
+                        </author>
+                    </block>
+                </container>
+            </region>
+        </cluster>
+        <cluster area="feature" visible="True">
+            <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
+                <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
+                    </block>
+                </container>
+                <container cp:__name__="id-bab27568-9d14-4553-ab74-70310bf45317" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/kolumne" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/kolumne" year="2008">
+                    </block>
+                </container>
+                <container cp:__name__="id-6a370fea-c678-46ac-b546-dc1d30143978" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-05" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-05" year="2008">
+                    </block>
+                </container>
+                <container cp:__name__="id-0e4c300a-813a-4549-95a7-2affe49167fe" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="video" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/video/2014-01/1953013471001" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" year="2014">
+                    </block>
+                </container>
+                <container cp:__name__="id-0e4c300a-813a-4549-95a7-2ccde49167fe" cp:type="teaser" hide-dupes="True" module="zon-large" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
+                    </block>
+                </container>
+                <container cp:type="jobbox_ticker" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-909682ba-5b0d-4e11-a88a-4b30847c52c9" jobbox_ticker_id="hp"/>
+            </region>
+            <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" visible="True" kind="minor">
+                <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7" cp:type="teaser" hide-dupes="True" module="zon-square" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/gallery/biga_1" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/gallery/biga_1" year="2008">
+                    </block>
+                </container>
+                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60597" cp:type="teaser" hide-dupes="True" module="zon-square" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
+                    </block>
+                    <block author="Test Mann" contenttype="article" date-first-released="2010-09-28T14:47:21.340730+00:00" date-last-modified="2014-07-17T14:02:48+00:00" date-last-published="2012-07-20T03:48:01+00:00" expires="" genre="gastbeitrag" href="http://xml.zeit.de/zeit-online/article/01" issue="39" last-semantic-change="2014-07-17T14:02:47.393607+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2010">
+                    </block>
+                </container>
+                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True" force_mobile_image="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
+                        <supertitle>CP-Editor</supertitle>
+                        <title>Universaler Testartikel 2.0</title>
+                        <text>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</text>
+                        <description>Jelly danish pudding chocolate cake. Candy canes fruitcake cake cotton candy candy canes caramels fruitcake cupcake. Biscuit muffin caramels. Jujubes halvah fruitcake.</description>
+                        <byline/>
+                        <breadcrumb_title/>
+                        <image align="left" base-id="http://xml.zeit.de/politik/ausland/2015-03/zon-dummy/" expires="" publication-date="" type="jpg">
+                            <bu>Jelly danish pudding chocolate cake.</bu>
+                            <copyright>© ZEIT ONLINE</copyright>
+                        </image>
+                        <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
+                            <display_name>Test Mann</display_name>
+                        </author>
+                    </block>
+                </container>
+            </region>
+        </cluster>
+    </body>
+    <feed/>
+    <teaser>
+        <title>CP-Editor 0.4</title>
+    </teaser>
+</centerpage>

@@ -1,0 +1,19 @@
+.wm-ticker
+	&__header
+		align-items: baseline
+		display: flex
+		justify-content: space-between
+
+	&__headline
+		font-size: $font-l--px
+
+	&__link
+		color: $zon-grey
+
+		&::after
+			content: '\203A' // single right pointing arrow quotation mark
+			margin-left: remify($tiny)
+
+	+respond-min($break-tablet-min)
+		&__header
+			border-top: 1px solid #dddddd
