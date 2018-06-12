@@ -292,35 +292,64 @@ function wmTicker( element ) {
     WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
         var begin = new Date( date );
         kickoff = new Date( kickoff );
+        var minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes();
+        var minuteDifference = getMinuteDifference( kickoff );
+        var returnString = '';
 
         if ( defaults.showRunningGameTime ) {
-            if ( status === 'LIVE' ) {
-                // kickoff and start do not match
-                if ( kickoff.getTime() !== begin.getTime() ) {
-                    if ( period === 2 ) {
-                        return ( ( 45 ) + getMinuteDifference( kickoff ) ) + '"';
-                    } else if ( period === 3 ) {
-                        return ( ( 90 ) + getMinuteDifference( kickoff ) ) + '"';
-                    } else if ( period === 4 ) {
-                        return ( ( 105 ) + getMinuteDifference( kickoff ) ) + '"';
+            switch ( status ) {
+                case 'LIVE':
+                    // kickoff and start do not match
+                    if ( kickoff.getTime() !== begin.getTime() ) {
+                        switch ( period ) {
+                            case 2:
+                                returnString = 45 + minuteDifference + '"';
+                                break;
+                            case 3:
+                                returnString =  90 + minuteDifference + '"';
+                                break;
+                            case 4:
+                                returnString = 105 + minuteDifference + '"';
+                                break;
+                            default:
+                                returnString = minuteDifference + '"';
+                                break;
+                        }
+                    } else {
+                        // kickoff and start match. propably first half
+                        returnString = minuteDifference + '"';
                     }
-                }
-
-                // kickoff and start match. propably first half
-                return getMinuteDifference( kickoff ) + '"';
-            } else if ( status === 'HALF-TIME' ) {
-                return 'Halbzeit';
-            } else if ( status === 'HALF-EXTRATIME' ) {
-                return '45" + ' + ( ( 45 - getMinuteDifference( kickoff ) ) * -1 );
-            } else if ( status === 'PENALTY-SHOOTOUT' ) {
-                return 'Elfmeterschießen';
-            } else if ( status === 'FULL' ) {
-                return '';
+                    break;
+                case 'HALF-TIME':
+                    returnString = 'Halbzeit';
+                    break;
+                case 'HALF-EXTRATIME':
+                    var extraMinutes = ( ( 45 - getMinuteDifference( kickoff ) ) * -1 );
+                    returnString = '45" + ' + extraMinutes;
+                    break;
+                case 'PENALTY-SHOOTOUT':
+                    returnString = 'Elfmeterschießen';
+                    break;
+                case 'FULL':
+                    returnString = '';
+                    break;
+                default:
+                    // Game is in future
+                    returnString = 'um ' + begin.getHours() + ':' + minutes;
+                    break;
+            }
+        } else {
+            switch ( status ) {
+                case 'PRE-MATCH':
+                    returnString = 'um ' + begin.getHours() + ':' + minutes;
+                    break;
+                default:
+                    // Game is in future
+                    returnString = '';
+                    break;
             }
         }
-
-        var minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes();
-        return 'um ' + begin.getHours() + ':' + minutes; // Game is in future
+        return returnString;
     };
 
     /**
