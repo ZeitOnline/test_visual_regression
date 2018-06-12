@@ -204,7 +204,7 @@ function wmTicker( element ) {
         today.setHours( date.getHours() );
         today.setMinutes( date.getMinutes() );
         var difference = today.getTime() - new Date().getTime();
-        return Math.round( difference / 60000 );
+        return ( Math.round( difference / 60000 ) ) * -1;
     }
 
     /**
@@ -292,31 +292,18 @@ function wmTicker( element ) {
         kickoff = new Date( kickoff );
         var hour = date.getHours();
         var minutes = ( date.getMinutes() < 10 ? '0' : '' ) + date.getMinutes();
-        var time = 'um ' + hour + ':' + minutes;
+        var time = 'um ' + hour + ':' + minutes; // Game is in future
 
         if ( status === 'LIVE' ) {
-            time = '';
-            if ( defaults.showRunningGameTime ) {
-                // if kickoff is in past
-                if ( getMinuteDifference( kickoff ) < 0 ) {
-                    time = ( getMinuteDifference( kickoff ) * -1 ) + '"';
-                    if ( parseInt( period ) === 1 ) {
-                        time = ( 45 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
-                    } else if ( parseInt( period ) === 2 ) {
-                        time = ( 90 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
-                    } else if ( parseInt( period ) === 3 ) {
-                        time = ( 105 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
-                    }
-                }
-            }
+            return '';
         } else if ( status === 'HALF-TIME' ) {
-            time = 'Halbzeit';
+            return 'Halbzeit';
         } else if ( status === 'HALF-EXTRATIME' ) {
-            time = '45" + ' +  ( 45 - ( getMinuteDifference( kickoff ) * -1 ) ) * -1;
+            return '45" + ' +  ( 45 - ( getMinuteDifference( kickoff ) ) );
         } else if ( status === 'PENALTY-SHOOTOUT' ) {
-            time = 'Elfmeterschießen';
+            return 'Elfmeterschießen';
         } else if ( status === 'FULL' ) {
-            time = '';
+            return '';
         }
 
         return time;
