@@ -193,21 +193,6 @@ function wmTicker( element ) {
     };
 
     /**
-     * Get Difference between hours in Minutes
-     * between current date and some date
-     * @param  {string | Date }  date that shall be compared
-     * @return {integer} negative if game is in past!
-     */
-    function getMinuteDifference( date ) {
-        date = new Date( date );
-        var today = new Date();
-        today.setHours( date.getHours() );
-        today.setMinutes( date.getMinutes() );
-        var difference = today.getTime() - new Date().getTime();
-        return ( Math.round( difference / 60000 ) ) * -1;
-    }
-
-    /**
      * Map Data from API to needed format to use in further code
      * @param  {object}  data from Kickerticker Backend
      * @return {object}
