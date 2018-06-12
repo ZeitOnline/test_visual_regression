@@ -16,6 +16,7 @@ function wmTicker( element ) {
         moreLink: [ 'https://www.zeit.de/thema/fussball-wm' ],
         wsEnabled: false,
         refreshSeconds: 10,
+        showRunningGameTime: true,
         countries: [
             { name: 'Russland', short: 'ru', long: 'rus' },
             { name: 'Saudi-Arabien', short: 'sa', long: 'ksa' },
@@ -132,6 +133,7 @@ function wmTicker( element ) {
         var link = element.getAttribute( 'data-link' ),
             headline = element.getAttribute( 'data-headline' ),
             refreshSeconds = element.getAttribute( 'data-refresh-seconds' ),
+            showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
             wsenabled = element.getAttribute( 'data-wsenabled' );
 
         if ( link !== '' ) {
@@ -144,6 +146,10 @@ function wmTicker( element ) {
 
         if ( parseInt( refreshSeconds ) > 0 ) {
             defaults.refreshSeconds = parseInt( refreshSeconds );
+        }
+
+        if ( showRunningGameTime ) {
+            defaults.showRunningGameTime = showRunningGameTime.toLowerCase() === 'true';
         }
 
         if ( wsenabled ) {
@@ -289,20 +295,19 @@ function wmTicker( element ) {
         var time = 'um ' + hour + ':' + minutes;
 
         if ( status === 'LIVE' ) {
-            // if kickoff is in past
-            if ( getMinuteDifference( kickoff ) < 0 ) {
-                time = ( getMinuteDifference( kickoff ) * -1 ) + '"';
-                if ( parseInt( period ) === 1 ) {
-                    time = ( 45 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
-                } else if ( parseInt( period ) === 2 ) {
-                    time = ( 90 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
-                } else if ( parseInt( period ) === 3 ) {
-                    time = ( 105 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
+            time = '';
+            if ( defaults.showRunningGameTime ) {
+                // if kickoff is in past
+                if ( getMinuteDifference( kickoff ) < 0 ) {
+                    time = ( getMinuteDifference( kickoff ) * -1 ) + '"';
+                    if ( parseInt( period ) === 1 ) {
+                        time = ( 45 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
+                    } else if ( parseInt( period ) === 2 ) {
+                        time = ( 90 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
+                    } else if ( parseInt( period ) === 3 ) {
+                        time = ( 105 + ( getMinuteDifference( kickoff ) * -1 ) ) + '"';
+                    }
                 }
-
-                /* eslint-disable */
-                debugger;
-
             }
         } else if ( status === 'HALF-TIME' ) {
             time = 'Halbzeit';
@@ -405,6 +410,7 @@ function wmTicker( element ) {
                 data.matches[ i ].status = receivedData.status;
                 data.matches[ i ].homePoints = receivedData.home_score; // eslint-disable-line camelcase
                 data.matches[ i ].awayPoints = receivedData.away_score; // eslint-disable-line camelcase
+                data.matches[ i ].period = receivedData.period; // eslint-disable-line camelcase
 
                 this.renderView( data );
                 break;
