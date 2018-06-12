@@ -15,7 +15,7 @@ POSTDEPLOY
 3.160 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-938: Add styles for liveblog badge in buzzbox teaser
 
 
 3.159.3 (2018-06-12)
