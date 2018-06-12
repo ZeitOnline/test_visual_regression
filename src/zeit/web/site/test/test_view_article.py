@@ -4,6 +4,7 @@ import datetime
 import urlparse
 
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 import lxml.etree
@@ -2414,3 +2415,21 @@ def test_each_faq_answer_should_have_one_itemprop_text(testbrowser):
 
     for answer in select('div[itemprop="acceptedAnswer"]'):
         answer.getchildren()[0].get('itemprop') == 'text'
+
+
+def test_if_video_is_playable_on_page_with_embed(selenium_driver, testserver):
+    url = testserver.url + '/zeit-online/article/video-and-zeit-require'
+    driver = selenium_driver
+    driver.set_window_size(1000, 800)
+    driver.get(url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.js-videoplayer')))
+    except TimeoutException:
+        assert False, 'video must be present and playable'
+
+    link = driver.find_element_by_css_selector('.vjs-play-control')
+    link.click()
+    assert driver.find_element_by_css_selector('.vjs-paused')
