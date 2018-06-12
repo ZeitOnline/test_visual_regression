@@ -22,8 +22,8 @@ def test_amp_standard_article_contains_required_liveblog_addition(testbrowser):
     assert article.get('itemtype') == 'http://schema.org/LiveBlogPosting'
     # required script for AMP live list
     assert browser.cssselect('script[custom-element="amp-live-list"]')
-    # main image inside article body
-    assert article.cssselect('[itemprop="articleBody"] [itemprop="image"]')
+    # main image inside article header with layout large
+    assert article.cssselect('header [itemprop="image"].figure--large')
 
 
 def test_amp_liveblog_article_contains_required_liveblog_addition(testbrowser):
@@ -34,9 +34,9 @@ def test_amp_liveblog_article_contains_required_liveblog_addition(testbrowser):
     assert article.get('itemtype') == 'http://schema.org/LiveBlogPosting'
     # required script for AMP live list
     assert browser.cssselect('script[custom-element="amp-live-list"]')
-    # main image before article header
-    assert article.cssselect('[itemprop="mainEntity"] [itemprop="image"]')
-    assert not article.cssselect('[itemprop="articleBody"] [itemprop="image"]')
+    # main image inside article header with layout column-width
+    assert article.cssselect('header [itemprop="image"].figure--column-width')
+    assert not article.cssselect('header [itemprop="image"].figure--large')
 
 
 def test_amp_liveblog_v2_article_contains_required_styles(testbrowser):

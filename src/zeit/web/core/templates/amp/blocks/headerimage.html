@@ -1,11 +1,11 @@
 {% extends "zeit.web.core:templates/amp/asset/image_linked.html" %}
-{% set image = get_image(block, variant_id="wide", fallback=False) %}
+{% set image = get_image(block, fallback=False) %}
 {% set href = image.href %}
 
 {% block itemprop %} itemprop="image"{% endblock %}
 
 {% block image %}
-    <div class="{{ 'article__item' | with_mods('large') }}">
+    <div class="{{ 'article__item' | with_mods(display_mode) }}">
         {{ super() }}
     </div>
 {% endblock %}

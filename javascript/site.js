@@ -15,6 +15,7 @@ var $ = require( 'jquery' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
     dataProtectionPopOver = require( 'web.core/dataProtectionPopOver' ),
     followPushButton = require( 'web.core/followPushButton' ),
+    wmTickerWrapper = require( 'web.site/wmTickerRequire' ),
     article = $( '#js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     isHp = document.body.getAttribute( 'data-is-hp' );
@@ -30,6 +31,7 @@ triggeredEventTracking.init();
 adReload.init();
 videoStage.init();
 dataProtectionPopOver.init();
+wmTickerWrapper.init();
 
 if ( article.length ) {
     articledate.init();
@@ -102,7 +104,6 @@ if ( pageType === 'centerpage' ) {
     article.find( '.js-liveblog' ).liveblog();
     article.find( '.article-toc' ).toggleRegions();
     $.picturefill();
-    $( '.sharing-menu' ).toggleRegions();
     $( '.comment-section' ).countFormchars();
 } else if ( pageType === 'author' ) {
     $( '.author-questions' ).longTextWrapper();

@@ -98,7 +98,7 @@
     <title>Mehr Davos, weniger Kreuth</title>
     <subtitle>Zwei Bergdörfer diskutieren die Flüchtlingskrise: In einem dominiert der Kleingeist, das andere entwickelt eine Zukunft, in der Flüchtlinge keine Flüchtlinge mehr sind.</subtitle>
     <division type="page">
-      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="In Davos" alt="Flüchtlinge: In Davos" align="left" publication-date="" expires="" layout="large" is_empty="False" title_local="In Davos" alt_local="Flüchtlinge: In Davos">
+      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="In Davos" publication-date="" expires="" display_mode="column-width" variant_name="wide" is_empty="False" title_local="In Davos" alt_local="Flüchtlinge: In Davos">
         <bu>In Davos</bu>
         <copyright>© Jean-Christophe Bott/EPA/dpa</copyright>
       </image>
@@ -231,7 +231,7 @@ empfinden Zuwanderung weniger als Gewinn denn als Verlust ihrer
 vertrauten Welt", mahnte gar Joachim Gauck, und redete am Schluss selbst
  von einer Obergrenze: "Begrenzung hilft, Akzeptanz zu erhalten."
 </p>
-<image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-5/" type="jpg" title="In Davos" alt="Stress in Davos" align="left" publication-date="" expires="" layout="large" is_empty="False" title_local="In Davos" alt_local="Stress in Davos">
+<image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-5/" type="jpg" title="In Davos" alt="Stress in Davos" align="left" publication-date="" expires="" display_mode="large" variant_name="wide" is_empty="False" title_local="In Davos" alt_local="Stress in Davos">
   <bu>Stress in Davos</bu>
   <copyright>© Jean-Christophe Snow/EPA/dpa</copyright>
 </image>

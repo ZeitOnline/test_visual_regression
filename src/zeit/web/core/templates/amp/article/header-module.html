@@ -1,0 +1,4 @@
+{% if view.header_module and view.page_nr == 1 %}
+    {% set block = view.header_module -%}
+    {% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
+{% endif %}

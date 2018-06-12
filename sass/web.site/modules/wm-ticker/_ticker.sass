@@ -1,0 +1,10 @@
+.wm-ticker
+	+padded
+	color: $zon-dark-grey
+	letter-spacing: .03rem
+
+	&:empty
+		margin-bottom: 0
+
+	+respond-min($break-desktop-min)
+		margin-bottom: remify($compact)
