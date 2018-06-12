@@ -256,27 +256,30 @@
     };
 
     Overlay.prototype.listenToPostMessages = function() {
-        var that = this;
         window.addEventListener( 'message', function( event ) {
-            if ( that.cookieValue === 'canceled' ) {
+            var data = {},
+                origin = event.origin,
+                isQuizOrPodcast = false,
+                trigger = false;
+
+            if ( this.cookieValue === 'canceled' ) {
                 return;
             }
-            var data =  typeof( event.data ) === 'string' ? JSON.parse( event.data ) : event.data;
-            var matches = false;
-            // quiz
-            if ( data.name === 'quiz' && data.message === 'started' ) {
-                matches = true;
-            }
-            // podcast
-            if ( data.context === 'player.js' && data.event === 'play' ) {
-                matches = true;
-            }
 
-            if ( matches ) {
-                that.addCancelCookie();
-                that.log( 'Added Cookie' );
+            isQuizOrPodcast = origin === 'https://quiz.zeit.de' || origin === 'http://cdn.podigee.com';
+
+            // window receives postMessage events all over the place, we want to single out podcast and quiz
+            // both provide stringified JSON as event.data which needs to be parsed, other events won't
+            data =  isQuizOrPodcast && typeof( event.data ) === 'string' ? JSON.parse( event.data ) : event.data;
+
+            // match the actual trigger events reagrding parsed event.data
+            trigger = ( data.name === 'quiz' && data.message === 'started' ) || ( data.context === 'player.js' && data.event === 'play' );
+
+            if ( trigger ) {
+                this.addCancelCookie();
+                this.log( 'Added Cookie' );
             }
-        }, false );
+        }.bind( this ), false );
     };
 
     Overlay.prototype.addPostMessageEventListener = function() {
