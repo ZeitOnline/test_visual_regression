@@ -223,7 +223,7 @@ function wmTicker( element ) {
         data.forEach( function( game ) {
             var teams = self.mapCountryCodes( game.away_name, game.home_name );
 
-            var time = self.timeString( game.date, game.kickoff, game.period, game.status );
+            var time = self.timeString( game.date, game.kickoff, game.status );
 
             // set hour or game status time
             var gameHour = new Date( game.date ).getHours();
@@ -287,7 +287,7 @@ function wmTicker( element ) {
      * @param  {string}  date string supplied by API
      * @return {string}
      */
-    WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
+    WmTicker.prototype.timeString = function( date, kickoff, status ) {
         date = new Date( date );
         kickoff = new Date( kickoff );
         var hour = date.getHours();
