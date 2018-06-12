@@ -12,10 +12,10 @@ POSTDEPLOY
 - change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
 
 
-3.160 (unreleased)
+3.159.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FIX: WM-Ticker Tweaks
 
 
 3.159.2 (2018-06-11)
