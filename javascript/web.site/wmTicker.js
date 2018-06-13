@@ -216,6 +216,10 @@ function wmTicker( element ) {
             // only one game. Which shall then be displayed big
             if ( data.length === 1 ) {
                 gameShallBeBig = true;
+                // single game big and finished shall write 'beendet'
+                if ( game.status === 'FULL' ) {
+                    time = 'beendet';
+                }
             }
             var gameData = {
                 id: game.id,
