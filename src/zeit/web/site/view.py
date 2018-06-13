@@ -88,6 +88,10 @@ class Base(zeit.web.core.view.Base):
     def shared_cardstack_id(self):
         return self.request.GET.get('stackId', '') or None
 
+    @zeit.web.reify
+    def include_optimize(self):
+        return None
+
 
 @zeit.web.view_config(
     route_name='login_state',
