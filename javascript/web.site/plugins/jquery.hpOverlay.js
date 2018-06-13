@@ -266,7 +266,7 @@
                 return;
             }
 
-            isQuizOrPodcast = origin === 'https://quiz.zeit.de' || origin === 'http://cdn.podigee.com';
+            isQuizOrPodcast = origin === 'https://quiz.zeit.de' || origin === 'https://cdn.podigee.com';
 
             // window receives postMessage events all over the place, we want to single out podcast and quiz
             // both provide stringified JSON as event.data which needs to be parsed, other events won't
