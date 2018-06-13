@@ -15,6 +15,8 @@ POSTDEPLOY
 3.160 (unreleased)
 ------------------
 
+- ZON-4732: playsinline Tag for Videos
+
 - BUG-935: Consider brightcove player loaded as AMD
 
 - BUG-938: Add styles for liveblog badge in buzzbox teaser
