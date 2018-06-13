@@ -9,7 +9,7 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
+- Nothing
 
 
 3.160 (unreleased)
@@ -18,6 +18,8 @@ POSTDEPLOY
 - BUG-935: Consider brightcove player loaded as AMD
 
 - BUG-938: Add styles for liveblog badge in buzzbox teaser
+
+- FIX: HP Overlay disabled when Quiz or Podcast plays
 
 
 3.159.3 (2018-06-12)
