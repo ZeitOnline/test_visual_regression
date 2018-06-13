@@ -309,7 +309,7 @@ def test_gdpr_dnt_cookie_works_on_videos(
         'data-player') == 'SJENxUNKe'
 
 
-def test_video_should_has_playsinline_tag(selenium_driver, testserver):
+def test_video_should_have_playsinline_tag(selenium_driver, testserver):
     driver = selenium_driver
     select = driver.find_elements_by_css_selector
     driver.get('{}/zeit-online/article/videos'.format(testserver.url))
