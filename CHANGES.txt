@@ -23,6 +23,8 @@ POSTDEPLOY
 
 - FIX: HP Overlay disabled when Quiz or Podcast plays
 
+- FIX: Add cp26 webtrekk-parameter to FAQ (ZON-4437) 
+
 
 3.159.3 (2018-06-12)
 --------------------
