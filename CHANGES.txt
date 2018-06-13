@@ -12,7 +12,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.160 (unreleased)
+3.160 (2018-06-13)
 ------------------
 
 - ZON-4732: playsinline Tag for Videos
