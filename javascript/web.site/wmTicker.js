@@ -135,8 +135,8 @@ function wmTicker( element ) {
         defaults.moreLink[ 0 ] = link || defaults.moreLink[ 0 ];
         defaults.headline = headline || defaults.headline;
         defaults.refreshSeconds = parseInt( refreshSeconds ) > 0 ? parseInt( refreshSeconds ) : defaults.refreshSeconds;
-        defaults.showRunningGameTime = showRunningGameTime.toLowerCase() === 'true';
-        defaults.wsEnabled = wsenabled.toLowerCase() === 'true';
+        defaults.showRunningGameTime = showRunningGameTime ? showRunningGameTime.toLowerCase() === 'true' : defaults.showRunningGameTime;
+        defaults.wsEnabled = wsenabled ? wsenabled.toLowerCase() === 'true' : defaults.wsEnabled;
     };
 
 
