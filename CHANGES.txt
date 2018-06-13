@@ -12,8 +12,8 @@ POSTDEPLOY
 - Nothing
 
 
-3.160.1 (unreleased)
-------------------
+3.160.1 (2018-06-13)
+--------------------
 
 - HOTFIX: WM Ticker: Check presence of data-attributes
 
