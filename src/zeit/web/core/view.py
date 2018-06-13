@@ -618,6 +618,8 @@ class Base(object):
 
         if getattr(self, 'framebuilder_requires_webtrekk', False):
             pagetype = 'centerpage.framebuilder'
+        elif zeit.web.core.article.IFAQArticle.providedBy(self.context):
+            pagetype = 'article.faq'
         else:
             pagetype = self.detailed_content_type
 
