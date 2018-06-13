@@ -8,7 +8,6 @@ function wmTicker( element ) {
         headline: 'FIFA WM 2018',
         dataURL: 'https://kickerticker.zeit.de/matchday',
         dataPath: '?today=eq.true',
-        debugURL: 'http://kickerticker.devel.zeit.de/matchday',
         webSocketURL: 'wss://ws.zeit.de:443/',
         webSocketPath: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
         'eyJjaGFubmVsIjoid20iLCJtb2RlIjoiciJ9.' +
@@ -119,22 +118,22 @@ function wmTicker( element ) {
                 console.log( 'WM-TICKER: Date set to: %s', date );
             }
         }
-
-        if ( this.debug ) {
-            defaults.dataURL = defaults.debugURL;
-            console.log( 'WM-TICKER: URL set to %s', defaults.dataURL + defaults.dataPath );
-        }
     };
 
     /**
      * get DATA Attributes and set them in defaults object for later use
      */
     WmTicker.prototype.setConfigurableAttributes = function() {
-        var link = element.getAttribute( 'data-link' ),
+        var backendURL = element.getAttribute( 'data-backend-url' ),
+            link = element.getAttribute( 'data-link' ),
             headline = element.getAttribute( 'data-headline' ),
             refreshSeconds = element.getAttribute( 'data-refresh-seconds' ),
             showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
             wsenabled = element.getAttribute( 'data-wsenabled' );
+
+        if ( backendURL.trim() !== '' ) {
+            defaults.dataURL = backendURL;
+        }
 
         if ( link !== '' ) {
             defaults.moreLink[ 0 ] = link;
