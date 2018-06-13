@@ -131,29 +131,12 @@ function wmTicker( element ) {
             showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
             wsenabled = element.getAttribute( 'data-wsenabled' );
 
-        if ( backendURL.trim() !== '' ) {
-            defaults.dataURL = backendURL;
-        }
-
-        if ( link !== '' ) {
-            defaults.moreLink[ 0 ] = link;
-        }
-
-        if ( headline ) {
-            defaults.headline = headline;
-        }
-
-        if ( parseInt( refreshSeconds ) > 0 ) {
-            defaults.refreshSeconds = parseInt( refreshSeconds );
-        }
-
-        if ( showRunningGameTime ) {
-            defaults.showRunningGameTime = showRunningGameTime.toLowerCase() === 'true';
-        }
-
-        if ( wsenabled ) {
-            defaults.wsEnabled = wsenabled !== 'false';
-        }
+        defaults.dataURL = backendURL || defaults.dataURL;
+        defaults.moreLink[ 0 ] = link || defaults.moreLink[ 0 ];
+        defaults.headline = headline || defaults.headline;
+        defaults.refreshSeconds = parseInt( refreshSeconds ) > 0 ? parseInt( refreshSeconds ) : defaults.refreshSeconds;
+        defaults.showRunningGameTime = showRunningGameTime.toLowerCase() === 'true';
+        defaults.wsEnabled = wsenabled.toLowerCase() === 'true';
     };
 
 
