@@ -8,8 +8,7 @@ function wmTicker( element ) {
         headline: 'FIFA WM 2018',
         dataURL: 'https://kickerticker.zeit.de/matchday',
         dataPath: '?today=eq.true',
-        debugURL: 'http://kickerticker.devel.zeit.de/matchday',
-        webSocketURL: 'ws://ws.zeit.de:80/',
+        webSocketURL: 'wss://ws.zeit.de:443/',
         webSocketPath: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
         'eyJjaGFubmVsIjoid20iLCJtb2RlIjoiciJ9.' +
         'c791lyW1KxWajSmmmnHSjjR5hJPkGn2ZNSsQGG072WQ',
@@ -119,42 +118,25 @@ function wmTicker( element ) {
                 console.log( 'WM-TICKER: Date set to: %s', date );
             }
         }
-
-        if ( this.debug ) {
-            defaults.dataURL = defaults.debugURL;
-            console.log( 'WM-TICKER: URL set to %s', defaults.dataURL + defaults.dataPath );
-        }
     };
 
     /**
      * get DATA Attributes and set them in defaults object for later use
      */
     WmTicker.prototype.setConfigurableAttributes = function() {
-        var link = element.getAttribute( 'data-link' ),
+        var backendURL = element.getAttribute( 'data-backend-url' ),
+            link = element.getAttribute( 'data-link' ),
             headline = element.getAttribute( 'data-headline' ),
             refreshSeconds = element.getAttribute( 'data-refresh-seconds' ),
             showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
             wsenabled = element.getAttribute( 'data-wsenabled' );
 
-        if ( link !== '' ) {
-            defaults.moreLink[ 0 ] = link;
-        }
-
-        if ( headline ) {
-            defaults.headline = headline;
-        }
-
-        if ( parseInt( refreshSeconds ) > 0 ) {
-            defaults.refreshSeconds = parseInt( refreshSeconds );
-        }
-
-        if ( showRunningGameTime ) {
-            defaults.showRunningGameTime = showRunningGameTime.toLowerCase() === 'true';
-        }
-
-        if ( wsenabled ) {
-            defaults.wsEnabled = wsenabled !== 'false';
-        }
+        defaults.dataURL = backendURL || defaults.dataURL;
+        defaults.moreLink[ 0 ] = link || defaults.moreLink[ 0 ];
+        defaults.headline = headline || defaults.headline;
+        defaults.refreshSeconds = parseInt( refreshSeconds ) > 0 ? parseInt( refreshSeconds ) : defaults.refreshSeconds;
+        defaults.showRunningGameTime = showRunningGameTime.toLowerCase() === 'true';
+        defaults.wsEnabled = wsenabled.toLowerCase() === 'true';
     };
 
 
@@ -192,6 +174,23 @@ function wmTicker( element ) {
         return countries;
     };
 
+
+    /**
+     * Get Difference between hours in Minutes
+     * between current date and some date
+     * @param  {string | Date }  date that shall be compared
+     * @return {integer} negative if game is in past!
+     */
+    function getMinuteDifference( date ) {
+        date = new Date( date );
+        var today = new Date();
+        today.setHours( date.getHours() );
+        today.setMinutes( date.getMinutes() );
+        var difference = new Date().getTime() - today.getTime();
+        return ( Math.round( difference / 1000 / 60 ) );
+    }
+
+
     /**
      * Map Data from API to needed format to use in further code
      * @param  {object}  data from Kickerticker Backend
@@ -208,7 +207,7 @@ function wmTicker( element ) {
         data.forEach( function( game ) {
             var teams = self.mapCountryCodes( game.away_name, game.home_name );
 
-            var time = self.timeString( game.date, game.kickoff, game.status );
+            var time = self.timeString( game.date, game.kickoff, game.period, game.status );
 
             // set hour or game status time
             var gameHour = new Date( game.date ).getHours();
@@ -217,6 +216,10 @@ function wmTicker( element ) {
             // only one game. Which shall then be displayed big
             if ( data.length === 1 ) {
                 gameShallBeBig = true;
+                // single game big and finished shall write 'beendet'
+                if ( game.status === 'FULL' ) {
+                    time = 'beendet';
+                }
             }
             var gameData = {
                 id: game.id,
@@ -272,26 +275,50 @@ function wmTicker( element ) {
      * @param  {string}  date string supplied by API
      * @return {string}
      */
-    WmTicker.prototype.timeString = function( date, kickoff, status ) {
-        date = new Date( date );
+    WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
+        var begin = new Date( date ),
+            minuteDifference = getMinuteDifference( kickoff ),
+            minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
+            returnString = 'um ' + begin.getHours() + ':' + minutes;
         kickoff = new Date( kickoff );
-        var hour = date.getHours();
-        var minutes = ( date.getMinutes() < 10 ? '0' : '' ) + date.getMinutes();
-        var time = 'um ' + hour + ':' + minutes; // Game is in future
 
-        if ( status === 'LIVE' ) {
-            return '';
-        } else if ( status === 'HALF-TIME' ) {
-            return 'Halbzeit';
-        } else if ( status === 'HALF-EXTRATIME' ) {
-            return '';
-        } else if ( status === 'PENALTY-SHOOTOUT' ) {
-            return 'Elfmeterschießen';
-        } else if ( status === 'FULL' ) {
-            return '';
+        if ( defaults.showRunningGameTime ) {
+            switch ( status ) {
+                case 'LIVE':
+                    var offsetArray = [ 0, 45, 90, 105, 120 ];
+                    var cutoff = offsetArray[ period ];
+                    var min = minuteDifference + offsetArray[ period - 1 ];
+                    if ( min > cutoff ) {
+                        returnString = cutoff + '" + ' + ( min - cutoff );
+                    } else {
+                        returnString = min + '"';
+                    }
+                    break;
+                case 'HALF-TIME':
+                    returnString = 'Halbzeit';
+                    break;
+                case 'HALF-EXTRATIME':
+                    returnString = 'Halbzeit Verlängerung';
+                    break;
+                case 'PENALTY-SHOOTOUT':
+                    returnString = 'Elfmeterschießen';
+                    break;
+                case 'FULL':
+                    returnString = '';
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( status ) {
+                case 'PRE-MATCH':
+                    returnString = 'um ' + begin.getHours() + ':' + minutes;
+                    break;
+                default:
+                    break;
+            }
         }
-
-        return time;
+        return returnString;
     };
 
     /**
