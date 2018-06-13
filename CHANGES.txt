@@ -9,7 +9,7 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- change `author_articles_query_type` to "elasticsearch-query" to activate TMS-233
+- Nothing
 
 
 3.160 (unreleased)
