@@ -9,6 +9,11 @@ import zeit.content.video.video
 import zeit.web.core.template
 import zeit.web.site.view_video
 
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 def test_video_page_should_feature_sharing_images(testbrowser):
     doc = testbrowser('/zeit-online/video/3537342483001').document
@@ -302,3 +307,28 @@ def test_gdpr_dnt_cookie_works_on_videos(
     # JS (the cookie) loads the Player without Ads
     assert select('.video-player__videotag')[0].get_attribute(
         'data-player') == 'SJENxUNKe'
+
+
+def test_video_should_has_playsinline_tag(selenium_driver, testserver):
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+    driver.get('{}/zeit-online/article/videos'.format(testserver.url))
+    players = select('.video-player__videotag')
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.video-player__videotag')))
+    except TimeoutException:
+        assert False, 'videotag must be present'
+
+    assert len(players) == 3
+
+    assert select('.video-player__videotag')[0].get_attribute(
+        'playsinline') == 'true'
+
+    assert select('.video-player__videotag')[1].get_attribute(
+        'playsinline') == 'true'
+
+    assert select('.video-player__videotag')[2].get_attribute(
+        'playsinline') == 'true'
