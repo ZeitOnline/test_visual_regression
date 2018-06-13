@@ -9,7 +9,7 @@ function wmTicker( element ) {
         dataURL: 'https://kickerticker.zeit.de/matchday',
         dataPath: '?today=eq.true',
         debugURL: 'http://kickerticker.devel.zeit.de/matchday',
-        webSocketURL: 'ws://ws.zeit.de:80/',
+        webSocketURL: 'wss://ws.zeit.de:443/',
         webSocketPath: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
         'eyJjaGFubmVsIjoid20iLCJtb2RlIjoiciJ9.' +
         'c791lyW1KxWajSmmmnHSjjR5hJPkGn2ZNSsQGG072WQ',
