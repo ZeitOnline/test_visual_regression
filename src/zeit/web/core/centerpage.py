@@ -158,27 +158,6 @@ def cache_values_area(context):
     return context
 
 
-class LegacyTeaserMapping(zeit.web.core.utils.frozendict):
-
-    _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama',
-                          'parquet-large', 'zon-parquet-large'],
-            'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date',
-                          'parquet-regular', 'zon-parquet-small'],
-            'zon-fullwidth': ['leader-fullwidth'],
-            'zon-inhouse': ['parquet-verlag'],
-            'hide': ['archive-print-volume', 'archive-print-year',
-                     'two-side-by-side', 'ressort', 'leader-upright',
-                     'buttons-fullwidth', 'parquet-printteaser']}
-
-    def __init__(self, *args, **kw):
-        # Flattens and reverses _map, so we can easily lookup a layout.
-        super(LegacyTeaserMapping, self).__init__(
-            x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
-
-
-LEGACY_TEASER_MAPPING = LegacyTeaserMapping()
-
-
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
 class TopicLink(zeit.web.core.utils.nslist):
@@ -268,8 +247,7 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
     @zeit.web.reify
     def layout(self):
         if self._layout:
-            layout = LEGACY_TEASER_MAPPING.get(self._layout, self._layout)
-            layout = zeit.content.cp.layout.get_layout(layout)
+            layout = zeit.content.cp.layout.get_layout(self._layout)
             if layout:
                 return layout
             else:

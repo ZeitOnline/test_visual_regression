@@ -464,7 +464,6 @@ def get_layout(block):
     if zeit.content.cp.interfaces.ITeaserBlock.providedBy(
             block) and not len(block):
         return 'hide'
-    layout = zeit.web.core.centerpage.LEGACY_TEASER_MAPPING.get(layout, layout)
     return layout
 
 
