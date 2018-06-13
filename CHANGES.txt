@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - BUG-938: Add styles for liveblog badge in buzzbox teaser
 
+- FIX: HP Overlay disabled when Quiz or Podcast plays
+
 
 3.159.3 (2018-06-12)
 --------------------
