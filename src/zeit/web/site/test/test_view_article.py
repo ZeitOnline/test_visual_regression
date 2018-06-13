@@ -4,6 +4,7 @@ import datetime
 import urlparse
 
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 import lxml.etree
@@ -2421,3 +2422,21 @@ def test_faq_article_contains_correct_webtrekk_param(dummy_request):
         'http://xml.zeit.de/zeit-online/article/faq')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp26'] == 'article.faq'
+
+
+def test_if_video_is_playable_on_page_with_embed(selenium_driver, testserver):
+    url = testserver.url + '/zeit-online/article/video-and-zeit-require'
+    driver = selenium_driver
+    driver.set_window_size(1000, 800)
+    driver.get(url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.js-videoplayer')))
+    except TimeoutException:
+        assert False, 'video must be present and playable'
+
+    link = driver.find_element_by_css_selector('.vjs-play-control')
+    link.click()
+    assert driver.find_element_by_css_selector('.vjs-paused')

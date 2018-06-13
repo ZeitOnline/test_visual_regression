@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/W/Jochen_Wegner/index" publication-date="" expires="">
+      <display_name>Jochen Wegner</display_name>
+      <location>Davos</location>
+    </author>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/thema/fluechtlinge-in-europa" contenttype="link" />
+    </references>
+    <rankedTags>
+      <tag type="free" url_value="fluechtling" uuid="d7c98935-f4bf-43b5-bf38-5307a4d3ed4e">Flüchtling</tag>
+      <tag type="Organization" url_value="weltwirtschaftsforum-davos" uuid="611fd80a-8a38-43b8-b280-b8d982d2de7f">Weltwirtschaftsforum Davos</tag>
+      <tag type="free" url_value="arbeitsmarkt" uuid="de762a10-49a9-4b42-af13-8c29bea570f4">Arbeitsmarkt</tag>
+      <tag type="free" url_value="migration" uuid="312de135-2e1f-452e-9f87-4c0a36842878">Migration</tag>
+      <tag type="Organization" url_value="europaeische-union" uuid="f7f8e748-cc2e-40b0-b065-267e6113e8a2">Europäische Union</tag>
+    </rankedTags>
+    <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="Flüchtlinge Davos Europa" alt="In Davos" align="left" publication-date="" expires="">
+      <bu>In Davos</bu>
+      <copyright>© Jean-Christophe Bott/EPA/dpa</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Jochen Wegner</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Wirtschaft</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-01-22T12:14:36.677206+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-01-22T10:55:46.556878+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-22T12:14:49.209756+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-01-22T12:14:48.450437+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-01-22T10:55:45.564569+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-01-22T11:41:19.677273+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-01-22T09:42:04.601603+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.brandenburger</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/wirtschaft/2016-01/dbf5b59e-5370-4c02-ad98-8565984711bf.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">83345c37eb704e86960f8abd1719463f</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wirtschaft</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Wie Flüchtlinge aufhören, Flüchtlinge zu sein. @jochen über den Geist von #davos (cb)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">7583</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:def048c9-2d75-4a20-89eb-9c746f1a530c}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">4</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Flüchtlinge</supertitle>
+    <title>Mehr Davos, weniger Kreuth</title>
+    <subtitle>Zwei Bergdörfer diskutieren die Flüchtlingskrise: In einem dominiert der Kleingeist, das andere entwickelt eine Zukunft, in der Flüchtlinge keine Flüchtlinge mehr sind.</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" title="In Davos" publication-date="" expires="" display_mode="column-width" variant_name="wide" is_empty="False" title_local="In Davos">
+        <bu>In Davos</bu>
+        <copyright>© Jean-Christophe Bott/EPA/dpa</copyright>
+      </image>
+      <p>Auf den ersten Blick sehen die Nachrichtenbilder aus, als sei die Bundeskanzlerin doch nach Davos gekommen. Pünktlich zum Auftakt des Weltwirtschaftsforums (WEF) am Mittwoch in der Schweiz steht sie vor einer hübschen Dorfkulisse, Pulverschnee ist malerisch gefallen. Nur die Politiker, die sie umringen, blicken etwas zu grimmig.</p>
+      <p>Obwohl Merkels großes Thema, die <a class="" href="http://www.zeit.de/thema/fluechtling" target="_blank">Flüchtlinge</a>, in diesem Jahr die Agenda des WEF dominiert wie seit der Finanzkrise keines, war sie diese Woche in ein anderes Alpendorf gereist, Kreuth. Die nationale Diskussion um Flüchtlinge ist für Merkel derzeit ohnehin wichtiger als die globale: In Davos wird gerade nur um das Schicksal von weltweit 60 Millionen zwangsweise entwurzelten Menschen gerungen. In <a href="https://goo.gl/maps/kRnc2N4eQGo">Wildbad Kreuth</a>, wo am Jahresanfang immer die CSU einkehrt, ging es aber zusätzlich um das damit eng verbundene Schicksal von Angela Merkel selbst.</p>
+      <video format="large" is_empty="False" href="http://xml.zeit.de/video/2014-01/3035864892001" expires=""/>
+      <intertitle>Deutschland steht alleine da<br/></intertitle>
+      <p>Gaucks Botschaft war wohl platziert in einer Phase, in der Europa nicht nur an seinen wirtschaftlichen, sondern vor allem an seinen territorialen Fragen zerbrechen könnte. Bald endet der Winter und die Zahl der Flüchtlinge wird trotz aller anlaufenden Initiativen neue Rekorde erreichen. "Ein Europa ohne Grenzen kann nur gelingen, wenn die Außengrenzen gesichert werden, und das funktioniert nicht", erklärte in Davos bündig Sebastian Kurz, Außenminister von Österreich, das die Zahl der Flüchtlinge jetzt begrenzen will – zum Schaden Deutschlands. Österreich gehörte neben Schweden zu den Ländern, die gemeinsam mit Deutschland die meisten Flüchtlinge aufgenommen haben, nun steht die Bundesrepublik mit ihrer Willkommenskultur alleine da. Selbst der deutsche Vizekanzler Sigmar Gabriel hegte öffentlich Zweifel an der von Gauck beschworenen Solidarität: "Ich werde nicht viele europäische Partner finden, die helfen werden." Für Merkel macht das eine schwierige Situation noch schwieriger.</p>
+      <video format="large" is_empty="False" href="http://xml.zeit.de/video/2014-01/3089721834001" expires=""/>
+      <p>Faktisch wird das Verbot für die Luftqualität in Hamburg nichts bringen. Es wird gar nicht erst versucht, Autoverkehr auf umweltfreundliche Verkehrsmittel umzulenken – dazu sind die Abschnitte viel zu kurz. Die problematischen Stickoxide (NOx) entstehen weiterhin, nur eben ein paar Straßen weiter. Niemand wird sein älteres Dieselauto stehen lassen, weil er oder sie 580 Meter der Max-Brauer-Allee nicht mehr befahren darf, zumal die Stadt mit entsprechenden Schildern die betroffenen Personen um die Sperrzonen herumführt.</p>
+      <p>Doch um bessere Luft geht es den Stadtoberen ja auch nicht wirklich. Sondern nur darum, dass Hamburg an den Messstationen die von der EU vorgegebenen Grenzwerte einhält. Die Fahrverbote sind also nicht mehr als bloßer Aktionismus, der lediglich Vorgaben auf dem Papier gerecht zu werden versucht, ohne die Autofahrer zu vergrätzen.</p>
+      <rawtext>
+        <text_reference type="intern" href="http://xml.zeit.de/embed/karte-hamburg-sperrung" publication-date="" expires=""/>
+      </rawtext>
+      <p>Wollte die Stadt wirklich die negativen Wirkungen des Autoverkehrs verringern, müsste sie wesentlich rigoroser eingreifen: Sie müsste ganze Straßen oder gar ganze Viertel für ältere Dieselautos – die Hauptquelle von Stickoxiden (NOx) – sperren. Einer solchen Maßnahme stehen aber zwei Dinge entgegen: die Urteile des Bundesverwaltungsgerichts vom Februar und die tatenlose Bundesregierung. Die Bundesverwaltungsrichter in Leipzig haben hohe Hürden definiert, die zu überwinden wären, um großflächig Dieselfahrverbote zu verhängen. Nur einzelne Straßensperrungen, wie sie Hamburg jetzt einführt, sind für die Richter grundsätzlich akzeptabel.</p>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Flüchtlinge</supertitle>
+    <title>Mehr Davos, weniger Kreuth</title>
+    <text>Zwei Bergdörfer diskutieren die Flüchtlingskrise: In einem dominiert der Kleingeist, das andere entwickelt eine Zukunft, in der Flüchtlinge keine Flüchtlinge mehr sind.</text>
+  </teaser>
+</article>
