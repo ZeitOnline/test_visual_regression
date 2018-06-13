@@ -204,8 +204,8 @@ function wmTicker( element ) {
         var today = new Date();
         today.setHours( date.getHours() );
         today.setMinutes( date.getMinutes() );
-        var difference = today.getTime() - new Date().getTime();
-        return ( Math.round( difference / 60000 ) ) * -1;
+        var difference = new Date().getTime() - today.getTime();
+        return ( Math.round( difference / 1000 / 60 ) );
     }
 
 
@@ -290,42 +290,29 @@ function wmTicker( element ) {
      * @return {string}
      */
     WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
-        var begin = new Date( date );
+        var begin = new Date( date ),
+            minuteDifference = getMinuteDifference( kickoff ),
+            minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
+            returnString = 'um ' + begin.getHours() + ':' + minutes;
         kickoff = new Date( kickoff );
-        var minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes();
-        var minuteDifference = getMinuteDifference( kickoff );
-        var returnString = '';
 
         if ( defaults.showRunningGameTime ) {
             switch ( status ) {
                 case 'LIVE':
-                    // kickoff and start do not match
-                    if ( kickoff.getTime() !== begin.getTime() ) {
-                        switch ( period ) {
-                            case 2:
-                                returnString = 45 + minuteDifference + '"';
-                                break;
-                            case 3:
-                                returnString =  90 + minuteDifference + '"';
-                                break;
-                            case 4:
-                                returnString = 105 + minuteDifference + '"';
-                                break;
-                            default:
-                                returnString = minuteDifference + '"';
-                                break;
-                        }
+                    var offsetArray = [ 0, 45, 90, 105, 120 ];
+                    var cutoff = offsetArray[ period ];
+                    var min = minuteDifference + offsetArray[ period - 1 ];
+                    if ( min > cutoff ) {
+                        returnString = cutoff + '" + ' + ( min - cutoff );
                     } else {
-                        // kickoff and start match. propably first half
-                        returnString = minuteDifference + '"';
+                        returnString = min + '"';
                     }
                     break;
                 case 'HALF-TIME':
                     returnString = 'Halbzeit';
                     break;
                 case 'HALF-EXTRATIME':
-                    var extraMinutes = ( ( 45 - getMinuteDifference( kickoff ) ) * -1 );
-                    returnString = '45" + ' + extraMinutes;
+                    returnString = 'Halbzeit Verlängerung';
                     break;
                 case 'PENALTY-SHOOTOUT':
                     returnString = 'Elfmeterschießen';
@@ -334,8 +321,6 @@ function wmTicker( element ) {
                     returnString = '';
                     break;
                 default:
-                    // Game is in future
-                    returnString = 'um ' + begin.getHours() + ':' + minutes;
                     break;
             }
         } else {
@@ -344,8 +329,6 @@ function wmTicker( element ) {
                     returnString = 'um ' + begin.getHours() + ':' + minutes;
                     break;
                 default:
-                    // Game is in future
-                    returnString = '';
                     break;
             }
         }
