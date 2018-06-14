@@ -12,10 +12,10 @@ POSTDEPLOY
 - Nothing
 
 
-3.161 (unreleased)
+3.160.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- MAINT: Update test (don't cache test assets)
 
 
 3.160.2 (2018-06-14)
