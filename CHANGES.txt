@@ -12,10 +12,10 @@ POSTDEPLOY
 - Nothing
 
 
-3.161 (unreleased)
+3.160.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4663: WM Ticker Updates
 
 
 3.160.1 (2018-06-13)
