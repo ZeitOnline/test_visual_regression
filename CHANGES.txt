@@ -15,7 +15,7 @@ POSTDEPLOY
 3.161 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- MAINT: Remove `ssl_asset_host` remnants
 
 
 3.160.3 (2018-06-14)
