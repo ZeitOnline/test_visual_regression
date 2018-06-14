@@ -294,9 +294,9 @@ function wmTicker( element ) {
                     var cutoff = offsetArray[ period ];
                     var min = minuteDifference + offsetArray[ period - 1 ];
                     if ( min > cutoff ) {
-                        returnString = cutoff + '" + ' + ( min - cutoff );
+                        returnString = cutoff + '. + ' + ( min - cutoff );
                     } else {
-                        returnString = min + '"';
+                        returnString = min + '.';
                     }
                     break;
                 case 'HALF-TIME':
