@@ -225,7 +225,6 @@
     <series title="Ungewollt kinderlos" serienname="Ungewollt kinderlos" url="ungewollt-kinderlos" encoded="Ungewollt%20kinderlos" />
     <series title="Unigeziefer" serienname="Unigeziefer" url="unigeziefer" />
     <series title="Unterschätzte Stadt" serienname="Unterschätzte Stadt" url="unterschaetzte-stadt" encoded="Untersch%C3%A4tzte%20Stadt" />
-    <series title="Utopien" serienname="Utopien" url="utopien" encoded="Utopien" video="yes" />
     <series title="Veganes Leben" serienname="Veganes Leben" url="veganes-leben" encoded="Veganes%20Leben" />
     <series title="Versteckte Klassiker" serienname="Versteckte Klassiker" url="versteckte-klassiker" encoded="Versteckte%20Klassiker" />
     <series title="Volkslieder" serienname="Volkslieder" url="volkslieder" />
@@ -260,32 +259,28 @@
     <series title="Zukunft des Staates" serienname="Zukunft des Staates" url="Zukunft-des-Staates" encoded="Zukunft%20des%20Staates" />
     <series title="Zukunftsvisionen" serienname="Zukunftsvisionen" url="zukunftsvisionen" />
     <series title="Zu Tisch" serienname="Zu Tisch" url="zu-tisch" encoded="Zu%20Tisch" />
-    <videoseries>
-        <!-- 'aktuelle' Serien -->
-        <series title="Utopien" serienname="Utopien" url="utopien" encoded="Utopien" video="yes" />
-        <series title="BR" serienname="BR" url="br" encoded="BR" video="yes" />
-        <series title="BR-Hochschulporträts" serienname="BR-Hochschulporträts" url="br-hochschulportraets" encoded="BR-Hochschulportr%C3%A4ts" video="yes" />
-        <series title="Deutsche Kinemathek" serienname="Deutsche Kinemathek" url="deutsche-kinemathek" encoded="Deutsche%20Kinemathek" video="yes" />
-        <series title="Meine kleine Idee für Europa" serienname="Meine kleine Idee für Europa" url="meine-kleine-idee-fuer-europa" encoded="Meine%20kleine%20Idee%20f%C3%BCr%20Europa" video="yes" />
-        <series title="Idee des Jahres" serienname="Idee des Jahres" url="idee-des-jahres" encoded="Idee%20des%20Jahres" video="yes" />
-        <series title="Die Unverzagten" serienname="Die Unverzagten" url="die-unverzagten" encoded="Die%20Unverzagten" video="yes" />
-        <series title="Bewerbungsfangfragen" serienname="Bewerbungsfangfragen" url="bewerbungsfangfragen" encoded="bewerbungsfangfragen" video="yes" />
-        <series title="Kurzfilme" serienname="Kurzfilme" url="kurzfilme" encoded="Kurzfilme" video="yes" />
-        <series title="Talking Fashion" serienname="Talking Fashion" url="talking-fashion" encoded="Talking%20Fashion" video="yes" />
-        <series title="Filmtipp" serienname="Filmtipp" url="filmtipp" encoded="Filmtipp" video="yes" />
-        <series title="Rekorder" serienname="Rekorder" url="rekorder" encoded="Rekorder" video="yes" />
-        <series title="Rekorder B-Seiten" serienname="Rekorder B-Seiten" url="rekorder-b-seiten" encoded="Rekorder%20B-Seiten" video="yes" />
-        <series title="DIE ZEIT TV" serienname="DIE ZEIT TV" url="die-zeit-tv" encoded="DIE%20ZEIT%20TV" video="yes" />
-        <series title="Erklärvideos" serienname="Erklärvideos" url="erklaervideos" encoded="Erkl%C3%A4rvideos" video="yes" />
-        <series title="Lesetipp" serienname="Lesetipp" url="lesetipp" encoded="Lesetipp" video="yes" />
-        <series title="Taktisch klug" serienname="Taktisch klug" url="taktisch-klug" encoded="Taktisch%20klug" video="yes" />
-        <series title="Thomas Sarbacher liest" serienname="Thomas Sarbacher liest" url="thomas-sarbacher-liest" encoded="Thomas%20Sarbacher%20liest" video="yes" />
-        <series title="Dr. Max" serienname="Dr. Max" url="dr-max" encoded="Dr.%20Max" video="yes" format-label="Kolumne" />
-        <series title="Helmut Schmidt" serienname="Helmut Schmidt" url="helmut-schmidt" encoded="Helmut%20Schmidt" video="yes" />
-        <series title="Zehnseiten" serienname="Zehnseiten" url="zehnseiten" video="yes" />
-        <series title="ZEIT Akademie: Evolution" serienname="ZEIT Akademie: Evolution" url="zeit-akademie-evolution" encoded="ZEIT%20Akademie%3A%20Evolution" video="yes" />
-        <series title="ZEIT Akademie: Philosophie" serienname="ZEIT Akademie: Philosophie" url="zeit-akademie-philosophie" encoded="ZEIT%20Akademie%3A%20Philosophie" video="yes" />
-        <series title="ZEIT Akademie: Ökonomie" serienname="ZEIT Akademie: Ökonomie" url="zeit-akademie-oekonomie" encoded="ZEIT%20Akademie%3A%20%C3%96konomie" video="yes" />
-        <!-- archivierte Serien -->
-    </videoseries>
+    <series title="Utopien" serienname="Utopien" url="utopien" encoded="Utopien" video="yes" />
+    <series title="BR" serienname="BR" url="br" encoded="BR" video="yes" />
+    <series title="BR-Hochschulporträts" serienname="BR-Hochschulporträts" url="br-hochschulportraets" encoded="BR-Hochschulportr%C3%A4ts" video="yes" />
+    <series title="Deutsche Kinemathek" serienname="Deutsche Kinemathek" url="deutsche-kinemathek" encoded="Deutsche%20Kinemathek" video="yes" />
+    <series title="Meine kleine Idee für Europa" serienname="Meine kleine Idee für Europa" url="meine-kleine-idee-fuer-europa" encoded="Meine%20kleine%20Idee%20f%C3%BCr%20Europa" video="yes" />
+    <series title="Idee des Jahres" serienname="Idee des Jahres" url="idee-des-jahres" encoded="Idee%20des%20Jahres" video="yes" />
+    <series title="Die Unverzagten" serienname="Die Unverzagten" url="die-unverzagten" encoded="Die%20Unverzagten" video="yes" />
+    <series title="Bewerbungsfangfragen" serienname="Bewerbungsfangfragen" url="bewerbungsfangfragen" encoded="bewerbungsfangfragen" video="yes" />
+    <series title="Kurzfilme" serienname="Kurzfilme" url="kurzfilme" encoded="Kurzfilme" video="yes" />
+    <series title="Talking Fashion" serienname="Talking Fashion" url="talking-fashion" encoded="Talking%20Fashion" video="yes" />
+    <series title="Filmtipp" serienname="Filmtipp" url="filmtipp" encoded="Filmtipp" video="yes" />
+    <series title="Rekorder" serienname="Rekorder" url="rekorder" encoded="Rekorder" video="yes" />
+    <series title="Rekorder B-Seiten" serienname="Rekorder B-Seiten" url="rekorder-b-seiten" encoded="Rekorder%20B-Seiten" video="yes" />
+    <series title="DIE ZEIT TV" serienname="DIE ZEIT TV" url="die-zeit-tv" encoded="DIE%20ZEIT%20TV" video="yes" />
+    <series title="Erklärvideos" serienname="Erklärvideos" url="erklaervideos" encoded="Erkl%C3%A4rvideos" video="yes" />
+    <series title="Lesetipp" serienname="Lesetipp" url="lesetipp" encoded="Lesetipp" video="yes" />
+    <series title="Taktisch klug" serienname="Taktisch klug" url="taktisch-klug" encoded="Taktisch%20klug" video="yes" />
+    <series title="Thomas Sarbacher liest" serienname="Thomas Sarbacher liest" url="thomas-sarbacher-liest" encoded="Thomas%20Sarbacher%20liest" video="yes" />
+    <series title="Dr. Max" serienname="Dr. Max" url="dr-max" encoded="Dr.%20Max" video="yes" format-label="Kolumne" />
+    <series title="Helmut Schmidt" serienname="Helmut Schmidt" url="helmut-schmidt" encoded="Helmut%20Schmidt" video="yes" />
+    <series title="Zehnseiten" serienname="Zehnseiten" url="zehnseiten" video="yes" />
+    <series title="ZEIT Akademie: Evolution" serienname="ZEIT Akademie: Evolution" url="zeit-akademie-evolution" encoded="ZEIT%20Akademie%3A%20Evolution" video="yes" />
+    <series title="ZEIT Akademie: Philosophie" serienname="ZEIT Akademie: Philosophie" url="zeit-akademie-philosophie" encoded="ZEIT%20Akademie%3A%20Philosophie" video="yes" />
+    <series title="ZEIT Akademie: Ökonomie" serienname="ZEIT Akademie: Ökonomie" url="zeit-akademie-oekonomie" encoded="ZEIT%20Akademie%3A%20%C3%96konomie" video="yes" />
 </allseries>
