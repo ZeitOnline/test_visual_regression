@@ -165,8 +165,7 @@ class Application(object):
         if self.settings['serve_assets']:
             config.add_static_view(
                 name=self.settings.get('asset_prefix', '/static/latest'),
-                path='zeit.web.static:', cache_max_age=ast.literal_eval(
-                    self.settings['assets_max_age']))
+                path='zeit.web.static:', cache_max_age=None)
 
         config.set_request_factory(SSLRequest)
         config.add_request_method(configure_host('asset'), reify=True)
