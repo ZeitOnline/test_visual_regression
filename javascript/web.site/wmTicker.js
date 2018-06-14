@@ -231,6 +231,7 @@ function wmTicker( element ) {
                 awayShort: teams[ 0 ].short,
                 awayLong: teams[ 0 ].long,
                 awayPoints: game.away_score || '-',
+                period: game.period,
                 time: time,
                 status: game.status,
                 running: game.running,
@@ -276,10 +277,14 @@ function wmTicker( element ) {
      * @return {string}
      */
     WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
-        var begin = new Date( date ),
-            minuteDifference = getMinuteDifference( kickoff ),
-            minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
-            returnString = 'um ' + begin.getHours() + ':' + minutes;
+        if ( date ) {
+            var begin = new Date( date ),
+                minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
+                returnString = 'um ' + begin.getHours() + ':' + minutes;
+        }
+
+        var minuteDifference = getMinuteDifference( kickoff );
+
         kickoff = new Date( kickoff );
 
         if ( defaults.showRunningGameTime ) {
@@ -401,15 +406,24 @@ function wmTicker( element ) {
     WmTicker.prototype.handleWebSocketMessage = function( event ) {
         var receivedData = JSON.parse( event.data );
         var data = JSON.parse( JSON.stringify( this.data ) );
+        var self = this;
 
         // do not iterate over list data. That should be useless. Only large games needed
         // iterate over old data. Update if needed.
         for ( var i = 0; i < data.matches.length; i++ ) {
             if ( data.matches[ i ].id === receivedData.id ) {
                 data.matches[ i ].status = receivedData.status;
+                var period = receivedData.period || data.matches[ i ].period;
+                data.matches[ i ].period = period;
+                data.matches[ i ].time = ( receivedData.status === 'FULL' ) ? 'beendet' : self.timeString(
+                    false,
+                    receivedData.kickoff,
+                    period,
+                    receivedData.status
+                );
                 data.matches[ i ].homePoints = receivedData.home_score; // eslint-disable-line camelcase
                 data.matches[ i ].awayPoints = receivedData.away_score; // eslint-disable-line camelcase
-                data.matches[ i ].period = receivedData.period; // eslint-disable-line camelcase
+
 
                 this.renderView( data );
                 break;
