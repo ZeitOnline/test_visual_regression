@@ -392,7 +392,6 @@ function wmTicker( element ) {
             }
         };
         xhr.open( 'GET', defaults.dataURL + defaults.dataPath, true );
-        xhr.setRequestHeader( 'X-Competition', 'fb_mwm' );
         xhr.send();
     };
 
