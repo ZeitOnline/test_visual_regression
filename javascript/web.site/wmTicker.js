@@ -13,6 +13,7 @@ function wmTicker( element ) {
         'eyJjaGFubmVsIjoid20iLCJtb2RlIjoiciJ9.' +
         'c791lyW1KxWajSmmmnHSjjR5hJPkGn2ZNSsQGG072WQ',
         moreLink: [ 'https://www.zeit.de/thema/fussball-wm' ],
+        detailLink: '',
         wsEnabled: false,
         refreshSeconds: 10,
         showRunningGameTime: true,
@@ -126,6 +127,7 @@ function wmTicker( element ) {
     WmTicker.prototype.setConfigurableAttributes = function() {
         var backendURL = element.getAttribute( 'data-backend-url' ),
             link = element.getAttribute( 'data-link' ),
+            detailLink = element.getAttribute( 'data-detail-link' ),
             headline = element.getAttribute( 'data-headline' ),
             refreshSeconds = element.getAttribute( 'data-refresh-seconds' ),
             showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
@@ -133,6 +135,7 @@ function wmTicker( element ) {
 
         defaults.dataURL = backendURL || defaults.dataURL;
         defaults.moreLink[ 0 ] = link || defaults.moreLink[ 0 ];
+        defaults.detailLink = detailLink || defaults.detailLink;
         defaults.headline = headline || defaults.headline;
         defaults.refreshSeconds = parseInt( refreshSeconds ) > 0 ? parseInt( refreshSeconds ) : defaults.refreshSeconds;
         defaults.showRunningGameTime = showRunningGameTime ? showRunningGameTime.toLowerCase() === 'true' : defaults.showRunningGameTime;
@@ -221,6 +224,7 @@ function wmTicker( element ) {
                     time = 'beendet';
                 }
             }
+
             var gameData = {
                 id: game.id,
                 home: game.home_name,
@@ -236,6 +240,9 @@ function wmTicker( element ) {
                 kickoff: game.kickoff,
                 status: game.status,
                 running: game.running,
+                link: ( defaults.detailLink !== '' ) ?
+                    'href=' + defaults.detailLink + game.id  :
+                    '',
                 matchFinishedModifier: ( game.status === 'FULL' ) ? 'wm-ticker__match--finished' : '',
                 scoreFinishedModifier: ( game.status === 'FULL' ) ? 'wm-ticker__match-score--finished' : ''
             };
@@ -313,7 +320,7 @@ function wmTicker( element ) {
                     returnString = 'Elfmeterschießen';
                     break;
                 case 'FULL':
-                    returnString = '';
+                    returnString = 'Bericht';
                     break;
                 default:
                     break;
@@ -403,7 +410,7 @@ function wmTicker( element ) {
         var data = JSON.parse( JSON.stringify( this.data ) );
 
         data.matches.forEach( function( game ) {
-            if ( game.status !== 'PRE-MATCH' ) {
+            if ( game.status !== 'PRE-MATCH' && game.status !== 'FULL' ) {
                 game.time = this.timeString(
                     false,
                     game.kickoff,
@@ -497,6 +504,7 @@ function wmTicker( element ) {
             template = template({
                 headline: defaults.headline,
                 link: defaults.moreLink,
+                detailLink: defaults.detailLink,
                 matches: data.matches,
                 matchesModifier: ( data.matches.length > 1 ) ? 'wm-ticker__match-detail--multi' : '',
                 list: data.list,
