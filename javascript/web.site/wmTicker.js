@@ -233,6 +233,7 @@ function wmTicker( element ) {
                 awayPoints: game.away_score || '-',
                 period: game.period,
                 time: time,
+                kickoff: game.kickoff,
                 status: game.status,
                 running: game.running,
                 matchFinishedModifier: ( game.status === 'FULL' ) ? 'wm-ticker__match--finished' : '',
@@ -396,9 +397,41 @@ function wmTicker( element ) {
     };
 
     /**
+     * Count ticker time up and update view
+     */
+    WmTicker.prototype.updateTime = function() {
+        var data = JSON.parse( JSON.stringify( this.data ) );
+
+        data.matches.forEach( function( game ) {
+            if ( game.status !== 'PRE-MATCH' ) {
+                game.time = this.timeString(
+                    false,
+                    game.kickoff,
+                    game.period,
+                    game.status
+                );
+            }
+        }.bind( this ) );
+
+        this.renderView( data );
+    };
+
+    /**
+     * Update Time if WebSockets enabled every 30 seconds
+     */
+    WmTicker.prototype.addWebSocketTimeIntervall = function() {
+        var self = this;
+
+        setInterval( function() {
+            self.updateTime();
+        }, 60000 / 2 );
+    };
+
+    /**
      * what shall happen when websocket connection is openened is described here
      */
     WmTicker.prototype.handleWebSocketOpen = function() {
+        this.addWebSocketTimeIntervall();
     };
 
     /**
