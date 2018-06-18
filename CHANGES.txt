@@ -12,8 +12,18 @@ POSTDEPLOY
 - Remove `<videoseries>` from /data/series.xml, use normal <series video="yes"> instead
 
 
-3.161 (unreleased)
+3.162 (unreleased)
 ------------------
+
+- Nothing changed yet.
+
+
+3.161 (2018-06-18)
+------------------
+
+- ZON-4747: WM-Ticker: Update more link (text & style)
+
+- ZON-4746: WM Ticker Links & WS Update
 
 - MAINT: Remove `ssl_asset_host` remnants
 
