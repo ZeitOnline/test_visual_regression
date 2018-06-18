@@ -205,12 +205,11 @@ function wmTicker( element ) {
             upcoming: [],
             finished: []
         };
-        var self = this;
 
         data.forEach( function( game ) {
-            var teams = self.mapCountryCodes( game.away_name, game.home_name );
+            var teams = this.mapCountryCodes( game.away_name, game.home_name );
 
-            var time = self.timeString( game.date, game.kickoff, game.period, game.status );
+            var time = this.timeString( game.date, game.kickoff, game.period, game.status );
 
             // set hour or game status time
             var gameHour = new Date( game.date ).getHours();
@@ -257,7 +256,7 @@ function wmTicker( element ) {
             } else {
                 returnData.upcoming.push( gameData );
             }
-        });
+        }.bind( this ) );
 
         return {
             matches: returnData.current,
@@ -369,35 +368,30 @@ function wmTicker( element ) {
      * fallback for when WebSockets are not working (THIS IS AN INTERVAL!!)
      */
     WmTicker.prototype.addFallbackInterval = function() {
-        var self = this;
-
         // add interval to update regularly
-        setInterval( function() {
-            self.fetchData();
-        }, defaults.refreshSeconds * 1000 );
+        setInterval( this.fetchData.bind( this ), defaults.refreshSeconds * 1000 );
     };
 
     /**
      * fetch data via XMLHttpRequest
      */
     WmTicker.prototype.fetchData = function( initial ) {
-        var self = this;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if ( xhr.readyState === 4 && xhr.status === 200 ) {
-                var receivedData = self.mapData( JSON.parse( xhr.responseText ) );
+                var receivedData = this.mapData( JSON.parse( xhr.responseText ) );
 
-                self.renderView( receivedData );
+                this.renderView( receivedData );
 
                 if ( initial ) {
                     if ( defaults.wsEnabled ) {
-                        self.initWebSocket();
+                        this.initWebSocket();
                     } else {
-                        self.addFallbackInterval();
+                        this.addFallbackInterval();
                     }
                 }
             }
-        };
+        }.bind( this );
         xhr.open( 'GET', defaults.dataURL + defaults.dataPath, true );
         xhr.send();
     };
@@ -407,7 +401,6 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.updateTime = function() {
         var data = JSON.parse( JSON.stringify( this.data ) );
-
         data.matches.forEach( function( game ) {
             if ( game.status !== 'PRE-MATCH' && game.status !== 'FULL' ) {
                 game.time = this.timeString(
@@ -426,11 +419,7 @@ function wmTicker( element ) {
      * Update Time if WebSockets enabled every 30 seconds
      */
     WmTicker.prototype.addWebSocketTimeIntervall = function() {
-        var self = this;
-
-        setInterval( function() {
-            self.updateTime();
-        }, 60000 / 2 );
+        setInterval( this.updateTime.bind( this ), 30000 );
     };
 
     /**
