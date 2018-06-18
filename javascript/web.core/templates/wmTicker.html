@@ -7,8 +7,8 @@
 
 <div class="wm-ticker__matches" data-ct-row="matches" data-ct-column="false">
     {{#matches}}
-        <div class="wm-ticker__match-detail {{ matchesModifier }}">
-            <a {{ link }} title="Zu den Detailinformationen" class="wm-ticker__match-detail-link">
+        <div class="wm-ticker__match-detail {{ matchesModifier }}" data-ct-row="header" data-ct-column="false">
+            <a {{ link }} title="Zu den Detailinformationen" class="wm-ticker__match-detail-link" data-ct-label="link_detail">
                 <div class="wm-ticker__match-detail-content">
                     <div class="wm-ticker__country wm-ticker__country--home">
                         <img alt="Flagge {{ home }}" class="wm-ticker__country-flag" src="/static/latest/images/svg/flags/{{ homeShort }}.svg">
@@ -36,11 +36,10 @@
         <div class="wm-ticker__list wm-ticker__list--hidden">
             <ol class="wm-ticker__list-content">
                 {{#list}}
-                    <li class="wm-ticker__match {{ matchFinishedModifier }}">
-                        {{! TODO any other idea to do this? }}
+                    <li class="wm-ticker__match {{ matchFinishedModifier }}" data-ct-row="header" data-ct-column="false">
                         {{! TODO Link Tracking? }}
                         {{! TODO Stop link color change on hover? }}
-                        <a {{ link }} title="Zu den Detailinformationen" class="wm-ticker__match-link">
+                        <a {{ link }} title="Zu den Detailinformationen" class="wm-ticker__match-link" data-ct-label="link_detail">
                             <div class="wm-ticker__match-info">
                                 <div class="wm-ticker__match-score {{ scoreFinishedModifier }}"> {{ homePoints }} : {{ awayPoints }}</div>
                                 <div class="wm-ticker__list-country wm-ticker__list-country--home">
