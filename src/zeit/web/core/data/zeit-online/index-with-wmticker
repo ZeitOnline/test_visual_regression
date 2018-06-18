@@ -67,7 +67,7 @@
         <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True" kind="solo">
             <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
                 <container cp:type="rawtext" module="rawtext" visible="True" visible_mobile="True" cp:__name__="id-2f4417b0-58fb-4923-a4cb-1b4fc779d44a">
-                    <text>&lt;div class="wm-ticker" data-date="2018-06-16" data-wsenabled="false" data-refresh-seconds="15" data-link="https://www.zeit.de/thema/fussball-wm" data-headline=""
+                    <text>&lt;div class="wm-ticker" data-date="" data-wsenabled="true" data-refresh-seconds="15" data-link="https://www.zeit.de/thema/fussball-wm" data-detail-link="https://www.zeit.de/sport/2018-06/wm-2018-fussball-liveticker#/live-e" data-headline=""
                     data-show-running-time="true" data-backend-url="" data-ct-area="wmticker"&gt;&lt;/div&gt;</text>
                 </container>
                 <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
