@@ -6,12 +6,13 @@
 function wmTicker( element ) {
     var defaults = {
         headline: 'FIFA WM 2018',
-        dataURL: 'https://kickerticker.zeit.de/matchday',
+        dataURL: 'https://kickerticker.zeit.de/standings',
         dataPath: '?today=eq.true',
         webSocketURL: 'wss://ws.zeit.de:443/',
         webSocketPath: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
         'eyJjaGFubmVsIjoid20iLCJtb2RlIjoiciJ9.' +
         'c791lyW1KxWajSmmmnHSjjR5hJPkGn2ZNSsQGG072WQ',
+        detailLink: '',
         wsEnabled: false,
         refreshSeconds: 10,
         showRunningGameTime: true,
@@ -124,12 +125,14 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.setConfigurableAttributes = function() {
         var backendURL = element.getAttribute( 'data-backend-url' ),
+            detailLink = element.getAttribute( 'data-detail-link' ),
             headline = element.getAttribute( 'data-headline' ),
             refreshSeconds = element.getAttribute( 'data-refresh-seconds' ),
             showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
             wsenabled = element.getAttribute( 'data-wsenabled' );
 
         defaults.dataURL = backendURL || defaults.dataURL;
+        defaults.detailLink = detailLink || defaults.detailLink;
         defaults.headline = headline || defaults.headline;
         defaults.refreshSeconds = parseInt( refreshSeconds ) > 0 ? parseInt( refreshSeconds ) : defaults.refreshSeconds;
         defaults.showRunningGameTime = showRunningGameTime ? showRunningGameTime.toLowerCase() === 'true' : defaults.showRunningGameTime;
@@ -184,7 +187,7 @@ function wmTicker( element ) {
         today.setHours( date.getHours() );
         today.setMinutes( date.getMinutes() );
         var difference = new Date().getTime() - today.getTime();
-        return ( Math.round( difference / 1000 / 60 ) );
+        return Math.ceil( difference / 1000 / 60 );
     }
 
 
@@ -199,12 +202,11 @@ function wmTicker( element ) {
             upcoming: [],
             finished: []
         };
-        var self = this;
 
         data.forEach( function( game ) {
-            var teams = self.mapCountryCodes( game.away_name, game.home_name );
+            var teams = this.mapCountryCodes( game.away_name, game.home_name );
 
-            var time = self.timeString( game.date, game.kickoff, game.period, game.status );
+            var time = this.timeString( game.date, game.kickoff, game.period, game.status );
 
             // set hour or game status time
             var gameHour = new Date( game.date ).getHours();
@@ -218,6 +220,7 @@ function wmTicker( element ) {
                     time = 'beendet';
                 }
             }
+
             var gameData = {
                 id: game.id,
                 home: game.home_name,
@@ -230,8 +233,11 @@ function wmTicker( element ) {
                 awayPoints: game.away_score || '-',
                 period: game.period,
                 time: time,
+                kickoff: game.kickoff,
                 status: game.status,
                 running: game.running,
+                link: defaults.detailLink ? defaults.detailLink + game.id  : '',
+                noLink: !defaults.detailLink,
                 matchFinishedModifier: ( game.status === 'FULL' ) ? 'wm-ticker__match--finished' : '',
                 scoreFinishedModifier: ( game.status === 'FULL' ) ? 'wm-ticker__match-score--finished' : ''
             };
@@ -247,7 +253,7 @@ function wmTicker( element ) {
             } else {
                 returnData.upcoming.push( gameData );
             }
-        });
+        }.bind( this ) );
 
         return {
             matches: returnData.current,
@@ -359,43 +365,65 @@ function wmTicker( element ) {
      * fallback for when WebSockets are not working (THIS IS AN INTERVAL!!)
      */
     WmTicker.prototype.addFallbackInterval = function() {
-        var self = this;
-
         // add interval to update regularly
-        setInterval( function() {
-            self.fetchData();
-        }, defaults.refreshSeconds * 1000 );
+        setInterval( this.fetchData.bind( this ), defaults.refreshSeconds * 1000 );
     };
 
     /**
      * fetch data via XMLHttpRequest
      */
     WmTicker.prototype.fetchData = function( initial ) {
-        var self = this;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if ( xhr.readyState === 4 && xhr.status === 200 ) {
-                var receivedData = self.mapData( JSON.parse( xhr.responseText ) );
+                var receivedData = this.mapData( JSON.parse( xhr.responseText ) );
 
-                self.renderView( receivedData );
+                this.renderView( receivedData );
 
                 if ( initial ) {
                     if ( defaults.wsEnabled ) {
-                        self.initWebSocket();
+                        this.initWebSocket();
                     } else {
-                        self.addFallbackInterval();
+                        this.addFallbackInterval();
                     }
                 }
             }
-        };
+        }.bind( this );
         xhr.open( 'GET', defaults.dataURL + defaults.dataPath, true );
         xhr.send();
+    };
+
+    /**
+     * Count ticker time up and update view
+     */
+    WmTicker.prototype.updateTime = function() {
+        var data = JSON.parse( JSON.stringify( this.data ) );
+        data.matches.forEach( function( game ) {
+            if ( game.status !== 'PRE-MATCH' && game.status !== 'FULL' ) {
+                game.time = this.timeString(
+                    false,
+                    game.kickoff,
+                    game.period,
+                    game.status
+                );
+            }
+        }.bind( this ) );
+
+        this.renderView( data );
+    };
+
+    /**
+     * Update Time if WebSockets enabled every 30 seconds
+     */
+    WmTicker.prototype.addWebSocketTimeIntervall = function() {
+        setInterval( this.updateTime.bind( this ), 30000 );
     };
 
     /**
      * what shall happen when websocket connection is openened is described here
      */
     WmTicker.prototype.handleWebSocketOpen = function() {
+        this.addWebSocketTimeIntervall();
     };
 
     /**
@@ -460,6 +488,7 @@ function wmTicker( element ) {
             var template = require( 'web.core/templates/wmTicker.html' );
             template = template({
                 headline: defaults.headline,
+                detailLink: defaults.detailLink,
                 matches: data.matches,
                 matchesModifier: ( data.matches.length > 1 ) ? 'wm-ticker__match-detail--multi' : '',
                 list: data.list,
