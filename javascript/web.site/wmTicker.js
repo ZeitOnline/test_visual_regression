@@ -319,7 +319,7 @@ function wmTicker( element ) {
                     returnString = 'Elfmeterschießen';
                     break;
                 case 'FULL':
-                    returnString = 'Bericht';
+                    returnString = '';
                     break;
                 default:
                     break;
