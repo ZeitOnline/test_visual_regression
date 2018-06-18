@@ -12,7 +12,6 @@ import zeit.content.cp.blocks.automatic
 import zeit.content.cp.blocks.teaser
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
-import zeit.content.gallery.interfaces
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 import zeit.edit.interfaces
@@ -27,53 +26,54 @@ import zeit.web.core.utils
 log = logging.getLogger(__name__)
 
 
-@zope.interface.implementer(zeit.content.cp.interfaces.IArea)
-class Area(collections.OrderedDict):
+class InMemoryMixin(object):
+    """Overrides relevant methods of zeit.edit.container.Base to use a dict
+    instead of an XML node as storage. To instantiate, pass the respective
+    parent object (an IBody or IRegion).
 
-    factory = zeit.content.cp.area.AreaFactory(None)
+    InMemory Region and Area are meant to contain items that are already
+    zeit.web-wrapped (that is, equivalents to what comes out of
+    `IRendered(get_area())` or `get_module()`, respectively).
+    This can be helpful either for performance reasons (i.e. if using the
+    normal XML-backed classes from zeit.content.cp is too much overhead), or in
+    cases where there is no vivi-equivalent for the modules in question (e.g.
+    the comments area in zeit.web.site.view_author which displays a comment
+    dict as if it were an ICMSContent inside a teaser module).
+    """
 
-    def __init__(self, arg, **kw):
-        super(Area, self).__init__(
-            [('id-{}'.format(uuid.uuid1()), get_module(v)) for v in arg if v])
-        self.kind = kw.pop('kind', 'solo')
-        self.xml = kw.pop('xml', self.factory.get_xml())
-        self.automatic = kw.pop('automatic', False)
-        self.__parent__ = kw.pop('parent', None)
+    _factory = NotImplemented
 
-        for key in kw:
-            try:
-                assert not hasattr(self, key)
-                setattr(self, key, kw[key])
-            except:
-                continue
+    __name__ = None
 
-    def append(self, value):
-        self['id-{}'.format(uuid.uuid1())] = value
+    def __init__(self, context):
+        super(InMemoryMixin, self).__init__(context, self._factory.get_xml())
+        self._data = collections.OrderedDict()
+        self.__name__ = str(uuid.uuid4())
 
-    def __hash__(self):
-        if self.kind:
-            return hash((self.kind, id(self)))
-        else:
-            raise NotImplementedError()
+    def __getitem__(self, key):
+        return self._data[key]
 
-    def __repr__(self):
-        return object.__repr__(self)
+    def _get_keys(self, xml_node):
+        return self._data.keys()
 
-    # XXX This is really crude, but since these Legacy-classes throw away
-    # their vivi-side objects, we can't get to the interfaces anymore,
-    # so a full re-implementation is just plain impossible.
-    # So we hard-code the only use-case that this should ever be called for,
-    # which is ITeaseredContent.
-    def filter_values(self, *interfaces):
-        for module in zeit.content.cp.interfaces.IRenderedArea(self).values():
-            if getattr(module, 'type', None) == 'teaser':
-                yield module
+    def _add(self, item):
+        key = self._get_unique_name(item)
+        item.__name__ = key
+        self._data[key] = item
+        return key
+
+    def _delete(self, key):
+        del self._data[key]
 
 
-@zope.interface.implementer(zeit.content.cp.interfaces.IRegion)
-class Region(Area):
+class Region(InMemoryMixin, zeit.content.cp.area.Region):
 
-    factory = zeit.content.cp.area.RegionFactory(None)
+    _factory = zeit.content.cp.area.RegionFactory(None)
+
+
+class Area(InMemoryMixin, zeit.content.cp.area.Area):
+
+    _factory = zeit.content.cp.area.AreaFactory(None)
 
 
 @zeit.web.register_global
@@ -158,27 +158,6 @@ def cache_values_area(context):
     return context
 
 
-class LegacyTeaserMapping(zeit.web.core.utils.frozendict):
-
-    _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama',
-                          'parquet-large', 'zon-parquet-large'],
-            'zon-small': ['text-teaser', 'buttons', 'large', 'short', 'date',
-                          'parquet-regular', 'zon-parquet-small'],
-            'zon-fullwidth': ['leader-fullwidth'],
-            'zon-inhouse': ['parquet-verlag'],
-            'hide': ['archive-print-volume', 'archive-print-year',
-                     'two-side-by-side', 'ressort', 'leader-upright',
-                     'buttons-fullwidth', 'parquet-printteaser']}
-
-    def __init__(self, *args, **kw):
-        # Flattens and reverses _map, so we can easily lookup a layout.
-        super(LegacyTeaserMapping, self).__init__(
-            x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
-
-
-LEGACY_TEASER_MAPPING = LegacyTeaserMapping()
-
-
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
 class TopicLink(zeit.web.core.utils.nslist):
@@ -197,7 +176,7 @@ class TopicLink(zeit.web.core.utils.nslist):
 
 @zeit.web.register_module(u'')
 class Module(object):
-    """Base class for RAM-style modules to be used in cp2015 centerpages.
+    """Base class for RAM-style modules.
 
     See `zeit.web.core.decorator.register_module` for doc and example.
     """
@@ -268,8 +247,7 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
     @zeit.web.reify
     def layout(self):
         if self._layout:
-            layout = LEGACY_TEASER_MAPPING.get(self._layout, self._layout)
-            layout = zeit.content.cp.layout.get_layout(layout)
+            layout = zeit.content.cp.layout.get_layout(self._layout)
             if layout:
                 return layout
             else:

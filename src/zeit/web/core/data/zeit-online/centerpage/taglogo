@@ -77,8 +77,8 @@
             </container>
         </region>
     </cluster>
-    <cluster area="feature" visible="True">
-        <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
+    <cluster area="id-776ba4e6-09a5-44c4-be90-d245aea497c8" visible="True" kind="duo">
+        <region area="id-c70a83f6-51a7-430a-bcbe-b8a57ca8b85a" kind="major" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
             <container cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def2" cp:type="teaser" module="zon-small">
                 <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d17-tag"  uniqueId="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d17-tag"/>
             </container>
@@ -129,12 +129,12 @@
         </region>
     </cluster>
     <cluster visible="True" visible_mobile="True" area="id-525cdf87-4922-4abc-8ee3-dfd94e9ecbbe" kind="duo" kind_title="Standard-Region">
-      <region area="lead" visible="True" hide-dupes="False" count="7" automatic="True" automatic_type="centerpage" visible_mobile="True" title="Alles digital" supertitle="Digital" read_more_url="http://www.zeit.de/digital/index">
+      <region area="id-11d39088-874f-4ea9-b71b-62eec0752c12" kind="major" visible="True" hide-dupes="False" count="7" automatic="True" automatic_type="centerpage" visible_mobile="True" title="Alles digital" supertitle="Digital" read_more_url="http://www.zeit.de/digital/index">
         <referenced_cp>http://xml.zeit.de/campus/index</referenced_cp>
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-782d4e82-a4da-47af-b709-7e8fa633cc61"/>
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f68c4b0d-0636-422d-9145-7610206a3c3f"/>
       </region>
-      <region area="informatives" visible="True" hide-dupes="False" visible_mobile="True">
+      <region area="id-3238133b-4a0f-4b11-bfbb-64ac50cfd334" visible="True" hide-dupes="False" visible_mobile="True" kind="minor">
       </region>
     </cluster>
     <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">

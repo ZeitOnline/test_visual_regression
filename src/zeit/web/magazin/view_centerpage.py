@@ -7,7 +7,7 @@ import zeit.web.magazin.view
 
 
 @zeit.web.view_defaults(
-    context=zeit.content.cp.interfaces.ICP2015,
+    context=zeit.content.cp.interfaces.ICenterPage,
     vertical='zmo')
 @zeit.web.view_config(
     custom_predicates=(zeit.web.core.view.is_advertorial,),

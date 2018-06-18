@@ -339,7 +339,7 @@ def test_og_url_is_set_correctly(application):
         'http://xml.zeit.de/zeit-online/index')
     request = pyramid.testing.DummyRequest(route_url=lambda x: 'foo/')
     view = zeit.web.site.view_centerpage.Centerpage(context, request)
-    view.request.traversed = ('politik', 'index.cp2015')
+    view.request.traversed = ('politik', 'index')
     assert view.og_url == 'foo/politik/index'
 
 
@@ -382,43 +382,6 @@ def test_trailing_slash_should_lead_to_redirect():
     request.path = '/foo/baa'
     request.url = 'http://foo.xyz.de/foo/baa'
     assert zeit.web.core.view.redirect_on_trailing_slash(request) is None
-
-
-def test_cp2015_suffix_should_lead_to_redirect():
-    request = pyramid.testing.DummyRequest()
-    request.path = '/foo/baa.cp2015'
-    request.url = 'http://foo.xyz.de/foo/baa.cp2015'
-    with pytest.raises(
-            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
-        zeit.web.core.view.redirect_on_cp2015_suffix(request)
-
-    assert redirect.value.location == 'http://foo.xyz.de/foo/baa'
-
-    request.path = '/foo/baa.cp2015'
-    request.url = 'http://foo.xyz.de/foo/baa.cp2015?x=y'
-
-    with pytest.raises(
-            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
-        zeit.web.core.view.redirect_on_cp2015_suffix(request)
-
-    assert redirect.value.location == 'http://foo.xyz.de/foo/baa?x=y'
-
-    request.path = '/foo/baa'
-    request.url = 'http://foo.xyz.de/foo/baa'
-    assert zeit.web.core.view.redirect_on_cp2015_suffix(request) is None
-
-
-def test_cp2015_redirect_can_be_disabled(application):
-    # The context doesn't matter for this test, just needs to be ICMSContent.
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/slenderized-index')
-    request = pyramid.testing.DummyRequest(path='/index.cp2015')
-    request.registry = application.zeit_app.config.registry
-    view = zeit.web.core.view.Base(context, request)
-    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['redirect_from_cp2015'] = 'False'
-    # assert: no HTTPFound is raised.
-    view()
 
 
 def test_ispaginated_predicate_should_handle_get_parameter():

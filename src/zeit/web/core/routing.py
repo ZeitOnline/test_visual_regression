@@ -123,27 +123,6 @@ class ArticleBody(Traversable):
 
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)
-class CenterPage2015(Traversable):
-
-    def __call__(self, tdict):
-        # XXX Ugly workaround until the "new world" content is up to date.
-        if tdict['view_name'] in ['rss-spektrum-flavoured', 'xml']:
-            return
-
-        try:
-            name = u'{}.cp2015'.format(tdict['context'].__name__)
-            assert name != tdict['context'].__name__
-            pos = tdict['traversed'].index(tdict['context'].__name__)
-            tdict['context'] = tdict['context'].__parent__[name]
-        except (AssertionError, KeyError, TypeError, ValueError):
-            pass
-        else:
-            travd = tdict['traversed']
-            tdict['traversed'] = travd[:pos] + (name,) + travd[pos + 1:]
-            raise Retraverse(tdict['request'])
-
-
-@traverser(zeit.content.cp.interfaces.ICenterPage)
 class CenterpageArea(Traversable):
 
     def __call__(self, tdict):
