@@ -126,9 +126,9 @@ def test_transaction_aborts_after_request(testbrowser):
         assert not commit.called
 
 
-def test_assets_have_configurable_cache_control_header(testbrowser):
+def test_assets_are_not_cached(testbrowser):
     b = testbrowser('/static/latest/css/web.site/screen.css')
-    assert b.headers['Cache-control'] == 'max-age=1'
+    assert 'Cache-control' not in b.headers.keys()
 
 
 def test_feature_toggle_source_should_be_parsed(application):

@@ -138,7 +138,7 @@ def test_video_should_load_on_video_single_page(config, selenium_driver):
 
 
 def test_asset_cache_header(config):
-    response = requests.get('{}/static/latest/css/web.site/screen.css'.format(
+    response = requests.get('{}/assets/latest/css/web.site/screen.css'.format(
         config['BASE_URL']))
     assert response.status_code == 200
     assert response.headers.get(

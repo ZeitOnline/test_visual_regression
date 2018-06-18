@@ -2,13 +2,11 @@
 import logging
 import math
 
-import lxml.objectify
 import pyramid.httpexceptions
 import zope.component
 import zope.interface
 
 import zeit.content.author.interfaces
-import zeit.content.cp.blocks.mail
 
 from zeit.web.core.view import is_paginated
 import zeit.web
@@ -93,18 +91,19 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
 
     @zeit.web.reify
     def area_favourite_content(self):
-        modules = []
+        area = create_area(self.context, 'author-favourite-content')
+        zon_small = zeit.content.cp.layout.get_layout('zon-small')
         for index, content in enumerate(self.context.favourite_content):
-            module = zeit.web.core.centerpage.TeaserModule(
-                [content], layout='zon-small')
+            module = area.create_item('teaser')
+            module.layout = zon_small
             module.force_mobile_image = not bool(index)
-            modules.append(module)
-        return zeit.web.core.centerpage.Area(
-            modules, kind='author-favourite-content')
+            module.insert(0, content)
+        return zeit.web.core.centerpage.IRendered(area)
 
     @zeit.web.reify
     def area_articles(self):
-        return create_author_article_area(self.context)
+        return zeit.web.core.centerpage.IRendered(
+            create_author_article_area(self.context))
 
     @zeit.web.reify
     def area_providing_pagination(self):
@@ -173,17 +172,14 @@ class Feedback(Author):
     def area_feedback(self):
         if not self.context.email:
             return None
-        area = zeit.web.core.centerpage.Area([], kind='author-feedback')
-        module = zeit.content.cp.blocks.mail.MailBlock(
-            area, lxml.objectify.XML('<dummy/>'))
 
+        area = create_area(self.context, 'author-feedback')
+        module = area.create_item('mail')
         module.subject = 'Sie haben Feedback erhalten'
         module.author_name = self.context.display_name
         module.success_message = 'Ihr Feedback wurde erfolgreich ' \
             'verschickt.'
-
-        area.append(zeit.web.core.centerpage.get_module(module))
-        return area
+        return zeit.web.core.centerpage.IRendered(area)
 
 
 @zeit.web.view_config(
@@ -216,30 +212,33 @@ class Comments(Author):
         page_size = int(self.request.registry.settings.get(
             'author_comment_page_size', '10'))
 
+        cp = create_synthetic_cp(self.context, 'user-comments')
+        area = zeit.web.core.centerpage.Area(cp.body.create_item('region'))
+        area.kind = 'user-comments'
         try:
             community = zope.component.getUtility(
                 zeit.web.core.interfaces.ICommunity)
             comments_meta = community.get_user_comments(
                 self.context, page=page, rows=page_size)
-            if comments_meta is None:
-                return [UserCommentsArea([])]
-            comments = comments_meta['comments']
-            return [UserCommentsArea([zeit.web.core.centerpage.TeaserModule(
-                [c], layout='user-comment') for c in comments],
-                comments=comments_meta)]
+            if comments_meta is not None:
+                area._comments_meta = comments_meta
+                for comment in comments_meta['comments']:
+                    module = zeit.web.core.centerpage.TeaserModule(
+                        [comment], layout='user-comment')
+                    module.__name__ = None  # XXX API clash
+                    area.add(module)
         except zeit.web.core.comments.PagesExhaustedError:
             raise pyramid.httpexceptions.HTTPNotFound()
         except zeit.web.core.comments.UserCommentsException:
-            return [UserCommentsArea([])]
+            pass
+        return [zeit.web.core.centerpage.IRendered(
+            zeit.web.core.centerpage.get_area(area))]
 
 
 def create_author_article_area(
         context, count=None, dedupe_favourite_content=True):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    cp = zeit.content.cp.centerpage.CenterPage()
-    zope.interface.alsoProvides(cp, zeit.cms.section.interfaces.IZONContent)
-    cp.uniqueId = context.uniqueId + u'/articles'
-    cp.body.clear()
+    cp = create_synthetic_cp(context, 'author-articles')
 
     if dedupe_favourite_content:
         area = cp.body.create_item('region').create_item('area')
@@ -269,9 +268,25 @@ def create_author_article_area(
         area.count = int(conf.get('author_articles_page_size', '10'))
     area.automatic = True
     area.hide_dupes = True
-    return AuthorRanking(area)
+    return zeit.web.core.centerpage.get_area(area)
 
 
+def create_area(context, kind):
+    cp = create_synthetic_cp(context, kind)
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = kind
+    return area
+
+
+def create_synthetic_cp(context, kind):
+    cp = zeit.content.cp.centerpage.CenterPage()
+    zope.interface.alsoProvides(cp, zeit.cms.section.interfaces.IZONContent)
+    cp.uniqueId = context.uniqueId + u'/%s' % kind
+    cp.body.clear()
+    return cp
+
+
+@zeit.web.register_area('author-articles')
 class AuthorRanking(zeit.web.core.area.ranking.Ranking):
 
     @zeit.web.reify
@@ -295,15 +310,18 @@ class AuthorRanking(zeit.web.core.area.ranking.Ranking):
         return 0
 
 
-class UserCommentsArea(zeit.web.core.centerpage.Area):
+@zeit.web.register_area('user-comments')
+class UserCommentsPagination(zeit.content.cp.automatic.AutomaticArea):
 
     zope.interface.implements(zeit.web.core.interfaces.IPagination)
 
-    def __init__(self, arg, **kw):
-        super(self.__class__, self).__init__(arg, **kw)
-        self.kind = 'user-comments'
-        self.comments = kw.get('comments', {'page_total': 0, 'page': 1})
+    def __init__(self, context):
+        super(UserCommentsPagination, self).__init__(context)
+        self.comments = context._comments_meta
         self.request = pyramid.threadlocal.get_current_request()
+
+    def values(self):
+        return self.context.values()
 
     @zeit.web.reify
     def page(self):

@@ -7,7 +7,7 @@ import zeit.web.core.view_centerpage
 
 
 @zeit.web.view_defaults(
-    context=zeit.content.cp.interfaces.ICP2015,
+    context=zeit.content.cp.interfaces.ICenterPage,
     vertical='zco')
 @zeit.web.view_config(
     custom_predicates=(zeit.web.core.view.is_advertorial,),
@@ -21,7 +21,7 @@ class Centerpage(
 
 
 @zeit.web.view_config(
-    context=zeit.content.cp.interfaces.ICP2015,
+    context=zeit.content.cp.interfaces.ICenterPage,
     vertical='zco',
     custom_predicates=(zeit.web.core.view.is_paginated,),
     renderer='templates/centerpage.html')

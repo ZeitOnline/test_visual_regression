@@ -93,7 +93,11 @@
                     ns0:href="http://example.com/some_target" date-last-modified="2015-02-25T07:29:19+00:00" date-first-released="2015-02-25T07:29:54.791058+00:00" date-last-published="2015-02-25T07:30:19.241979+00:00" last-semantic-change="2015-02-25T07:28:33.069549+00:00" author="Tom Sundermann"/>
                 </container>
             </region>
-            <region area="informatives"/>
+            <region area="informatives">
+                <container cp:__name__="5860ae76-cdff-4625-b69c-ce7108b86526" cp:type="cpextra" module="mostread">
+                    <cp_extra id="mostread"/>
+                </container>
+            </region>
         </cluster>
         <cluster area="teaser-mosaic"/>
         <supertitle>ZON CP</supertitle>

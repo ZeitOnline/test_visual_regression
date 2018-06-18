@@ -23,19 +23,19 @@ function wmTicker( element ) {
             { name: 'Uruguay', short: 'uy', long: 'uru' },
             { name: 'Marokko', short: 'ma', long: 'mar' },
             { name: 'Iran', short: 'ir', long: 'irn' },
-            { name: 'Portugal', short: 'pt', long: 'prt' },
+            { name: 'Portugal', short: 'pt', long: 'por' },
             { name: 'Spanien', short: 'es', long: 'esp' },
             { name: 'Frankreich', short: 'fr', long: 'fra' },
             { name: 'Australien', short: 'au', long: 'aus' },
             { name: 'Argentinien', short: 'ar', long: 'arg' },
             { name: 'Island', short: 'is', long: 'isl' },
             { name: 'Peru', short: 'pe', long: 'per' },
-            { name: 'Dänemark', short: 'dk', long: 'dnk' },
-            { name: 'Kroatien', short: 'hr', long: 'hrv' },
+            { name: 'Dänemark', short: 'dk', long: 'den' },
+            { name: 'Kroatien', short: 'hr', long: 'cro' },
             { name: 'Nigeria', short: 'ng', long: 'nga' },
-            { name: 'Costa Rica', short: 'cr', long: 'cri' },
+            { name: 'Costa Rica', short: 'cr', long: 'crc' },
             { name: 'Serbien', short: 'rs', long: 'srb' },
-            { name: 'Deutschland', short: 'de', long: 'deu' },
+            { name: 'Deutschland', short: 'de', long: 'ger' },
             { name: 'Mexiko', short: 'mx', long: 'mex' },
             { name: 'Brasilien', short: 'br', long: 'bra' },
             { name: 'Schweiz', short: 'ch', long: 'sui' },
@@ -231,6 +231,7 @@ function wmTicker( element ) {
                 awayShort: teams[ 0 ].short,
                 awayLong: teams[ 0 ].long,
                 awayPoints: game.away_score || '-',
+                period: game.period,
                 time: time,
                 status: game.status,
                 running: game.running,
@@ -276,10 +277,17 @@ function wmTicker( element ) {
      * @return {string}
      */
     WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
-        var begin = new Date( date ),
-            minuteDifference = getMinuteDifference( kickoff ),
-            minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
+
+        var minuteDifference = getMinuteDifference( kickoff ),
+            returnString = '';
+
+        // date === false if called by WS-handler
+        if ( date ) {
+            var begin = new Date( date ),
+                minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes();
             returnString = 'um ' + begin.getHours() + ':' + minutes;
+        }
+
         kickoff = new Date( kickoff );
 
         if ( defaults.showRunningGameTime ) {
@@ -289,9 +297,9 @@ function wmTicker( element ) {
                     var cutoff = offsetArray[ period ];
                     var min = minuteDifference + offsetArray[ period - 1 ];
                     if ( min > cutoff ) {
-                        returnString = cutoff + '" + ' + ( min - cutoff );
+                        returnString = cutoff + '. + ' + ( min - cutoff );
                     } else {
-                        returnString = min + '"';
+                        returnString = min + '.';
                     }
                     break;
                 case 'HALF-TIME':
@@ -384,7 +392,6 @@ function wmTicker( element ) {
             }
         };
         xhr.open( 'GET', defaults.dataURL + defaults.dataPath, true );
-        xhr.setRequestHeader( 'X-Competition', 'fb_mwm' );
         xhr.send();
     };
 
@@ -400,16 +407,24 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.handleWebSocketMessage = function( event ) {
         var receivedData = JSON.parse( event.data );
+        // decouple reference to this.data
         var data = JSON.parse( JSON.stringify( this.data ) );
 
         // do not iterate over list data. That should be useless. Only large games needed
         // iterate over old data. Update if needed.
-        for ( var i = 0; i < data.matches.length; i++ ) {
+        for ( var i = 0, len = data.matches.length; i < len; i++ ) {
             if ( data.matches[ i ].id === receivedData.id ) {
                 data.matches[ i ].status = receivedData.status;
+                var period = receivedData.period || data.matches[ i ].period;
+                data.matches[ i ].period = period;
+                data.matches[ i ].time = ( receivedData.status === 'FULL' ) ? 'beendet' : this.timeString(
+                    false,
+                    receivedData.kickoff,
+                    period,
+                    receivedData.status
+                );
                 data.matches[ i ].homePoints = receivedData.home_score; // eslint-disable-line camelcase
                 data.matches[ i ].awayPoints = receivedData.away_score; // eslint-disable-line camelcase
-                data.matches[ i ].period = receivedData.period; // eslint-disable-line camelcase
 
                 this.renderView( data );
                 break;

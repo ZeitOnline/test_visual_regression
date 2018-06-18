@@ -70,7 +70,7 @@ setup(
         'zeit.content.quiz',
         'zeit.content.text',
         'zeit.content.rawxml>=0.5.0.dev0',
-        'zeit.content.video >= 3.0.0.dev0',
+        'zeit.content.video >= 3.1.0.dev0',
         'zeit.content.volume >= 1.6.0.dev0',
         'zeit.edit >= 2.16.0.dev0',
         'zeit.find',
