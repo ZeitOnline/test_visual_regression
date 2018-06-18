@@ -74,7 +74,7 @@ def access_for_common_content(context):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IPaywallAccess)
-@grokcore.component.adapter(zeit.content.cp.interfaces.ICP2015)
+@grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
 def access_for_cps(context):
     if context.type == 'volume':
             volume = zeit.content.volume.interfaces.IVolume(context, None)

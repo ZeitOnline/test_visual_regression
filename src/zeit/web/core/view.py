@@ -78,16 +78,6 @@ def redirect_on_trailing_slash(request):
             location=url)
 
 
-def redirect_on_cp2015_suffix(request):
-    if request.path.endswith('.cp2015') and not len(request.path) == 7:
-        scheme, netloc, path, params, query, fragment = urlparse.urlparse(
-            request.url)
-        url = '{}://{}{}'.format(scheme, netloc, path[:-7])
-        url = url if query == '' else '{}?{}'.format(url, query)
-        raise pyramid.httpexceptions.HTTPMovedPermanently(
-            location=url)
-
-
 def is_paywalled(context, request):
     return zeit.web.core.paywall.Paywall.status(request)
 
@@ -110,11 +100,6 @@ class Base(object):
 
     def __call__(self):
         redirect_on_trailing_slash(self.request)
-        # Don't redirect for preview (since the workingcopy does not contain
-        # the suffix-less version)
-        if pyramid.settings.asbool(self.request.registry.settings.get(
-                'redirect_from_cp2015', True)):
-            redirect_on_cp2015_suffix(self.request)
 
         # Set caching times.
         client_time = zeit.web.core.interfaces.ICachingTime(self.context)
@@ -503,7 +488,7 @@ class Base(object):
 
     @zeit.web.reify
     def content_path(self):
-        return u'/' + u'/'.join(self.request.traversed).replace('.cp2015', '')
+        return u'/' + u'/'.join(self.request.traversed)
 
     @zeit.web.reify
     def content_url(self):
@@ -618,6 +603,8 @@ class Base(object):
 
         if getattr(self, 'framebuilder_requires_webtrekk', False):
             pagetype = 'centerpage.framebuilder'
+        elif zeit.web.core.article.IFAQArticle.providedBy(self.context):
+            pagetype = 'article.faq'
         else:
             pagetype = self.detailed_content_type
 

@@ -2417,6 +2417,13 @@ def test_each_faq_answer_should_have_one_itemprop_text(testbrowser):
         answer.getchildren()[0].get('itemprop') == 'text'
 
 
+def test_faq_article_contains_correct_webtrekk_param(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/faq')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp26'] == 'article.faq'
+
+
 def test_if_video_is_playable_on_page_with_embed(selenium_driver, testserver):
     url = testserver.url + '/zeit-online/article/video-and-zeit-require'
     driver = selenium_driver

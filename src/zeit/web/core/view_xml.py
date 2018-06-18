@@ -135,10 +135,6 @@ class XMLArticle(XMLContent):
 
 @zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage,
                       host_restriction='xml')
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2009,
-                      host_restriction='xml')
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015,
-                      host_restriction='xml')
 class XMLCenterpage(XMLContent):
 
     @property

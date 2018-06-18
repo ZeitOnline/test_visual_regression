@@ -221,8 +221,6 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/zco-jobmarket.xml'),
         'vivi_zeit.content.gallery_gallery-types-url': (
             'egg://zeit.web.core/data/config/gallery-types.xml'),
-        'vivi_zeit.web_series-source': (
-            'egg://zeit.web.core/data/config/series.xml'),
         'vivi_zeit.web_feature-toggle-source': (
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
         'vivi_zeit.imp_scale-source':
@@ -236,8 +234,6 @@ def app_settings(mockserver):
         'vivi_zeit.push_facebook-main-account': 'fb-test',
         'vivi_zeit.push_facebook-magazin-account': 'fb-magazin',
         'vivi_zeit.push_facebook-campus-account': 'fb-campus',
-        'vivi_zeit.content.video_source-serie': (
-            'egg://zeit.web.core/data/config/video-serie.xml'),
         'vivi_zeit.content.volume_volume-cover-source': (
             'egg://zeit.web.core/data/config/volume-covers.xml'),
         'vivi_zeit.content.volume_default-teaser-text': (

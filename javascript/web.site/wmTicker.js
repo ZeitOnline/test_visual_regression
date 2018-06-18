@@ -6,14 +6,13 @@
 function wmTicker( element ) {
     var defaults = {
         headline: 'FIFA WM 2018',
-        dataURL: 'https://kickerticker.zeit.de/matchday',
+        dataURL: 'https://kickerticker.zeit.de/standings',
         dataPath: '?today=eq.true',
-        debugURL: 'http://kickerticker.devel.zeit.de/matchday',
-        webSocketURL: 'ws://ws.zeit.de:80/',
+        webSocketURL: 'wss://ws.zeit.de:443/',
         webSocketPath: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
         'eyJjaGFubmVsIjoid20iLCJtb2RlIjoiciJ9.' +
         'c791lyW1KxWajSmmmnHSjjR5hJPkGn2ZNSsQGG072WQ',
-        moreLink: [ 'https://www.zeit.de/thema/fussball-wm' ],
+        detailLink: '',
         wsEnabled: false,
         refreshSeconds: 10,
         showRunningGameTime: true,
@@ -24,19 +23,19 @@ function wmTicker( element ) {
             { name: 'Uruguay', short: 'uy', long: 'uru' },
             { name: 'Marokko', short: 'ma', long: 'mar' },
             { name: 'Iran', short: 'ir', long: 'irn' },
-            { name: 'Portugal', short: 'pt', long: 'prt' },
+            { name: 'Portugal', short: 'pt', long: 'por' },
             { name: 'Spanien', short: 'es', long: 'esp' },
             { name: 'Frankreich', short: 'fr', long: 'fra' },
             { name: 'Australien', short: 'au', long: 'aus' },
             { name: 'Argentinien', short: 'ar', long: 'arg' },
             { name: 'Island', short: 'is', long: 'isl' },
             { name: 'Peru', short: 'pe', long: 'per' },
-            { name: 'Dänemark', short: 'dk', long: 'dnk' },
-            { name: 'Kroatien', short: 'hr', long: 'hrv' },
+            { name: 'Dänemark', short: 'dk', long: 'den' },
+            { name: 'Kroatien', short: 'hr', long: 'cro' },
             { name: 'Nigeria', short: 'ng', long: 'nga' },
-            { name: 'Costa Rica', short: 'cr', long: 'cri' },
+            { name: 'Costa Rica', short: 'cr', long: 'crc' },
             { name: 'Serbien', short: 'rs', long: 'srb' },
-            { name: 'Deutschland', short: 'de', long: 'deu' },
+            { name: 'Deutschland', short: 'de', long: 'ger' },
             { name: 'Mexiko', short: 'mx', long: 'mex' },
             { name: 'Brasilien', short: 'br', long: 'bra' },
             { name: 'Schweiz', short: 'ch', long: 'sui' },
@@ -119,42 +118,25 @@ function wmTicker( element ) {
                 console.log( 'WM-TICKER: Date set to: %s', date );
             }
         }
-
-        if ( this.debug ) {
-            defaults.dataURL = defaults.debugURL;
-            console.log( 'WM-TICKER: URL set to %s', defaults.dataURL + defaults.dataPath );
-        }
     };
 
     /**
      * get DATA Attributes and set them in defaults object for later use
      */
     WmTicker.prototype.setConfigurableAttributes = function() {
-        var link = element.getAttribute( 'data-link' ),
+        var backendURL = element.getAttribute( 'data-backend-url' ),
+            detailLink = element.getAttribute( 'data-detail-link' ),
             headline = element.getAttribute( 'data-headline' ),
             refreshSeconds = element.getAttribute( 'data-refresh-seconds' ),
             showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
             wsenabled = element.getAttribute( 'data-wsenabled' );
 
-        if ( link !== '' ) {
-            defaults.moreLink[ 0 ] = link;
-        }
-
-        if ( headline ) {
-            defaults.headline = headline;
-        }
-
-        if ( parseInt( refreshSeconds ) > 0 ) {
-            defaults.refreshSeconds = parseInt( refreshSeconds );
-        }
-
-        if ( showRunningGameTime ) {
-            defaults.showRunningGameTime = showRunningGameTime.toLowerCase() === 'true';
-        }
-
-        if ( wsenabled ) {
-            defaults.wsEnabled = wsenabled !== 'false';
-        }
+        defaults.dataURL = backendURL || defaults.dataURL;
+        defaults.detailLink = detailLink || defaults.detailLink;
+        defaults.headline = headline || defaults.headline;
+        defaults.refreshSeconds = parseInt( refreshSeconds ) > 0 ? parseInt( refreshSeconds ) : defaults.refreshSeconds;
+        defaults.showRunningGameTime = showRunningGameTime ? showRunningGameTime.toLowerCase() === 'true' : defaults.showRunningGameTime;
+        defaults.wsEnabled = wsenabled ? wsenabled.toLowerCase() === 'true' : defaults.wsEnabled;
     };
 
 
@@ -192,6 +174,23 @@ function wmTicker( element ) {
         return countries;
     };
 
+
+    /**
+     * Get Difference between hours in Minutes
+     * between current date and some date
+     * @param  {string | Date }  date that shall be compared
+     * @return {integer} negative if game is in past!
+     */
+    function getMinuteDifference( date ) {
+        date = new Date( date );
+        var today = new Date();
+        today.setHours( date.getHours() );
+        today.setMinutes( date.getMinutes() );
+        var difference = new Date().getTime() - today.getTime();
+        return Math.ceil( difference / 1000 / 60 );
+    }
+
+
     /**
      * Map Data from API to needed format to use in further code
      * @param  {object}  data from Kickerticker Backend
@@ -203,12 +202,11 @@ function wmTicker( element ) {
             upcoming: [],
             finished: []
         };
-        var self = this;
 
         data.forEach( function( game ) {
-            var teams = self.mapCountryCodes( game.away_name, game.home_name );
+            var teams = this.mapCountryCodes( game.away_name, game.home_name );
 
-            var time = self.timeString( game.date, game.kickoff, game.status );
+            var time = this.timeString( game.date, game.kickoff, game.period, game.status );
 
             // set hour or game status time
             var gameHour = new Date( game.date ).getHours();
@@ -217,7 +215,12 @@ function wmTicker( element ) {
             // only one game. Which shall then be displayed big
             if ( data.length === 1 ) {
                 gameShallBeBig = true;
+                // single game big and finished shall write 'beendet'
+                if ( game.status === 'FULL' ) {
+                    time = 'beendet';
+                }
             }
+
             var gameData = {
                 id: game.id,
                 home: game.home_name,
@@ -228,9 +231,13 @@ function wmTicker( element ) {
                 awayShort: teams[ 0 ].short,
                 awayLong: teams[ 0 ].long,
                 awayPoints: game.away_score || '-',
+                period: game.period,
                 time: time,
+                kickoff: game.kickoff,
                 status: game.status,
                 running: game.running,
+                link: defaults.detailLink ? defaults.detailLink + game.id  : '',
+                noLink: !defaults.detailLink,
                 matchFinishedModifier: ( game.status === 'FULL' ) ? 'wm-ticker__match--finished' : '',
                 scoreFinishedModifier: ( game.status === 'FULL' ) ? 'wm-ticker__match-score--finished' : ''
             };
@@ -246,7 +253,7 @@ function wmTicker( element ) {
             } else {
                 returnData.upcoming.push( gameData );
             }
-        });
+        }.bind( this ) );
 
         return {
             matches: returnData.current,
@@ -272,26 +279,57 @@ function wmTicker( element ) {
      * @param  {string}  date string supplied by API
      * @return {string}
      */
-    WmTicker.prototype.timeString = function( date, kickoff, status ) {
-        date = new Date( date );
-        kickoff = new Date( kickoff );
-        var hour = date.getHours();
-        var minutes = ( date.getMinutes() < 10 ? '0' : '' ) + date.getMinutes();
-        var time = 'um ' + hour + ':' + minutes; // Game is in future
+    WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
 
-        if ( status === 'LIVE' ) {
-            return '';
-        } else if ( status === 'HALF-TIME' ) {
-            return 'Halbzeit';
-        } else if ( status === 'HALF-EXTRATIME' ) {
-            return '';
-        } else if ( status === 'PENALTY-SHOOTOUT' ) {
-            return 'Elfmeterschießen';
-        } else if ( status === 'FULL' ) {
-            return '';
+        var minuteDifference = getMinuteDifference( kickoff ),
+            returnString = '';
+
+        // date === false if called by WS-handler
+        if ( date ) {
+            var begin = new Date( date ),
+                minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes();
+            returnString = 'um ' + begin.getHours() + ':' + minutes;
         }
 
-        return time;
+        kickoff = new Date( kickoff );
+
+        if ( defaults.showRunningGameTime ) {
+            switch ( status ) {
+                case 'LIVE':
+                    var offsetArray = [ 0, 45, 90, 105, 120 ];
+                    var cutoff = offsetArray[ period ];
+                    var min = minuteDifference + offsetArray[ period - 1 ];
+                    if ( min > cutoff ) {
+                        returnString = cutoff + '. + ' + ( min - cutoff );
+                    } else {
+                        returnString = min + '.';
+                    }
+                    break;
+                case 'HALF-TIME':
+                    returnString = 'Halbzeit';
+                    break;
+                case 'HALF-EXTRATIME':
+                    returnString = 'Halbzeit Verlängerung';
+                    break;
+                case 'PENALTY-SHOOTOUT':
+                    returnString = 'Elfmeterschießen';
+                    break;
+                case 'FULL':
+                    returnString = '';
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( status ) {
+                case 'PRE-MATCH':
+                    returnString = 'um ' + begin.getHours() + ':' + minutes;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return returnString;
     };
 
     /**
@@ -327,44 +365,65 @@ function wmTicker( element ) {
      * fallback for when WebSockets are not working (THIS IS AN INTERVAL!!)
      */
     WmTicker.prototype.addFallbackInterval = function() {
-        var self = this;
-
         // add interval to update regularly
-        setInterval( function() {
-            self.fetchData();
-        }, defaults.refreshSeconds * 1000 );
+        setInterval( this.fetchData.bind( this ), defaults.refreshSeconds * 1000 );
     };
 
     /**
      * fetch data via XMLHttpRequest
      */
     WmTicker.prototype.fetchData = function( initial ) {
-        var self = this;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if ( xhr.readyState === 4 && xhr.status === 200 ) {
-                var receivedData = self.mapData( JSON.parse( xhr.responseText ) );
+                var receivedData = this.mapData( JSON.parse( xhr.responseText ) );
 
-                self.renderView( receivedData );
+                this.renderView( receivedData );
 
                 if ( initial ) {
                     if ( defaults.wsEnabled ) {
-                        self.initWebSocket();
+                        this.initWebSocket();
                     } else {
-                        self.addFallbackInterval();
+                        this.addFallbackInterval();
                     }
                 }
             }
-        };
+        }.bind( this );
         xhr.open( 'GET', defaults.dataURL + defaults.dataPath, true );
-        xhr.setRequestHeader( 'X-Competition', 'fb_mwm' );
         xhr.send();
+    };
+
+    /**
+     * Count ticker time up and update view
+     */
+    WmTicker.prototype.updateTime = function() {
+        var data = JSON.parse( JSON.stringify( this.data ) );
+        data.matches.forEach( function( game ) {
+            if ( game.status !== 'PRE-MATCH' && game.status !== 'FULL' ) {
+                game.time = this.timeString(
+                    false,
+                    game.kickoff,
+                    game.period,
+                    game.status
+                );
+            }
+        }.bind( this ) );
+
+        this.renderView( data );
+    };
+
+    /**
+     * Update Time if WebSockets enabled every 30 seconds
+     */
+    WmTicker.prototype.addWebSocketTimeIntervall = function() {
+        setInterval( this.updateTime.bind( this ), 30000 );
     };
 
     /**
      * what shall happen when websocket connection is openened is described here
      */
     WmTicker.prototype.handleWebSocketOpen = function() {
+        this.addWebSocketTimeIntervall();
     };
 
     /**
@@ -373,16 +432,24 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.handleWebSocketMessage = function( event ) {
         var receivedData = JSON.parse( event.data );
+        // decouple reference to this.data
         var data = JSON.parse( JSON.stringify( this.data ) );
 
         // do not iterate over list data. That should be useless. Only large games needed
         // iterate over old data. Update if needed.
-        for ( var i = 0; i < data.matches.length; i++ ) {
+        for ( var i = 0, len = data.matches.length; i < len; i++ ) {
             if ( data.matches[ i ].id === receivedData.id ) {
                 data.matches[ i ].status = receivedData.status;
+                var period = receivedData.period || data.matches[ i ].period;
+                data.matches[ i ].period = period;
+                data.matches[ i ].time = ( receivedData.status === 'FULL' ) ? 'beendet' : this.timeString(
+                    false,
+                    receivedData.kickoff,
+                    period,
+                    receivedData.status
+                );
                 data.matches[ i ].homePoints = receivedData.home_score; // eslint-disable-line camelcase
                 data.matches[ i ].awayPoints = receivedData.away_score; // eslint-disable-line camelcase
-                data.matches[ i ].period = receivedData.period; // eslint-disable-line camelcase
 
                 this.renderView( data );
                 break;
@@ -421,7 +488,7 @@ function wmTicker( element ) {
             var template = require( 'web.core/templates/wmTicker.html' );
             template = template({
                 headline: defaults.headline,
-                link: defaults.moreLink,
+                detailLink: defaults.detailLink,
                 matches: data.matches,
                 matchesModifier: ( data.matches.length > 1 ) ? 'wm-ticker__match-detail--multi' : '',
                 list: data.list,

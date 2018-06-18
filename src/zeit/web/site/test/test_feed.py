@@ -8,26 +8,6 @@ import zeit.solr.interfaces
 import zeit.web.site.view_feed
 
 
-def test_newsfeed_should_only_render_cp2015(testserver):
-    res = requests.get(
-        '%s/index' % testserver.url,
-        headers={'Host': 'newsfeed.zeit.de'})
-
-    assert res.status_code == 200
-
-    res = requests.get(
-        '%s/centerpage/index' % testserver.url,
-        headers={'Host': 'newsfeed.zeit.de'})
-
-    assert res.status_code == 404
-
-    res = requests.get(
-        '%s/zeit-magazin/article/01' % testserver.url,
-        headers={'Host': 'newsfeed.zeit.de'})
-
-    assert res.status_code == 404
-
-
 def test_newsfeed_should_render_magazin_and_campus(testserver):
     res = requests.get(
         '%s/zeit-magazin/index' % testserver.url,
