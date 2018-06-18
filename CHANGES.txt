@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - TMS-231: Update to changed CP API by finally removing `ICP2009` support
 
+- TMS-218: Unify series.xml structure regarding video series
+
 
 3.160.3 (2018-06-14)
 --------------------
