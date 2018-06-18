@@ -2,6 +2,7 @@
 import logging
 
 import pyramid.httpexceptions
+import zope.component
 
 import zeit.content.cp.interfaces
 
