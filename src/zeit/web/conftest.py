@@ -234,8 +234,6 @@ def app_settings(mockserver):
         'vivi_zeit.push_facebook-main-account': 'fb-test',
         'vivi_zeit.push_facebook-magazin-account': 'fb-magazin',
         'vivi_zeit.push_facebook-campus-account': 'fb-campus',
-        'vivi_zeit.content.video_source-serie': (
-            'egg://zeit.web.core/data/config/video-serie.xml'),
         'vivi_zeit.content.volume_volume-cover-source': (
             'egg://zeit.web.core/data/config/volume-covers.xml'),
         'vivi_zeit.content.volume_default-teaser-text': (
