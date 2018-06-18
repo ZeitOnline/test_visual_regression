@@ -13,33 +13,33 @@
 
 	&__list-teams
 		text-align: center
-		font-size: $font-s--px
+		font-size: em(14px)
 		font-weight: lighter
 		text-transform: uppercase
-		margin: 0 remify($thin)
+		margin: remify(0 8px)
 		width: remify(75px)
 
 	&__list-time
 		color: $zon-grey
-		font-size: $font-s--px
+		font-size: em(14px)
 		font-weight: lighter
 		min-width: remify(85px)
-		padding-right: remify($fine)
+		padding-right: remify(10px)
 		text-align: right
 
 	&__match
-		border-bottom: remify(1px) solid $zon-alto
-		padding-bottom: remify($micro)
-		padding-top: remify($micro)
-		display: flex
 		align-items: center
+		border-bottom: 1px solid $color-border
+		display: flex
 		justify-content: space-between
+		padding-bottom: remify(4px)
+		padding-top: remify(4px)
 
 		&:first-of-type
-			border-top: remify(1px) solid $zon-alto
+			border-top: 1px solid $color-border
 
 		&:last-of-type
-			margin-bottom: remify($compact)
+			margin-bottom: remify(28px)
 
 		&--finished
 			background-color: $grey--light
@@ -70,11 +70,11 @@
 				display: block
 
 		&__list-teams
-			font-size: $font-ss--px
+			font-size: em(13px)
 			font-weight: bold
 
 		&__list-time
-			margin-left: remify($fine)
+			margin-left: remify(10px)
 
 // handle display grid modifier
 +respond-min($break-desktop-min)
@@ -84,7 +84,7 @@
 		grid-auto-flow: column
 
 		.wm-ticker__match
-			border-top: remify(1px) solid $zon-alto
+			border-top: 1px solid $color-border
 
 		&.wm-ticker__list-content--items-2
 			grid-template-columns: repeat(2, 1fr)
@@ -100,12 +100,12 @@
 			// hide border bottom for every odd child to stop duplicate borders
 			.wm-ticker__match
 				&:nth-child(odd)
-					border-top: remify(1px) solid $zon-alto
+					border-top: 1px solid $color-border
 					border-bottom: none
 
 				&:nth-child(even)
-					border-top: remify(1px) solid $zon-alto
-					border-bottom: remify(1px) solid $zon-alto
+					border-top: 1px solid $color-border
+					border-bottom: 1px solid $color-border
 
 				// hide line after third item only if four items are present
 				&:nth-of-type(3)::after
