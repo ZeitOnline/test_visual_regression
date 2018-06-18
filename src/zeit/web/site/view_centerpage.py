@@ -2,6 +2,7 @@
 import logging
 
 import pyramid.httpexceptions
+import zope.component
 
 import zeit.content.cp.interfaces
 
@@ -48,6 +49,14 @@ class Centerpage(
         if image is not None and image not in self._buzzboard_images.keys():
             self._buzzboard_images.update({image: True})
         return registered_images
+
+    @zeit.web.reify
+    def include_optimize(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        if self.is_hp:
+            return conf.get('optimize_on_zon_homepage', None)
+        else:
+            return conf.get('optimize_on_zon_centerpage', None)
 
 
 @zeit.web.view_config(

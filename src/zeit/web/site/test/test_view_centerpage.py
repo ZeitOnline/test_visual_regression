@@ -3043,3 +3043,14 @@ def test_wm_ticker_is_not_empty(selenium_driver, testserver):
                 % testserver.url))
     matches = driver.find_elements_by_class_name('wm-ticker__matches')
     assert len(matches) == 1
+
+
+def test_centerpage_can_include_optimize(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    assert 'optimize' not in browser.contents
+
+    optimize_url = 'https://www.zeit.de/js/ga_optimize.js'
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['optimize_on_zon_centerpage'] = optimize_url
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    assert optimize_url in browser.contents

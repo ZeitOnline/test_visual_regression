@@ -85,6 +85,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return atoms[pos - 1:pos + 2]
 
     @zeit.web.reify
+    def include_optimize(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('optimize_on_zon_article', None)
+
+    @zeit.web.reify
     def liveblog(self):
         return zeit.web.core.interfaces.ILiveblogInfo(self.context)
 

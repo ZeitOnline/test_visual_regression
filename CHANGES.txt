@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4739: Small share-buttons + pocket-button
 
+- ZON-4740: Add google optimize to settings
+
 
 3.161 (2018-06-18)
 ------------------
