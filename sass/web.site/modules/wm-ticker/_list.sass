@@ -31,6 +31,9 @@
 		border-bottom: remify(1px) solid $zon-alto
 		padding-bottom: remify($micro)
 		padding-top: remify($micro)
+		display: flex
+		align-items: center
+		justify-content: space-between
 
 		&:first-of-type
 			border-top: remify(1px) solid $zon-alto
@@ -41,15 +44,7 @@
 		&--finished
 			background-color: $grey--light
 
-	&__match-link
-		align-items: center
-		display: flex
-		justify-content: space-between
-
-		&:hover,
-		&:focus
-			color: inherit
-
+	&__match-link,
 	&__match-info
 		align-items: center
 		color: $zon-grey

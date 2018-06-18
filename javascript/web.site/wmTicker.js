@@ -240,9 +240,8 @@ function wmTicker( element ) {
                 kickoff: game.kickoff,
                 status: game.status,
                 running: game.running,
-                link: ( defaults.detailLink !== '' ) ?
-                    'href=' + defaults.detailLink + game.id  :
-                    '',
+                link: defaults.detailLink ? defaults.detailLink + game.id  : '',
+                noLink: !defaults.detailLink,
                 matchFinishedModifier: ( game.status === 'FULL' ) ? 'wm-ticker__match--finished' : '',
                 scoreFinishedModifier: ( game.status === 'FULL' ) ? 'wm-ticker__match-score--finished' : ''
             };
