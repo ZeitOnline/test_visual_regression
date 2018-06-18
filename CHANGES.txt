@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - MAINT: Remove `ssl_asset_host` remnants
 
+- TMS-231: Update to changed CP API by finally removing `ICP2009` support
+
 
 3.160.3 (2018-06-14)
 --------------------
