@@ -15,7 +15,7 @@ POSTDEPLOY
 3.162 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4740: Add google optimize to settings
 
 
 3.161 (2018-06-18)
