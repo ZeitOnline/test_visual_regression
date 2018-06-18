@@ -9,13 +9,19 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- Nothing
+- Remove `<videoseries>` from /data/series.xml, use normal <series video="yes"> instead
 
 
 3.161 (unreleased)
 ------------------
 
 - MAINT: Remove `ssl_asset_host` remnants
+
+- TMS-231: Update to changed CP API by finally removing `ICP2009` support
+
+- TMS-218: Unify series.xml structure regarding video series
+
+- BUG-931: Implement equality for LazyProxy, so that hide_dupes works with them
 
 
 3.160.3 (2018-06-14)

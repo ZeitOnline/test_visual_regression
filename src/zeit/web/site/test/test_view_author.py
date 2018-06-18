@@ -171,7 +171,7 @@ def test_view_author_comments_should_have_comments_area(
     dummy_request.GET['p'] = '1'
     view = zeit.web.site.view_author.Comments(author, dummy_request)
     assert type(view.tab_areas[0]) == (
-        zeit.web.site.view_author.UserCommentsArea)
+        zeit.web.site.view_author.UserCommentsPagination)
 
 
 def test_author_comments_should_correctly_validate_pagination(
@@ -181,17 +181,19 @@ def test_author_comments_should_correctly_validate_pagination(
         zeit.web.core.comments.Community, 'get_user_comments', mock_comments)
 
     dummy_request.GET.clear()
-    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    context = mock.Mock()
+    context.uniqueId = 'http://xml.zeit.de/author'
+    view = zeit.web.site.view_author.Comments(context, dummy_request)
     assert view.tab_areas is not None
     assert mock_comments.call_args[1]['page'] == 1
 
     dummy_request.GET['p'] = 'nan'
-    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    view = zeit.web.site.view_author.Comments(context, dummy_request)
     assert view.tab_areas is not None
     assert mock_comments.call_args[1]['page'] == 1
 
     dummy_request.GET['p'] = '3'
-    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    view = zeit.web.site.view_author.Comments(context, dummy_request)
     assert view.tab_areas is not None
     assert mock_comments.call_args[1]['page'] == 3
 
