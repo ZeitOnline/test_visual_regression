@@ -37,7 +37,7 @@
             </a>
         </li>
         <li class="{{ '%s__item' | format(self.layout()) | with_mods('pocket') }}">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('pocket') }}" href="https://getpocket.com/save?url={{(content_url ~ ga_campaign).format('pocket') | urlencode }}" data-ct-label="pocket" title="Pocket">
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('pocket') }}" href="https://getpocket.com/save?url={{(content_url ~ ga_campaign).format('pocket') | urlencode }}" target="_blank" data-ct-label="pocket" title="Pocket">
                 {{ lama.use_svg_icon('sharing-pocket', '%s__icon' | format(self.layout()) | with_mods('pocket'), view.package, a11y=False) }}
                 <span class="{{ self.layout() }}__text">{% block sharing_menu_text_pocket %}Pocket{% endblock %}</span>
             </a>
