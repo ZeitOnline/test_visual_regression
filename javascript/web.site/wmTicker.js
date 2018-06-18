@@ -6,7 +6,7 @@
 function wmTicker( element ) {
     var defaults = {
         headline: 'FIFA WM 2018',
-        dataURL: 'https://kickerticker.zeit.de/matchday',
+        dataURL: 'https://kickerticker.zeit.de/standings',
         dataPath: '?today=eq.true',
         webSocketURL: 'wss://ws.zeit.de:443/',
         webSocketPath: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
@@ -190,7 +190,7 @@ function wmTicker( element ) {
         today.setHours( date.getHours() );
         today.setMinutes( date.getMinutes() );
         var difference = new Date().getTime() - today.getTime();
-        return ( Math.round( difference / 1000 / 60 ) );
+        return ( Math.floor( difference / 1000 / 60 )  + 1 );
     }
 
 
