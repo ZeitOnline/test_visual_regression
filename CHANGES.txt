@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - TMS-218: Unify series.xml structure regarding video series
 
+- BUG-931: Implement equality for LazyProxy, so that hide_dupes works with them
+
 
 3.160.3 (2018-06-14)
 --------------------
