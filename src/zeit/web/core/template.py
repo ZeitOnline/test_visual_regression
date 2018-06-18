@@ -223,7 +223,11 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         templates.append('logo-zmo-zm')
         return templates
     if liveblog(teaser):
-        templates.append('liveblog')
+        livebloginfo = zeit.web.core.interfaces.ILiveblogInfo(teaser)
+        if livebloginfo.is_live:
+            templates.append('liveblog')
+        else:
+            templates.append('liveblog-closed')
         return templates
     if brand == 'zett':
         templates.append('logo-zett-small')
