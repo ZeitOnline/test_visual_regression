@@ -12,7 +12,6 @@ function wmTicker( element ) {
         webSocketPath: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
         'eyJjaGFubmVsIjoid20iLCJtb2RlIjoiciJ9.' +
         'c791lyW1KxWajSmmmnHSjjR5hJPkGn2ZNSsQGG072WQ',
-        moreLink: [ 'https://www.zeit.de/thema/fussball-wm' ],
         wsEnabled: false,
         refreshSeconds: 10,
         showRunningGameTime: true,
@@ -125,14 +124,12 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.setConfigurableAttributes = function() {
         var backendURL = element.getAttribute( 'data-backend-url' ),
-            link = element.getAttribute( 'data-link' ),
             headline = element.getAttribute( 'data-headline' ),
             refreshSeconds = element.getAttribute( 'data-refresh-seconds' ),
             showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
             wsenabled = element.getAttribute( 'data-wsenabled' );
 
         defaults.dataURL = backendURL || defaults.dataURL;
-        defaults.moreLink[ 0 ] = link || defaults.moreLink[ 0 ];
         defaults.headline = headline || defaults.headline;
         defaults.refreshSeconds = parseInt( refreshSeconds ) > 0 ? parseInt( refreshSeconds ) : defaults.refreshSeconds;
         defaults.showRunningGameTime = showRunningGameTime ? showRunningGameTime.toLowerCase() === 'true' : defaults.showRunningGameTime;
@@ -463,7 +460,6 @@ function wmTicker( element ) {
             var template = require( 'web.core/templates/wmTicker.html' );
             template = template({
                 headline: defaults.headline,
-                link: defaults.moreLink,
                 matches: data.matches,
                 matchesModifier: ( data.matches.length > 1 ) ? 'wm-ticker__match-detail--multi' : '',
                 list: data.list,
