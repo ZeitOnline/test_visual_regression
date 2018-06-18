@@ -1905,8 +1905,16 @@ def test_share_buttons_are_present(testbrowser):
     assert query.get('link').pop(0).startswith(canonical)
     assert query.get('app_id').pop(0) == '638028906281625'
 
-    #  mail
+    #  pocket
     parts = urlparse.urlparse(links[5].get('href'))
+    query = urlparse.parse_qs(parts.query)
+    url = query['url'][0]
+    assert 'utm_source=pocket_zonaudev_ext' in url
+    assert 'utm_campaign=ref' in url
+    assert 'utm_content=zeitde_share_link_x' in url
+
+    #  mail
+    parts = urlparse.urlparse(links[6].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
@@ -1917,7 +1925,8 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[2].text == 'Flippen'
     assert labels[3].text == 'WhatsApp'
     assert labels[4].text == 'Facebook Messenger'
-    assert labels[5].text == 'Mailen'
+    assert labels[5].text == 'Pocket'
+    assert labels[6].text == 'Mailen'
 
 
 def test_merian_link_has_nofollow(testbrowser, dummy_request):
