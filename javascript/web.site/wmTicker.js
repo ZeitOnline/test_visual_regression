@@ -190,7 +190,7 @@ function wmTicker( element ) {
         today.setHours( date.getHours() );
         today.setMinutes( date.getMinutes() );
         var difference = new Date().getTime() - today.getTime();
-        return ( Math.floor( difference / 1000 / 60 )  + 1 );
+        return Math.ceil( difference / 1000 / 60 );
     }
 
 
