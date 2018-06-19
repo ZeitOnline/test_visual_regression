@@ -118,7 +118,7 @@ def test_buzzboard_should_avoid_same_teaser_image_twice(
     browser = testbrowser('/zeit-online/buzz-box')
     area = browser.cssselect('.cp-area--buzzboard')[0]
     assert len(area.cssselect('.teaser-buzzboard__media')) == 4
-    assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 2
+    assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 1
 
 
 def test_printbox_is_present_and_has_digital_offerings(
