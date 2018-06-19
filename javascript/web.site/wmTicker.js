@@ -70,7 +70,7 @@ function wmTicker( element ) {
             // mock response for local testing
             console.log( 'WM-TICKER: debugging locally with mocked response' );
             require([ 'web.site/wmTickerData' ], function( data ) {
-                this.renderView( this.mapData( data ) );
+                this.renderView( data );
             }.bind( this ) );
         }
     };
@@ -376,7 +376,7 @@ function wmTicker( element ) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if ( xhr.readyState === 4 && xhr.status === 200 ) {
-                var receivedData = this.mapData( JSON.parse( xhr.responseText ) );
+                var receivedData = JSON.parse( xhr.responseText );
 
                 this.renderView( receivedData );
 
@@ -397,19 +397,7 @@ function wmTicker( element ) {
      * Count ticker time up and update view
      */
     WmTicker.prototype.updateTime = function() {
-        var data = JSON.parse( JSON.stringify( this.data ) );
-        data.matches.forEach( function( game ) {
-            if ( game.status !== 'PRE-MATCH' && game.status !== 'FULL' ) {
-                game.time = this.timeString(
-                    false,
-                    game.kickoff,
-                    game.period,
-                    game.status
-                );
-            }
-        }.bind( this ) );
-
-        this.renderView( data );
+        this.renderView( this.data );
     };
 
     /**
@@ -437,19 +425,13 @@ function wmTicker( element ) {
 
         // do not iterate over list data. That should be useless. Only large games needed
         // iterate over old data. Update if needed.
-        for ( var i = 0, len = data.matches.length; i < len; i++ ) {
-            if ( data.matches[ i ].id === receivedData.id ) {
-                data.matches[ i ].status = receivedData.status;
-                var period = receivedData.period || data.matches[ i ].period;
-                data.matches[ i ].period = period;
-                data.matches[ i ].time = ( receivedData.status === 'FULL' ) ? 'beendet' : this.timeString(
-                    false,
-                    receivedData.kickoff,
-                    period,
-                    receivedData.status
-                );
-                data.matches[ i ].homePoints = receivedData.home_score; // eslint-disable-line camelcase
-                data.matches[ i ].awayPoints = receivedData.away_score; // eslint-disable-line camelcase
+        for ( var i = 0, len = data.length; i < len; i++ ) {
+            if ( data[ i ].id === receivedData.id ) {
+                data[ i ].status = receivedData.status;
+                data[ i ].period = receivedData.period;
+                data[ i ].kickoff = receivedData.kickoff;
+                data[ i ].home_score = receivedData.home_score; // eslint-disable-line camelcase
+                data[ i ].away_score = receivedData.away_score; // eslint-disable-line camelcase
 
                 this.renderView( data );
                 break;
@@ -482,6 +464,7 @@ function wmTicker( element ) {
             this.data = data;
         }
 
+        data = this.mapData( data );
         var singleGame = ( data.matches.length + data.list.length ) === 1;
 
         if ( data.matches.length !== 0 || data.list.length !== 0 ) {
