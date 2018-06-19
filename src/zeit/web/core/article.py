@@ -92,7 +92,7 @@ class Page(object):
             self.blocks.append(wrapped)
 
 
-def _inject_banner_code(pages, pubtype):
+def _inject_banner_code(pages, pubtype, ressort):
     adconfig = {
         'zon': {
             'pages': range(1, len(pages) + 1),
@@ -111,13 +111,18 @@ def _inject_banner_code(pages, pubtype):
     toggles = zeit.web.core.application.FEATURE_TOGGLES
     place5 = ({'tile': 5, 'paragraph': 6, 'type': 'desktop'},
               {'tile': 'content_ad', 'paragraph': 6, 'type': ''},)
-    if toggles.find('iqd_contentmarketing_ad'):
-        adconfig['zon']['ads'].append(place5[1])
-    else:
-        adconfig['zon']['ads'].append(place5[0])
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)
+
+    # split settings string
+    ctm_teaser_ressorts = conf.get(
+        'ctm_teaser_ressorts').replace(' ', '').lower().split(',')
+
+    if ressort.lower() in ctm_teaser_ressorts:
+        adconfig['zon']['ads'].append(place5[1])
+    else:
+        adconfig['zon']['ads'].append(place5[0])
 
     for page_number, page in enumerate(pages, start=1):
 
@@ -233,6 +238,8 @@ def pages_of_article(article, advertising_enabled=True):
     # Call values() first, to ensure that ensure_divsion() was called.
     blocks = body.values()
 
+    ressort = zeit.content.article.interfaces.IArticle(article).ressort
+
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
     first_division = body._get_element_for_node(first_division)
@@ -261,7 +268,7 @@ def pages_of_article(article, advertising_enabled=True):
     else:
         pubtype = 'zon'
 
-    return _inject_banner_code(pages, pubtype)
+    return _inject_banner_code(pages, pubtype, ressort)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IArticleModule)

@@ -49,6 +49,9 @@
   <setting name="caching_time_videostill" xsi:type="xsd:int">35</setting>
   <setting name="caching_time_external" xsi:type="xsd:int">15</setting>
 
+  <!-- ressorts that shall contain ctm teasers  -->
+  <setting name="ctm_teaser_ressorts" xsi:type="xsd:string">Politik, Wirtschaft, Entdecken</setting>
+
   <!-- overscrolling settings -->
   <setting name="overscrolling_active" xsi:type="xsd:boolean">true</setting>
   <!-- homepage hp overlay settings -->
