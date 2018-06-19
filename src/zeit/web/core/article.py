@@ -119,7 +119,7 @@ def _inject_banner_code(pages, pubtype, ressort):
     ctm_teaser_ressorts = conf.get(
         'ctm_teaser_ressorts').replace(' ', '').lower().split(',')
 
-    if ressort.lower() in ctm_teaser_ressorts:
+    if ressort and ressort.lower() in ctm_teaser_ressorts:
         adconfig['zon']['ads'].append(place5[1])
     else:
         adconfig['zon']['ads'].append(place5[0])
