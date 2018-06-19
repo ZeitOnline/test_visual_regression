@@ -433,6 +433,12 @@ function wmTicker( element ) {
                 data[ i ].home_score = receivedData.home_score; // eslint-disable-line camelcase
                 data[ i ].away_score = receivedData.away_score; // eslint-disable-line camelcase
 
+                // TODO: the backend should send this...
+                data[ i ].running = ( receivedData.status === 'LIVE' ||
+                    receivedData.status === 'HALF-TIME' ||
+                    receivedData.status === 'HALF-EXTRATIME' ||
+                    receivedData.status === 'PENALTY-SHOOTOUT' );
+
                 this.renderView( data );
                 break;
             }
