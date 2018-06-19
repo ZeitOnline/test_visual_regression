@@ -14,7 +14,9 @@
             {% endblock %}
             <div class="{{ self.layout() }}__inner">
                 {% block playbutton %}
-                    {{ lama.playbutton('block', teaser.videoDuration) }}
+                    <span class="video-text-playbutton video-text-playbutton--block">
+                        <span class="video-text-playbutton__text video-text-playbutton__text--block">Video ansehen</span><span class="video-text-playbutton__duration">{{ teaser.renditions[0].video_duration | duration_format }}</span>
+                    </span>
                 {% endblock playbutton %}
                 <h2 class="{{ self.layout() }}-title">
                     <span class="{{ self.layout() }}-title__kicker">
@@ -24,7 +26,9 @@
                         {{ teaser.teaserTitle }}
                     </span>
                     {% block inlineplaybutton %}
-                        {{ lama.playbutton('inline', teaser.videoDuration) }}
+                        <span class="video-text-playbutton video-text-playbutton--inline">
+                            <span class="video-text-playbutton__text video-text-playbutton__text--inline">Video ansehen</span><span class="video-text-playbutton__duration">{{ teaser.renditions[0].video_duration | duration_format }}</span>
+                        </span>
                     {% endblock %}
                 </h2>
                 {% block description %}{% endblock %}
