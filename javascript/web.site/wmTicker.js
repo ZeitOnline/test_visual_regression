@@ -206,9 +206,9 @@ function wmTicker( element ) {
             var time = this.timeString( game.date, game.kickoff, game.period, game.status );
 
             // set hour or game status time
-            var gameHour = new Date( game.date ).getHours();
-            var currentHour = new Date().getHours();
-            var gameShallBeBig = ( gameHour - currentHour ) === 1;
+            var untilGame = ( new Date( game.date ) - new Date() ) / 1000;
+            var preGame = untilGame < 3600 && game.status === 'PRE-MATCH';
+            var gameShallBeBig = preGame || game.running;
             // only one game. Which shall then be displayed big
             if ( data.length === 1 ) {
                 gameShallBeBig = true;
