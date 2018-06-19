@@ -392,7 +392,7 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.handleWebSocketOpen = function() {
         // Update Time if WebSockets enabled every 30 seconds
-        setInterval( this.renderView, 30000 );
+        setInterval( this.renderView.bind( this ), 30000 );
     };
 
     /**
