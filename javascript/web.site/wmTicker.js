@@ -70,7 +70,8 @@ function wmTicker( element ) {
             // mock response for local testing
             console.log( 'WM-TICKER: debugging locally with mocked response' );
             require([ 'web.site/wmTickerData' ], function( data ) {
-                this.renderView( data );
+                this.data = data;
+                this.renderView();
             }.bind( this ) );
         }
     };
@@ -280,16 +281,10 @@ function wmTicker( element ) {
      * @return {string}
      */
     WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
-
         var minuteDifference = getMinuteDifference( kickoff ),
-            returnString = '';
-
-        // date === false if called by WS-handler
-        if ( date ) {
-            var begin = new Date( date ),
-                minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes();
+            begin = new Date( date ),
+            minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
             returnString = 'um ' + begin.getHours() + ':' + minutes;
-        }
 
         kickoff = new Date( kickoff );
 
@@ -376,9 +371,8 @@ function wmTicker( element ) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if ( xhr.readyState === 4 && xhr.status === 200 ) {
-                var receivedData = JSON.parse( xhr.responseText );
-
-                this.renderView( receivedData );
+                this.data = JSON.parse( xhr.responseText );
+                this.renderView();
 
                 if ( initial ) {
                     if ( defaults.wsEnabled ) {
@@ -394,24 +388,11 @@ function wmTicker( element ) {
     };
 
     /**
-     * Count ticker time up and update view
-     */
-    WmTicker.prototype.updateTime = function() {
-        this.renderView( this.data );
-    };
-
-    /**
-     * Update Time if WebSockets enabled every 30 seconds
-     */
-    WmTicker.prototype.addWebSocketTimeIntervall = function() {
-        setInterval( this.updateTime.bind( this ), 30000 );
-    };
-
-    /**
      * what shall happen when websocket connection is openened is described here
      */
     WmTicker.prototype.handleWebSocketOpen = function() {
-        this.addWebSocketTimeIntervall();
+        // Update Time if WebSockets enabled every 30 seconds
+        setInterval( this.renderView, 30000 );
     };
 
     /**
@@ -420,8 +401,7 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.handleWebSocketMessage = function( event ) {
         var receivedData = JSON.parse( event.data );
-        // decouple reference to this.data
-        var data = JSON.parse( JSON.stringify( this.data ) );
+        var data = this.data;
 
         // do not iterate over list data. That should be useless. Only large games needed
         // iterate over old data. Update if needed.
@@ -439,7 +419,7 @@ function wmTicker( element ) {
                     receivedData.status === 'HALF-EXTRATIME' ||
                     receivedData.status === 'PENALTY-SHOOTOUT' );
 
-                this.renderView( data );
+                this.renderView();
                 break;
             }
         }
@@ -463,14 +443,8 @@ function wmTicker( element ) {
         ws.onerror = this.handleWebSocketError.bind( this );
     };
 
-    WmTicker.prototype.renderView = function( data ) {
-        if ( JSON.stringify( this.data ) === JSON.stringify( data ) ) {
-            return;
-        } else {
-            this.data = data;
-        }
-
-        data = this.mapData( data );
+    WmTicker.prototype.renderView = function() {
+        var data = this.mapData( this.data );
         var singleGame = ( data.matches.length + data.list.length ) === 1;
 
         if ( data.matches.length !== 0 || data.list.length !== 0 ) {
