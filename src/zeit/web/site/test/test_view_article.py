@@ -2319,9 +2319,8 @@ def test_faq_page_should_present_links_to_intertitles(testbrowser):
             browser.cssselect('.article__subheading')):
         link_text = browser.cssselect(
             '.article-flexible-toc__link')[index].get('href')
-        assert link_text == ("{}#{}".format(
-            browser.url,
-            zeit.web.core.template.format_faq(subheading.text)))
+        assert link_text == '#' + zeit.web.core.template.format_faq(
+            subheading.text)
 
 
 def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
