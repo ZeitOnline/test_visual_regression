@@ -4,6 +4,8 @@ import pytest
 
 import pyramid.request
 
+import zope.component
+
 import zeit.web.core.application
 
 
@@ -59,6 +61,18 @@ def test_iqd_ads_should_utilize_feature_toggles(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     assert 'AdController.initialize();' not in (
         browser.cssselect('head')[0].text_content())
+
+
+def test_ads_should_utilize_settings(testbrowser):
+    selector = '#iq-artikelanker'
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['ctm_teaser_ressorts'] = ''
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect(selector)) == 0
+
+    conf['ctm_teaser_ressorts'] = 'Gesellschaft'
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect(selector)) == 1
 
 
 def test_adcontroller_handles_for_entdecken_und_reisen(mock_ad_view):
