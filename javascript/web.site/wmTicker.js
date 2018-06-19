@@ -183,11 +183,7 @@ function wmTicker( element ) {
      * @return {integer} negative if game is in past!
      */
     function getMinuteDifference( date ) {
-        date = new Date( date );
-        var today = new Date();
-        today.setHours( date.getHours() );
-        today.setMinutes( date.getMinutes() );
-        var difference = new Date().getTime() - today.getTime();
+        var difference = new Date() - new Date( date );
         return Math.ceil( difference / 1000 / 60 );
     }
 
