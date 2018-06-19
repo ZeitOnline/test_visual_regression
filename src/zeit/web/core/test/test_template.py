@@ -24,6 +24,14 @@ def test_filter_strftime_works_as_expected():
     assert strftime(localtime, '%s') == time.strftime('%s', localtime)
 
 
+def test_filter_duration_format_works_as_expected():
+    duration_format = zeit.web.core.template.duration_format
+    assert duration_format(25000) == '0:25'
+    assert duration_format(9000) == '0:09'
+    assert duration_format(3600000) == '1:00:00'
+    assert duration_format(3680001) == '1:01:20'
+
+
 def test_teaser_layout_should_be_cached_per_unique_id(application, request):
     request.addfinalizer(pyramid.threadlocal.manager.clear)
 
