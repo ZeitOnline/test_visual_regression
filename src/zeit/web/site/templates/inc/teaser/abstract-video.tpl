@@ -1,4 +1,4 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% set teaser_url = teaser | create_url %}
 <article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{ teaser.__name__ }}"
     {% if teaser.serie and teaser.serie.serienname %} data-video-series="{{ teaser.serie.serienname | format_webtrekk }}"{% endif %}

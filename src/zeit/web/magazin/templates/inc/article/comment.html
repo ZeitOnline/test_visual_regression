@@ -1,4 +1,4 @@
-{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama with context %}
 
 <article class="comment{% if comment.is_reply and not comment.is_promoted %} is-indented{% endif %}"{% if not comment.is_promoted %} id="cid-{{ comment.cid }}"{% endif %}>
     <div class="comment__head">

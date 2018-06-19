@@ -1,5 +1,5 @@
 {% if podlove_button_configuration %}
-    {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+    {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
     <script type="text/javascript">
         window.podcastData_{{ podlove_button_id }} = {{ podlove_button_configuration | tojson | safe }};
     </script>
