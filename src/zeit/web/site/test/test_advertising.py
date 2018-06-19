@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import pyramid.testing
 
+import zope.component
+
 import zeit.cms.interfaces
 
 import zeit.web.core.application
@@ -149,15 +151,17 @@ def test_adplaces_have_no_banner_label_data_attribute(testbrowser):
 
 
 def test_banner_content_enabled_shows_all_ads(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['ctm_teaser_ressorts'] = 'Gesellschaft'
     zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
+
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(
-        browser.cssselect('article.article script[id|="ad-desktop"]')) == 3
+        browser.cssselect('article.article script[id|="ad-desktop"]')) == 2
     assert len(
         browser.cssselect('article.article script[id|="ad-mobile"]')) == 2
-    assert not browser.cssselect('#iq-artikelanker')
+    assert browser.cssselect('#iq-artikelanker')
 
-    zeit.web.core.application.FEATURE_TOGGLES.set('iqd_contentmarketing_ad')
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(
         browser.cssselect('article.article script[id|="ad-desktop"]')) == 2
@@ -342,7 +346,7 @@ def test_adtile5_is_empty_on_zmo_paywall(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set(
         'third_party_modules', 'iqd', 'reader_revenue')
     zeit.web.core.application.FEATURE_TOGGLES.unset(
-        'ligatus', 'iqd_contentmarketing_ad')
+        'ligatus')
     param = "?C1-Meter-Status=paywall&C1-Meter-User-Status=always-paid"
     browser = testbrowser('/zeit-magazin/article/01' + param)
     assert not browser.cssselect('#ad-desktop-5')
@@ -350,7 +354,9 @@ def test_adtile5_is_empty_on_zmo_paywall(testbrowser):
 
 def test_contentad_is_rendered_once_on_article_pages(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set(
-        'third_party_modules', 'iqd', 'iqd_contentmarketing_ad')
+        'third_party_modules', 'iqd')
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['ctm_teaser_ressorts'] = 'Deutschland'
 
     selector = '#iq-artikelanker'
 
