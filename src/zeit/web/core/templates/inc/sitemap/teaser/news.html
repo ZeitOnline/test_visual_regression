@@ -1,7 +1,7 @@
 {%- set keywords = teaser.keywords | map(attribute='label') | list + [teaser.ressort, teaser.sub_ressort] | list -%}
 {%- require date = teaser | mod_date | format_date('iso8601') -%}
     <url>
-        <loc>{{ teaser.uniqueId | create_url }}</loc>
+        <loc>{{ teaser | create_url }}</loc>
         <n:news>
             <n:publication>
                 <n:name>ZEIT ONLINE</n:name>
