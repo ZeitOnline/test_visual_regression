@@ -116,8 +116,7 @@ def _inject_banner_code(pages, pubtype, ressort):
     p_length = conf.get('sufficient_paragraph_length', 10)
 
     # split settings string
-    ctm_teaser_ressorts = conf.get(
-        'ctm_teaser_ressorts').replace(' ', '').lower().split(',')
+    ctm_teaser_ressorts = CTM_TEASER_RESSORTS_SOURCE
 
     if ressort and ressort.lower() in ctm_teaser_ressorts:
         adconfig['zon']['ads'].append(place5[1])
@@ -557,3 +556,29 @@ def suppress_intextlinks(article):
         if keyword in INTEXTLINK_BLACKLIST:
             return True
     return False
+
+
+class CtmTeaserRessortsSource(
+        zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.cms'
+    config_url = 'source-ressorts'
+
+    def getValues(self, context):
+        try:
+            tree = self._get_tree()
+        except (TypeError, IOError):
+            return []
+        ctm_ressort = tree.xpath('//ressort[@ctmTeaser="yes"]')
+        ctm_sub_ressort = tree.xpath('//subnavigation[@ctmTeaser="yes"]')
+        result = []
+        for node in ctm_ressort:
+            result.append(node.get('name'))
+        for node in ctm_sub_ressort:
+            result.append(node.get('name'))
+
+        import pdb; pdb.set_trace()
+        return result
+
+
+CTM_TEASER_RESSORTS_SOURCE = CtmTeaserRessortsSource()(None)
