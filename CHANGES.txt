@@ -9,7 +9,7 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- Remove `<videoseries>` from /data/series.xml, use normal <series video="yes"> instead
+- Nothing
 
 
 3.162 (unreleased)
