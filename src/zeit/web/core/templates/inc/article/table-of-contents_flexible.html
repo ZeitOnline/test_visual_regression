@@ -1,35 +1,24 @@
-<aside class="article-flexible-toc article__item">
-    <div class="article-flexible-toc__container">
-        {% block flexible_toc_headline -%}
-        <h3 class="article-flexible-toc__headline" id="article-flexible-toc-label">
+{% set wrapped = view.subheadings | length > 8 -%}
+<aside id="flexible-toc" class="article-flexible-toc article__item" data-ct-area="flexible-toc" data-ct-row="1">
+    <h3 class="article-flexible-toc__headline">
+        {%- block flexible_toc_headline -%}
             Übersicht:
-        </h3>
         {%- endblock -%}
-        <div class="article-flexible-toc__seperator">
-            <ul class="article-flexible-toc__list">
-            {% set morequestions = [] %}
-            {%- for subheading in view.subheadings %}
-                {%- if loop.index > 8 %}
-                    {% if morequestions.append(True) %}{% endif %}
-                {% endif %}
-                <li class="article-flexible-toc__item article-flexible-toc__item--empty {% if morequestions %}article-flexible-toc__item--secondary{% endif %}">
-                    <a class="article-flexible-toc__link js-scroll" href="#{{ subheading.text | striptags | format_faq }}" data-ct-label="{{ subheading.text | safe }}">{{ subheading.text | safe }}</a>
-                </li>
-            {%- endfor -%}
-            </ul>
-            {% if morequestions %}
-                <a href="#article-flexible-toc-label" class="js-scroll article-flexible-toc__item--showall" data-ct-label="mehr anzeigen">
-                    <div class="article-flexible-toc__fadeout"></div>
-                    <div class="article-flexible-toc__showall">Mehr anzeigen</div>
-                </a>
-            {% endif %}
-        </div>
-    </div>
+    </h3>
+    <ul class="article-flexible-toc__list
+        {%- if wrapped %} article-flexible-toc__list--wrapped{% endif %}">
+        {% for subheading in view.subheadings -%}
+        <li class="article-flexible-toc__item">
+            <a class="article-flexible-toc__link js-scroll" href="#{{ subheading.text | striptags | format_faq }}" data-ct-label="text">
+                {{- subheading.text | safe -}}
+            </a>
+        </li>
+        {% endfor -%}
+    </ul>
+    {%- if wrapped -%}
+        <a href="#flexible-toc" class="article-flexible-toc__showall" data-ct-column="false"
+            onclick="this.previousSibling.classList.remove('article-flexible-toc__list--wrapped'); return false;">
+            <span class="article-flexible-toc__more">Mehr anzeigen</span>
+        </a>
+    {% endif -%}
 </aside>
-<script>
-    document.querySelector('.article-flexible-toc__item--showall').onclick = function () {
-        // hide button and overlay and show hidden elements
-        var flexibleTocList = document.querySelector('.article-flexible-toc__list');
-        flexibleTocList.classList.add('article-flexible-toc__list--showall');
-    }
-</script>
