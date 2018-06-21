@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - FIX: Handle no comments in author comments area gracefully
 
+- MAINT: Validate query parameters in "load next" areas
+
 
 3.161 (2018-06-18)
 ------------------
