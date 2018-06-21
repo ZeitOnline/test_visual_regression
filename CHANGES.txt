@@ -4,25 +4,179 @@ Change log for zeit.web
 PREDEPLOY
 ---------
 
-- add feature toggle `dataprotection_popover`
-
-- remove dataprotection settings from all zeitweb-settings.xml
-
+- Nothing
 
 POSTDEPLOY
 ----------
 
-- remove `zon_inline_video_via_html5` from feature toggles
-
-- remove `zon_videosinglepage_via_html5` from feature toggles
+- Nothing
 
 
-3.154 (unreleased)
+3.163 (unreleased)
 ------------------
+
+- Nothing changed yet.
+
+
+3.162 (2018-06-21)
+------------------
+
+- TMS-235: Support link objects in sitemaps
+
+- ZON-4739: Small share-buttons + pocket-button
+
+- ZON-4740: Add google optimize to settings
+
+- BUG-943: Enable Follow-Button in App
+
+- FIX: Handle no comments in author comments area gracefully
+
+- MAINT: Validate query parameters in "load next" areas
+
+
+3.161 (2018-06-18)
+------------------
+
+- ZON-4747: WM-Ticker: Update more link (text & style)
+
+- ZON-4746: WM Ticker Links & WS Update
+
+- MAINT: Remove `ssl_asset_host` remnants
+
+- TMS-231: Update to changed CP API by finally removing `ICP2009` support
+
+- TMS-218: Unify series.xml structure regarding video series
+
+- BUG-931: Implement equality for LazyProxy, so that hide_dupes works with them
+
+
+3.160.3 (2018-06-14)
+--------------------
+
+- MAINT: Update test (don't cache test assets)
+
+
+3.160.2 (2018-06-14)
+--------------------
+
+- ZON-4663: WM Ticker Updates
+
+
+3.160.1 (2018-06-13)
+--------------------
+
+- HOTFIX: WM Ticker: Check presence of data-attributes
+
+
+3.160 (2018-06-13)
+------------------
+
+- ZON-4732: playsinline Tag for Videos
+
+- ZON-4663: WM Ticker Tweaks
+
+- BUG-935: Consider brightcove player loaded as AMD
+
+- BUG-938: Add styles for liveblog badge in buzzbox teaser
+
+- FIX: HP Overlay disabled when Quiz or Podcast plays
+
+- FIX: Add cp26 webtrekk-parameter to FAQ (ZON-4437)
+
+
+3.159.3 (2018-06-12)
+--------------------
+
+- FIX: WM-Ticker Tweaks
+
+
+3.159.2 (2018-06-11)
+--------------------
+
+- FIX: Changed SVG Flag paths
+
+
+3.159.1 (2018-06-11)
+--------------------
+
+- FIX: Re-deploy w\ SVG assets
+
+
+3.159 (2018-06-11)
+------------------
+
+- SSL-160: Add puzzle solution form
+
+- ZON-4663: Add WM Ticker
+
+- ZON-4730: Add new Schulportal link to services
+
+
+3.158.1 (2018-06-07)
+--------------------
+
+- FIX: CSS release due to deployment issues
+
+
+3.158 (2018-06-07)
+------------------
+
+- ZON-4668: Add channel list to webtrekk tracking
+
+- ZON-4720: Override comment sort order default, if indicated by content
+
+- ZON-4708: Unify "back to homepage" buttons
+
+- BUG-932: Fix display mode for header images in AMPs
+
+- FIX: Use correct sso url redirect in the user dashboard view
+
+
+3.157 (2018-06-05)
+------------------
+
+- ZON-4641: Disable HP Overlay on Podcast Play and Quiz
+
+- TMS-226: Update ES fulltext search to changed ContentQuery API
+
+- MAINT: Remove ES sort quickfix
+
+- TMS-233: Support elasticsearch for author articles tab
+
+
+3.156.1 (2018-06-01)
+--------------------
+
+- FIX: Quickfix ES query with url param "sort=None"
+
+
+3.156 (2018-06-01)
+------------------
+
+- BUG-933: Add config for adplace5 vs. content marketing ad
+
+- MAINT: Reuse `mod_date` instead of duplicating its code in `view.date_last_published_semantic`
+
+- MAINT: Update parameter for abo shop link
+
+
+3.155 (2018-05-30)
+------------------
+
+- FIX: Enhance schema.org markup for FAQ articles
+
+
+3.154 (2018-05-30)
+------------------
+
+- TMS-220: Retrieve metadata directly from elasticsearch, instead of whatever
+  reach passes through
 
 - ZON-4638: Markup for podcast-series
 
 - TMS-226: Change channel queries to ES, update to changed ContentQuery API
+
+- FIX: Add link to evidon in all verticals and edit wording
 
 
 3.153 (2018-05-25)

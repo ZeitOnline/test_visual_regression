@@ -36,51 +36,6 @@ def screen_size(request):
     return request.param
 
 
-def test_area_major_should_correctly_process_teasers(application):
-    context = mock.MagicMock()
-
-    def create_mocked_teaserblocks():
-        tb_large = mock.MagicMock()
-        tb_large.layout.id = 'zon-large'
-        tb_large.__len__.return_value = 2
-        tb_large.__iter__ = lambda _: iter(['article'])
-
-        tb_small = mock.MagicMock()
-        tb_small.layout.id = 'zon-small'
-        tb_small.__len__.return_value = 2
-        tb_small.__iter__ = lambda _: iter(['article'])
-
-        tb_no_layout = mock.MagicMock()
-        tb_no_layout.layout = None
-        tb_no_layout.__len__.return_value = 2
-
-        tb_no_layout_id = mock.MagicMock()
-        tb_no_layout_id.layout.id = None
-        tb_no_layout_id.__len__.return_value = 2
-
-        tb_no_teaser_in_block = mock.MagicMock()
-        tb_no_teaser_in_block.layout.id = 'zon-small'
-        tb_no_teaser_in_block.__iter__ = lambda _: iter([])
-
-        return [tb_large, tb_small, tb_no_layout, tb_no_layout_id,
-                tb_no_teaser_in_block]
-
-    def val():
-        m = mock.Mock()
-        m.itervalues = create_mocked_teaserblocks().__iter__
-        return [{'lead': m}]
-    context.values = val
-    context.ressort = 'ressort'
-
-    request = pyramid.testing.DummyRequest()
-    cp = zeit.web.site.view_centerpage.LegacyCenterpage(context, request)
-
-    assert len(cp.area_major) == 4
-    assert cp.area_major.values()[0].layout.id == 'zon-large'
-    assert cp.area_major.values()[1].layout.id == 'zon-small'
-    assert list(cp.area_major.values()[0])[0] == 'article'
-
-
 def test_default_teaser_should_have_certain_blocks(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default.tpl')
@@ -256,9 +211,7 @@ def test_responsive_image_should_render_correctly(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
     image = browser.cssselect(
-        '#main .cp-region .cp-area'
-        ' article:first-of-type figure.scaled-image'
-        ' a > img')
+        '.cp-area--major article:first-of-type figure.scaled-image a > img')
     assert len(image) == 1, 'Only one image for first article'
 
 
@@ -279,8 +232,7 @@ def test_image_should_be_on_position_a(testbrowser):
 def test_responsive_image_should_have_noscript(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
-    noscript = browser.cssselect(
-        '#main .cp-region--duo .scaled-image noscript')
+    noscript = browser.cssselect('.cp-area--major .scaled-image noscript')
     assert len(noscript) == 3
 
 
@@ -319,7 +271,7 @@ def test_centerpage_view_should_have_topic_links(
 def test_cp_areas_should_be_rendered_correctly(testbrowser):
     browser = testbrowser('/zeit-online/index')
 
-    fullwidth = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
+    fullwidth = browser.cssselect('.cp-area.cp-area--major .teaser-fullwidth')
     content = browser.cssselect('.cp-area.cp-area--major')
     informatives = browser.cssselect('.cp-area.cp-area--minor')
 
@@ -444,33 +396,6 @@ def test_small_teaser_without_image_has_no_padding_left(
     assert int(teaser.location.get('x')) == 20
 
 
-def test_parquet_region_list_should_have_regions(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        cp, pyramid.testing.DummyRequest())
-    assert len(view.region_list_parquet) == 3, (
-        'View contains %s parquet regions instead of 4' % len(
-            view.region_list_parquet))
-
-
-def test_parquet_regions_should_have_one_area_each(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        cp, pyramid.testing.DummyRequest())
-    assert [1, 1, 1] == [len(region) for region in view.region_list_parquet]
-
-
-def test_parquet_region_areas_should_have_multiple_modules_each(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        cp, pyramid.testing.DummyRequest())
-    assert all([len(area.values()) > 1 for region in view.region_list_parquet
-                for area in region.values()])
-
-
 def test_parquet_should_display_meta_links_only_on_desktop(
         selenium_driver, testserver):
     driver = selenium_driver
@@ -584,10 +509,10 @@ def test_videostage_has_zon_svg_logo(testbrowser):
 def test_module_printbox_should_produce_teaser_image(
         application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        cp, dummy_request)
-    printbox = zeit.web.core.centerpage.get_module(view.module_printbox)
+        'http://xml.zeit.de/zeit-online/printbox')
+    printbox = zeit.web.core.centerpage.get_module(
+        cp.body.values()[0].values()[1].find_first(
+            zeit.content.cp.interfaces.ICPExtraBlock))
     image = zeit.web.core.template.get_image(
         printbox, name='content', fallback=False)
     assert zeit.web.core.interfaces.IImage.providedBy(image)
@@ -916,7 +841,8 @@ def test_centerpage_invalid_area_id_should_404(testbrowser):
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser):
     browser = testbrowser('/zeit-online/zeitonline')
     assert browser.cssselect('.buzz-box')
-    assert len(browser.cssselect('.buzz-box__teasers article')) == 3
+    assert len(browser.cssselect(
+        '#buzz-mostread .buzz-box__teasers article')) == 3
 
 
 def test_teaser_buzzbox_link_title_should_match_kicker_and_headline(
@@ -979,6 +905,12 @@ def test_gallery_teaser_should_hide_duplicates(testbrowser):
 
     assert first.uniqueId != browser.cssselect(
         '.cp-area--gallery article')[0].get('data-unique-id')
+
+
+def test_gallery_teaser_should_validate_query_parameter(testbrowser):
+    with pytest.raises(urllib2.HTTPError) as info:
+        testbrowser('/zeit-online/teaser-gallery-setup?p=invalid-id')
+    assert info.value.getcode() == 404
 
 
 def test_gallery_teaser_has_correct_elements(testbrowser):
@@ -2575,7 +2507,7 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
 
     # test minor area teasers
     teasers = browser.cssselect('.cp-area--minor article[data-zplus]')
-    assert len(teasers) == 7
+    assert len(teasers) == 8
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert (teaser.cssselect('.{}__kicker-logo--zplus'.format(layout)) or
@@ -3108,3 +3040,23 @@ def test_if_series_is_podcast(testbrowser):
     browser = testbrowser('/serie/ist-das-normal')
     link = browser.cssselect('link[rel="alternate"]')
     assert link[0].get('href') == 'https://istdasnormal.podigee.io/feed/mp3'
+
+
+def test_wm_ticker_is_not_empty(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1000, 1024)
+    driver.get(('%s/zeit-online/index-with-wmticker#debug-wm-ticker-locally'
+                % testserver.url))
+    matches = driver.find_elements_by_class_name('wm-ticker__matches')
+    assert len(matches) == 1
+
+
+def test_centerpage_can_include_optimize(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    assert 'optimize' not in browser.contents
+
+    optimize_url = 'https://www.zeit.de/js/ga_optimize.js'
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['optimize_on_zon_centerpage'] = optimize_url
+    browser = testbrowser('/zeit-online/slenderized-centerpage')
+    assert optimize_url in browser.contents

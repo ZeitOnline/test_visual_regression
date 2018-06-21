@@ -1,11 +1,12 @@
 {% if image %}
-    {%- set image_sources = image_sources | default([320, 480, 660, 820]) %}
+    {%- set image_sources = image_sources | default([320, 480, 660, 750, 820]) %}
+    {%- set display_mode = display_mode | default(block.display_mode if block) %}
     {%- set default_width = 320 %}
     {%- set default_height = (default_width / image.ratio) | int %}
     {%- set image_width = image.fallback_width | default(default_width, True) %}
     {%- set image_height = image.fallback_height | default(default_height, True) %}
     {%- block image %}
-        <figure class="{% block media_block %}{{ 'figure' | with_mods(block.display_mode if block, image_modifier) }}{% endblock %}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
+        <figure class="{% block media_block %}{{ 'figure' | with_mods(display_mode) }}{% endblock %}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
             {% block media -%}
             <amp-img
                 src="{{ request.image_host + image.fallback_path }}"
@@ -14,7 +15,7 @@
                 width="{{ image_width }}"
                 height="{{ image_height }}"
                 {% block sizes -%}
-                    {% if block and block.display_mode == 'large' -%}
+                    {% if display_mode == 'large' -%}
                         sizes="(min-width: 820px) 820px, 100vw"
                     {% endif -%}
                 {% endblock -%}
@@ -25,9 +26,8 @@
             <meta itemprop="url" content="{{ request.image_host + image.fallback_path }}">
             <meta itemprop="width" content="{{ image_width }}">
             <meta itemprop="height" content="{{ image_height }}">
-
-            {% block caption %}
-            <figcaption class="figure__caption">
+            {% block caption -%}
+            <figcaption class="figure__caption" {%- if not image.caption and not image.copyrights | length %} hidden{% endif %}>
                 <span class="figure__text" itemprop="caption">{{ image.caption }}</span>
                 {% for item in image.copyrights %}
                 <span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">

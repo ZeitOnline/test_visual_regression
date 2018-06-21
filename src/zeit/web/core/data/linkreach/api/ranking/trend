@@ -1,49 +1,20 @@
 [
 	{
-		"location": "/politik/deutschland/2015-09/rassismus-gewalt-ostdeutschland-feierabendterroristen",
+		"location": "/zeit-online/article/01",
 		"score": 0.006830385586635586,
-		"uniqueId": "http://xml.zeit.de/zeit-online/article/01",
-		"ressort": "politik",
-		"sub_ressort": "deutschland",
-		"date_first_released": "2015-09-07T10:51:17Z",
-		"product_id": "ZEDE",
-		"supertitle": "Rechte Gewalt im Osten",
-		"title": "Die neuen Feierabendterroristen",
-		"subtitle": "Rassismus ist kein ostdeutsches Phänomen. Aber während Anschläge im Westen konspirativ verlaufen, sind es im Osten pogromartige rassistische Randale mit Dabeistehern.",
-		"channels": ["Politik Deutschland"],
 		"fetchedAt": 1441623241276,
-		"timestamp": 1441623077000,
-		"access": "free"
+		"timestamp": 1441623077000
 	},
 	{
-		"location": "/politik/deutschland/2015-09/deutschland-moral-fluechtlingspolitik",
+		"location": "/zeit-online/liveblog/champions-league",
 		"score": 0.004282090132090131,
-		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-05",
-		"ressort": "politik",
-		"sub_ressort": "deutschland",
-		"date_first_released": "2015-09-07T12:02:13Z",
-		"product_id": "ZEDE",
-		"supertitle": "Flüchtlingspolitik",
-		"title": "\"Deutschland ist eine moralische Autorität\"",
-		"subtitle": "Die Bilder von Tausenden ankommenden Flüchtlingen gehen um die Welt. Internationale Medien loben die \"Willkommenskultur\" der Deutschen – üben aber auch Kritik.",
-		"channels": ["Politik Deutschland"],
 		"fetchedAt": 1441627561250,
-		"timestamp": 1441627333000,
-		"access": "abo"
+		"timestamp": 1441627333000
 	},
 	{
-		"location": "/gesellschaft/2015-09/fluechtlinge-helfer-gemeinnuetzigkeit-interview",
+		"location": "/zeit-magazin/article/zplus-zmo-register",
 		"score": 0.0031609168609168636,
-		"uniqueId": "http://xml.zeit.de/zeit-magazin/article/zplus-zmo-register",
-		"ressort": "gesellschaft",
-		"date_first_released": "2015-09-07T08:52:19Z",
-		"product_id": "ZEDE",
-		"supertitle": "Flüchtlinge",
-		"title": "\"Angela Merkel? Ich kümmer mich lieber selbst\"",
-		"subtitle": "Die Hilfsbewegung für die Flüchtlinge organisiert und vernetzt sich selbst, weil der Staat versagt. Der Forscher Christian Schuldt sieht darin einen grundlegenden Trend.",
-		"channels": ["Gesellschaft"],
 		"fetchedAt": 1441616161326,
-		"timestamp": 1441615939000,
-		"access": "registration"
+		"timestamp": 1441615939000
 	}
 ]

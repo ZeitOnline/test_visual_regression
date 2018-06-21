@@ -1,29 +1,16 @@
 # -*- coding: utf-8 -*-
 import logging
 
-import grokcore.component
-import lxml.etree
 import pyramid.httpexceptions
 import zope.component
-import zope.component.interfaces
-import zope.interface
 
-import zeit.cms.interfaces
-import zeit.content.cp.area
 import zeit.content.cp.interfaces
 
-from zeit.web.core.centerpage import Region, Area
 import zeit.web
-import zeit.web.core.centerpage
-import zeit.web.core.interfaces
 import zeit.web.core.navigation
 import zeit.web.core.template
-import zeit.web.core.utils
 import zeit.web.core.view
-import zeit.web.core.centerpage
 import zeit.web.core.view_centerpage
-import zeit.web.site.module.buzzbox
-import zeit.web.site.module.printbox
 import zeit.web.site.view
 
 
@@ -31,7 +18,7 @@ log = logging.getLogger(__name__)
 
 
 @zeit.web.view_defaults(
-    context=zeit.content.cp.interfaces.ICP2015,
+    context=zeit.content.cp.interfaces.ICenterPage,
     vertical='zon')
 @zeit.web.view_config(
     custom_predicates=(zeit.web.core.view.is_advertorial,),
@@ -63,9 +50,17 @@ class Centerpage(
             self._buzzboard_images.update({image: True})
         return registered_images
 
+    @zeit.web.reify
+    def include_optimize(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        if self.is_hp:
+            return conf.get('optimize_on_zon_homepage', None)
+        else:
+            return conf.get('optimize_on_zon_centerpage', None)
+
 
 @zeit.web.view_config(
-    context=zeit.content.cp.interfaces.ICP2015,
+    context=zeit.content.cp.interfaces.ICenterPage,
     vertical='zon',
     custom_predicates=(zeit.web.core.view.is_paginated,),
     renderer='templates/centerpage.html')
@@ -74,7 +69,7 @@ class CenterpagePage(zeit.web.core.view_centerpage.CenterpagePage, Centerpage):
 
 
 @zeit.web.view_config(
-    context=zeit.content.cp.interfaces.ICP2015,
+    context=zeit.content.cp.interfaces.ICenterPage,
     vertical='zon',
     custom_predicates=(zeit.web.core.view.is_paywalled,))
 def temporary_redirect_paywalled_centerpage(context, request):
@@ -163,125 +158,3 @@ class Storystream(Centerpage):
         self.atom_meta['count'] = atom_counter
         self.atom_meta['oldest_date'] = oldest_atom
         self.atom_meta['latest_date'] = latest_atom
-
-
-@zeit.web.view_defaults(
-    context=zeit.content.cp.interfaces.ICenterPage,
-    vertical='zon')
-@zeit.web.view_config(
-    custom_predicates=(zeit.web.core.view.is_advertorial,),
-    renderer='templates/centerpage_advertorial.html')
-@zeit.web.view_config(
-    renderer='templates/centerpage.html')
-class LegacyCenterpage(Centerpage):
-    """Legacy view for centerpages built with the old cp-editor."""
-
-    @zeit.web.reify
-    def regions(self):
-        regions = []
-
-        if(len(self.area_solo.values()) > 0):
-            region_fullwidth = Region([self.area_solo])
-            regions.append(region_fullwidth)
-
-        region_multi = Region([self.area_major, self.area_minor], kind='duo')
-        regions.append(region_multi)
-
-        regions += self.region_list_parquet
-
-        return regions
-
-    @zeit.web.reify
-    def area_solo(self):
-        """Return all fullwidth teaser blocks with a minimum length of 1."""
-
-        def valid_module(m):
-            return zeit.web.core.template.get_layout(m) in (
-                'zon-fullwidth')
-
-        area = self.context.values()[0]['lead']
-        return Area([m for m in area.itervalues() if valid_module(m)])
-
-    @zeit.web.reify
-    def area_major(self):
-        """Return all non-fullwidth teaser blocks with a min length of 1."""
-
-        def valid_module(m):
-            return zeit.web.core.template.get_layout(m) not in (
-                'zon-fullwidth', 'hide')
-
-        area = self.context.values()[0]['lead']
-        return Area([m for m in area.itervalues() if valid_module(m)],
-                    kind='major')
-
-    @zeit.web.reify
-    def area_minor(self):
-        """Return an automated informatives-style area with buzz and ads."""
-
-        return Area([m for m in (
-            self.module_buzz_mostread, self.module_printbox) if m],
-            kind='minor')
-
-    @zeit.web.reify
-    def module_buzz_mostread(self):
-        """Return buzz box module with the top 3 most read articles."""
-
-        return zeit.content.cp.blocks.cpextra.CPExtraBlock(
-            self.context,
-            lxml.etree.fromstring('<container module="mostread"/>'))
-
-    @zeit.web.reify
-    def module_printbox(self):
-        """Return the module block for the Printbox or Angebotsbox."""
-
-        return zeit.content.cp.blocks.cpextra.CPExtraBlock(
-            self.context,
-            lxml.etree.fromstring('<container module="printbox"/>'))
-
-    @zeit.web.reify
-    def region_list_parquet(self):
-        """Re-model the parquet to conform with new RAM-style structure."""
-
-        regions = []
-        for area in self.context.values()[1].itervalues():
-            if area.kind != 'parquet':
-                continue
-            for block in area.values():
-                try:
-                    legacy = zope.component.getMultiAdapter(
-                        (area, block),
-                        zeit.content.cp.interfaces.IRenderedArea)
-                except (zope.component.interfaces.ComponentLookupError,
-                        AttributeError, TypeError):
-                    continue
-                regions.append(Region([legacy], kind='parquet'))
-
-        return regions
-
-
-@grokcore.component.adapter(
-    zeit.content.cp.interfaces.IArea,
-    zeit.content.cp.interfaces.ITeaserBlock)
-@grokcore.component.implementer(
-    zeit.content.cp.interfaces.IRenderedArea)
-class RenderedLegacyArea(zeit.web.core.centerpage.Area):
-
-    def __init__(self, area, block):
-        area.count = int(block.xml.get('display_amount', 3))
-        uid = unicode(block.xml.find('./referenced_cp'))
-        area.referenced_cp = zeit.cms.interfaces.ICMSContent(uid, None)
-        area.automatic_type = 'centerpage'
-        area.hide_dupes = (block.xml.get('hide-dupes') == 'True')
-        auto = zeit.content.cp.interfaces.IRenderedArea(area)
-        content = auto._content_query()
-
-        lids = [block.layout.id] + area.count * ['zon-small']
-        modules = [zeit.web.core.centerpage.TeaserModule(
-            [t], layout=lids.pop(0), parent=self) for t in content]
-        super(RenderedLegacyArea, self).__init__(
-            modules, kind='parquet', is_teaserbar=True)
-
-        self.read_more = block.read_more
-        self.read_more_url = block.read_more_url
-        self.title = block.title
-        self.referenced_cp = area.referenced_cp

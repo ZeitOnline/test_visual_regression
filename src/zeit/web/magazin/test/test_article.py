@@ -195,7 +195,8 @@ def test_article03_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp32': 'unfeasible'}
+        'cp32': 'unfeasible',
+        'cp38': 'undefined'}
 
 
 def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
@@ -253,7 +254,8 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp32': 'unfeasible'}
+        'cp32': 'unfeasible',
+        'cp38': 'undefined'}
 
 
 def test_cp_has_correct_webtrekk_values(httpbrowser):
@@ -338,7 +340,8 @@ def test_cp_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp32': 'unfeasible'}
+        'cp32': 'unfeasible',
+        'cp38': 'undefined'}
 
 
 def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
@@ -957,8 +960,16 @@ def test_share_buttons_are_present(testbrowser):
     assert query.get('link').pop(0).startswith(canonical)
     assert query.get('app_id').pop(0) == '638028906281625'
 
-    #  mail
+    #  pocket
     parts = urlparse.urlparse(links[5].get('href'))
+    query = urlparse.parse_qs(parts.query)
+    url = query['url'][0]
+    assert 'utm_source=pocket_zonaudev_ext' in url
+    assert 'utm_campaign=ref' in url
+    assert 'utm_content=zeitde_share_link_x' in url
+
+    #  mail
+    parts = urlparse.urlparse(links[6].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Der Chianti hat eine zweite Chance verdient - '
             'Artikel auf ZEITmagazin ONLINE') in query.get('subject').pop(0)
@@ -969,7 +980,8 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[2].text == 'Flippen'
     assert labels[3].text == 'WhatsApp'
     assert labels[4].text == 'Facebook Messenger'
-    assert labels[5].text == 'Mailen'
+    assert labels[5].text == 'Pocket'
+    assert labels[6].text == 'Mailen'
 
 
 def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):

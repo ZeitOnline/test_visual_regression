@@ -24,20 +24,6 @@ def test_filter_strftime_works_as_expected():
     assert strftime(localtime, '%s') == time.strftime('%s', localtime)
 
 
-def test_zon_large_teaser_mapping_is_working_as_expected(application):
-    block = mock.Mock()
-    block.__iter__ = lambda _: iter(['article'])
-    block.layout.id = 'leader'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-large'
-    block.layout.id = 'leader-two-columns'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-large'
-    block.layout.id = 'leader-panorama'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-large'
-
-
 def test_teaser_layout_should_be_cached_per_unique_id(application, request):
     request.addfinalizer(pyramid.threadlocal.manager.clear)
 
@@ -81,70 +67,6 @@ def test_get_layout_should_deal_with_all_sort_of_unset_params(
 
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
-
-
-def test_zon_small_teaser_mapping_is_working_as_expected(application):
-    block = mock.Mock()
-    block.__iter__ = lambda _: iter(['article'])
-    block.layout.id = 'text-teaser'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-small'
-    block.layout.id = 'buttons'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-small'
-    block.layout.id = 'large'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-small'
-    block.layout.id = 'short'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-small'
-    block.layout.id = 'date'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-small'
-
-
-def test_zon_fullwidth_teaser_mapping_is_working_as_expected(application):
-    block = mock.Mock()
-    block.__iter__ = lambda _: iter(['article'])
-    block.layout.id = 'leader-fullwidth'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-fullwidth'
-
-
-def test_zon_inhouse_teaser_mapping_is_working_as_expected(application):
-    block = mock.Mock()
-    block.__iter__ = lambda _: iter(['article'])
-    block.layout.id = 'parquet-verlag'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-inhouse'
-
-
-def test_hide_teaser_mapping_is_working_as_expected(application):
-    block = mock.Mock()
-    block.__parent__ = mock.Mock()
-    block.__parent__.kind = 'major'
-    block.__iter__ = lambda _: iter(['article'])
-    block.layout.id = 'archive-print-volume'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'hide'
-    block.layout.id = 'archive-print-year'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'hide'
-    block.layout.id = 'two-side-by-side'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'hide'
-    block.layout.id = 'ressort'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'hide'
-    block.layout.id = 'leader-upright'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'hide'
-    block.layout.id = 'buttons-fullwidth'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'hide'
-    block.layout.id = 'parquet-printteaser'
-    teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'hide'
 
 
 def test_teaser_for_columns_should_have_according_journalistic_format(

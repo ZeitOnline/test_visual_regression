@@ -153,7 +153,7 @@ class Base(zeit.web.core.view.Base):
 
 
 @zeit.web.view_config(
-    context=zeit.content.cp.interfaces.ICP2015,
+    context=zeit.content.cp.interfaces.ICenterPage,
     host_restriction='newsfeed')
 class Newsfeed(Base):
 

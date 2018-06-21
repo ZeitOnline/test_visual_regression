@@ -108,50 +108,12 @@
                     "zeit.web.core:templates/amp/article/publisher.html"] %}
                 <meta itemprop="mainEntityOfPage" content="{{ view.content_url }}">
                 {% block article_head -%}
-                <header class="{{ 'article__header' | with_mods('has-volume' if view.zplus_label) }}">
-                    <h1 class="headline article__item" itemprop="headline">
-                        <span class="headline__kicker">
-                            {%- if view.context is column -%}
-                                {{- '%s / ' | format(view.serie) -}}
-                            {%- endif -%}
-                            {{- view.supertitle -}}
-                        </span>
-                        {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
-                        <span class="headline__title">
-                            {{- view.title -}}
-                        </span>
-                    </h1>
-                    {% block zplus_badge %}
-                        {% include "zeit.web.core:templates/amp/article/zplus-badge.html" %}
-                    {% endblock %}
-                    <div class="article__item">
-                        <div class="summary" itemprop="description">
-                            {{ view.subtitle }}
-                        </div>
-                        {% set byline = view.context | get_byline('main') -%}
-                        {% if byline | length -%}
-                        <div class="byline">
-                            {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
-                        </div>
-                        {% else -%}
-                        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                            <meta itemprop="name" content="{% if view.context.product %}{{ view.context.product.title }}{% else %}ZEIT ONLINE{% endif %}">
-                        </span>
-                        {% endif -%}
-                        <div class="metadata">
-                            {% include "zeit.web.core:templates/amp/article/metadata.html" %}
-                        </div>
-                    </div>
-                </header>
+                    {% include ["zeit.web.core:templates/amp/article-header/{}.html".format(view.header_layout),
+                                "zeit.web.core:templates/amp/article-header/default.html"] %}
                 {%- endblock %}
 
                 {% block article_body -%}
                 <div class="article__body" itemprop="articleBody">
-                    {% block article_main_image %}
-                        {% set block = view.header_module %}
-                        {% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
-                    {% endblock article_main_image %}
-
                     {% block article_pages %}
                         {% for page in view.pages %}
                             {% set adplaces = view.pages | adplaces([(0, 3),(3, 4)]) %}
@@ -203,6 +165,16 @@
                                     <span class="article-sharing__text">Twittern</span>
                                 </a>
                             </li>
+                            
+                            <li class="article-sharing__item">
+                                <a class="article-sharing__link article-sharing__link--flipboard" href="https://share.flipboard.com/bookmarklet/popout?v=2&title={{ view.title | urlencode }}&url={{ content_url.format('flipboard') | urlencode | replace('sm.ext', 'soref.ext') }}">
+                                    <svg class="article-sharing__icon">
+                                        <use xlink:href="#svg-sharing-flipboard"/>
+                                    </svg>
+                                    <span class="article-sharing__text">Flippen</span>
+                                </a>
+                            </li>
+                            
                             <li class="article-sharing__item article-sharing__item--whatsapp">
                                 <a class="article-sharing__link article-sharing__link--whatsapp" href="whatsapp://send?text={{ '%s - Artikel auf %s: %s' | format(view.title, view.publisher_name, content_url.format('whatsapp')) | urlencode }}">
                                     <svg class="article-sharing__icon">
@@ -217,6 +189,14 @@
                                         <use xlink:href="#svg-sharing-messenger"/>
                                     </svg>
                                     <span class="article-sharing__text">Facebook Messenger</span>
+                                </a>
+                            </li>
+                            <li class="article-sharing__item">
+                                <a class="article-sharing__link article-sharing__link--pocket" href="https://getpocket.com/save?url={{(content_url ~ ga_campaign).format('pocket') | urlencode }}">
+                                    <svg class="article-sharing__icon">
+                                        <use xlink:href="#svg-sharing-pocket"/>
+                                    </svg>
+                                    <span class="article-sharing__text">Pocket</span>
                                 </a>
                             </li>
                             <li class="article-sharing__item">

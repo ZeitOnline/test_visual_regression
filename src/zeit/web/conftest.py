@@ -146,6 +146,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/article-genres.xml'),
         'vivi_zeit.content.article_image-display-mode-source': (
             'egg://zeit.web.core/data/config/article-image-display-modes.xml'),
+        'vivi_zeit.content.article_puzzleforms-source': (
+            'egg://zeit.content.article/edit/tests/puzzleforms.xml'),
         'vivi_zeit.content.article_legacy-display-mode-source': (
             'egg://zeit.web.core/data/config/article-legacy-display-modes.xml'
         ),
@@ -219,8 +221,6 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/zco-jobmarket.xml'),
         'vivi_zeit.content.gallery_gallery-types-url': (
             'egg://zeit.web.core/data/config/gallery-types.xml'),
-        'vivi_zeit.web_series-source': (
-            'egg://zeit.web.core/data/config/series.xml'),
         'vivi_zeit.web_feature-toggle-source': (
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
         'vivi_zeit.imp_scale-source':
@@ -234,8 +234,6 @@ def app_settings(mockserver):
         'vivi_zeit.push_facebook-main-account': 'fb-test',
         'vivi_zeit.push_facebook-magazin-account': 'fb-magazin',
         'vivi_zeit.push_facebook-campus-account': 'fb-campus',
-        'vivi_zeit.content.video_source-serie': (
-            'egg://zeit.web.core/data/config/video-serie.xml'),
         'vivi_zeit.content.volume_volume-cover-source': (
             'egg://zeit.web.core/data/config/volume-covers.xml'),
         'vivi_zeit.content.volume_default-teaser-text': (
@@ -932,7 +930,7 @@ class MockES(MockSearch):
 
     zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
 
-    def search(self, query, order, rows=25, **kw):
+    def search(self, query, order=None, rows=25, **kw):
         result = zeit.cms.interfaces.Result(self.pop_results(rows))
         result.hits = self._hits
         return result

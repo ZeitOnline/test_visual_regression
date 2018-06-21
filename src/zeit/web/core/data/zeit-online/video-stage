@@ -71,8 +71,8 @@
                 </container>
             </region>
         </cluster>
-        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff7" visible="True" kind="solo">
-            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
+        <cluster area="id-6637ff7f3-9042-4a6f-b88d-143fdfc5cff7" visible="True" kind="solo">
+            <region area="id-9123c8ee-b68e-40dd-a117-4d676e28aebd" visible="True" kind="solo">
                 <container cp:type="playlist" module="playlist" visible="True" cp:__name__="id-7b4d43b7-5434-47b6-8a15-dfd1f4f45a2d">
                   <block type="intern" href="http://xml.zeit.de/video/playlist/36516804001" contenttype="playlist" publication-date="" expires="" uniqueId="http://xml.zeit.de/video/playlist/36516804001" date-last-modified="2015-06-08T11:20:18+00:00" date-first-released="2015-03-19T01:32:12.609203+00:00" date-last-published="2015-06-08T11:21:18.553021+00:00" last-semantic-change="2015-06-08T11:17:11+00:00">
                   </block>

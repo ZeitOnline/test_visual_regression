@@ -302,24 +302,28 @@ class CenterpagePage(object):
             return []
 
         # Reconstruct a paginated cp with optional header and ranking area.
-        regions = [zeit.web.core.centerpage.Region(
-            [zeit.web.core.centerpage.IRendered(
-                self.area_providing_pagination)])]
+        pagination_region = zeit.web.core.centerpage.Region(
+            self.context.body)
+        pagination_region.kind = 'solo'
+        pagination_region.add(self.area_providing_pagination)
+        regions = [pagination_region]
 
         # We keep any areas of the first region that contain at least one kind
         # of preserve-worthy module.
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        preserved_areas = []
+        preserve_region = zeit.web.core.centerpage.Region(
+            self.context.body)
+        preserve_region.kind = 'solo'
         for mod in conf.get('cp_preserve_modules_on_pagination', '').split():
             module = zeit.web.core.utils.find_block(values[0], module=mod)
             if module:
                 area = module.__parent__
-                if area not in preserved_areas:
-                    preserved_areas.append(
-                        zeit.web.core.centerpage.IRendered(area))
+                if area.__name__ not in preserve_region:
+                    preserve_region.add(zeit.web.core.centerpage.IRendered(
+                        zeit.web.core.centerpage.get_area(area)))
 
-        if preserved_areas:
-            regions.insert(0, zeit.web.core.centerpage.Region(preserved_areas))
+        if len(preserve_region):
+            regions.insert(0, preserve_region)
 
         return regions
 

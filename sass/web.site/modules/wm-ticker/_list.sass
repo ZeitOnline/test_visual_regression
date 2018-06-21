@@ -1,0 +1,121 @@
+.wm-ticker
+	&__list
+		display: block
+
+		&--hidden
+			display: none
+
+	&__list-content
+		margin-bottom: 0
+		margin-top: 0
+		padding-left: 0
+		list-style: none
+
+	&__list-teams
+		text-align: center
+		font-size: em(14px)
+		font-weight: lighter
+		text-transform: uppercase
+		margin: remify(0 8px)
+		width: remify(75px)
+
+	&__list-time
+		color: $zon-grey
+		font-size: em(14px)
+		font-weight: lighter
+		min-width: remify(85px)
+		padding-right: remify(10px)
+		text-align: right
+
+	&__match
+		align-items: center
+		border-bottom: 1px solid $color-border
+		display: flex
+		justify-content: space-between
+		padding-bottom: remify(4px)
+		padding-top: remify(4px)
+
+		&:first-of-type
+			border-top: 1px solid $color-border
+
+		&:last-of-type
+			margin-bottom: remify(28px)
+
+		&--finished
+			background-color: $grey--light
+
+	&__match-link,
+	&__match-info
+		align-items: center
+		color: $zon-grey
+		display: flex
+		justify-content: space-between
+
+	&__match-score
+		width: 50px
+
+		&--finished
+			color: $grey--dark
+			font-weight: bold
+
++respond-min($break-desktop-min)
+	.wm-ticker
+		&__match
+			position: relative
+
+			&:last-of-type
+				margin-bottom: 0
+
+		&__list--hidden
+				display: block
+
+		&__list-teams
+			font-size: em(13px)
+			font-weight: bold
+
+		&__list-time
+			margin-left: remify(10px)
+
+// handle display grid modifier
++respond-min($break-desktop-min)
+	.wm-ticker__list-content--grid
+		display: grid
+		grid-gap: 40px
+		grid-auto-flow: column
+
+		.wm-ticker__match
+			border-top: 1px solid $color-border
+
+		&.wm-ticker__list-content--items-2
+			grid-template-columns: repeat(2, 1fr)
+
+		&.wm-ticker__list-content--items-3
+			grid-template-columns: repeat(3, 1fr)
+
+		&.wm-ticker__list-content--items-4
+			grid-row-gap: 0
+			grid-template-columns: repeat(2, 1fr)
+			grid-template-rows: repeat(2, 1fr)
+
+			// hide border bottom for every odd child to stop duplicate borders
+			.wm-ticker__match
+				&:nth-child(odd)
+					border-top: 1px solid $color-border
+					border-bottom: none
+
+				&:nth-child(even)
+					border-top: 1px solid $color-border
+					border-bottom: 1px solid $color-border
+
+				// hide line after third item only if four items are present
+				&:nth-of-type(3)::after
+					display: none
+
+		.wm-ticker__match:not(:last-of-type)::after
+			content: ''
+			position: absolute
+			right: -20px
+			top: -20px
+			bottom: -20px
+			width: 1px
+			background-color: $zon-alto

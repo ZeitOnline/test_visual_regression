@@ -16,9 +16,17 @@ def test_amp_view_should_have_expected_structure(testbrowser):
 def test_amp_view_should_consider_image_display_mode(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/image-column-width')
     article = browser.cssselect('article.article')[0]
-    image = article.cssselect('figure.figure')[0]
+    image = article.cssselect('figure.figure')[1]
 
     assert 'figure--column-width' in image.get('class')
+
+
+def test_amp_view_should_ignore_header_image_display_mode(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/image-column-width')
+    article = browser.cssselect('article.article')[0]
+    image = article.cssselect('figure.figure')[0]
+
+    assert 'figure--large' in image.get('class')
 
 
 def test_amp_contains_required_microdata(testbrowser):

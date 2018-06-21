@@ -458,12 +458,6 @@ class HeaderImage(Image):
 
     def __init__(self, model_block, header):
         super(HeaderImage, self).__init__(model_block)
-        if getattr(self, 'block_type', None) == 'infographic':
-            # XXX Annoying special case, header images don't usually use
-            # display_mode but rather handle their display in the respective
-            # header template, but infographics have their own template that
-            # does not distinguish between header and body (at the moment).
-            self.display_mode = 'large'
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
@@ -524,6 +518,24 @@ class RawText(Module):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ICitation)
 class Citation(Module):
     pass
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IPuzzleForm)
+class PuzzleForm(Module):
+
+    @pyramid.decorator.reify
+    def success_message(self):
+        return u"Vielen Dank für Ihre Einsendung."
+
+    @pyramid.decorator.reify
+    def failure_message(self):
+        return u"Leider ist ein technisches Problem aufgetreten." \
+               u"Bitte versuchen Sie es später erneut."
+
+    @pyramid.decorator.reify
+    def is_multiple(self):
+        return self.puzzle_type.multiple
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
