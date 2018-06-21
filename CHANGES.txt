@@ -15,7 +15,7 @@ POSTDEPLOY
 3.163 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4705: Add ZMO seriespage
 
 
 3.162 (2018-06-21)
