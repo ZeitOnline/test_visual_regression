@@ -227,6 +227,8 @@ class Comments(Author):
                         [comment], layout='user-comment')
                     module.__name__ = None  # XXX API clash
                     area.add(module)
+            else:
+                area._comments_meta = {'page_total': 0, 'page': 1}
         except zeit.web.core.comments.PagesExhaustedError:
             raise pyramid.httpexceptions.HTTPNotFound()
         except zeit.web.core.comments.UserCommentsException:

@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - ZON-4740: Add google optimize to settings
 
+- FIX: Handle no comments in author comments area gracefully
+
 
 3.161 (2018-06-18)
 ------------------
