@@ -97,7 +97,7 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
             module = area.create_item('teaser')
             module.layout = zon_small
             module.force_mobile_image = not bool(index)
-            module.insert(0, content)
+            module.insert(0, content, suppress_errors=True)
         return zeit.web.core.centerpage.IRendered(area)
 
     @zeit.web.reify
