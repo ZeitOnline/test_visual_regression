@@ -2314,13 +2314,14 @@ def test_faq_page_should_present_a_link_for_each_intertitle(testbrowser):
 def test_faq_page_should_present_links_to_intertitles(testbrowser):
     browser = testbrowser('/zeit-online/article/faq')
 
-    browser.cssselect('.article-flexible-toc__item')[0]
-    for index, subheading in enumerate(
-            browser.cssselect('.article__subheading')):
-        link_text = browser.cssselect(
-            '.article-flexible-toc__link')[index].get('href')
-        assert link_text == '#' + zeit.web.core.template.format_faq(
-            subheading.text)
+    subheadings = browser.cssselect('.article__subheading')
+    links = browser.cssselect('.article-flexible-toc__link')
+
+    assert (subheadings)
+
+    for index, subheading in enumerate(subheadings):
+        href = links[index].get('href')
+        assert href == '#' + subheading.get('id')
 
 
 def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
