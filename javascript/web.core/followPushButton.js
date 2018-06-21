@@ -9,7 +9,7 @@ define([ ], function() {
     return {
         init: function() {
 
-            if ( !window.Zeit.isWrapped || !window.PushManager ) {
+            if ( !window.Zeit.isWrapped ) {
                 return;
             }
 
