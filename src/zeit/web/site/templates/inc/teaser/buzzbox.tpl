@@ -7,6 +7,6 @@
 {% block teaser_container %}
     <span class="{{ self.layout() }}__metadata">
         {{ lama.use_svg_icon(module.icon, self.layout() + '__icon', view.package, a11y=false) }}
-        {{ (teaser.score * module.score_factor) | round | pluralize(*module.score_pattern) }}
+        {{ (adapt(teaser, 'zeit.web.core.interfaces.IReachData').score * module.score_factor) | round | pluralize(*module.score_pattern) }}
     </span>
 {% endblock %}
