@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - ZON-4740: Add google optimize to settings
 
+- BUG-943: Enable Follow-Button in App
+
 - FIX: Handle no comments in author comments area gracefully
 
 - MAINT: Validate query parameters in "load next" areas
