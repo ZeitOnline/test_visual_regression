@@ -74,6 +74,11 @@ function wmTicker( element ) {
                 this.renderView();
             }.bind( this ) );
         }
+
+        // Update game time display every 10 seconds
+        // TODO: this should probably only run when a game
+        //   is running or about to start...
+        setInterval( this.updateTime.bind( this ), 10000 );
     };
 
 
@@ -203,7 +208,7 @@ function wmTicker( element ) {
         data.forEach( function( game ) {
             var teams = this.mapCountryCodes( game.away_name, game.home_name );
 
-            var time = this.timeString( game.date, game.kickoff, game.period, game.status );
+            var time = timeString( game.date, game.kickoff, game.period, game.status );
 
             // set hour or game status time
             var untilGame = ( new Date( game.date ) - new Date() ) / 1000;
@@ -276,7 +281,7 @@ function wmTicker( element ) {
      * @param  {string}  date string supplied by API
      * @return {string}
      */
-    WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
+    function timeString( date, kickoff, period, status ) {
         var minuteDifference = getMinuteDifference( kickoff ),
             begin = new Date( date ),
             minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
@@ -321,6 +326,18 @@ function wmTicker( element ) {
             }
         }
         return returnString;
+    }
+
+    /**
+     * Count ticker time up and update view
+     */
+    WmTicker.prototype.updateTime = function() {
+        this.data.forEach( function( game ) {
+            var elem = document.getElementById( 'time-' + game.id );
+            if ( elem ) {
+                elem.innerText = timeString( game.date, game.kickoff, game.period, game.status );
+            }
+        });
     };
 
     /**
@@ -384,14 +401,6 @@ function wmTicker( element ) {
     };
 
     /**
-     * what shall happen when websocket connection is openened is described here
-     */
-    WmTicker.prototype.handleWebSocketOpen = function() {
-        // Update Time if WebSockets enabled every 30 seconds
-        setInterval( this.renderView.bind( this ), 30000 );
-    };
-
-    /**
      * WebSocket receiving message is handled here..
      * @param  {object}  event with only updated data set. Map by Id!
      */
@@ -434,7 +443,6 @@ function wmTicker( element ) {
     WmTicker.prototype.initWebSocket = function() {
         var ws = new WebSocket( defaults.webSocketURL + defaults.webSocketPath );
 
-        ws.onopen = this.handleWebSocketOpen.bind( this );
         ws.onmessage = this.handleWebSocketMessage.bind( this );
         ws.onerror = this.handleWebSocketError.bind( this );
     };
