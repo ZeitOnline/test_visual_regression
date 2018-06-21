@@ -12,7 +12,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.162 (unreleased)
+3.162 (2018-06-21)
 ------------------
 
 - TMS-235: Support link objects in sitemaps
