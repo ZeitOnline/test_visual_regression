@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+User-agent: Googlebot-News
+Disallow: /zmo-assets/js/web.core/plugins/jquery.clarify.js
