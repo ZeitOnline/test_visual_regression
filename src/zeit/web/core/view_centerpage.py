@@ -345,8 +345,8 @@ class CenterpagePage(object):
     renderer='templates/sitemap.html')
 class Sitemap(Centerpage):
 
-    # Seems like google does not accept dates < 1970 but this can be the case
-    min_date = babel.dates.get_timezone('Europe/Berlin').localize(
+    # Seems like Google does not accept modification dates < 1970
+    min_modified_display = babel.dates.get_timezone('Europe/Berlin').localize(
         datetime.datetime(1970, 1, 1))
 
     def __init__(self, context, request):
