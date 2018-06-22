@@ -1,7 +1,7 @@
 <header class="{{ 'article__header' | with_mods('has-volume' if view.zplus_label) }}">
     {% block embed %}{% endblock -%}
 
-    <h1 class="headline article__item" itemprop="headline">
+    <h1 class="headline article__item">
         <span class="headline__kicker">
             {%- if view.context is column -%}
                 {{- '%s / ' | format(view.serie) -}}
@@ -16,7 +16,7 @@
     {% include ["{}:templates/amp/article/zplus-badge.html".format(view.package),
                 "zeit.web.core:templates/amp/article/zplus-badge.html"] %}
     <div class="article__item">
-        <div class="summary" itemprop="description">
+        <div class="summary">
             {{ view.subtitle }}
         </div>
         {% set byline = view.context | get_byline('main') -%}

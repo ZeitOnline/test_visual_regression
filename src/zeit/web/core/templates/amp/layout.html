@@ -1,5 +1,5 @@
 <!doctype html>
-<html ⚡ lang="de" itemscope itemtype="http://schema.org/WebPage">
+<html ⚡ lang="de">
 <head>
     <meta charset="utf-8">
     <title>{{ view.pagetitle }}</title>
@@ -66,20 +66,13 @@
     {%- include "zeit.web.core:templates/amp/tracking/ivw.html" -%}
 
     <div class="content" id="top">
-        <header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <header class="header">
             {% block logo %}
             <div class="article__item article__item--wide">
-                <a itemprop="url" href="{{ request.route_url('home') }}index">
-                    <meta itemprop="name" content="ZEIT ONLINE">
-                    <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-                        <svg class="header__logo">
-                            <use xlink:href="#svg-logo-zon"/>
-                        </svg>
-                        {# The "logo" dimensions must not exceed 600x60 -#}
-                        <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
-                        <meta itemprop="width" content="565">
-                        <meta itemprop="height" content="60">
-                    </span>
+                <a href="{{ request.route_url('home') }}index">
+                    <svg class="header__logo">
+                        <use xlink:href="#svg-logo-zon"/>
+                    </svg>
                 </a>
             </div>
             {% endblock logo %}
@@ -94,26 +87,17 @@
             {% include "zeit.web.core:templates/amp/amp-ads/tile_1.html" %}
         {% endif %}
 
-        <main itemprop="mainContentOfPage">
+        <main>
         {% block main %}
             {% block content %}
-            <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/
-                {%- if view.liveblog and view.liveblog.liveblog -%}
-                    LiveBlogPosting
-                {%- else -%}
-                    Article
-                {%- endif -%}">
-                {% include [
-                    "{}:templates/amp/article/publisher.html".format(view.package),
-                    "zeit.web.core:templates/amp/article/publisher.html"] %}
-                <meta itemprop="mainEntityOfPage" content="{{ view.content_url }}">
+            <article class="article">
                 {% block article_head -%}
                     {% include ["zeit.web.core:templates/amp/article-header/{}.html".format(view.header_layout),
                                 "zeit.web.core:templates/amp/article-header/default.html"] %}
                 {%- endblock %}
 
                 {% block article_body -%}
-                <div class="article__body" itemprop="articleBody">
+                <div class="article__body">
                     {% block article_pages %}
                         {% for page in view.pages %}
                             {% set adplaces = view.pages | adplaces([(0, 3),(3, 4)]) %}
@@ -165,7 +149,7 @@
                                     <span class="article-sharing__text">Twittern</span>
                                 </a>
                             </li>
-                            
+
                             <li class="article-sharing__item">
                                 <a class="article-sharing__link article-sharing__link--flipboard" href="https://share.flipboard.com/bookmarklet/popout?v=2&title={{ view.title | urlencode }}&url={{ content_url.format('flipboard') | urlencode | replace('sm.ext', 'soref.ext') }}">
                                     <svg class="article-sharing__icon">
@@ -174,7 +158,7 @@
                                     <span class="article-sharing__text">Flippen</span>
                                 </a>
                             </li>
-                            
+
                             <li class="article-sharing__item article-sharing__item--whatsapp">
                                 <a class="article-sharing__link article-sharing__link--whatsapp" href="whatsapp://send?text={{ '%s - Artikel auf %s: %s' | format(view.title, view.publisher_name, content_url.format('whatsapp')) | urlencode }}">
                                     <svg class="article-sharing__icon">
@@ -213,7 +197,7 @@
                 {% if view.keywords %}
                     <nav class="article-tags">
                         <h4 class="article-tags__title">Schlagwörter</h4>
-                        <ul class="article-tags__list" itemprop="keywords">
+                        <ul class="article-tags__list">
                         {% for keyword in view.keywords[:6] -%}
                             {% if keyword.link %}
                                 <li><a href="{{ request.route_url('home') }}{{ keyword.link }}" class="article-tags__link"
