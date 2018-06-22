@@ -2339,7 +2339,10 @@ def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
 def test_faq_page_should_render_show_more_button(testbrowser):
     select = testbrowser('/zeit-online/article/faq').cssselect
 
-    assert len(select('.article-flexible-toc__item--showall')) == 1
+    buttons = select('.article-flexible-toc__showall')
+
+    assert len(buttons) == 1
+    assert buttons[0].get('onclick')
 
 
 def test_faq_page_should_follow_schema_org(testbrowser):
@@ -2388,16 +2391,13 @@ def test_faq_page_should_contain_exactly_one_flexible_toc(testbrowser):
 def test_faq_page_should_render_flexible_toc_above_first_question(testbrowser):
     select = testbrowser('/zeit-online/article/faq').cssselect
 
-    first_block = select('.article-page')[0].getchildren()[0]
-    assert 'article__item' in first_block.get('class')
+    blocks = select('.article-page')[0].getchildren()
 
-    flexible_toc = first_block.getnext()
-    assert 'article-flexible-toc' in flexible_toc.get('class')
-    assert flexible_toc.getnext().tag == 'script'
+    assert 'paragraph' in blocks[0].get('class')
+    assert 'article-flexible-toc' in blocks[1].get('class')
 
-    first_question = flexible_toc.getnext().getnext()
-    assert 'http://schema.org/Question' in (
-        flexible_toc.getnext().getnext().get('itemtype'))
+    for i in range(2, 5):
+        assert blocks[i].get('itemtype') == 'http://schema.org/Question'
 
 
 def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
@@ -2409,14 +2409,16 @@ def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
     assert len(select('.article-flexible-toc')) == 1
 
     first_block = select('.article-page')[0].getchildren()[0]
-    assert 'article__item' in first_block.get('class')
+    assert 'paragraph' in first_block.get('class')
 
     flexible_toc = first_block.getnext()
     assert 'article-flexible-toc' in flexible_toc.get('class')
-    assert flexible_toc.getnext().tag == 'script'
 
-    first_question = flexible_toc.getnext().getnext()
-    assert 'article__item' in first_block.get('class')
+    first_topic = flexible_toc.getnext()
+    assert 'article-flexible-toc__subheading' in first_topic.get('class')
+
+    first_content = first_topic.getnext()
+    assert 'paragraph' in first_content.get('class')
 
 
 def test_each_faq_answer_should_have_one_itemprop_text(testbrowser):
