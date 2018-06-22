@@ -63,7 +63,14 @@ function wmTicker( element ) {
         this.debugHelper();
         this.setConfigurableAttributes();
 
-        if ( !this.debugLocally() ) {
+        if ( this.debugLocally() ) {
+            // mock response for local testing
+            console.log( 'WM-TICKER: debugging locally with mocked response' );
+            require([ 'web.site/wmTickerData' ], function( data ) {
+                this.data = data;
+                this.renderView();
+            }.bind( this ) );
+        } else {
             // initial GET Request
             this.fetchData();
             if ( defaults.wsEnabled ) {
@@ -71,18 +78,10 @@ function wmTicker( element ) {
             } else {
                 this.addFallbackInterval();
             }
-        } else {
-            // mock response for local testing
-            console.log( 'WM-TICKER: debugging locally with mocked response' );
-            require([ 'web.site/wmTickerData' ], function( data ) {
-                this.data = data;
-                this.renderView();
-            }.bind( this ) );
         }
 
         // Update game time display every 10 seconds
-        // TODO: this should probably only run when a game
-        //   is running or about to start...
+        // => ONLY if game not finished or pre-match
         setInterval( this.updateTime.bind( this ), 10000 );
     };
 
@@ -214,20 +213,14 @@ function wmTicker( element ) {
 
         data.forEach( function( game ) {
             var teams = this.mapCountryCodes( game.away_name, game.home_name );
-
             var time = timeString( game.date, game.kickoff, game.period, game.status );
-
-            // set hour or game status time
-            var untilGame = ( new Date( game.date ) - new Date() ) / 1000;
-            var preGame = untilGame < 3600 && game.status === 'PRE-MATCH';
+            var minutesTillGameBegins = ( new Date( game.date ) - new Date() ) / 1000;
+            var preGame = minutesTillGameBegins < 3600 && game.status === 'PRE-MATCH';
             var gameShallBeBig = preGame || game.running;
             // only one game. Which shall then be displayed big
             if ( data.length === 1 ) {
                 gameShallBeBig = true;
-                // single game big and finished shall write 'beendet'
-                if ( game.status === 'FULL' ) {
-                    time = 'beendet';
-                }
+                time = ( game.status === 'FULL' ) ? 'beendet' : time; // single game big and finished shall write 'beendet'
             }
 
             var gameData = {
@@ -340,9 +333,11 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.updateTime = function() {
         this.data.forEach( function( game ) {
-            var elem = document.getElementById( 'time-' + game.id );
-            if ( elem ) {
-                elem.innerText = timeString( game.date, game.kickoff, game.period, game.status );
+            if ( !( game.status === 'FULL' || game.status === 'PRE-MATCH' ) ) {
+                var elem = document.getElementById( 'time-' + game.id );
+                if ( elem ) {
+                    elem.innerText = timeString( game.date, game.kickoff, game.period, game.status );
+                }
             }
         });
     };
@@ -409,7 +404,7 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.handleWebSocketMessage = function( event ) {
         var receivedData = JSON.parse( event.data );
-        var data = this.data;
+        var data = this.data; // work with reference to this.data
 
         // do not iterate over list data. That should be useless. Only large games needed
         // iterate over old data. Update if needed.
@@ -453,8 +448,9 @@ function wmTicker( element ) {
     WmTicker.prototype.renderView = function() {
         var data = this.mapData( this.data );
         var singleGame = ( data.matches.length + data.list.length ) === 1;
+        var todaysGames = data.matches.length + data.list.length;
 
-        if ( data.matches.length !== 0 || data.list.length !== 0 ) {
+        if ( todaysGames > 0 ) {
             var template = require( 'web.core/templates/wmTicker.html' );
             template = template({
                 headline: defaults.headline,
