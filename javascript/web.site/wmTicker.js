@@ -65,7 +65,12 @@ function wmTicker( element ) {
 
         if ( !this.debugLocally() ) {
             // initial GET Request
-            this.fetchData( true );
+            this.fetchData();
+            if ( defaults.wsEnabled ) {
+                this.initWebSocket();
+            } else {
+                this.addFallbackInterval();
+            }
         } else {
             // mock response for local testing
             console.log( 'WM-TICKER: debugging locally with mocked response' );
@@ -382,7 +387,7 @@ function wmTicker( element ) {
     /**
      * fetch data via XMLHttpRequest
      */
-    WmTicker.prototype.fetchData = function( initial ) {
+    WmTicker.prototype.fetchData = function() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if ( xhr.readyState === 4 && xhr.status === 200 ) {
@@ -392,14 +397,6 @@ function wmTicker( element ) {
                 }
                 this.data = data;
                 this.renderView();
-
-                if ( initial ) {
-                    if ( defaults.wsEnabled ) {
-                        this.initWebSocket();
-                    } else {
-                        this.addFallbackInterval();
-                    }
-                }
             }
         }.bind( this );
         xhr.open( 'GET', defaults.dataURL + defaults.dataPath, true );
