@@ -3,7 +3,7 @@
     {%- set page_view = True -%}
 {%- endif -%}
 {%- for region in view.regions -%}
-    {%- for area in region.values() if 'ranking' in area.kind -%}
+    {%- for area in region.values() -%}
         {%- set layout = area.values() | first_child | get_layout -%}
         {%- if layout == 'sitemap-news' -%}
             {# newssitemap has no overview #}
