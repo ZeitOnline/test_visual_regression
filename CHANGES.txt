@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4705: Add ZMO seriespage
 
+- MAINT: Serve different robots.txt content according to host header
+
 
 3.162 (2018-06-21)
 ------------------
