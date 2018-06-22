@@ -1,11 +1,13 @@
 # coding: utf-8
 import datetime
+import urllib2
+
 import mock
+import pytest
 import pytz
 import lxml.etree
 import zope.component
 
-import zeit.web.core.view_centerpage
 import zeit.solr.interfaces
 import zeit.web.core.solr
 
@@ -99,6 +101,12 @@ def test_gsitemap_page_does_not_break_without_image_caption(
         xml.xpath(
             '//image:image/image:caption', namespaces={'image': ns})[0].text ==
         u'(©\xa0Warner Bros./dpa)')
+
+
+def test_gsitemap_rejects_invalid_page_parameter(testbrowser):
+    with pytest.raises(urllib2.HTTPError) as err:
+        testbrowser('/gsitemaps/themenindex.xml?p=invalid')
+    assert err.value.getcode() == 404
 
 
 def test_gsitemap_page_does_not_contain_invalid_lastmod_date(

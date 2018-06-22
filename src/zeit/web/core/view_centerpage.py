@@ -353,3 +353,17 @@ class Sitemap(Centerpage):
         super(Sitemap, self).__init__(context, request)
         self.request.response.content_type = 'application/xml'
         zeit.web.core.solr.register_sitemap_solr_utility()
+
+    @zeit.web.reify
+    def show_overview(self):
+        try:
+            # newssitemap has no overview (the detection is a bit kludgy).
+            if (self.area_providing_pagination.values()[0].layout.id ==
+                    'sitemap-news'):
+                return False
+        except Exception:
+            pass
+        try:
+            return int(self.request.GET.get('p', 0)) == 0
+        except ValueError:
+            raise pyramid.httpexceptions.HTTPNotFound()
