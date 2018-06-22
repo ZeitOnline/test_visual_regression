@@ -384,7 +384,11 @@ function wmTicker( element ) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if ( xhr.readyState === 4 && xhr.status === 200 ) {
-                this.data = JSON.parse( xhr.responseText );
+                var data = JSON.parse( xhr.responseText );
+                if ( JSON.stringify( this.data ) === JSON.stringify( data ) ) {
+                    return;
+                }
+                this.data = data;
                 this.renderView();
 
                 if ( initial ) {
