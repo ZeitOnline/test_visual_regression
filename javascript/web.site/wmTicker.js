@@ -135,6 +135,7 @@ function wmTicker( element ) {
             headline = element.getAttribute( 'data-headline' ),
             refreshSeconds = element.getAttribute( 'data-refresh-seconds' ),
             showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
+            webSocketURL = element.getAttribute( 'data-websocket-url' ),
             wsenabled = element.getAttribute( 'data-wsenabled' );
 
         defaults.dataURL = backendURL || defaults.dataURL;
@@ -143,6 +144,7 @@ function wmTicker( element ) {
         defaults.refreshSeconds = parseInt( refreshSeconds ) > 0 ? parseInt( refreshSeconds ) : defaults.refreshSeconds;
         defaults.showRunningGameTime = showRunningGameTime ? showRunningGameTime.toLowerCase() === 'true' : defaults.showRunningGameTime;
         defaults.wsEnabled = wsenabled ? wsenabled.toLowerCase() === 'true' : defaults.wsEnabled;
+        defaults.webSocketURL = webSocketURL || defaults.webSocketURL;
     };
 
 
