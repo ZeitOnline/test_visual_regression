@@ -989,3 +989,38 @@ def test_view_should_return_none_if_it_has_no_channels(application):
     request = pyramid.testing.DummyRequest()
     view = zeit.web.site.view_author.Author(author, request)
     assert view.channels is None
+
+
+def test_robots_txt_should_be_dispatched_according_to_host(testserver):
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'www.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' in r.content
+
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'www.staging.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' in r.content
+
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'img.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' not in r.content
+    assert 'Googlebot-News' in r.content
+
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'img.staging.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' not in r.content
+    assert 'Googlebot-News' in r.content
+
+    # Falls back to www if no specific file exists.
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'anything.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' in r.content

@@ -9,13 +9,15 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- Nothing
+- Remove `location /robots.txt` from nginx config
 
 
 3.163 (unreleased)
 ------------------
 
 - ZON-4705: Add ZMO seriespage
+
+- MAINT: Serve different robots.txt content according to host header
 
 
 3.162 (2018-06-21)
