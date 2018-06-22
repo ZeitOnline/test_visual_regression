@@ -129,12 +129,28 @@
                         "actionName": "amp.articlebottom.social.2..twitter|${canonicalUrl}"
                     }
                 },
+                "trackFlipboardClick": {
+                    "on": "click",
+                    "selector": ".article-sharing__link--flipboard",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.social.3..flipboard|${canonicalUrl}"
+                    }
+                },
                 "trackWhatsAppClick": {
                     "on": "click",
                     "selector": ".article-sharing__link--whatsapp",
                     "request": "event",
                     "vars": {
-                        "actionName": "amp.articlebottom.social.3..whatsapp|${canonicalUrl}"
+                        "actionName": "amp.articlebottom.social.4..whatsapp|${canonicalUrl}"
+                    }
+                },
+                "trackPocketClick": {
+                    "on": "click",
+                    "selector": ".article-sharing__link--pocket",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.social.5..pocket|${canonicalUrl}"
                     }
                 },
                 "trackMailClick": {

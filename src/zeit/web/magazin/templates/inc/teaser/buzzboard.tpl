@@ -6,6 +6,6 @@
 {% block comments %}{% endblock %}
 {% block teaser_text %}
     <span class="teaser-buzzboard__metadata">
-       {{- (teaser.score * module.score_factor) | round | pluralize(*module.score_pattern) -}}
+       {{- (adapt(teaser, 'zeit.web.core.interfaces.IReachData').score * module.score_factor) | round | pluralize(*module.score_pattern) -}}
     </span>
 {% endblock %}

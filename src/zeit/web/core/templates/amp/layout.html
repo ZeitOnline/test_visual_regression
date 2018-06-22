@@ -165,6 +165,16 @@
                                     <span class="article-sharing__text">Twittern</span>
                                 </a>
                             </li>
+                            
+                            <li class="article-sharing__item">
+                                <a class="article-sharing__link article-sharing__link--flipboard" href="https://share.flipboard.com/bookmarklet/popout?v=2&title={{ view.title | urlencode }}&url={{ content_url.format('flipboard') | urlencode | replace('sm.ext', 'soref.ext') }}">
+                                    <svg class="article-sharing__icon">
+                                        <use xlink:href="#svg-sharing-flipboard"/>
+                                    </svg>
+                                    <span class="article-sharing__text">Flippen</span>
+                                </a>
+                            </li>
+                            
                             <li class="article-sharing__item article-sharing__item--whatsapp">
                                 <a class="article-sharing__link article-sharing__link--whatsapp" href="whatsapp://send?text={{ '%s - Artikel auf %s: %s' | format(view.title, view.publisher_name, content_url.format('whatsapp')) | urlencode }}">
                                     <svg class="article-sharing__icon">
@@ -179,6 +189,14 @@
                                         <use xlink:href="#svg-sharing-messenger"/>
                                     </svg>
                                     <span class="article-sharing__text">Facebook Messenger</span>
+                                </a>
+                            </li>
+                            <li class="article-sharing__item">
+                                <a class="article-sharing__link article-sharing__link--pocket" href="https://getpocket.com/save?url={{(content_url ~ ga_campaign).format('pocket') | urlencode }}">
+                                    <svg class="article-sharing__icon">
+                                        <use xlink:href="#svg-sharing-pocket"/>
+                                    </svg>
+                                    <span class="article-sharing__text">Pocket</span>
                                 </a>
                             </li>
                             <li class="article-sharing__item">

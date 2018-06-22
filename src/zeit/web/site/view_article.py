@@ -85,6 +85,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return atoms[pos - 1:pos + 2]
 
     @zeit.web.reify
+    def include_optimize(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('optimize_on_zon_article', None)
+
+    @zeit.web.reify
     def liveblog(self):
         return zeit.web.core.interfaces.ILiveblogInfo(self.context)
 
@@ -220,10 +225,12 @@ class FAQArticle(Article):
 
     @zeit.web.reify
     def subheadings(self):
+        intertitles = []
         for block in self.pages[0].blocks:
             if isinstance(block, zeit.web.core.article.FAQItemBlock):
                 if isinstance(block[0], zeit.web.core.block.Intertitle):
-                    yield block[0].context
+                    intertitles.append(block[0].context)
+        return intertitles
 
 
 @zeit.web.view_config(
@@ -236,9 +243,11 @@ class FlexibleTOCArticle(Article):
         """Like FAQs, flexible tables of content are by definition only able to
         present intertitles from the first page.
         """
+        intertitles = []
         for block in self.pages[0].blocks:
             if isinstance(block, zeit.web.core.block.Intertitle):
-                yield block.context
+                intertitles.append(block.context)
+        return intertitles
 
 
 @zeit.web.view_config(

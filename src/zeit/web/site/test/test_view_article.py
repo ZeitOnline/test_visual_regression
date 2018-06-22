@@ -1905,8 +1905,16 @@ def test_share_buttons_are_present(testbrowser):
     assert query.get('link').pop(0).startswith(canonical)
     assert query.get('app_id').pop(0) == '638028906281625'
 
-    #  mail
+    #  pocket
     parts = urlparse.urlparse(links[5].get('href'))
+    query = urlparse.parse_qs(parts.query)
+    url = query['url'][0]
+    assert 'utm_source=pocket_zonaudev_ext' in url
+    assert 'utm_campaign=ref' in url
+    assert 'utm_content=zeitde_share_link_x' in url
+
+    #  mail
+    parts = urlparse.urlparse(links[6].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
@@ -1917,7 +1925,8 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[2].text == 'Flippen'
     assert labels[3].text == 'WhatsApp'
     assert labels[4].text == 'Facebook Messenger'
-    assert labels[5].text == 'Mailen'
+    assert labels[5].text == 'Pocket'
+    assert labels[6].text == 'Mailen'
 
 
 def test_merian_link_has_nofollow(testbrowser, dummy_request):
@@ -2305,14 +2314,14 @@ def test_faq_page_should_present_a_link_for_each_intertitle(testbrowser):
 def test_faq_page_should_present_links_to_intertitles(testbrowser):
     browser = testbrowser('/zeit-online/article/faq')
 
-    browser.cssselect('.article-flexible-toc__item')[0]
-    for index, subheading in enumerate(
-            browser.cssselect('.article__subheading')):
-        link_text = browser.cssselect(
-            '.article-flexible-toc__link')[index].get('href')
-        assert link_text == ("{}#{}".format(
-            browser.url,
-            zeit.web.core.template.format_faq(subheading.text)))
+    subheadings = browser.cssselect('.article__subheading')
+    links = browser.cssselect('.article-flexible-toc__link')
+
+    assert (subheadings)
+
+    for index, subheading in enumerate(subheadings):
+        href = links[index].get('href')
+        assert href == '#' + subheading.get('id')
 
 
 def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
@@ -2330,7 +2339,10 @@ def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
 def test_faq_page_should_render_show_more_button(testbrowser):
     select = testbrowser('/zeit-online/article/faq').cssselect
 
-    assert len(select('.article-flexible-toc__item--showall')) == 1
+    buttons = select('.article-flexible-toc__showall')
+
+    assert len(buttons) == 1
+    assert buttons[0].get('onclick')
 
 
 def test_faq_page_should_follow_schema_org(testbrowser):
@@ -2379,16 +2391,13 @@ def test_faq_page_should_contain_exactly_one_flexible_toc(testbrowser):
 def test_faq_page_should_render_flexible_toc_above_first_question(testbrowser):
     select = testbrowser('/zeit-online/article/faq').cssselect
 
-    first_block = select('.article-page')[0].getchildren()[0]
-    assert 'article__item' in first_block.get('class')
+    blocks = select('.article-page')[0].getchildren()
 
-    flexible_toc = first_block.getnext()
-    assert 'article-flexible-toc' in flexible_toc.get('class')
-    assert flexible_toc.getnext().tag == 'script'
+    assert 'paragraph' in blocks[0].get('class')
+    assert 'article-flexible-toc' in blocks[1].get('class')
 
-    first_question = flexible_toc.getnext().getnext()
-    assert 'http://schema.org/Question' in (
-        flexible_toc.getnext().getnext().get('itemtype'))
+    for i in range(2, 5):
+        assert blocks[i].get('itemtype') == 'http://schema.org/Question'
 
 
 def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
@@ -2400,14 +2409,16 @@ def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
     assert len(select('.article-flexible-toc')) == 1
 
     first_block = select('.article-page')[0].getchildren()[0]
-    assert 'article__item' in first_block.get('class')
+    assert 'paragraph' in first_block.get('class')
 
     flexible_toc = first_block.getnext()
     assert 'article-flexible-toc' in flexible_toc.get('class')
-    assert flexible_toc.getnext().tag == 'script'
 
-    first_question = flexible_toc.getnext().getnext()
-    assert 'article__item' in first_block.get('class')
+    first_topic = flexible_toc.getnext()
+    assert 'article-flexible-toc__subheading' in first_topic.get('class')
+
+    first_content = first_topic.getnext()
+    assert 'paragraph' in first_content.get('class')
 
 
 def test_each_faq_answer_should_have_one_itemprop_text(testbrowser):
@@ -2440,3 +2451,14 @@ def test_if_video_is_playable_on_page_with_embed(selenium_driver, testserver):
     link = driver.find_element_by_css_selector('.vjs-play-control')
     link.click()
     assert driver.find_element_by_css_selector('.vjs-paused')
+
+
+def test_article_can_include_optimize(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    assert 'optimize' not in browser.contents
+
+    optimize_url = 'https://www.zeit.de/js/ga_optimize.js'
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['optimize_on_zon_article'] = optimize_url
+    browser = testbrowser('/zeit-online/article/simple')
+    assert optimize_url in browser.contents

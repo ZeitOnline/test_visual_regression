@@ -13,6 +13,6 @@
 
 {% block teaser_container %}
     <span class="{{ self.layout() }}__metadata">
-        {{ (teaser.score * module.score_factor) | round | pluralize(*module.score_pattern) }}
+        {{ (adapt(teaser, 'zeit.web.core.interfaces.IReachData').score * module.score_factor) | round | pluralize(*module.score_pattern) }}
     </span>
 {% endblock %}
