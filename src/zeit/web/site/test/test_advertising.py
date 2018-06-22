@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import pyramid.testing
 
+import mock
+
 import zope.component
 
 import zeit.cms.interfaces
@@ -8,6 +10,7 @@ import zeit.cms.interfaces
 import zeit.web.core.application
 import zeit.web.core.banner
 import zeit.web.site
+import zeit.content
 
 
 def test_homepage_should_have_proper_ivw_script_integration(testbrowser):
@@ -151,21 +154,19 @@ def test_adplaces_have_no_banner_label_data_attribute(testbrowser):
 
 
 def test_banner_content_enabled_shows_all_ads(testbrowser):
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['ctm_teaser_ressorts'] = 'Gesellschaft'
     zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
 
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(
-        browser.cssselect('article.article script[id|="ad-desktop"]')) == 2
+        browser.cssselect('article.article script[id|="ad-desktop"]')) == 3
     assert len(
         browser.cssselect('article.article script[id|="ad-mobile"]')) == 2
-    assert browser.cssselect('#iq-artikelanker')
+    assert not browser.cssselect('#iq-artikelanker')
 
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(
-        browser.cssselect('article.article script[id|="ad-desktop"]')) == 2
-    assert len(browser.cssselect('article.article #iq-artikelanker')) == 1
+        browser.cssselect('article.article script[id|="ad-desktop"]')) == 3
+    assert not browser.cssselect('article.article #iq-artikelanker')
 
 
 def test_banner_content_disabled_exclude_body_ads(testbrowser):
@@ -355,16 +356,82 @@ def test_adtile5_is_empty_on_zmo_paywall(testbrowser):
 def test_contentad_is_rendered_once_on_article_pages(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set(
         'third_party_modules', 'iqd')
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['ctm_teaser_ressorts'] = 'Deutschland'
-
     selector = '#iq-artikelanker'
 
     browser = testbrowser('/zeit-online/article/fischer')
-    assert len(browser.cssselect(selector)) == 1
+    assert len(browser.cssselect(selector)) == 0
 
     browser = testbrowser('/zeit-online/article/fischer/seite-2')
-    assert len(browser.cssselect(selector)) == 1
+    assert len(browser.cssselect(selector)) == 0
 
     browser = testbrowser('/zeit-online/article/fischer/komplettansicht')
-    assert len(browser.cssselect(selector)) == 1
+    assert len(browser.cssselect(selector)) == 0
+
+
+def test_ctm_should_show_in_ressort(testbrowser, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zeit')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Politik')
+    article = zeit.web.site.view_article.Article(
+        context, pyramid.testing.DummyRequest())
+    pages = zeit.web.core.article._inject_banner_code(
+        article.pages, 'zon', article.ressort, article.sub_ressort)
+    banners = filter(lambda b: isinstance(
+        b, zeit.web.core.banner.ContentAdBlock), pages[0])
+    assert len(banners) == 1
+    assert banners[0].name == 'iq-artikelanker'
+
+
+def test_ctm_should_show_in_subressort(
+        testbrowser, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zeit')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Politik')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'sub_ressort', u'Ausland')
+    article = zeit.web.site.view_article.Article(
+        context, pyramid.testing.DummyRequest())
+    pages = zeit.web.core.article._inject_banner_code(
+        article.pages, 'zon', article.ressort, article.sub_ressort)
+    banners = filter(lambda b: isinstance(
+        b, zeit.web.core.banner.ContentAdBlock), pages[0])
+    assert len(banners) == 1
+    assert banners[0].name == 'iq-artikelanker'
+
+
+def test_ctm_should_not_show_in_ressort(
+        testbrowser, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zeit')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Foo')
+    article = zeit.web.site.view_article.Article(
+        context, pyramid.testing.DummyRequest())
+
+    pages = zeit.web.core.article._inject_banner_code(
+        article.pages, 'zon', article.ressort, article.sub_ressort)
+    banners = filter(lambda b: isinstance(
+        b, zeit.web.core.banner.Place), pages[0])
+    assert len(banners) != 1
+    assert banners.pop(-1).tile == 5
+
+
+def test_ctm_should_not_show_in_sub_ressort(
+        testbrowser, monkeypatch, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zeit')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Kultur')
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, u'ressort', u'Film')
+    article = zeit.web.site.view_article.Article(
+        context, pyramid.testing.DummyRequest())
+
+    pages = zeit.web.core.article._inject_banner_code(
+        article.pages, 'zon', article.ressort, article.sub_ressort)
+    banners = filter(lambda b: isinstance(
+        b, zeit.web.core.banner.Place), pages[0])
+    assert len(banners) != 1
+    assert banners.pop(-1).tile == 5

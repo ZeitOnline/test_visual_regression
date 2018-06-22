@@ -92,7 +92,7 @@ class Page(object):
             self.blocks.append(wrapped)
 
 
-def _inject_banner_code(pages, pubtype, ressort):
+def _inject_banner_code(pages, pubtype, ressort, sub_ressort):
     adconfig = {
         'zon': {
             'pages': range(1, len(pages) + 1),
@@ -118,9 +118,13 @@ def _inject_banner_code(pages, pubtype, ressort):
     # split settings string
     ctm_teaser_ressorts = CTM_TEASER_RESSORTS_SOURCE
 
-    if ressort and ressort.lower() in ctm_teaser_ressorts:
-        adconfig['zon']['ads'].append(place5[1])
-    else:
+    try:
+        if (ressort in ctm_teaser_ressorts) or (
+                sub_ressort in ctm_teaser_ressorts):
+            adconfig['zon']['ads'].append(place5[1])
+        else:
+            raise Exception
+    except Exception:
         adconfig['zon']['ads'].append(place5[0])
 
     for page_number, page in enumerate(pages, start=1):
@@ -238,6 +242,7 @@ def pages_of_article(article, advertising_enabled=True):
     blocks = body.values()
 
     ressort = zeit.content.article.interfaces.IArticle(article).ressort
+    sub_ressort = zeit.content.article.interfaces.IArticle(article).sub_ressort
 
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
@@ -267,7 +272,7 @@ def pages_of_article(article, advertising_enabled=True):
     else:
         pubtype = 'zon'
 
-    return _inject_banner_code(pages, pubtype, ressort)
+    return _inject_banner_code(pages, pubtype, ressort, sub_ressort)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IArticleModule)
@@ -569,15 +574,14 @@ class CtmTeaserRessortsSource(
             tree = self._get_tree()
         except (TypeError, IOError):
             return []
-        ctm_ressort = tree.xpath('//ressort[@ctmTeaser="yes"]')
-        ctm_sub_ressort = tree.xpath('//subnavigation[@ctmTeaser="yes"]')
+
+        ressorts = tree.xpath(
+            '//ressort[@ctmTeaser="yes"]|//subnavigation[@ctmTeaser="yes"]')
+
         result = []
-        for node in ctm_ressort:
-            result.append(node.get('name'))
-        for node in ctm_sub_ressort:
+        for node in ressorts:
             result.append(node.get('name'))
 
-        import pdb; pdb.set_trace()
         return result
 
 

@@ -63,18 +63,6 @@ def test_iqd_ads_should_utilize_feature_toggles(testbrowser):
         browser.cssselect('head')[0].text_content())
 
 
-def test_ads_should_utilize_settings(testbrowser):
-    selector = '#iq-artikelanker'
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['ctm_teaser_ressorts'] = ''
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect(selector)) == 0
-
-    conf['ctm_teaser_ressorts'] = 'Gesellschaft'
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect(selector)) == 1
-
-
 def test_adcontroller_handles_for_entdecken_und_reisen(mock_ad_view):
     assert mock_ad_view(
         'centerpage', 'entdecken', ''
