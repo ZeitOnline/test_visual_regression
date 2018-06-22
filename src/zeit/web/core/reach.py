@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
+import grokcore.component as grok
 import requests
 import requests.exceptions
 import requests_file
@@ -48,9 +49,6 @@ class Reach(object):
             content = self._resolve(doc)
             if content is None:
                 continue
-            # XXX Should we instead use an adapter to expose this?
-            # Templates currently don't care and simply say `teaser.score`
-            content.score = doc.get('score')
             result.append(content)
         return result
 
@@ -58,6 +56,7 @@ class Reach(object):
         try:
             result = self._get_metadata(doc['location'])
             content = zeit.retresco.interfaces.ITMSContent(result[0])
+            content._reach_data = doc
         except Exception:
             log.warning('Resolving %s failed', doc, exc_info=True)
             return None
@@ -97,3 +96,13 @@ class MockReach(Reach):
     def _get_metadata(self, path):
         content = zeit.cms.interfaces.ICMSContent(u'http://xml.zeit.de' + path)
         return [zeit.retresco.interfaces.ITMSRepresentation(content)()]
+
+
+class ReachData(grok.Adapter):
+
+    grok.context(zeit.retresco.interfaces.ITMSContent)
+    grok.implements(zeit.web.core.interfaces.IReachData)
+
+    @property
+    def score(self):
+        return getattr(self.context, '_reach_data', {}).get('score')

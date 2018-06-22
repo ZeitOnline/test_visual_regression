@@ -217,11 +217,11 @@ def test_format_faq_returns_safe_text(application):
     target = 'die-zeit-archiv'
     assert zeit.web.core.template.format_faq(text) == target
 
-    text = u'Ausgabe: 30, für Ü-30 Leser!'
+    text = u'!Ausgabe: 30, für Ü-30 Leser!'
     target = 'ausgabe-30-fuer-ue-30-leser'
     assert zeit.web.core.template.format_faq(text) == target
 
-    text = u'Ä-Ö-Ü á à é è ß_!?)&'
+    text = u'!?!Ä-Ö-Ü á à é è ß_!?)&'
     target = 'ae-oe-ue-a-a-e-e-ss'
     assert zeit.web.core.template.format_faq(text) == target
 

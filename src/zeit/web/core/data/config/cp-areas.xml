@@ -24,6 +24,7 @@
     <area kind="ranking" title="Simple-Fläche" available="zeit.cms.section.interfaces.IZONContent">ranking</area>
     <area kind="zco-ranking" title="Simple-Fläche" available="zeit.campus.interfaces.IZCOContent">zco-ranking</area>
     <area kind="zar-ranking" title="Simple-Fläche" available="zeit.arbeit.interfaces.IZARContent">zar-ranking</area>
+    <area kind="zmo-ranking" title="Simple-Fläche" available="zeit.arbeit.interfaces.IZMOContent">zmo-ranking</area>
     <area kind="tube" title="Schlauch-Fläche" available="zeit.cms.section.interfaces.IZONContent">tube</area>
     <area kind="print-ressort" title="Ressort-Fläche" available="zeit.cms.section.interfaces.IZONContent">print-ressort</area>
     <area kind="exclusive-ressort" title="Exklusiv-Fläche" available="zeit.cms.section.interfaces.IZONContent">exclusive-ressort</area>

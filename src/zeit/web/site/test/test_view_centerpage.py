@@ -907,6 +907,12 @@ def test_gallery_teaser_should_hide_duplicates(testbrowser):
         '.cp-area--gallery article')[0].get('data-unique-id')
 
 
+def test_gallery_teaser_should_validate_query_parameter(testbrowser):
+    with pytest.raises(urllib2.HTTPError) as info:
+        testbrowser('/zeit-online/teaser-gallery-setup?p=invalid-id')
+    assert info.value.getcode() == 404
+
+
 def test_gallery_teaser_has_correct_elements(testbrowser):
     wanted = 2
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
