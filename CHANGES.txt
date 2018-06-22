@@ -15,6 +15,8 @@ POSTDEPLOY
 3.163 (unreleased)
 ------------------
 
+- ZON-4663: WM Ticker Tweaks (Use Websockets, Link Styling)
+
 - ZON-4705: Add ZMO seriespage
 
 - FIX: Use only fragment identifier in TOC links for FAQ pages
