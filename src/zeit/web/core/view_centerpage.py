@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+import calendar
 import datetime
 import urlparse
 
 import pyramid.httpexceptions
+import pytz
 import zope.component
 import babel.dates
 
@@ -348,6 +350,7 @@ class Sitemap(Centerpage):
     # Seems like Google does not accept modification dates < 1970
     min_modified_display = babel.dates.get_timezone('Europe/Berlin').localize(
         datetime.datetime(1970, 1, 1))
+    zeit_start = 1946
 
     def __init__(self, context, request):
         super(Sitemap, self).__init__(context, request)
@@ -363,7 +366,24 @@ class Sitemap(Centerpage):
                 return False
         except Exception:
             pass
-        try:
-            return int(self.request.GET.get('p', 0)) == 0
-        except ValueError:
+
+        if self.area_providing_pagination.kind == 'ranking':
+            try:
+                return int(self.request.GET.get('p', 0)) == 0
+            except ValueError:
+                raise pyramid.httpexceptions.HTTPNotFound()
+        elif self.area_providing_pagination.kind == 'overview':
+            return 'date' not in self.request.GET
+        else:
             raise pyramid.httpexceptions.HTTPNotFound()
+
+    @zeit.web.reify
+    def calendar(self):
+        today = datetime.datetime.now()
+        for year in range(self.zeit_start, today.year + 1):
+            for month in range(1, 12 + 1):
+                for day in range(1, calendar.monthrange(year, month)[1] + 1):
+                    date = (year, month, day)
+                    if date > (today.year, today.month, today.day):
+                        return
+                    yield '%s-%s-%s' % date

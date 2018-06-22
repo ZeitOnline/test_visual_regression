@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 {%- if view.show_index -%}
-    {%- include "zeit.web.core:templates/inc/sitemap/index.html" -%}
+    {%- include "zeit.web.core:templates/inc/sitemap/index-{0}.html".format(view.area_providing_pagination.kind) -%}
 {%- else -%}
     {%- include "zeit.web.core:templates/inc/sitemap/page.html" -%}
 {%- endif -%}
