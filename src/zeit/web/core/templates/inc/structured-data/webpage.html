@@ -1,0 +1,19 @@
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) -%}
+        {% set source = request.image_host + image.path + '__1300x731' -%}
+        "primaryImageOfPage": "{{ source }}",
+    {% endrequire -%}
+    "publisher": {
+        "@id": "#publisher"
+    },
+    "mainEntity": {
+        "@id": "#mainentity"
+    },
+    "breadcrumb": {
+        "@id": "#breadcrumb"
+    }
+}
+</script>
