@@ -4,8 +4,6 @@ import pytest
 
 import pyramid.request
 
-import zope.component
-
 import zeit.web.core.application
 
 
