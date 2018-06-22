@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4705: Add ZMO seriespage
 
+- FIX: Use only fragment identifier in TOC links for FAQ pages
+
 - MAINT: Serve different robots.txt content according to host header
 
 
