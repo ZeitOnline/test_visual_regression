@@ -355,7 +355,7 @@ class Sitemap(Centerpage):
         zeit.web.core.solr.register_sitemap_solr_utility()
 
     @zeit.web.reify
-    def show_overview(self):
+    def show_index(self):
         try:
             # newssitemap has no overview (the detection is a bit kludgy).
             if (self.area_providing_pagination.values()[0].layout.id ==
