@@ -40,7 +40,7 @@
     <subnavigation name="Literatur" uniqueId="http://xml.zeit.de/kultur/literatur">
       <title>Literatur</title>
     </subnavigation>
-    <subnavigation name="Film" uniqueId="http://xml.zeit.de/kultur/film" ctmTeaser="yes">
+    <subnavigation name="Film" uniqueId="http://xml.zeit.de/kultur/film">
       <title>Film &amp; TV</title>
     </subnavigation>
     <subnavigation name="Kunst" uniqueId="http://xml.zeit.de/kultur/kunst">
