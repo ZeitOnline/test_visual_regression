@@ -333,11 +333,9 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.updateTime = function() {
         this.data.forEach( function( game ) {
-            if ( !( game.status === 'FULL' || game.status === 'PRE-MATCH' ) ) {
-                var elem = document.getElementById( 'time-' + game.id );
-                if ( elem ) {
-                    elem.innerText = timeString( game.date, game.kickoff, game.period, game.status );
-                }
+            var elem = document.getElementById( 'time-' + game.id );
+            if ( elem ) {
+                elem.innerText = timeString( game.date, game.kickoff, game.period, game.status );
             }
         });
     };
