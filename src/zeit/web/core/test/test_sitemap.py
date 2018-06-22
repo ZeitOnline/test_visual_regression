@@ -262,6 +262,7 @@ def test_gsitemap_video_does_not_call_bc_api(testbrowser, monkeypatch):
     }
     monkeypatch.setattr(
         zeit.brightcove.connection.PlaybackAPI, 'get_video', mocked_get_video)
+    testbrowser('/gsitemaps/video.xml?p=1')
     assert not mocked_get_video.called, \
         'get_video from BC-API was called and should not have been'
 
