@@ -254,6 +254,9 @@
                     </svg>
                 </a>
             {% endblock footer_logo %}
+
+            {% include "zeit.web.core:templates/inc/breadcrumbs.html" %}
+
             <nav class="footer__navigation">
                 <ul>
                     <li><a href="{{ request.route_url('home') }}impressum/index">Impressum</a></li>
