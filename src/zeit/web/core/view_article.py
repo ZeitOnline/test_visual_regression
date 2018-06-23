@@ -186,6 +186,35 @@ class Article(zeit.web.core.view.Content):
         return ''
 
     @zeit.web.reify
+    def authors_structured_data(self):
+        data = []
+        # Check for author objects associated with the context
+        authors = filter(bool, getattr(self.context, 'authorships', ()))
+
+        if not authors:
+            # As a fallback, collect free-text author strings
+            authors = filter(bool, getattr(self.context, 'authors', ()))
+
+        for author in authors:
+            person = {'@type': 'Person'}
+            # Don't break because of missing .meta files or invalid references.
+            # (Surprisingly common in older articles is referencing the folder
+            # instead of the author's index.xml).
+            if isinstance(author, basestring):
+                person['name'] = author
+            else:
+                if getattr(author.target, 'display_name', None):
+                    person['name'] = author.target.display_name
+                if getattr(author.target, 'uniqueId', None):
+                    person['url'] = zeit.web.core.template.create_url(
+                        None, author.target.uniqueId, self.request)
+            data.append(person)
+
+        if len (data) == 1:
+            return data[0]
+        return data
+
+    @zeit.web.reify
     def text_length(self):
         return self.context.textLength
 

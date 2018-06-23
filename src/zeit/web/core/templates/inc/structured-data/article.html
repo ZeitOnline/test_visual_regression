@@ -7,14 +7,15 @@
         "@type": "WebPage",
         "@id": "{{ view.content_url }}"
     },
-    {% for author in view.authors -%}
-    "author": {
-        "@type": "Person",
-        {% if author.href -%}
-            "url": "{{ author.href | create_url }}",
-        {% endif -%}
-        "name": {{ author.name | tojson | safe }}
+    {% if view.has_series_attached -%}
+    "isPartOf": {
+        "@type": "WebPage",
+        "@id": "{{ context | find_series_cp | create_url }}",
+        "name": {{ view.serie | tojson | safe }}
     },
+    {% endif -%}
+    {% if view.authors_structured_data -%}
+    "author": {{ view.authors_structured_data | tojson | safe }},
     {% else -%}
     "author": {
         "@type": "Person",
@@ -25,7 +26,7 @@
         {%- endif %}
 
     },
-    {% endfor -%}
+    {% endif -%}
     "datePublished": "{{ view.date_first_released | format_date('iso8601') }}",
     "dateModified": "{{ view.date_last_modified | format_date('iso8601') }}",
     "headline": {% set headline = '%s: %s' | format(view.supertitle, view.title) -%}
