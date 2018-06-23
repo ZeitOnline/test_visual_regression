@@ -6,7 +6,7 @@
     {%- set image_width = image.fallback_width | default(default_width, True) %}
     {%- set image_height = image.fallback_height | default(default_height, True) %}
     {%- block image %}
-        <figure class="{% block media_block %}{{ 'figure' | with_mods(display_mode) }}{% endblock %}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
+        <figure class="{% block media_block %}{{ 'figure' | with_mods(display_mode) }}{% endblock %}">
             {% block media -%}
             <amp-img
                 src="{{ request.image_host + image.fallback_path }}"
@@ -20,20 +20,16 @@
                     {% endif -%}
                 {% endblock -%}
                 layout="responsive"
-                attribution="{{ image.copyrights | map(attribute='text') | join(', ') }}"
-                itemprop="contentUrl"></amp-img>
+                attribution="{{ image.copyrights | map(attribute='text') | join(', ') }}"></amp-img>
             {% endblock media -%}
-            <meta itemprop="url" content="{{ request.image_host + image.fallback_path }}">
-            <meta itemprop="width" content="{{ image_width }}">
-            <meta itemprop="height" content="{{ image_height }}">
             {% block caption -%}
             <figcaption class="figure__caption" {%- if not image.caption and not image.copyrights | length %} hidden{% endif %}>
-                <span class="figure__text" itemprop="caption">{{ image.caption }}</span>
+                <span class="figure__text">{{ image.caption }}</span>
                 {% for item in image.copyrights %}
-                <span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
-                    {% if item.url %}<a itemprop="url"{% if item.nofollow %} rel="nofollow"{% endif %} href="{{ item.url }}">{% endif %}
-                    <span itemprop="name">{{ item.text }}</span>
-                    {% if item.url %}</a>{% endif %}
+                <span class="figure__copyright">
+                    {%- if item.url %}<a href="{{ item.url }}"{% if item.nofollow %} rel="nofollow"{% endif %}>{% endif -%}
+                    {{- item.text -}}
+                    {%- if item.url %}</a>{% endif -%}
                 </span>
                 {% endfor %}
             </figcaption>

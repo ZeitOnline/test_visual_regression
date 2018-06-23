@@ -16,7 +16,7 @@
                 attribution="{{ image.copyrights | map(attribute='text') | join(', ') }}"></amp-img>
         {% endrequire -%}
 
-        <a href="{{ series_cp | create_url }}" class="article-series__heading" itemprop="isPartOf">
+        <a href="{{ series_cp | create_url }}" class="article-series__heading">
             <span class="article-series__kicker">Aus der Serie</span><span class="visually-hidden">: </span>
             <span class="article-series__title">{{ view.serie }}</span>
         </a>
