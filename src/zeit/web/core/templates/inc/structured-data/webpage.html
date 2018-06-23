@@ -3,8 +3,13 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) -%}
-        {% set source = request.image_host + image.path + '__1300x731' -%}
-        "primaryImageOfPage": "{{ source }}",
+        {% set image_source = request.image_host + image.path + '__1300x731' -%}
+        "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "{{ image_source }}",
+            "width": 1300,
+            "height": 731
+        },
     {% endrequire -%}
     "publisher": {
         "@id": "#publisher"

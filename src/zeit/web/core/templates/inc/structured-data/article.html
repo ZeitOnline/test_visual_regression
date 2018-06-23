@@ -39,7 +39,9 @@
         {% set image_source = request.image_host + image.path + '__1300x731' -%}
         "image": {
             "@type": "ImageObject",
-            "url": "{{ image_source }}"
+            "url": "{{ image_source }}",
+            "width": 1300,
+            "height": 731
         },
     {% endrequire -%}
     {% if view.keywords -%}
