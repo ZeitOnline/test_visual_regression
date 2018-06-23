@@ -28,10 +28,6 @@
         <div class="byline">
             {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
         </div>
-        {% else -%}
-        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <meta itemprop="name" content="{% if view.context.product %}{{ view.context.product.title }}{% else %}ZEIT ONLINE{% endif %}">
-        </span>
         {% endif -%}
         <div class="metadata">
             {% include "zeit.web.core:templates/amp/article/metadata.html" %}
