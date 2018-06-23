@@ -1,4 +1,8 @@
 <header class="{{ 'article__header' | with_mods('has-volume' if view.zplus_label) }}">
+    {% block headerseries -%}
+        {% include "zeit.web.core:templates/amp/article/series.html" %}
+    {% endblock -%}
+
     {% block embed %}{% endblock -%}
 
     <h1 class="headline article__item">
