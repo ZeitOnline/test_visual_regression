@@ -1,7 +1,7 @@
 <script type="application/ld+json">
 {
     "@context": "http://schema.org",
-    "@type": "Article",
+    "@type": "{% block type %}Article{% endblock %}",
     "@id": "#mainentity",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -29,6 +29,7 @@
     {% endif -%}
     "datePublished": "{{ view.date_first_released | format_date('iso8601') }}",
     "dateModified": "{{ view.date_last_modified | format_date('iso8601') }}",
+    {% block additional_structured_data %}{% endblock -%}
     "headline": {% set headline = '%s: %s' | format(view.supertitle, view.title) -%}
         {%- if view.context is column -%}
             {{ '%s / %s' | format(view.serie, headline) | tojson | safe }}
