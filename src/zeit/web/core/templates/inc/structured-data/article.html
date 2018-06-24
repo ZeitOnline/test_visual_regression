@@ -7,13 +7,6 @@
         "@type": "WebPage",
         "@id": "{{ view.content_url }}"
     },
-    {% if view.has_series_attached -%}
-    "isPartOf": {
-        "@type": "WebPage",
-        "@id": "{{ context | find_series_cp | create_url }}",
-        "name": {{ view.serie | tojson | safe }}
-    },
-    {% endif -%}
     {% if view.authors_structured_data -%}
     "author": {{ view.authors_structured_data | tojson | safe }},
     {% else -%}
@@ -48,6 +41,13 @@
     {% endrequire -%}
     {% if view.keywords -%}
         "keywords": {{ view.keywords | join(', ', attribute='label') | tojson | safe }},
+    {% endif -%}
+    {% if view.has_series_attached -%}
+    "isPartOf": {
+        "@type": "WebPage",
+        "@id": "{{ context | find_series_cp | create_url }}",
+        "name": {{ view.serie | tojson | safe }}
+    },
     {% endif -%}
     "publisher": {
         "@id": "#publisher"
