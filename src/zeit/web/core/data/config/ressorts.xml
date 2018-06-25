@@ -19,17 +19,8 @@
     <subnavigation name="Boerse" uniqueId="http://xml.zeit.de/wirtschaft/boerse">
       <title>Boerse</title>
     </subnavigation>
-  </ressort>
-  <ressort name="Gesellschaft" uniqueId="http://xml.zeit.de/gesellschaft">
-    <title>Gesellschaft</title>
-    <subnavigation name="Zeitgeschehen" uniqueId="http://xml.zeit.de/gesellschaft/zeitgeschehen">
-      <title>Zeitgeschehen</title>
-    </subnavigation>
-    <subnavigation name="Familie" uniqueId="http://xml.zeit.de/gesellschaft/familie">
-      <title>Familie</title>
-    </subnavigation>
-    <subnavigation name="Schule" uniqueId="http://xml.zeit.de/gesellschaft/schule">
-      <title>Schule</title>
+    <subnavigation name="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/wirtschaft">
+      <title>Wirtschaft</title>
     </subnavigation>
   </ressort>
   <ressort name="Kultur" uniqueId="http://xml.zeit.de/kultur">
