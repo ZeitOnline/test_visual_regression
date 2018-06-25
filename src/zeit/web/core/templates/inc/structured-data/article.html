@@ -2,7 +2,7 @@
 {
     "@context": "http://schema.org",
     "@type": "{% block type %}Article{% endblock %}",
-    "@id": "#mainentity",
+    "@id": "#{{ view.type }}",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "{{ view.content_url }}"
@@ -31,13 +31,15 @@
         {%- endif %},
     "description": {{ view.subtitle | tojson | safe }},
     {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) -%}
-        {% set image_source = request.image_host + image.path + '__1300x731' -%}
-        "image": {
-            "@type": "ImageObject",
-            "url": "{{ image_source }}",
-            "width": 1300,
-            "height": 731
-        },
+    "image": {
+        {% set image_width = 1300 -%}
+        {% set image_height = (image_width / image.ratio) | round | int -%}
+        {% set image_source = '%s%s__%dx%d' | format (request.image_host, image.path, image_width, image_height) -%}
+        "@type": "ImageObject",
+        "url": "{{ image_source }}",
+        "width": {{ image_width }},
+        "height": {{ image_height }}
+    },
     {% endrequire -%}
     {% if view.keywords -%}
         "keywords": {{ view.keywords | join(', ', attribute='label') | tojson | safe }},
@@ -47,6 +49,14 @@
         "@type": "WebPage",
         "@id": "{{ context | find_series_cp | create_url }}",
         "name": {{ view.serie | tojson | safe }}
+    },
+    {% endif -%}
+    {% if view.context is zplus_content -%}
+    "isAccessibleForFree": "False",
+    "hasPart": {
+        "@type": "WebPageElement",
+        "isAccessibleForFree": "False",
+        "cssSelector" : "main .article-page"
     },
     {% endif -%}
     "publisher": {
