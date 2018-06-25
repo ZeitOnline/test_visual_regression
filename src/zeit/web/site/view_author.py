@@ -97,7 +97,7 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
             module = area.create_item('teaser')
             module.layout = zon_small
             module.force_mobile_image = not bool(index)
-            module.insert(0, content)
+            module.insert(0, content, suppress_errors=True)
         return zeit.web.core.centerpage.IRendered(area)
 
     @zeit.web.reify
@@ -147,10 +147,8 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
     @zeit.web.reify
     def followpush_tag(self):
         uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
-        uuid = getattr(uuid, 'id', None)
         if uuid:
-            uuid = uuid.strip('{}').replace('urn:uuid:', '')
-            return uuid
+            return uuid.shortened
 
 
 @zeit.web.view_config(name='feedback')
@@ -227,6 +225,8 @@ class Comments(Author):
                         [comment], layout='user-comment')
                     module.__name__ = None  # XXX API clash
                     area.add(module)
+            else:
+                area._comments_meta = {'page_total': 0, 'page': 1}
         except zeit.web.core.comments.PagesExhaustedError:
             raise pyramid.httpexceptions.HTTPNotFound()
         except zeit.web.core.comments.UserCommentsException:

@@ -39,8 +39,9 @@
     "svg-sprite": "1.4.0",
     "svgo": "1.0.5",
     "velocity-animate": "1.5.1",
-    "webpack": "4.8.1",
-    "webpack-cli": "2.1.3"
+    "webpack": "^4.12.0",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-cli": "^3.0.8"
   },
   "scripts": {
     "clean:legacy": "rm -rf javascript/vendor",
@@ -80,6 +81,9 @@
     "svg": "npm-run-all --parallel svgo:* svg:sprite:*:* svg:flags-wm",
     "prejs": "npm run lint",
     "js": "npm run webpack:dist",
+    "webpack:analyzer": "webpack-bundle-analyzer webpack-stats.json src/zeit/web/static/js",
+    "webpack:profile": "webpack --mode development --profile --json > webpack-stats.json",
+    "webpack:analyze": "npm-run-all webpack:profile webpack:analyzer",
     "webpack": "webpack --mode development",
     "webpack:dist": "webpack -p --mode production",
     "webpack:dev": "webpack -d --mode development --display-modules",

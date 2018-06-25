@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ins_serienseite">
+  <head>
+    <header_image xsi:nil="true"/>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">zeit-magazin</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">01</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noarchive</attribute>
+    <topiclinks>
+    </topiclinks>
+  </head>
+  <body>
+    <title>Martenstein</title>
+    <supertitle>Serie</supertitle>
+    <subtitle></subtitle>
+    <cluster area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo" visible="True" visible_mobile="True">
+      <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e" hide-dupes="True" kind="solo" visible="True" visible_mobile="True">
+        <container cp:__name__="id-5703525b-6449-45f3-93fb-801b281a9af4" cp:type="headerimage" module="headerimage" supertitle="Serie" title="Martenstein">
+          <image>http://xml.zeit.de/campus/image/jura-studium-fleiss/</image>
+        </container>
+        <container cp:type="markup" module="markup" cp:__name__="id-7c959f63-b6db-40f1-a124-56eae525588f" align="center">
+          <text>
+            <p>Molestias cumque libero voluptatum ducimus. Iste sed distinctio quibusdam sequi voluptatibus praesentium laudantium autem, maiores, repellat modi, cupiditate qui quia aut itaque. Ex assumenda dolore reiciendis doloremque obcaecati accusamus tempora error vel, non aperiam.</p>
+            <p>Error voluptatibus perspiciatis explicabo repellat odit, ipsum minima? Eius hic quibusdam iusto porro optio quos velit amet earum. Nostrum accusantium recusandae neque asperiores ex sit labore nemo hic, tenetur, assumenda et quidem non rerum.</p>
+          </text>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-c993c09c-2a27-4aa8-87da-fecaf8797606" kind="solo" visible="True" visible_mobile="True" kind_title="Simple-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-74ca0250-6332-4ea0-a944-053ed85a4a9f" kind="ranking" count="10" automatic="True" automatic_type="query">
+        <raw_query>published:"published" AND serie:"foo"</raw_query>
+        <container cp:__name__="id-167b003d-0199-4cc5-831e-c1eaac5f925c" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-4a960096-2165-4f23-bdf9-c38a34655c43" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-aa3d66b6-5a83-4c28-98de-78686d074a62" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-13b34132-500d-41b4-b565-2e29f7f9840f" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-097121c4-56ca-4711-950d-54989b5ed453" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-167b003d-0199-4cc8-531e-c1eaac5f925c" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-4a960096-2165-4f32-bdf9-c38a34655c43" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-aa3d66b6-5a83-4c28-89de-78686d074a62" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-13b34132-500d-414b-b565-2e29f7f9840f" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-097121c4-65ca-4171-950d-54989b5ed453" cp:type="auto-teaser" module="zon-small" visible="True"/>
+      </region>
+    </cluster>
+  </body>
+  <feed/>
+</centerpage>

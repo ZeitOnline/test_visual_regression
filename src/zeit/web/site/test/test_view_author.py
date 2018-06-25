@@ -174,6 +174,21 @@ def test_view_author_comments_should_have_comments_area(
         zeit.web.site.view_author.UserCommentsPagination)
 
 
+def test_view_author_comments_should_handle_no_comments_gracefully(
+        application, dummy_request):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/author3')
+    view = zeit.web.site.view_author.Comments(author, dummy_request)
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    with mock.patch.object(community, 'get_user_comments') as get:
+        get.return_value = None
+        area = view.tab_areas[0]
+        assert type(area) == (
+            zeit.web.site.view_author.UserCommentsPagination)
+        assert area.total_pages == 0
+        assert area.page == 1
+
+
 def test_author_comments_should_correctly_validate_pagination(
         application, dummy_request, monkeypatch):
     mock_comments = mock.MagicMock(return_value={'comments': []})

@@ -1,4 +1,5 @@
 import grokcore.component
+import pyramid.httpexceptions
 import pyramid.threadlocal
 
 import zeit.content.cp.automatic
@@ -21,7 +22,10 @@ class CyclicalContentQuery(zeit.content.cp.automatic.CenterpageContentQuery):
         # duplicates, we need to burn through all previous pages and consume
         # enough valid teasers of the content slice.
         request = pyramid.threadlocal.get_current_request()
-        skip_until = request.GET.get('p', None)
+        skip_until = request.GET.get('p', False)
+        if skip_until and not skip_until.startswith(
+                zeit.cms.interfaces.ID_NAMESPACE):
+            raise pyramid.httpexceptions.HTTPNotFound()
 
         result = []
         teasered = iter([])

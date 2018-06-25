@@ -3,8 +3,8 @@
 		text-transform: uppercase
 
 	&__country-flag
-		border-radius: remify(4px)
-		box-shadow: 0 0 remify(1px) remify(1px) rgba(200, 200, 200, 0.6)
+		border-radius: 4px
+		box-shadow: 0 0 1px 1px rgba(200, 200, 200, 0.6)
 		color: #000 // flag inherit color.. reset here
 		display: block
 		height: remify(36px)
@@ -12,8 +12,8 @@
 		width: remify(48px)
 
 	&__list-flag
-		border-radius: remify(3px)
-		box-shadow: 0 0 remify(1px) remify(1px) rgba(200, 200, 200, 0.6)
+		border-radius: 3px
+		box-shadow: 0 0 1px 1px rgba(200, 200, 200, 0.6)
 		color: #000 // flag inherit color.. reset here
 		display: block
 		height: remify(21px)
@@ -25,18 +25,15 @@
 			display: flex
 
 		&__country-flag
-			border-radius: remify(4px)
-			box-shadow: 0 0 remify(1px) remify(1px) rgba(200, 200, 200, 0.6)
-			display: block
 			height: remify(60px)
 			width: remify(80px)
 
 		&__country--home img
-			margin-left: $little
+			margin-left: remify(14px)
 			order: 1
 
 		&__country--away img
-			margin-right: $little
+			margin-right: remify(14px)
 
 	/* overwrite multi game stuff - here because nesting is cleaner */
 +respond-min($break-phablet-min)

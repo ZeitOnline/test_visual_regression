@@ -1,8 +1,6 @@
 <div class="wm-ticker__header" data-ct-row="header" data-ct-column="false">
     <h3 class="wm-ticker__headline">{{ headline }}</h3>
-    {{#link}}
-        <a href="{{ link }}" class="wm-ticker__link" title="Mehr Informationen anzeigen" data-ct-label="link">mehr</a>
-    {{/link}}
+    <a href="https://www.zeit.de/sport/2018-06/wm-2018-fussball-liveticker#/schedule" class="wm-ticker__link" data-ct-label="link">Zum Spielplan</a>
 </div>
 
 <div class="wm-ticker__matches" data-ct-row="matches" data-ct-column="false">
@@ -24,7 +22,7 @@
                             <span class="wm-ticker__dots">:</span>
                             <span class="wm-ticker__text--large wm-ticker__score--away">{{ awayPoints }}</span>
                         </div>
-                        <div class="wm-ticker__match-time">{{ time }}</div>
+                        <div class="wm-ticker__match-time" id="time-{{ id }}">{{ time }}</div>
                     </div>
                     <div class="wm-ticker__country wm-ticker__country--away">
                         <img alt="Flagge {{ away }}" class="wm-ticker__country-flag" src="/static/latest/images/svg/flags/{{ awayShort }}.svg">

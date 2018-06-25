@@ -74,6 +74,7 @@
   <setting name="c1_prefix" xsi:type="xsd:string">/config</setting>
   <setting name="series_prefix" xsi:type="xsd:string">http://xml.zeit.de/serie</setting>
   <setting name="topic_prefix" xsi:type="xsd:string">http://xml.zeit.de/thema</setting>
+  <setting name="robots_txt_prefix" xsi:type="xsd:string">http://xml.zeit.de/robots</setting>
   <setting name="volume_navigation_base" xsi:type="xsd:string">https://premium.zeit.de/abo/diezeit/%s/%02d</setting>
   <setting name="webtrekk_version" xsi:type="xsd:string">4.3.1</setting>
   <setting name="webtrekk_id" xsi:type="xsd:string">674229970930653</setting>
@@ -105,4 +106,9 @@
   <setting name="podcast_theme_article_body" xsi:type="xsd:string">zon-standalone</setting>
   <setting name="podcast_theme_article_header" xsi:type="xsd:string">zon-minimal</setting>
 
+  <!-- To enable, insert path to Google-Analytics/Optimize Script
+  To disable, use empty string. Do NOT use "false". -->
+  <setting name="optimize_on_zon_homepage" xsi:type="xsd:string"></setting>
+  <setting name="optimize_on_zon_centerpage" xsi:type="xsd:string"></setting>
+  <setting name="optimize_on_zon_article" xsi:type="xsd:string"></setting>
 </settings>
