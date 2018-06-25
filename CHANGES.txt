@@ -15,7 +15,7 @@ POSTDEPLOY
 3.164 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-942: Show current liveblog status in buzz-box and buzz-board teasers
 
 
 3.163 (2018-06-22)
