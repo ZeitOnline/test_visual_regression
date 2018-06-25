@@ -18,7 +18,8 @@
                     {% if display_mode == 'large' -%}
                         sizes="(min-width: 820px) 820px, 100vw"
                     {% endif -%}
-                {% endblock -%}
+                {%- endblock %}
+
                 layout="responsive"
                 attribution="{{ image.copyrights | map(attribute='text') | join(', ') }}"></amp-img>
             {% endblock media -%}
