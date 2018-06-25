@@ -228,7 +228,8 @@ def test_search_form_should_create_valid_date_range_elasticsearch_query(
                 u'term': {u'payload.workflow.published': True}
             }, {
                 u'range': {
-                    u'payload.document.last-semantic-change': {u'gte': u'1y'}}
+                    u'payload.document.last-semantic-change': {
+                        u'gte': u'now-1y'}}
             }],
             u'must_not': [{
                 u'terms': {
