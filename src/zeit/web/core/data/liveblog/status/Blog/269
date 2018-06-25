@@ -1,0 +1,55 @@
+{
+  "Id": "269",
+  "IsLive": "False",
+  "Description": "",
+  "Title": "Alle Elemente Test",
+  "CreatedOn": "11/22/16 5:14 PM",
+  "Creator": {
+    "href": "//zeit.superdesk.pro/resources/HR/User/283",
+    "Id": "283"
+  },
+  "Language": {
+    "href": "//zeit.superdesk.pro/resources/Localization/Language/2",
+    "Id": "2"
+  },
+  "Type": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/BlogType/1",
+    "Id": "1"
+  },
+  "Post": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Post/"
+  },
+  "PostPublished": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Post/Published"
+  },
+  "PostUnpublished": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Post/Unpublished"
+  },
+  "PostComment": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Post/Comment"
+  },
+  "Collaborator": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Collaborator/"
+  },
+  "CollaboratorPotential": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Collaborator/Potential"
+  },
+  "Sync": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Sync/"
+  },
+  "Configuration": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Configuration/"
+  },
+  "CommentPost": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Comment/Post/"
+  },
+  "Source": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Source/"
+  },
+  "Seo": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/Seo/"
+  },
+  "BlogMedia": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/269/BlogMedia/"
+  }
+}
