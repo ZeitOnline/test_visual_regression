@@ -8,7 +8,7 @@
       <title>Deutschland</title>
     </subnavigation>
   </ressort>
-  <ressort name="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft" ctmTeaser="yes">
+  <ressort name="Wirtschaft" uniqueId="http://xml.zeit.de/zeit-online/article" ctmTeaser="yes">
     <title>Wirtschaft</title>
     <subnavigation name="Unternehmen" uniqueId="http://xml.zeit.de/wirtschaft/unternehmen">
       <title>Unternehmen</title>
