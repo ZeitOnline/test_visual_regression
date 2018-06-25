@@ -454,9 +454,9 @@ def strftime(t, format):
 
 
 @zeit.web.register_filter
-def duration_format(milliseconds):
+def video_duration_format(teaser):
     try:
-        seconds = milliseconds / 1000.0
+        seconds = teaser.renditions[0].video_duration / 1000.0
         formatstr = '%-H:%M:%S' if seconds >= 3600 else '%-M:%S'
         d = datetime.timedelta(seconds=seconds)
         t = (datetime.datetime.min + d).time()

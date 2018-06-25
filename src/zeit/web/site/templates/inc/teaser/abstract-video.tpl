@@ -1,5 +1,6 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% set teaser_url = teaser | create_url %}
+{% set duration = teaser | video_duration_format %}
 <article class="{% block layout %}{{ layout }}{% endblock %}" data-video-id="{{ teaser.__name__ }}"
     {% if teaser.serie and teaser.serie.serienname %} data-video-series="{{ teaser.serie.serienname | format_webtrekk }}"{% endif %}
     {% block data_video_size %}{% endblock %}
@@ -15,7 +16,7 @@
             <div class="{{ self.layout() }}__inner">
                 {% block playbutton %}
                     <span class="video-text-playbutton video-text-playbutton--block">
-                        <span class="video-text-playbutton__text video-text-playbutton__text--block">Video ansehen</span><span class="video-text-playbutton__duration">{{ teaser.renditions[0].video_duration | duration_format }}</span>
+                        <span class="video-text-playbutton__text video-text-playbutton__text--block">Video ansehen</span>{% if duration %}<span class="video-text-playbutton__duration">{{ duration }}</span>{% endif %}
                     </span>
                 {% endblock playbutton %}
                 <h2 class="{{ self.layout() }}-title">
@@ -27,7 +28,7 @@
                     </span>
                     {% block inlineplaybutton %}
                         <span class="video-text-playbutton video-text-playbutton--inline">
-                            <span class="video-text-playbutton__text video-text-playbutton__text--inline">Video ansehen</span><span class="video-text-playbutton__duration">{{ teaser.renditions[0].video_duration | duration_format }}</span>
+                            <span class="video-text-playbutton__text video-text-playbutton__text--inline">Video ansehen</span>{% if duration %}<span class="video-text-playbutton__duration">{{ duration }}</span>{% endif %}
                         </span>
                     {% endblock %}
                 </h2>
