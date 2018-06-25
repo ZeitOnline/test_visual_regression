@@ -1,9 +1,8 @@
 import mock
 import transaction
-import zope.component
 
 import zeit.cms.interfaces
-import zeit.retresco.interfaces
+import zeit.retresco.connection
 
 
 def test_intextlink_data_is_cached_per_request(application):
@@ -11,7 +10,7 @@ def test_intextlink_data_is_cached_per_request(application):
         'http://xml.zeit.de/zeit-online/article/01')
     a2 = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/02')
-    tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
+    tms = zeit.retresco.connection.TMS('http://example.com')
     with mock.patch.object(tms, '_request') as request:
         request.return_value = {}
         tms.get_article_keywords(a1)

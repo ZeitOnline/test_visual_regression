@@ -118,7 +118,7 @@ def test_buzzboard_should_avoid_same_teaser_image_twice(
     browser = testbrowser('/zeit-online/buzz-box')
     area = browser.cssselect('.cp-area--buzzboard')[0]
     assert len(area.cssselect('.teaser-buzzboard__media')) == 4
-    assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 2
+    assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 1
 
 
 def test_printbox_is_present_and_has_digital_offerings(
@@ -373,8 +373,8 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
     liveblog = main.cssselect('span[class*="__kicker-logo--liveblog"]')
     offline = main.cssselect('span[class*="__kicker-logo--liveblog-closed"]')
 
-    assert len(liveblog) == 17
-    assert len(offline) == 8
+    assert len(liveblog) == 21
+    assert len(offline) == 10
 
 
 def test_format_date_returns_expected_value_in_newsbox(clock):
