@@ -25,8 +25,8 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:b0ad8e79-197f-43c9-8062-d358815568c9}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-09-11T13:22:46.257956+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Deutschland</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Meinung</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wirtschaft</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Wirtschaft</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Wer definiert, was die wahre Wirklichkeit ist? Die Fischer-im-Recht-Kolumne &#xFC;ber nichts als die Wahrheit (sd)</attribute>
