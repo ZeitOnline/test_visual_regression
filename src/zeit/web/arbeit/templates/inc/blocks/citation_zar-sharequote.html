@@ -7,7 +7,7 @@
 {% block citation_after_block %}
     {% if toggles('arbeit_quote_sharing') -%}
 
-        {% import 'zeit.web.arbeit:templates/macros/layout_macro.tpl' as lama %}
+        {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
         {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_link_x' %}
         {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share.link.x' %}
 

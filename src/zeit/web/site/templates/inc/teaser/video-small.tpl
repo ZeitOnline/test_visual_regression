@@ -2,6 +2,4 @@
 
 {% block layout %}video-small{% endblock %}
 
-{% block playbutton_modifier %}inline{% endblock %}
-
 {% block playbutton %}{% endblock %}
