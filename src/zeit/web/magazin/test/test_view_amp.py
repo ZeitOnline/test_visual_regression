@@ -47,8 +47,9 @@ def test_amp_contains_required_structured_data(testbrowser):
 
     # check WebPage
     assert page['publisher']['@id'] == publisher['@id']
-    assert page['mainEntity']['@id'] == article['@id']
     assert page['breadcrumb']['@id'] == breadcrumb['@id']
+    # disabled for now, as long as google can't handle this reference
+    # assert page['mainEntity']['@id'] == article['@id']
 
     # check Organization
     assert publisher['@id'] == '#publisher'

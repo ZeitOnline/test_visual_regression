@@ -13,11 +13,17 @@
         "height": {{ image_height }}
     },
     {% endrequire -%}
+    {#
+        this breaks the images in google search results for AMPs, although it's valid JSON-LD
+        luckily this is a 2-way reference, so we still describe the relation in one way
+        - WebPage.mainEntity -> Article
+        - Article.mainEntityOfPage -> WebPage
     {% if view.type != 'centerpage' -%}
     "mainEntity": {
         "@id": "#{{ view.type }}"
     },
     {% endif -%}
+    -#}
     {% if view.breadcrumbs -%}
     "breadcrumb": {
         "@id": "#breadcrumb"

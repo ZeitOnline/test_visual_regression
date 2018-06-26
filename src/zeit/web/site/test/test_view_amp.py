@@ -58,8 +58,9 @@ def test_amp_liveblog_article_contains_required_structured_data(testbrowser):
 
     # check WebPage
     assert page['publisher']['@id'] == publisher['@id']
-    assert page['mainEntity']['@id'] == liveblog['@id']
     assert page['breadcrumb']['@id'] == breadcrumb['@id']
+    # disabled for now, as long as google can't handle this reference
+    # assert page['mainEntity']['@id'] == liveblog['@id']
 
     # check Liveblog
     assert liveblog['mainEntityOfPage']['@id'] == (
@@ -133,8 +134,9 @@ def test_amp_liveblog_v3_article_contains_required_structured_data(
 
     # check WebPage
     assert page['publisher']['@id'] == publisher['@id']
-    assert page['mainEntity']['@id'] == liveblog['@id']
     assert page['breadcrumb']['@id'] == breadcrumb['@id']
+    # disabled for now, as long as google can't handle this reference
+    # assert page['mainEntity']['@id'] == liveblog['@id']
 
     # check Liveblog
     assert liveblog['mainEntityOfPage']['@id'] == (
@@ -190,8 +192,9 @@ def test_amp_liveblog_v3_solo_article_contains_required_structured_data(
 
     # check WebPage
     assert page['publisher']['@id'] == publisher['@id']
-    assert page['mainEntity']['@id'] == liveblog['@id']
     assert page['breadcrumb']['@id'] == breadcrumb['@id']
+    # disabled for now, as long as google can't handle this reference
+    # assert page['mainEntity']['@id'] == liveblog['@id']
 
     # check Liveblog
     assert liveblog['mainEntityOfPage']['@id'] == (
