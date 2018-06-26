@@ -85,6 +85,10 @@ class LazyProxy(object):
             # XXX Don't know who causes ext. solr to index this value
             elif type_id == 'centerpage':
                 type_id = 'centerpage-2009'
+            # Treat blogposts as links, so create_url() works as usual
+            elif type_id == 'blogpost':
+                type_id = 'link'
+                self.__proxy__['url'] = self.__proxy__.get('uniqueId')
             # XXX We should tweak the source_class so we don't have to talk to
             # `.factory`, but that's quite a bit of mechanical hassle.
             type_iface = CONTENT_TYPE_SOURCE.factory.find(type_id)
@@ -102,6 +106,12 @@ class LazyProxy(object):
         if self.serie and self.serie.column:
             zope.interface.alsoProvides(
                 self, zeit.web.core.article.IColumnArticle)
+
+    def __cmp__(self, other):
+        # Just like zeit.cms.repository.repository.ContentBase
+        if not zeit.cms.interfaces.ICMSContent.providedBy(other):
+            return -1
+        return cmp(self.uniqueId, other.uniqueId)
 
     def __getattr__(self, key):
         if not self.__exposed__ or not hasattr(self.__origin__, key):

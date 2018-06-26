@@ -1,0 +1,11 @@
+{% if not ns.toc_faq_printed %}
+    {# Place flexible table of contents right above the first intertitle, which
+       may or may not be the first block, so we cannot rely on the toc logic in
+       page.html #}
+    {% include "zeit.web.core:templates/inc/article/table-of-contents_flexible.html" %}
+    {% set ns.toc_faq_printed = True %}
+{% endif %}
+<h2 class="article__subheading article__item article-flexible-toc__subheading" id="{{ block.text | striptags | format_faq }}">
+    {{- block | striptags -}}
+    <a class="article-flexible-toc__subheading-link js-scroll" href="#flexible-toc" data-id="flexible-toc....oben"></a>
+</h2>

@@ -24,10 +24,12 @@ def test_get_reaches_from_centerpage_view(application):
         cp, module='zmo-mostread')
     buzz = zeit.web.core.centerpage.get_module(block).reach
 
-    buzz_views = buzz.get_views(section='zeit-magazin')[1].score
-    buzz_facebook = buzz.get_social(
-        facet='facebook', section='zeit-magazin')[1].score
-    buzz_comments = buzz.get_comments(section='zeit-magazin')[1].score
+    buzz_views = zeit.web.core.interfaces.IReachData(
+        buzz.get_views(section='zeit-magazin')[1]).score
+    buzz_facebook = zeit.web.core.interfaces.IReachData(buzz.get_social(
+        facet='facebook', section='zeit-magazin')[1]).score
+    buzz_comments = zeit.web.core.interfaces.IReachData(
+        buzz.get_comments(section='zeit-magazin')[1]).score
 
     assert buzz_views == 73147
     assert buzz_facebook == 408

@@ -65,6 +65,8 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     @property
     def elasticsearch_raw_query(self):
         if self.search_form:
+            # search_form already has a `published:true` clause.
+            self.is_complete_query = True
             return self.search_form.elasticsearch_raw_query
         return super(Ranking, self).elasticsearch_raw_query
 

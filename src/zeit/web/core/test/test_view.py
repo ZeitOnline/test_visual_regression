@@ -15,6 +15,7 @@ import zeit.web.magazin.view
 import zeit.web.magazin.view_article
 import zeit.web.magazin.view_centerpage
 import zeit.web.site.view_article
+import zeit.web.site.view_author
 import zeit.web.site.view_centerpage
 
 from selenium.common.exceptions import TimeoutException
@@ -338,7 +339,7 @@ def test_og_url_is_set_correctly(application):
         'http://xml.zeit.de/zeit-online/index')
     request = pyramid.testing.DummyRequest(route_url=lambda x: 'foo/')
     view = zeit.web.site.view_centerpage.Centerpage(context, request)
-    view.request.traversed = ('politik', 'index.cp2015')
+    view.request.traversed = ('politik', 'index')
     assert view.og_url == 'foo/politik/index'
 
 
@@ -381,43 +382,6 @@ def test_trailing_slash_should_lead_to_redirect():
     request.path = '/foo/baa'
     request.url = 'http://foo.xyz.de/foo/baa'
     assert zeit.web.core.view.redirect_on_trailing_slash(request) is None
-
-
-def test_cp2015_suffix_should_lead_to_redirect():
-    request = pyramid.testing.DummyRequest()
-    request.path = '/foo/baa.cp2015'
-    request.url = 'http://foo.xyz.de/foo/baa.cp2015'
-    with pytest.raises(
-            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
-        zeit.web.core.view.redirect_on_cp2015_suffix(request)
-
-    assert redirect.value.location == 'http://foo.xyz.de/foo/baa'
-
-    request.path = '/foo/baa.cp2015'
-    request.url = 'http://foo.xyz.de/foo/baa.cp2015?x=y'
-
-    with pytest.raises(
-            pyramid.httpexceptions.HTTPMovedPermanently) as redirect:
-        zeit.web.core.view.redirect_on_cp2015_suffix(request)
-
-    assert redirect.value.location == 'http://foo.xyz.de/foo/baa?x=y'
-
-    request.path = '/foo/baa'
-    request.url = 'http://foo.xyz.de/foo/baa'
-    assert zeit.web.core.view.redirect_on_cp2015_suffix(request) is None
-
-
-def test_cp2015_redirect_can_be_disabled(application):
-    # The context doesn't matter for this test, just needs to be ICMSContent.
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/slenderized-index')
-    request = pyramid.testing.DummyRequest(path='/index.cp2015')
-    request.registry = application.zeit_app.config.registry
-    view = zeit.web.core.view.Base(context, request)
-    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    settings['redirect_from_cp2015'] = 'False'
-    # assert: no HTTPFound is raised.
-    view()
 
 
 def test_ispaginated_predicate_should_handle_get_parameter():
@@ -675,6 +639,10 @@ def test_notification_script_does_not_edit_unknown_hashes(
         assert url_hash in driver.current_url
 
 
+# mock state ist not resetted in local env
+# when running in chain, maybe future versions of
+# Chromedriver fix this
+@pytest.mark.xfail(reason='Fails locally')
 def test_user_name_and_email_are_displayed_correctly(
         testserver, selenium_driver):
     driver = selenium_driver
@@ -991,3 +959,68 @@ def test_response_has_surrogate_key_header(testserver):
         '%s/zeit-online/article/simple' % testserver.url)
     assert response.headers.get('surrogate-key') == (
         'http://xml.zeit.de/zeit-online/article/simple')
+
+
+def test_gdpr_cookie_sets_adcontroller_siteinfo(selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/simple' % testserver.url)
+    driver.add_cookie({
+        'name': 'gdpr',
+        'value': 'dnt',
+        'path': '/'
+    })
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+    gdpr = driver.execute_script('return adcSiteInfo.gdpr')
+    assert gdpr == 'dnt'
+
+
+def test_view_should_return_channels(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/arbeit/article/01-digitale-nomaden')
+    view = zeit.web.arbeit.view_article.Article(
+        context, pyramid.testing.DummyRequest())
+    assert view.channels == u'entdecken;reisen'
+
+
+def test_view_should_return_none_if_it_has_no_channels(application):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/j_random')
+    request = pyramid.testing.DummyRequest()
+    view = zeit.web.site.view_author.Author(author, request)
+    assert view.channels is None
+
+
+def test_robots_txt_should_be_dispatched_according_to_host(testserver):
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'www.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' in r.content
+
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'www.staging.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' in r.content
+
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'img.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' not in r.content
+    assert 'Googlebot-News' in r.content
+
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'img.staging.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' not in r.content
+    assert 'Googlebot-News' in r.content
+
+    # Falls back to www if no specific file exists.
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'anything.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' in r.content

@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <article xmlns:cp="http://namespaces.zeit.de/CMS/cp">
 <head>
 <header>
@@ -29,7 +30,7 @@
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">embed</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-06-01T14:47:14.055411+00:00</attribute>

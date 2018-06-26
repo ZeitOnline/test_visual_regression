@@ -119,8 +119,11 @@ class Application(object):
         config.add_subscriber(register_standard_site_manager,
                               pyramid.interfaces.INewRequest)
 
+        config.add_route('robots', '/robots.txt')
+
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('campus_framebuilder', '/campus/framebuilder')
+
         config.add_route('instantarticle', '/instantarticle/*traverse')
         config.add_route(
             'instantarticle-item', '/instantarticle-item/*traverse')
@@ -165,15 +168,13 @@ class Application(object):
         if self.settings['serve_assets']:
             config.add_static_view(
                 name=self.settings.get('asset_prefix', '/static/latest'),
-                path='zeit.web.static:', cache_max_age=ast.literal_eval(
-                    self.settings['assets_max_age']))
+                path='zeit.web.static:', cache_max_age=None)
 
         config.set_request_factory(SSLRequest)
         config.add_request_method(configure_host('asset'), reify=True)
         config.add_request_method(configure_host('image'), reify=True)
         config.add_request_method(configure_host('jsconf'), reify=True)
         config.add_request_method(configure_host('fbia'), reify=True)
-        config.add_request_method(configure_host('ssl_asset'), reify=True)
 
         config.add_request_method(
             zeit.web.core.security.get_user, name='user', reify=True)

@@ -78,16 +78,6 @@ def redirect_on_trailing_slash(request):
             location=url)
 
 
-def redirect_on_cp2015_suffix(request):
-    if request.path.endswith('.cp2015') and not len(request.path) == 7:
-        scheme, netloc, path, params, query, fragment = urlparse.urlparse(
-            request.url)
-        url = '{}://{}{}'.format(scheme, netloc, path[:-7])
-        url = url if query == '' else '{}?{}'.format(url, query)
-        raise pyramid.httpexceptions.HTTPMovedPermanently(
-            location=url)
-
-
 def is_paywalled(context, request):
     return zeit.web.core.paywall.Paywall.status(request)
 
@@ -110,11 +100,6 @@ class Base(object):
 
     def __call__(self):
         redirect_on_trailing_slash(self.request)
-        # Don't redirect for preview (since the workingcopy does not contain
-        # the suffix-less version)
-        if pyramid.settings.asbool(self.request.registry.settings.get(
-                'redirect_from_cp2015', True)):
-            redirect_on_cp2015_suffix(self.request)
 
         # Set caching times.
         client_time = zeit.web.core.interfaces.ICachingTime(self.context)
@@ -174,6 +159,15 @@ class Base(object):
             return ''
 
     @zeit.web.reify
+    def channels(self):
+        """ A string with a semicolon seperated list of all channels """
+        channels = getattr(self.context, 'channels', None)
+        if isinstance(channels, (list, tuple)):
+            channel_list = [item for tuples in channels for item in tuples]
+            return ';'.join(zeit.web.core.template.format_webtrekk(str(
+                item)) for item in channel_list if item is not None)
+
+    @zeit.web.reify
     def is_advertorial(self):
         return is_advertorial(self.context, self.request)
 
@@ -182,6 +176,30 @@ class Base(object):
         if self.context.serie is None:
             return ''
         return self.context.serie.serienname
+
+    @zeit.web.reify
+    def series_title(self):
+        series = zeit.web.core.interfaces.ISeries(self.context, [])
+        try:
+            return series.title
+        except AttributeError:
+            return True
+
+    @zeit.web.reify
+    def podcastseries_feed(self):
+        series = zeit.web.core.interfaces.ISeries(self.context, [])
+        try:
+            return series.podcastseries_feed.replace("-", "")
+        except AttributeError:
+            return True
+
+    @zeit.web.reify
+    def is_podcastseries(self):
+        series = zeit.web.core.interfaces.ISeries(self.context, [])
+        try:
+            return series.kind == "Podcast"
+        except AttributeError:
+            return None
 
     @zeit.web.reify
     def cap_title(self):
@@ -470,7 +488,7 @@ class Base(object):
 
     @zeit.web.reify
     def content_path(self):
-        return u'/' + u'/'.join(self.request.traversed).replace('.cp2015', '')
+        return u'/' + u'/'.join(self.request.traversed)
 
     @zeit.web.reify
     def content_url(self):
@@ -490,25 +508,13 @@ class Base(object):
 
     @zeit.web.reify
     def date_last_modified(self):
-        return self.date_last_published_semantic or self.date_first_released
+        return zeit.web.core.date.mod_date(self.context)
 
     @zeit.web.reify
     def date_first_released(self):
         date = self.publish_info.date_first_released
         if date:
             return date.astimezone(self.timezone)
-
-    @zeit.web.reify
-    def date_last_published_semantic(self):
-        modified = self.publish_info.date_last_published_semantic
-        released = self.date_first_released
-        # use 60s of tolerance before displaying a modification date
-        # whould be unnecessary if date_last_published_semantic is never before
-        # first_released and initially undefined or equal first_released
-        # but it's not like that [ms]
-        if (released is not None and modified is not None and
-                modified - released > datetime.timedelta(seconds=60)):
-            return modified.astimezone(self.timezone)
 
     @zeit.web.reify
     def has_cardstack(self):
@@ -597,6 +603,8 @@ class Base(object):
 
         if getattr(self, 'framebuilder_requires_webtrekk', False):
             pagetype = 'centerpage.framebuilder'
+        elif zeit.web.core.article.IFAQArticle.providedBy(self.context):
+            pagetype = 'article.faq'
         else:
             pagetype = self.detailed_content_type
 
@@ -649,7 +657,8 @@ class Base(object):
             ('cp28', access),  #
             ('cp29', first_click_free),  # First click free
             ('cp30', self.paywall or 'open'),  # Paywall Schranke
-            ('cp32', 'unfeasible')  # Protokoll (set via JS in webtrekk.html)
+            ('cp32', 'unfeasible'),  # Protokoll (set via JS in webtrekk.html)
+            ('cp38', self.channels or 'undefined')  # Channel-Liste
         ])
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
@@ -763,18 +772,32 @@ class CommentMixin(object):
         except IndexError:
             return False
 
+    def _get_comment_sorting(self):
+        # Basic comment sort is ascending.
+        sort = 'asc'
+
+        # This might be overwritten by context specific default.
+        if getattr(self.context, 'recent_comments_first', False):
+            sort = 'desc'
+
+        # User might change sort order as well, but fall back to
+        # derived default, if it hasn't.
+        return self.request.params.get('sort', sort)
+
     @zeit.web.reify
     def comments(self):
         if not self.show_commentthread:
             return
-        sort = self.request.params.get('sort', 'asc')
+
         try:
             page = int(self.request.params.get('page', 1))
         except ValueError:
             return
         cid = self.request.params.get('cid', None)
         return self.community.get_thread(
-            self.context.uniqueId, sort=sort, page=page, cid=cid)
+            self.context.uniqueId,
+            sort=self._get_comment_sorting(),
+            page=page, cid=cid)
 
     def get_comment(self, cid):
         return self.community.get_comment(self.context.uniqueId, cid)
@@ -877,10 +900,9 @@ class CommentMixin(object):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
         if not toggles.find('zoca_moderation_launch'):
             uuid = zeit.cms.content.interfaces.IUUID(
-                self.context).id
+                self.context).shortened
             if not uuid:
                 return None
-            uuid = uuid.strip('{}').replace('urn:uuid:', '')
             return u'{}/{}/thread/%cid%'.format(
                 conf.get('community_admin_host').rstrip('/'), uuid)
         else:
@@ -911,7 +933,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def show_date_format(self):
-        if self.date_last_published_semantic:
+        if self.date_last_modified != self.date_first_released:
             return 'long'
         elif self.product_id in ('ZEI', 'ZMLB'):
             return 'short'
@@ -961,11 +983,11 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def last_modified_label(self):
-        if self.date_last_published_semantic:
+        if self.date_last_modified != self.date_first_released:
             return u'{} am {}'.format(
                 self.last_modified_wording,
                 zeit.web.core.template.format_date(
-                    self.date_last_published_semantic, 'long'))
+                    self.date_last_modified, 'long'))
 
     @zeit.web.reify
     def obfuscated_date(self):
@@ -1283,3 +1305,21 @@ def invalid_unicode_in_request(request):
     http_cache=60)
 def login_state_footer(request):
     return zeit.web.core.security.get_login_state(request)
+
+
+@zeit.web.view_config(
+    route_name='robots',
+    host_restriction=False)
+def robots_txt(request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    hostname = request.headers.get('host', 'www.zeit.de').lower()
+    subdomain = hostname.split('.')[0]
+
+    folder = conf.get('robots_txt_prefix')
+    if zeit.cms.interfaces.ICMSContent(
+            '%s/%s' % (folder, subdomain), None) is None:
+        subdomain = 'www'
+
+    prefix = urlparse.urlparse(folder).path
+    subrequest = pyramid.request.Request.blank('%s/%s' % (prefix, subdomain))
+    return request.invoke_subrequest(subrequest, use_tweens=True)

@@ -309,6 +309,13 @@ class PostComment(zeit.web.core.view.Base):
         return comment['uid'], filter(None, comment['fans'].split(','))
 
     def _ensure_comment_thread(self, unique_id):
+        """Check whether comment thread exists in community, and create it if
+        not. This is only a safety belt, the main responsibility for creating
+        new threads lies with zeit.publisher, which is also responsible for
+        updating existing threads when metadata changes in vivi -- since we
+        cannot do that here easily/cheaply (we'd have to "re-create" the
+        thread every time we post a comment, which is too expensive).
+        """
         community = zope.component.getUtility(
             zeit.web.core.interfaces.ICommunity)
         if community.get_comment_count(unique_id):
@@ -324,7 +331,9 @@ class PostComment(zeit.web.core.view.Base):
                             'no comment_thread for it.'.format(unique_id))
 
         xml_str = lxml.etree.tostring(content.xml)
-        headers = self._create_community_headers(unique_id)
+        headers = {
+            'X-uniqueId': unique_id,
+            'Content-Type': 'text/xml'}
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         error = None
@@ -356,18 +365,6 @@ class PostComment(zeit.web.core.view.Base):
 
         # XXX TRASHME together with get_cacheable_thread
         invalidate_comment_thread(unique_id)
-
-    def _create_community_headers(self, unique_id):
-        # XXX: The community currently expects X-uniqueId which
-        # a) uses "http" scheme
-        # b) can be www.zeit.de or www.staging.zeit.de
-        # Which doesn't play well with ssl-enabled route_url()
-        # We'll soon fix this on the community side to simply use xml.zeit.de
-        x_uniqueid_host = urlparse.urlparse(self.request.route_url('home'))[1]
-        path = urlparse.urlparse(unique_id)[2]
-        return {
-            'X-uniqueId': 'http://{}{}'.format(x_uniqueid_host, path),
-            'Content-Type': 'text/xml'}
 
 
 @zeit.web.view_config(

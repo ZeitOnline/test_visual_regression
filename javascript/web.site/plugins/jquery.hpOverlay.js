@@ -69,6 +69,8 @@
         // bind this on runtime to make it revokable
         this.visibilityListener = visibilityListener.bind( this );
         document.addEventListener( 'visibilitychange', this.visibilityListener );
+        // add Podcast Event Listener
+        this.addPostMessageEventListener();
         // fetchData initially
         this.fetchData();
     };
@@ -181,8 +183,7 @@
         // set state
         this.visible = false;
         // write cookie
-        this.cookieValue = 'canceled';
-        Zeit.cookieCreate( 'overlaycanceled', 'canceled', this.options.cookieTimeInDays, '' );
+        this.addCancelCookie();
         // restore last focused element
         if ( this.activeElement ) {
             this.activeElement.focus();
@@ -235,6 +236,64 @@
         $( window ).off( '.hpoverlay' );
         $( document ).off( '.hpoverlay' );
         document.removeEventListener( 'visibilitychange', this.visibilityListener );
+    };
+
+    Overlay.prototype.sendPodcastPlayEventPostMessage = function() {
+        // send postMessage with value play to get the message once the player starts
+        $( '.podigee-podcast-player' ).each(
+            function() {
+                $( this ).context.contentWindow.postMessage(
+                    JSON.stringify({
+                        context: 'player.js',
+                        version: 'version',
+                        method: 'addEventListener',
+                        value: 'play'
+                    }),
+                    '*'
+                );
+            }
+        );
+    };
+
+    Overlay.prototype.listenToPostMessages = function() {
+        window.addEventListener( 'message', function( event ) {
+            var data = {},
+                origin = event.origin,
+                isQuizOrPodcast = false,
+                trigger = false;
+
+            if ( this.cookieValue === 'canceled' ) {
+                return;
+            }
+
+            isQuizOrPodcast = origin === 'https://quiz.zeit.de' || origin === 'https://cdn.podigee.com';
+
+            // window receives postMessage events all over the place, we want to single out podcast and quiz
+            // both provide stringified JSON as event.data which needs to be parsed, other events won't
+            data =  isQuizOrPodcast && typeof( event.data ) === 'string' ? JSON.parse( event.data ) : event.data;
+
+            // match the actual trigger events reagrding parsed event.data
+            trigger = ( data.name === 'quiz' && data.message === 'started' ) || ( data.context === 'player.js' && data.event === 'play' );
+
+            if ( trigger ) {
+                this.addCancelCookie();
+                this.log( 'Added Cookie' );
+            }
+        }.bind( this ), false );
+    };
+
+    Overlay.prototype.addPostMessageEventListener = function() {
+        // add postMessage listeners only if either Podcast or Quiz are present
+        var trigger = $( '.podigee-podcast-player' ) || $( 'iframe[src*="quiz.zeit.de"]' );
+        if ( trigger ) {
+            this.sendPodcastPlayEventPostMessage();
+            this.listenToPostMessages();
+        }
+    };
+
+    Overlay.prototype.addCancelCookie = function() {
+        this.cookieValue = 'canceled';
+        Zeit.cookieCreate( 'overlaycanceled', this.cookieValue, this.options.cookieTimeInDays, '' );
     };
 
     // jquery plugin

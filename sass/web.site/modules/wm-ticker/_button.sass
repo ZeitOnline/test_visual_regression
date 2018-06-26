@@ -1,0 +1,25 @@
+.wm-ticker__button
+	background-color: transparent
+	border: 0
+	color: $zon-mid-grey
+	font-size: em(14px)
+	letter-spacing: $letter-spacing-s
+	padding: 0
+	margin-bottom: $small
+
+	&::before
+		border-color: currentColor
+		border-style: solid
+		border-width: 2px 2px 0 0
+		content: ''
+		height: 5px
+		display: inline-block
+		margin-right: 10px
+		transform: rotate(135deg) translateY(3px)
+		width: 5px
+
+	&--hidden
+		display: none
+
+	+respond-min($break-desktop-min)
+		display: none

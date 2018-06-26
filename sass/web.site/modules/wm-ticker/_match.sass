@@ -1,0 +1,71 @@
+.wm-ticker
+	&__matches
+		text-align: center
+
+	/* current game */
+	&__match-detail
+		margin-bottom: $vertical-space
+
+		&:not(:first-of-type)
+			border-top: 1px solid $color-border
+			padding-top: $vertical-space
+
+	&__match-detail-link,
+	&__match-detail-content
+		display: flex
+		justify-content: center
+		align-items: center
+
+	/* text underneath flag */
+	&__text
+		color: $zon-grey
+		font-size: em(13px)
+		font-weight: bold
+		padding: .1rem 0
+
+		&--large
+			font-size: em(50px)
+			font-weight: bolder
+			line-height: 1
+			vertical-align: middle
+
+	/* everything center container in current game */
+	&__match-time
+		color: $zon-mid-grey
+		font-size: em(16px) // time should be bigger - thank you layouts
+
+	&__score
+		margin-left: remify(20px)
+		margin-right: remify(20px)
+		min-width: remify(140px)
+
+	&__dots
+		font-size: em(40px)
+		font-weight: bolder
+		padding-left: remify(6px)
+		padding-right: remify(6px)
+		vertical-align: middle
+
+	+respond-min($break-desktop-min)
+		&__matches
+			align-items: center
+			display: flex
+			justify-content: center
+
+		&__match-detail
+			&:not(:last-of-type)
+				border-right: 1px solid $color-border
+				padding-right: remify(28px)
+				margin-bottom: 0
+				margin-right: remify(28px)
+
+			&:not(:first-of-type)
+				border-top: 0
+				padding-top: 0
+
+		&__text
+			color: $zon-dark-grey
+			font-size: em(16px)
+
+		&__match-time
+			font-size: em(14px)

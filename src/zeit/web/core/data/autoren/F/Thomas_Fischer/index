@@ -2,6 +2,8 @@
 <author>
   <firstname>Thomas</firstname>
   <lastname>Fischer</lastname>
+  <email>foo.bar@zeit.de</email>
+  <enable_feedback>false</enable_feedback>
   <status>Print</status>
   <external>false</external>
   <display_name>Thomas Fischer</display_name>

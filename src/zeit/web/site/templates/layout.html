@@ -27,7 +27,12 @@
 
     <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
+
+    {% if view.is_podcastseries %}
+    <link type="application/rss+xml" rel="alternate" title="{{ view.series_title }}" href="https://{{ view.podcastseries_feed }}.podigee.io/feed/mp3"/>
+    {% else %}
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+    {% endif %}
 
     {% block css_link %}
         <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">
@@ -40,6 +45,10 @@
     {% block ligatus_include %}{% endblock %}
     {% block schemaorg_data %}{% endblock %}
 
+    {% if view.include_optimize -%}
+        <script src="{{ view.include_optimize }}"></script>
+    {% endif %}
+
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
     {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
     {% if toggles('third_party_modules') -%}
@@ -48,7 +57,6 @@
 
     {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
-        {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
     {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
     {% if settings('livereload') %}
@@ -124,6 +132,8 @@
     {% if view.is_hp %}
         {%- include "zeit.web.site:templates/inc/overlay.html" -%}
     {% endif %}
+
+    {%- include "zeit.web.core:templates/inc/data-protection-popover.html" -%}
 
     {% block adblocker_count %}
         {%- include "zeit.web.core:templates/inc/tracking/adblocker_count.html" -%}

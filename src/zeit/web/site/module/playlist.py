@@ -27,15 +27,15 @@ class Playlist(zeit.web.core.centerpage.Module):
 
 class VideoSeriesSource(zeit.cms.content.sources.SimpleXMLSource):
 
-    product_configuration = 'zeit.web'
-    config_url = 'series-source'
+    product_configuration = 'zeit.cms'
+    config_url = 'source-serie'
 
     def getValues(self):
         try:
             tree = self._get_tree()
         except (TypeError, IOError):
             return []
-        videoseries = tree.xpath('/allseries/videoseries/series')
+        videoseries = tree.xpath('//series[@video="yes"]')
         result = []
         for node in videoseries:
             result.append(dict(url=node.get('url'), title=node.get('title')))

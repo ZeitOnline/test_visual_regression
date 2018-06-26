@@ -8,10 +8,14 @@ var $ = require( 'jquery' ),
     menu = require( 'web.core/menu' ),
     overscrolling = require( 'web.core/overscrolling' ),
     videoStage = require( 'web.site/video/videoStage' ),
+    videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
     adblockCount = require( 'web.site/adblockCount' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
+    dataProtectionPopOver = require( 'web.core/dataProtectionPopOver' ),
+    followPushButton = require( 'web.core/followPushButton' ),
+    wmTickerWrapper = require( 'web.site/wmTickerRequire' ),
     article = $( '#js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     isHp = document.body.getAttribute( 'data-is-hp' );
@@ -26,14 +30,18 @@ clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
 videoStage.init();
+dataProtectionPopOver.init();
+wmTickerWrapper.init();
 
 if ( article.length ) {
     articledate.init();
     comments.init();
     overscrolling.init({ livePreview: true });
     visibilityTracking.init();
+    videoPlayer.init();
 }
 
+followPushButton.init();
 adblockCount.init();
 saveGetToCookie.init();
 zeit.clearQueue();
@@ -96,7 +104,6 @@ if ( pageType === 'centerpage' ) {
     article.find( '.js-liveblog' ).liveblog();
     article.find( '.article-toc' ).toggleRegions();
     $.picturefill();
-    $( '.sharing-menu' ).toggleRegions();
     $( '.comment-section' ).countFormchars();
 } else if ( pageType === 'author' ) {
     $( '.author-questions' ).longTextWrapper();

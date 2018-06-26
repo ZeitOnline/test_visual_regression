@@ -34,6 +34,16 @@ class IColumnArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that belong to a "column" series."""
 
 
+class IFlexibleTOCArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that contain a flexible table of
+    contents.
+    """
+
+
+class IFAQArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that contain a FAQ."""
+
+
 class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that contain a liveblog."""
 
@@ -41,7 +51,8 @@ class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
 class ISeriesArticleWithFallbackImage(
         zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that are part of a series with a
-    fallback image."""
+    fallback image.
+    """
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
@@ -88,14 +99,22 @@ def _inject_banner_code(pages, pubtype):
             'ads': [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
                     {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
                     {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
-                    {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
-                    {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
+                    {'tile': 4, 'paragraph': 4, 'type': 'desktop'}]
         },
         'longform': {
             'pages': [2],
             'ads': [{'tile': 7, 'paragraph': 5, 'type': 'desktop'}]
         }
     }
+
+    # change place5 against ctm if configured
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    place5 = ({'tile': 5, 'paragraph': 6, 'type': 'desktop'},
+              {'tile': 'content_ad', 'paragraph': 6, 'type': ''},)
+    if toggles.find('iqd_contentmarketing_ad'):
+        adconfig['zon']['ads'].append(place5[1])
+    else:
+        adconfig['zon']['ads'].append(place5[0])
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)
@@ -169,7 +188,6 @@ def get_retresco_body(article):
     seo = zeit.seo.interfaces.ISEO(article)
 
     if (toggles.find('enable_intext_links') and
-            not zeit.retresco.interfaces.ITMSContent.providedBy(article) and
             not ILocalContent.providedBy(article) and
             not seo.disable_intext_links and
             not suppress_intextlinks(article)):
@@ -189,6 +207,11 @@ def get_retresco_body(article):
                     exc_info=True)
             else:
                 article._v_retresco_body = xml
+    elif zeit.retresco.interfaces.ITMSContent.providedBy(article):
+        # While this branch is quite correct, it is mostly a fallback for tests
+        content = zeit.cms.interfaces.ICMSContent(article.uniqueId, None)
+        if zeit.content.article.interfaces.IArticle.providedBy(content):
+            xml = content.xml.body
 
     return zope.component.queryMultiAdapter(
         (article, xml),
@@ -243,6 +266,46 @@ def pages_of_article(article, advertising_enabled=True):
         pubtype = 'zon'
 
     return _inject_banner_code(pages, pubtype)
+
+
+@zope.interface.implementer(zeit.web.core.interfaces.IArticleModule)
+class FAQItemBlock(Page):
+
+    """A block for FAQs, wrapped around questions and corresponding answers.
+    This may be placed in z.w.c.block instead, but will result in
+    circular imports.
+    """
+
+    def __init__(self):
+        self.blocks = []
+
+
+def restructure_faq_article(page):
+    # FAQs by definition consist only of a single page.
+    restructured_blocks = []
+    for block in page.blocks:
+        try:
+            previous_block = restructured_blocks[-1]
+        except IndexError:
+            previous_block = None
+
+        if isinstance(block, zeit.web.core.block.Intertitle):
+            # Handle intertitles, representing a FAQ question.
+            faq_item_block = FAQItemBlock()
+            faq_item_block.append(block)
+            restructured_blocks.append(faq_item_block)
+        elif zeit.web.core.interfaces.IContentAdBlock.providedBy(block):
+            # Ad blocks should never be part of an answer.
+            restructured_blocks.append(block)
+        elif isinstance(previous_block, FAQItemBlock):
+            # Add further blocks as answers to their corresponding question.
+            previous_block.append(block)
+        else:
+            # Everything else is just a regular block (e.g. paragraphs that
+            # appear before the first intertitle question).
+            restructured_blocks.append(block)
+        page.blocks = restructured_blocks
+    return page
 
 
 def convert_authors(article):
@@ -375,8 +438,17 @@ class LiveblogInfo(object):
         if self.liveblog:
             return self.liveblog.collapse_preceding_content
 
+    @property
+    def has_relative_dates(self):
+        if self.liveblog:
+            theme = self.liveblog.get_amp_themed_id(self.liveblog.id)
+            if theme:
+                return theme.startswith('zon-amp-solo')
+
 
 TEMPLATE_INTERFACES = {
+    'faq': (IFAQArticle,),
+    'flexible-toc': (IFlexibleTOCArticle,),
     'zon-liveblog': (ILiveblogArticle,),
     # Should we check that the article provides IZMOContent? Because those
     # templates are only available there.

@@ -6,7 +6,16 @@
         jsconfHost: '{{ request.jsconf_host }}',
         cookieFallbackDomain: '{{ settings('cookie_fallback_domain', 'zeit.de') }}',
         moderationURL: '{{ view.moderation_url }}',
-        cpVideoPlayerId: '{{ settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') }}',
+        videoPlayers: {
+            'cp': {
+                'withAds': '{{ settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') }}',
+                'withoutAds': '{{ settings('brightcove_videoplayer_hp_cp_single_wo_ads', 'r1xb937iwZ') }}'
+            },
+            'article': {
+                'withAds': '{{ settings('brightcove_videoplayer_article', 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9') }}',
+                'withoutAds': '{{ settings('brightcove_videoplayer_article_wo_ads', 'NykzeyfYg') }}'
+            }
+        },
         hpOverlay: {
             active: {{ 'true' if settings('hp_overlay_active', False) else 'false' }},
             interval: '{{ settings('hp_overlay_interval') }}'
@@ -116,6 +125,24 @@
                     return size;
                 }
             }
+        },
+        cookieCreate: function( name, value, days, domain ) {
+            var expires = '';
+
+            if ( arguments.length < 4 ) {
+                domain = window.Zeit.cookieFallbackDomain;
+            }
+
+            if ( days ) {
+                var date = new Date();
+                date.setTime( date.getTime() + ( days * 24 * 60 * 60 * 1000 ) );
+                expires = '; expires=' + date.toGMTString();
+            }
+
+            document.cookie = name + '=' + value + expires + '; path=/; domain=' + domain;
+        },
+        cookieRead: function( name ) {
+            return ( document.cookie.match( '(?:^|;) ?' + name + '\\s*=\\s*([^;]*)' ) || 0 )[ 1 ];
         }
     };
 

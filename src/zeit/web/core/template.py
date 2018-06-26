@@ -223,7 +223,11 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         templates.append('logo-zmo-zm')
         return templates
     if liveblog(teaser):
-        templates.append('liveblog')
+        livebloginfo = zeit.web.core.interfaces.ILiveblogInfo(teaser)
+        if livebloginfo.is_live:
+            templates.append('liveblog')
+        else:
+            templates.append('liveblog-closed')
         return templates
     if brand == 'zett':
         templates.append('logo-zett-small')
@@ -330,7 +334,7 @@ def create_url(context, obj, request=None):
 
     if isinstance(obj, basestring):
         return zeit.web.core.utils.maybe_convert_http_to_https(obj.replace(
-            zeit.cms.interfaces.ID_NAMESPACE, host, 1).replace('.cp2015', ''))
+            zeit.cms.interfaces.ID_NAMESPACE, host, 1))
     elif zeit.content.link.interfaces.ILink.providedBy(obj):
         return zeit.web.core.utils.maybe_convert_http_to_https(obj.url)
     elif zeit.content.video.interfaces.IVideo.providedBy(obj):
@@ -464,7 +468,6 @@ def get_layout(block):
     if zeit.content.cp.interfaces.ITeaserBlock.providedBy(
             block) and not len(block):
         return 'hide'
-    layout = zeit.web.core.centerpage.LEGACY_TEASER_MAPPING.get(layout, layout)
     return layout
 
 
@@ -695,6 +698,25 @@ def format_webtrekk(string):
     string = re.sub(u'_+', '_', string)
     string = re.sub(u'^_|_$', '', string)
     return string
+
+
+@zeit.web.register_filter
+def format_faq(string):
+    """Returns a string that is save for the faq site."""
+    if not isinstance(string, basestring):
+        return string
+    string = string.lower().replace(
+        u'ä', 'ae').replace(
+        u'ö', 'oe').replace(
+        u'ü', 'ue').replace(
+        u'á', 'a').replace(
+        u'à', 'a').replace(
+        u'é', 'e').replace(
+        u'è', 'e').replace(
+        u'ß', 'ss')
+    string = re.sub(u'[^-a-zA-Z0-9]', '-', string)
+    string = re.sub(u'-+', '-', string)
+    return string.strip('-')
 
 
 @zeit.web.register_filter

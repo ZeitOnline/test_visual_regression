@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/spiele/2013-03/scrabble-12-580.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">Scrabble</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple/&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-03-14T01:07:02.365823+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2013-03-14T01:06:00+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.Manthe</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-03-14T01:07:02.365823+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-03-08T07:34:38.168882+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">1489756710</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:6e4382e3-593f-408f-9439-b6bafe42d9d3}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Scrabble</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2017-05-10T15:35:21Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">116294</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Thu, 14 Mar 2013 01:06:02 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"1c646-4d7d820521280"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">image/jpeg</attribute>
+</head>

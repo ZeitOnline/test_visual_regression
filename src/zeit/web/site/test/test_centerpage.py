@@ -33,8 +33,8 @@ def test_buzz_mostread_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--mostread .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--mostread .teaser-buzz__title')
-    assert kicker and u'Flüchtlinge' in kicker[1].text
-    assert titles and u'Fluchthilfe ganz privat' in titles[2].text
+    assert 'Arbeitswelt' == kicker[2].text.strip()
+    assert 'Der Terror der guten Laune' == titles[2].text
 
 
 def test_buzz_comments_should_render_correct_article_count(testbrowser):
@@ -53,8 +53,8 @@ def test_buzz_comments_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--comments .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--comments .teaser-buzz__title')
-    assert u'Asylbewerber' in kicker[0].text
-    assert u'Orbán verlangt Schließung der Grenzen' in titles[2].text
+    assert 'Steuerhinterziehung' == kicker[0].text.strip()
+    assert u'"Die Schweiz ist die größte Fluchtburg"' == titles[0].text
 
 
 def test_buzz_mostshared_should_render_correct_article_count(testbrowser):
@@ -73,8 +73,8 @@ def test_buzz_mostshared_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--shared .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--shared .teaser-buzz__title')
-    assert u'Studienwahl' in kicker[0].text
-    assert u'Zuwanderer haben häufiger Abitur' in titles[1].text
+    assert 'Gender Studies' == kicker[0].text.strip()
+    assert 'Born to be wild' == titles[1].text
 
 
 def test_buzzboard_renders(testbrowser):
@@ -118,7 +118,7 @@ def test_buzzboard_should_avoid_same_teaser_image_twice(
     browser = testbrowser('/zeit-online/buzz-box')
     area = browser.cssselect('.cp-area--buzzboard')[0]
     assert len(area.cssselect('.teaser-buzzboard__media')) == 4
-    assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 2
+    assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 1
 
 
 def test_printbox_is_present_and_has_digital_offerings(
@@ -127,7 +127,7 @@ def test_printbox_is_present_and_has_digital_offerings(
     content = zeit.cms.interfaces.ICMSContent(uri)
     with checked_out(content) as co:
         co.byline = 'mo-mi'
-    browser = testbrowser('/zeit-online/index')
+    browser = testbrowser('/zeit-online/printbox')
     printbox = browser.cssselect('.print-box:not(.print-box--angebot)')
     anbebotsbox = browser.cssselect('.print-box--angebot')
 
@@ -141,7 +141,7 @@ def test_printbox_is_present_and_has_newsprint_offerings(
     content = zeit.cms.interfaces.ICMSContent(uri)
     with checked_out(content) as co:
         co.byline = ''
-    browser = testbrowser('/zeit-online/index')
+    browser = testbrowser('/zeit-online/printbox')
     printbox = browser.cssselect('.print-box:not(.print-box--angebot)')
     anbebotsbox = browser.cssselect('.print-box--angebot')
 
@@ -373,8 +373,8 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
     liveblog = main.cssselect('span[class*="__kicker-logo--liveblog"]')
     offline = main.cssselect('span[class*="__kicker-logo--liveblog-closed"]')
 
-    assert len(liveblog) == 17
-    assert len(offline) == 8
+    assert len(liveblog) == 21
+    assert len(offline) == 10
 
 
 def test_format_date_returns_expected_value_in_newsbox(clock):

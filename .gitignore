@@ -25,3 +25,4 @@ tools/resource.meta
 /smoketest/lib
 /smoketest/pip-selfcheck.json
 /smoketest/selenium
+/webpack-stats.json

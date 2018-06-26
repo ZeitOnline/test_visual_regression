@@ -451,6 +451,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     '[data-ct-area]',
                     [
                         'a:not([data-wt-click])',
+                        'button[data-ct-label]',
                         'input[type="submit"]'
                     ].join()
                 ],

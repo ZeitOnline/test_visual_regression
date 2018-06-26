@@ -23,6 +23,12 @@
       <title>Standard</title>
     </header>
   </template>
+  <template name="faq" available="zeit.cms.section.interfaces.IZONContent">
+    <title>FAQ</title>
+    <header name="faq">
+      <title>Standard</title>
+    </header>
+  </template>
   <!--
     ZAR-Templates
   -->

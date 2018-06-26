@@ -77,7 +77,7 @@
 			</region>
 		</cluster>
         <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f">
-            <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" kind="major">
+            <region area="id-81faeca3-7dbb-437d-8e70-3a3d0796aebd" kind="major">
                 <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" module="zon-small">
                     <block href="http://xml.zeit.de/zeit-online/article/01" />
                 </container>
