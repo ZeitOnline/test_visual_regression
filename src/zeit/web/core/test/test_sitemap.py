@@ -289,7 +289,7 @@ def test_gsitemap_video_does_not_call_bc_api(testbrowser, monkeypatch):
         'get_video from BC-API was called and should not have been'
 
 
-def test_gsitemap_themen_overview(testbrowser):
+def test_gsitemap_themen_overview(testbrowser, data_tms):
     browser = testbrowser('/gsitemaps/themenindex.xml')
     assert browser.document.xpath('//sitemapindex')[0] is not None
     assert (
@@ -297,7 +297,7 @@ def test_gsitemap_themen_overview(testbrowser):
         'http://localhost/gsitemaps/themenindex.xml?p=6')
 
 
-def test_gsitemap_themen_page(testbrowser):
+def test_gsitemap_themen_page(testbrowser, data_tms):
     browser = testbrowser('/gsitemaps/themenindex.xml?p=5')
     assert len(browser.document.xpath('//url')) == 10
     assert (
@@ -305,7 +305,7 @@ def test_gsitemap_themen_page(testbrowser):
         'http://localhost/thema/addis-abeba')
 
 
-def test_gsitemap_themen_last_page(testbrowser):
+def test_gsitemap_themen_last_page(testbrowser, data_tms):
     browser = testbrowser('/gsitemaps/themenindex.xml?p=495')
     assert len(browser.document.xpath('//url')) == 7
     assert (

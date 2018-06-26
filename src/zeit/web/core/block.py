@@ -994,12 +994,6 @@ class ZONNextread(Nextread):
         args = rel.related if rel and rel.related else ()
         super(ZONNextread, self).__init__(context, args)
 
-    @property
-    def liveblog(self):
-        context = zeit.web.core.template.first_child(self)
-        if zeit.web.core.template.liveblog(context):
-            return zeit.web.core.interfaces.ILiveblogInfo(context)
-
 
 @grokcore.component.implementer(zeit.web.core.interfaces.INextread)
 @grokcore.component.adapter(

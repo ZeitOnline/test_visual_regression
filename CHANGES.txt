@@ -9,13 +9,29 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- Nothing
+- Remove `location /robots.txt` from nginx config
 
 
-3.163 (unreleased)
+3.164 (unreleased)
 ------------------
 
+- BUG-934: Update author contact FB Icon width (mobile)
+
+- BUG-942: Show current liveblog status in buzz-box and buzz-board teasers
+
+- FIX: Use correct date range syntax for ES fulltext query
+
+
+3.163 (2018-06-22)
+------------------
+
+- ZON-4663: WM Ticker Tweaks (Use Websockets, Link Styling)
+
 - ZON-4705: Add ZMO seriespage
+
+- FIX: Use only fragment identifier in TOC links for FAQ pages
+
+- MAINT: Serve different robots.txt content according to host header
 
 
 3.162 (2018-06-21)
