@@ -7,8 +7,21 @@
         "@type": "WebPage",
         "@id": "{{ view.content_url }}"
     },
-    {% if view.authors_structured_data -%}
-    "author": {{ view.authors_structured_data | tojson | safe }},
+    {% set byline = view.context | get_byline('data') -%}
+    {% if byline | length -%}
+    "author": {% if byline | length > 1 %}[{% endif -%}
+        {% for type, author in byline -%}
+            {% if not loop.first %},{% endif -%}
+    {
+        "@type": "Person",
+        {% if author.uniqueId -%}
+            "url": "{{ author.uniqueId | create_url }}",
+        {% endif -%}
+        "name": {{ author.display_name | tojson | safe }}
+
+    }
+        {%- endfor -%}
+        {%- if byline | length > 1 %}]{% endif -%},
     {% else -%}
     "author": {
         "@type": "Person",

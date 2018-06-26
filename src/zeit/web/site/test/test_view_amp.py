@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import json
+import pytest
 
 
 def test_amp_article_contains_no_unwanted_liveblog_addition(testbrowser):
@@ -215,3 +216,37 @@ def test_amp_liveblog_v3_article_last_modified_date(testbrowser, clock):
         '9. Februar 2018')
     assert browser.cssselect('.liveblog-status__meta-updated')[0].text == (
         'vor 28 Minuten aktualisiert')
+
+
+@pytest.mark.parametrize('article, length, name, url', [
+    ('amp', 1, 'Jochen Wegner', 'autoren/W/Jochen_Wegner/index'),
+    ('liveblog', 2, 'Oliver Fritsch', 'autoren/F/Oliver_Fritsch-2/index'),
+    ('amp-ohne-autor', 1, 'ZEITmagazin', None),
+    ('dpa', 1, 'DPA', None)])
+def test_amp_article_contains_structured_data_for_author(
+        article, length, name, url, testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/{}'.format(article))
+    scripts = browser.cssselect('head script[type="application/ld+json"]')
+    data = {}
+
+    assert scripts
+
+    for script in scripts:
+        content = json.loads(script.text_content().strip())
+        data[content['@type']] = content
+
+    article = data['Article']
+
+    if length > 1:
+        assert len(article['author']) == length
+        author = article['author'][1]
+    else:
+        author = article['author']
+
+    # check article author
+    assert author['@type'] == 'Person'
+    assert author['name'] == name
+    if url:
+        assert author['url'] == 'http://localhost/{}'.format(url)
+    else:
+        assert 'url' not in author
