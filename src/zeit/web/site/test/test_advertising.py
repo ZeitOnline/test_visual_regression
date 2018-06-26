@@ -359,13 +359,13 @@ def test_contentad_is_rendered_once_on_article_pages(testbrowser):
     selector = '#iq-artikelanker'
 
     browser = testbrowser('/zeit-online/article/fischer')
-    assert len(browser.cssselect(selector)) == 0
+    assert len(browser.cssselect(selector)) == 1
 
     browser = testbrowser('/zeit-online/article/fischer/seite-2')
-    assert len(browser.cssselect(selector)) == 0
+    assert len(browser.cssselect(selector)) == 1
 
     browser = testbrowser('/zeit-online/article/fischer/komplettansicht')
-    assert len(browser.cssselect(selector)) == 0
+    assert len(browser.cssselect(selector)) == 1
 
 
 def test_ctm_should_show_in_ressort(testbrowser, monkeypatch, dummy_request):
