@@ -1,0 +1,7 @@
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for date in view.calendar -%}
+    <sitemap>
+        <loc>{{ view.content_url }}?date={{ date }}</loc>
+    </sitemap>
+{%- endfor -%}
+</sitemapindex>
