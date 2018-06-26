@@ -142,9 +142,9 @@ def test_amp_liveblog_v3_article_contains_required_structured_data(
     assert liveblog['headline'] == u'Liveblog 3: Testblog'
     assert len(liveblog['description'])
     assert liveblog['datePublished'] == '2018-02-09T13:00:00+01:00'
-    assert liveblog['dateModified'] == '2018-02-09T13:00:00+01:00'
+    assert liveblog['dateModified'] == '2018-06-02T15:31:50+02:00'
     assert liveblog['coverageStartTime'] == '2018-02-09T13:00:00+01:00'
-    assert liveblog['coverageEndTime'] == '2018-02-09T13:00:00+01:00'
+    assert liveblog['coverageEndTime'] == '2018-06-02T15:31:50+02:00'
     assert 'keywords' not in liveblog
     assert liveblog['publisher']['@id'] == publisher['@id']
 
@@ -207,13 +207,13 @@ def test_amp_liveblog_v3_solo_article_contains_required_structured_data(
 
 
 def test_amp_liveblog_v3_article_last_modified_date(testbrowser, clock):
-    clock.freeze(datetime.datetime(2018, 2, 9, 12, 28))
+    clock.freeze(datetime.datetime(2018, 6, 2, 14, 0))
     browser = testbrowser('/amp/zeit-online/article/liveblog3')
 
     # liveblog status for liveblog article template
     assert browser.cssselect('.liveblog-status')
     assert browser.cssselect('.liveblog-status__meta-date')[0].text == (
-        '9. Februar 2018')
+        '2. Juni 2018')
     assert browser.cssselect('.liveblog-status__meta-updated')[0].text == (
         'vor 28 Minuten aktualisiert')
 
