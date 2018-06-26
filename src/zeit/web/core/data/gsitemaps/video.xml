@@ -55,7 +55,7 @@
   <body>
     <title>Suche</title>
     <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa257" kind="solo" title="Suchergebnisse">
-      <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc7" kind="ranking" title="Ergebnisse" count="2" automatic="True" automatic_type="query">
+      <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc7" kind="overview" title="Ergebnisse" count="2" automatic="True" automatic_type="query">
         <raw_query>type:video</raw_query>
         <container cp:type="auto-teaser" module="sitemap-video" visible="True" cp:__name__="id-7677b90b-6cf3-49fb-8343-9416b1a8c500"/>
         <container cp:type="auto-teaser" module="sitemap-video" visible="True" cp:__name__="id-cb1a9735-66a3-4012-afef-9ba13f544e6e"/>
