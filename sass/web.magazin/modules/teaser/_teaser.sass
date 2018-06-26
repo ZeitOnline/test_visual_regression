@@ -58,6 +58,19 @@
 	letter-spacing: $letter-spacing-l
 	margin: 0 0 remify(4px)
 	text-transform: uppercase
+	
+%teaser__metadata
+	color: $color-text--light
+	+scaled-font(15px)
+	letter-spacing: $letter-spacing-s
+	line-height: 1.4
+	+respond-min($break-tablet-min)
+		+scaled-font(14px)
+	time
+		white-space: nowrap
+		
+%teaser__commentcount
+	@extend %commentcount
 
 // standart teaser if nothing else applies
 // will hopefully be never shown

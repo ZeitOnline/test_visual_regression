@@ -266,7 +266,7 @@ def test_gsitemap_video_does_not_call_bc_api(testbrowser, monkeypatch):
         'get_video from BC-API was called and should not have been'
 
 
-def test_gsitemap_themen_overview(testbrowser):
+def test_gsitemap_themen_overview(testbrowser, data_tms):
     browser = testbrowser('/gsitemaps/themenindex.xml')
     assert browser.document.xpath('//sitemapindex')[0] is not None
     assert (
@@ -274,7 +274,7 @@ def test_gsitemap_themen_overview(testbrowser):
         'http://localhost/gsitemaps/themenindex.xml?p=6')
 
 
-def test_gsitemap_themen_page(testbrowser):
+def test_gsitemap_themen_page(testbrowser, data_tms):
     browser = testbrowser('/gsitemaps/themenindex.xml?p=5')
     assert len(browser.document.xpath('//url')) == 10
     assert (
@@ -282,7 +282,7 @@ def test_gsitemap_themen_page(testbrowser):
         'http://localhost/thema/addis-abeba')
 
 
-def test_gsitemap_themen_last_page(testbrowser):
+def test_gsitemap_themen_last_page(testbrowser, data_tms):
     browser = testbrowser('/gsitemaps/themenindex.xml?p=495')
     assert len(browser.document.xpath('//url')) == 7
     assert (
@@ -352,3 +352,24 @@ def test_gsitemap_solr_uses_different_timeout_than_normal_solr(testbrowser):
     testbrowser('/zeit-online/article/portraitbox_inline')
     newer_solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     assert newer_solr.timeout == old_timeout
+
+
+def test_sitemaps_support_link_objects(testbrowser):
+    set_sitemap_solr_results([{
+        'uniqueId': 'http://xml.zeit.de/mylink',
+        'doc_type': 'link',
+        'url': 'http://example.com/link'
+    }])
+    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    assert (browser.document.xpath('//url/loc')[0].text ==
+            'http://example.com/link')
+
+
+def test_sitemaps_treat_blogpost_as_link(testbrowser):
+    set_sitemap_solr_results([{
+        'uniqueId': 'http://blog.zeit.de/meinblog/foo',
+        'doc_type': 'blogpost',
+    }])
+    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    assert (browser.document.xpath('//url/loc')[0].text ==
+            'https://blog.zeit.de/meinblog/foo')

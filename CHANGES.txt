@@ -9,15 +9,43 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- Remove `<videoseries>` from /data/series.xml, use normal <series video="yes"> instead
+- Remove `location /robots.txt` from nginx config
 
 
-3.162 (unreleased)
+3.164 (unreleased)
 ------------------
+
+- BUG-942: Show current liveblog status in buzz-box and buzz-board teasers
+
+- FIX: Use correct date range syntax for ES fulltext query
+
+
+3.163 (2018-06-22)
+------------------
+
+- ZON-4663: WM Ticker Tweaks (Use Websockets, Link Styling)
+
+- ZON-4705: Add ZMO seriespage
+
+- FIX: Use only fragment identifier in TOC links for FAQ pages
+
+- MAINT: Serve different robots.txt content according to host header
+
+
+3.162 (2018-06-21)
+------------------
+
+- TMS-235: Support link objects in sitemaps
 
 - ZON-4739: Small share-buttons + pocket-button
 
 - ZON-4740: Add google optimize to settings
+
+- BUG-943: Enable Follow-Button in App
+
+- FIX: Handle no comments in author comments area gracefully
+
+- MAINT: Validate query parameters in "load next" areas
 
 
 3.161 (2018-06-18)

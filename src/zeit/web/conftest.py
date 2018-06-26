@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+import collections
 import copy
 import json
 import logging
@@ -37,8 +38,10 @@ import zope.interface
 import zope.processlifetime
 import zope.testbrowser.wsgi
 
+import zeit.cms.interfaces
 import zeit.content.image.interfaces
 import zeit.retresco.interfaces
+import zeit.retresco.connection
 import zeit.solr.interfaces
 
 import zeit.web.core.application
@@ -360,6 +363,8 @@ def application_session(app_settings, set_loglevel, request):
                                   zeit.web.core.solr.ISitemapSolrConnection)
     zope.component.provideUtility(MockES(),
                                   zeit.retresco.interfaces.IElasticsearch)
+    zope.component.provideUtility(MockTMS(),
+                                  zeit.retresco.interfaces.ITMS)
     zope.component.provideUtility(mock.Mock(),
                                   zeit.objectlog.interfaces.IObjectLog)
     zope.component.provideUtility(mock.Mock(),
@@ -949,6 +954,27 @@ class MockES(MockSearch):
         self._results = value
 
 
+class MockTMS(zeit.retresco.connection.TMS):
+    """Stub with empty results."""
+
+    def __init__(self):
+        pass
+
+    def is_healthy(self):
+        return True
+
+    def _request(self, *args, **kw):
+        # XXX unclear if this properly stubs out all public functions
+        return collections.defaultdict(lambda: None)
+
+    def get_topicpages(self, *args, **kw):
+        return zeit.cms.interfaces.Result()
+
+    def get_article_body(self, content, timeout=None):
+        content = zeit.cms.interfaces.ICMSContent(content.uniqueId)
+        return lxml.etree.tostring(content.xml.body)
+
+
 @pytest.fixture
 def data_solr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
@@ -964,6 +990,15 @@ def data_es(request):
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
     zope.component.provideUtility(zeit.web.core.retresco.DataES())
+
+
+@pytest.fixture
+def data_tms(request):
+    previous = zope.component.queryUtility(
+        zeit.retresco.interfaces.ITMS)
+    if previous is not None:
+        request.addfinalizer(lambda: zope.component.provideUtility(previous))
+    zope.component.provideUtility(zeit.web.core.retresco.DataTMS())
 
 
 @pytest.fixture(scope='session')

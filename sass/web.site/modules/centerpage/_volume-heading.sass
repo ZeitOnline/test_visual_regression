@@ -68,19 +68,19 @@
 		width: 33.33%
 	.volume-heading
 		&__caption
-			font-size: $font-xxl
+			font-size: em(30px)
 
 +respond-max($break-desktop-min)
 	.volume-heading
 		&__caption
-			font-size: $font-mxxl--px
+			font-size: em(28px)
 
 +respond-max($break-tablet-min)
 	.volume-heading
 		&__issue
 			margin: remify(24px 0 50px)
 		&__caption
-			font-size: $font-xl
+			font-size: em(24px)
 	.volume-heading-teaser
 		&:after
 			border-bottom: 1px solid rgba($white, 1)

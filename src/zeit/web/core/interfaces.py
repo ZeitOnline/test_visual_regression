@@ -205,6 +205,12 @@ class IReach(zope.interface.Interface):
         """Collect a buzz summary for an article by uniqueId"""
 
 
+class IReachData(zope.interface.Interface):
+    """Adapts an article returned by IReach to access its score value"""
+
+    score = zope.interface.Attribute('reach score')
+
+
 class IPodigee(zope.interface.Interface):
 
     def get_episode(episode_id):

@@ -994,3 +994,9 @@ def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
     assert '30: "paid"' in webtrekk_config
+
+
+def test_magazine_series_should_has_right_site_name(testbrowser):
+    browser = testbrowser('/serie/martenstein')
+    assert '<meta property="og:site_name" '\
+        'content="ZEITmagazin">' in browser.contents

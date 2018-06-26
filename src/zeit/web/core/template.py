@@ -223,7 +223,11 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         templates.append('logo-zmo-zm')
         return templates
     if liveblog(teaser):
-        templates.append('liveblog')
+        livebloginfo = zeit.web.core.interfaces.ILiveblogInfo(teaser)
+        if livebloginfo.is_live:
+            templates.append('liveblog')
+        else:
+            templates.append('liveblog-closed')
         return templates
     if brand == 'zett':
         templates.append('logo-zett-small')
@@ -712,8 +716,7 @@ def format_faq(string):
         u'ß', 'ss')
     string = re.sub(u'[^-a-zA-Z0-9]', '-', string)
     string = re.sub(u'-+', '-', string)
-    string = re.sub(u'^_|_$ ^-|-$', '', string)
-    return string
+    return string.strip('-')
 
 
 @zeit.web.register_filter

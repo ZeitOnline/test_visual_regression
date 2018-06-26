@@ -1,12 +1,12 @@
 [
 	{
-		"location": "/zeit-online/article/01",
+		"location": "/zeit-online/cp-content/liveblog-live",
 		"score": 0.006830385586635586,
 		"fetchedAt": 1441623241276,
 		"timestamp": 1441623077000
 	},
 	{
-		"location": "/zeit-online/liveblog/champions-league",
+		"location": "/zeit-online/cp-content/liveblog-offline",
 		"score": 0.004282090132090131,
 		"fetchedAt": 1441627561250,
 		"timestamp": 1441627333000
