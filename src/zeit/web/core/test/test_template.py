@@ -25,11 +25,20 @@ def test_filter_strftime_works_as_expected():
 
 
 def test_filter_duration_format_works_as_expected():
-    duration_format = zeit.web.core.template.duration_format
-    assert duration_format(25000) == '0:25'
-    assert duration_format(9000) == '0:09'
-    assert duration_format(3600000) == '1:00:00'
-    assert duration_format(3680001) == '1:01:20'
+    duration_format = zeit.web.core.template.video_duration_format
+    rendition = mock.MagicMock()
+    rendition.video_duration = 25000
+    teaser = mock.Mock(renditions=[rendition])
+    assert duration_format(teaser) == '0:25'
+
+    rendition.video_duration = 9000
+    assert duration_format(teaser) == '0:09'
+
+    rendition.video_duration = 3600000
+    assert duration_format(teaser) == '1:00:00'
+
+    rendition.video_duration = 3680001
+    assert duration_format(teaser) == '1:01:20'
 
 
 def test_teaser_layout_should_be_cached_per_unique_id(application, request):

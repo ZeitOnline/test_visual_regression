@@ -201,12 +201,11 @@ def test_video_stage_main_should_display_byline(testbrowser):
 def test_video_teaser_shows_video_length(testbrowser):
     select = testbrowser('zeit-online/video-stage').cssselect
     large = select('.video-large__container .video-text-playbutton__duration')
-    assert len(large) == 1
-    assert large[0].text_content() == ''
+    assert len(large) == 0
 
     small = select('.video-stage-secondary .video-text-playbutton__duration')
-    assert len(small) == 3
-    assert small[1].text_content() == '7:16'
+    assert len(small) == 1
+    assert small[0].text_content() == '7:16'
 
 
 def test_article_teaser_should_not_be_identified_as_video(application):
