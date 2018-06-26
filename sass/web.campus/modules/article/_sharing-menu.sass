@@ -6,24 +6,13 @@ $campus-sharing-button-factor: 1.2
 	margin: remify(20px 0 32px)
 
 	&__item
-		line-height: remify(40px)
 		margin-right: 1px
 
 	&__link
 		border-radius: 0
-		min-height: remify(40px)
-		min-width: remify(46px)
-
-	&__text
-		@extend %font-beckett
-		+scaled-font(22px, $title-factor)
-		font-weight: normal
-		vertical-align: middle
-		padding-right: remify(15px)
 
 	// icon size from core, but a little inflated
 	&__icon
-		margin-top: remify(-2px)
 		&--facebook
 			height: remify($campus-sharing-button-factor * 20px)
 			width: remify($campus-sharing-button-factor * 10px)

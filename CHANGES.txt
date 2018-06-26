@@ -15,7 +15,7 @@ POSTDEPLOY
 3.165 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-946: Adjust small sharing buttons in ZEIT Arbeit
 
 
 3.164 (2018-06-26)
