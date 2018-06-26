@@ -293,6 +293,10 @@
 
     Overlay.prototype.addCancelCookie = function() {
         this.cookieValue = 'canceled';
+
+        // if user is logged in, disable overlay for 365 days
+        this.options.cookieTimeInDays = Zeit.cookieRead( 'zeit_sso_201501' ) ?
+            365 : this.options.cookieTimeInDays;
         Zeit.cookieCreate( 'overlaycanceled', this.cookieValue, this.options.cookieTimeInDays, '' );
     };
 
