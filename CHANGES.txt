@@ -15,7 +15,7 @@ POSTDEPLOY
 3.166 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- MAINT: Polish styles
 
 
 3.165 (2018-06-27)
