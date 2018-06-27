@@ -454,6 +454,18 @@ def strftime(t, format):
 
 
 @zeit.web.register_filter
+def video_duration_format(teaser):
+    try:
+        seconds = teaser.renditions[0].video_duration / 1000.0
+        formatstr = '%-H:%M:%S' if seconds >= 3600 else '%-M:%S'
+        d = datetime.timedelta(seconds=seconds)
+        t = (datetime.datetime.min + d).time()
+        return t.strftime(formatstr)
+    except (AttributeError, TypeError, ValueError):
+        return
+
+
+@zeit.web.register_filter
 def substring_from(string, find):
     return string.split(find)[-1]
 

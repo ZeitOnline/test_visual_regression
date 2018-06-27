@@ -1,5 +1,5 @@
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
-{%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
+{%- import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% set fill_color = module.background_color %}
 {% if not fill_color %}

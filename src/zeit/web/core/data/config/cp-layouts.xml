@@ -450,7 +450,7 @@
     <layout
         id="sitemap-default"
         title="Sitemap Teaser"
-        areas="ranking"
+        areas="ranking overview"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
@@ -462,7 +462,7 @@
     <layout
         id="sitemap-video"
         title="Video Sitemap Teaser"
-        areas="ranking"
+        areas="ranking overview"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
@@ -474,7 +474,7 @@
     <layout
         id="sitemap-apps"
         title="Appcon Sitemap Teaser"
-        areas="ranking"
+        areas="ranking overview"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
