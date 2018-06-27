@@ -1,20 +1,12 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
-<!DOCTYPE html>
-<!--[if IE 9]> <html lang="de" class="no-js lt-ie10"> <![endif]-->
-<!--[if gt IE 9]><!-->
-<html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
-<!--<![endif]-->
-<head>
-    {% include "zeit.web.core:templates/inc/meta/basics.html" %}
+{% extends "zeit.web.core:templates/layout.html" %}
 
+{%- block head %}
     {% if view.is_hp -%}
         <meta name="apple-itunes-app" content="app-id=828889166">
     {% endif -%}
     <meta name="application-name" content="ZEIT ONLINE">
     <meta name="msapplication-TileImage" content="{{ request.image_host }}/static/img/zo-icon-win8-144x144.png">
     <meta name="msapplication-TileColor" content="#e6e6e6">
-
-    {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
 
     {% if toggles('preload_webfonts') %}
         {# ../latest/ for escaping the version number. Same is used in CSS. #}
@@ -25,52 +17,20 @@
         {% endif %}
     {% endif %}
 
-    <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
-    <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
-
     {% if view.is_podcastseries %}
     <link type="application/rss+xml" rel="alternate" title="{{ view.series_title }}" href="https://{{ view.podcastseries_feed }}.podigee.io/feed/mp3"/>
     {% else %}
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
     {% endif %}
 
-    {% block css_link %}
-        <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">
-    {% endblock css_link %}
-
-    {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
-    {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
-    {%- include "zeit.web.site:templates/inc/meta/sharing.html" -%}
-    {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
-    {% block ligatus_include %}{% endblock %}
-    {% block schemaorg_data %}{% endblock %}
-
-    <script>{% include "zeit.web.core:templates/inc/inline_js/modernizr-replacement.js" %}</script>
-    {% if toggles('modernizr_js_file') -%}
-        <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
-    {% endif -%}
-
     {% if view.include_optimize -%}
         <script src="{{ view.include_optimize }}"></script>
     {% endif %}
 
     {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
-    {% if toggles('third_party_modules') -%}
-        <script src="https://script.ioam.de/iam.js"></script>
-    {% endif -%}
+{% endblock head %}
 
-    {% if toggles('third_party_modules', 'iqd') %}
-        {% include "zeit.web.core:templates/inc/ads/head.html" %}
-    {% endif %}
-    {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
-    {% if settings('livereload') %}
-        <script src="//localhost:35729/livereload.js"></script>
-    {% endif %}
-    {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
-    {% block babator_include %}{% endblock %}
-</head>
-<body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
-
+{%- block body %}
     {% if toggles('third_party_modules', 'tracking', 'optimize_ab_testing_to_webtrekk') -%}
         {% include "zeit.web.core:templates/inc/tracking/webtrekk_googleoptimize.html" %}
     {% endif -%}
@@ -151,5 +111,4 @@
     <!--end: vgwort-->
     {% endif %}
     {% include "zeit.web.core:templates/inc/cardstack/footer.tpl" %}
-</body>
-</html>
+{% endblock body %}
