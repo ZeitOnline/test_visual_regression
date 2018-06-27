@@ -12,7 +12,7 @@ POSTDEPLOY
 - Remove `location /robots.txt` from nginx config
 
 
-3.165 (unreleased)
+3.165 (2018-06-27)
 ------------------
 
 - BUG-906: Bring back duration on video teasers
