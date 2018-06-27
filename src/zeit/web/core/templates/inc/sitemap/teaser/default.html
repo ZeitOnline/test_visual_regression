@@ -1,7 +1,7 @@
 <url>
-    <loc>{{ teaser.uniqueId | create_url }}</loc>
+    <loc>{{ teaser | create_url }}</loc>
     {% require publication_date = teaser | mod_date %}
-        {%- if publication_date >= view.min_date -%}
+        {%- if publication_date >= view.min_modified_display -%}
             <lastmod>{{ publication_date  | format_date('iso8601') }}</lastmod>
         {%- endif -%}
     {% endrequire %}

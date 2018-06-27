@@ -196,7 +196,6 @@ def get_retresco_body(article):
     seo = zeit.seo.interfaces.ISEO(article)
 
     if (toggles.find('enable_intext_links') and
-            not zeit.retresco.interfaces.ITMSContent.providedBy(article) and
             not ILocalContent.providedBy(article) and
             not seo.disable_intext_links and
             not suppress_intextlinks(article)):
@@ -216,6 +215,11 @@ def get_retresco_body(article):
                     exc_info=True)
             else:
                 article._v_retresco_body = xml
+    elif zeit.retresco.interfaces.ITMSContent.providedBy(article):
+        # While this branch is quite correct, it is mostly a fallback for tests
+        content = zeit.cms.interfaces.ICMSContent(article.uniqueId, None)
+        if zeit.content.article.interfaces.IArticle.providedBy(content):
+            xml = content.xml.body
 
     return zope.component.queryMultiAdapter(
         (article, xml),

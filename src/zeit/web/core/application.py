@@ -119,8 +119,11 @@ class Application(object):
         config.add_subscriber(register_standard_site_manager,
                               pyramid.interfaces.INewRequest)
 
+        config.add_route('robots', '/robots.txt')
+
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('campus_framebuilder', '/campus/framebuilder')
+
         config.add_route('instantarticle', '/instantarticle/*traverse')
         config.add_route(
             'instantarticle-item', '/instantarticle-item/*traverse')

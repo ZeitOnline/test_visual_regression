@@ -8,16 +8,12 @@
 		font-size: em(20px)
 
 	&__link
-		border-bottom: 1px solid rgba($zon-grey, .4)
-		color: $zon-mid-dark-grey
+		@extend %commentcount
 		display: inline-block
 		font-size: em(14px)
 		letter-spacing: $letter-spacing-s
 		line-height: 1.2
 		margin: remify(14px 0 0 10px)
-		+on-interaction
-			border-bottom-color: rgba($zon-grey, .8)
-			color: $zon-grey
 
 	+respond-min($break-tablet-min)
 		&__header

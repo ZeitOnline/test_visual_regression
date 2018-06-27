@@ -1,4 +1,4 @@
-{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% macro advertorial_modifier(product, is_advertorial) -%}
     {% if (product.title == 'Advertorial' and not is_advertorial) %} is-advertorial{% endif %}

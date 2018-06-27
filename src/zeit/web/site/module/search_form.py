@@ -110,10 +110,10 @@ class Form(zeit.web.core.centerpage.Module):
                     'payload.document.last-semantic-change': {
                         'gte': {
                             'today': 'now/d',
-                            '24h': '24h',
-                            '7d': '7d',
-                            '30d': '30d',
-                            '1y': '1y',
+                            '24h': 'now-24h',
+                            '7d': 'now-7d',
+                            '30d': 'now-30d',
+                            '1y': 'now-1y',
                         }.get(self.mode)
                     }
                 }

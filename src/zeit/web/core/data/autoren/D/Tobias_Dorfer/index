@@ -19,6 +19,7 @@
   <biography>Social-Media-Editor bei ZEIT ONLINE seit März 2015. Davor sieben Jahr bei sz.de, als Redakteur im Wirtschafts- und Regional-Ressort sowie Editorial SEO. Ausbildung an der Deutschen Journalistenschule in München mit Hospitanzen bei "Süddeutsche Zeitung", "Spiegel" und "Spiegel Online". Mag: Frankreich, Katzen, die Prenzlschwäbin, gute Musik und Jonathan Franzen.
 Mag nicht: die hausgemachte Dauermisere des VfB Stuttgart.</biography>
   <email>tobias.dorfer@zeit.de</email>
+  <enable_feedback>true</enable_feedback>
   <favourites>
     <reference xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/politik/deutschland/2015-11/rechtsextremismus-fluechtlingsunterkuenfte-gewalt-gegen-fluechtlinge-justiz-taeter-urteile" year="2015" issue="46" ressort="Politik" contenttype="article" publication-date="" expires="" author="Paul Blickle;Kai Biermann;Philip Faigle;Astrid Geisler;Götz Hamann;Lenz Jacobsen;Anna Kemper;Martin Klingst;Karsten Polke-Majewski;Stefan Schirmer;Hannes Soltau;Julian Stahnke;Toralf Staud;Tilman Steffen;Sascha Venohr">
       <supertitle>Gewalt gegen Flüchtlinge</supertitle>

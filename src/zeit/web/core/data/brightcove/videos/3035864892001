@@ -1,14 +1,19 @@
 {
     "sources": [
         {"width": 1280,
-        "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1105/18140073001_3035966678001_Beitrag-Skispringen-f-r-Anf-nger.mp4"},
+         "duration": 115000,
+         "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1105/18140073001_3035966678001_Beitrag-Skispringen-f-r-Anf-nger.mp4"},
         {"width": 720,
+         "duration": 115000,
          "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1177/18140073001_3035898001001_Beitrag-Skispringen-f-r-Anf-nger.mp4"},
         {"width": 640,
+         "duration": 115000,
          "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/2777/18140073001_3035896381001_Beitrag-Skispringen-f-r-Anf-nger.mp4"},
         {"width": 480,
+         "duration": 115000,
          "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/927/18140073001_3035897844001_Beitrag-Skispringen-f-r-Anf-nger.mp4"},
         {"width": 400,
+         "duration": 115000,
          "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1841/18140073001_3035888094001_Beitrag-Skispringen-f-r-Anf-nger.mp4"}
     ],
     "poster": "file://%DATA%/zeit-online/video/still.jpg",

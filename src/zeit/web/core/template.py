@@ -223,7 +223,11 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         templates.append('logo-zmo-zm')
         return templates
     if liveblog(teaser):
-        templates.append('liveblog')
+        livebloginfo = zeit.web.core.interfaces.ILiveblogInfo(teaser)
+        if livebloginfo.is_live:
+            templates.append('liveblog')
+        else:
+            templates.append('liveblog-closed')
         return templates
     if brand == 'zett':
         templates.append('logo-zett-small')
@@ -445,6 +449,18 @@ def strftime(t, format):
             return time.strftime(format, t)
         elif isinstance(t, datetime.datetime):
             return t.strftime(format)
+    except (AttributeError, TypeError, ValueError):
+        return
+
+
+@zeit.web.register_filter
+def video_duration_format(teaser):
+    try:
+        seconds = teaser.renditions[0].video_duration / 1000.0
+        formatstr = '%-H:%M:%S' if seconds >= 3600 else '%-M:%S'
+        d = datetime.timedelta(seconds=seconds)
+        t = (datetime.datetime.min + d).time()
+        return t.strftime(formatstr)
     except (AttributeError, TypeError, ValueError):
         return
 
@@ -712,8 +728,7 @@ def format_faq(string):
         u'ß', 'ss')
     string = re.sub(u'[^-a-zA-Z0-9]', '-', string)
     string = re.sub(u'-+', '-', string)
-    string = re.sub(u'^_|_$ ^-|-$', '', string)
-    return string
+    return string.strip('-')
 
 
 @zeit.web.register_filter

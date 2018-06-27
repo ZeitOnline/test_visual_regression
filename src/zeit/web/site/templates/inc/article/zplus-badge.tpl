@@ -1,4 +1,4 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 
 <div class="{% block layout %}zplus-badge{% endblock %}
     {%- if not view.zplus_label.volume_exists %} {{ self.layout() }}--coverless{% endif %}" data-ct-row="zplus-badge

@@ -900,10 +900,9 @@ class CommentMixin(object):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
         if not toggles.find('zoca_moderation_launch'):
             uuid = zeit.cms.content.interfaces.IUUID(
-                self.context).id
+                self.context).shortened
             if not uuid:
                 return None
-            uuid = uuid.strip('{}').replace('urn:uuid:', '')
             return u'{}/{}/thread/%cid%'.format(
                 conf.get('community_admin_host').rstrip('/'), uuid)
         else:
@@ -1306,3 +1305,21 @@ def invalid_unicode_in_request(request):
     http_cache=60)
 def login_state_footer(request):
     return zeit.web.core.security.get_login_state(request)
+
+
+@zeit.web.view_config(
+    route_name='robots',
+    host_restriction=False)
+def robots_txt(request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    hostname = request.headers.get('host', 'www.zeit.de').lower()
+    subdomain = hostname.split('.')[0]
+
+    folder = conf.get('robots_txt_prefix')
+    if zeit.cms.interfaces.ICMSContent(
+            '%s/%s' % (folder, subdomain), None) is None:
+        subdomain = 'www'
+
+    prefix = urlparse.urlparse(folder).path
+    subrequest = pyramid.request.Request.blank('%s/%s' % (prefix, subdomain))
+    return request.invoke_subrequest(subrequest, use_tweens=True)

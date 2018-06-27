@@ -65,6 +65,12 @@
         image_pattern="wide"
         areas="zar-ranking tube"
         />
+     <layout
+        id="zmo-ranking"
+        title="kleiner Teaser Suchergebnis und Themenseite"
+        image_pattern="wide"
+        areas="zmo-ranking tube"
+        />
     <layout
         id="zar-podcast"
         title="Podcast"
@@ -444,7 +450,7 @@
     <layout
         id="sitemap-default"
         title="Sitemap Teaser"
-        areas="ranking"
+        areas="ranking overview"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
@@ -456,7 +462,7 @@
     <layout
         id="sitemap-video"
         title="Video Sitemap Teaser"
-        areas="ranking"
+        areas="ranking overview"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
@@ -468,7 +474,7 @@
     <layout
         id="sitemap-apps"
         title="Appcon Sitemap Teaser"
-        areas="ranking"
+        areas="ranking overview"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
