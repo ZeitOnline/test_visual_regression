@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4734: Ad-Position P5 differenziert nach Ressorts
 
+- FEM-67: Delay Modernizr (own js-check)
+
 - FEM-77: Contrast polishing
 
 - MAINT: Polish styles
