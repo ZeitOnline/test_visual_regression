@@ -21,7 +21,6 @@
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
   <iqd_touchpoint>true</iqd_touchpoint>
-  <iqd_contentmarketing_ad>false</iqd_contentmarketing_ad>
   <keywords_from_tms>false</keywords_from_tms>
   <modernizr_js_file>false</modernizr_js_file>
 

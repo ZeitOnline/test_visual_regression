@@ -16,4 +16,5 @@
   <question id="hobby">Berlin besser kennenlernen, programmieren und fotografieren.</question>
   <question id="person">Mit dem Fernsehreporter Willi Weitzel - auf dem Weg an die türkisch-syrische Grenze.</question>
   <summary>Redakteur Entwicklungsredaktion, ZEIT ONLINE</summary>
+  <enable_feedback>true</enable_feedback>
 </author>

@@ -92,7 +92,7 @@ class Page(object):
             self.blocks.append(wrapped)
 
 
-def _inject_banner_code(pages, pubtype):
+def _inject_banner_code(pages, pubtype, ressort, sub_ressort):
     adconfig = {
         'zon': {
             'pages': range(1, len(pages) + 1),
@@ -111,13 +111,21 @@ def _inject_banner_code(pages, pubtype):
     toggles = zeit.web.core.application.FEATURE_TOGGLES
     place5 = ({'tile': 5, 'paragraph': 6, 'type': 'desktop'},
               {'tile': 'content_ad', 'paragraph': 6, 'type': ''},)
-    if toggles.find('iqd_contentmarketing_ad'):
-        adconfig['zon']['ads'].append(place5[1])
-    else:
-        adconfig['zon']['ads'].append(place5[0])
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)
+
+    # split settings string
+    ctm_teaser_ressorts = CTM_TEASER_RESSORTS_SOURCE
+
+    try:
+        if (ressort in ctm_teaser_ressorts) or (
+                sub_ressort in ctm_teaser_ressorts):
+            adconfig['zon']['ads'].append(place5[1])
+        else:
+            raise Exception
+    except Exception:
+        adconfig['zon']['ads'].append(place5[0])
 
     for page_number, page in enumerate(pages, start=1):
 
@@ -237,6 +245,9 @@ def pages_of_article(article, advertising_enabled=True):
     # Call values() first, to ensure that ensure_divsion() was called.
     blocks = body.values()
 
+    ressort = zeit.content.article.interfaces.IArticle(article).ressort
+    sub_ressort = zeit.content.article.interfaces.IArticle(article).sub_ressort
+
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
     first_division = body._get_element_for_node(first_division)
@@ -265,7 +276,7 @@ def pages_of_article(article, advertising_enabled=True):
     else:
         pubtype = 'zon'
 
-    return _inject_banner_code(pages, pubtype)
+    return _inject_banner_code(pages, pubtype, ressort, sub_ressort)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IArticleModule)
@@ -554,3 +565,28 @@ def suppress_intextlinks(article):
         if keyword in INTEXTLINK_BLACKLIST:
             return True
     return False
+
+
+class CtmTeaserRessortsSource(
+        zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.cms'
+    config_url = 'source-ressorts'
+
+    def getValues(self, context):
+        try:
+            tree = self._get_tree()
+        except (TypeError, IOError):
+            return []
+
+        ressorts = tree.xpath(
+            '//ressort[@ctmTeaser="yes"]|//subnavigation[@ctmTeaser="yes"]')
+
+        result = []
+        for node in ressorts:
+            result.append(node.get('name'))
+
+        return result
+
+
+CTM_TEASER_RESSORTS_SOURCE = CtmTeaserRessortsSource()(None)

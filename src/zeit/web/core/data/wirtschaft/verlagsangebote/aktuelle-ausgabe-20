@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<advertisement>
+  <head>
+    <image base-id="http://xml.zeit.de/angebote/bilder-verlagsnextreads/aktuelle-ausgabe-20-3/" type="png" title="aktuelle-ausgabe-20.jpg" title_local="aktuelle-ausgabe-20.jpg"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2017-05-10T13:27:05.893918+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2017-05-10T16:03:40.306803+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2017-05-10T16:03:40.380867+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2017-05-10T16:03:40.306803+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2017-05-10T16:03:40.188849+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2017-05-10T13:27:02.205012+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.kochanek</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">advertisement</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:c952234c-49a6-48fc-b026-49a576c5373c}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Advertisement" module="zeit.content.advertisement.advertisement"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Der Heiland</title>
+    <text>Emmanuel Macron gilt nun als Retter Europas. Doch in Frankreich ist er vielen Menschen verhasst, nicht nur unter den Rechten. Was haben wir von ihm zu erwarten? Jetzt in der neuen ZEIT.</text>
+    <button_text>Hier lesen</button_text>
+    <button_color>42661f</button_color>
+    <supertitle>publisher</supertitle>
+    <url>https://premium.zeit.de/aktuelle-zeit?wt_zmc=cross.int.zonpme.zeitde.next.ausgseite.bildtext.aktuell.aktuell&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=next&amp;utm_content=ausgseite_bildtext_aktuell_aktuell</url>
+  </body>
+</advertisement>
