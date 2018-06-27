@@ -13,10 +13,8 @@
     {% if view.syndication_source -%}
         <link rel="syndication-source" href="{{ view.syndication_source }}">
     {% endif -%}
-    {%- include "zeit.web.core:templates/inc/meta/date.html" %}
-    {%- block sharing_meta %}
-        {%- include "zeit.web.core:templates/inc/meta/sharing.html" -%}
-    {% endblock sharing_meta %}
+    {% include "zeit.web.core:templates/inc/meta/date.html" -%}
+    {% include "zeit.web.core:templates/inc/meta/sharing.html" -%}
     {% include [
         "{}:templates/inc/structured-data/organization.html".format(view.package),
         "zeit.web.core:templates/inc/structured-data/organization.html"] %}

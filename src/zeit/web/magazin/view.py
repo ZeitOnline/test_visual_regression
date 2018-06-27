@@ -95,6 +95,10 @@ class Base(zeit.web.core.view.Base):
         return 'ZEITmagazin ONLINE'
 
     @zeit.web.reify
+    def site_name(self):
+        return 'ZEITmagazin'
+
+    @zeit.web.reify
     def twitter_username(self):
         return 'ZEITmagazin'
 

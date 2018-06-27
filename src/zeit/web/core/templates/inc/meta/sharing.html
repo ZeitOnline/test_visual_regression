@@ -1,4 +1,4 @@
-    <meta property="og:site_name" content="{% block og_site_name %}ZEIT ONLINE{% endblock %}">
+    <meta property="og:site_name" content="{{ view.site_name }}">
     <meta property="fb:app_id" content="{% block facebook_app_id %}638028906281625{% endblock %}">
     <meta property="fb:pages" content="{{ settings('facebook_app_id_list') | default('37816894428, 63948163305, 327602816926, 114803848589834', true) }}" />
 {%- for author in view.authors -%}
@@ -12,7 +12,7 @@
     {# We are receiving the sharing metadata from the cards backend -#}
     <meta name="twitter:card" content="{{ view.twitter_card_type }}">
     <meta name="twitter:site" content="@zeitonline">
-    <meta name="twitter:creator" content="{% block twitter_creator %}@zeitonline{% endblock %}">
+    <meta name="twitter:creator" content="@{{ view.twitter_username }}">
     <meta name="twitter:title" content="{{ view.social_pagetitle }}">
     <meta name="twitter:description" content="{{ view.social_description }}">
     <meta property="og:type" content="article">
