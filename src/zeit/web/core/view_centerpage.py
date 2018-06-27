@@ -386,4 +386,4 @@ class Sitemap(Centerpage):
                     date = (year, month, day)
                     if date > (today.year, today.month, today.day):
                         return
-                    yield '%s-%s-%s' % date
+                    yield '%s-%02d-%02d' % date

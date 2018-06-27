@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - BUG-946: Adjust small sharing buttons in ZEIT Arbeit
 
+- FIX: Format sitemap link dates as yyyy-mm-dd (instead of yyyy-m-d)
+
 
 3.164 (2018-06-26)
 ------------------
