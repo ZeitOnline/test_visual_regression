@@ -23,7 +23,9 @@
     {% include "zeit.web.core:templates/inc/inline_js/library.html" %}
 
     {# Modernizr -#}
+    <script>{% include "zeit.web.core:templates/inc/inline_js/modernizr-replacement.js" %}</script>
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+
     {% if view.framebuilder_requires_ivw -%}
         <script src="https://script.ioam.de/iam.js"></script>
     {%- endif %}
