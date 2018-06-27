@@ -12,7 +12,25 @@ POSTDEPLOY
 - Remove `location /robots.txt` from nginx config
 
 
-3.164 (unreleased)
+3.166 (unreleased)
+------------------
+
+- FEM-77: Contrast polishing
+
+- MAINT: Polish styles
+
+
+3.165 (2018-06-27)
+------------------
+
+- BUG-906: Bring back duration on video teasers
+
+- BUG-946: Adjust small sharing buttons in ZEIT Arbeit
+
+- FIX: Format sitemap link dates as yyyy-mm-dd (instead of yyyy-m-d)
+
+
+3.164 (2018-06-26)
 ------------------
 
 - BUG-934: Update author contact FB Icon width (mobile)
@@ -20,6 +38,8 @@ POSTDEPLOY
 - BUG-942: Show current liveblog status in buzz-box and buzz-board teasers
 
 - FIX: Use correct date range syntax for ES fulltext query
+
+- TMS-236: Support date-based pagination of sitemaps
 
 
 3.163 (2018-06-22)

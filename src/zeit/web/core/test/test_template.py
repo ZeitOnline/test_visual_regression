@@ -24,6 +24,23 @@ def test_filter_strftime_works_as_expected():
     assert strftime(localtime, '%s') == time.strftime('%s', localtime)
 
 
+def test_filter_duration_format_works_as_expected():
+    duration_format = zeit.web.core.template.video_duration_format
+    rendition = mock.MagicMock()
+    rendition.video_duration = 25000
+    teaser = mock.Mock(renditions=[rendition])
+    assert duration_format(teaser) == '0:25'
+
+    rendition.video_duration = 9000
+    assert duration_format(teaser) == '0:09'
+
+    rendition.video_duration = 3600000
+    assert duration_format(teaser) == '1:00:00'
+
+    rendition.video_duration = 3680001
+    assert duration_format(teaser) == '1:01:20'
+
+
 def test_teaser_layout_should_be_cached_per_unique_id(application, request):
     request.addfinalizer(pyramid.threadlocal.manager.clear)
 
@@ -270,7 +287,7 @@ def test_filter_iqd_email_hash_produces_expected_string():
     email = 'foo2342@bar.de'
     assert '102-b0ab3182d9cfe79fd9e66fa060d320345efcd3661f20a30e'\
            '4b3f38a845a101ce' == (
-            zeit.web.core.template.iqd_mail_hash(email))
+               zeit.web.core.template.iqd_mail_hash(email))
 
 
 def test_pagination_calculation_should_deliver_valid_output():

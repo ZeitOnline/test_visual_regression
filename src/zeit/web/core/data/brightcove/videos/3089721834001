@@ -1,14 +1,19 @@
 {
     "sources": [
         {"width": 1280,
-        "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/2646/18140073001_3089748679001_entourage-heldinnen2.mp4"},
+         "duration": 238000,
+         "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/2646/18140073001_3089748679001_entourage-heldinnen2.mp4"},
         {"width": 720,
+         "duration": 238000,
          "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/2746/18140073001_3089744721001_entourage-heldinnen2.mp4"},
         {"width": 640,
+         "duration": 238000,
          "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1134/18140073001_3089749192001_entourage-heldinnen2.mp4"},
         {"width": 480,
+         "duration": 238000,
          "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1626/18140073001_3089747673001_entourage-heldinnen2.mp4"},
         {"width": 400,
+         "duration": 238000,
          "src": "http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/3134/18140073001_3089749182001_entourage-heldinnen2.mp4"}
     ],
     "poster": "file://%DATA%/zeit-online/video/still.jpg",
