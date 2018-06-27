@@ -1,4 +1,4 @@
-{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 
 <div class="{% block gallery_class %}gallery{% endblock %}">
     <div class="{{ self.gallery_class() }}-container">
