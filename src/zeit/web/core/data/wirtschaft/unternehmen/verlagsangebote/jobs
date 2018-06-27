@@ -1,0 +1,31 @@
+<advertisement>
+  <head>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-09-01T10:44:14.467753+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Advertisement" module="zeit.content.advertisement.advertisement"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-09-01T10:44:20.672560+00:00</attribute>
+    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/verlagsnextread/images/shop_unser-geheimnisvolles-ich/" type="jpg" title="ZEIT-Edition: Unser geheimnisvolles Ich" alt="ZEIT-Edition: Unser geheimnisvolles Ich" align="left" publication-date="" expires="">
+      <bu>ZEIT-Edition: Unser geheimnisvolles Ich</bu>
+      <copyright>©ZEIT Shop</copyright>
+    </image>
+  </head>
+  <body>
+    <supertitle>publisher</supertitle>
+    <title>ZEIT-Edition »Unser geheimnisvolles Ich«</title>
+    <text>Aktuelles Wissen zu Gehirn, Bewusstsein und Persönlichkeit</text>
+    <button_text>Jetzt Bestellen</button_text>
+    <button_color>c71585</button_color>
+    <url>http://shop.zeit.de/sortiment/kinderwelt/spielzeug-und-accessoires/2178/zookids-stiftemaeppchen-tom-tiger?c=2853</url>
+  </body>
+</advertisement>
