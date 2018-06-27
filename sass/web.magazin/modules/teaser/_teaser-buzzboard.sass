@@ -12,9 +12,6 @@
 		left: 0
 		line-height: 1em
 
-	&__text
-		color: $black
-
 	&__link
 		@extend %teaser__link
 
@@ -22,10 +19,7 @@
 		@extend %teaser__title-box
 
 	&__kicker
-		display: block
-		font-size: $font-s
-		font-weight: normal
-		letter-spacing: $hair
+		@extend %teaser__kicker
 
 	&__title
 		font-weight: bold

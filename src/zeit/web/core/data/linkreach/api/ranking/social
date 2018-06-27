@@ -1,50 +1,20 @@
 [
 	{
-		"location": "/studium/uni-leben/2015-09/studienwahl-bwl-arbeitsmarkt",
+		"location": "/zeit-online/cp-content/kolumne-ohne-autorenbild",
 		"score": 2357,
-		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild",
-		"ressort": "studium",
-		"sub_ressort": "uni-leben",
-		"date_first_released": "2015-09-08T08:49:55Z",
-		"product_id": "ZEDE",
-		"supertitle": "Studienwahl",
-		"title": "Hätte ich mal BWL studiert!",
-		"subtitle": "Alles angepasste Langweiler, diese BWLer. Unser Autor träumte vom Intellektuellendasein – und studierte Geschichte. Kurz vor Studienende möchte er sich entschuldigen.",
-		"channels": ["Studium Uni-Leben"],
 		"fetchedAt": 1441702321503,
-		"timestamp": 1441702195000,
-		"access": "free"
+		"timestamp": 1441702195000
 	},
 	{
-		"location": "/gesellschaft/schule/2015-09/bildung-auslaender-abschluss-migrationshintergrund",
+		"location": "/zeit-online/cp-content/article-01",
 		"score": 2346,
-		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-01",
-		"ressort": "gesellschaft",
-		"sub_ressort": "schule",
-		"date_first_released": "2015-09-08T14:48:35Z",
-		"product_id": "ZEDE",
-		"supertitle": "Bildung",
-		"title": "Zuwanderer haben häufiger Abitur",
-		"subtitle": "Schüler mit ausländischen Wurzeln erreichen eher den höchsten Bildungsabschluss als Einheimische. Doch auch Jugendliche ohne Migrationshintergrund haben sich verbessert.",
-		"channels": ["Gesellschaft Schule"],
 		"fetchedAt": 1441723921408,
-		"timestamp": 1441723715000,
-		"access": "free"
+		"timestamp": 1441723715000
 	},
 	{
-		"location": "/gesellschaft/zeitgeschehen/2015-09/ungarn-kamerafrau-fluechtlinge-gewalt-roeszke",
+		"location": "/zeit-online/cp-content/article-02",
 		"score": 1227,
-		"uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-02",
-		"ressort": "gesellschaft",
-		"sub_ressort": "zeitgeschehen",
-		"date_first_released": "2015-09-09T04:58:30Z",
-		"product_id": "ZEDE",
-		"supertitle": "Ungarn",
-		"title": "Kamerafrau tritt nach Flüchtlingen",
-		"subtitle": "Eine Mitarbeiterin eines ungarischen Fernsehsenders hat ein flüchtendes Kind getreten, einem Mann stellte sie ein Bein. Der Sender hat die Kamerafrau entlassen.",
-		"channels": ["Gesellschaft Zeitgeschehen"],
 		"fetchedAt": 1441774921343,
-		"timestamp": 1441774710000,
-		"access": "free"
+		"timestamp": 1441774710000
 	}
 ]

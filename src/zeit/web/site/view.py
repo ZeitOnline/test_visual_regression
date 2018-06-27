@@ -88,6 +88,10 @@ class Base(zeit.web.core.view.Base):
     def shared_cardstack_id(self):
         return self.request.GET.get('stackId', '') or None
 
+    @zeit.web.reify
+    def include_optimize(self):
+        return None
+
 
 @zeit.web.view_config(
     route_name='login_state',
@@ -115,7 +119,7 @@ class UserDashboard(Base):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         if not self.request.user:
             raise pyramid.httpexceptions.HTTPFound(
-                location=u'{}?{}'.format(
+                location=u'{}/anmelden?{}'.format(
                     conf.get('sso_url'),
                     urllib.urlencode({'url': self.request.url})))
         # XXX There's nothing in ICommonMetadata that's relevant for the

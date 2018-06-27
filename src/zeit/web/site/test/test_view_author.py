@@ -6,7 +6,7 @@ import mock
 import pyramid.testing
 import zope.component
 
-import zeit.solr.interfaces
+import zeit.retresco.interfaces
 
 import zeit.web.core.interfaces
 
@@ -50,8 +50,8 @@ def test_author_page_should_feature_schema_org_props(testbrowser):
 
 
 def test_author_page_should_show_articles_by_author(testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/anne_mustermann')
@@ -61,8 +61,8 @@ def test_author_page_should_show_articles_by_author(testbrowser):
 def test_articles_by_author_should_paginate(testbrowser):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['author_articles_page_size'] = 1
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/anne_mustermann?p=2')
@@ -88,17 +88,17 @@ def test_author_area_articles_should_offset_correctly(
 
 def test_author_page_with_favourite_content_should_get_total_pages_correctly(
         testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
     # case 1: 7 articles on page 1, 10 articles on page 2
-    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
-                    for i in range(17)])
+    es.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                   for i in range(17)])
     select = testbrowser('/autoren/j_random').cssselect
     assert len(select('.cp-area--author-favourite-content article')) == 3
     assert len(select('.pager__pages .pager__page')) == 2
 
     # case 2: 7 articles on page 1, 10 articles on page 2, 1 article on page 3
-    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
-                    for i in range(18)])
+    es.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                   for i in range(18)])
     select = testbrowser('/autoren/j_random').cssselect
     assert len(select('.cp-area--author-favourite-content article')) == 3
     assert len(select('.pager__pages .pager__page')) == 3
@@ -108,8 +108,8 @@ def test_author_page_should_hide_favourite_content_on_further_pages(
         testbrowser):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['author_articles_page_size'] = 4
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'},
@@ -140,20 +140,22 @@ def test_articles_by_author_should_not_repeat_favourite_content(
         testbrowser, monkeypatch):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/j_random')
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
     mock_search = mock.Mock()
-    monkeypatch.setattr(solr, 'search', mock_search)
+    monkeypatch.setattr(es, 'search', mock_search)
     testbrowser('/autoren/j_random')
     for fav in author.favourite_content:
-        assert fav.uniqueId in mock_search.call_args[1]['fq']
+        assert (zeit.cms.content.interfaces.IUUID(fav).id in
+                mock_search.call_args[0][0]['query']['bool']['must_not']
+                ['ids']['values'])
 
 
 def test_first_page_shows_fewer_solr_results_since_it_shows_favourite_content(
         testbrowser):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['author_articles_page_size'] = 4
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/autoren/j_random')
@@ -169,7 +171,22 @@ def test_view_author_comments_should_have_comments_area(
     dummy_request.GET['p'] = '1'
     view = zeit.web.site.view_author.Comments(author, dummy_request)
     assert type(view.tab_areas[0]) == (
-        zeit.web.site.view_author.UserCommentsArea)
+        zeit.web.site.view_author.UserCommentsPagination)
+
+
+def test_view_author_comments_should_handle_no_comments_gracefully(
+        application, dummy_request):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/author3')
+    view = zeit.web.site.view_author.Comments(author, dummy_request)
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    with mock.patch.object(community, 'get_user_comments') as get:
+        get.return_value = None
+        area = view.tab_areas[0]
+        assert type(area) == (
+            zeit.web.site.view_author.UserCommentsPagination)
+        assert area.total_pages == 0
+        assert area.page == 1
 
 
 def test_author_comments_should_correctly_validate_pagination(
@@ -179,22 +196,26 @@ def test_author_comments_should_correctly_validate_pagination(
         zeit.web.core.comments.Community, 'get_user_comments', mock_comments)
 
     dummy_request.GET.clear()
-    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    context = mock.Mock()
+    context.uniqueId = 'http://xml.zeit.de/author'
+    view = zeit.web.site.view_author.Comments(context, dummy_request)
     assert view.tab_areas is not None
     assert mock_comments.call_args[1]['page'] == 1
 
     dummy_request.GET['p'] = 'nan'
-    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    view = zeit.web.site.view_author.Comments(context, dummy_request)
     assert view.tab_areas is not None
     assert mock_comments.call_args[1]['page'] == 1
 
     dummy_request.GET['p'] = '3'
-    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    view = zeit.web.site.view_author.Comments(context, dummy_request)
     assert view.tab_areas is not None
     assert mock_comments.call_args[1]['page'] == 3
 
 
-def test_author_contact_should_be_fully_rendered(testbrowser):
+def test_author_contact_should_be_fully_rendered(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'author_feedback': True}.get)
     browser = testbrowser('/autoren/j_random')
     container = browser.cssselect('.author-contact')[0]
     items = container.cssselect('.author-contact__item')
@@ -202,7 +223,7 @@ def test_author_contact_should_be_fully_rendered(testbrowser):
     facebook = container.cssselect('.author-contact__icon--facebook')
     instagram = container.cssselect('.author-contact__icon--instagram')
 
-    assert len(items) == 3
+    assert len(items) == 4
     assert len(twitter) == 1
     assert len(facebook) == 1
     assert len(instagram) == 1
@@ -256,6 +277,7 @@ def test_author_handles_missing_profile_data_right(jinja2_env):
     author.topiclink_url_2 = None
     author.topiclink_url_3 = None
     author.biography = ''
+    author.email = ''
     author.twitter = ''
     author.facebook = ''
     author.instagram = ''
@@ -287,9 +309,9 @@ def test_author_has_correct_open_graph_image(testbrowser):
 
 def test_author_page_has_correct_pagination_information(
         application, dummy_request):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
-                    for i in range(22)])
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                   for i in range(22)])
 
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/j_random')
@@ -326,9 +348,9 @@ def test_author_page_has_correct_pagination_information(
 
 
 def test_author_page_contains_pagination_information(testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
-                    for i in range(22)])
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                   for i in range(22)])
 
     url = 'http://localhost/autoren/j_random'
 
@@ -370,3 +392,14 @@ def test_author_comments_page_contains_pagination_information(testbrowser):
     assert select('link[rel="prev"]')[0].get('href') == url + '?p=2'
     assert select('meta[name="robots"]')[0].get('content') == (
         'noindex,follow,noarchive')
+
+
+def test_authorpage_has_follow_push_button(selenium_driver, testserver):
+    zeit.web.core.application.FEATURE_TOGGLES.set('push_for_author_in_app')
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+    driver.get('%s/autoren/j_random?app-content' % testserver.url)
+    expected_link = 'zeitapp://subscribe/{segment}/{id}'.format(
+        segment='authors', id='c5520263-4393-43d3-b6a9-3d390e12ad11')
+    assert len(
+        select('a[href^="{}"]'.format(expected_link))) == 1

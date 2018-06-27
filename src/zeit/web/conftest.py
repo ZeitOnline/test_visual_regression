@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+import collections
 import copy
 import json
 import logging
@@ -37,8 +38,10 @@ import zope.interface
 import zope.processlifetime
 import zope.testbrowser.wsgi
 
+import zeit.cms.interfaces
 import zeit.content.image.interfaces
 import zeit.retresco.interfaces
+import zeit.retresco.connection
 import zeit.solr.interfaces
 
 import zeit.web.core.application
@@ -75,7 +78,7 @@ def app_settings(mockserver):
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
         'liveblog_backend_url_v3': mockserver.url + '/liveblog/v3',
-        'liveblog_amp_theme_v3': 'amp',
+        'liveblog_amp_theme_v3': 'zon-amp',
         'liveblog_api_auth_url_v3': mockserver.url + '/liveblog/v3/api/auth',
         'liveblog_api_auth_username_v3': 'apiuser',
         'liveblog_api_auth_password_v3': 'geheim',
@@ -146,6 +149,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/article-genres.xml'),
         'vivi_zeit.content.article_image-display-mode-source': (
             'egg://zeit.web.core/data/config/article-image-display-modes.xml'),
+        'vivi_zeit.content.article_puzzleforms-source': (
+            'egg://zeit.content.article/edit/tests/puzzleforms.xml'),
         'vivi_zeit.content.article_legacy-display-mode-source': (
             'egg://zeit.web.core/data/config/article-legacy-display-modes.xml'
         ),
@@ -219,8 +224,6 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/zco-jobmarket.xml'),
         'vivi_zeit.content.gallery_gallery-types-url': (
             'egg://zeit.web.core/data/config/gallery-types.xml'),
-        'vivi_zeit.web_series-source': (
-            'egg://zeit.web.core/data/config/series.xml'),
         'vivi_zeit.web_feature-toggle-source': (
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
         'vivi_zeit.imp_scale-source':
@@ -234,8 +237,6 @@ def app_settings(mockserver):
         'vivi_zeit.push_facebook-main-account': 'fb-test',
         'vivi_zeit.push_facebook-magazin-account': 'fb-magazin',
         'vivi_zeit.push_facebook-campus-account': 'fb-campus',
-        'vivi_zeit.content.video_source-serie': (
-            'egg://zeit.web.core/data/config/video-serie.xml'),
         'vivi_zeit.content.volume_volume-cover-source': (
             'egg://zeit.web.core/data/config/volume-covers.xml'),
         'vivi_zeit.content.volume_default-teaser-text': (
@@ -362,6 +363,8 @@ def application_session(app_settings, set_loglevel, request):
                                   zeit.web.core.solr.ISitemapSolrConnection)
     zope.component.provideUtility(MockES(),
                                   zeit.retresco.interfaces.IElasticsearch)
+    zope.component.provideUtility(MockTMS(),
+                                  zeit.retresco.interfaces.ITMS)
     zope.component.provideUtility(mock.Mock(),
                                   zeit.objectlog.interfaces.IObjectLog)
     zope.component.provideUtility(mock.Mock(),
@@ -932,7 +935,7 @@ class MockES(MockSearch):
 
     zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
 
-    def search(self, query, order, rows=25, **kw):
+    def search(self, query, order=None, rows=25, **kw):
         result = zeit.cms.interfaces.Result(self.pop_results(rows))
         result.hits = self._hits
         return result
@@ -951,6 +954,27 @@ class MockES(MockSearch):
         self._results = value
 
 
+class MockTMS(zeit.retresco.connection.TMS):
+    """Stub with empty results."""
+
+    def __init__(self):
+        pass
+
+    def is_healthy(self):
+        return True
+
+    def _request(self, *args, **kw):
+        # XXX unclear if this properly stubs out all public functions
+        return collections.defaultdict(lambda: None)
+
+    def get_topicpages(self, *args, **kw):
+        return zeit.cms.interfaces.Result()
+
+    def get_article_body(self, content, timeout=None):
+        content = zeit.cms.interfaces.ICMSContent(content.uniqueId)
+        return lxml.etree.tostring(content.xml.body)
+
+
 @pytest.fixture
 def data_solr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
@@ -966,6 +990,15 @@ def data_es(request):
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
     zope.component.provideUtility(zeit.web.core.retresco.DataES())
+
+
+@pytest.fixture
+def data_tms(request):
+    previous = zope.component.queryUtility(
+        zeit.retresco.interfaces.ITMS)
+    if previous is not None:
+        request.addfinalizer(lambda: zope.component.provideUtility(previous))
+    zope.component.provideUtility(zeit.web.core.retresco.DataTMS())
 
 
 @pytest.fixture(scope='session')

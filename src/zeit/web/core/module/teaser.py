@@ -122,9 +122,4 @@ class ContentTeaserBlock(TeaserBlock):
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.content.article.interfaces.IArticle)
 class ArticleTeaserBlock(ContentTeaserBlock):
-
-    @property
-    def liveblog(self):
-        if zeit.web.core.template.liveblog(self._v_first_content):
-            return zeit.web.core.interfaces.ILiveblogInfo(
-                self._v_first_content)
+    pass

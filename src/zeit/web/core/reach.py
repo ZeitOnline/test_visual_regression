@@ -1,21 +1,23 @@
 # -*- coding: utf-8 -*-
 import logging
 
+import grokcore.component as grok
 import requests
 import requests.exceptions
 import requests_file
-import zc.iso8601.parse
 import zope.component
 import zope.interface
 
-import zeit.cms.interfaces
+import zeit.retresco.interfaces
 
 import zeit.web
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
+import zeit.web.core.repository
 
 
 log = logging.getLogger(__name__)
+DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 
 
 class Reach(object):
@@ -42,18 +44,31 @@ class Reach(object):
         location = '.'.join(filter(bool, (location, facet)))
         kw.setdefault('limit', 3)
         docs = self._get('/'.join(('ranking', location)), **kw) or []
-        for idx, doc in enumerate(docs):
-            zeit.web.core.area.automatic.Converter._set_defaults(doc)
-            doc['product_id'] = doc.get('product_id')
-            doc['serie'] = doc.get('serie')
-            if 'date_first_released' in doc:
-                try:
-                    doc['date_first_released'] = zc.iso8601.parse.datetimetz(
-                        str(doc['date_first_released']))
-                except Exception:
-                    pass
-            docs[idx] = zeit.cms.interfaces.ICMSContent(doc)
-        return docs
+        result = []
+        for doc in docs:
+            content = self._resolve(doc)
+            if content is None:
+                continue
+            result.append(content)
+        return result
+
+    def _resolve(self, doc):
+        try:
+            result = self._get_metadata(doc['location'])
+            content = zeit.retresco.interfaces.ITMSContent(result[0])
+            content._reach_data = doc
+        except Exception:
+            log.warning('Resolving %s failed', doc, exc_info=True)
+            return None
+        zeit.web.core.repository.add_marker_interfaces(
+            content, in_repository=False)
+        return content
+
+    @DEFAULT_TERM_CACHE.cache_on_arguments(should_cache_fn=bool)
+    def _get_metadata(self, path):
+        es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+        return es.search(
+            {'query': {'term': {'url': path}}}, rows=1, include_payload=True)
 
     def get_comments(self, **kw):
         return self._get_ranking('comments', **kw)
@@ -70,13 +85,24 @@ class Reach(object):
     def get_views(self, **kw):
         return self._get_ranking('views', **kw)
 
-    def get_buzz(self, unique_id='http://xml.zeit.de/index'):
-        url = unique_id.replace(
-            zeit.cms.interfaces.ID_NAMESPACE, 'http://www.zeit.de/', 1)
-        return self._get('buzz', url=url) or {}
-
 
 class MockReach(Reach):
 
+    # Tests use the `mockserver` fixture to serve `z.w.core/data` via HTTP, but
+    # the local sandbox can't use that, so its config uses `file://` instead.
     session = requests.Session()
     session.mount('file://', requests_file.FileAdapter())
+
+    def _get_metadata(self, path):
+        content = zeit.cms.interfaces.ICMSContent(u'http://xml.zeit.de' + path)
+        return [zeit.retresco.interfaces.ITMSRepresentation(content)()]
+
+
+class ReachData(grok.Adapter):
+
+    grok.context(zeit.retresco.interfaces.ITMSContent)
+    grok.implements(zeit.web.core.interfaces.IReachData)
+
+    @property
+    def score(self):
+        return getattr(self.context, '_reach_data', {}).get('score')

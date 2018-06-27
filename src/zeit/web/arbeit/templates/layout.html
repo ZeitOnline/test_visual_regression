@@ -1,4 +1,4 @@
-{% import "zeit.web.arbeit:templates/macros/layout_macro.tpl" as lama %}
+{% import "zeit.web.core:templates/macros/layout_macro.tpl" as lama %}
 <!DOCTYPE html>
 <html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
 <head>
@@ -31,7 +31,6 @@
     {% endif -%}
     {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
-        {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
     {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
     {% if settings('livereload') %}
@@ -82,6 +81,9 @@
             {% endblock footer %}
         </div>
     </div>
+
+    {%- include "zeit.web.core:templates/inc/data-protection-popover.html" -%}
+
     {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
     {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
     {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}

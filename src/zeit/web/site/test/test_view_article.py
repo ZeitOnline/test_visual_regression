@@ -4,6 +4,7 @@ import datetime
 import urlparse
 
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 import lxml.etree
@@ -51,8 +52,8 @@ def test_article_single_page_has_no_pagination(testbrowser):
 
 
 def test_article_full_view_has_no_pagination(testbrowser):
-    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
 
+    select = testbrowser('/zeit-online/article/zeit/komplettansicht').cssselect
     assert len(select('.summary, .byline, .metadata')) == 3
     assert len(select('.article-pagination')) == 1
     assert len(select('.article-pager')) == 0
@@ -894,7 +895,8 @@ def test_article_doesnt_show_modified_date(testbrowser):
 
 def test_video_in_article_is_there(testbrowser):
     article = testbrowser('/zeit-online/article/video')
-    assert len(article.cssselect('.video-player__videotag')) == 1
+    assert len(article.cssselect(
+        '.js-videoplayer[data-video-id="3035864892001"]')) == 1
 
 
 def test_advertorial_marker_is_present(testbrowser):
@@ -1021,17 +1023,27 @@ def test_breaking_news_should_have_their_own_sharing_image_if_present(
 
 
 def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
-    main_image = browser.cssselect('.article__item img')[0]
-    figure = main_image.xpath('./ancestor::figure')[0]
-    assert 'article__item--wide' in figure.get('class')
-
     browser = testbrowser('/zeit-online/article/image-column-width')
-    article = browser.cssselect('main article')[0]
-    figure = article.cssselect('figure[itemprop="image"]')[0]
+    figure = browser.cssselect('main article figure[itemprop="image"]')[1]
     classname = figure.get('class')
     assert 'article__item--wide' not in classname
     assert 'article__item--rimless' not in classname
+    assert 'article__item--apart' in classname
+
+
+def test_article_should_ignore_display_mode_of_header_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    figure = browser.cssselect('main header figure[itemprop="image"]')[0]
+    classname = figure.get('class')
+    assert 'article__item--wide' in classname
+    assert 'article__item--rimless' in classname
+    assert 'article__item--apart' in classname
+
+    browser = testbrowser('/zeit-online/article/image-column-width')
+    figure = browser.cssselect('main header figure[itemprop="image"]')[0]
+    classname = figure.get('class')
+    assert 'article__item--wide' in classname
+    assert 'article__item--rimless' in classname
     assert 'article__item--apart' in classname
 
 
@@ -1346,7 +1358,8 @@ def test_article_has_image_header_embed(testbrowser):
 def test_article_has_video_header_embed(testbrowser):
     browser = testbrowser('/zeit-online/article/embed-header-video')
     embed = browser.cssselect('.article-embed')[0]
-    assert len(embed.cssselect('.video-player')) == 1
+    assert len(embed.cssselect(
+        '.js-videoplayer[data-video-id="4193594095001"]')) == 1
 
 
 def test_article_has_quiz_header_embed(testbrowser):
@@ -1521,6 +1534,8 @@ def test_infographics_should_display_origin_instead_of_caption(testbrowser):
 def test_infographics_should_render_html_correctly(
         tplbrowser, dummy_request):
     template = 'zeit.web.core:templates/inc/blocks/infographic.html'
+    view = mock.Mock()
+    request = dummy_request
     image = zeit.web.core.image.Image(mock.Mock())
     image.ratio = 1
     image.group = mock.Mock()
@@ -1532,34 +1547,42 @@ def test_infographics_should_render_html_correctly(
     image.origin = True
     image.copyrights = {'text': 'FOO'}
     image.caption = True
-    browser = tplbrowser(template, block=image, request=dummy_request)
+    browser = tplbrowser(template, block=image, view=view, request=request)
     assert browser.cssselect('.infographic__text')
     assert browser.cssselect('.infographic__caption')
     assert browser.cssselect('.infographic__media.high-resolution')
 
     # borderless subheadline
     image.caption = False
-    browser = tplbrowser(template, block=image, request=dummy_request)
+    browser = tplbrowser(template, block=image, view=view, request=request)
     assert not browser.cssselect('.infographic__text')
 
     # footer has border
     image.origin = True
     image.copyrights = {}
-    browser = tplbrowser(template, block=image, request=dummy_request)
+    browser = tplbrowser(template, block=image, view=view, request=request)
     assert browser.cssselect('.infographic__caption')
 
     image.origin = False
     image.copyrights = {'text': 'FOO'}
-    browser = tplbrowser(template, block=image, request=dummy_request)
+    browser = tplbrowser(template, block=image, view=view, request=request)
     assert browser.cssselect('.infographic__caption')
 
     # no border styles present
     image.copyrights = {}
     image.origin = False
     image.caption = False
-    browser = tplbrowser(template, block=image, request=dummy_request)
+    browser = tplbrowser(template, block=image, view=view, request=request)
     assert not browser.cssselect('.infographic__text')
     assert not browser.cssselect('.infographic__caption')
+
+    # header module
+    image.display_mode = 'column-width'
+    view.header_module = image
+    browser = tplbrowser(template, block=image, view=view, request=request)
+    assert browser.cssselect('.infographic__media.high-resolution')
+    assert browser.cssselect('.infographic__media.infographic__media--large')
+    assert not browser.cssselect('.infographic__media--column-width')
 
 
 def test_infographics_desktop_should_have_proper_asset_source(
@@ -1582,19 +1605,6 @@ def test_infographics_mobile_should_have_proper_asset_source(
         '.infographic img').get_attribute('src')
     assert u'/zeit-online/image/bertelsmann-infographic/' \
            u'original__450x563__mobile' in img_src
-
-
-def test_contentad_is_rendered_once_on_article_pages(testbrowser):
-    selector = '#iq-artikelanker'
-
-    browser = testbrowser('/zeit-online/article/fischer')
-    assert len(browser.cssselect(selector)) == 1
-
-    browser = testbrowser('/zeit-online/article/fischer/seite-2')
-    assert len(browser.cssselect(selector)) == 1
-
-    browser = testbrowser('/zeit-online/article/fischer/komplettansicht')
-    assert len(browser.cssselect(selector)) == 1
 
 
 def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
@@ -1895,8 +1905,16 @@ def test_share_buttons_are_present(testbrowser):
     assert query.get('link').pop(0).startswith(canonical)
     assert query.get('app_id').pop(0) == '638028906281625'
 
-    #  mail
+    #  pocket
     parts = urlparse.urlparse(links[5].get('href'))
+    query = urlparse.parse_qs(parts.query)
+    url = query['url'][0]
+    assert 'utm_source=pocket_zonaudev_ext' in url
+    assert 'utm_campaign=ref' in url
+    assert 'utm_content=zeitde_share_link_x' in url
+
+    #  mail
+    parts = urlparse.urlparse(links[6].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
@@ -1907,7 +1925,8 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[2].text == 'Flippen'
     assert labels[3].text == 'WhatsApp'
     assert labels[4].text == 'Facebook Messenger'
-    assert labels[5].text == 'Mailen'
+    assert labels[5].text == 'Pocket'
+    assert labels[6].text == 'Mailen'
 
 
 def test_merian_link_has_nofollow(testbrowser, dummy_request):
@@ -2102,11 +2121,21 @@ def test_overscrolling_is_working_as_expected(selenium_driver, testserver):
         By.CSS_SELECTOR, '#overscrolling'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
+
+    # execute overscroll and test, if we leave the page
+    old_page = driver.find_element_by_tag_name('html')
+    stale_condition = expected_conditions.staleness_of(old_page)
     driver.execute_script('window.scrollBy(0, 801)')
-    condition = expected_conditions.visibility_of_element_located((
-        By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
-    assert WebDriverWait(
-        selenium_driver, 5).until(condition)
+    try:
+        WebDriverWait(driver, 10).until(stale_condition)
+        assert 'article/01' not in driver.current_url
+        # test if we try to load homepage
+        condition = expected_conditions.visibility_of_element_located((
+            By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
+        assert WebDriverWait(selenium_driver, 5).until(condition)
+    except TimeoutException:
+        assert False, 'Article page not left by overscroll'
+
     # overscrolling is inactive in app
     driver.get(
         '%s/zeit-online/article/01?app-content' % testserver.url)
@@ -2207,6 +2236,7 @@ def test_narrow_header_should_render_image_column_width(testbrowser):
     browser = testbrowser('/zeit-online/article/narrow')
     figure = browser.cssselect('.article-header figure')[0]
     assert 'article__item--wide' not in figure.get('class')
+    assert 'article__item--rimless' not in figure.get('class')
     assert 'article__item--apart' in figure.get('class')
 
 
@@ -2273,3 +2303,162 @@ def test_dpa_noimage_article_renders_empty_image_block(testbrowser):
 def test_dpa_afp_article_should_have_notice(testbrowser, parameter):
     browser = testbrowser('/zeit-online/article/' + parameter)
     assert len(browser.cssselect('.article-notice')) == 1
+
+
+def test_faq_page_should_present_a_link_for_each_intertitle(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select('.article-flexible-toc__link')) == 14
+
+
+def test_faq_page_should_present_links_to_intertitles(testbrowser):
+    browser = testbrowser('/zeit-online/article/faq')
+
+    subheadings = browser.cssselect('.article__subheading')
+    links = browser.cssselect('.article-flexible-toc__link')
+
+    assert (subheadings)
+
+    for index, subheading in enumerate(subheadings):
+        href = links[index].get('href')
+        assert href == '#' + subheading.get('id')
+
+
+def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
+        monkeypatch, testbrowser):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/faq')
+    intertitle = mock.Mock()
+    monkeypatch.setattr(
+        zeit.web.site.view_article.FAQArticle, u'subheadings', [intertitle])
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select('#showall')) == 0
+
+
+def test_faq_page_should_render_show_more_button(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    buttons = select('.article-flexible-toc__showall')
+
+    assert len(buttons) == 1
+    assert buttons[0].get('onclick')
+
+
+def test_faq_page_should_follow_schema_org(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    question_wrapper = select('div[itemtype="http://schema.org/Question"]')[0]
+
+    # Questions are represented by h2.
+    assert len(question_wrapper.cssselect('h2')) == 1
+
+    # Answers are wrapped inside questions.
+    assert len(question_wrapper.cssselect(
+        'div[itemtype="http://schema.org/Answer"]')) == 1
+
+
+def test_faq_page_should_enable_blocks_outside_of_questions(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    # No div around the first paragraph, which appears before the first
+    # question.
+    assert 'Einleitungstext' in select('.article-page > p')[0].text
+
+
+def test_faq_page_should_wrap_multiple_blocks_into_one_answer(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    question = select('div[itemtype="http://schema.org/Question"]')[0]
+    assert len(question.cssselect('div > p')) == 2
+
+
+def test_faq_page_should_handle_multiple_block_types(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select(
+        'div[itemtype="http://schema.org/Question"] .js-videoplayer')) >= 1
+    assert len(select(
+        'div[itemtype="http://schema.org/Question"] p')) >= 1
+
+
+def test_faq_page_should_contain_exactly_one_flexible_toc(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    assert len(select('.article-flexible-toc')) == 1
+
+
+def test_faq_page_should_render_flexible_toc_above_first_question(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    blocks = select('.article-page')[0].getchildren()
+
+    assert 'paragraph' in blocks[0].get('class')
+    assert 'article-flexible-toc' in blocks[1].get('class')
+
+    for i in range(2, 5):
+        assert blocks[i].get('itemtype') == 'http://schema.org/Question'
+
+
+def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
+    """Functionality is pretty much completely covered by faq tests above,
+    so just cover some basics here."""
+
+    select = testbrowser('/zeit-online/article/flexible-toc').cssselect
+
+    assert len(select('.article-flexible-toc')) == 1
+
+    first_block = select('.article-page')[0].getchildren()[0]
+    assert 'paragraph' in first_block.get('class')
+
+    flexible_toc = first_block.getnext()
+    assert 'article-flexible-toc' in flexible_toc.get('class')
+
+    first_topic = flexible_toc.getnext()
+    assert 'article-flexible-toc__subheading' in first_topic.get('class')
+
+    first_content = first_topic.getnext()
+    assert 'paragraph' in first_content.get('class')
+
+
+def test_each_faq_answer_should_have_one_itemprop_text(testbrowser):
+    select = testbrowser('/zeit-online/article/faq').cssselect
+
+    for answer in select('div[itemprop="acceptedAnswer"]'):
+        answer.getchildren()[0].get('itemprop') == 'text'
+
+
+def test_faq_article_contains_correct_webtrekk_param(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/faq')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp26'] == 'article.faq'
+
+
+def test_if_video_is_playable_on_page_with_embed(selenium_driver, testserver):
+    url = testserver.url + '/zeit-online/article/video-and-zeit-require'
+    driver = selenium_driver
+    driver.set_window_size(1000, 800)
+    driver.get(url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.js-videoplayer')))
+    except TimeoutException:
+        assert False, 'video must be present and playable'
+
+    link = driver.find_element_by_css_selector('.vjs-play-control')
+    link.click()
+    assert driver.find_element_by_css_selector('.vjs-paused')
+
+
+def test_article_can_include_optimize(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    assert 'optimize' not in browser.contents
+
+    optimize_url = 'https://www.zeit.de/js/ga_optimize.js'
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['optimize_on_zon_article'] = optimize_url
+    browser = testbrowser('/zeit-online/article/simple')
+    assert optimize_url in browser.contents

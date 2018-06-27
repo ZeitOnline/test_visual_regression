@@ -110,6 +110,10 @@
 			</region>
 
 			<region area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
+				<container cp:type="cpextra" module="mosttrending" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a007">
+					<cp_extra id="mosttrending"/>
+				</container>
+
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead1b">
 					<block href="http://xml.zeit.de/zeit-online/cp-content/liveblog-live"/>
 				</container>
@@ -162,6 +166,24 @@
 
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b">
 					<block href="http://xml.zeit.de/zeit-online/cp-content/liveblog-offline"/>
+				</container>
+			</region>
+		</cluster>
+
+		<!-- Buzzboard -->
+		<cluster area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
+			<region area="id-33b33be0-ac8a-484e-b681-0cee9933a5cf" kind="buzzboard" title="Buzz-Board Galore">
+				<container cp:type="cpextra" module="mosttrending" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a000">
+					<cp_extra id="mosttrending"/>
+				</container>
+				<container cp:type="cpextra" module="mostshared" cp:__name__="id-c7d8c767-9f68-4a29-8ce9-2cf09a68340a">
+					<cp_extra id="mostshared"/>
+				</container>
+				<container cp:type="cpextra" module="mostcommented" cp:__name__="id-a067d15a-9fa8-4730-9c0f-56b406b586d6">
+					<cp_extra id="mostcommented"/>
+				</container>
+				<container cp:type="cpextra" module="mostread" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a003">
+					<cp_extra id="mostread"/>
 				</container>
 			</region>
 		</cluster>

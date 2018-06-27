@@ -22,12 +22,14 @@
 
 		&--twitter
 			color: $color-twitter
+			margin-top: remify(3px)
 		&--facebook
 			color: $color-facebook
 		&--instagram
 			color: #66583d
 		&--email
 			color: $zon-grey
+			margin-top: remify(5px)
 
 		+respond-min($break-areas)
 			height: remify(18px)
@@ -47,6 +49,10 @@
 			max-width: remify(70px)
 			width: 25%
 			line-height: normal
+
+		&__item--facebook
+			width: 20%
+
 		&__icon
 			display: block
 		&__text

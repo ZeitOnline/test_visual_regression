@@ -181,14 +181,14 @@ def test_buzzboard_provides_expected_webtrekk_strings(
     link.click()
     track_str = driver.execute_script("return window.trackingData")
     assert track_str.startswith('mobile.minor.2.4.teaser-buzz.text|')
-    assert track_str.endswith('/zeit-online/article/01')
+    assert track_str.endswith('/zeit-online/cp-content/liveblog-live')
 
     # desktop
     driver.set_window_size(1000, 800)
     link.click()
     track_str = driver.execute_script("return window.trackingData")
     assert track_str.startswith('stationaer.minor.2.4.teaser-buzz.text|')
-    assert track_str.endswith('/zeit-online/article/01')
+    assert track_str.endswith('/zeit-online/cp-content/liveblog-live')
 
 
 @pytest.mark.parametrize(

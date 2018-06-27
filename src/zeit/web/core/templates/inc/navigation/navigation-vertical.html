@@ -1,11 +1,11 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {%- set navigation = view.navigation_more -%}
 {% set items = navigation %}
     <div class="nav__home">
         <h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
     </div>
     <nav class="nav__sales">
-        <a href="https://abo.zeit.de/?utm_medium=referral&utm_source={{ vertical_campaign_param_long }}&utm_campaign=keine&utm_content=keine__stand__x&icode={{ vertical_campaign_param_abolink }}">Abo</a>
+        <a href="https://abo.zeit.de/?utm_medium=referral&utm_source={{ vertical_campaign_param_long }}&utm_campaign=keine&icode={{ vertical_campaign_param_abolink }}">Abo</a>
     </nav>
     <nav class="nav__more">
         <a class="nav__more-title" href="#more-menu" role="button" aria-controls="more-menu"><span class="nav__dropdown">Mehr</span></a>

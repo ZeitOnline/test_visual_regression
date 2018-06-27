@@ -1,4 +1,4 @@
-{% import 'zeit.web.arbeit:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.arbeit:templates/macros/centerpage_macro.tpl' as cp %}
 
 {% block teaser %}

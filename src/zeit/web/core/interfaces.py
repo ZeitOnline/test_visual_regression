@@ -205,6 +205,12 @@ class IReach(zope.interface.Interface):
         """Collect a buzz summary for an article by uniqueId"""
 
 
+class IReachData(zope.interface.Interface):
+    """Adapts an article returned by IReach to access its score value"""
+
+    score = zope.interface.Attribute('reach score')
+
+
 class IPodigee(zope.interface.Interface):
 
     def get_episode(episode_id):
@@ -337,3 +343,16 @@ class IContentMarkerInterfaces(zope.interface.Interface):
     """Returns a list of marker interfaces that are added to ICMSContent
     objects.
     """
+
+
+class ISeries(zope.interface.Interface):
+    """A interface for zeit.web series"""
+
+    def series_kind():
+        """Returns the kind of a series (e.g. podcast)"""
+
+    def series_title():
+        """Returns the title of a series"""
+
+    def series_url():
+        """Returns the url of a series"""

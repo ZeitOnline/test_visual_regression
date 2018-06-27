@@ -6,7 +6,7 @@ from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
 import zeit.content.article.article
 import zeit.content.article.edit.interfaces
-import zeit.retresco.connection
+import zeit.retresco.interfaces
 
 import zeit.web.core.article
 import zeit.web.core.interfaces
@@ -27,12 +27,11 @@ def test_video_should_be_removed_from_body_if_layout_is_header(application):
 
 
 def test_retresco_body_should_respect_toggle_off(application, monkeypatch):
-    assert zeit.web.core.application.FEATURE_TOGGLES.find(
-        'enable_intext_links') is False
+    zeit.web.core.application.FEATURE_TOGGLES.unset('enable_intext_links')
 
+    tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     get_article_body = mock.Mock(return_value='')
-    monkeypatch.setattr(
-        zeit.retresco.connection.TMS, 'get_article_body', get_article_body)
+    monkeypatch.setattr(tms, 'get_article_body', get_article_body)
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -44,9 +43,9 @@ def test_retresco_body_should_respect_toggle_off(application, monkeypatch):
 def test_retresco_body_should_respect_seo_flag(application, monkeypatch):
     zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
 
+    tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     get_article_body = mock.Mock(return_value='')
-    monkeypatch.setattr(
-        zeit.retresco.connection.TMS, 'get_article_body', get_article_body)
+    monkeypatch.setattr(tms, 'get_article_body', get_article_body)
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/intext-disabled')
@@ -61,10 +60,10 @@ def test_retresco_body_should_replace_xml_body(application, monkeypatch):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['retresco_timeout'] = 0.42
 
+    tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     get_article_body = mock.Mock(
         return_value='<body><a href="http://foo">topicpage</a></body>')
-    monkeypatch.setattr(
-        zeit.retresco.connection.TMS, 'get_article_body', get_article_body)
+    monkeypatch.setattr(tms, 'get_article_body', get_article_body)
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -76,10 +75,10 @@ def test_retresco_body_should_replace_xml_body(application, monkeypatch):
 
 def test_retresco_body_xml_should_be_cached(application, monkeypatch):
     zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
+    tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     get_article_body = mock.Mock(
         return_value='<body><a href="http://foo">topicpage</a></body>')
-    monkeypatch.setattr(
-        zeit.retresco.connection.TMS, 'get_article_body', get_article_body)
+    monkeypatch.setattr(tms, 'get_article_body', get_article_body)
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     b1 = zeit.content.article.edit.interfaces.IEditableBody(article)
@@ -109,9 +108,9 @@ def test_editable_body_should_calculate_values_only_once(application):
 def test_retresco_body_is_not_used_for_articles_with_keywords_on_blacklist(
         application, monkeypatch, workingcopy):
     zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
+    tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     get_article_body = mock.Mock(return_value='<body/>')
-    monkeypatch.setattr(
-        zeit.retresco.connection.TMS, 'get_article_body', get_article_body)
+    monkeypatch.setattr(tms, 'get_article_body', get_article_body)
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')

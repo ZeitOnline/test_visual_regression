@@ -24,8 +24,8 @@ def test_article_pagination_on_single_page(testbrowser):
     # assert len(select('.article-toc')) == 0
     button = select('.article-pagination__button')[0]
     link = select('.article-pagination__link')[0].get('href')
-    assert button.text.strip() == 'Mehr ZEIT Campus'
-    assert 'campus/index' in link
+    assert button.text.strip() == 'Startseite'
+    assert 'index' in link
 
 
 def test_article_pagination_on_second_page(testbrowser):
@@ -51,7 +51,7 @@ def test_article_pagination_on_last_paginated_page(testbrowser):
     assert len(select('.article-pager')) == 1
     # assert len(select('.article-toc')) == 1
     button = select('.article-pagination__button')[0]
-    assert button.text.strip() == 'Mehr ZEIT Campus'
+    assert button.text.strip() == 'Startseite'
 
 
 def test_article_pagination_on_komplettansicht(testbrowser):
@@ -63,7 +63,7 @@ def test_article_pagination_on_komplettansicht(testbrowser):
     assert len(select('.article-pager')) == 0
     # assert len(select('.article-toc')) == 0
     button = select('.article-pagination__button')[0]
-    assert button.text.strip() == 'Mehr ZEIT Campus'
+    assert button.text.strip() == 'Startseite'
 
 
 def test_article_pagination(testbrowser):
@@ -154,9 +154,9 @@ def test_campus_article_renders_video_with_correct_markup(testbrowser):
     bro = testbrowser('/campus/article/video')
     select = bro.cssselect
     assert select(
-        'figure.article__item > .video-player#video-player-3035864892001')
+        'figure.article__item > .js-videoplayer')
     assert select(
-        'video[data-video-id="3035864892001"]')
+        '.js-videoplayer[data-video-id="3035864892001"]')
     assert select(
         '.video-caption > .video-caption__kicker')[0].text == 'Reporter On Ice'
     assert select('.video-caption > .video-caption__title')[0].text == (
@@ -205,7 +205,7 @@ def test_campus_article_has_sharing_menu(testbrowser):
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
-    assert len(sharing_menu.cssselect('.sharing-menu__item')) == 6
+    assert len(sharing_menu.cssselect('.sharing-menu__item')) == 7
     assert labels[0].text == 'Facebook'
     assert labels[1].text == 'Twittern'
     assert labels[2].text == 'Flippen'

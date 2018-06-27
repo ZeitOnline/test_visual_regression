@@ -1,11 +1,11 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 
-{% if context.twitter or context.facebook or context.instagram %}
+{% if context.twitter or context.facebook or context.instagram or (context.email and context.enable_feedback and toggles('author_feedback')) %}
 <div class="author-contact">
     <h2 class="author-contact__title author__subheadline">Kontakt</h2>
 
     {% if context.twitter %}
-    <div class="author-contact__item">
+    <div class="author-contact__item author-contact__item--twitter">
         <a href="https://twitter.com/{{ context.twitter | replace('@', '') }}" class="author-contact__link">
             {{ lama.use_svg_icon('author-twitter', 'author-contact__icon' | with_mods('twitter'), view.package) }}
             <span class="author-contact__text">{{ context.twitter }}</span>
@@ -14,7 +14,7 @@
     {% endif %}
 
     {% if context.facebook %}
-    <div class="author-contact__item">
+    <div class="author-contact__item author-contact__item--facebook">
         <a href="https://www.facebook.com/{{ context.facebook }}" class="author-contact__link">
             {{ lama.use_svg_icon('author-facebook', 'author-contact__icon' | with_mods('facebook'), view.package) }}
             <span class="author-contact__text">{{ context.facebook }}</span>
@@ -23,7 +23,7 @@
     {% endif %}
 
     {% if context.instagram %}
-    <div class="author-contact__item">
+    <div class="author-contact__item author-contact__item--instagram">
         <a href="https://www.instagram.com/{{ context.instagram }}" class="author-contact__link">
             {{ lama.use_svg_icon('author-instagram', 'author-contact__icon' | with_mods('instagram'), view.package) }}
             <span class="author-contact__text">{{ context.instagram }}</span>
@@ -31,13 +31,13 @@
     </div>
     {% endif %}
 
-    {#% if context.email %}
-    <div class="author-contact__item">
-        <a href="mailto:{{ context.email }}" class="author-contact__link">
+    {% if context.email and context.enable_feedback and toggles('author_feedback') %}
+    <div class="author-contact__item author-contact__item--email">
+        <a href="{{ view.content_url }}/feedback#author-content" class="author-contact__link">
             {{ lama.use_svg_icon('author-email', 'author-contact__icon' | with_mods('email'), view.package) }}
-            <span class="author-contact__text">{{ context.email }}</span>
+            <span class="author-contact__text">Mail an {{ context.display_name }}</span>
         </a>
     </div>
-    {% endif %#}
+    {% endif %}
 </div>
 {% endif %}

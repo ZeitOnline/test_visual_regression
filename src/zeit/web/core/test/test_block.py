@@ -412,13 +412,13 @@ def test_liveblog_api_request_renews_expired_cache_token(
 
 
 def test_liveblog_get_info(application, liveblog):
-    assert liveblog.last_modified.isoformat() == u'2017-12-22T14:17:23+01:00'
+    assert liveblog.last_modified.isoformat() == u'2017-12-05T16:12:54+01:00'
     assert liveblog.is_live is True
 
 
 def test_liveblog_get_amp_id(application, liveblog):
-    amp_id = liveblog.get_amp_themed_id(liveblog.blog_id)
-    assert amp_id == u'amp/59fc6d566aa4f500e7c68bd7'
+    amp_id = liveblog.get_amp_themed_id(liveblog.id)
+    assert amp_id == u'zon-amp-solo/5a3d05af6aa4f500f30315d3'
 
 
 def test_block_breaking_news_has_correct_date(application):

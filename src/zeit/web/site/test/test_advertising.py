@@ -148,27 +148,19 @@ def test_adplaces_have_no_banner_label_data_attribute(testbrowser):
     assert labelstring not in browser.contents
 
 
-def test_adplace5_depends_on_ligatus_toggle_on(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set(
-        'third_party_modules', 'iqd', 'ligatus', 'ligatus_on_site')
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert not browser.cssselect('#ad-desktop-5')
-
-
-def test_adplace5_depends_on_ligatus_toggle_off(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
-    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert browser.cssselect('#ad-desktop-5')
-
-
 def test_banner_content_enabled_shows_all_ads(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set('third_party_modules', 'iqd')
     browser = testbrowser('/zeit-online/article/zeit')
     assert len(
-        browser.cssselect('article.article script[id|="ad-desktop"]')) == 2
+        browser.cssselect('article.article script[id|="ad-desktop"]')) == 3
     assert len(
         browser.cssselect('article.article script[id|="ad-mobile"]')) == 2
+    assert not browser.cssselect('#iq-artikelanker')
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('iqd_contentmarketing_ad')
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(
+        browser.cssselect('article.article script[id|="ad-desktop"]')) == 2
     assert len(browser.cssselect('article.article #iq-artikelanker')) == 1
 
 
@@ -269,7 +261,7 @@ def test_adcontroller_values_return_values_on_hp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline'),
         ('tma', '')]
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+    view = zeit.web.site.view_centerpage.Centerpage(
         cp, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 
@@ -285,7 +277,7 @@ def test_adcontroller_values_return_values_on_cp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,sashawaltz,interpol'),
         ('tma', '')]
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+    view = zeit.web.site.view_centerpage.Centerpage(
         cp, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 
@@ -310,7 +302,7 @@ def test_tile8_is_rendered_on_correct_position(testbrowser):
 
 def test_tile8_for_fullwidth_is_rendered_on_correct_position(
         testbrowser):
-    browser = testbrowser('/zeit-online/index')
+    browser = testbrowser('/zeit-online/slenderized-index')
     tile8_on_first_position = browser.cssselect(
         '.cp-area--minor > div:first-child > script[id="ad-desktop-8"]')
     assert tile8_on_first_position, (
@@ -346,17 +338,27 @@ def test_iqd_adtile8_on_article_new_placement_alternative(
     assert body[2].cssselect('script')[0].get('id') == 'ad-desktop-8'
 
 
-def test_p5_not_displayed_when_there_are_no_comments(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set(
-        'third_party_modules', 'iqd', 'adplace5')
-    browser = testbrowser('/zeit-online/article/quiz')
-    assert not browser.cssselect('#ad-desktop-5')
-
-
 def test_adtile5_is_empty_on_zmo_paywall(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set(
         'third_party_modules', 'iqd', 'reader_revenue')
-    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
+    zeit.web.core.application.FEATURE_TOGGLES.unset(
+        'ligatus', 'iqd_contentmarketing_ad')
     param = "?C1-Meter-Status=paywall&C1-Meter-User-Status=always-paid"
     browser = testbrowser('/zeit-magazin/article/01' + param)
     assert not browser.cssselect('#ad-desktop-5')
+
+
+def test_contentad_is_rendered_once_on_article_pages(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'third_party_modules', 'iqd', 'iqd_contentmarketing_ad')
+
+    selector = '#iq-artikelanker'
+
+    browser = testbrowser('/zeit-online/article/fischer')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/fischer/seite-2')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/fischer/komplettansicht')
+    assert len(browser.cssselect(selector)) == 1

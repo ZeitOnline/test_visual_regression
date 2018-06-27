@@ -108,7 +108,7 @@
     <!-- JOFO: Serie -->
 
     <cluster visible="True" area="id-c7243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
-      <region visible="True" hide-dupes="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
+      <region visible="True" hide-dupes="True" area="id-73813be0-ac8a-484e-b681-0cee9933bfde" kind="solo">
         <container cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-fullwidth">
           <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
         </container>
@@ -122,7 +122,7 @@
       </region>
     </cluster>
     <cluster visible="True" area="id-7cb3cdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
-      <region visible="True" hide-dupes="True" area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
+      <region visible="True" hide-dupes="True" area="id-34489c43-8a0e-4551-9636-8126ed4ee8a7" kind="major">
         <container cp:__name__="id-593fe557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-large">
           <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
         </container>
@@ -130,7 +130,7 @@
           <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
         </container>
       </region>
-      <region visible="True" hide-dupes="True" area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor" title="Marginalspalte">
+      <region visible="True" hide-dupes="True" area="id-748826e2-3724-4c9f-bfe6-eb915b35abcd" kind="minor" title="Marginalspalte">
         <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-05228d01-a006-4c44-b681-dc638ff8758a">
           <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
         </container>
@@ -216,7 +216,7 @@
     <!-- JOFO: Kolumne ohne Bild -->
 
     <cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f7149e012c" kind="solo" title="AufmacherColumnWithoutImage">
-      <region visible="True" hide-dupes="True" area="id-49b67be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
+      <region visible="True" hide-dupes="True" area="id-65437be0-ac8a-484e-b681-0cee993311ee" kind="solo">
         <container cp:__name__="id-265307ee-ecdd-4480-870b-8fd67ff73e43" cp:type="teaser" module="zon-fullwidth" visible="True">
           <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild" />
         </container>

@@ -3,9 +3,11 @@
   <access_status_ivw>true</access_status_ivw>
   <amp_advertising>true</amp_advertising>
   <arbeit_quote_sharing>true</arbeit_quote_sharing>
+  <author_feedback>true</author_feedback>
   <babator>false</babator>
   <c1_adblocker_blocker>true</c1_adblocker_blocker>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
+  <dataprotection_popover>false</dataprotection_popover>
   <dtag_navigation>true</dtag_navigation>
   <campus_toolbox>true</campus_toolbox>
   <dummy>false</dummy>
@@ -19,6 +21,7 @@
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
   <iqd_touchpoint>true</iqd_touchpoint>
+  <iqd_contentmarketing_ad>false</iqd_contentmarketing_ad>
   <keywords_from_tms>false</keywords_from_tms>
   <modernizr_js_file>false</modernizr_js_file>
 
@@ -31,6 +34,7 @@
   <optimize_ab_testing_to_webtrekk>false</optimize_ab_testing_to_webtrekk>
   <podlove_button>true</podlove_button>
   <preload_webfonts>true</preload_webfonts>
+  <push_for_author_in_app>true</push_for_author_in_app>
   <rawr_iframe>true</rawr_iframe>
   <reader_revenue>true</reader_revenue>
   <reader_revenue_handle_celeraone_login_inconsistency>true</reader_revenue_handle_celeraone_login_inconsistency>
@@ -44,9 +48,7 @@
   <track_gate_visibility>true</track_gate_visibility>
   <update_signals>true</update_signals>
   <volume_teaser>true</volume_teaser>
-  <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
   <zon_admark>false</zon_admark>
-  <zon_videosinglepage_via_html5>true</zon_videosinglepage_via_html5>
   <zplus_badge_gray>true</zplus_badge_gray>
   <zplus_badge_on_registration_paywall>true</zplus_badge_on_registration_paywall>
 </features>

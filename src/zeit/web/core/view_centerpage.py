@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+import calendar
 import datetime
 import urlparse
 
 import pyramid.httpexceptions
+import pytz
 import zope.component
 import babel.dates
 
@@ -302,24 +304,28 @@ class CenterpagePage(object):
             return []
 
         # Reconstruct a paginated cp with optional header and ranking area.
-        regions = [zeit.web.core.centerpage.Region(
-            [zeit.web.core.centerpage.IRendered(
-                self.area_providing_pagination)])]
+        pagination_region = zeit.web.core.centerpage.Region(
+            self.context.body)
+        pagination_region.kind = 'solo'
+        pagination_region.add(self.area_providing_pagination)
+        regions = [pagination_region]
 
         # We keep any areas of the first region that contain at least one kind
         # of preserve-worthy module.
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        preserved_areas = []
+        preserve_region = zeit.web.core.centerpage.Region(
+            self.context.body)
+        preserve_region.kind = 'solo'
         for mod in conf.get('cp_preserve_modules_on_pagination', '').split():
             module = zeit.web.core.utils.find_block(values[0], module=mod)
             if module:
                 area = module.__parent__
-                if area not in preserved_areas:
-                    preserved_areas.append(
-                        zeit.web.core.centerpage.IRendered(area))
+                if area.__name__ not in preserve_region:
+                    preserve_region.add(zeit.web.core.centerpage.IRendered(
+                        zeit.web.core.centerpage.get_area(area)))
 
-        if preserved_areas:
-            regions.insert(0, zeit.web.core.centerpage.Region(preserved_areas))
+        if len(preserve_region):
+            regions.insert(0, preserve_region)
 
         return regions
 
@@ -341,11 +347,43 @@ class CenterpagePage(object):
     renderer='templates/sitemap.html')
 class Sitemap(Centerpage):
 
-    # Seems like google does not accept dates < 1970 but this can be the case
-    min_date = babel.dates.get_timezone('Europe/Berlin').localize(
+    # Seems like Google does not accept modification dates < 1970
+    min_modified_display = babel.dates.get_timezone('Europe/Berlin').localize(
         datetime.datetime(1970, 1, 1))
+    zeit_start = 1946
 
     def __init__(self, context, request):
         super(Sitemap, self).__init__(context, request)
         self.request.response.content_type = 'application/xml'
         zeit.web.core.solr.register_sitemap_solr_utility()
+
+    @zeit.web.reify
+    def show_index(self):
+        try:
+            # newssitemap has no overview (the detection is a bit kludgy).
+            if (self.area_providing_pagination.values()[0].layout.id ==
+                    'sitemap-news'):
+                return False
+        except Exception:
+            pass
+
+        if self.area_providing_pagination.kind == 'ranking':
+            try:
+                return int(self.request.GET.get('p', 0)) == 0
+            except ValueError:
+                raise pyramid.httpexceptions.HTTPNotFound()
+        elif self.area_providing_pagination.kind == 'overview':
+            return 'date' not in self.request.GET
+        else:
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+    @zeit.web.reify
+    def calendar(self):
+        today = datetime.datetime.now()
+        for year in range(self.zeit_start, today.year + 1):
+            for month in range(1, 12 + 1):
+                for day in range(1, calendar.monthrange(year, month)[1] + 1):
+                    date = (year, month, day)
+                    if date > (today.year, today.month, today.day):
+                        return
+                    yield '%s-%02d-%02d' % date

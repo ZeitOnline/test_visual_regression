@@ -1,6 +1,11 @@
 .feedback-section
 	margin-bottom: remify(50px)
 	margin-top: remify(50px)
+
+	&--padded
+		+respond-max($break-tablet-min)
+			+padded
+
 	&__headline
 		font-size: remify(24px)
 		text-align: center
@@ -38,6 +43,15 @@
 		text-align: center
 
 .feedback-form
+	&__headline
+		font-size: remify(24px)
+		text-align: center
+
+	&__mandatory
+		color: $grey
+		font-size: remify(14px)
+		text-align: right
+
 	&__inner,
 	&__error,
 	&__failure,
@@ -56,6 +70,10 @@
 		margin: 0 auto
 		min-height: remify(40px)
 		min-width: remify(180px)
+
+	&__checkbox
+		position: relative
+		top: rem(-1px)
 
 	&__error,
 	&__failure
@@ -132,3 +150,10 @@
 
 	&__label
 		color: $grey
+		&--agreement
+			color: $grey
+			display: block
+			font-size: remify(14px)
+			margin-top: remify(10px)
+			padding-left: remify(15px)
+			text-indent: remify(-15px)
