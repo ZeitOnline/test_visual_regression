@@ -42,43 +42,39 @@ def test_pages_list_contains_blocks(application):
 
 
 def test_article_has_valid_twitter_meta_tags(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/01')
-    assert (
-        '<meta name="twitter:card" content="summary_large_image">'
-        in browser.contents)
-    assert '<meta name="twitter:site"'\
-        ' content="@zeitonline">' in browser.contents
-    assert '<meta name="twitter:creator"'\
-        ' content="@ZEITmagazin">' in browser.contents
-    assert '<meta name="twitter:title"'\
-        ' content="Gentrifizierung: Mei, is des traurig!">' in browser.contents
-    assert '<meta name="twitter:description"'\
-        ' content="Die Münchner Schoppenstube hat dichtgemacht.'\
-        ' Was erzählt uns das über die Gentrifizierung?'\
-        ' Ein Erklärungsversuch.">' in browser.contents
-    assert '<meta name="twitter:image"' in browser.contents
+    select = testbrowser('/zeit-magazin/article/01').metaselect
+
+    assert select('[name="twitter:card"]') == 'summary_large_image'
+    assert select('[name="twitter:site"]') == '@zeitonline'
+    assert select('[name="twitter:creator"]') == '@ZEITmagazin'
+    assert select('[name="twitter:title"]') == (
+        'Gentrifizierung: Mei, is des traurig!')
+    assert select('[name="twitter:description"]') == (
+        u'Die Münchner Schoppenstube hat dichtgemacht. Was erzählt uns das '
+        u'über die Gentrifizierung? Ein Erklärungsversuch.')
+    assert select('[name="twitter:image"]') == ('http://'
+        'localhost/exampleimages/artikel/01/schoppenstube/wide__1300x731')
 
 
 def test_article_has_valid_facebook_meta_tags(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/01')
-    select = browser.cssselect
-    assert '<meta property="og:site_name" '\
-        'content="ZEITmagazin">' in browser.contents
-    assert '<meta property="fb:app_id"'\
-        ' content="638028906281625">' in browser.contents
-    assert '<meta property="og:type"'\
-        ' content="article">' in browser.contents
-    assert '<meta property="og:title"'\
-        ' content="Gentrifizierung: Mei, is des traurig!">' in browser.contents
-    assert '<meta property="og:description"'\
-        ' content="Die Münchner Schoppenstube hat dichtgemacht.'\
-        ' Was erzählt uns das über die Gentrifizierung?'\
-        ' Ein Erklärungsversuch.">' in browser.contents
-    assert '<meta property="og:image" ' in browser.contents
-    assert select('meta[property="og:image:width"]')[0].get('content') == (
-        '1300')
-    assert select('meta[property="og:image:height"]')[0].get('content') == (
-        '731')
+    select = testbrowser('/zeit-magazin/article/01').metaselect
+
+    assert select('[property="og:site_name"]') == 'ZEITmagazin'
+    assert select('[property="fb:app_id"]') == '638028906281625'
+    assert select('[property="fb:pages"]') == (
+        '37816894428, 63948163305, 327602816926, 114803848589834')
+    assert select('[property="og:type"]') == 'article'
+    assert select('[property="og:title"]') == (
+        'Gentrifizierung: Mei, is des traurig!')
+    assert select('[property="og:description"]') == (
+        u'Die Münchner Schoppenstube hat dichtgemacht. Was erzählt uns das '
+        u'über die Gentrifizierung? Ein Erklärungsversuch.')
+    assert select('[property="og:url"]') == (
+        'http://localhost/zeit-magazin/article/01')
+    assert select('[property="og:image"]') == ('http://'
+        'localhost/exampleimages/artikel/01/schoppenstube/wide__1300x731')
+    assert select('[property="og:image:width"]') == '1300'
+    assert select('[property="og:image:height"]') == '731'
 
 
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')
@@ -790,6 +786,40 @@ def test_feature_longform_should_have_zon_twittername(testbrowser):
     browser = testbrowser('/feature/feature_longform')
     creator = browser.cssselect('meta[name="twitter:site"]')
     assert creator[0].values()[1] == '@zeitonline'
+
+
+def test_feature_longform_has_valid_twitter_meta_tags(testbrowser):
+    select = testbrowser('/feature/feature_longform').metaselect
+
+    assert select('[name="twitter:card"]') == 'summary_large_image'
+    assert select('[name="twitter:site"]') == '@zeitonline'
+    assert select('[name="twitter:creator"]') == '@zeitonline'
+    assert select('[name="twitter:title"]') == (
+        'Friedhof Hamburg-Ohlsdorf: Die Angst des Friedhofs vor dem Tod')
+    assert select('[name="twitter:description"]').startswith(
+        u'Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft.')
+    assert select('[name="twitter:image"]') == (
+        'http://localhost/zeit-online/image/s15-einaescherung/wide__1300x731')
+
+
+def test_feature_longform_has_valid_facebook_meta_tags(testbrowser):
+    select = testbrowser('/feature/feature_longform').metaselect
+
+    assert select('[property="og:site_name"]') == 'ZEIT ONLINE'
+    assert select('[property="fb:app_id"]') == '638028906281625'
+    assert select('[property="fb:pages"]') == (
+        '37816894428, 63948163305, 327602816926, 114803848589834')
+    assert select('[property="og:type"]') == 'article'
+    assert select('[property="og:title"]') == (
+        'Friedhof Hamburg-Ohlsdorf: Die Angst des Friedhofs vor dem Tod')
+    assert select('[property="og:description"]').startswith(
+        u'Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft.')
+    assert select('[property="og:url"]') == (
+        'http://localhost/feature/feature_longform')
+    assert select('[property="og:image"]') == (
+        'http://localhost/zeit-online/image/s15-einaescherung/wide__1300x731')
+    assert select('[property="og:image:width"]') == '1300'
+    assert select('[property="og:image:height"]') == '731'
 
 
 def test_article_view_has_leadtime_set_if_article_provides_it(application):

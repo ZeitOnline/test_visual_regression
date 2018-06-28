@@ -566,3 +566,63 @@ def test_zar_print_article_sourcecode_doesnt_contain_date_print_published(
     assert dates[0].text == '26. April 2017, 13:49 Uhr'
     assert dates[1].text == 'Editiert am 26. April 2017, 13:49 Uhr'
     assert source[0].text == u'DIE ZEIT Nr. 14/2017'
+
+
+def test_article_contains_authorbox(testbrowser):
+    browser = testbrowser('/arbeit/article/authorbox')
+    authorbox = browser.cssselect('.authorbox')
+    assert len(authorbox) == 5
+
+    # test custom biography
+    author = authorbox[0]
+    description = author.cssselect('.authorbox__summary')[0]
+    assert description.text.strip() == 'Text im Feld Kurzbio'
+    assert description.get('itemprop') == 'description'
+
+    # test author content and microdata
+    author = authorbox[2]
+    image = author.cssselect('[itemprop="image"]')[0]
+
+    assert author.get('itemtype') == 'http://schema.org/Person'
+    assert author.get('itemscope') is not None
+    assert image.cssselect('[itemprop="url"]')[0].get('content').startswith(
+        'http://localhost/autoren/B/Jochen_Bittner/jochen-bittner-2/portrait')
+    assert author.cssselect('.authorbox__name')[0].text == 'Jochen Bittner'
+    assert author.cssselect('[itemprop="description"]')[0].text.strip() == (
+        'Redakteur im Ressort Politik, DIE ZEIT.')
+    assert author.cssselect('a.authorbox__button')[0].get('href') == (
+        'http://localhost/autoren/B/Jochen_Bittner/index.xml')
+
+
+def test_article_has_valid_twitter_meta_tags(testbrowser):
+    select = testbrowser('/arbeit/article/column').metaselect
+
+    assert select('[name="twitter:card"]') == 'summary_large_image'
+    assert select('[name="twitter:site"]') == '@zeitonline'
+    assert select('[name="twitter:creator"]') == '@wandelderarbeit'
+    assert select('[name="twitter:title"]') == (
+        u'Chat: Wir rauchen nicht, wir tippen.')
+    assert select('[name="twitter:description"]').startswith(
+        u'Sommerregen ist sehr gefährlich.')
+    assert select('[name="twitter:image"]') == ('http://localhost'
+        '/zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
+
+
+def test_article_has_valid_facebook_meta_tags(testbrowser):
+    select = testbrowser('/arbeit/article/column').metaselect
+
+    assert select('[property="og:site_name"]') == 'ZEIT ONLINE Arbeit'
+    assert select('[property="fb:app_id"]') == '638028906281625'
+    assert select('[property="fb:pages"]') == (
+        '37816894428, 63948163305, 327602816926, 114803848589834')
+    assert select('[property="og:type"]') == 'article'
+    assert select('[property="og:title"]') == (
+        u'Chat: Wir rauchen nicht, wir tippen.')
+    assert select('[property="og:description"]').startswith(
+        u'Sommerregen ist sehr gefährlich.')
+    assert select('[property="og:url"]') == (
+        'http://localhost/arbeit/article/column')
+    assert select('[property="og:image"]') == ('http://localhost'
+        '/zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
+    assert select('[property="og:image:width"]') == '1300'
+    assert select('[property="og:image:height"]') == '731'
