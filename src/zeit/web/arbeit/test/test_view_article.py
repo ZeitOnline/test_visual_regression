@@ -604,8 +604,9 @@ def test_article_has_valid_twitter_meta_tags(testbrowser):
         u'Chat: Wir rauchen nicht, wir tippen.')
     assert select('[name="twitter:description"]').startswith(
         u'Sommerregen ist sehr gefährlich.')
-    assert select('[name="twitter:image"]') == ('http://localhost'
-        '/zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
+    assert select('[name="twitter:image"]') == (
+        'http://localhost/zeit-online/cp-content/author_images/Julia_Zange/'
+        'wide__1300x731')
 
 
 def test_article_has_valid_facebook_meta_tags(testbrowser):
@@ -622,7 +623,8 @@ def test_article_has_valid_facebook_meta_tags(testbrowser):
         u'Sommerregen ist sehr gefährlich.')
     assert select('[property="og:url"]') == (
         'http://localhost/arbeit/article/column')
-    assert select('[property="og:image"]') == ('http://localhost'
-        '/zeit-online/cp-content/author_images/Julia_Zange/wide__1300x731')
+    assert select('[property="og:image"]') == (
+        'http://localhost/zeit-online/cp-content/author_images/Julia_Zange/'
+        'wide__1300x731')
     assert select('[property="og:image:width"]') == '1300'
     assert select('[property="og:image:height"]') == '731'

@@ -2474,8 +2474,9 @@ def test_article_has_valid_twitter_meta_tags(testbrowser):
         u'Flüchtlinge: Mehr Davos, weniger Kreuth')
     assert select('[name="twitter:description"]').startswith(
         u'Zwei Bergdörfer diskutieren die Flüchtlingskrise:')
-    assert select('[name="twitter:image"]') == ('http://localhost/zeit-online'
-        '/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+    assert select('[name="twitter:image"]') == (
+        'http://localhost/zeit-online/image/'
+        'filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
 
 
 def test_article_has_valid_facebook_meta_tags(testbrowser):
@@ -2492,7 +2493,8 @@ def test_article_has_valid_facebook_meta_tags(testbrowser):
         u'Zwei Bergdörfer diskutieren die Flüchtlingskrise:')
     assert select('[property="og:url"]') == (
         'http://localhost/zeit-online/article/amp')
-    assert select('[property="og:image"]') == ('http://localhost/zeit-online'
-        '/image/filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+    assert select('[property="og:image"]') == (
+        'http://localhost/zeit-online/image/'
+        'filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
     assert select('[property="og:image:width"]') == '1300'
     assert select('[property="og:image:height"]') == '731'

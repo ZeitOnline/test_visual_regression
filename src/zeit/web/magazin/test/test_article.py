@@ -52,8 +52,9 @@ def test_article_has_valid_twitter_meta_tags(testbrowser):
     assert select('[name="twitter:description"]') == (
         u'Die Münchner Schoppenstube hat dichtgemacht. Was erzählt uns das '
         u'über die Gentrifizierung? Ein Erklärungsversuch.')
-    assert select('[name="twitter:image"]') == ('http://'
-        'localhost/exampleimages/artikel/01/schoppenstube/wide__1300x731')
+    assert select('[name="twitter:image"]') == (
+        'http://localhost/exampleimages/artikel/01/schoppenstube/'
+        'wide__1300x731')
 
 
 def test_article_has_valid_facebook_meta_tags(testbrowser):
@@ -71,8 +72,9 @@ def test_article_has_valid_facebook_meta_tags(testbrowser):
         u'über die Gentrifizierung? Ein Erklärungsversuch.')
     assert select('[property="og:url"]') == (
         'http://localhost/zeit-magazin/article/01')
-    assert select('[property="og:image"]') == ('http://'
-        'localhost/exampleimages/artikel/01/schoppenstube/wide__1300x731')
+    assert select('[property="og:image"]') == (
+        'http://localhost/exampleimages/artikel/01/schoppenstube/'
+        'wide__1300x731')
     assert select('[property="og:image:width"]') == '1300'
     assert select('[property="og:image:height"]') == '731'
 
