@@ -830,6 +830,14 @@ class WsgiBrowser(BaseBrowser, zope.testbrowser.wsgi.Browser):
             uri = 'http://localhost/{}'.format(uri.lstrip('/'))
         return super(WsgiBrowser, self).open(uri, data)
 
+    def metaselect(self, selector):
+        """Return the content attribute value of a HTML <meta> tag that match
+        a given CSS attribute selector.
+        """
+        meta = self.cssselect('head meta{}'.format(selector))
+        if len(meta) == 1:
+            return meta[0].get('content')
+
 
 class TemplateBrowser(BaseBrowser):
 
