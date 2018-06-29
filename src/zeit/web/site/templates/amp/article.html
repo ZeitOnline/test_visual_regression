@@ -1,1 +1,5 @@
 {% extends "zeit.web.site:templates/amp/layout.html" %}
+
+{% block structured_data -%}
+    {% include "zeit.web.core:templates/inc/structured-data/article.html" %}
+{% endblock structured_data -%}

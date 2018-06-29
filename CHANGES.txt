@@ -17,7 +17,9 @@ POSTDEPLOY
 
 - ZON-4734: Ad-Position P5 differenziert nach Ressorts
 
-- FEM-67: Delay Modernizr (own js-check)
+- ZON-4764: Use JSON-LD structured data for AMP
+
+- FEM-67: Delay Modernizr (own js-check) + fix Modernizr integration
 
 - FEM-77: Contrast polishing
 

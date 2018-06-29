@@ -1,0 +1,11 @@
+{% extends "zeit.web.core:templates/inc/structured-data/article.html" -%}
+
+{%- block type -%}
+    LiveBlogPosting
+{%- endblock -%}
+
+{%- block additional_structured_data -%}
+    "coverageStartTime": "{{ view.date_first_released | format_date('iso8601') }}",
+    "coverageEndTime": "{{ view.date_last_modified | format_date('iso8601') }}",
+    {# add whitespace #}
+{% endblock -%}

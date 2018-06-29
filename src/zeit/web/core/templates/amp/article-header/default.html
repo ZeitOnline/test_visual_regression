@@ -1,7 +1,11 @@
 <header class="{{ 'article__header' | with_mods('has-volume' if view.zplus_label) }}">
+    {% block headerseries -%}
+        {% include "zeit.web.core:templates/amp/article/series.html" %}
+    {% endblock -%}
+
     {% block embed %}{% endblock -%}
 
-    <h1 class="headline article__item" itemprop="headline">
+    <h1 class="headline article__item">
         <span class="headline__kicker">
             {%- if view.context is column -%}
                 {{- '%s / ' | format(view.serie) -}}
@@ -16,7 +20,7 @@
     {% include ["{}:templates/amp/article/zplus-badge.html".format(view.package),
                 "zeit.web.core:templates/amp/article/zplus-badge.html"] %}
     <div class="article__item">
-        <div class="summary" itemprop="description">
+        <div class="summary">
             {{ view.subtitle }}
         </div>
         {% set byline = view.context | get_byline('main') -%}
@@ -24,10 +28,6 @@
         <div class="byline">
             {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
         </div>
-        {% else -%}
-        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <meta itemprop="name" content="{% if view.context.product %}{{ view.context.product.title }}{% else %}ZEIT ONLINE{% endif %}">
-        </span>
         {% endif -%}
         <div class="metadata">
             {% include "zeit.web.core:templates/amp/article/metadata.html" %}

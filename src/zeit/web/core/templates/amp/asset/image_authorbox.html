@@ -2,7 +2,6 @@
 
 {% set image = get_image(block.author, fallback=False, variant_id='square') %}
 {% set image_sources = [72, 144] %}
-{% block sizes %} sizes="72px"{% endblock %}
+{% block sizes %}sizes="72px"{% endblock %}
 {% block media_block %}authorbox__media{% endblock %}
-{% block itemprop %} itemprop="image"{% endblock %}
 {% block caption %}{% endblock caption %}
