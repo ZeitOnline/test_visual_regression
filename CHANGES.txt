@@ -19,7 +19,7 @@ POSTDEPLOY
 
 - ZON-4764: Use JSON-LD structured data for AMP
 
-- FEM-67: Delay Modernizr (own js-check)
+- FEM-67: Delay Modernizr (own js-check) + fix Modernizr integration
 
 - FEM-77: Contrast polishing
 
