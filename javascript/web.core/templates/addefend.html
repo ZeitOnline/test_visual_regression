@@ -1,0 +1,28 @@
+<div id="addefend-overlay" aria-hidden="true" class="addefend">
+    <div class="addefend__wrapper">
+        <!-- Adblocker Hinweis -->
+        <div id="addefend-note" class="addefend__note">
+            <div class="addefend__main">
+                <h3 class="addefend__headline">{{ hl }}</h3>
+                <p class="addefend__description">{{ description }}</p>
+            </div>
+            <div class="addefend__aside">
+                <button class="addefend__button" id="addefend-dismiss">{{ btnDeactivate }}</button>
+                <span class="addefend__notification">{{ notice }}</span>
+            </div>
+        </div>
+
+        <!-- Adblocker Anleitung -->
+        <div id="addefend-manual" class="addefend__manual">
+            <h3 class="addefend__headline">{{ hlManual }}</h3>
+            <img src="/static/latest/images/addefend-browser.png" width="450" class="addefend__manualimage">
+            <ol class="addefend__list">
+                <li class="addefend__item">{{ listManual1 }}</li>
+                <li class="addefend__item">{{ listManual2 }}</li>
+                <li class="addefend__item">{{ listManual3 }}</li>
+            </ol>
+            <button class="addefend__button addefend__button--reload" id="addefend-reload">{{ btnReload }}</button>
+            <span class="addefend__notification">{{ notice }}</span>
+        </div>
+    </div>
+</div>
