@@ -16,11 +16,6 @@ $base-line-height: 1.5 !default
 $is-advertorial: false !default
 
 // margins/paddings in px
-$hair--px:         1px !default
-$dblhair--px:      2px !default
-$bristle--px:      3px !default
-$micro--px:        4px !default
-$tiny--px:         6px !default
 $thin--px:         8px !default
 $fine--px:        10px !default
 $little--px:      14px !default
@@ -37,11 +32,6 @@ $wide--px:        72px !default
 $huge--px:        90px !default
 
 // margins/paddings
-$hair:       em($hair--px)
-$dblhair:    em($dblhair--px)
-$bristle:    em($bristle--px)
-$micro:      em($micro--px)
-$tiny:       em($tiny--px)
 $thin:       em($thin--px)
 $fine:       em($fine--px)
 $little:     em($little--px)
@@ -193,8 +183,9 @@ $stamp-width: rem(240px)
 // These vars are used by modules in web.core,
 // but come originally from web.site
 $zon-charcoal: #313131 !default
-$zon-grey: #707070 !default
 $zon-dark-grey: #444  !default
+$old-zon-grey: #707070 !default // as a reference
+$zon-grey: darken($old-zon-grey, 2.75) // #696969
 $zon-light-grey: #CCC !default
 $zon-mid-grey: #999 !default
 $zon-red: #b91109 !default

@@ -28,19 +28,14 @@
         list-style-type: none
         margin: 0
         padding: 0
-        li
-            display: inline
-            &:after
-                content: '•'
-                margin: 0 $tiny 0 $tiny
-            &:last-child:after
-                content: ''
-    //Verlag schouldnt have a dot
-    div:first-child
-        li:first-child
-            &:after
-                content: ''
+    li
+        display: inline
+        &:not(.main-footer__link-label):not(:last-child):after
+            content: '•'
+            margin-left: remify(4px)
+    // Verlag shouldn't have a dot
+    .main-footer__link-label
+        margin-right: remify(4px)
     a
-        cursor: pointer
         color: $grey
         +animated-interaction($grey)

@@ -1,4 +1,4 @@
-{% import "zeit.web.arbeit:templates/macros/layout_macro.tpl" as lama %}
+{% import "zeit.web.core:templates/macros/layout_macro.tpl" as lama %}
 <!DOCTYPE html>
 <html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
 <head>
@@ -19,7 +19,11 @@
     {% block ligatus_include %}{% endblock %}
     {% block schemaorg_data %}{% endblock %}
 
-    <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+    <script>{%- include "zeit.web.core:templates/inc/inline_js/modernizr-replacement.js" -%}</script>
+    {% if not toggles('modernizr_js_file') or  toggles('modernizr_js_file') == False %}
+        <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+    {% endif %}
+
     {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
     {% if toggles('third_party_modules') -%}
         <script src="https://script.ioam.de/iam.js"></script>

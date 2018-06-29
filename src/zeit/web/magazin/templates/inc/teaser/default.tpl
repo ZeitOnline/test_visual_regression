@@ -2,7 +2,7 @@
 Default teaser template to inherit from.
 #}
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
-{%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
+{%- import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama with context %}
 
 {%- set image = get_image(module, fallback=True) %}
 {%- set video = get_video(teaser) %}

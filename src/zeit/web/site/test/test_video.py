@@ -198,6 +198,19 @@ def test_video_stage_main_should_display_byline(testbrowser):
     assert " ".join(byline[0].text.split()) == 'Von Wenke Husmann'
 
 
+def test_video_teaser_shows_video_length(testbrowser):
+    select = testbrowser('zeit-online/video-stage').cssselect
+    large = select('.video-large .video-text-playbutton__duration')
+    assert len(large) == 1
+    assert large[0].text == '1:54'
+
+    small = select('.video-small .video-text-playbutton__duration')
+    assert len(small) == 3
+    assert small[0].text == '1:55'
+    assert small[1].text == '7:16'
+    assert small[2].text == '3:58'
+
+
 def test_article_teaser_should_not_be_identified_as_video(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt')

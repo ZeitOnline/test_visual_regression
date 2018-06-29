@@ -59,7 +59,10 @@ def test_gsitemap_index_ranking_pagination(testbrowser, workingcopy):
 def test_gsitemap_index_overview_stops_at_current_date(testbrowser, clock):
     clock.freeze(datetime.datetime(1946, 1, 10))
     browser = testbrowser('/gsitemaps/index.xml')
-    assert len(browser.document.xpath('//sitemapindex/sitemap')) == 10
+    links = browser.document.xpath('//sitemapindex/sitemap/loc')
+    assert len(links) == 10
+    assert (links[0].text ==
+            'http://localhost/gsitemaps/index.xml?date=1946-01-01')
 
 
 def test_gsitemap_page_with_image_copyright(testbrowser):

@@ -12,10 +12,28 @@ POSTDEPLOY
 - Remove `location /robots.txt` from nginx config
 
 
-3.165 (unreleased)
+3.166 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4734: Ad-Position P5 differenziert nach Ressorts
+
+- FEM-67: Delay Modernizr (own js-check)
+
+- FEM-77: Contrast polishing
+
+- FIX: Fix minor glitches of puzzle form
+
+- MAINT: Polish styles
+
+
+3.165 (2018-06-27)
+------------------
+
+- BUG-906: Bring back duration on video teasers
+
+- BUG-946: Adjust small sharing buttons in ZEIT Arbeit
+
+- FIX: Format sitemap link dates as yyyy-mm-dd (instead of yyyy-m-d)
 
 
 3.164 (2018-06-26)
