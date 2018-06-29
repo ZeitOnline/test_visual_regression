@@ -60,10 +60,15 @@ def test_article_has_valid_twitter_meta_tags(testbrowser):
 def test_article_has_valid_facebook_meta_tags(testbrowser):
     select = testbrowser('/zeit-magazin/article/01').metaselect
 
-    assert select('[property="og:site_name"]') == 'ZEITmagazin'
     assert select('[property="fb:app_id"]') == '638028906281625'
     assert select('[property="fb:pages"]') == (
         '37816894428, 63948163305, 327602816926, 114803848589834')
+
+
+def test_article_has_valid_open_graph_meta_tags(testbrowser):
+    select = testbrowser('/zeit-magazin/article/01').metaselect
+
+    assert select('[property="og:site_name"]') == 'ZEITmagazin'
     assert select('[property="og:type"]') == 'article'
     assert select('[property="og:title"]') == (
         'Gentrifizierung: Mei, is des traurig!')

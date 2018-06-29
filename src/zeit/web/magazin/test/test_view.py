@@ -324,17 +324,6 @@ def test_longform_has_correct_twitter_card_type(application):
     assert article_view.twitter_card_type == 'summary_large_image'
 
 
-def test_article_has_correct_sharing_image(testbrowser):
-    xpath = testbrowser('/zeit-magazin/article/01').xpath
-    source = ('http://localhost/exampleimages/artikel/01/schoppenstube/'
-              'wide__1300x731')
-    assert xpath('//link[@itemprop="primaryImageOfPage"]/@href')[0] == source
-    assert xpath('//meta[@property="og:image"]/@content')[0] == source
-    assert xpath('//meta[@property="og:image:width"]/@content')[0] == '1300'
-    assert xpath('//meta[@property="og:image:height"]/@content')[0] == '731'
-    assert xpath('//meta[@name="twitter:image"]/@content')[0] == source
-
-
 def test_article_has_correct_product_id(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
