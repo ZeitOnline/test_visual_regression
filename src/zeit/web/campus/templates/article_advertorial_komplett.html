@@ -1,8 +1,8 @@
 {% extends "zeit.web.campus:templates/komplettansicht.html" %}
 
-{% block css_link %}
+{% block css_link -%}
     <link href="{{ request.asset_host }}/css/web.campus/advertorial.css" media="screen" rel="stylesheet" type="text/css" />
-{% endblock css_link %}
+{% endblock css_link -%}
 
 {% block advertorial_marker %}
     {% if view.advertorial_marker %}
