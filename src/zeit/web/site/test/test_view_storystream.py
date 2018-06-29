@@ -53,7 +53,7 @@ def test_storystream_contains_structured_data(testbrowser):
 
     # this "should" be done better sometimes (in the template)
     # e.g. wrap the storystream content in an article
-    article = browser.cssselect('main[itemprop="mainContentOfPage"]')[0]
+    article = browser.cssselect('main')[0]
 
     assert article.cssselect('[itemprop="headline"]')
     assert article.cssselect('[itemprop="description"]')

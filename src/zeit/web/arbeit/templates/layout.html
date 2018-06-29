@@ -26,7 +26,7 @@
                 {% include "zeit.web.core:templates/inc/ads/places/desktop/place3.html" %}
                 {% include "zeit.web.core:templates/inc/ads/places/mobile/place1.html" %}
             {% endblock adplace_billboard %}
-            <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
+            <main class="{{ 'main' | with_mods(view.type) }}" id="main">
                 {% block main %}{% endblock main %}
             </main>
             {% block adplace_floor %}

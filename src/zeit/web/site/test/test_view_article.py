@@ -255,12 +255,6 @@ def test_stale_breaking_news_article_must_not_render_breaking_bar(testbrowser):
     assert len(browser.cssselect('.breaking-news-heading')) == 0
 
 
-def test_schema_org_main_content_of_page(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-
-    assert len(select('main[itemprop="mainContentOfPage"]')) == 1
-
-
 def test_schema_org_article_mark_up(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     publisher = browser.cssselect('[itemprop="publisher"]')[0]
