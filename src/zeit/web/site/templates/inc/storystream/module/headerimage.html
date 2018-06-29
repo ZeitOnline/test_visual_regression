@@ -11,18 +11,18 @@
 
     <div class="{{ blockname }}__wrapper">
         <div class="{{ blockname }}__container">
-        	<div class="{{ blockname }}__content">
-            	<span class="{{ blockname }}__kicker">
+            <div class="{{ blockname }}__content">
+                <span class="{{ blockname }}__kicker">
                     <span class="{{ blockname }}__kicker-label">Live-Dossier</span>
                     <span class="{{ blockname }}__kicker-text">{{ module.supertitle }}</span>
                 </span>
-            	<h1 class="{{ blockname }}__title" itemprop="headline">{{ module.title }}</h1>
-                <time itemprop="datePublished" datetime="{{ view.date_first_released | format_date('iso8601') }}"></time>
+                <h1 class="{{ blockname }}__title">{{ module.title }}</h1>
+                <time datetime="{{ view.date_first_released | format_date('iso8601') }}"></time>
                 {% if view.date_last_modified %}
-                	<span class="{{ blockname }}__update">
+                    <span class="{{ blockname }}__update">
                         {{ lama.use_svg_icon('storystream-updated', 'storystream-headerimage__updateicon', view.package, a11y=False) }}
                         Zuletzt aktualisiert am
-                        <time class="{{ blockname }}__date" itemprop="dateModified" datetime="{{ view.date_last_modified | format_date('iso8601') }}">
+                        <time class="{{ blockname }}__date" datetime="{{ view.date_last_modified | format_date('iso8601') }}">
                             {% if view.atom_meta.latest_date %}
                                 {{- view.atom_meta.latest_date | format_date('short') -}}
                             {% else %}

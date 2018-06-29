@@ -3,7 +3,7 @@
 {%- endmacro -%}
 
 {%- macro text_author(string, counter) %}
-    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">
             {{- string -}}
         </span>
@@ -11,7 +11,7 @@
 {%- endmacro -%}
 
 {%- macro plain_author(obj, counter) %}
-    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">
             {{- obj.display_name -}}
         </span>
@@ -22,7 +22,7 @@
 {%- endmacro -%}
 
 {%- macro linked_author(obj, counter) %}
-    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span itemscope itemtype="http://schema.org/Person">
         <a href="{{ obj.uniqueId | create_url }}" rel="author" itemprop="url" data-ct-column="
             {{- '%s_of_%s' | format(counter.index, counter.length) }}" data-ct-subcolumn="false"
             {%- if view.is_amp %} data-vars-url="{{ obj.uniqueId | create_url | substring_from('://') }}"{% endif %}>

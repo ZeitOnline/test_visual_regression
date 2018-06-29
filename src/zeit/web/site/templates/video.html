@@ -41,7 +41,7 @@
         {% include "zeit.web.site:templates/inc/article/heading.tpl" %}
 
         <div class="article__item" data-ct-area="articleheader">
-            <div class="summary" itemprop="description">
+            <div class="summary">
                 {{ view.subtitle }}
             </div>
             {%- set byline = view.context | get_byline('main') %}

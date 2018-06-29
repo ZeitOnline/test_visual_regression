@@ -1,7 +1,7 @@
 {% if view.keywords %}
 <nav class="{{ 'article-tags' | with_mods(tag_modifier) }}">
     <h4 class="{{ 'article-tags__title' | with_mods(tag_modifier) }}">Schlagwörter</h4>
-    <ul class="article-tags__list" itemprop="keywords" data-ct-row="article-tag">
+    <ul class="article-tags__list" data-ct-row="article-tag">
     {%- for keyword in view.keywords[:6] -%}
         <li>
         {%- if keyword.link -%}

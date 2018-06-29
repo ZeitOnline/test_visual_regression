@@ -8,7 +8,7 @@
         </div>
     {% else %}
         {% block intro %}
-            <div class="summary" itemprop="description">
+            <div class="summary">
                 {{ view.subtitle }}
             </div>
             {% if not byline_already_rendered %}

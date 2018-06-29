@@ -1,5 +1,5 @@
 <article class="{% block layout %}nextread-teaser{% endblock %}">
-    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" class="{{ self.layout() }}__link" data-id="articlebottom.editorial-nextread...area" itemprop="relatedLink">
+    <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" class="{{ self.layout() }}__link" data-id="articlebottom.editorial-nextread...area">
         {% block teaser_image -%}
             {% require image = get_image(module, fallback=False, variant_id="portrait") -%}
                 {%- set media_block_additional_class = 'is-pixelperfect' -%}

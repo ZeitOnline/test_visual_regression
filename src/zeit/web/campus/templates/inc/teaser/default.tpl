@@ -9,12 +9,11 @@
 
     {% block teaser_content %}
         {% block teaser_heading %}
-            <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}"
-                {%- if not self.teaser_journalistic_format() | length %} itemprop="headline"{% endif %}>
+            <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
                 {% block teaser_link -%}
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
-                   href="{{ teaser | create_url | append_campaign_params }}" itemprop="mainEntityOfPage">
+                   href="{{ teaser | create_url | append_campaign_params }}">
                     {% block teaser_kicker %}
                         {% if teaser.teaserSupertitle or teaser.supertitle %}
                             <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
@@ -33,10 +32,7 @@
                         <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
                     {% endblock %}
                 </a>
-                {% endblock teaser_link %}
-                {%- if self.teaser_journalistic_format() | length -%}
-                    <meta itemprop="headline" content="{{ teaser.teaserSupertitle or teaser.supertitle }}: {{ teaser.teaserTitle or teaser.title }}">
-                {%- endif -%}
+                {% endblock teaser_link -%}
             </h2>
         {% endblock teaser_heading %}
 
@@ -44,7 +40,7 @@
 
         {% block teaser_container %}
             {% block teaser_text %}
-                <p class="{{ self.layout() }}__text" itemprop="description">{{ teaser.teaserText }}</p>
+                <p class="{{ self.layout() }}__text">{{ teaser.teaserText }}</p>
             {% endblock teaser_text %}
             {% block teaser_metadata_default %}
             <div class="{{ self.layout() }}__metadata">
@@ -74,6 +70,4 @@
         {% endblock teaser_container %}
 
     {% endblock teaser_content %}
-    <meta itemprop="datePublished" content="{{ teaser | release_date | format_date('iso8601') }}">
-    <meta itemprop="dateModified" content="{{ teaser | mod_date | format_date('iso8601') }}">
 </article>

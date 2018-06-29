@@ -3,7 +3,7 @@
         <div class="article__item">
             <div class="column-heading__inner">
                 <div class="column-heading__information">
-                    <h1 class="column-heading__header" itemprop="headline">
+                    <h1 class="column-heading__header">
                         <span class="column-heading__kicker">
                             {{- view.serie + ' / ' -}}
                             {{- view.supertitle -}}
@@ -29,7 +29,7 @@
     {% if view.pagination and view.pagination.current < 2 %}
     <div class="column-heading__lower">
         <div class="article__item">
-            <div class="summary" itemprop="description">
+            <div class="summary">
                 {{ view.subtitle }}
             </div>
             <div class="metadata metadata--column">
