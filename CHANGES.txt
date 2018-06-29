@@ -9,7 +9,7 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- Remove `location /robots.txt` from nginx config
+- Nothing
 
 
 3.166 (unreleased)
