@@ -110,4 +110,9 @@
   <setting name="optimize_on_zon_homepage" xsi:type="xsd:string"></setting>
   <setting name="optimize_on_zon_centerpage" xsi:type="xsd:string"></setting>
   <setting name="optimize_on_zon_article" xsi:type="xsd:string"></setting>
+
+  <!-- addefend settings min = 600px or full = max pageheight -->
+  <setting name="addefend_height" xsi:type="xsd:string">min</setting>
+  <!-- addefend settings till cookies expires in Minutes -->
+  <setting name="addefend_cookie_expire" xsi:type="xsd:int">30</setting>
 </settings>
