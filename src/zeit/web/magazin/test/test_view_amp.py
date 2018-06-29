@@ -30,16 +30,7 @@ def test_amp_view_should_ignore_header_image_display_mode(testbrowser):
 
 
 def test_amp_contains_required_structured_data(testbrowser):
-    browser = testbrowser('/amp/zeit-magazin/article/01')
-    scripts = browser.cssselect('head script[type="application/ld+json"]')
-    data = {}
-
-    assert scripts
-
-    for script in scripts:
-        content = json.loads(script.text_content().strip())
-        data[content['@type']] = content
-
+    data = testbrowser('/amp/zeit-magazin/article/01').structured_data()
     page = data['WebPage']
     article = data['Article']
     publisher = data['Organization']

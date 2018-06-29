@@ -838,6 +838,17 @@ class WsgiBrowser(BaseBrowser, zope.testbrowser.wsgi.Browser):
         if len(meta) == 1:
             return meta[0].get('content')
 
+    def structured_data(self):
+        """Return all structured data in JSON-LD format as dict by type
+        """
+        data = {}
+
+        for script in self.cssselect('script[type="application/ld+json"]'):
+            content = json.loads(script.text_content().strip())
+            data[content['@type']] = content
+
+        return data
+
 
 class TemplateBrowser(BaseBrowser):
 
