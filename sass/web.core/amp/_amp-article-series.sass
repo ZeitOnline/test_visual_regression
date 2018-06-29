@@ -1,0 +1,36 @@
+.article-series
+	background: $grey--dark
+	height: remify(80px)
+	position: relative
+
+.article-series__image
+	+plain-transparent-overlay()
+
+.article-series__heading
+	align-items: center
+	bottom: 0
+	display: flex
+	flex-direction: column
+	justify-content: center
+	left: 0
+	position: absolute
+	right: 0
+	top: 0
+
+.article-series__kicker
+	color: $zon-lighter-grey
+	display: block
+	font-size: remify(12px)
+	letter-spacing: 0.125em
+	line-height: 1.25
+	margin-bottom: remify(4px)
+	text-transform: uppercase
+
+.article-series__title
+	+font-smoothing()
+	color: #fff
+	display: block
+	font-size: remify(18px)
+	font-weight: bold
+	letter-spacing: 0.05em
+	line-height: 1.25

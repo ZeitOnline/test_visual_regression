@@ -1,0 +1,79 @@
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "{% block type %}Article{% endblock %}",
+    "@id": "#{{ view.type }}",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ view.content_url }}"
+    },
+    {% set byline = view.context | get_byline('data') -%}
+    {% if byline | length -%}
+    "author": {% if byline | length > 1 %}[{% endif -%}
+        {% for type, author in byline -%}
+            {% if not loop.first %},{% endif -%}
+    {
+        "@type": "Person",
+        {% if author.uniqueId -%}
+            "url": "{{ author.uniqueId | create_url }}",
+        {% endif -%}
+        "name": {{ author.display_name | tojson | safe }}
+
+    }
+        {%- endfor -%}
+        {%- if byline | length > 1 %}]{% endif -%},
+    {% else -%}
+    "author": {
+        "@type": "Person",
+        "name": {% if view.context.product -%}
+            {{ view.context.product.title | tojson | safe }}
+        {%- else -%}
+            "ZEIT ONLINE"
+        {%- endif %}
+
+    },
+    {% endif -%}
+    "datePublished": "{{ view.date_first_released | format_date('iso8601') }}",
+    "dateModified": "{{ view.date_last_modified | format_date('iso8601') }}",
+    {% block additional_structured_data %}{% endblock -%}
+    "headline": {% set headline = '%s: %s' | format(view.supertitle, view.title) -%}
+        {%- if view.context is column -%}
+            {{ '%s / %s' | format(view.serie, headline) | tojson | safe }}
+        {%- else -%}
+            {{ headline | tojson | safe }}
+        {%- endif %},
+    "description": {{ view.subtitle | tojson | safe }},
+    {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) -%}
+    "image": {
+        {% set image_width = 1300 -%}
+        {% set image_height = (image_width / image.ratio) | round | int -%}
+        {% set image_source = '%s%s__%dx%d' | format (request.image_host, image.path, image_width, image_height) -%}
+        "@type": "ImageObject",
+        "url": "{{ image_source }}",
+        "width": {{ image_width }},
+        "height": {{ image_height }}
+    },
+    {% endrequire -%}
+    {% if view.keywords -%}
+        "keywords": {{ view.keywords | join(', ', attribute='label') | tojson | safe }},
+    {% endif -%}
+    {% if view.has_series_attached -%}
+    "isPartOf": {
+        "@type": "WebPage",
+        "@id": "{{ context | find_series_cp | create_url }}",
+        "name": {{ view.serie | tojson | safe }}
+    },
+    {% endif -%}
+    {% if view.context is zplus_content -%}
+    "isAccessibleForFree": "False",
+    "hasPart": {
+        "@type": "WebPageElement",
+        "isAccessibleForFree": "False",
+        "cssSelector" : "main .article-page"
+    },
+    {% endif -%}
+    "publisher": {
+        "@id": "#publisher"
+    }
+}
+</script>
