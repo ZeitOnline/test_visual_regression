@@ -1,5 +1,9 @@
 {% extends "zeit.web.core:templates/layout.html" %}
 
+{% block css_link -%}
+    <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">
+{% endblock css_link -%}
+
 {%- block head %}
     {% if view.is_hp -%}
         <meta name="apple-itunes-app" content="app-id=828889166">
@@ -8,20 +12,11 @@
     <meta name="msapplication-TileImage" content="{{ request.image_host }}/static/img/zo-icon-win8-144x144.png">
     <meta name="msapplication-TileColor" content="#e6e6e6">
 
-    {% if toggles('preload_webfonts') %}
-        {# ../latest/ for escaping the version number. Same is used in CSS. #}
-        <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/tabletgothic/TabletGothic-Regular.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/tabletgothic/TabletGothic-Bold.woff2" as="font" type="font/woff2" crossorigin>
-        {% if not view.is_hp %}
-            <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/franziska/FranziskaWebPro.woff" as="font" type="font/woff" crossorigin>
-        {% endif %}
-    {% endif %}
-
-    {% if view.is_podcastseries %}
-    <link type="application/rss+xml" rel="alternate" title="{{ view.series_title }}" href="https://{{ view.podcastseries_feed }}.podigee.io/feed/mp3"/>
-    {% else %}
-    <link rel="alternate" type="application/rss+xml" href="https://newsfeed.zeit.de/index">
-    {% endif %}
+    {% if view.is_podcastseries -%}
+        <link type="application/rss+xml" rel="alternate" title="{{ view.series_title }}" href="https://{{ view.podcastseries_feed }}.podigee.io/feed/mp3"/>
+    {% else -%}
+        <link rel="alternate" type="application/rss+xml" href="https://newsfeed.zeit.de/index">
+    {% endif -%}
 
     {% if view.include_optimize -%}
         <script src="{{ view.include_optimize }}"></script>
