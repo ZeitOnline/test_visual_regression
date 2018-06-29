@@ -2976,15 +2976,14 @@ def test_responsive_image_teaser_only_in_first_region(testbrowser):
     assert len(sel('div.teaser-classic__media-container')) == 2
 
 
-def test_topicpage_has_jsonld(testbrowser, data_solr):
-    browser = testbrowser('/thema/jurastudium')
-    assert browser.cssselect('script[type="application/ld+json"]')
-    assert '"@type": "ItemList"' in browser.contents
+def test_topicpage_contains_required_structured_data(testbrowser, data_solr):
+    data = testbrowser('/thema/jurastudium').structured_data()
+    assert data['ItemList']['itemListElement']
 
 
-def test_centerpage_has_no_jsonld(testbrowser, data_solr):
-    browser = testbrowser('/zeit-online/index')
-    assert 'ld+json' not in browser.contents
+def test_centerpage_contains_no_itemlist(testbrowser, data_solr):
+    data = testbrowser('/zeit-online/slenderized-index').structured_data()
+    assert 'ItemList' not in data
 
 
 def test_brandeins_teaser_kicker_should_contain_logo(testbrowser):

@@ -26,7 +26,7 @@ def test_liveblog_collapse_preceding_content(testbrowser):
     liveblog = browser.cssselect('.liveblog')
     assert len(liveblog) == 1
     assert 'js-liveblog' in liveblog[0].get('class')
-    assert not browser.cssselect('[itemprop="articleBody"] .ad-container')
+    assert not browser.cssselect('.article-body .ad-container')
 
 
 def test_liveblog_show_preceding_content(testbrowser):
@@ -34,7 +34,7 @@ def test_liveblog_show_preceding_content(testbrowser):
     liveblog = browser.cssselect('.liveblog')
     assert len(liveblog) == 1
     assert 'js-liveblog' not in liveblog[0].get('class')
-    assert browser.cssselect('[itemprop="articleBody"] .ad-container')
+    assert browser.cssselect('.article-body .ad-container')
 
 
 def test_liveblog_has_no_print_menu(testbrowser):
@@ -46,8 +46,8 @@ def test_liveblog_has_no_print_menu(testbrowser):
 def test_liveblog_updates_modified_date(testbrowser):
     browser = testbrowser('/zeit-online/liveblog/sonnenfinsternis')
     select = browser.cssselect
-    date_published = select('time[itemprop="datePublished"]')[0]
-    date_modified = select('time[itemprop="dateModified"]')[0]
+    date_published = select('time.metadata__date')[0]
+    date_modified = select('time.metadata__date')[1]
 
     assert select('meta[name="date"]')[0].get('content') == (
         '2015-03-20T12:26:00+01:00')
@@ -63,8 +63,8 @@ def test_liveblog_updates_modified_date(testbrowser):
 def test_liveblog_v3_updates_modified_date(testbrowser):
     browser = testbrowser('/zeit-online/article/liveblog3')
     select = browser.cssselect
-    date_published = select('time[itemprop="datePublished"]')[0]
-    date_modified = select('time[itemprop="dateModified"]')[0]
+    date_published = select('time.metadata__date')[0]
+    date_modified = select('time.metadata__date')[1]
 
     assert select('meta[name="date"]')[0].get('content') == (
         '2018-06-02T15:31:50+02:00')

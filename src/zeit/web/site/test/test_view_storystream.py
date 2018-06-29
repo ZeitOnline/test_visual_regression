@@ -49,22 +49,23 @@ def test_storystream_teaser_should_show_age_for_new_storystreams(
 
 
 def test_storystream_contains_structured_data(testbrowser):
-    browser = testbrowser('/zeit-online/storystream/dummy')
+    data = testbrowser('/zeit-online/storystream/dummy').structured_data()
 
-    # this "should" be done better sometimes (in the template)
-    # e.g. wrap the storystream content in an article
-    article = browser.cssselect('main')[0]
+    article = data['Article']
+    publisher = data['Organization']
 
-    assert article.cssselect('[itemprop="headline"]')
-    assert article.cssselect('[itemprop="description"]')
-    assert article.cssselect('[itemprop="datePublished"]')
-    assert article.cssselect('[itemprop="dateModified"]')
+    assert article['mainEntityOfPage']['@id'] == (
+        'http://localhost/zeit-online/storystream/dummy')
+    assert article['headline'] == u'Griechenland: Das linke Experiment'
+    assert article['description']
+    assert article['datePublished'] == '2015-09-11T12:09:57+02:00'
+    assert article['dateModified'] == '2015-09-25T12:08:56+02:00'
+    assert article['publisher']['@id'] == publisher['@id']
 
-    author = article.cssselect('[itemprop="author"]')[0]
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.cssselect('[itemprop="name"]')[0].text == (
-        'Zacharias Zacharakis')
-    assert author.cssselect('[itemprop="url"]')[0].get('href') == (
+    # check author
+    assert article['author']['@type'] == 'Person'
+    assert article['author']['name'] == 'Zacharias Zacharakis'
+    assert article['author']['url'] == (
         'http://localhost/autoren/Z/Zacharias_Zacharakis/index.xml')
 
 

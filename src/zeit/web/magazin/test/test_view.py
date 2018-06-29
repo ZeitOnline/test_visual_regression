@@ -608,27 +608,6 @@ def test_navigation_should_handle_logged_out_user_correctly(
     assert browser.cssselect('a')[0].get('href') == '/login'
 
 
-def test_schema_org_publisher_mark_up(testbrowser):
-    # @see https://developers.google.com/structured-data/rich-snippets/articles
-    # #article_markup_properties
-    browser = testbrowser('/zeit-magazin/article/01')
-    publisher = browser.cssselect('[itemprop="publisher"]')[0]
-    logo = publisher.cssselect('[itemprop="logo"]')[0]
-
-    # check Organization
-    assert publisher.get('itemtype') == 'http://schema.org/Organization'
-    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
-        'ZEITmagazin')
-    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
-        'http://localhost/zeit-magazin/index')
-    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
-    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
-        'http://localhost/static/latest/images/'
-        'structured-data-publisher-logo-zmo.png')
-    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '600'
-    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '56'
-
-
 def test_url_encoding_in_login_state(testbrowser):
     path = '/zeit-magazin/article/03?a=foo&b=<b>&c=u + i'
     browser = testbrowser(path)

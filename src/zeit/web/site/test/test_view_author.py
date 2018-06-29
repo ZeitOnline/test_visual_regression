@@ -43,10 +43,16 @@ def test_author_page_should_hide_favourite_content_if_missing(testbrowser):
     assert len(browser.cssselect('.teaser-small')) == 0
 
 
-def test_author_page_should_feature_schema_org_props(testbrowser):
-    doc = testbrowser('/autoren/anne_mustermann').document
-    name = doc.xpath('//*[@itemprop="author"]/*[@itemprop="name"]')
-    assert name[0].text.strip() == 'Anne Mustermann'
+def test_author_page_contains_required_structured_data(testbrowser):
+    data = testbrowser('/autoren/anne_mustermann').structured_data()
+
+    author = data['Person']
+
+    assert author['mainEntityOfPage']['@id'] == (
+        'http://localhost/autoren/anne_mustermann')
+    assert author['name'] == 'Anne Mustermann'
+    assert author['jobTitle'] == (u'Redakteurin in den Ressorts Wirtschaft, '
+                                  u'Karriere, Mobilität, ZEIT ONLINE.')
 
 
 def test_author_page_should_show_articles_by_author(testbrowser):
