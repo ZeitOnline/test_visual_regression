@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - FEM-77: Contrast polishing
 
+- FIX: Fix minor glitches of puzzle form
+
 - MAINT: Polish styles
 
 

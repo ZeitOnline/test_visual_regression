@@ -530,7 +530,7 @@ class PuzzleForm(Module):
 
     @pyramid.decorator.reify
     def failure_message(self):
-        return u"Leider ist ein technisches Problem aufgetreten." \
+        return u"Leider ist ein technisches Problem aufgetreten. " \
                u"Bitte versuchen Sie es später erneut."
 
     @pyramid.decorator.reify
