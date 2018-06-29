@@ -50,6 +50,15 @@
 </head>
 <body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}"
     {%- if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
+    {% include "zeit.web.core:templates/inc/tracking/webtrekk_googleoptimize.html" %}
+    {% include "zeit.web.core:templates/inc/tag-manager.html" %}
+    {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
+
+    {% block skiplink -%}
+        <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
+    {% endblock skiplink -%}
+
     {% block body %}{% endblock %}
 
 </body>

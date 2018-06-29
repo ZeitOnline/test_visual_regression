@@ -1,3 +1,4 @@
+{% if toggles('third_party_modules', 'tracking', 'optimize_ab_testing_to_webtrekk') %}
 <script type="text/javascript">
 (function(win){
     {#/**
@@ -60,3 +61,4 @@
     win[dlName].hide = a;
 })(window);
 </script>
+{% endif %}
