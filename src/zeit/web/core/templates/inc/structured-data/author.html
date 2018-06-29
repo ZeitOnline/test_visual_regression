@@ -11,7 +11,7 @@
     {% if context.summary -%}
         "jobTitle": {{ context.summary | tojson | safe }},
     {% endif -%}
-    {% if context.biography | trim -%}
+    {% if context.biography -%}
         "description": {{ context.biography | trim | tojson | safe }},
     {% endif -%}
     {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) -%}

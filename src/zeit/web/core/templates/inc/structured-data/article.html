@@ -18,7 +18,6 @@
             "url": "{{ author.uniqueId | create_url }}",
         {% endif -%}
         "name": {{ author.display_name | tojson | safe }}
-
     }
         {%- endfor -%}
         {%- if byline | length > 1 %}]{% endif -%},
@@ -42,7 +41,7 @@
         {%- else -%}
             {{ headline | tojson | safe }}
         {%- endif %},
-    "description": {{ view.subtitle | tojson | safe }},
+    "description": {{ view.subtitle | trim | tojson | safe }},
     {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) -%}
     "image": {
         {% set image_width = 1300 -%}
