@@ -161,9 +161,28 @@ class ArticleByline(Byline):
 
 
 @grokcore.component.adapter(
-    zeit.cms.content.interfaces.ICommonMetadata, name='author')
+    zeit.cms.content.interfaces.ICommonMetadata, name='data')
 @grokcore.component.implementer(IByline)
 class StructuredDataByline(Byline):
+
+    def __init__(self, context):
+        # Skip Byline.__init__()
+        super(Byline, self).__init__()
+        self.context = context
+        self.author_list()
+
+    def author_list(self):
+        for author in self.authors:
+            if isinstance(author, basestring):
+                self.append(('plain_author', {'display_name': author}))
+            else:
+                self.append(('plain_author', author.target))
+
+
+@grokcore.component.adapter(
+    zeit.cms.content.interfaces.ICommonMetadata, name='author')
+@grokcore.component.implementer(IByline)
+class AuthorByline(Byline):
 
     @staticmethod
     def expand_authors(authors):
@@ -198,5 +217,5 @@ class ProxyByline(Byline):
 @grokcore.component.adapter(
     zeit.web.core.content.ILazyProxy, name='author')
 @grokcore.component.implementer(IByline)
-class ProxyAuthorByline(ProxyByline, StructuredDataByline):
+class ProxyAuthorByline(ProxyByline, AuthorByline):
     pass

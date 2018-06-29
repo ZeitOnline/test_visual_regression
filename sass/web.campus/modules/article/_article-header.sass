@@ -126,12 +126,11 @@
 	&__byline
 		+scaled-font(15px)
 		span[itemprop="name"]
-			color: $color-text
 			font-weight: bold
 		a
+			color: inherit
 			+on-interaction
-				span[itemprop="name"]
-					color: $color-article-primary
+				color: $color-article-primary
 
 	&__metadata
 		+scaled-font(14px)
