@@ -1,0 +1,33 @@
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Person",
+    "@id": "#{{ view.type }}",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ view.content_url }}"
+    },
+    "name": {{ context.display_name | tojson | safe }},
+    {% if context.summary -%}
+        "jobTitle": {{ context.summary | tojson | safe }},
+    {% endif -%}
+    {% if context.biography | trim -%}
+        "description": {{ context.biography | trim | tojson | safe }},
+    {% endif -%}
+    {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) -%}
+    "image": {
+        {% set image_width = 1300 -%}
+        {% set image_height = (image_width / image.ratio) | round | int -%}
+        {% set image_source = '%s%s__%dx%d' | format (request.image_host, image.path, image_width, image_height) -%}
+        "@type": "ImageObject",
+        "url": "{{ image_source }}",
+        "width": {{ image_width }},
+        "height": {{ image_height }}
+    },
+    {% endrequire -%}
+    {% if view.same_as -%}
+        "sameAs": {{ view.same_as | tojson | safe }},
+    {% endif -%}
+    "url": "{{ view.content_url }}"
+}
+</script>
