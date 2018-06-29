@@ -45,11 +45,15 @@
     {% block ligatus_include %}{% endblock %}
     {% block schemaorg_data %}{% endblock %}
 
+    <script>{%- include "zeit.web.core:templates/inc/inline_js/modernizr-replacement.js" -%}</script>
+    {% if not toggles('modernizr_js_file') or  toggles('modernizr_js_file') == False %}
+        <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+    {% endif %}
+
     {% if view.include_optimize -%}
         <script src="{{ view.include_optimize }}"></script>
     {% endif %}
 
-    <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
     {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
     {% if toggles('third_party_modules') -%}
         <script src="https://script.ioam.de/iam.js"></script>

@@ -49,7 +49,7 @@
     "clean:js": "rm -rf src/zeit/web/static/js",
     "clean:svg": "rm -rf src/zeit/web/static/images/svg",
     "clean": "npm-run-all --parallel clean:*",
-    "modernizr": "modernizr -c modernizr-config.json -d src/zeit/web/static/js/vendor/modernizr-custom.js --quiet",
+    "modernizr": "modernizr -c modernizr-config.json -d javascript/web.core/vendor/modernizr-custom.js --quiet",
     "jshint": "jshint javascript",
     "eslint": "eslint javascript --fix",
     "lint": "npm run jshint --silent & npm run eslint --silent",
@@ -88,7 +88,7 @@
     "webpack:dist": "webpack -p --mode production",
     "webpack:dev": "webpack -d --mode development --display-modules",
     "prebuild": "npm run clean",
-    "build": "NODE_ENV=production npm-run-all --parallel modernizr sass:dist js svg",
+    "build": "NODE_ENV=production npm-run-all --parallel sass:dist js svg",
     "postinstall": "npm prune --no-save"
   },
   "browserslist": [
