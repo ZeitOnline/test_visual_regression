@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 9]> <html lang="de" class="no-js lt-ie10"> <![endif]-->
-<!--[if gt IE 9]><!-->
-<html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
-<!--<![endif]-->
+<html lang="de" class="no-js">
 <head>
     <meta charset="utf-8">
     <title>ZEIT ONLINE</title>
