@@ -36,8 +36,7 @@
 {% endblock adplace_billboard %}
 
 {% block main %}
-    <article class="article article--longform" id="js-article" itemscope itemtype="http://schema.org/Article">
-        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
+    <article class="article article--longform" id="js-article">
         <div class="article__head-wrap" data-x-marker="header-wrapper">
 
             {% require block = view.header_module %}

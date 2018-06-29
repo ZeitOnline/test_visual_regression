@@ -15,8 +15,7 @@
 {% block main %}
     {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
-    <article class="article article--padded article--{{ view | block_type }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
-        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
+    <article class="article article--padded article--{{ view | block_type }}" id="js-article">
     {% profile %}
         {% block article_head %}
             <header class="article-header" data-ct-area="articleheader">
@@ -27,7 +26,7 @@
     {% endprofile %}
     {% profile %}
         {% block article_body %}
-        <div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
+        <div class="article-body article-body--{{ view | block_type }}">
             {% block article_storystreamteaser_teaser %}{% endblock %}
 
             {% block article_pages %}
