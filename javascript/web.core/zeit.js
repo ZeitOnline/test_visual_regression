@@ -46,4 +46,6 @@ if ( Zeit.isWrapped || window.location.href.indexOf( 'force-userfeedback' ) !== 
     Zeit.appUserFeedback = require( 'web.core/appUserFeedback' );
 }
 
+Zeit.adDefend = require( 'web.core/adDefend' );
+
 module.exports = Zeit;
