@@ -1,5 +1,9 @@
 {% extends 'zeit.web.site:templates/content.html' %}
 
+{% block structured_data -%}
+    {% include "zeit.web.core:templates/inc/structured-data/video.html" %}
+{% endblock structured_data -%}
+
 {% block content %}
     <article class="article article--padded article--video" id="js-article"
         {% if view.serie %} data-video-series="{{ view.serie | format_webtrekk }}"{% endif %}

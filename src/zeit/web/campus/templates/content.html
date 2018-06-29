@@ -8,9 +8,9 @@
     {%- include "zeit.web.core:templates/inc/meta/ligatus.html" -%}
 {% endblock %}
 
-{% block schemaorg_data %}
-    {%- include "zeit.web.core:templates/inc/meta/schemaorg.html" -%}
-{% endblock %}
+{% block structured_data -%}
+    {% include "zeit.web.core:templates/inc/structured-data/article.html" %}
+{% endblock structured_data -%}
 
 {% block main %}
     {% block advertorial_marker %}{% endblock advertorial_marker %}

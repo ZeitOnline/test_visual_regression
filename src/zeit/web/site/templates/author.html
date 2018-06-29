@@ -1,5 +1,9 @@
 {% extends "zeit.web.site:templates/layout.html" %}
 
+{% block structured_data -%}
+    {% include "zeit.web.core:templates/inc/structured-data/article.html" %}
+{% endblock structured_data -%}
+
 {% block main %}
     {% include "zeit.web.site:templates/inc/author/header.html" %}
     {% include "zeit.web.site:templates/inc/author/profile.html" %}
