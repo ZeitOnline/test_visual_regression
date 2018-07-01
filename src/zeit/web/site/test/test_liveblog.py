@@ -88,3 +88,31 @@ def test_liveblog_teaser_updates_modified_date(testbrowser, clock):
         time = article.cssselect('time')[0]
         assert time.get('datetime') == '2015-03-20T12:26:00+01:00'
         assert time.text == 'Vor 2 Stunden'
+
+
+def test_liveblog_article_contains_required_structured_data(testbrowser):
+    browser = testbrowser('/zeit-online/liveblog/sonnenfinsternis')
+    data = browser.structured_data()
+    page = data['WebPage']
+    liveblog = data['LiveBlogPosting']
+    publisher = data['Organization']
+    breadcrumb = data['BreadcrumbList']
+
+    # check WebPage
+    assert page['publisher']['@id'] == publisher['@id']
+    assert page['breadcrumb']['@id'] == breadcrumb['@id']
+
+    # check Liveblog
+    assert liveblog['mainEntityOfPage']['@id'] == (
+        'http://localhost/zeit-online/liveblog/sonnenfinsternis')
+    assert len(liveblog['author']) == 4
+    assert liveblog['headline'] == (
+        u'Sonnenfinsternis Live-Blog: Tschüss, Sofi, war schön mit Dir!')
+    assert len(liveblog['description'])
+    assert liveblog['datePublished'] == '2015-03-19T08:53:46+01:00'
+    assert liveblog['dateModified'] == '2015-03-20T12:26:00+01:00'
+    assert liveblog['coverageStartTime'] == '2015-03-19T08:53:46+01:00'
+    assert liveblog['coverageEndTime'] == '2015-03-20T12:26:00+01:00'
+    assert liveblog['image']['@type'] == 'ImageObject'
+    assert liveblog['keywords'] == u'Sonnenfinsternis, Astronomie, Sonne, Mond'
+    assert liveblog['publisher']['@id'] == publisher['@id']
