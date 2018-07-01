@@ -14,9 +14,9 @@
     {% if context.biography -%}
         "description": {{ context.biography | trim | tojson | safe }},
     {% endif -%}
-    {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) -%}
+    {% require image = get_image(view.context, variant_id='square', name='sharing', fallback=False) -%}
     "image": {
-        {% set image_width = 1300 -%}
+        {% set image_width = 900 -%}
         {% set image_height = (image_width / image.ratio) | round | int -%}
         {% set image_source = '%s%s__%dx%d' | format (request.image_host, image.path, image_width, image_height) -%}
         "@type": "ImageObject",
