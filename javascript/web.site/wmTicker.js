@@ -210,6 +210,14 @@ function wmTicker( element ) {
         return today.toDateString() === date.toDateString();
     }
 
+    /**
+     * add leading zero to numbers < 10
+     * @param  {integer}  number
+     * @return {integer}
+     */
+    function addLeadingZero( number ) {
+        return ( number < 10 ? '0' : '' ) + number;
+    }
 
     /**
      * generate time String containing all needed words
@@ -218,9 +226,9 @@ function wmTicker( element ) {
      */
     function timeString( date, kickoff, period, status ) {
         var begin = new Date( date ),
-            minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
+            minutes = addLeadingZero( begin.getMinutes() ),
             gameDate = new Date( begin.getFullYear(), begin.getMonth(), begin.getDate() ),
-            dateString = gameDate.getDate() + '.' + ( gameDate.getMonth() + 1 ),
+            dateString = addLeadingZero( gameDate.getDate() ) + '.' + addLeadingZero( ( gameDate.getMonth() + 1 ) ),
             returnString = begin.getHours() + '.' + minutes + ' Uhr';
         kickoff = new Date( kickoff );
 
