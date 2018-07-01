@@ -228,8 +228,8 @@ function wmTicker( element ) {
             switch ( status ) {
                 case 'LIVE':
                     var minuteDifference = getMinuteDifference( kickoff ),
-                        offsetArray = [ 0, 45, 90, 105, 120 ];
-                        cutoff = offsetArray[ period ];
+                        offsetArray = [ 0, 45, 90, 105, 120 ],
+                        cutoff = offsetArray[ period ],
                         min = minuteDifference + offsetArray[ period - 1 ];
                     if ( min > cutoff ) {
                         returnString = cutoff + '. + ' + ( min - cutoff );
@@ -256,7 +256,7 @@ function wmTicker( element ) {
                     break;
             }
         } else {
-            if (status === 'PRE-MATCH' && !dateIsToday( gameDate )) {
+            if ( status === 'PRE-MATCH' && !dateIsToday( gameDate ) ) {
                 returnString = dateString;
             }
         }
