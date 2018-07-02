@@ -12,7 +12,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.166 (unreleased)
+3.166 (2018-07-02)
 ------------------
 
 - ZON-4734: Ad-Position P5 differenziert nach Ressorts
