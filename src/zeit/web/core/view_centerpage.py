@@ -261,6 +261,7 @@ class Centerpage(AreaProvidingPaginationMixin,
     @zeit.web.reify
     def jsonld_listing(self):
         allowed_cp_types = [
+            'storystream',
             'autotopic',
             'manualtopic',
             'serienseite',
