@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import calendar
+import collections
 import datetime
 import urlparse
 
@@ -265,7 +266,7 @@ class Centerpage(AreaProvidingPaginationMixin,
             'serienseite',
             'ins_serienseite']
         if self.context.type in allowed_cp_types:
-            item_list_element = {}
+            item_list_element = collections.OrderedDict()
             item_list_element_counter = 0
             article_interface = zeit.content.article.interfaces.IArticle
             for region in self.regions:
