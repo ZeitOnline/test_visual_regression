@@ -15,7 +15,7 @@
     <references>
       <reference type="intern" href="http://xml.zeit.de/thema/oscar" contenttype="centerpage-2009"/>
     </references>
-    <image base-id="http://xml.zeit.de/kultur/film/2017-02/oscars-2017-warren-beatty/" type="jpg"/>
+    <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg"/>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Dirk  Gieselmann</attribute>

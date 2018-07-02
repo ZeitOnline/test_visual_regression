@@ -9,17 +9,29 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- Remove `location /robots.txt` from nginx config
+- Nothing
 
 
-3.166 (unreleased)
+3.167 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.166 (2018-07-02)
 ------------------
 
 - ZON-4734: Ad-Position P5 differenziert nach Ressorts
 
-- FEM-67: Delay Modernizr (own js-check)
+- ZON-4745: Disable HP Overlay for 365 days for logged in Users
+
+- ZON-4764: Use JSON-LD structured data for AMP
+
+- FEM-67: Delay Modernizr (own js-check) + fix Modernizr integration
 
 - FEM-77: Contrast polishing
+
+- FIX: Fix minor glitches of puzzle form
 
 - MAINT: Polish styles
 

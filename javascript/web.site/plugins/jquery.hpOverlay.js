@@ -24,7 +24,8 @@
         this.isLiveServer = /^(www\.)?zeit\.de$/.test( window.location.hostname );
         this.configuredProtocol = window.Zeit.toggles.https ? 'https:' : window.location.protocol;
         this.options = {
-            cookieTimeInDays: 1.5,
+            cookieTimeInDays: Zeit.cookieRead( 'zeit_sso_201501' ) ?
+                365 : 1.5,
             debug: location.href.indexOf( 'debug-popover' ) !== -1,
             endpoint: '//' + location.host + '/json/update-time/index',
             force: location.href.indexOf( 'force-popover' ) !== -1,

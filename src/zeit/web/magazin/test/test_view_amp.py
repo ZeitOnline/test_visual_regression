@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 
 
 def test_amp_view_should_have_expected_structure(testbrowser):
@@ -7,8 +8,7 @@ def test_amp_view_should_have_expected_structure(testbrowser):
     article = browser.cssselect('article.article')[0]
     image = article.cssselect('figure.figure')[0]
 
-    assert ('<html ⚡ lang="de" itemscope '
-            'itemtype="http://schema.org/WebPage">') in browser.contents
+    assert ('<html ⚡ lang="de">') in browser.contents
     assert link.get('href') == 'http://localhost/zeit-magazin/article/01'
     assert 'figure--large' in image.get('class')
 
@@ -29,77 +29,62 @@ def test_amp_view_should_ignore_header_image_display_mode(testbrowser):
     assert 'figure--large' in image.get('class')
 
 
-def test_amp_contains_required_microdata(testbrowser):
+def test_amp_contains_required_structured_data(testbrowser):
     browser = testbrowser('/amp/zeit-magazin/article/01')
-    publisher = browser.document.get_element_by_id('publisher')
-    logo = publisher.cssselect('[itemprop="logo"]')[0]
+    scripts = browser.cssselect('head script[type="application/ld+json"]')
+    data = {}
 
-    article = browser.cssselect('article[itemprop="mainEntity"]')[0]
-    main_entity_of_page = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
-    headline = article.cssselect('[itemprop="headline"]')[0]
-    description = article.cssselect('[itemprop="description"]')[0]
-    date_published = article.cssselect('[itemprop="datePublished"]')[0]
-    date_modified = article.cssselect('[itemprop="dateModified"]')[0]
-    author = article.cssselect('[itemprop="author"]')[0]
-    image = article.cssselect('[itemprop="image"]')[0]
-    copyright_holder = image.cssselect('[itemprop="copyrightHolder"]')[0]
+    assert scripts
 
-    # check Organization of Page
-    assert publisher.get('itemtype') == 'http://schema.org/Organization'
-    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
-        'ZEITmagazin')
-    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
-        'http://localhost/zeit-magazin/index')
-    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
-    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
+    for script in scripts:
+        content = json.loads(script.text_content().strip())
+        data[content['@type']] = content
+
+    page = data['WebPage']
+    article = data['Article']
+    publisher = data['Organization']
+    breadcrumb = data['BreadcrumbList']
+
+    # check WebPage
+    assert page['publisher']['@id'] == publisher['@id']
+    assert page['breadcrumb']['@id'] == breadcrumb['@id']
+    # disabled for now, as long as google can't handle this reference
+    # assert page['mainEntity']['@id'] == article['@id']
+
+    # check Organization
+    assert publisher['@id'] == '#publisher'
+    assert publisher['name'] == 'ZEITmagazin'
+    assert publisher['url'] == 'http://localhost/zeit-magazin/index'
+    assert publisher['logo']['@type'] == 'ImageObject'
+    assert publisher['logo']['url'] == (
         'http://localhost/static/latest/images/'
         'structured-data-publisher-logo-zmo.png')
-    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '600'
-    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '56'
+    assert publisher['logo']['width'] == 600
+    assert publisher['logo']['height'] == 56
 
     # check Article
-    assert article.get('itemtype') == 'http://schema.org/Article'
-    assert main_entity_of_page.get('content') == (
+    assert article['mainEntityOfPage']['@id'] == (
         'http://localhost/zeit-magazin/article/01')
-    text = headline.text_content().strip()
-    assert text == u'Gentrifizierung: Mei, is des traurig!'
-    assert len(description.text_content().strip())
-
-    # reassign publisher
-    publisher = article.cssselect('[itemprop="publisher"]')[0]
-    logo = publisher.cssselect('[itemprop="logo"]')[0]
-
-    # check Organization of Article
-    assert publisher.get('itemtype') == 'http://schema.org/Organization'
-    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
-        'ZEITmagazin')
-    assert publisher.cssselect('[itemprop="url"]')[0].get('content') == (
-        'http://localhost/zeit-magazin/index')
-    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
-    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
-        'http://localhost/static/latest/images/'
-        'structured-data-publisher-logo-zmo.png')
-    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '600'
-    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '56'
+    assert article['headline'] == u'Gentrifizierung: Mei, is des traurig!'
+    assert len(article['description'])
+    assert article['datePublished'] == '2013-09-26T08:00:00+02:00'
+    assert article['dateModified'] == '2013-10-08T11:25:03+02:00'
+    assert article['keywords'] == (
+        u'Gentrifizierung, Christian Ude, Facebook, Mietvertrag, München')
+    assert article['publisher']['@id'] == publisher['@id']
 
     # check ImageObject
-    assert image.get('itemtype') == 'http://schema.org/ImageObject'
-    assert len(image.cssselect('[itemprop="url"]')[0].get('content'))
-    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
-    assert image.cssselect('[itemprop="height"]')[0].get('content') == '461'
-    assert len(image.cssselect('[itemprop="caption"]')) == 1
-    assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
-    url = copyright_holder.cssselect('[itemprop="url"]')[0]
-    person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert url.get('href') == 'http://foo.com'
-    assert person.text == u'© Andreas Gebert/dpa'
+    assert article['image']['@type'] == 'ImageObject'
+    assert article['image']['url'] == (
+        'http://localhost/exampleimages/artikel/01/schoppenstube/'
+        'wide__1300x731')
+    assert article['image']['width'] == 1300
+    assert article['image']['height'] == 731
 
-    assert date_published.get('datetime') == '2013-09-26T08:00:00+02:00'
-    assert date_modified.get('datetime') == '2013-10-08T11:25:03+02:00'
-
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.cssselect('[itemprop="name"]')[0].text == 'Anne Mustermann'
-    assert author.cssselect('[itemprop="url"]')[0].get('href') == (
+    # check author
+    assert article['author']['@type'] == 'Person'
+    assert article['author']['name'] == 'Anne Mustermann'
+    assert article['author']['url'] == (
         'http://localhost/autoren/anne_mustermann')
 
 

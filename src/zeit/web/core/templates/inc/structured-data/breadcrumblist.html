@@ -1,0 +1,35 @@
+{% if view.breadcrumbs %}
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": "#breadcrumb",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "@id": "{{ request.route_url('home') }}",
+                "name": "ZEIT ONLINE"
+            }
+        }
+        {%- for text, link in view.breadcrumbs -%}
+        ,{
+            "@type": "ListItem",
+            "position": {{ loop.index + 1 }},
+            {% if link -%}
+            "item": {
+                "@id": "{{ link | create_url }}",
+                "name": {{ text | tojson | safe }}
+            }
+            {%- else -%}
+            "name": {{ text | tojson | safe }}
+            {%- endif %}
+
+        }
+        {%- endfor %}
+
+    ]
+}
+</script>
+{% endif %}

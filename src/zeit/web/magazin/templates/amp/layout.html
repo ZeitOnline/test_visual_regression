@@ -6,14 +6,9 @@
 
 {% block logo %}
 	<div class="article__item article__item--wide">
-		<a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index">
-			<meta itemprop="name" content="ZEITmagazin">
-			<svg class="header__logo" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+		<a href="{{ request.route_url('home') }}zeit-magazin/index">
+			<svg class="header__logo">
 				<use xlink:href="#svg-logo-zmo"/>
-				{# The "logo" dimensions must not exceed 600x60 -#}
-				<meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zmo.png">
-				<meta itemprop="width" content="600">
-				<meta itemprop="height" content="56">
 			</svg>
 		</a>
 	</div>

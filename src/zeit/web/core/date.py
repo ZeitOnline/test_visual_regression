@@ -38,7 +38,8 @@ def mod_date(resource):
             liveblog = zeit.web.core.interfaces.ILiveblogInfo(resource)
             if liveblog.last_modified:
                 if not modified or modified < liveblog.last_modified:
-                    return liveblog.last_modified
+                    if not released or released < liveblog.last_modified:
+                        return liveblog.last_modified
         # use 60s of tolerance before displaying a modification date
         if (released and modified and
                 modified - released > datetime.timedelta(seconds=60)):

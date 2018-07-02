@@ -1,15 +1,14 @@
 <div class="article__item article__item--wide">
-    <aside class="authorbox figure figure--float" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <aside class="authorbox figure figure--float">
         <div class="authorbox__container">
             {%- include "zeit.web.core:templates/amp/asset/image_authorbox.html" -%}
             <div>
-                <strong class="authorbox__name" itemprop="name">{{ block.author.display_name }}</strong>
-                <em class="authorbox__summary" itemprop="description">{{ block.text | default(block.author.summary, True) }}</em>
+                <strong class="authorbox__name">{{ block.author.display_name }}</strong>
+                <em class="authorbox__summary">{{ block.text | default(block.author.summary, True) }}</em>
             </div>
         </div>
-
         {% if block.author.uniqueId -%}
-            <a href="{{ block.author.uniqueId | create_url }}" itemprop="url" class="authorbox__button button">zur Autorenseite</a>
+            <a href="{{ block.author.uniqueId | create_url }}" class="authorbox__button button">zur Autorenseite</a>
         {%- endif %}
 
     </aside>
