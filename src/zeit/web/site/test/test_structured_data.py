@@ -70,11 +70,14 @@ def test_article_contains_required_structured_data(testbrowser):
 def test_series_article_contains_required_structured_data(testbrowser):
     data = testbrowser('/zeit-online/article/fischer').structured_data()
 
-    serie = data['Article']['isPartOf']
+    article = data['Article']
 
-    assert serie['@type'] == 'WebPage'
-    assert serie['@id'] == 'http://localhost/serie/fischer-im-recht'
-    assert serie['name'] == 'Fischer im Recht'
+    assert article['headline'] == (
+        u'Strafprozessrecht, Teil I: Über die Wahrheit')
+    assert article['isPartOf']['@type'] == 'WebPage'
+    assert article['isPartOf']['@id'] == (
+        'http://localhost/serie/fischer-im-recht')
+    assert article['isPartOf']['name'] == 'Fischer im Recht'
 
 
 def test_abo_article_contains_required_structured_data(testbrowser):

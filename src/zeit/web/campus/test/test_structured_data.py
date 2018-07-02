@@ -67,13 +67,15 @@ def test_article_contains_required_structured_data(testbrowser):
 
 
 def test_series_article_contains_required_structured_data(testbrowser):
-    data = testbrowser('/campus/article/common').structured_data()
+    data = testbrowser('/campus/article/column').structured_data()
 
-    serie = data['Article']['isPartOf']
+    article = data['Article']
 
-    assert serie['@type'] == 'WebPage'
-    assert serie['@id'] == 'http://localhost/serie/in-der-mensa-mit'
-    assert serie['name'] == 'In der Mensa mit'
+    assert article['headline'] == u'Chat: Wir rauchen nicht, wir tippen.'
+    assert article['isPartOf']['@type'] == 'WebPage'
+    assert article['isPartOf']['@id'] == (
+        'http://localhost/serie/freunde-von-akg')
+    assert article['isPartOf']['name'] == 'Freunde von AKG'
 
 
 def test_abo_article_contains_required_structured_data(testbrowser):
@@ -82,9 +84,15 @@ def test_abo_article_contains_required_structured_data(testbrowser):
     article = data['Article']
 
     assert article['isAccessibleForFree'] == 'False'
+    # abo
     assert article['hasPart']['@type'] == 'WebPageElement'
     assert article['hasPart']['isAccessibleForFree'] == 'False'
     assert article['hasPart']['cssSelector'] == 'main .article-page'
+    # serie
+    assert article['isPartOf']['@type'] == 'WebPage'
+    assert article['isPartOf']['@id'] == (
+        'http://localhost/serie/in-der-mensa-mit')
+    assert article['isPartOf']['name'] == 'In der Mensa mit'
 
 
 def test_free_article_contains_required_structured_data(testbrowser):
