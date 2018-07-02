@@ -181,8 +181,10 @@ function adDefend() {
         }
     };
 
-    new AdDefend();
-
+    // instantiate just once
+    if ( !document.querySelector( '#addefend-overlay' ) ) {
+        new AdDefend();
+    }
 }
 
 module.exports = adDefend;
