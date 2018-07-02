@@ -15,7 +15,7 @@ POSTDEPLOY
 3.167 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FEM-83: Update NPM Packages
 
 
 3.166 (2018-07-02)
