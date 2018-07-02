@@ -200,24 +200,37 @@ function wmTicker( element ) {
 
 
     /**
+     * check if Date is after midnight / is the next day
+     * @param  {string}  date
+     * @return {boolean}
+     */
+    function dateIsToday( date ) {
+        var today = new Date();
+        date = new Date( date );
+        return today.toDateString() === date.toDateString();
+    }
+
+
+    /**
      * generate time String containing all needed words
      * @param  {string}  date string supplied by API
      * @return {string}
      */
     function timeString( date, kickoff, period, status ) {
-        var minuteDifference = getMinuteDifference( kickoff ),
-            begin = new Date( date ),
+        var begin = new Date( date ),
             minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
-            returnString = 'um ' + begin.getHours() + ':' + minutes;
-
+            gameDate = new Date( begin.getFullYear(), begin.getMonth(), begin.getDate() ),
+            dateString = gameDate.getDate() + '.' + ( gameDate.getMonth() + 1 ),
+            returnString = begin.getHours() + '.' + minutes + ' Uhr';
         kickoff = new Date( kickoff );
 
         if ( defaults.showRunningGameTime ) {
             switch ( status ) {
                 case 'LIVE':
-                    var offsetArray = [ 0, 45, 90, 105, 120 ];
-                    var cutoff = offsetArray[ period ];
-                    var min = minuteDifference + offsetArray[ period - 1 ];
+                    var minuteDifference = getMinuteDifference( kickoff ),
+                        offsetArray = [ 0, 45, 90, 105, 120 ];
+                        cutoff = offsetArray[ period ];
+                        min = minuteDifference + offsetArray[ period - 1 ];
                     if ( min > cutoff ) {
                         returnString = cutoff + '. + ' + ( min - cutoff );
                     } else {
@@ -237,15 +250,14 @@ function wmTicker( element ) {
                     returnString = '';
                     break;
                 default:
+                    if ( !dateIsToday( gameDate ) ) {
+                        returnString = dateString;
+                    }
                     break;
             }
         } else {
-            switch ( status ) {
-                case 'PRE-MATCH':
-                    returnString = 'um ' + begin.getHours() + ':' + minutes;
-                    break;
-                default:
-                    break;
+            if (status === 'PRE-MATCH' && !dateIsToday( gameDate )) {
+                returnString = dateString;
             }
         }
         return returnString;
