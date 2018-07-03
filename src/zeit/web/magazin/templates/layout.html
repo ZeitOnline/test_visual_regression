@@ -1,61 +1,14 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama with context %}
-<!DOCTYPE html>
-<!--[if IE 9]> <html class="no-js lt-ie10 ie" lang="de"> <![endif]-->
-<!--[if gt IE 9]><!-->
-<html class="no-js" lang="de" itemscope itemtype="http://schema.org/WebPage">
-<!--<![endif]-->
-    <head>
-        {% include "zeit.web.core:templates/inc/meta/basics.html" %}
-        {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
+{% extends "zeit.web.core:templates/layout.html" %}
 
-        <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
-        <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
-        <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
-        {% block css_link %}
-            <link href="{{ request.asset_host }}/css/web.magazin/screen.css" media="all" rel="stylesheet" type="text/css">
-        {% endblock css_link %}
+{% block css_link -%}
+    <link href="{{ request.asset_host }}/css/web.magazin/screen.css" media="all" rel="stylesheet" type="text/css">
+{% endblock css_link -%}
 
-        {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
-        {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
+{%- block head %}
+    <link rel="alternate" type="application/rss+xml" href="https://newsfeed.zeit.de/zeit-magazin/index">
+{% endblock head %}
 
-        {% block sharing_meta -%}
-        {%- include "zeit.web.magazin:templates/inc/meta/sharing.html" -%}
-        {%- endblock sharing_meta %}
-
-        {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
-        {% block ligatus_include %}{% endblock %}
-        {% block schemaorg_data %}{% endblock %}
-
-        <script>{% include "zeit.web.core:templates/inc/inline_js/modernizr-replacement.js" %}</script>
-        {% if toggles('modernizr_js_file') -%}
-            <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
-        {% endif -%}
-
-        {% if toggles('third_party_modules') -%}
-            <script src="https://script.ioam.de/iam.js"></script>
-        {% endif -%}
-        {% if toggles('third_party_modules', 'iqd') %}
-            {% include "zeit.web.core:templates/inc/ads/head.html" %}
-        {% endif %}
-        {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
-        {% if settings('livereload') %}
-            <script src="//localhost:35729/livereload.js"></script>
-        {% endif %}
-        {% block babator_include %}{% endblock %}
-    </head>
-    <body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
-
-        {% if toggles('third_party_modules', 'tracking', 'optimize_ab_testing_to_webtrekk') -%}
-            {% include "zeit.web.core:templates/inc/tracking/webtrekk_googleoptimize.html" %}
-        {% endif -%}
-        {% include "zeit.web.core:templates/inc/tag-manager.html" %}
-        {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
-        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
-
-        {% block skiplink %}
-        <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
-        {% endblock skiplink %}
-
+{%- block body %}
         <div class="page">
             {% block adplace_top %}
                 {% include "zeit.web.core:templates/inc/ads/mainad.html" %}
@@ -149,5 +102,4 @@
         <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
         <!--end: vgwort-->
         {% endif %}
-    </body>
-</html>
+{% endblock body %}

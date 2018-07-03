@@ -712,6 +712,10 @@ class Base(object):
         return 'ZEIT ONLINE'
 
     @zeit.web.reify
+    def site_name(self):
+        return self.publisher_name
+
+    @zeit.web.reify
     def twitter_username(self):
         return 'zeitonline'
 

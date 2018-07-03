@@ -15,6 +15,8 @@ POSTDEPLOY
 3.167 (unreleased)
 ------------------
 
+- ZON-4775: Use core layout template
+
 - BUG-948: Add styles for tag logo in Buzzbox teasers
 
 - BUG-949: Fix transparent gradient for webkit and iOS

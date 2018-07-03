@@ -1,8 +1,8 @@
 {% extends "zeit.web.magazin:templates/{}.html".format(view.type) %}
 
-{% block css_link %}
+{% block css_link -%}
     <link href="{{ request.asset_host }}/css/web.magazin/advertorial.css" media="screen" rel="stylesheet" type="text/css" />
-{% endblock css_link %}
+{% endblock css_link -%}
 
 {% block advertorial_marker %}
     {% if view.advertorial_marker %}

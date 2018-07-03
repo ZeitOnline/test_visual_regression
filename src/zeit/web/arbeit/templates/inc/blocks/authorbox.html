@@ -1,12 +1,7 @@
-{# This template is similar to "zeit.web.core:templates/inc/blocks/authorbox.html", but has significant differences. That's why it is not extended. But if you change one of them,
-You should have a look at the other one. #}
-<aside class="authorbox article__item article__item--marginalia" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    {% include "zeit.web.arbeit:templates/inc/asset/image_authorbox.tpl" %}
-    <strong class="authorbox__name" itemprop="name">{{ block.author.display_name }}</strong>
-    <p class="authorbox__summary" itemprop="description">
-        {{ block.text | default(block.author.summary, True) }}
-    </p>
-    {% if block.author.uniqueId -%}
-        <a href="{{ block.author.uniqueId | create_url }}" itemprop="url" class="authorbox__button">Zur Autorenseite</a>
-    {%- endif %}
-</aside>
+{% extends "zeit.web.core:templates/inc/blocks/authorbox.html" %}
+
+{% block image %}
+    {%- include "zeit.web.arbeit:templates/inc/asset/image_authorbox.tpl" -%}
+{% endblock%}
+
+{% block button_class %}{% endblock %}

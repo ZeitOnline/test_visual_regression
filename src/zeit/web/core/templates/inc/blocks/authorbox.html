@@ -6,16 +6,13 @@
         {% endblock%}
         <div class="authorbox__text">
             <strong class="authorbox__name" itemprop="name">{{ block.author.display_name }}</strong>
-
-            {% block summary %}
-                <em class="authorbox__summary" itemprop="description">{{ block.text | default(block.author.summary, True) }}</em>
-            {% endblock %}
+            <p class="authorbox__summary" itemprop="description">{{ block.text | default(block.author.summary, True) }}</p>
         </div>
     </div>
 
     {% if block.author.uniqueId -%}
         {% block link %}
-            <a href="{{ block.author.uniqueId | create_url }}" itemprop="url" class="authorbox__button button">zur Autorenseite</a>
+            <a href="{{ block.author.uniqueId | create_url }}" itemprop="url" class="authorbox__button{% block button_class %} button{% endblock %}">zur Autorenseite</a>
         {% endblock %}
     {%- endif %}
 
