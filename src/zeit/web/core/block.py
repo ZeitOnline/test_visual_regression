@@ -289,6 +289,8 @@ class Liveblog(Module):
 
     def set_blog_info(self):
         blog_info = self.api_blog_request()
+        if not blog_info:
+            return
         self.is_live = blog_info.get('blog_status') == u'open'
         if blog_info.get('last_created_post'):
             updated = blog_info.get('last_created_post').get('_updated')
