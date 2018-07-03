@@ -70,7 +70,7 @@ def test_advertorial_marker_is_returned_correctly():
     assert view.advertorial_marker == ('YYY', 'XXX', 'Zzz')
 
 
-def test_liveblog_article_renders_if_liveblog_api_backend_is_down(testbrowser):
+def test_article_renders_if_liveblog_api_backend_is_down(testbrowser):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['liveblog_api_url_v3'] = 'http://unavailable//api/blogs'
     conf['liveblog_api_auth_url_v3'] = 'http://unavailable/auth'
@@ -80,7 +80,7 @@ def test_liveblog_article_renders_if_liveblog_api_backend_is_down(testbrowser):
     assert browser.cssselect('main#main')
 
 
-def test_liveblog_article_renders_if_liveblog_content_backend_is_down(testbrowser):
+def test_article_renders_if_liveblog_content_backend_is_down(testbrowser):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['liveblog_api_url_v3'] = 'http://unavailable//api/blogs'
     conf['liveblog_api_auth_url_v3'] = 'http://unavailable/auth'
