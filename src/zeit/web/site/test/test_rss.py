@@ -161,6 +161,7 @@ def test_rss_z2x_feed(testserver):
         testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
     assert res.headers['Content-Type'].startswith('application/rss+xml')
     feed = res.text
+
     assert '<atom:link href="http://newsfeed.zeit.de%s"' % feed_path in feed
     assert ('<link>https://www.zeit.de/zeit-magazin/'
             'centerpage/article_image_asset?' in feed)

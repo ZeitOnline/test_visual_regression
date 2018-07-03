@@ -326,61 +326,48 @@ class InstantArticleFeed(Base):
         return root
 
 
-class RSSChannel(object):
-    def __init__(self, channel):
-        self.channel = channel
-
-
-class RSSTitle(RSSChannel):
-    def __get__(self, obj, objtype):
-        return self.channel.findtext('title')
-
-    def __set__(self, obj, val):
-        self.channel.find('title').text = val
-
-
-class RSSLink(RSSChannel):
-    def __get__(self, obj, objtype):
-        return self.channel.findtext('link')
-
-    def __set__(self, obj, val):
-        self.channel.find('link').text = val
-
-
-class AtomLink(RSSChannel):
-    def __init__(self, channel):
-        super(AtomLink, self).__init__(channel)
-        self.atom = self.channel.find(
-            '{http://www.w3.org/2005/Atom}link')
+class ChannelAttr(object):
+    def __init__(self, channel_attr):
+        self.channel_attr = channel_attr
 
     def __get__(self, obj, objtype):
-        return (self.atom.attrib['href'], self.atom.attrib['type'])
+        return obj.channel.findtext(self.channel_attr)
 
     def __set__(self, obj, val):
-        self.atom.attrib['href'] = val[0]
-        self.atom.attrib['type'] = val[1]
+        obj.channel.find(self.channel_attr).text = val
+
+
+class AtomLink(object):
+    def _atom(self, obj):
+        return obj.channel.find('{http://www.w3.org/2005/Atom}link')
+
+    def __get__(self, obj, objtype):
+        return self._atom(obj).attrib['href'], self.atom.attrib['type']
+
+    def __set__(self, obj, val):
+        self._atom(obj).attrib['href'] = val[0]
+        self._atom(obj).attrib['type'] = val[1]
 
 
 class RSSBase(Base):
-    root = ELEMENT_MAKER('rss', version='2.0')
-    channel = ELEMENT_MAKER(
-        'channel',
-        ELEMENT_MAKER('title', ''),
-        ELEMENT_MAKER('link', ''),
-        ELEMENT_MAKER('description'),
-        ELEMENT_MAKER('language', 'de-de'),
-        ELEMENT_MAKER('copyright',
-          'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
-        ELEMENT_NS_MAKER('atom', 'link',
-           href='', type='')
-    )
-
-    rss_title = RSSTitle(channel)
-    rss_link = RSSLink(channel)
-    atom_link = AtomLink(channel)
+    rss_title = ChannelAttr('title')
+    rss_link = ChannelAttr('link')
+    atom_link = AtomLink()
 
     def __init__(self, context, request):
         super(RSSBase, self).__init__(context, request)
+        self.root = ELEMENT_MAKER('rss', version='2.0')
+        self.channel = ELEMENT_MAKER(
+            'channel',
+            ELEMENT_MAKER('title', ''),
+            ELEMENT_MAKER('link', ''),
+            ELEMENT_MAKER('description'),
+            ELEMENT_MAKER('language', 'de-de'),
+            ELEMENT_MAKER('copyright',
+                          'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+            ELEMENT_NS_MAKER('atom', 'link', href='', type='')
+        )
+
         self.rss_link = self.request.route_url('home')
         self.atom_link = (self.request.url,
                           self.request.response.content_type)
@@ -441,8 +428,8 @@ class Z2XFeed(RSSBase):
         It contians items in document order and has no sorting by date. """
 
     def __init__(self, context, request):
-        self.rss_title = 'Z2X Kooperationsfeed'
         super(Z2XFeed, self).__init__(context, request)
+        self.rss_title = 'Z2X Kooperationsfeed'
 
     def build_feed(self):
         for content in self.items:
@@ -471,10 +458,12 @@ class SocialFeed(RSSBase):
     social_value = NotImplemented
 
     def __init__(self, context, request):
+        super(SocialFeed, self).__init__(context, request)
         self.rss_title = 'ZEIT ONLINE Social Flow'
-        super(SpektrumFeed, self).__init__(context, request)
 
     def build_feed(self):
+        E = ELEMENT_MAKER
+        EN = ELEMENT_NS_MAKER
         for content in self.items:
             try:
                 content_url = zeit.web.core.template.create_url(
@@ -489,6 +478,7 @@ class SocialFeed(RSSBase):
                       format_rfc822_date(last_published_semantic(content))),
                     E('guid', self.make_guid(content), isPermaLink='false'),
                 )
+
                 social_value = self.social_value(content)
                 if social_value:
                     item.append(EN('content', 'encoded', social_value))
