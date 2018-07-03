@@ -364,7 +364,8 @@ class RSSBase(Base):
             ELEMENT_MAKER('description'),
             ELEMENT_MAKER('language', 'de-de'),
             ELEMENT_MAKER('copyright',
-                          'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+                          'Copyright ZEIT ONLINE GmbH.'
+                          'Alle Rechte vorbehalten'),
             ELEMENT_NS_MAKER('atom', 'link', href='', type='')
         )
 
@@ -444,8 +445,8 @@ class Z2XFeed(RSSBase):
 class SpektrumFeed(RSSBase):
 
     def __init__(self, context, request):
-        self.rss_title = 'Spektrum Kooperationsfeed'
         super(SpektrumFeed, self).__init__(context, request)
+        self.rss_title = 'Spektrum Kooperationsfeed'
 
     def build_feed(self):
         for content in filter_and_sort_entries(self.items)[:100]:
