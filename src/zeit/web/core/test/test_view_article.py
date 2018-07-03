@@ -2,6 +2,7 @@ import mock
 import pyramid.testing
 import pytest
 import requests
+import zope.component
 
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
@@ -67,6 +68,27 @@ def test_advertorial_marker_is_returned_correctly():
     view = zeit.web.site.view_article.Article(
         content, pyramid.testing.DummyRequest())
     assert view.advertorial_marker == ('YYY', 'XXX', 'Zzz')
+
+
+def test_liveblog_article_renders_if_liveblog_api_backend_is_down(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['liveblog_api_url_v3'] = 'http://unavailable//api/blogs'
+    conf['liveblog_api_auth_url_v3'] = 'http://unavailable/auth'
+    browser = testbrowser('/zeit-online/article/liveblog3')
+    assert browser.cssselect('body')
+    assert browser.cssselect('div#navigation')
+    assert browser.cssselect('main#main')
+
+
+def test_liveblog_article_renders_if_liveblog_content_backend_is_down(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['liveblog_api_url_v3'] = 'http://unavailable//api/blogs'
+    conf['liveblog_api_auth_url_v3'] = 'http://unavailable/auth'
+    conf['liveblog_backend_url_v3'] = 'http://unavailable/v3'
+    browser = testbrowser('/zeit-online/article/liveblog3')
+    assert browser.cssselect('body')
+    assert browser.cssselect('div#navigation')
+    assert browser.cssselect('main#main')
 
 
 def test_url_of_image_groups_is_suffixed_with_mobile_on_small_browser_size(
