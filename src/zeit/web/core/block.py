@@ -289,10 +289,15 @@ class Liveblog(Module):
 
     def set_blog_info(self):
         json = self.api_blog_request()
-        updated = json.get('last_created_post').get('_updated') or json.get(
-            '_updated')
         self.is_live = json.get('blog_status') == u'open'
-        self.last_modified = self.format_date(updated)
+        if json.get('last_created_post'):
+            updated = json.get('last_created_post').get('_updated')
+        else:
+            updated = json.get('_updated')
+        try:
+            self.last_modified = self.format_date(updated)
+        except Exception:
+            self.last_modified = ''
 
     @LONG_TERM_CACHE.cache_on_arguments()
     def auth_token(self):
@@ -317,7 +322,8 @@ class Liveblog(Module):
         url = '{}/{}'.format(api_url, self.blog_id)
 
         if retries >= 2:
-            raise RuntimeError('Maximum retries exceeded for %s' % url)
+            log.error('Maximum retries exceeded for %s' % url)
+            return {}
 
         try:
             with zeit.web.core.metrics.http('liveblog3.api') as record:
@@ -330,12 +336,14 @@ class Liveblog(Module):
                 log.debug('Refreshing liveblog3 auth token')
                 self.auth_token.invalidate(self)
                 return self.api_blog_request(retries=retries + 1)
-            raise
+            log.error(
+                'Liveblog3 API unavailable with status  %s' % err.response)
+            return {}
         try:
             return response.json()
         except Exception:
             log.error('%s returned invalid json %r', url, response.text)
-            raise ValueError('No valid JSON found for %s' % url)
+            return {}
 
     def format_date(self, date):
         tz = babel.dates.get_timezone('Europe/Berlin')
