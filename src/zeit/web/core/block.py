@@ -288,12 +288,12 @@ class Liveblog(Module):
                 self.is_live = True
 
     def set_blog_info(self):
-        json = self.api_blog_request()
-        self.is_live = json.get('blog_status') == u'open'
-        if json.get('last_created_post'):
-            updated = json.get('last_created_post').get('_updated')
+        blog_info = self.api_blog_request()
+        self.is_live = blog_info.get('blog_status') == u'open'
+        if blog_info.get('last_created_post'):
+            updated = blog_info.get('last_created_post').get('_updated')
         else:
-            updated = json.get('_updated')
+            updated = blog_info.get('_updated')
         try:
             self.last_modified = self.format_date(updated)
         except Exception:
