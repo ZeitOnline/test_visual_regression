@@ -12,7 +12,17 @@ POSTDEPLOY
 - Nothing
 
 
-3.166 (unreleased)
+3.167 (unreleased)
+------------------
+
+- BUG-948: Add styles for tag logo in Buzzbox teasers
+
+- BUG-949: Fix transparent gradient for webkit and iOS
+
+- FEM-83: Update NPM Packages
+
+
+3.166 (2018-07-02)
 ------------------
 
 - ZON-4734: Ad-Position P5 differenziert nach Ressorts
