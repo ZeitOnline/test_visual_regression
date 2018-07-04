@@ -12,7 +12,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.167 (unreleased)
+3.167 (2018-07-04)
 ------------------
 
 - ZON-4775: Use core layout template
