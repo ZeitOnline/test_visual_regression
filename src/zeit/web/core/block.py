@@ -245,9 +245,6 @@ class Infobox(Module):
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ILiveblog)
 def liveblog_dispatcher(context):
-
-    import pdb;pdb.set_trace()
-
     return Liveblog(context) if context.version == '3' else (
         LiveblogLegacy(context))
 
@@ -256,16 +253,31 @@ class LiveblogBase(Module):
 
     def __init__(self, context):
         super(LiveblogBase, self).__init__(context)
-        self.blog_id = self.context.blog_id
         self.version = self.context.version
         self.collapse_preceding_content = (
             self.context.collapse_preceding_content)
-        self.is_live = False
-        self.last_modified = None
-        self.id = self.blog_id
-        self.seo_id = None
         self.conf = zope.component.getUtility(
             zeit.web.core.interfaces.ISettings)
+
+    @zeit.web.reify
+    def blog_id(self):
+        return self.context.blog_id
+
+    @zeit.web.reify
+    def is_life(self):
+        return False
+
+    @zeit.web.reify
+    def last_modified(self):
+        return None
+
+    @zeit.web.reify
+    def id(self):
+        return self.blog_id
+
+    @zeit.web.reify
+    def seo_id(self):
+        return None
 
     def format_date(self, date):
         tz = babel.dates.get_timezone('Europe/Berlin')
@@ -345,10 +357,10 @@ class Liveblog(LiveblogBase):
 
     @zeit.web.reify
     def last_modified(self):
-        last_modified == ''
-        updated = blog_info.get('_updated')
+        last_modified = ''
+        updated = self.blog_info.get('_updated')
         if self.blog_info.get('last_created_post'):
-            updated = blog_info['last_created_post'].get('_updated')
+            updated = self.blog_info['last_created_post'].get('_updated')
         return self.format_date(updated) if updated else last_modified
 
     @LONG_TERM_CACHE.cache_on_arguments()
@@ -379,7 +391,7 @@ class LiveblogLegacy(LiveblogBase):
 
     @zeit.web.reify
     def seo_id(self):
-        if len(self._ids >= 2):
+        if len(self._ids) >= 2:
             return self._ids[1]
 
     @zeit.web.reify
@@ -414,9 +426,10 @@ class LiveblogLegacy(LiveblogBase):
 
     @zeit.web.reify
     def is_live(self):
-        content = self.get_restful(
+        content = self._get_restful(
             '{}/Blog/{}'.format(self.status_url, self.id))
-        return content and 'ClosedOn' not in content
+
+        return bool(content and not content.get('ClosedOn'))
 
     def _prepare_ref(self, url):
         return 'http:{}'.format(url).replace(
