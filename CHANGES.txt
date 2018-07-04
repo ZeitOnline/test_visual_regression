@@ -12,7 +12,13 @@ POSTDEPLOY
 - Nothing
 
 
-3.167 (unreleased)
+3.168 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.167 (2018-07-04)
 ------------------
 
 - ZON-4775: Use core layout template
@@ -20,6 +26,8 @@ POSTDEPLOY
 - BUG-948: Add styles for tag logo in Buzzbox teasers
 
 - BUG-949: Fix transparent gradient for webkit and iOS
+
+- BUG-950: Fix empty page when Liveblog API down
 
 - FEM-83: Update NPM Packages
 
