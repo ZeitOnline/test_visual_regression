@@ -15,7 +15,7 @@ POSTDEPLOY
 3.168 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4744: Feed for ZON content on z2x.zeit.de
 
 
 3.167 (2018-07-04)
