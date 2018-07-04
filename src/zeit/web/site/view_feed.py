@@ -426,7 +426,7 @@ class RSSBase(Base):
     host_restriction='newsfeed')
 class Z2XFeed(RSSBase):
     """ This feed is used as an interchange format for the Z2X Website.
-        It contians items in document order and has no sorting by date. """
+        It contains items in document order and has no sorting by date. """
 
     def __init__(self, context, request):
         super(Z2XFeed, self).__init__(context, request)
