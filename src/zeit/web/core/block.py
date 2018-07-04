@@ -309,7 +309,8 @@ class Liveblog(Module):
             with zeit.web.core.metrics.http('liveblog3.auth') as record:
                 response = requests.post(url, json={
                     'username': conf.get('liveblog_api_auth_username_v3'),
-                    'password': conf.get('liveblog_api_auth_password_v3')})
+                    'password': conf.get('liveblog_api_auth_password_v3')},
+                    timeout=0.5)
                 record(response)
             response.raise_for_status()
             return response.json().get('token')
@@ -329,7 +330,8 @@ class Liveblog(Module):
 
         try:
             with zeit.web.core.metrics.http('liveblog3.api') as record:
-                response = requests.get(url, auth=(self.auth_token(), ''))
+                response = requests.get(
+                    url, auth=(self.auth_token(), ''), timeout=0.5)
                 record(response)
             response.raise_for_status()
         except requests.exceptions.RequestException as err:
