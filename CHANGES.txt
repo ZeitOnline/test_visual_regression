@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - BUG-949: Fix transparent gradient for webkit and iOS
 
+- BUG-950: Fix empty page when Liveblog API down
+
 - FEM-83: Update NPM Packages
 
 
