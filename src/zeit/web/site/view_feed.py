@@ -342,7 +342,7 @@ class AtomLink(object):
         return obj.channel.find('{http://www.w3.org/2005/Atom}link')
 
     def __get__(self, obj, objtype):
-        return self._atom(obj).attrib['href'], self.atom.attrib['type']
+        return self._atom(obj).attrib['href'], self._atom(obj).attrib['type']
 
     def __set__(self, obj, val):
         self._atom(obj).attrib['href'] = val[0]
