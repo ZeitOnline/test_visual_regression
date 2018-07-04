@@ -310,7 +310,7 @@ class Liveblog(Module):
                 response = requests.post(url, json={
                     'username': conf.get('liveblog_api_auth_username_v3'),
                     'password': conf.get('liveblog_api_auth_password_v3')},
-                    timeout=0.5)
+                    timeout=1)
                 record(response)
             response.raise_for_status()
             return response.json().get('token')
