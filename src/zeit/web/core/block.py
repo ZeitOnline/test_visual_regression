@@ -288,11 +288,18 @@ class Liveblog(Module):
                 self.is_live = True
 
     def set_blog_info(self):
-        json = self.api_blog_request()
-        updated = json.get('last_created_post').get('_updated') or json.get(
-            '_updated')
-        self.is_live = json.get('blog_status') == u'open'
-        self.last_modified = self.format_date(updated)
+        blog_info = self.api_blog_request()
+        if not blog_info:
+            return
+        self.is_live = blog_info.get('blog_status') == u'open'
+        if blog_info.get('last_created_post'):
+            updated = blog_info.get('last_created_post').get('_updated')
+        else:
+            updated = blog_info.get('_updated')
+        try:
+            self.last_modified = self.format_date(updated)
+        except Exception:
+            self.last_modified = ''
 
     @LONG_TERM_CACHE.cache_on_arguments()
     def auth_token(self):
@@ -302,7 +309,8 @@ class Liveblog(Module):
             with zeit.web.core.metrics.http('liveblog3.auth') as record:
                 response = requests.post(url, json={
                     'username': conf.get('liveblog_api_auth_username_v3'),
-                    'password': conf.get('liveblog_api_auth_password_v3')})
+                    'password': conf.get('liveblog_api_auth_password_v3')},
+                    timeout=1)
                 record(response)
             response.raise_for_status()
             return response.json().get('token')
@@ -317,11 +325,13 @@ class Liveblog(Module):
         url = '{}/{}'.format(api_url, self.blog_id)
 
         if retries >= 2:
-            raise RuntimeError('Maximum retries exceeded for %s' % url)
+            log.error('Maximum retries exceeded for %s' % url)
+            return {}
 
         try:
             with zeit.web.core.metrics.http('liveblog3.api') as record:
-                response = requests.get(url, auth=(self.auth_token(), ''))
+                response = requests.get(
+                    url, auth=(self.auth_token(), ''), timeout=0.5)
                 record(response)
             response.raise_for_status()
         except requests.exceptions.RequestException as err:
@@ -330,12 +340,14 @@ class Liveblog(Module):
                 log.debug('Refreshing liveblog3 auth token')
                 self.auth_token.invalidate(self)
                 return self.api_blog_request(retries=retries + 1)
-            raise
+            log.error(
+                'Liveblog3 API unavailable with status  %s' % err.response)
+            return {}
         try:
             return response.json()
         except Exception:
             log.error('%s returned invalid json %r', url, response.text)
-            raise ValueError('No valid JSON found for %s' % url)
+            return {}
 
     def format_date(self, date):
         tz = babel.dates.get_timezone('Europe/Berlin')
@@ -530,7 +542,7 @@ class PuzzleForm(Module):
 
     @pyramid.decorator.reify
     def failure_message(self):
-        return u"Leider ist ein technisches Problem aufgetreten." \
+        return u"Leider ist ein technisches Problem aufgetreten. " \
                u"Bitte versuchen Sie es später erneut."
 
     @pyramid.decorator.reify

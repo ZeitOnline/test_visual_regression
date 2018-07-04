@@ -2462,3 +2462,39 @@ def test_article_can_include_optimize(testbrowser):
     settings['optimize_on_zon_article'] = optimize_url
     browser = testbrowser('/zeit-online/article/simple')
     assert optimize_url in browser.contents
+
+
+def test_article_has_valid_twitter_meta_tags(testbrowser):
+    select = testbrowser('/zeit-online/article/amp').metaselect
+
+    assert select('[name="twitter:card"]') == 'summary_large_image'
+    assert select('[name="twitter:site"]') == '@zeitonline'
+    assert select('[name="twitter:creator"]') == '@zeitonline'
+    assert select('[name="twitter:title"]') == (
+        u'Flüchtlinge: Mehr Davos, weniger Kreuth')
+    assert select('[name="twitter:description"]').startswith(
+        u'Zwei Bergdörfer diskutieren die Flüchtlingskrise:')
+    assert select('[name="twitter:image"]') == (
+        'http://localhost/zeit-online/image/'
+        'filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+
+
+def test_article_has_valid_facebook_meta_tags(testbrowser):
+    select = testbrowser('/zeit-online/article/amp').metaselect
+
+    assert select('[property="og:site_name"]') == 'ZEIT ONLINE'
+    assert select('[property="fb:app_id"]') == '638028906281625'
+    assert select('[property="fb:pages"]') == (
+        '37816894428, 63948163305, 327602816926, 114803848589834')
+    assert select('[property="og:type"]') == 'article'
+    assert select('[property="og:title"]') == (
+        u'Flüchtlinge: Mehr Davos, weniger Kreuth')
+    assert select('[property="og:description"]').startswith(
+        u'Zwei Bergdörfer diskutieren die Flüchtlingskrise:')
+    assert select('[property="og:url"]') == (
+        'http://localhost/zeit-online/article/amp')
+    assert select('[property="og:image"]') == (
+        'http://localhost/zeit-online/image/'
+        'filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+    assert select('[property="og:image:width"]') == '1300'
+    assert select('[property="og:image:height"]') == '731'

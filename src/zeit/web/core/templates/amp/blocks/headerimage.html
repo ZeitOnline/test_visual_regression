@@ -2,8 +2,6 @@
 {% set image = get_image(block, fallback=False) %}
 {% set href = image.href %}
 
-{% block itemprop %} itemprop="image"{% endblock %}
-
 {% block image %}
     <div class="{{ 'article__item' | with_mods(display_mode) }}">
         {{ super() }}

@@ -200,6 +200,59 @@ function wmTicker( element ) {
 
 
     /**
+     * generate time String containing all needed words
+     * @param  {string}  date string supplied by API
+     * @return {string}
+     */
+    function timeString( date, kickoff, period, status ) {
+        var minuteDifference = getMinuteDifference( kickoff ),
+            begin = new Date( date ),
+            minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
+            returnString = 'um ' + begin.getHours() + ':' + minutes;
+
+        kickoff = new Date( kickoff );
+
+        if ( defaults.showRunningGameTime ) {
+            switch ( status ) {
+                case 'LIVE':
+                    var offsetArray = [ 0, 45, 90, 105, 120 ];
+                    var cutoff = offsetArray[ period ];
+                    var min = minuteDifference + offsetArray[ period - 1 ];
+                    if ( min > cutoff ) {
+                        returnString = cutoff + '. + ' + ( min - cutoff );
+                    } else {
+                        returnString = min + '.';
+                    }
+                    break;
+                case 'HALF-TIME':
+                    returnString = 'Halbzeit';
+                    break;
+                case 'HALF-EXTRATIME':
+                    returnString = 'Halbzeit Verlängerung';
+                    break;
+                case 'PENALTY-SHOOTOUT':
+                    returnString = 'Elfmeterschießen';
+                    break;
+                case 'FULL':
+                    returnString = '';
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( status ) {
+                case 'PRE-MATCH':
+                    returnString = 'um ' + begin.getHours() + ':' + minutes;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return returnString;
+    }
+
+
+    /**
      * Map Data from API to needed format to use in further code
      * @param  {object}  data from Kickerticker Backend
      * @return {object}
@@ -276,57 +329,6 @@ function wmTicker( element ) {
         return points;
     };
 
-    /**
-     * generate time String containing all needed words
-     * @param  {string}  date string supplied by API
-     * @return {string}
-     */
-    function timeString( date, kickoff, period, status ) {
-        var minuteDifference = getMinuteDifference( kickoff ),
-            begin = new Date( date ),
-            minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
-            returnString = 'um ' + begin.getHours() + ':' + minutes;
-
-        kickoff = new Date( kickoff );
-
-        if ( defaults.showRunningGameTime ) {
-            switch ( status ) {
-                case 'LIVE':
-                    var offsetArray = [ 0, 45, 90, 105, 120 ];
-                    var cutoff = offsetArray[ period ];
-                    var min = minuteDifference + offsetArray[ period - 1 ];
-                    if ( min > cutoff ) {
-                        returnString = cutoff + '. + ' + ( min - cutoff );
-                    } else {
-                        returnString = min + '.';
-                    }
-                    break;
-                case 'HALF-TIME':
-                    returnString = 'Halbzeit';
-                    break;
-                case 'HALF-EXTRATIME':
-                    returnString = 'Halbzeit Verlängerung';
-                    break;
-                case 'PENALTY-SHOOTOUT':
-                    returnString = 'Elfmeterschießen';
-                    break;
-                case 'FULL':
-                    returnString = '';
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch ( status ) {
-                case 'PRE-MATCH':
-                    returnString = 'um ' + begin.getHours() + ':' + minutes;
-                    break;
-                default:
-                    break;
-            }
-        }
-        return returnString;
-    }
 
     /**
      * Count ticker time up and update view

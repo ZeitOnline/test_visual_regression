@@ -9,12 +9,14 @@
     <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.asset_host }}/icons/favicon.ico">
     {% block css_link -%}
         <link href="{{ request.asset_host }}/css/web.campus/framebuilder.css" media="all" rel="stylesheet" type="text/css">
-    {%- endblock css_link %}
+    {% endblock css_link -%}
 
     {% include "zeit.web.core:templates/inc/inline_js/library.html" %}
 
     {# Modernizr -#}
+    <script>{% include "zeit.web.core:templates/inc/inline_js/modernizr-replacement.js" %}</script>
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+
     {% if view.framebuilder_requires_ivw -%}
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>

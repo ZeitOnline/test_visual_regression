@@ -1,0 +1,16 @@
+{% extends "zeit.web.core:templates/inc/structured-data/article.html" -%}
+
+{%- block type -%}
+    VideoObject
+{%- endblock -%}
+
+{%- block additional_structured_data -%}
+    "name": {{ view.title | tojson | safe }},
+    {% require image = get_image(view.context, variant_id="wide", fallback=False) -%}
+        "thumbnailUrl": "{{ request.image_host + image.path }}",
+    {% endrequire -%}
+    "duration": "{{ view.iso_duration }}",
+    "contentUrl": "{{ block.highest_rendition_url }}",
+    "uploadDate": "{{ view.date_last_modified | format_date('iso8601') }}"
+    {# add whitespace #}
+{% endblock -%}

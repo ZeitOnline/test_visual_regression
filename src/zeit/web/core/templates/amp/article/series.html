@@ -1,0 +1,24 @@
+{% if view.has_series_attached %}
+    <div class="article-series article__item article__item--large">
+        {% set series_cp = context | find_series_cp -%}
+        {% set image_sources = [320, 480, 660, 750, 820, 1000] -%}
+        {% require image = get_image(series_cp, variant_id='stripe', fallback=False) -%}
+            <amp-img
+                class="article-series__image"
+                src="{{ request.image_host + image.fallback_path }}"
+                srcset="{% for w in image_sources %}
+                    {{- '%s%s__%sx%s %sw' | format(request.image_host, image.path, w, (w / image.ratio) | int, w) }}
+                    {{- ', ' if not loop.last }}{% endfor %}"
+                alt="{{ image.alt }}"
+                width="auto"
+                height="80"
+                layout="fixed-height"
+                attribution="{{ image.copyrights | map(attribute='text') | join(', ') }}"></amp-img>
+        {% endrequire -%}
+
+        <a href="{{ series_cp | create_url }}" class="article-series__heading">
+            <span class="article-series__kicker">Aus der Serie</span><span class="visually-hidden">: </span>
+            <span class="article-series__title">{{ view.serie }}</span>
+        </a>
+    </div>
+{% endif %}

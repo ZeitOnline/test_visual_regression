@@ -22,6 +22,7 @@
   <iqd>false</iqd>
   <iqd_touchpoint>true</iqd_touchpoint>
   <keywords_from_tms>false</keywords_from_tms>
+  <modernizr_js_file>false</modernizr_js_file>
 
   <ligatus>false</ligatus>
   <ligatus_on_arbeit>false</ligatus_on_arbeit>
