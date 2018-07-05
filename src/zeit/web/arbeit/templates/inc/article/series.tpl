@@ -10,7 +10,7 @@
             {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
         {%- endif -%}
 
-        <a href="{{ series_cp | create_url }}" class="article-series__heading" itemprop="isPartOf" data-ct-label="{{ view.serie }}">
+        <a href="{{ series_cp | create_url }}" class="article-series__heading" data-ct-label="{{ view.serie }}">
             <span class="article-series__title">Aus der Serie: {{ view.serie }}</span>
         </a>
     </div>

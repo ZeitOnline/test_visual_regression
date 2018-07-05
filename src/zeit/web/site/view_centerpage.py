@@ -158,3 +158,11 @@ class Storystream(Centerpage):
         self.atom_meta['count'] = atom_counter
         self.atom_meta['oldest_date'] = oldest_atom
         self.atom_meta['latest_date'] = latest_atom
+
+    @zeit.web.reify
+    def date_last_modified(self):
+        last_modified = super(Storystream, self).date_last_modified
+        latest_atom_date = self.atom_meta['latest_date']
+        if latest_atom_date and latest_atom_date > last_modified:
+            return latest_atom_date
+        return last_modified

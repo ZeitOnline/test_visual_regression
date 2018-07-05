@@ -1,28 +1,16 @@
 {% extends 'zeit.web.site:templates/content.html' %}
 
+{% block structured_data -%}
+    {% include "zeit.web.core:templates/inc/structured-data/video.html" %}
+{% endblock structured_data -%}
+
 {% block content %}
     <article class="article article--padded article--video" id="js-article"
         {% if view.serie %} data-video-series="{{ view.serie | format_webtrekk }}"{% endif %}
         data-video-provider="brightcove"
         data-video-size="large"
-        data-video-page-url="{{ view.content_url }}{% if view.slug %}/{{ view.slug }}{% endif %}"
-        itemprop="mainEntity"
-        itemscope
-        itemtype="http://schema.org/VideoObject"
-        itemid="{{ view.basename }}"
-        itemref="publisher">
-        {% profile %}
-        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
-        <meta itemprop="playerType" content="HTML5 Flash">
-        <meta itemprop="name" content="{{ view.title }}">
-        <meta itemprop="uploadDate" content="{{ view.date_last_modified | format_date('iso8601') }}">
-        {% if view.iso_duration %}
-            <meta itemprop="duration" content="{{ view.iso_duration }}">
-        {% endif %}
-        {% require image = get_image(view.context, variant_id="wide", fallback=False) %}
-            <meta itemprop="thumbnailUrl" content="{{ request.image_host + image.path }}">
-        {% endrequire %}
-
+        data-video-page-url="{{ view.content_url }}{% if view.slug %}/{{ view.slug }}{% endif %}">
+        {% profile -%}
         <div class="article__item article__item--wide article__item--rimless">
             <div class="js-videoplayer"
                  data-video-id="{{ view.context.__name__ }}"
@@ -37,7 +25,7 @@
         {% include "zeit.web.site:templates/inc/article/heading.tpl" %}
 
         <div class="article__item" data-ct-area="articleheader">
-            <div class="summary" itemprop="description">
+            <div class="summary">
                 {{ view.subtitle }}
             </div>
             {%- set byline = view.context | get_byline('main') %}

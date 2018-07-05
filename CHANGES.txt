@@ -15,6 +15,8 @@ POSTDEPLOY
 3.168 (unreleased)
 ------------------
 
+- ZON-4777: Add structured data in JSON-LD format
+
 - ZON-4744: Feed for ZON content on z2x.zeit.de
 
 - BUG-952: Copy missing vendor script to enable Modernizr loading

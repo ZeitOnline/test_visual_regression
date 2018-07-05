@@ -8,21 +8,20 @@
     {%- include "zeit.web.core:templates/inc/meta/ligatus.html" -%}
 {% endblock %}
 
-{% block schemaorg_data %}
-    {%- include "zeit.web.core:templates/inc/meta/schemaorg.html" -%}
-{% endblock %}
+{% block structured_data -%}
+    {% include "zeit.web.core:templates/inc/structured-data/article.html" %}
+{% endblock structured_data -%}
 
 {% block main %}
     {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
-    <article class="article article--{{ view | block_type }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
-        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
+    <article class="article article--{{ view | block_type }}" id="js-article">
         {% block article_heading -%}
             {% include ["zeit.web.arbeit:templates/inc/article-header/{}.html".format(view.header_layout),
                         "zeit.web.arbeit:templates/inc/article-header/default.html"] %}
         {% endblock article_heading -%}
         {% block article_body %}
-        <div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
+        <div class="article-body article-body--{{ view | block_type }}">
             {% block article_pages %}
                 <!-- Here goes the content for a page -->
             {% endblock article_pages %}

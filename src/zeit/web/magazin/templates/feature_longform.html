@@ -1,15 +1,8 @@
 {% extends "zeit.web.magazin:templates/longform.html" %}
 
 {% block longform_logo %}
-    <a itemprop="url" href="{{ request.route_url('home') }}index" data-ct-label="logo">
-        <meta itemprop="name" content="ZEIT ONLINE">
-        <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-            {{ lama.use_svg_icon('logo-zon-large', 'header__logo header__logo--zon', view.package) }}
-            {# The "logo" dimensions must not exceed 600x60 -#}
-            <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
-            <meta itemprop="width" content="565">
-            <meta itemprop="height" content="60">
-        </span>
+    <a href="{{ request.route_url('home') }}index" data-ct-label="logo">
+        {{ lama.use_svg_icon('logo-zon-large', 'header__logo header__logo--zon', view.package) }}
     </a>
 {% endblock longform_logo %}
 
