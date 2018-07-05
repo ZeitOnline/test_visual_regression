@@ -289,8 +289,11 @@ class LiveblogBase(Module):
             date_format = '%Y-%m-%dT%H:%M:%S+00:00'
         elif '-' in date:
             date_format = '%Y-%m-%dT%H:%M:%SZ'
-        return datetime.datetime.strptime(
-            date, date_format).replace(tzinfo=utc).astimezone(tz)
+        try:
+            return datetime.datetime.strptime(
+                date, date_format).replace(tzinfo=utc).astimezone(tz)
+        except ValueError:
+            return
 
 
 class Liveblog(LiveblogBase):
