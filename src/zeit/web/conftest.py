@@ -54,7 +54,7 @@ log = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope='session')
-def app_settings(mockserver):
+def app_settings(mockserver_session):
     return {
         'pyramid.reload_templates': False,
         'pyramid.debug_authorization': False,
@@ -75,44 +75,46 @@ def app_settings(mockserver):
         # vivi config setup too, so we need to satisfy it.
         'vivi_zeit.cms_cache-expiration-config': '600',
         'session.reissue_time': '1',
-        'liveblog_backend_url': mockserver.url + '/liveblog/backend',
-        'liveblog_status_url': mockserver.url + '/liveblog/status',
-        'liveblog_backend_url_v3': mockserver.url + '/liveblog/v3',
+        'liveblog_backend_url': mockserver_session.url + '/liveblog/backend',
+        'liveblog_status_url': mockserver_session.url + '/liveblog/status',
+        'liveblog_backend_url_v3': mockserver_session.url + '/liveblog/v3',
         'liveblog_amp_theme_v3': 'zon-amp',
-        'liveblog_api_auth_url_v3': mockserver.url + '/liveblog/v3/api/auth',
+        'liveblog_api_auth_url_v3': mockserver_session.url + (
+            '/liveblog/v3/api/auth'),
         'liveblog_api_auth_username_v3': 'apiuser',
         'liveblog_api_auth_password_v3': 'geheim',
-        'liveblog_api_url_v3': mockserver.url + '/liveblog/v3/api/blogs',
+        'liveblog_api_url_v3': mockserver_session.url + (
+            '/liveblog/v3/api/blogs'),
         # XXX I'd rather put None here and change the settings for a specific
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
         'cookie_fallback_domain': 'localhost',
         'comment_page_size': '4',
-        'community_host': mockserver.url + '/comments',
+        'community_host': mockserver_session.url + '/comments',
         'community_profile_url': 'https://community.zeit.de',
         'community_admin_host': 'http://community_admin',
         'community_static_host': 'http://static_community',
         'community_maintenance': (
             'http://xml.zeit.de/config/community_maintenance.xml'),
-        'agatho_host': mockserver.url + '/comments',
-        'linkreach_host': mockserver.url + '/linkreach/api',
-        'podigee_url': mockserver.url + '/podigee',
+        'agatho_host': mockserver_session.url + '/comments',
+        'linkreach_host': mockserver_session.url + '/linkreach/api',
+        'podigee_url': mockserver_session.url + '/podigee',
         'itunes_podcast_base_url': 'http://xml.zeit.de/podcast/id',
         'app_servers': '',
         'health_check_with_fs': True,
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
-        'brandeins_hp_feed': mockserver.url + '/brandeins/feed.xml',
-        'brandeins_img_host': mockserver.url + '/brandeins',
-        'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
-        'spektrum_img_host': mockserver.url + '/spektrum',
+        'brandeins_hp_feed': mockserver_session.url + '/brandeins/feed.xml',
+        'brandeins_img_host': mockserver_session.url + '/brandeins',
+        'spektrum_hp_feed': mockserver_session.url + '/spektrum/feed.xml',
+        'spektrum_img_host': mockserver_session.url + '/spektrum',
         'brandeins_host': 'https://www.brandeins.de',
         'zett_host': 'https://ze.tt',
-        'zett_hp_feed': mockserver.url + '/zett/feed.xml',
-        'zett_img_host': mockserver.url + '/zett',
-        'academics_hp_feed': mockserver.url + '/academics/feed.xml',
-        'academics_img_host': mockserver.url + '/academics',
-        'cardstack_backend': mockserver.url + '/cardstack',
+        'zett_hp_feed': mockserver_session.url + '/zett/feed.xml',
+        'zett_img_host': mockserver_session.url + '/zett',
+        'academics_hp_feed': mockserver_session.url + '/academics/feed.xml',
+        'academics_img_host': mockserver_session.url + '/academics',
+        'cardstack_backend': mockserver_session.url + '/cardstack',
         'connector_type': 'mock',
         'solr_timeout': 2,
         'solr_sitemap_timeout': 10,
@@ -227,7 +229,7 @@ def app_settings(mockserver):
         'vivi_zeit.web_feature-toggle-source': (
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
         'vivi_zeit.imp_scale-source':
-            'egg://zeit.web.core/data/config/scales.xml',
+        'egg://zeit.web.core/data/config/scales.xml',
         'vivi_zeit.web_intextlink-blacklist-url': (
             'egg://zeit.web.core/data/config/intextlink-blacklist.xml'),
         'vivi_zeit.content.link_source-blogs': (
@@ -251,7 +253,8 @@ def app_settings(mockserver):
         'vivi_zeit.content.author_biography-questions': (
             'egg://zeit.web.core/data/config/author-biography-questions.xml'),
         'vivi_zeit.cms_celery-config': '/dev/null',
-        'vivi_zeit.brightcove_playback-url': mockserver.url + '/brightcove',
+        'vivi_zeit.brightcove_playback-url': mockserver_session.url + (
+            '/brightcove'),
         'vivi_zeit.brightcove_playback-policy-key': 'None',
         'vivi_zeit.brightcove_playback-timeout': '2',
         'sso_activate': '',
@@ -524,11 +527,6 @@ def sleep_tween(handler, registry):
         response = handler(request)
 
         # For comfortability set sleep back to 0
-        # XXX: This works fine, if a request is actually issued
-        # and performed in a test. But it leads to isolation problems,
-        # if not and `sleep` is sth. > 0.
-        # Due to the session scope nature of the mockserver,
-        # it's not easy to work around it.
         if conf['sleep_reset']:
             conf['sleep'] = 0
         return response
@@ -561,7 +559,7 @@ class StaticViewMaybeReplaceHostURL(pyramid.static.static_view):
 
 
 @pytest.fixture(scope='session')
-def mockserver(request):
+def mockserver_session(request):
     """Used for mocking external HTTP dependencies like agatho or spektrum."""
     from pyramid.config import Configurator
 
@@ -584,6 +582,28 @@ def mockserver(request):
     server.url = 'http://%s' % server['http_address']
     request.addfinalizer(server.tearDown)
     return server
+
+
+@pytest.fixture
+def preserve_mockserver_settings(mockserver_session, request):
+    def restore_settings():
+        settings = zope.component.queryUtility(ISettings)
+        if settings is not None and settings_orig is not None:
+            for key, value in settings_orig.items():
+                settings[key] = value
+            for key in list(settings):
+                if key not in settings_orig:
+                    del settings[key]
+    settings_orig = None
+    settings = zope.component.queryUtility(ISettings)
+    if settings is not None:
+        request.addfinalizer(restore_settings)
+        settings_orig = copy.copy(settings)
+
+
+@pytest.fixture
+def mockserver(mockserver_session, preserve_mockserver_settings):
+    return mockserver_session
 
 
 @pytest.fixture(scope='session')
