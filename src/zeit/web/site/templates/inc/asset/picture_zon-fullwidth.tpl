@@ -18,7 +18,7 @@
     {%- set mobile_image_sizes = [360, 480, 660, 767] %}
     {%- set desktop_image_sizes = [900, 1000] %}
 
-    <figure class="{{ module_layout }}__media" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+    <figure class="{{ module_layout }}__media" itemscope itemtype="http://schema.org/ImageObject">
 
         {# OPTIMIZATION: Für Teaser, bei denen sich zwischen Mobil-Desktop nicht
            die Ratio ändert, könnte man auf die harte vorgeschriebene Grenze

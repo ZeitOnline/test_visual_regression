@@ -6,11 +6,16 @@
 
 {%- block additional_structured_data -%}
     "name": {{ view.title | tojson | safe }},
+    "playerType": "HTML5 Flash",
     {% require image = get_image(view.context, variant_id="wide", fallback=False) -%}
         "thumbnailUrl": "{{ request.image_host + image.path }}",
     {% endrequire -%}
-    "duration": "{{ view.iso_duration }}",
-    "contentUrl": "{{ block.highest_rendition_url }}",
-    "uploadDate": "{{ view.date_last_modified | format_date('iso8601') }}"
+    {% if view.iso_duration -%}
+        "duration": "{{ view.iso_duration }}",
+    {% endif -%}
+    {# XXX how can we get to this?
+        "contentUrl": "block.highest_rendition_url",
+    -#}
+    "uploadDate": "{{ view.date_last_modified | format_date('iso8601') }}",
     {# add whitespace #}
 {% endblock -%}

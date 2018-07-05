@@ -5,7 +5,7 @@
     "@id": "#{{ view.type }}",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "{{ view.content_url }}"
+        "@id": {{ view.canonical_url | tojson | safe }}
     },
     {% set byline = view.context | get_byline('data') -%}
     {% if byline | length -%}
@@ -18,7 +18,6 @@
             "url": "{{ author.uniqueId | create_url }}",
         {% endif -%}
         "name": {{ author.display_name | tojson | safe }}
-
     }
         {%- endfor -%}
         {%- if byline | length > 1 %}]{% endif -%},
@@ -36,13 +35,8 @@
     "datePublished": "{{ view.date_first_released | format_date('iso8601') }}",
     "dateModified": "{{ view.date_last_modified | format_date('iso8601') }}",
     {% block additional_structured_data %}{% endblock -%}
-    "headline": {% set headline = '%s: %s' | format(view.supertitle, view.title) -%}
-        {%- if view.context is column -%}
-            {{ '%s / %s' | format(view.serie, headline) | tojson | safe }}
-        {%- else -%}
-            {{ headline | tojson | safe }}
-        {%- endif %},
-    "description": {{ view.subtitle | tojson | safe }},
+    "headline": {{ [view.supertitle, view.title] | join_if_exists(': ') | tojson | safe }},
+    "description": {{ view.subtitle | trim | tojson | safe }},
     {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) -%}
     "image": {
         {% set image_width = 1300 -%}

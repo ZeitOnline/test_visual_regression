@@ -461,7 +461,7 @@ def video_duration_format(teaser):
         d = datetime.timedelta(seconds=seconds)
         t = (datetime.datetime.min + d).time()
         return t.strftime(formatstr)
-    except (AttributeError, TypeError, ValueError):
+    except Exception:
         return
 
 

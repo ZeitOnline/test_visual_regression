@@ -1,4 +1,4 @@
-<section class="{% block page_class %}article-page {% if view.paywall -%}paywall{% endif -%}{% endblock %}" {% if view.paywall -%}itemprop="isAccessibleForFree" content="false"{% endif -%} data-page-number="{{ view.current_page.number + 1 }}">
+<section class="article-page {%- if view.paywall %} paywall{% endif %}" data-page-number="{{ view.current_page.number + 1 }}">
     {%- set page = view.current_page -%}
     {%- set block = (page | select('paragraph') | first) -%}
     {% include "zeit.web.core:templates/inc/article/paywall/paragraph.html" %}

@@ -1,5 +1,5 @@
 {% set headertag = 'div' if view.pagination and view.pagination.current > 1 and view.current_page.teaser else 'h1' %}
-<{{ headertag }} class="article-heading" itemprop="headline">
+<{{ headertag }} class="article-heading">
     <span class="article-heading__kicker">
         {{- view.supertitle -}}
     </span>

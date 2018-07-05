@@ -2,17 +2,18 @@
 
 {% block article_head %}
     <div class="article__item">
-        <h1 class="article-heading" itemprop="headline">
+        <h1 class="article-heading">
             <span class="article-heading__title">
                 {{- view.title -}}
             </span>
         </h1>
-        <div class="summary" itemprop="description">
+        <div class="summary">
             {{ view.subtitle }}
         </div>
     </div>
 {% endblock %}
 
+{% block structured_data %}{% endblock %}
 {% block article_footer %}{% endblock %}
 {% block nextread %}{% endblock %}
 {% block nextread_ad %}{% endblock %}

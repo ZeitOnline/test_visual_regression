@@ -410,6 +410,12 @@ class Article(zeit.web.core.view.Content):
 class AcceleratedMobilePageArticle(Article):
 
     @zeit.web.reify
+    def canonical_url(self):
+        return u"{}{}".format(
+            self.request.route_url('home'),
+            self.request.path_info.lstrip('/amp/'))
+
+    @zeit.web.reify
     def meta_robots(self):
         return super(AcceleratedMobilePageArticle,
                      self).meta_robots.replace(',noarchive', '')

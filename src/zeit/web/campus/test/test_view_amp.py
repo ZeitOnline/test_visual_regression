@@ -14,16 +14,7 @@ def test_amp_view_should_have_expected_structure(testbrowser):
 
 
 def test_amp_contains_required_structured_data(testbrowser):
-    browser = testbrowser('/amp/campus/article/common')
-    scripts = browser.cssselect('head script[type="application/ld+json"]')
-    data = {}
-
-    assert scripts
-
-    for script in scripts:
-        content = json.loads(script.text_content().strip())
-        data[content['@type']] = content
-
+    data = testbrowser('/amp/campus/article/common').structured_data()
     page = data['WebPage']
     article = data['Article']
     publisher = data['Organization']

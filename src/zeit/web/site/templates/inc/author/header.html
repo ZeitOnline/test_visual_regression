@@ -7,8 +7,8 @@
             {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
         </div>
         {% endrequire -%}
-        <div class="author-header__text" itemscope itemtype="http://schema.org/Person" itemprop="author">
-            <h1 class="author-header__name" itemprop="name">
+        <div class="author-header__text">
+            <h1 class="author-header__name">
                 {{- context.display_name -}}
             </h1>
             {% if context.summary -%}

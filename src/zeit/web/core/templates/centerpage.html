@@ -1,5 +1,9 @@
 {% extends "{}:templates/layout.html".format(view.package) %}
 
+{% block structured_data -%}
+    {% include "zeit.web.core:templates/inc/structured-data/itemlist.html" %}
+{% endblock structured_data -%}
+
 {% block main %}
     {% for region_prev, region, region_next in view.regions | neighborhood %}
         {% set region_loop = loop %}
@@ -7,10 +11,4 @@
                      "{}:templates/inc/region/default.html".format(view.package),
                      "zeit.web.core:templates/inc/region/default.html"] -%}
     {% endfor %}
-
-    {# listing of articles belonging to a series/topic for google carousel #}
-    {% require jsonld_listing = view.jsonld_listing %}
-        <script type="application/ld+json">{{ jsonld_listing | tojson | safe }}</script>
-    {% endrequire %}
-
 {% endblock main %}

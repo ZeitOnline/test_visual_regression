@@ -204,12 +204,12 @@ def test_zar_advertorial_teaser_has_modifier(testbrowser):
     assert len(select('.teaser-duo--advertorial')) == 2
 
 
-def test_zar_topicpage_has_jsonld(testbrowser, data_solr):
-    browser = testbrowser('/arbeit/centerpage/thema-automatic')
-    assert browser.cssselect('script[type="application/ld+json"]')
-    assert '"@type": "ItemList"' in browser.contents
+def test_zar_topicpage_contains_required_structured_data(
+        testbrowser, data_solr):
+    data = testbrowser('/arbeit/centerpage/thema-automatic').structured_data()
+    assert data['ItemList']['itemListElement']
 
 
-def test_zar_centerpage_has_no_jsonld(testbrowser, data_solr):
-    browser = testbrowser('/arbeit/index')
-    assert 'ld+json' not in browser.contents
+def test_zar_centerpage_contains_no_itemlist(testbrowser, data_solr):
+    data = testbrowser('/arbeit/index').structured_data()
+    assert 'ItemList' not in data

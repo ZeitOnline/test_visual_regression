@@ -43,10 +43,23 @@ def test_author_page_should_hide_favourite_content_if_missing(testbrowser):
     assert len(browser.cssselect('.teaser-small')) == 0
 
 
-def test_author_page_should_feature_schema_org_props(testbrowser):
-    doc = testbrowser('/autoren/anne_mustermann').document
-    name = doc.xpath('//*[@itemprop="author"]/*[@itemprop="name"]')
-    assert name[0].text.strip() == 'Anne Mustermann'
+def test_author_page_contains_required_structured_data(testbrowser):
+    data = testbrowser('/autoren/W/Jochen_Wegner/index').structured_data()
+
+    author = data['Person']
+
+    assert author['mainEntityOfPage']['@id'] == (
+        'http://localhost/autoren/W/Jochen_Wegner/index')
+    assert author['name'] == 'Jochen Wegner'
+    assert author['jobTitle'] == 'Chefredakteur, ZEIT ONLINE.'
+    assert author['description']
+    assert author['image']['url'] == (
+        'http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/'
+        'square__900x900')
+    assert author['image']['width'] == 900
+    assert author['image']['height'] == 900
+    assert len(author['sameAs']) == 3
+    assert author['url'] == 'http://localhost/autoren/W/Jochen_Wegner/index'
 
 
 def test_author_page_should_show_articles_by_author(testbrowser):
