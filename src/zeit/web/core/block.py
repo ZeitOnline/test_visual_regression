@@ -479,7 +479,7 @@ class Image(Module):
         except:
             pass
 
-        # `legacy_layout` is required for bw compat of the ZCO default 
+        # `legacy_layout` is required for bw compat of the ZCO default
         # variant, which is `portrait` rather the usual `wide`.
         self.legacy_layout = context.xml.get('layout', None)
 
