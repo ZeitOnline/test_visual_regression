@@ -9,7 +9,7 @@
     {% endif -%}
     <meta name="robots" content="{{ view.meta_robots }}">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-    <link rel="canonical" href="{{ view.content_url }}">
+    <link rel="canonical" href="{{ view.canonical_url | safe }}">
     {% if view.syndication_source -%}
         <link rel="syndication-source" href="{{ view.syndication_source }}">
     {% endif -%}

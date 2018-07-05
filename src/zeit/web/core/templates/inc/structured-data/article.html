@@ -5,7 +5,7 @@
     "@id": "#{{ view.type }}",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "{{ view.content_url }}"
+        "@id": {{ view.canonical_url | tojson | safe }}
     },
     {% set byline = view.context | get_byline('data') -%}
     {% if byline | length -%}

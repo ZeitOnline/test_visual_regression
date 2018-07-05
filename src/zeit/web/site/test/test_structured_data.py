@@ -98,3 +98,22 @@ def test_free_article_contains_required_structured_data(testbrowser):
 
     assert 'isAccessibleForFree' not in article
     assert 'hasPart' not in article
+
+
+def test_article_page_contains_required_structured_data(testbrowser):
+    data = testbrowser('/zeit-online/article/zeit/seite-2').structured_data()
+
+    article = data['Article']
+
+    assert article['mainEntityOfPage']['@id'] == (
+        'http://localhost/zeit-online/article/zeit/seite-2')
+
+
+def test_article_full_view_contains_required_structured_data(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    data = browser.structured_data()
+
+    article = data['Article']
+
+    assert article['mainEntityOfPage']['@id'] == (
+        'http://localhost/zeit-online/article/zeit')
