@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - FIX: Be defensive about nonexistent videos
 
+- FIX: Rename puzzle form field
+
 
 3.167 (2018-07-04)
 ------------------
