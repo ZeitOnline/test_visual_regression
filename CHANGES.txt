@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4744: Feed for ZON content on z2x.zeit.de
 
+- BUG-952: Copy missing vendor script to enable Modernizr loading
+
 - FIX: Be defensive about nonexistent videos
 
 - FIX: Rename puzzle form field
