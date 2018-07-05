@@ -524,6 +524,11 @@ def sleep_tween(handler, registry):
         response = handler(request)
 
         # For comfortability set sleep back to 0
+        # XXX: This works fine, if a request is actually issued
+        # and performed in a test. But it leads to isolation problems,
+        # if not and `sleep` is sth. > 0.
+        # Due to the session scope nature of the mockserver,
+        # it's not easy to work around it.
         if conf['sleep_reset']:
             conf['sleep'] = 0
         return response

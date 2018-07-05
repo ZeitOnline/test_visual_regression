@@ -340,7 +340,6 @@ def test_block_liveblog_instance_causing_timeouts(
         '2015-05-06T22:46:00+02:00')
 
     # Set unachievable timeout
-    mockserver.settings['sleep'] = 1
     conf = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     conf['liveblog_timeout'] = 0.001
 
