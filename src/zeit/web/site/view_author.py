@@ -137,6 +137,20 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
         return self.context.enable_feedback
 
     @zeit.web.reify
+    def same_as(self):
+        links = []
+        if self.context.facebook:
+            links.append('https://www.facebook.com/{}'.format(
+                self.context.facebook))
+        if self.context.twitter:
+            links.append('https://twitter.com/{}'.format(
+                self.context.twitter.lstrip('@')))
+        if self.context.instagram:
+            links.append('https://www.instagram.com/{}'.format(
+                self.context.instagram))
+        return links
+
+    @zeit.web.reify
     def followpush_available(self):
         return bool(self.context.enable_followpush)
 

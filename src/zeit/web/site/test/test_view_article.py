@@ -255,65 +255,6 @@ def test_stale_breaking_news_article_must_not_render_breaking_bar(testbrowser):
     assert len(browser.cssselect('.breaking-news-heading')) == 0
 
 
-def test_schema_org_main_content_of_page(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-
-    assert len(select('main[itemprop="mainContentOfPage"]')) == 1
-
-
-def test_schema_org_article_mark_up(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
-    publisher = browser.cssselect('[itemprop="publisher"]')[0]
-    logo = publisher.cssselect('[itemprop="logo"]')[0]
-
-    article = browser.cssselect('article[itemprop="mainEntity"]')[0]
-    main_entity_of_page = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
-    headline = article.cssselect('[itemprop="headline"]')[0]
-    description = article.cssselect('[itemprop="description"]')[0]
-    date_published = article.cssselect('[itemprop="datePublished"]')[0]
-    author = article.cssselect('[itemprop="author"]')[0]
-
-    image = article.cssselect('[itemprop="image"]')[0]
-    copyright_holder = image.cssselect('[itemprop="copyrightHolder"]')[0]
-
-    # check Organization
-    assert publisher.get('itemtype') == 'http://schema.org/Organization'
-    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
-        'ZEIT ONLINE')
-    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
-        'http://localhost/index')
-    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
-    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
-        'http://localhost/static/latest/images/'
-        'structured-data-publisher-logo-zon.png')
-    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '565'
-    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'
-
-    # check Article
-    assert article.get('itemtype') == 'http://schema.org/Article'
-    assert main_entity_of_page.get('href') == (
-        'http://localhost/zeit-online/article/01')
-    assert ' '.join(headline.text_content().strip().split()) == (
-        u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?')
-
-    assert len(description.text_content().strip())
-    assert len(article.cssselect('[itemprop="articleBody"]')) == 1
-
-    # check ImageObject
-    assert image.get('itemtype') == 'http://schema.org/ImageObject'
-    assert len(image.cssselect('[itemprop="caption"]')) == 1
-    assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
-    person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros./dpa'
-
-    assert date_published.get('datetime') == '2015-05-27T19:11:30+02:00'
-
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.cssselect('[itemprop="name"]')[0].text == 'Wenke Husmann'
-    assert author.cssselect('[itemprop="url"]')[0].get('href') == (
-        'http://localhost/autoren/H/Wenke_Husmann/index.xml')
-
-
 def test_multipage_article_should_designate_meta_pagination(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     assert not browser.xpath('//head/link[@rel="prev"]')
@@ -2238,20 +2179,6 @@ def test_narrow_header_should_render_image_column_width(testbrowser):
     assert 'article__item--wide' not in figure.get('class')
     assert 'article__item--rimless' not in figure.get('class')
     assert 'article__item--apart' in figure.get('class')
-
-
-def test_abo_paywall_schema_attr(testbrowser):
-    browser = testbrowser('/zeit-online/article/zplus-zon')
-    jsonld = browser.cssselect('script[type="application/ld+json"]')
-    assert len(jsonld) == 1
-    jsonld = jsonld[0]
-    assert '"isAccessibleForFree": "False"' in jsonld.text
-
-
-def test_abo_paywall_schema_attr_not_on_free_content(testbrowser):
-    browser = testbrowser('/zeit-online/article/simple')
-    jsonld = browser.cssselect('script[type="application/ld+json"]')
-    assert len(jsonld) == 0
 
 
 def test_dpa_article_should_have_correct_header(testbrowser):

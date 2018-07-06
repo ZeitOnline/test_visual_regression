@@ -1,6 +1,6 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 <!DOCTYPE html>
-<html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
+<html lang="de" class="no-js">
 <head>
     {% include "zeit.web.core:templates/inc/meta/basics.html" %}
     {%- include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
@@ -19,10 +19,18 @@
 
     {% block css_link %}{% endblock -%}
 
-    {% include "zeit.web.core:templates/inc/inline_js/library.html" %}
     {% include "zeit.web.core:templates/inc/meta/date.html" %}
     {% include "zeit.web.core:templates/inc/meta/sharing.html" %}
     {% include "zeit.web.core:templates/inc/meta/app-indexing.html" %}
+
+    {% include [
+        "{}:templates/inc/structured-data/organization.html".format(view.package),
+        "zeit.web.core:templates/inc/structured-data/organization.html"] %}
+    {% include "zeit.web.core:templates/inc/structured-data/webpage.html" %}
+    {% include "zeit.web.core:templates/inc/structured-data/breadcrumblist.html" %}
+    {% block structured_data %}{% endblock structured_data -%}
+
+    {% include "zeit.web.core:templates/inc/inline_js/library.html" %}
     <script>{% include "zeit.web.core:templates/inc/inline_js/modernizr-replacement.js" %}</script>
     {% if toggles('modernizr_js_file') -%}
         <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>

@@ -87,4 +87,8 @@ def test_campus_framebuilder_uses_static_ssl_url(testbrowser):
     conf['asset_prefix'] = 'https://static.zeit.de/static/latest/'
     browser = testbrowser('/campus/framebuilder')
     urls = browser.contents.count('https://static.zeit.de/static/latest/')
-    assert urls == 6
+    assert urls == 5
+    assert browser.xpath('//link[@rel="stylesheet"]/@href')[0].startswith(
+        'https://static.zeit.de/static/latest/')
+    assert browser.xpath('//link[@rel="shortcut icon"]/@href')[0].startswith(
+        'https://static.zeit.de/static/latest/')

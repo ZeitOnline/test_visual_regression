@@ -1,0 +1,6 @@
+{# listing of articles belonging to a series/topic for google carousel #}
+{% if view.jsonld_listing %}
+<script type="application/ld+json">
+    {{ view.jsonld_listing | tojson | safe }}
+</script>
+{% endif %}

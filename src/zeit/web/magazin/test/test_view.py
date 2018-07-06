@@ -324,17 +324,6 @@ def test_longform_has_correct_twitter_card_type(application):
     assert article_view.twitter_card_type == 'summary_large_image'
 
 
-def test_article_has_correct_sharing_image(testbrowser):
-    xpath = testbrowser('/zeit-magazin/article/01').xpath
-    source = ('http://localhost/exampleimages/artikel/01/schoppenstube/'
-              'wide__1300x731')
-    assert xpath('//link[@itemprop="primaryImageOfPage"]/@href')[0] == source
-    assert xpath('//meta[@property="og:image"]/@content')[0] == source
-    assert xpath('//meta[@property="og:image:width"]/@content')[0] == '1300'
-    assert xpath('//meta[@property="og:image:height"]/@content')[0] == '731'
-    assert xpath('//meta[@name="twitter:image"]/@content')[0] == source
-
-
 def test_article_has_correct_product_id(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
@@ -617,27 +606,6 @@ def test_navigation_should_handle_logged_out_user_correctly(
         request=dummy_request, **info)
 
     assert browser.cssselect('a')[0].get('href') == '/login'
-
-
-def test_schema_org_publisher_mark_up(testbrowser):
-    # @see https://developers.google.com/structured-data/rich-snippets/articles
-    # #article_markup_properties
-    browser = testbrowser('/zeit-magazin/article/01')
-    publisher = browser.cssselect('[itemprop="publisher"]')[0]
-    logo = publisher.cssselect('[itemprop="logo"]')[0]
-
-    # check Organization
-    assert publisher.get('itemtype') == 'http://schema.org/Organization'
-    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
-        'ZEITmagazin')
-    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
-        'http://localhost/zeit-magazin/index')
-    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
-    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
-        'http://localhost/static/latest/images/'
-        'structured-data-publisher-logo-zmo.png')
-    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '600'
-    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '56'
 
 
 def test_url_encoding_in_login_state(testbrowser):

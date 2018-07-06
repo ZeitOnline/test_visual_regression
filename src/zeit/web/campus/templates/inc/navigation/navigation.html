@@ -1,15 +1,8 @@
 {% import "zeit.web.core:templates/macros/layout_macro.tpl" as lama %}
 <div class="header__brand" data-ct-row="lead">
-    <div class="header__publisher" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <a itemprop="url" href="{{ request.route_url('home') }}campus/index" data-ct-label="logo">
-            <meta itemprop="name" content="ZEIT Campus">
-            <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-                {{ lama.use_svg_icon('logo-zco', 'header__logo', view.package) }}
-                {# The "logo" dimensions must not exceed 600x60 -#}
-                <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zco.png">
-                <meta itemprop="width" content="347">
-                <meta itemprop="height" content="60">
-            </span>
+    <div class="header__publisher">
+        <a href="{{ request.route_url('home') }}campus/index" data-ct-label="logo">
+            {{ lama.use_svg_icon('logo-zco', 'header__logo', view.package) }}
         </a>
     </div>
     {% if view.is_advertorial -%}
