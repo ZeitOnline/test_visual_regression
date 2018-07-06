@@ -23,6 +23,8 @@ POSTDEPLOY
 
 - BUG-952: Copy missing vendor script to enable Modernizr loading
 
+- Fix: Adjust authorbox image width in AMP for tablet
+
 - FIX: Be defensive about nonexistent videos
 
 - FIX: Rename puzzle form field

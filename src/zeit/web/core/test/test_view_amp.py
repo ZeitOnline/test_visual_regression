@@ -250,6 +250,7 @@ def test_amp_article_contains_authorbox(testbrowser):
     assert image.get('src') == (
         'http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/'
         'square__460x460')
+    assert image.get('sizes') == '(min-width: 48em) 100px, 72px'
     assert name.text.strip() == 'Jochen Wegner'
     assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
     assert button.get('href') == (
