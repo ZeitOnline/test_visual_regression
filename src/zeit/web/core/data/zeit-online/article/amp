@@ -6,18 +6,7 @@
       <location>Davos</location>
     </author>
     <references>
-      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/thema/fluechtlinge-in-europa" year="2016" issue="1" ressort="Gesellschaft" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/thema/fluechtling">
-        <supertitle>Flüchtlinge</supertitle>
-        <title>Hoffnung Europa</title>
-        <text/>
-        <description/>
-        <byline/>
-        <breadcrumb_title/>
-        <image base-id="http://xml.zeit.de/politik/2015-12/fluechtlinge-dossier-teaser/" type="jpg" title="Flüchtlinge Dossier" align="left" publication-date="" expires="">
-          <bu>A woman waves a life jacket to direct a migrant boat ashore as it makes the crossing from Turkey to the Greek island of Lesbos on November 12, 2015 in Sikaminias, Greece.</bu>
-          <copyright>© Carl Court/Getty Images</copyright>
-        </image>
-      </reference>
+      <reference type="intern" href="http://xml.zeit.de/thema/fluechtlinge-in-europa"/>
     </references>
     <rankedTags>
       <tag type="free" url_value="fluechtling" uuid="d7c98935-f4bf-43b5-bf38-5307a4d3ed4e">Flüchtling</tag>
