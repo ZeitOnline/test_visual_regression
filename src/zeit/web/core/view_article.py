@@ -41,6 +41,8 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_layout(self):
+        if self.product_id == 'News':
+            return 'dpa'
         return self.context.header_layout or 'default'
 
     @zeit.web.reify
