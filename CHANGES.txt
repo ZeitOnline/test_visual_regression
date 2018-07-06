@@ -29,6 +29,8 @@ POSTDEPLOY
 
 - FIX: Rename puzzle form field
 
+- MAINT: Refactor liveblog
+
 
 3.167 (2018-07-04)
 ------------------

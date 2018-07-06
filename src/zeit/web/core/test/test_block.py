@@ -318,33 +318,34 @@ def test_block_liveblog_instance_causing_timeouts(
 
     model_block = mock.Mock()
     model_block.blog_id = '158'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
+    liveblog = zeit.web.core.block.LiveblogLegacy(model_block)
+
     assert liveblog.id == '158'
     assert liveblog.last_modified.isoformat() == (
         '2015-03-20T12:26:00+01:00')
 
     model_block = mock.Mock()
     model_block.blog_id = '213-259'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
+    liveblog = zeit.web.core.block.LiveblogLegacy(model_block)
     assert liveblog.id == '213'
     assert liveblog.is_live
 
     model_block = mock.Mock()
     model_block.blog_id = '166-201'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
+    liveblog = zeit.web.core.block.LiveblogLegacy(model_block)
+
     assert liveblog.id == '166'
     assert liveblog.seo_id == '201'
     assert liveblog.last_modified.isoformat() == (
         '2015-05-06T22:46:00+02:00')
 
     # Set unachievable timeout
-    mockserver.settings['sleep'] = 1
     conf = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     conf['liveblog_timeout'] = 0.001
 
     model_block = mock.Mock()
     model_block.blog_id = '166-201'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
+    liveblog = zeit.web.core.block.LiveblogLegacy(model_block)
     # requests failed, last_modified is not set
     assert liveblog.last_modified is None
 
@@ -353,6 +354,14 @@ def test_block_liveblog_instance_causing_timeouts(
 def liveblog():
     model_block = mock.Mock()
     model_block.blog_id = '59fc6d316aa4f500e80f119b'
+    model_block.version = '3'
+    return zeit.web.core.block.Liveblog(model_block)
+
+
+@pytest.fixture
+def liveblog_invalid():
+    model_block = mock.Mock()
+    model_block.blog_id = 'invalid'
     model_block.version = '3'
     return zeit.web.core.block.Liveblog(model_block)
 
@@ -414,6 +423,10 @@ def test_liveblog_api_request_renews_expired_cache_token(
 def test_liveblog_get_info(application, liveblog):
     assert liveblog.last_modified.isoformat() == u'2017-12-05T16:12:54+01:00'
     assert liveblog.is_live is True
+
+
+def test_liveblog_get_info_from_invalid_data(application, liveblog_invalid):
+    assert liveblog_invalid.last_modified is None
 
 
 def test_liveblog_get_amp_id(application, liveblog):
