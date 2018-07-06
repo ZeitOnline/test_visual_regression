@@ -426,7 +426,7 @@ def test_liveblog_get_info(application, liveblog):
 
 
 def test_liveblog_get_info_from_invalid_data(application, liveblog_invalid):
-    assert liveblog_invalid.last_modified == None
+    assert liveblog_invalid.last_modified is None
 
 
 def test_liveblog_get_amp_id(application, liveblog):
