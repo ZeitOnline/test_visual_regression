@@ -395,7 +395,7 @@ def test_liveblog_api_request_is_not_stoped_by_unavailable_auth_server(
         m.get(api_url, json={'blog_id': '123'}, status_code=200)
         m.post(
             auth_url, reason='Service unavailable', status_code=503)
-        blog_object = liveblog.api_blog_request()
+        blog_object = liveblog._fetch_blog_info()
         assert '123' == blog_object['blog_id']
 
 
@@ -415,7 +415,7 @@ def test_liveblog_api_request_renews_expired_cache_token(
         # fresh token and the subsequent GET "validate" the token...
         m.get(api_url, [dict(status_code=401), dict(json={}, status_code=200)])
         m.post(auth_url, json={"token": "78901"}, status_code=200)
-        liveblog.api_blog_request()
+        liveblog._fetch_blog_info()
         # the (new) token ends up in the cache...
         assert '78901' == cache.get(cache_key)
 

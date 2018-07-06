@@ -321,7 +321,11 @@ class Liveblog(LiveblogBase):
         except (requests.exceptions.RequestException, ValueError):
             return
 
-    def api_blog_request(self, retries=0):
+    @zeit.web.reify
+    def blog_info(self):
+        return self._fetch_blog_info()
+
+    def _fetch_blog_info(self, retries=0):
         api_url = self.conf.get('liveblog_api_url_v3')
         url = '{}/{}'.format(api_url, self.blog_id)
 
@@ -340,7 +344,7 @@ class Liveblog(LiveblogBase):
             if status == 401:
                 log.debug('Refreshing liveblog3 auth token')
                 self.auth_token.invalidate(self)
-                return self.api_blog_request(retries=retries + 1)
+                return self._fetch_blog_info(retries=retries + 1)
             log.error(
                 'Liveblog3 API unavailable with status  %s' % err.response)
             return {}
@@ -349,10 +353,6 @@ class Liveblog(LiveblogBase):
         except Exception:
             log.error('%s returned invalid json %r', url, response.text)
             return {}
-
-    @zeit.web.reify
-    def blog_info(self):
-        return self.api_blog_request()
 
     @zeit.web.reify
     def is_live(self):
