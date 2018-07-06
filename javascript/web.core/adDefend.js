@@ -5,8 +5,6 @@
  */
 
 function AdDefend() {
-    'use strict';
-
     // general config
     this.config = {
         template: require( 'web.core/templates/addefend.html' ), // the template we use
@@ -177,9 +175,6 @@ AdDefend.prototype.init = function() {
     }
 };
 
-// instantiate just once
-if ( !document.querySelector( '#addefend-overlay' ) ) {
-    new AdDefend();
-}
+new AdDefend();
 
 module.exports = AdDefend;
