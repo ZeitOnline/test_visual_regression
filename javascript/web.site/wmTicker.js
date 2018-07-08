@@ -205,9 +205,7 @@ function wmTicker( element ) {
      * @return {boolean}
      */
     function dateIsToday( date ) {
-        var today = new Date();
-        date = new Date( date );
-        return today.toDateString() === date.toDateString();
+        return new Date().toDateString() === date.toDateString();
     }
 
     /**
@@ -228,8 +226,7 @@ function wmTicker( element ) {
         var begin = new Date( date ),
             minutes = addLeadingZero( begin.getMinutes() ),
             gameDate = new Date( begin.getFullYear(), begin.getMonth(), begin.getDate() ),
-            dateString = addLeadingZero( gameDate.getDate() ) + '.' + addLeadingZero( ( gameDate.getMonth() + 1 ) ),
-            returnString = begin.getHours() + '.' + minutes + ' Uhr';
+            dateString = addLeadingZero( gameDate.getDate() ) + '.' + addLeadingZero( ( gameDate.getMonth() + 1 ) );
         kickoff = new Date( kickoff );
 
         if ( defaults.showRunningGameTime ) {
@@ -240,35 +237,32 @@ function wmTicker( element ) {
                         cutoff = offsetArray[ period ],
                         min = minuteDifference + offsetArray[ period - 1 ];
                     if ( min > cutoff ) {
-                        returnString = cutoff + '. + ' + ( min - cutoff );
+                        return cutoff + '. + ' + ( min - cutoff );
                     } else {
-                        returnString = min + '.';
+                        return min + '.';
                     }
-                    break;
                 case 'HALF-TIME':
-                    returnString = 'Halbzeit';
-                    break;
+                    return 'Halbzeit';
                 case 'HALF-EXTRATIME':
-                    returnString = 'Halbzeit Verlängerung';
-                    break;
+                    return 'Halbzeit Verlängerung';
                 case 'PENALTY-SHOOTOUT':
-                    returnString = 'Elfmeterschießen';
-                    break;
+                    return 'Elfmeterschießen';
                 case 'FULL':
-                    returnString = '';
-                    break;
+                    return '';
                 default:
                     if ( !dateIsToday( gameDate ) ) {
-                        returnString = dateString;
+                        return dateString;
                     }
                     break;
             }
         } else {
             if ( status === 'PRE-MATCH' && !dateIsToday( gameDate ) ) {
-                returnString = dateString;
+                return dateString;
             }
         }
-        return returnString;
+        // default return value: "gameHour.minutes Uhr" e.g "16.04 Uhr"
+        // use dot instead of colon to match corporate usage
+        return begin.getHours() + '.' + minutes + ' Uhr';
     }
 
 
