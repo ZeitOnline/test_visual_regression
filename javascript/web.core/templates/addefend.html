@@ -7,8 +7,8 @@
                 <p class="addefend__description">{{ description }}</p>
             </div>
             <div class="addefend__aside">
-                <button class="addefend__button" id="addefend-dismiss">{{ btnDeactivate }}</button>
-                <span class="addefend__notification">{{ notice }}</span>
+                <button class="addefend__button" id="addefend-guide">{{ btnDeactivate }}</button><br>
+                <button class="addefend__dismiss">{{ notice }}</button>
             </div>
         </div>
 
@@ -21,8 +21,16 @@
                 <li class="addefend__item">{{ listManual2 }}</li>
                 <li class="addefend__item">{{ listManual3 }}</li>
             </ol>
-            <button class="addefend__button addefend__button--reload" id="addefend-reload">{{ btnReload }}</button>
-            <span class="addefend__notification">{{ notice }}</span>
+            <button class="addefend__button addefend__button--reload" id="addefend-reload">
+                <svg width="14" height="13" viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg" class="svg-symbol addefend__reload-icon" aria-hidden="true">
+                    <title>Neu laden</title>
+                    <g>
+                        <path d="M9.192 7.15L8.13 13 14 11.963l-1.793-1.794a6.35 6.35 0 0 0-.777-8.029A6.308 6.308 0 0 0 8 .371l-.327 1.854a4.432 4.432 0 0 1 2.429 1.245 4.468 4.468 0 0 1 .739 5.332L9.192 7.15zM3.177 4.244l1.63 1.632L5.843 0 0 1.063 1.824 2.89a6.351 6.351 0 0 0 .641 8.225 6.313 6.313 0 0 0 3.372 1.759l.327-1.853a4.44 4.44 0 0 1-2.371-1.235 4.472 4.472 0 0 1-.616-5.542z"/>
+                    </g>
+                </svg>
+                {{ btnReload }}
+            </button><br>
+            <button class="addefend__dismiss">{{ notice }}</button>
         </div>
     </div>
 </div>
