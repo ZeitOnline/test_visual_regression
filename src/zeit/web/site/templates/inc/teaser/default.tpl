@@ -16,19 +16,20 @@
 
     <div class="{{ self.layout() }}__container">
 
-        {% block teaser_journalistic_format %}
-            {%- if teaser.serie -%}
+        {% block teaser_journalistic_format -%}
+            {% if view.context is seriespage -%}
+            {% elif teaser.serie -%}
                 <div class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | branding ) }}">
                     {%- if not teaser.serie.column %}Serie: {% endif -%}
                     {{ teaser.serie.serienname -}}
                 </div>
-            {%- elif teaser.blog -%}
+            {% elif teaser.blog -%}
                 <div class="blog-format">
                     <span class="blog-format__marker">Blog</span>
                     <span class="blog-format__name">{{ teaser.blog.name }}</span>
                 </div>
-            {%- endif -%}
-        {% endblock teaser_journalistic_format %}
+            {% endif -%}
+        {% endblock teaser_journalistic_format -%}
 
         {% block teaser_heading %}
             <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
