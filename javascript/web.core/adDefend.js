@@ -4,19 +4,23 @@
  * @version  0.1
  */
 
+var $ = require( 'jquery' ),
+    zeit = require( 'web.core/zeit' ),
+    clicktracking = require( 'web.core/clicktracking' );
+
 function AdDefend() {
     // general config
     this.config = {
         template: require( 'web.core/templates/addefend.html' ), // the template we use
-        windowHeight: window.Zeit.view.get( 'addefend_height' ), // config zeitweb-settings, mobileView is always 500px
+        windowHeight: zeit.view.get( 'addefend_height' ), // config zeitweb-settings, mobileView is always 500px
         jsonPath: '/json/addefend/addefend.json', // config zeitweb-settings for path to config file
         inViewElement: '.footer', // hide notice bar when footer is in view
         cookieName: 'addefend', // cookiename for AdDefend
-        cookieExpire: window.Zeit.view.get( 'addefend_cookie_expire' ), // config zeitweb-settings for expiringtime for cookies
+        cookieExpire: zeit.view.get( 'addefend_cookie_expire' ), // config zeitweb-settings for expiringtime for cookies
         trackingId: '#adb' // identifier for clicktracking
     };
 
-    this.path = '//' + window.location.host + this.config.jsonPath;
+    this.path = '//' + location.host + this.config.jsonPath;
     this.init();
 }
 
@@ -47,19 +51,19 @@ AdDefend.prototype.getData = function( url ) {
     });
 };
 
-AdDefend.prototype.renderTemplate = function() {
+AdDefend.prototype.renderTemplate = function( data ) {
 
     // text for different sections from json-file
     var html = this.config.template({
-        hl: this.responseObj.headline_notice,
-        description: this.responseObj.description,
-        btnDeactivate: this.responseObj.btn_deactivate,
-        notice: this.responseObj.notice,
-        hlManual: this.responseObj.hl_manual,
-        listManual1: this.responseObj.list_manual1,
-        listManual2: this.responseObj.list_manual2,
-        listManual3: this.responseObj.list_manual3,
-        btnReload: this.responseObj.btn_reload
+        hl: data.headline_notice,
+        description: data.description,
+        btnDeactivate: data.btn_deactivate,
+        notice: data.notice,
+        hlManual: data.hl_manual,
+        listManual1: data.list_manual1,
+        listManual2: data.list_manual2,
+        listManual3: data.list_manual3,
+        btnReload: data.btn_reload
     });
 
     document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', html );
@@ -71,17 +75,15 @@ AdDefend.prototype.handleOverlay = function() {
     var addefenddark = document.querySelector( '.page' );
 
     // tracking
-    that.track( 'view', 'banner', that.config.trackingId );
+    this.track( 'view', 'banner', this.config.trackingId );
 
     // darken page 50% opacity
     addefenddark.classList.add( 'addefend__darken' );
 
     require([
-        'jquery',
-        'web.core/zeit',
         'jquery.inview'
     ],
-    function( $, Zeit ) {
+    function() {
         // hide if footer is in view
         $( that.config.inViewElement ).on( 'inview', function( event, isInView ) {
             if ( isInView ) {
@@ -93,8 +95,8 @@ AdDefend.prototype.handleOverlay = function() {
             }
         });
 
-        // dismiss-Button
-        $( '#addefend-dismiss' ).click( function() {
+        // Show manual button
+        $( '#addefend-guide' ).click( function() {
             $( '#addefend-note' ).fadeOut();
 
             // tracking
@@ -106,7 +108,7 @@ AdDefend.prototype.handleOverlay = function() {
                 overlayHeight = $( window ).height();
             } else if ( that.config.windowHeight === 'min' ) {
                 overlayHeight = '600';
-            } else if ( Zeit.isMobileView() ) {
+            } else if ( zeit.isMobileView() ) {
                 overlayHeight = '500';
             }
 
@@ -118,7 +120,7 @@ AdDefend.prototype.handleOverlay = function() {
             $( '#addefend-manual' ).delay( 500 ).fadeIn();
 
             // keep update-overlay back
-            Zeit.cookieCreate( 'overlaycanceled', 'canceled', that.config.cookieExpire );
+            zeit.cookieCreate( 'overlaycanceled', 'canceled', that.config.cookieExpire );
 
             // track click
             that.track( 'deactivate', 'banner', that.config.trackingId );
@@ -133,7 +135,7 @@ AdDefend.prototype.handleOverlay = function() {
         });
 
         // remove layer and add cookie
-        $( '.addefend__notification' ).click( function() {
+        $( '.addefend__dismiss' ).click( function() {
             $( '#addefend-overlay' ).fadeOut( 200, function() {
                 $( this ).remove();
             });
@@ -142,11 +144,7 @@ AdDefend.prototype.handleOverlay = function() {
             that.track( 'cancel', '', that.config.trackingId );
 
             // hide addefend notice for the time that are set in the config
-            var date = new Date();
-            var minutes = that.config.cookieExpire;
-            date.setTime( date.getTime() + ( minutes * 60 * 1000 ) );
-
-            document.cookie = that.config.cookieName + '=' + 'true' + ';path=/;expires=' + date.toGMTString();
+            zeit.cookieCreate( that.config.cookieName, 'true', that.config.cookieExpire );
 
             // light up page
             document.querySelector( '.page' ).classList.remove( 'addefend__darken' );
@@ -155,26 +153,20 @@ AdDefend.prototype.handleOverlay = function() {
 };
 
 AdDefend.prototype.track = function( action, section, identifier ) {
-    require([ 'web.core/clicktracking' ], function( Clicktracking ) {
-        var data = [ 'sitebottom.' + section + '...' + action, identifier ];
-        Clicktracking.send( data );
-    });
+    var data = [ 'sitebottom.' + section + '...' + action, identifier ];
+    clicktracking.send( data );
 };
 
 AdDefend.prototype.init = function() {
     var that = this;
     // only init when cookie is not set
-    if ( document.cookie.indexOf( that.config.cookieName ) <= 0  ) {
-        that.getData( that.path ).then( function( response ) {
-            that.responseObj = response;
-        }).then( function() {
-            that.renderTemplate();
+    if ( document.cookie.indexOf( this.config.cookieName ) <= 0  ) {
+        this.getData( this.path ).then( function( response ) {
+            that.renderTemplate( response );
             that.handleOverlay();
             that.track();
         });
     }
 };
-
-new AdDefend();
 
 module.exports = AdDefend;

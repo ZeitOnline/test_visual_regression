@@ -25,6 +25,11 @@ var Zeit = window.Zeit || {},
 
                 this.queue = [];
             }
+        },
+        adDefend: function() {
+            require([ 'web.core/adDefend' ], function( adDefend ) {
+                new adDefend();
+            });
         }
     },
     key;
@@ -45,9 +50,5 @@ if ( Zeit.isWrapped || window.location.href.indexOf( 'force-userisback' ) !== -1
 if ( Zeit.isWrapped || window.location.href.indexOf( 'force-userfeedback' ) !== -1 ) {
     Zeit.appUserFeedback = require( 'web.core/appUserFeedback' );
 }
-
-require([ 'web.core/adDefend' ], function( adDefend ) {
-    Zeit.adDefend = adDefend;
-});
 
 module.exports = Zeit;

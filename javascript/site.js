@@ -10,7 +10,6 @@ var $ = require( 'jquery' ),
     videoStage = require( 'web.site/video/videoStage' ),
     videoPlayer = require( 'web.core/video/videoPlayer' ),
     articledate = require( 'web.core/articledate' ),
-    adDefend = require( 'web.core/adDefendRequire' ),
     comments = require( 'web.core/comments' ),
     adblockCount = require( 'web.site/adblockCount' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
@@ -29,7 +28,6 @@ images.init();
 menu.init({ followMobile: 'always' });
 clicktracking.init();
 triggeredEventTracking.init();
-adDefend.init();
 adReload.init();
 videoStage.init();
 dataProtectionPopOver.init();
