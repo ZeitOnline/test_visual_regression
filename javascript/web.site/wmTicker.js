@@ -224,9 +224,7 @@ function wmTicker( element ) {
      */
     function timeString( date, kickoff, period, status ) {
         var begin = new Date( date ),
-            minutes = addLeadingZero( begin.getMinutes() ),
-            gameDate = new Date( begin.getFullYear(), begin.getMonth(), begin.getDate() ),
-            dateString = addLeadingZero( gameDate.getDate() ) + '.' + addLeadingZero( ( gameDate.getMonth() + 1 ) );
+            dateString = addLeadingZero( begin.getDate() ) + '.' + addLeadingZero( ( begin.getMonth() + 1 ) );
         kickoff = new Date( kickoff );
 
         if ( defaults.showRunningGameTime ) {
@@ -250,19 +248,19 @@ function wmTicker( element ) {
                 case 'FULL':
                     return '';
                 default:
-                    if ( !dateIsToday( gameDate ) ) {
+                    if ( !dateIsToday( begin ) ) {
                         return dateString;
                     }
                     break;
             }
         } else {
-            if ( status === 'PRE-MATCH' && !dateIsToday( gameDate ) ) {
+            if ( status === 'PRE-MATCH' && !dateIsToday( begin ) ) {
                 return dateString;
             }
         }
         // default return value: "gameHour.minutes Uhr" e.g "16.04 Uhr"
         // use dot instead of colon to match corporate usage
-        return begin.getHours() + '.' + minutes + ' Uhr';
+        return addLeadingZero( begin.getHours() ) + '.' + addLeadingZero( begin.getMinutes() ) + ' Uhr';
     }
 
 
