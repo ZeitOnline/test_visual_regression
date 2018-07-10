@@ -1,9 +1,9 @@
 <header class="header-image{% if module.visible_mobile == False %} mobile-hidden{% endif %}">
-    {%- require image = get_image(module, fallback=False, variant_id='wide' if module.animate else 'cinema') -%}
+    {%- require image = get_image(module, fallback=False, variant_id='panorama') -%}
         {%- include "zeit.web.magazin:templates/inc/asset/image_header.tpl" -%}
     {%- endrequire -%}
     <h1 class="{{ 'header-image__heading' | with_mods('overlay' if image) }}">
         <span class="header-image__kicker">{{ module.supertitle }}</span>
-        <span class="header-advertorial__title">{{ module.title }}</span>
+        <span class="header-image__title">{{ module.title }}</span>
     </h1>
 </header>
