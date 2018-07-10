@@ -25,10 +25,6 @@
   <modernizr_js_file>false</modernizr_js_file>
 
   <ligatus>false</ligatus>
-  <ligatus_on_arbeit>false</ligatus_on_arbeit>
-  <ligatus_on_campus>false</ligatus_on_campus>
-  <ligatus_on_magazin>false</ligatus_on_magazin>
-  <ligatus_on_site>false</ligatus_on_site>
 
   <optimize_ab_testing_to_webtrekk>false</optimize_ab_testing_to_webtrekk>
   <podlove_button>true</podlove_button>
