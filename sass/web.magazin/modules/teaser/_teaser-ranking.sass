@@ -1,64 +1,38 @@
-.cp-area--ranking .teaser
-	@extend %teaser
-	margin: 0 auto
-	min-height: initial
-	padding-bottom: remify(40px)
-	max-width: remify(680px)
-	+respond-min($break-1)
-		padding: $vertical-space $cp-padding
+.teaser-ranking
+	margin-bottom: (40px)
+	padding: 0 $page-padding--small
+	+respond-min($break-0)
+		display: flex
+	+respond-min($break-areas)
+		padding: 0
 
 	&__media
-		@extend %teaser__media
-		background-color: transparent
-		display: block
-		max-height: initial
-		+respond-min($break-1)
-			display: table-cell
-			max-height: remify(145px)
+		margin: 0 0 remify(20px)
+		+respond-min($break-0)
+			margin: 0
+			padding-right: 3.5%
+			flex: 0 0 33%
+		+respond-min($break-2)
+			padding-right: 4.5%
+			flex: 0 0 49%
 
-	&__heading
-		+scaled-font(28px, $title-factor)
-		line-height: 0
-		margin: remify(0 0 10px)
+	&__text
+
+	&__title-box
+		@extend %teaser__title-box
 
 	&__link
-		color: #313131
+		@extend %teaser__link
 
 	&__kicker
 		@extend %teaser__kicker
-		display: block
-		padding-botton: remify(3px)
-		position: static
 
 	&__title
 		@extend %teaser__title
 
-	&__text
-		@extend %teaser__text
-		display: block
-		vertical-align: top
-		+respond-min($break-1)
-			display: table-cell
-			width: remify(380px)
+	&__subtitle
+		@extend %teaser__subtitle
 
-	&__media-container
-		display: block
-		vertical-align: top
-		width: 100%
-		+respond-min($break-1)
-			height: remify(170px)
-			margin-right: remify(30px)
-			padding-bottom: remify(40px) / 16 * 9 // image variant 'wide' (16:9)
-			width: remify(295px)
+	&__series-label
+		@extend %teaser__series-label
 
-.cp-area--ranking
-	&:before
-		border-bottom: 3px solid #000
-		content: ""
-		display: block
-		height: remify(3px)
-		margin: remify(5px auto 38px)
-		width: remify(90px)
-
-	.pager--ranking
-		text-align: center

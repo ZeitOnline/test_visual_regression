@@ -1,6 +1,10 @@
 // pagination pager, used in e.g. ranking areas and comments pagination
 .pager
 	margin: remify(16px 0 32px)
+	&--ranking,
+		padding: 0 $page-padding--small
+		+respond-min($break-areas)
+			padding: 0
 
 .pager__button
 	@extend .button
