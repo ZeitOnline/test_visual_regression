@@ -1,4 +1,3 @@
-
 #overlay-wrapper,
 .overlay-tracker
 	display: none
@@ -17,6 +16,12 @@
 	width: 100%
 	z-index: 99998
 
+	&--alternative
+		background: transparent
+		position: static
+		opacity: 1
+		overflow: auto
+
 .overlay__dialog
 	background-color: $white
 	border-radius: remify(3px)
@@ -29,13 +34,30 @@
 	top: 5%
 	z-index: 99999
 
+	&--alternative
+		bottom: 5%
+		box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2)
+		min-width: 475px
+		padding: remify(10px 10px 10px 30px)
+		top: auto
+
 	+respond-min($break-tablet-min)
 		left: 30%
 		right: 30%
 		top: 30%
 
+		&--alternative
+			top: auto
+			bottom: 3%
+			left: 50%
+			right: auto
+			transform: translateX(-50%)
+
 .overlay__content
 	text-align: center
+
+	&--alternative
+		text-align: left
 
 .overlay__headline
 	color: $color-text
@@ -44,10 +66,18 @@
 	line-height: 1.2
 	margin: remify(0 0 6px)
 
+	&--alternative
+		display: inline-block
+		font-size: remify(18px)
+		margin-right: remify(10px)
+
 .overlay__text
 	color: $color-text--light
 	font-size: remify(16px)
 	margin: remify(0 0 20px)
+
+	&--alternative
+		display: none
 
 .overlay__button
 	min-width: remify(140px)
@@ -72,3 +102,16 @@
 
 	+on-interaction
 		color: $dusty-gray
+
+	&--alternative
+		margin-top: 0
+		padding: 0
+
+		&::after
+			content: '\d7' // close icon
+			font-size: 1.5rem
+			position: absolute
+			top: 0
+			left: remify(7px)
+		span
+			display: none
