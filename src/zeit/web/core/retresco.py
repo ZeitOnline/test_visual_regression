@@ -28,7 +28,7 @@ log = logging.getLogger(__name__)
 
 
 @SHORT_TERM_CACHE.cache_on_arguments()
-def is_healthy(self):
+def is_tms_healthy(self):
     """Cached health check, so we avoid additional requests that not only
     unecessarily take time just to return erroneous, but also add to the load
     of an already down server."""
@@ -48,7 +48,7 @@ def is_healthy(self):
         return False
 
 
-zeit.retresco.connection.TMS.is_healthy = is_healthy
+zeit.retresco.connection.TMS.is_healthy = is_tms_healthy
 
 
 def tms_request(self, *args, **kw):
@@ -96,7 +96,33 @@ def es_user_agent(self):
 zeit.retresco.search.Connection._user_agent = es_user_agent
 
 
+@SHORT_TERM_CACHE.cache_on_arguments()
+def is_es_healthy(self):
+    """Cached health check, so we avoid additional requests that not only
+    unecessarily take time just to return erroneous, but also add to the load
+    of an already down server."""
+    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
+    try:
+        with zeit.web.core.metrics.timer(
+                'zeit.retresco.search.health_check'
+                '.elasticsearch.response_time'):
+            original_es_request(self, 'GET', '/')
+        metrics.increment(
+            'zeit.retresco.search.health_check.elasticsearch.status.200')
+        return True
+    except Exception:
+        log.warning('Health check failed', exc_info=True)
+        metrics.increment(
+            'zeit.retresco.search.health_check.elasticsearch.status.599')
+        return False
+
+
+zeit.retresco.search.Connection.is_healthy = is_es_healthy
+
+
 def es_request(self, *args, **kw):
+    if not self.is_healthy():
+        raise zeit.retresco.interfaces.TechnicalError('Health check failed')
     with zeit.web.core.metrics.timer(
             'zeit.retresco.search.elasticsearch.response_time'):
         return original_es_request(self, *args, **kw)
