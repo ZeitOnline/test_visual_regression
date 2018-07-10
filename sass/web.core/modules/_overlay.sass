@@ -75,13 +75,15 @@
 // alternative styles
 .overlay-wrapper--alternative
 	.overlay
-		background: transparent
-		position: static
-		opacity: 1
-		overflow: auto
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0))
+		height: 110px
+		top: auto
+		pointer-events: none
 
 		&__dialog
+			animation: slideIn 350ms ease-in-out
 			bottom: 5%
+			border: 1px solid #f9f9f9
 			box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2)
 			min-width: 475px
 			padding: remify(10px 10px 10px 30px)
@@ -89,7 +91,7 @@
 
 			+respond-min($break-tablet-min)
 				top: auto
-				bottom: 3%
+				bottom: remify(50px)
 				left: 50%
 				right: auto
 				transform: translateX(-50%)
@@ -101,7 +103,7 @@
 			display: inline-block
 			font-size: remify(18px)
 			letter-spacing: $letter-spacing-s
-			margin-right: remify(10px)
+			margin-right: remify(15px)
 
 		&__text
 			display: none
@@ -119,3 +121,9 @@
 
 			span
 				display: none
+
+@keyframes slideIn
+	from
+		bottom: remify(-100px)
+	to
+		bottom: remify(50px)
