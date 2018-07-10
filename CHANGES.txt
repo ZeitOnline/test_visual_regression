@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4776: Change WM-Ticker date format
 
+- BUG-955: Show news agency note in AMP articles
+
 - FEM-84: Load app functions dynamically on runtime
 
 - FEM-85: Update node packages
