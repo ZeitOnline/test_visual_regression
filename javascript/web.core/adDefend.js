@@ -71,84 +71,63 @@ AdDefend.prototype.renderTemplate = function( data ) {
 
 AdDefend.prototype.handleOverlay = function() {
     var that = this;
-    var addefendwrapper = document.querySelector( '#addefend-overlay' );
-    var addefenddark = document.querySelector( '.page' );
+
+    // view Overlay
+    $( '#overlay-wrapper, #overlay-wrapper .overlay' ).fadeIn();
 
     // tracking
     this.track( 'view', 'banner', this.config.trackingId );
 
-    // darken page 50% opacity
-    addefenddark.classList.add( 'addefend__darken' );
+    // Show manual button
+    $( '#addefend-guide' ).click( function() {
+        $( '#addefend-note' ).fadeOut();
 
-    require([
-        'jquery.inview'
-    ],
-    function() {
-        // hide if footer is in view
-        $( that.config.inViewElement ).on( 'inview', function( event, isInView ) {
-            if ( isInView ) {
-                addefendwrapper.classList.add( 'addefend--hidden' );
-                addefenddark.classList.remove( 'addefend__darken' );
-            } else {
-                addefendwrapper.classList.remove( 'addefend--hidden' );
-                addefenddark.classList.add( 'addefend__darken' );
-            }
+        // tracking
+        that.track( 'view', 'banner', that.config.trackingId );
+
+        var overlayHeight;
+
+        if ( that.config.windowHeight === 'max' ) {
+            overlayHeight = $( window ).height();
+        } else if ( that.config.windowHeight === 'min' ) {
+            overlayHeight = '600';
+        } else if ( zeit.isMobileView() ) {
+            overlayHeight = '500';
+        }
+
+        $( '#addefend-overlay' ).delay( 300 ).animate({
+            height: overlayHeight
+        }, 400 );
+
+        // fadein manual
+        $( '#addefend-manual' ).delay( 500 ).fadeIn();
+
+        // keep update-overlay back
+        zeit.cookieCreate( 'overlaycanceled', 'canceled', that.config.cookieExpire );
+
+        // track click
+        that.track( 'deactivate', 'banner', that.config.trackingId );
+    });
+
+    // reload-button
+    $( '#addefend-reload' ).click( function() {
+        location.reload();
+
+        // tracking
+        that.track( 'refresh', 'anleitung', that.config.trackingId );
+    });
+
+    // remove layer and add cookie
+    $( '.addefend__dismiss' ).click( function() {
+        $( '#addefend-overlay, #overlay-wrapper' ).fadeOut( 200, function() {
+            $( this ).remove();
         });
 
-        // Show manual button
-        $( '#addefend-guide' ).click( function() {
-            $( '#addefend-note' ).fadeOut();
+        // track click
+        that.track( 'cancel', '', that.config.trackingId );
 
-            // tracking
-            that.track( 'view', 'banner', that.config.trackingId );
-
-            var overlayHeight;
-
-            if ( that.config.windowHeight === 'max' ) {
-                overlayHeight = $( window ).height();
-            } else if ( that.config.windowHeight === 'min' ) {
-                overlayHeight = '600';
-            } else if ( zeit.isMobileView() ) {
-                overlayHeight = '500';
-            }
-
-            $( '#addefend-overlay' ).delay( 300 ).animate({
-                height: overlayHeight
-            }, 400 );
-
-            // fadein manual
-            $( '#addefend-manual' ).delay( 500 ).fadeIn();
-
-            // keep update-overlay back
-            zeit.cookieCreate( 'overlaycanceled', 'canceled', that.config.cookieExpire );
-
-            // track click
-            that.track( 'deactivate', 'banner', that.config.trackingId );
-        });
-
-        // reload-button
-        $( '#addefend-reload' ).click( function() {
-            location.reload();
-
-            // tracking
-            that.track( 'refresh', 'anleitung', that.config.trackingId );
-        });
-
-        // remove layer and add cookie
-        $( '.addefend__dismiss' ).click( function() {
-            $( '#addefend-overlay' ).fadeOut( 200, function() {
-                $( this ).remove();
-            });
-
-            // track click
-            that.track( 'cancel', '', that.config.trackingId );
-
-            // hide addefend notice for the time that are set in the config
-            zeit.cookieCreate( that.config.cookieName, 'true', that.config.cookieExpire );
-
-            // light up page
-            document.querySelector( '.page' ).classList.remove( 'addefend__darken' );
-        });
+        // hide addefend notice for the time that are set in the config
+        zeit.cookieCreate( that.config.cookieName, 'true', that.config.cookieExpire );
     });
 };
 

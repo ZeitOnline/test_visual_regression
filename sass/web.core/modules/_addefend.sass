@@ -10,7 +10,7 @@
 	text-align: center
 	transform: translateY(0)
 	transition: transform .75s ease-in-out, visibility .75s
-	z-index: 100
+	z-index: 99999
 
 	&--hidden
 		transform: translateY(100%)
@@ -139,16 +139,3 @@
 		+on-interaction
 			border-bottom-color: $color-text--light
 			color: $color-text--light
-
-	&__darken
-		animation-duration: 0.75s
-		animation-iteration-count: 1
-		animation-name: fadeInOpacity
-		animation-timing-function: ease-in
-		opacity: 0.5
-
-	@keyframes fadeInOpacity
-		0%
-			opacity: 1
-		100%
-			opacity: 0.5
