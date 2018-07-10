@@ -15,6 +15,8 @@ POSTDEPLOY
 3.169 (unreleased)
 ------------------
 
+- ZON-4776: Change WM-Ticker date format
+
 - MAINT: Add cached health check for elasticsearch to short-circuit requests
   when the server is already down
 

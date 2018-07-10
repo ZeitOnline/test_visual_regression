@@ -200,55 +200,67 @@ function wmTicker( element ) {
 
 
     /**
+     * check if Date is after midnight / is the next day
+     * @param  {string}  date
+     * @return {boolean}
+     */
+    function dateIsToday( date ) {
+        return new Date().toDateString() === date.toDateString();
+    }
+
+    /**
+     * add leading zero to numbers < 10
+     * @param  {integer}  number
+     * @return {integer}
+     */
+    function addLeadingZero( number ) {
+        return ( number < 10 ? '0' : '' ) + number;
+    }
+
+    /**
      * generate time String containing all needed words
      * @param  {string}  date string supplied by API
      * @return {string}
      */
     function timeString( date, kickoff, period, status ) {
-        var minuteDifference = getMinuteDifference( kickoff ),
-            begin = new Date( date ),
-            minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes(),
-            returnString = 'um ' + begin.getHours() + ':' + minutes;
-
+        var begin = new Date( date ),
+            dateString = addLeadingZero( begin.getDate() ) + '.' + addLeadingZero( ( begin.getMonth() + 1 ) );
         kickoff = new Date( kickoff );
 
         if ( defaults.showRunningGameTime ) {
             switch ( status ) {
                 case 'LIVE':
-                    var offsetArray = [ 0, 45, 90, 105, 120 ];
-                    var cutoff = offsetArray[ period ];
-                    var min = minuteDifference + offsetArray[ period - 1 ];
+                    var minuteDifference = getMinuteDifference( kickoff ),
+                        offsetArray = [ 0, 45, 90, 105, 120 ],
+                        cutoff = offsetArray[ period ],
+                        min = minuteDifference + offsetArray[ period - 1 ];
                     if ( min > cutoff ) {
-                        returnString = cutoff + '. + ' + ( min - cutoff );
+                        return cutoff + '. + ' + ( min - cutoff );
                     } else {
-                        returnString = min + '.';
+                        return min + '.';
                     }
-                    break;
                 case 'HALF-TIME':
-                    returnString = 'Halbzeit';
-                    break;
+                    return 'Halbzeit';
                 case 'HALF-EXTRATIME':
-                    returnString = 'Halbzeit Verlängerung';
-                    break;
+                    return 'Halbzeit Verlängerung';
                 case 'PENALTY-SHOOTOUT':
-                    returnString = 'Elfmeterschießen';
-                    break;
+                    return 'Elfmeterschießen';
                 case 'FULL':
-                    returnString = '';
-                    break;
+                    return '';
                 default:
+                    if ( !dateIsToday( begin ) ) {
+                        return dateString;
+                    }
                     break;
             }
         } else {
-            switch ( status ) {
-                case 'PRE-MATCH':
-                    returnString = 'um ' + begin.getHours() + ':' + minutes;
-                    break;
-                default:
-                    break;
+            if ( status === 'PRE-MATCH' && !dateIsToday( begin ) ) {
+                return dateString;
             }
         }
-        return returnString;
+        // default return value: "gameHour.minutes Uhr" e.g "16.04 Uhr"
+        // use dot instead of colon to match corporate usage
+        return addLeadingZero( begin.getHours() ) + '.' + addLeadingZero( begin.getMinutes() ) + ' Uhr';
     }
 
 
