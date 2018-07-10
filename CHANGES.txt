@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4776: Change WM-Ticker date format
 
+- FEM-84: Load app functions dynamically on runtime
+
 - MAINT: Add cached health check for elasticsearch to short-circuit requests
   when the server is already down
 
@@ -31,8 +33,6 @@ POSTDEPLOY
 - BUG-954: Enable padding on <main> element in IE11
 
 - BUG-952: Copy missing vendor script to enable Modernizr loading
-
-- FEM-84: Load app functions dynamically on runtime
 
 - Fix: Adjust authorbox image width in AMP for tablet
 
