@@ -304,6 +304,26 @@ def test_hp_shows_popover(selenium_driver, testserver):
     assert box.is_displayed()
 
 
+def test_hp_shows_alternative_popover(selenium_driver, testserver):
+    driver = selenium_driver
+
+    # default
+    driver.get('{}/zeit-online/slenderized-index?force-popover'.format(
+        testserver.url))
+
+    text = driver.find_elements_by_css_selector(".overlay__text")[0]
+    assert text.is_displayed()
+
+    # alternative popover hides text, so after running the script
+    # -> the text should not be shown
+
+    script = """var element = document.getElementById('overlay-wrapper');
+        element.classList.add('overlay-wrapper--alternative');"""
+    updated_driver = driver.execute_script(script)
+    text = driver.find_elements_by_css_selector(".overlay__text")[0]
+    assert not text.is_displayed()
+
+
 def test_zon_campus_teaser_fullwidth_has_campus_signet(testbrowser):
     select = testbrowser('zeit-online/centerpage/teasers-to-campus').cssselect
     svg = select('.teaser-fullwidth .teaser-fullwidth__kicker-logo--zco')
