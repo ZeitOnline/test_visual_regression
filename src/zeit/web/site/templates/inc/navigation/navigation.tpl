@@ -2,16 +2,9 @@
 
 <div class="header__brand" data-ct-row="lead">
     {% with tag_name = 'h1' if view.is_hp else 'div' -%}
-    <{{ tag_name }} class="header__publisher" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <a itemprop="url" href="{{ request.route_url('home') }}index" title="Nachrichten auf ZEIT ONLINE" data-ct-label="logo">
-            <meta itemprop="name" content="ZEIT ONLINE">
-            <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-                {{ lama.use_svg_icon('logo-zon-black', 'header__logo', view.package) }}
-                {# The "logo" dimensions must not exceed 600x60 -#}
-                <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
-                <meta itemprop="width" content="565">
-                <meta itemprop="height" content="60">
-            </span>
+    <{{ tag_name }} class="header__publisher">
+        <a href="{{ request.route_url('home') }}index" title="Nachrichten auf ZEIT ONLINE" data-ct-label="logo">
+            {{ lama.use_svg_icon('logo-zon-black', 'header__logo', view.package) }}
         </a>
     </{{ tag_name }}>
     {% endwith -%}

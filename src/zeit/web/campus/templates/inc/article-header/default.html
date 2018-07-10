@@ -2,7 +2,7 @@
     {% block article_page_header -%}
     <div class="{{ 'page-header' | with_mods(view.article_layout) }} article__item">
         {% set headertag = 'div' if view.current_page.teaser else 'h1' -%}
-        <{{ headertag }} class="{{ 'page-header__headline' | with_mods(view.article_layout) }}" itemprop="headline">
+        <{{ headertag }} class="{{ 'page-header__headline' | with_mods(view.article_layout) }}">
             <span class="{{ 'page-header__kicker' | with_mods(view.article_layout) }}">
                 {{- view.supertitle -}}
             </span>
@@ -44,7 +44,7 @@
         {% endif -%}
 
         {% block article_headline -%}
-            <h1 class="{{ 'article-header__headline' | with_mods(view.article_layout) }}" itemprop="headline">
+            <h1 class="{{ 'article-header__headline' | with_mods(view.article_layout) }}">
                 <span class="{{ 'article-header__kicker' | with_mods(view.article_layout) }}">
                     {{- view.supertitle -}}
                 </span>

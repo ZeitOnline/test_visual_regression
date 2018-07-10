@@ -3,7 +3,7 @@
     {%- if view.zplus_label and view.zplus_label.zplus and view.page_nr == 1 %} header-article--zplusbadge{% endif %} {% if view.is_advertorial %}header-article--advertorial{% endif %}" data-ct-area="articleheader">
     {% block header_content %}
     {% block headline -%}
-    <h1 class="headline" itemprop="headline">
+    <h1 class="headline">
         <span class="headline__supertitle">{{ view.supertitle }}</span>
         <span class="headline__title">{{ view.title }}</span>
     </h1>

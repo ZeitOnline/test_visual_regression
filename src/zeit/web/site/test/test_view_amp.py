@@ -42,15 +42,7 @@ def test_amp_liveblog_article_contains_required_liveblog_addition(testbrowser):
 
 def test_amp_liveblog_article_contains_required_structured_data(testbrowser):
     browser = testbrowser('/amp/zeit-online/liveblog/champions-league')
-    scripts = browser.cssselect('head script[type="application/ld+json"]')
-    data = {}
-
-    assert scripts
-
-    for script in scripts:
-        content = json.loads(script.text_content().strip())
-        data[content['@type']] = content
-
+    data = browser.structured_data()
     page = data['WebPage']
     liveblog = data['LiveBlogPosting']
     publisher = data['Organization']
@@ -117,16 +109,7 @@ def test_amp_liveblog_v3_article_contains_required_markup(testbrowser):
 
 def test_amp_liveblog_v3_article_contains_required_structured_data(
         testbrowser):
-    browser = testbrowser('/amp/zeit-online/article/liveblog3')
-    scripts = browser.cssselect('head script[type="application/ld+json"]')
-    data = {}
-
-    assert scripts
-
-    for script in scripts:
-        content = json.loads(script.text_content().strip())
-        data[content['@type']] = content
-
+    data = testbrowser('/amp/zeit-online/article/liveblog3').structured_data()
     page = data['WebPage']
     liveblog = data['LiveBlogPosting']
     publisher = data['Organization']
@@ -176,15 +159,7 @@ def test_amp_liveblog_v3_solo_article_contains_required_markup(testbrowser):
 def test_amp_liveblog_v3_solo_article_contains_required_structured_data(
         testbrowser):
     browser = testbrowser('/amp/zeit-online/article/liveblog3-solo-theme')
-    scripts = browser.cssselect('head script[type="application/ld+json"]')
-    data = {}
-
-    assert scripts
-
-    for script in scripts:
-        content = json.loads(script.text_content().strip())
-        data[content['@type']] = content
-
+    data = browser.structured_data()
     page = data['WebPage']
     liveblog = data['LiveBlogPosting']
     publisher = data['Organization']
@@ -229,15 +204,7 @@ def test_amp_liveblog_v3_article_last_modified_date(testbrowser, clock):
 def test_amp_article_contains_structured_data_for_author(
         article, length, name, url, testbrowser):
     browser = testbrowser('/amp/zeit-online/article/{}'.format(article))
-    scripts = browser.cssselect('head script[type="application/ld+json"]')
-    data = {}
-
-    assert scripts
-
-    for script in scripts:
-        content = json.loads(script.text_content().strip())
-        data[content['@type']] = content
-
+    data = browser.structured_data()
     article = data['Article']
 
     if length > 1:

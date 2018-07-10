@@ -155,6 +155,24 @@ def test_rss_feed_of_cp_has_requested_format(testserver):
         feed)
 
 
+def test_rss_z2x_feed(testserver):
+    feed_path = '/zeit-magazin/centerpage/index/rss-z2x-flavoured'
+    res = requests.get(
+        testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
+    assert res.headers['Content-Type'].startswith('application/rss+xml')
+    feed = res.text
+
+    assert '<atom:link href="http://newsfeed.zeit.de%s"' % feed_path in feed
+    assert ('<link>https://www.zeit.de/zeit-magazin/'
+            'centerpage/article_image_asset?' in feed)
+    assert ('wt_zmc=koop.ext.zonaudev.z2x.feed.'
+            'article-image-asset.bildtext.link.x' in feed)
+    assert re.search(
+        '<enclosure.*url="http://newsfeed.zeit.de/'
+        'zeit-magazin/centerpage/katzencontent/',
+        feed)
+
+
 def test_spektrum_also_renders_on_ng_centerpages(testbrowser):
     browser = testbrowser('/zeit-online/parquet')
     rows = browser.cssselect('.cp-region--parquet .cp-area--spektrum')

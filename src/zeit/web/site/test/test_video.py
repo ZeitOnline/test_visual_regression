@@ -23,34 +23,33 @@ def test_video_page_should_feature_sharing_images(testbrowser):
         '/zeit-online/video/3537342483001/imagegroup/wide__1300x731')
 
 
-def test_video_page_should_feature_schema_org_props(testbrowser):
-    doc = testbrowser('/zeit-online/video/3537342483001').document
-    assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
-    assert doc.xpath('//meta[@itemprop="thumbnailUrl"]/@content')[0].endswith(
-        '/zeit-online/video/3537342483001/imagegroup/wide')
-    assert doc.xpath('//meta[@itemprop="duration" and @content="PT436S"]')
-    assert doc.xpath(
-        '//meta[@itemprop="playerType" and @content="HTML5 Flash"]')
-    assert doc.xpath(
-        u'//meta[@itemprop="name" and ' +
-        u'@content="Roboter Myon übernimmt Opernrolle"]')
-    assert doc.xpath(
-        u'//meta[@itemprop="uploadDate" and ' +
-        u'@content="2015-01-22T10:27:01+01:00"]')
+def test_video_page_contains_required_structured_data(testbrowser):
+    data = testbrowser('/zeit-online/video/3537342483001').structured_data()
+
+    video = data['VideoObject']
+
+    assert video['name'] == u'Roboter Myon übernimmt Opernrolle'
+    assert video['playerType'] == 'HTML5 Flash'
+    assert video['thumbnailUrl'] == (
+        'http://localhost/zeit-online/video/3537342483001/imagegroup/wide')
+    assert video['duration'] == 'PT436S'
+    assert video['uploadDate'] == '2015-01-22T10:27:01+01:00'
+    assert video['description'].startswith(
+        u'Er ist so groß wie ein siebenjähriges Kind und lernt noch:')
 
 
 def test_video_page_should_print_out_video_headline(testbrowser):
     browser = testbrowser('/zeit-online/video/3537342483001')
-    headline = browser.xpath('//h1[@itemprop="headline"]/span/text()')
+    headline = browser.xpath('//h1/span/text()')
     assert headline[0].strip() == u'Künstliche Intelligenz'
     assert headline[1] == u': '
     assert headline[2].strip() == u'Roboter Myon übernimmt Opernrolle'
 
 
 def test_video_page_should_render_video_description(testbrowser):
-    doc = testbrowser('/zeit-online/video/3537342483001').document
-    assert u'Er ist so groß wie ein siebenjähriges Kind und lernt noch' in (
-        doc.xpath('//div[@itemprop="description"]/text()')[0])
+    browser = testbrowser('/zeit-online/video/3537342483001')
+    assert browser.cssselect('.summary')[0].text.strip().startswith(
+        u'Er ist so groß wie ein siebenjähriges Kind und lernt noch:')
 
 
 def test_video_page_should_display_modified_date(testbrowser):

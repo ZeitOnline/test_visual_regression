@@ -1,7 +1,7 @@
 {% extends "zeit.web.core:templates/amp/asset/image.html" %}
 
 {% set image = get_image(block.author, fallback=False, variant_id='square') %}
-{% set image_sources = [72, 144] %}
-{% block sizes %}sizes="72px"{% endblock %}
+{% set image_sources = [72, 100, 144, 200] %}
+{% block sizes %}sizes="(min-width: 48em) 100px, 72px"{% endblock %}
 {% block media_block %}authorbox__media{% endblock %}
 {% block caption %}{% endblock caption %}

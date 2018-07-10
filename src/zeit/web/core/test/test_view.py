@@ -585,7 +585,7 @@ def test_notification_after_paywall_registration_renders_correctly(
 
     def assert_notification(pathname, css_class, text, query=''):
         driver.get('%s%s%s%s' % (testserver.url, pathname, query, url_hash))
-        selector = 'link[itemprop="mainEntityOfPage"][href="{}{}"]'.format(
+        selector = 'link[rel="canonical"][href="{}{}"]'.format(
             testserver.url, pathname)
         try:
             # assure we are seeing the right page
@@ -626,7 +626,7 @@ def test_notification_script_does_not_edit_unknown_hashes(
     driver = selenium_driver
     url_hash = '#debug-clicktracking'
     driver.get('{}/zeit-online/article/01{}'.format(testserver.url, url_hash))
-    selector = 'link[itemprop="mainEntityOfPage"][href="{}{}"]'.format(
+    selector = 'link[rel="canonical"][href="{}{}"]'.format(
         testserver.url, '/zeit-online/article/01')
     try:
         # assure we are seeing the right page

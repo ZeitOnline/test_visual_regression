@@ -22,16 +22,7 @@ def test_amp_paragraph_should_contain_expected_structure(tplbrowser):
 
 
 def test_amp_contains_required_structured_data(testbrowser):
-    browser = testbrowser('/amp/zeit-online/article/amp')
-    scripts = browser.cssselect('head script[type="application/ld+json"]')
-    data = {}
-
-    assert scripts
-
-    for script in scripts:
-        content = json.loads(script.text_content().strip())
-        data[content['@type']] = content
-
+    data = testbrowser('/amp/zeit-online/article/amp').structured_data()
     page = data['WebPage']
     article = data['Article']
     publisher = data['Organization']
@@ -259,6 +250,7 @@ def test_amp_article_contains_authorbox(testbrowser):
     assert image.get('src') == (
         'http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/'
         'square__460x460')
+    assert image.get('sizes') == '(min-width: 48em) 100px, 72px'
     assert name.text.strip() == 'Jochen Wegner'
     assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
     assert button.get('href') == (

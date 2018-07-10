@@ -3,7 +3,7 @@
 {% block layout %}teaser-graphical{% endblock %}
 
 {% block teaser_content %}
-    <a class="{{ self.layout() }}__link" href="{{ teaser | create_url | append_campaign_params }}" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}" itemprop="mainEntityOfPage">
+    <a class="{{ self.layout() }}__link" href="{{ teaser | create_url | append_campaign_params }}" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}">
         {%- set module_layout = self.layout() -%}
         {%- include "zeit.web.campus:templates/inc/teaser/asset/image_zco-graphical.tpl" %}
 
@@ -12,6 +12,5 @@
                 {{- teaser.teaserSupertitle or teaser.supertitle -}}
             </span></span>
         </h2>
-        <meta itemprop="headline" content="{{ teaser.teaserSupertitle or teaser.supertitle }}: {{ teaser.teaserTitle or teaser.title }}">
     </a>
 {% endblock teaser_content %}

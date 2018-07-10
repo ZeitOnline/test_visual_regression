@@ -74,19 +74,3 @@ def test_module_zco_link_button_is_available(testbrowser):
     assert len(module) == 1
     module = browser.cssselect('.link_button__link')
     assert len(module) == 1
-
-
-def test_teaser_microdata_does_not_contain_series_label(testbrowser):
-    browser = testbrowser('/campus/centerpage/teasers')
-    articles = browser.cssselect('[itemtype="http://schema.org/Article"]')
-    series = browser.cssselect('.series-label')
-
-    assert len(articles)
-    assert len(series)
-
-    for article in articles:
-        headline = article.cssselect('[itemprop="headline"]')[0]
-        title = headline.get('content') or headline.text_content().strip()
-        series = article.cssselect('.series-label')
-        if len(series):
-            assert series[0].text.strip() not in title

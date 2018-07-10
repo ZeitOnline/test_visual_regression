@@ -3,7 +3,7 @@
         <div class="article__item">
             <div class="column-heading__inner">
                 <div class="column-heading__information">
-                    <h1 class="column-heading__header" itemprop="headline">
+                    <h1 class="column-heading__header">
                         <span class="column-heading__kicker">
                             {{- view.serie + ' / ' -}}
                             {{- view.supertitle -}}
@@ -11,26 +11,12 @@
                         {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
                         <span class="column-heading__title">{{ view.title }}</span>
                     </h1>
-                    {% if view.authors %}
+                    {% set byline = view.context | get_byline('main') -%}
+                    {% if byline | length -%}
                         <div class="column-heading__name" data-ct-row="author">
-                            Eine Kolumne von
-                            {% for author in view.authors -%}
-                                <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                                {%- if loop.length > 1 and not loop.first -%}
-                                    {%- if loop.last %} und {% else %}, {% endif -%}
-                                {%- endif -%}
-                                {%- if author.href -%}
-                                    <a href="{{ author.href | create_url }}" rel="author" itemprop="url" data-ct-column="
-                                        {{- '%s_of_%s' | format(loop.index, loop.length) }}" data-ct-subcolumn="false"><span itemprop="name">
-                                        {{- author.name -}}
-                                    </span></a>
-                                {%- else -%}
-                                    <span itemprop="name">{{ author.name }}</span>
-                                {%- endif -%}
-                                </span>
-                            {%- endfor %}
+                            {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
                         </div>
-                    {% endif %}
+                    {% endif -%}
                 </div>
                 {% require image = get_image(view.context, variant_id='square', name='author', fallback=False) -%}
                 <div class="column-heading__author">
@@ -43,7 +29,7 @@
     {% if view.pagination and view.pagination.current < 2 %}
     <div class="column-heading__lower">
         <div class="article__item">
-            <div class="summary" itemprop="description">
+            <div class="summary">
                 {{ view.subtitle }}
             </div>
             <div class="metadata metadata--column">

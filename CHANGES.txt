@@ -12,10 +12,31 @@ POSTDEPLOY
 - Nothing
 
 
-3.168 (unreleased)
+3.169 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- MAINT: Add cached health check for elasticsearch to short-circuit requests
+  when the server is already down
+
+
+3.168 (2018-07-09)
+------------------
+
+- ZON-4777: Add structured data in JSON-LD format
+
+- ZON-4744: Feed for ZON content on z2x.zeit.de
+
+- BUG-954: Enable padding on <main> element in IE11
+
+- BUG-952: Copy missing vendor script to enable Modernizr loading
+
+- Fix: Adjust authorbox image width in AMP for tablet
+
+- FIX: Be defensive about nonexistent videos
+
+- FIX: Rename puzzle form field
+
+- MAINT: Refactor liveblog
 
 
 3.167 (2018-07-04)

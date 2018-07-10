@@ -8,7 +8,7 @@
         </div>
     {% else %}
         {% block intro %}
-            <div class="summary" itemprop="description">
+            <div class="summary">
                 {{ view.subtitle }}
             </div>
             {%- set byline = view.context | get_byline('main') %}

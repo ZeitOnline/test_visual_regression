@@ -11,7 +11,7 @@
         <div class="{{ 'article-heading__container' | with_mods('podcast') }}">
             {% include "zeit.web.arbeit:templates/inc/asset/image_article-header-podcast.html" %}
             <div class="article-heading__podcast">
-                <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}" itemprop="headline">
+                <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}">
                     {%- if view.serie -%}
                     <span class="{{ 'article-heading__series' | with_mods('podcast') }}">
                         Podcast: {{ view.serie -}}

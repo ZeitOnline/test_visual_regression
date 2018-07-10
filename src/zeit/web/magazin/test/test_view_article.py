@@ -103,10 +103,10 @@ def test_article_contains_authorbox(testbrowser):
 
 def test_article_header_contains_authors(testbrowser):
     browser = testbrowser('/zeit-magazin/article/08')
-    summary = browser.cssselect('.header-article__subtitle')
-    authors = browser.cssselect('span[itemprop="author"]')
+    summary = browser.cssselect('.header-article__subtitle')[0]
+    authors = summary.cssselect('span[itemtype="http://schema.org/Person"]')
     link = authors[0].cssselect('a[itemprop="url"]')[0]
-    assert ' '.join(summary[0].text_content().strip().split()).endswith(
+    assert ' '.join(summary.text_content().strip().split()).endswith(
         'Ein Kommentar von Anne Mustermann, Berlin und Oliver Fritsch, London')
     assert len(authors) == 2
     assert authors[0].text_content().strip() == 'Anne Mustermann'

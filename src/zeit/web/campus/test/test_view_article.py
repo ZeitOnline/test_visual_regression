@@ -334,8 +334,8 @@ def test_article_contains_campus_authorbox(testbrowser):
     assert len(figure) == 1
 
     # test if no link to author page is available
-    url = author.cssselect('a[itemprop="url"]')
-    assert not url
+    link = author.cssselect('a.authorbox__button')
+    assert not link
 
     # check if mobile and desktop resource are given
     image = figure[0].cssselect('.authorbox__media-item')

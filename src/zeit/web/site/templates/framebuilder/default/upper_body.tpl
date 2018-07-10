@@ -27,7 +27,7 @@
                 {# mobile ad place 1 #}
                 {% include "zeit.web.core:templates/inc/ads/places/mobile/place1.html" %}
             {% endblock adplace_billboard %}
-            <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
+            <main class="{{ 'main' | with_mods(view.type) }}" id="main">
 
             {%- if view.is_advertorial and view.cap_title %}
                 <div class="advertorial-marker">
