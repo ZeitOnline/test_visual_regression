@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - FEM-84: Load app functions dynamically on runtime
 
+- FEM-85: Update node packages
+
 - MAINT: Add cached health check for elasticsearch to short-circuit requests
   when the server is already down
 

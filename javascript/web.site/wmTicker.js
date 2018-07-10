@@ -234,19 +234,25 @@ function wmTicker( element ) {
                         offsetArray = [ 0, 45, 90, 105, 120 ],
                         cutoff = offsetArray[ period ],
                         min = minuteDifference + offsetArray[ period - 1 ];
+
                     if ( min > cutoff ) {
                         return cutoff + '. + ' + ( min - cutoff );
-                    } else {
-                        return min + '.';
                     }
+
+                    return min + '.';
+
                 case 'HALF-TIME':
                     return 'Halbzeit';
+
                 case 'HALF-EXTRATIME':
                     return 'Halbzeit Verlängerung';
+
                 case 'PENALTY-SHOOTOUT':
                     return 'Elfmeterschießen';
+
                 case 'FULL':
                     return '';
+
                 default:
                     if ( !dateIsToday( begin ) ) {
                         return dateString;
