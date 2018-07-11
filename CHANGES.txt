@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - BUG-955: Show news agency note in AMP articles
 
+- BUG-959: Author Feedback Form now displays author name again
+
 - FEM-84: Load app functions dynamically on runtime
 
 - FEM-85: Update node packages
