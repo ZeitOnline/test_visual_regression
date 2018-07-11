@@ -4,6 +4,7 @@
     {%- endrequire -%}
     <h1 class="{{ 'header-image__heading' | with_mods('overlay' if image) }}">
         <span class="header-image__kicker">{{ module.supertitle }}</span>
+        {%- if module.supertitle %}<span class="visually-hidden">: </span>{% endif -%}
         <span class="header-image__title">{{ module.title }}</span>
     </h1>
 </header>
