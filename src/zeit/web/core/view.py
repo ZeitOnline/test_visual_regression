@@ -1060,7 +1060,6 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def ligatus(self):
-
         ressorts = zeit.web.core.content.RESSORT_SOURCE
         ligatus_ressort_blacklist = []
         try:
@@ -1068,7 +1067,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             nodes = tree.xpath(
                 '//ressort[@ligatus="no"]|//subnavigation[@ligatus="no"]')
             for node in nodes:
-                ligatus_ressort_blacklist.append(node.get('name'))
+                ligatus_ressort_blacklist.append(node.get('name').lower())
         except (AttributeError, TypeError):
             pass
 
