@@ -16,6 +16,7 @@ import zeit.retresco.tag
 
 log = logging.getLogger(__name__)
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
+RESSORT_SOURCE = zeit.cms.content.sources.RessortSource()
 
 
 class ILazyProxy(zeit.cms.content.interfaces.ICommonMetadata):
