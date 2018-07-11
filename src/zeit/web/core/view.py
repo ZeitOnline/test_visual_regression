@@ -82,14 +82,6 @@ def is_paywalled(context, request):
     return zeit.web.core.paywall.Paywall.status(request)
 
 
-def is_dpa_article(context, request):
-    return context.product and context.product.id == 'News'
-
-
-def is_afp_article(context, request):
-    return context.product and context.product.id == 'afp'
-
-
 class Base(object):
 
     """Base class for all views."""

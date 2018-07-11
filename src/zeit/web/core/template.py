@@ -14,6 +14,7 @@ import urlparse
 import hashlib
 
 import babel.dates
+import jinja2
 import lxml.etree
 import pyramid.path
 import zope.component
@@ -874,6 +875,8 @@ def join_if_exists(iterable, string=''):
 
 @zeit.web.register_filter
 def tojson(value):
+    if isinstance(value, jinja2.Undefined):
+        return 'null'
     result = json.dumps(remove_break(value))
     # <https://html.spec.whatwg.org/multipage
     #  /scripting.html#restrictions-for-contents-of-script-elements>
