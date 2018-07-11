@@ -501,7 +501,13 @@ def get_keywords(context):
         tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
         try:
             timeout = conf.get('retresco_timeout', 0.1)
-            return tms.get_article_keywords(context, timeout=timeout)
+            published_content = not (
+                    conf.get('is_preview', False) and
+                    zeit.web.core.application.FEATURE_TOGGLES.find(
+                        'keywords_from_unpublished_content'))
+            return tms.get_article_keywords(context,
+                                            timeout=timeout,
+                                            published=published_content)
         except Exception:
             log.warning(
                 'Retresco keywords failed for %s', context.uniqueId,

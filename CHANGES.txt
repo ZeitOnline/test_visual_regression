@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4776: Change WM-Ticker date format
 
+- ZON-4571: Use unpublished TMS for preview
+
 - BUG-955: Show news agency note in AMP articles
 
 - FEM-84: Load app functions dynamically on runtime
