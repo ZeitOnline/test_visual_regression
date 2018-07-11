@@ -22,10 +22,8 @@
   <iqd>false</iqd>
   <iqd_touchpoint>true</iqd_touchpoint>
   <keywords_from_tms>false</keywords_from_tms>
-  <modernizr_js_file>false</modernizr_js_file>
-
   <ligatus>false</ligatus>
-
+  <modernizr_js_file>false</modernizr_js_file>
   <optimize_ab_testing_to_webtrekk>false</optimize_ab_testing_to_webtrekk>
   <podlove_button>true</podlove_button>
   <preload_webfonts>true</preload_webfonts>
