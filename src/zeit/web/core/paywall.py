@@ -208,19 +208,12 @@ class CeleraOneMixin(object):
                 request.response.headers[res_name] = value
 
     def set_c1_adblocker_response_headers(self):
-        if zeit.web.core.application.FEATURE_TOGGLES.find(
-                'c1_adblocker_blocker'):
+        response = self.request.response
 
-            # First test implementation with two hardcoded articles.
-            # Logic will follow.
-            response = self.request.response
-            if self.context.uniqueId == 'http://xml.zeit.de/digital/' \
-                    'internet/2017-11/firefox-quantum-browser-test-' \
-                    'vergleich-google-chrome':
-                response.headers['C1-Track-Adblocker-Targeting'] = 'false'
-                return True
-            if self.context.uniqueId == 'http://xml.zeit.de/digital/' \
-                    'internet/2018-04/adblocker-urteil-bgh-springer-' \
-                    'adblock-plus':
-                response.headers['C1-Track-Adblocker-Targeting'] = 'true'
-                return True
+        # Set header when feature is activated and notification is not hidden.
+        if zeit.web.core.application.FEATURE_TOGGLES.find(
+                'c1_adblocker_blocker') and not (
+                self.context.hide_adblocker_notification):
+            response.headers['C1-Track-Adblocker-Targeting'] = 'true'
+        else:
+            response.headers['C1-Track-Adblocker-Targeting'] = 'false'
