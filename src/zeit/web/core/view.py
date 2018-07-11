@@ -1072,7 +1072,9 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             pass
 
         ressort_blacklisted = (
-            self.ressort or self.sub_ressort) in ligatus_ressort_blacklist
+            self.ressort in ligatus_ressort_blacklist) or (
+            self.sub_ressort in ligatus_ressort_blacklist)
+
         return (
             zeit.web.core.application.FEATURE_TOGGLES.find('ligatus')
             and self.advertising_enabled and not ressort_blacklisted and
