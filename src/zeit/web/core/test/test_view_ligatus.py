@@ -1,5 +1,6 @@
 import pytest
 
+import gocept.lxml.objectify
 import zeit.web.core.application
 
 
@@ -37,11 +38,7 @@ def test_ligatus_zon_article_has_access_value(testbrowser):
 
 def test_ligatus_is_available_in_all_verticals(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set(
-        'ligatus',
-        'ligatus_on_arbeit',
-        'ligatus_on_campus',
-        'ligatus_on_magazin',
-        'ligatus_on_site'
+        'ligatus'
     )
 
     browser = testbrowser('/arbeit/article/simple-nextread')
@@ -82,7 +79,7 @@ def test_ligatus_can_be_toggled_off(testbrowser):
 
 
 def test_ligatus_can_be_disabled_on_article(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus', 'ligatus_on_site')
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus')
 
     browser = testbrowser('/zeit-online/article/simple-ligatus-disabled')
     assert not browser.cssselect('#ligatus')
@@ -193,62 +190,81 @@ def test_ligatus_do_not_index_advertorials(testbrowser, param):
     assert meta[0].get('content') == param[1]
 
 
-def test_ligatus_can_be_toggled_globally(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set(
-        'ligatus_on_arbeit',
-        'ligatus_on_campus',
-        'ligatus_on_magazin',
-        'ligatus_on_site'
-    )
-    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
+def test_ligatus_can_be_toggled_by_ressorts(monkeypatch, testbrowser):
 
+    def mock_tree():
+        return gocept.lxml.objectify.fromstring("""\
+<ressorts>
+  <ressort name="Arbeit" uniqueId="http://xml.zeit.de/arbeit" ligatus="no">
+    <title>Arbeit</title>
+  </ressort>
+  <ressort name="Campus" uniqueId="http://xml.zeit.de/campus" ligatus="no">
+    <title>Campus</title>
+  </ressort>
+  <ressort name="zeit-magazin">
+    <title>Zeit Magazin</title>
+  </ressort>
+  <ressort name="Studium" uniqueId="http://xml.zeit.de/studium" ligatus="no">
+    <title>Studium</title>
+  </ressort>
+</ressorts>
+""")
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus')
+    monkeypatch.setattr(
+        zeit.web.core.content.RESSORT_SOURCE.factory, '_get_tree', mock_tree)
+
+    # ressort Arbeit: off
     browser = testbrowser('/arbeit/article/simple-nextread')
     assert not browser.cssselect('#ligatus')
     assert not browser.cssselect('script[src*=".ligatus.com"]')
 
+    # ressort Campus: off
     browser = testbrowser('/campus/article/simple')
     assert not browser.cssselect('#ligatus')
     assert not browser.cssselect('script[src*=".ligatus.com"]')
 
+    # ressort zeit-magazin: on
     browser = testbrowser('/zeit-magazin/article/header-text-only')
-    assert not browser.cssselect('#ligatus')
-    assert not browser.cssselect('script[src*=".ligatus.com"]')
-
-    browser = testbrowser('/zeit-online/article/simple')
-    assert not browser.cssselect('#ligatus')
-    assert not browser.cssselect('script[src*=".ligatus.com"]')
-
-
-def test_ligatus_can_be_toggled_for_verticals(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set(
-        'ligatus',
-        'ligatus_on_arbeit',
-        'ligatus_on_site'
-    )
-    zeit.web.core.application.FEATURE_TOGGLES.unset(
-        'ligatus_on_campus',
-        'ligatus_on_magazin'
-    )
-
-    browser = testbrowser('/arbeit/article/simple-nextread')
     assert browser.cssselect('#ligatus')
     assert browser.cssselect('script[src*=".ligatus.com"]')
 
+
+def test_ligatus_can_be_toggled_by_sub_ressort(monkeypatch, testbrowser):
+
+    def mock_tree():
+        return gocept.lxml.objectify.fromstring("""\
+<ressorts>
+  <ressort name="Kultur" uniqueId="http://xml.zeit.de/kultur">
+    <title>Kultur</title>
+    <subnavigation name="Film" uniqueId="http://xml.zeit.de/kultur/film"\
+     ligatus="no">
+      <title>Film &amp; TV</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Campus" uniqueId="http://xml.zeit.de/campus">
+    <title>Campus</title>
+  </ressort>
+</ressorts>
+""")
+
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus')
+    monkeypatch.setattr(
+        zeit.web.core.content.RESSORT_SOURCE.factory, '_get_tree', mock_tree)
+
+    # subressort Film: off
+    browser = testbrowser('/arbeit/article/inline-gallery')
+    assert not browser.cssselect('#ligatus')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')
+
+    # ressort Campus: on
     browser = testbrowser('/campus/article/simple')
-    assert not browser.cssselect('#ligatus')
-    assert not browser.cssselect('script[src*=".ligatus.com"]')
-
-    browser = testbrowser('/zeit-magazin/article/header-text-only')
-    assert not browser.cssselect('#ligatus')
-    assert not browser.cssselect('script[src*=".ligatus.com"]')
-
-    browser = testbrowser('/zeit-online/article/simple')
     assert browser.cssselect('#ligatus')
     assert browser.cssselect('script[src*=".ligatus.com"]')
 
 
 def test_ligatus_is_shown_below_special_content(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus', 'ligatus_on_site')
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus')
 
     browser = testbrowser('/zeit-online/video/3537342483001')
     assert browser.cssselect('#ligatus')
@@ -260,9 +276,24 @@ def test_ligatus_is_shown_below_special_content(testbrowser):
 
 
 def test_ligatus_is_not_shown_if_ads_disabled(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set(
-        'ligatus', 'ligatus_on_magazin')
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus')
 
     browser = testbrowser('/zeit-magazin/article/nobanner')
+    assert not browser.cssselect('#ligatus')
+    assert not browser.cssselect('script[src*=".ligatus.com"]')
+
+
+def test_nextread_is_hidden_when_ligatus_is_on(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('ligatus')
+    browser = testbrowser('/zeit-online/article/simple-nextread')
+    assert not browser.cssselect('#nextread')
+    assert browser.cssselect('#ligatus')
+    assert browser.cssselect('script[src*=".ligatus.com"]')
+
+
+def test_nextread_is_visible_when_ligatus_is_off(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.unset('ligatus')
+    browser = testbrowser('/zeit-online/article/simple-nextread')
+    assert browser.cssselect('#nextread')
     assert not browser.cssselect('#ligatus')
     assert not browser.cssselect('script[src*=".ligatus.com"]')
