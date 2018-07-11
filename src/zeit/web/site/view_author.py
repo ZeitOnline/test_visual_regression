@@ -188,7 +188,6 @@ class Feedback(Author):
         area = create_area(self.context, 'author-feedback')
         module = area.create_item('mail')
         module.subject = 'Sie haben Feedback erhalten'
-        module.author_name = self.context.display_name
         module.success_message = 'Ihr Feedback wurde erfolgreich ' \
             'verschickt.'
         return zeit.web.core.centerpage.IRendered(area)
