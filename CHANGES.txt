@@ -23,6 +23,8 @@ POSTDEPLOY
 
 - FEM-85: Update node packages
 
+- FIX: Serialize jinja `Undefined` to json as None
+
 - MAINT: Add cached health check for elasticsearch to short-circuit requests
   when the server is already down
 
