@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<centerpage type="manualtopic" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<head>
 		<header_image/>
 		<attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
@@ -28,11 +28,10 @@
 		<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
 		<attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
 		<attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
-		<attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
 		<attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
 		<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
 		<attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
-		<attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">manualtopic</attribute>
 		<attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:b564620e-0887-4862-b1b3-a079b36140b3}</attribute>
 		<attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">16</attribute>
 		<attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
@@ -53,7 +52,8 @@
 &lt;/pickle&gt;</attribute>
 	</head>
 	<body>
-		<title>Tube CP</title>
+        <title>Inszenierte Themenseite</title>
+        <supertitle>Teaserliste</supertitle>
 		<cluster area="id-8458d4a8-7cee-4b15-be25-0e0e36e327cd" kind="solo">
 		  <region area="id-0b68c298-c9de-4a92-b0f4-d1ac839b2ae9" kind="solo" hide-dupes="True">
 			<container cp:type="headerimage" module="headerimage" cp:__name__="id-3e6bf101-bd4b-49a7-a27e-82e2df102cd2" supertitle="Schlauchig" title="Teaserliste">
@@ -62,10 +62,8 @@
 		  </region>
 		</cluster>
 		<cluster area="id-c01879aa-f212-497e-b201-4ac10bbf86a4" kind="solo">
-			<region area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e94" kind="tube" count="5" automatic="True" automatic_type="channel" title="Politik" hide-dupes="True">
-				<query>
-					<condition type="Channel">Politik</condition>
-				</query>
+			<region area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e94" kind="tube" count="5" automatic="True" automatic_type="centerpage" title="Politik" hide-dupes="True">
+				<referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
 				<container cp:type="auto-teaser" module="zon-small" cp:__name__="id-ea7dc592-96e4-47c6-b19b-8844131735c2"/>
 				<container cp:type="auto-teaser" module="zon-small" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8de"/>
 				<container cp:type="auto-teaser" module="zon-large" cp:__name__="id-b71b5ef7-d4c1-4c3e-99d6-ee48455e82f9"/>
