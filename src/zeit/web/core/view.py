@@ -1060,13 +1060,23 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def ligatus(self):
-        # self.package is "zeit.web.arbeit"
-        shortpackage = self.package.replace('zeit.web.', '')
-        verticaltoggle = 'ligatus_on_{}'.format(shortpackage)
+
+        ressorts = zeit.web.core.content.RESSORT_SOURCE
+        ligatus_ressort_blacklist = []
+        try:
+            tree = ressorts.factory._get_tree()
+            nodes = tree.xpath(
+                '//ressort[@ligatus="no"]|//subnavigation[@ligatus="no"]')
+            for node in nodes:
+                ligatus_ressort_blacklist.append(node.get('name'))
+        except (AttributeError, TypeError):
+            pass
+
+        ressort_blacklisted = (
+            self.ressort or self.sub_ressort) in ligatus_ressort_blacklist
         return (
-            zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
-            zeit.web.core.application.FEATURE_TOGGLES.find(verticaltoggle) and
-            self.advertising_enabled and
+            zeit.web.core.application.FEATURE_TOGGLES.find('ligatus')
+            and self.advertising_enabled and not ressort_blacklisted and
             not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
