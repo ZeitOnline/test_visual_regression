@@ -242,6 +242,22 @@ def test_author_contact_should_be_fully_rendered(testbrowser, monkeypatch):
     assert len(instagram) == 1
 
 
+def test_author_feedback_should_be_fully_rendered(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'author_feedback': True}.get)
+    browser = testbrowser('/autoren/j_random/feedback')
+    container = browser.cssselect('.feedback-section')[0]
+    form = container.cssselect('.feedback-form')
+    title = container.cssselect('.feedback-form__inner p')[0].text
+    textarea = container.cssselect('#feedbacktext')
+    mail_input = container.cssselect('#feedbackmail')
+
+    assert len(form) == 1
+    assert title == 'Ihr Feedback an J. Random Hacker'
+    assert len(textarea) == 1
+    assert len(mail_input) == 1
+
+
 def test_author_should_have_user_comments(testbrowser, clock):
     clock.freeze(datetime.datetime(2015, 12, 9))
     browser = testbrowser('/autoren/author3/kommentare')
