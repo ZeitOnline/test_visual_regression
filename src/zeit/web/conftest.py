@@ -33,6 +33,7 @@ import waitress
 import webtest
 import wesgi
 import zope.browserpage.metaconfigure
+import zope.component
 import zope.event
 import zope.interface
 import zope.processlifetime
