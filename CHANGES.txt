@@ -15,6 +15,8 @@ POSTDEPLOY
 3.170 (unreleased)
 ------------------
 
+- ZON-4794: De-/Activate ligatus widget by ressort switch
+
 - BUG-961: Remove redundant subtitle in ZEIT Arbeit gallerie
 
 
