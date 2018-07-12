@@ -67,7 +67,7 @@
         <area kind="ranking"/>
     </region>
     <region kind="solo" title="Simple-Region" type="!storystream" available="zeit.magazin.interfaces.IZMOContent">
-        <area kind="ranking"/>
+        <area kind="zmo-ranking"/>
     </region>
     <region kind="solo" title="Simple-Region" type="!storystream" available="zeit.campus.interfaces.IZCOContent">
         <area kind="zco-ranking"/>

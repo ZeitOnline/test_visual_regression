@@ -331,6 +331,14 @@
         available="zeit.magazin.interfaces.IZMOContent"
     />
     <layout
+        id="zmo-ranking"
+        title="ZMO kleiner Teaser Serien- und Themenseite"
+        image_pattern="wide"
+        areas="zmo-ranking tube"
+        default="zmo-ranking"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+    <layout
         id="zmo-leader-fullwidth-light"
         title="ZMO Vollbreiter Aufmacher (helles Bild)"
         image_pattern="wide"
@@ -382,7 +390,7 @@
         id="zmo-landscape-small"
         title="ZMO kleiner Teaser 16:9"
         image_pattern="wide"
-        areas="major minor"
+        areas="major minor zmo-ranking tube"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
