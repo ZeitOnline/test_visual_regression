@@ -23,6 +23,8 @@ POSTDEPLOY
 
 - BUG-959: Author Feedback Form now displays author name again
 
+- BUG-961: Remove redundant subtitle in ZEIT Arbeit galleries
+
 - FEM-84: Load app functions dynamically on runtime
 
 - FEM-85: Update node packages
