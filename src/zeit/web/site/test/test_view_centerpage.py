@@ -2300,8 +2300,8 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
             'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
 
     browser = testbrowser('/serie/martenstein')
-    image1 = browser.cssselect('.cp-area--ranking article img')[0]
-    image2 = browser.cssselect('.cp-area--ranking article img')[1]
+    image1 = browser.cssselect('.cp-area--zmo-ranking article img')[0]
+    image2 = browser.cssselect('.cp-area--zmo-ranking article img')[1]
 
     assert image1.get('data-src').endswith('__A3E6BB')
     assert not image2.get('data-src').endswith('__')

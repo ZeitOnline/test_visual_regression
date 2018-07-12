@@ -471,15 +471,16 @@ def test_if_all_followbox_elements_present(testbrowser):
 def test_seriespage_contains_required_elements(testbrowser, data_solr):
     browser = testbrowser('/serie/martenstein')
     headline = browser.cssselect('h1')[0]
+    select = browser.cssselect
 
-    assert browser.cssselect('header[data-ct-area="zmo-topnav"]')
-    assert browser.cssselect('footer[data-ct-area="zmo-footernav"]')
-    assert browser.cssselect('nav.breadcrumbs')
-    assert len(browser.cssselect('.cp-area--ranking .teaser-ranking')) == 5
-    assert len(browser.cssselect('.cp-area--ranking .pager--ranking')) == 1
+    assert select('header[data-ct-area="zmo-topnav"]')
+    assert select('footer[data-ct-area="zmo-footernav"]')
+    assert select('nav.breadcrumbs')
+    assert len(select('.cp-area--zmo-ranking .teaser-ranking')) == 5
+    assert len(select('.cp-area--zmo-ranking .pager--zmo-ranking')) == 1
     assert headline.text_content().strip() == 'Serie: Martenstein'
 
-    assert browser.cssselect('link[rel="canonical"]')[0].get('href') == (
+    assert select('link[rel="canonical"]')[0].get('href') == (
         'http://localhost/serie/martenstein')
-    assert browser.cssselect('link[rel="next"]')[0].get('href') == (
+    assert select('link[rel="next"]')[0].get('href') == (
         'http://localhost/serie/martenstein?p=2')
