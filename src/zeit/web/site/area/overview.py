@@ -19,7 +19,10 @@ import zeit.web.core.area.ranking
 log = logging.getLogger(__name__)
 
 
-SANITY_BOUND = 500
+# In sitemaps we routinely see ~600 items per day, rarely up to 900, but so far
+# not more than 1000. The query takes about 1.5s which is just inside the 2s
+# limit that we aspire to.
+SANITY_BOUND = 1000
 
 
 @zeit.web.register_area('overview')
