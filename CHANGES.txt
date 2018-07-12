@@ -15,7 +15,7 @@ POSTDEPLOY
 3.170 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-961: Remove redundant subtitle in ZEIT Arbeit gallerie
 
 
 3.169 (2018-07-12)
