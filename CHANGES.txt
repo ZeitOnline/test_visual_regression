@@ -12,7 +12,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.169 (unreleased)
+3.169 (2018-07-12)
 ------------------
 
 - ZON-4776: Change WM-Ticker date format
