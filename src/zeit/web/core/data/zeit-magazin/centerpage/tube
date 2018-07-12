@@ -63,12 +63,12 @@
 		</cluster>
 		<cluster area="id-c01879aa-f212-497e-b201-4ac10bbf86a4" kind="solo">
 			<region area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e94" kind="tube" count="5" automatic="True" automatic_type="centerpage" title="Politik" hide-dupes="True">
-				<referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
-				<container cp:type="auto-teaser" module="zon-small" cp:__name__="id-ea7dc592-96e4-47c6-b19b-8844131735c2"/>
-				<container cp:type="auto-teaser" module="zon-small" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8de"/>
-				<container cp:type="auto-teaser" module="zon-large" cp:__name__="id-b71b5ef7-d4c1-4c3e-99d6-ee48455e82f9"/>
-				<container cp:type="auto-teaser" module="zon-small" cp:__name__="id-bda65215-57f7-4f6a-bbdd-738e4a05e5d7"/>
-				<container cp:type="auto-teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b"/>
+				<referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
+				<container cp:__name__="id-ea7dc592-96e4-47c6-b19b-8844131735c2" cp:type="auto-teaser" module="zmo-ranking"/>
+				<container cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8de" cp:type="auto-teaser" module="zmo-ranking"/>
+				<container cp:__name__="id-b71b5ef7-d4c1-4c3e-99d6-ee48455e82f9" cp:type="auto-teaser" module="zmo-landscape-small"/>
+				<container cp:__name__="id-bda65215-57f7-4f6a-bbdd-738e4a05e5d7" cp:type="auto-teaser" module="zmo-ranking"/>
+				<container cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b" cp:type="auto-teaser" module="zmo-ranking"/>
 			</region>
 		</cluster>
 	</body>
