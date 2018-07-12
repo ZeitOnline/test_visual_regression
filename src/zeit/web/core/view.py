@@ -24,6 +24,7 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.push.interfaces
 
+from zeit.web.core.source import LIGATUS_BLACKLIST
 import zeit.web
 import zeit.web.core.application
 import zeit.web.core.banner
@@ -1052,19 +1053,8 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def ligatus(self):
-        ressorts = zeit.web.core.content.RESSORT_SOURCE
-        ligatus_ressort_blacklist = []
-        try:
-            tree = ressorts.factory._get_tree()
-            nodes = tree.xpath(
-                '//ressort[@ligatus="no"]|//subnavigation[@ligatus="no"]')
-            for node in nodes:
-                ligatus_ressort_blacklist.append(node.get('name').lower())
-        except (AttributeError, TypeError):
-            pass
-
-        ressort_blacklisted = (self.ressort in ligatus_ressort_blacklist) or (
-            self.sub_ressort in ligatus_ressort_blacklist)
+        ressort_blacklisted = (self.ressort in LIGATUS_BLACKLIST) or (
+            self.sub_ressort in LIGATUS_BLACKLIST)
 
         return (
             zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and

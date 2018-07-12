@@ -1,7 +1,9 @@
 import pytest
 
 import gocept.lxml.objectify
+
 import zeit.web.core.application
+import zeit.web.core.source
 
 
 def test_ligatus_zar_article_has_access_value(testbrowser):
@@ -212,7 +214,7 @@ def test_ligatus_can_be_toggled_by_ressorts(monkeypatch, testbrowser):
 
     zeit.web.core.application.FEATURE_TOGGLES.set('ligatus')
     monkeypatch.setattr(
-        zeit.web.core.content.RESSORT_SOURCE.factory, '_get_tree', mock_tree)
+        zeit.web.core.source.LIGATUS_BLACKLIST.factory, '_get_tree', mock_tree)
 
     # ressort Arbeit: off
     browser = testbrowser('/arbeit/article/simple-nextread')
@@ -250,7 +252,7 @@ def test_ligatus_can_be_toggled_by_sub_ressort(monkeypatch, testbrowser):
 
     zeit.web.core.application.FEATURE_TOGGLES.set('ligatus')
     monkeypatch.setattr(
-        zeit.web.core.content.RESSORT_SOURCE.factory, '_get_tree', mock_tree)
+        zeit.web.core.source.LIGATUS_BLACKLIST.factory, '_get_tree', mock_tree)
 
     # subressort Film: off
     browser = testbrowser('/arbeit/article/inline-gallery')
