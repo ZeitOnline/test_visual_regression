@@ -23,6 +23,9 @@ POSTDEPLOY
 
 - BUG-959: Author Feedback Form now displays author name again
 
+- TMS-236: Increase sanity bound of items per day page,
+  so sitemaps get all content published per day
+
 - FEM-84: Load app functions dynamically on runtime
 
 - FEM-85: Update node packages
