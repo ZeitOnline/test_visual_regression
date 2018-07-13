@@ -12,7 +12,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.170 (unreleased)
+3.170 (2018-07-13)
 ------------------
 
 - ZON-4794: De-/Activate ligatus widget by ressort switch
