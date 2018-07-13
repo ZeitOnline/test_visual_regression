@@ -21,7 +21,11 @@ function AdDefend() {
     };
 
     this.path = '//' + location.host + this.config.jsonPath;
-    this.init();
+
+    // instantiate just once
+    if ( !document.querySelector( '#addefend-overlay' ) ) {
+        this.init();
+    }
 }
 
 AdDefend.prototype.getData = function( url ) {
@@ -73,7 +77,7 @@ AdDefend.prototype.handleOverlay = function() {
     var that = this;
 
     // view Overlay
-    $( '#overlay-wrapper, #overlay-wrapper .overlay' ).fadeIn();
+    $( '#overlay-wrapper, #overlay-addefend' ).fadeIn();
 
     // tracking
     this.track( 'view', 'banner', this.config.trackingId );
@@ -89,15 +93,11 @@ AdDefend.prototype.handleOverlay = function() {
 
         if ( that.config.windowHeight === 'max' ) {
             overlayHeight = $( window ).height();
-        } else if ( that.config.windowHeight === 'min' ) {
-            overlayHeight = '600';
-        } else if ( zeit.isMobileView() ) {
+        } else {
             overlayHeight = '500';
         }
 
-        $( '#addefend-overlay' ).delay( 300 ).animate({
-            height: overlayHeight
-        }, 400 );
+        $( '#addefend-overlay' ).animate({ 'min-height': overlayHeight }, 400 );
 
         // fadein manual
         $( '#addefend-manual' ).delay( 500 ).fadeIn();
@@ -119,7 +119,7 @@ AdDefend.prototype.handleOverlay = function() {
 
     // remove layer and add cookie
     $( '.addefend__dismiss' ).click( function() {
-        $( '#addefend-overlay, #overlay-wrapper' ).fadeOut( 200, function() {
+        $( '#addefend-overlay, #overlay-addefend' ).fadeOut( 200, function() {
             $( this ).remove();
         });
 

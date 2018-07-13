@@ -1,16 +1,19 @@
 .addefend
-	+padded
 	background-color: #fff
 	bottom: 0
 	box-shadow: 0 0 40px rgba(0, 0, 0, 0.2)
 	color: $grey--mid-dark
 	left: 0
-	position: fixed
+	padding: 10px
+	position: fixed // fallback for older browsers
+	position: sticky
 	right: 0
 	text-align: center
 	transform: translateY(0)
 	transition: transform .75s ease-in-out, visibility .75s
 	z-index: 99999
+	+respond-min($break-tablet-min)
+		padding: 2px 0
 
 	&--hidden
 		transform: translateY(100%)
@@ -57,11 +60,9 @@
 
 	&__manual
 		display: none
-		// height: 0 // @todo fix
 		margin: remify(30px auto)
 		max-width: remify(520px)
 		+respond-min($break-tablet-min)
-			margin: remify(40px auto 50px)
 			.addefend__headline
 				font-size: remify(24px)
 
