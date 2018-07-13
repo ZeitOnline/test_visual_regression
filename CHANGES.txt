@@ -15,7 +15,7 @@ POSTDEPLOY
 3.171 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4793: Enable ZMO series pages
 
 
 3.170 (2018-07-13)
