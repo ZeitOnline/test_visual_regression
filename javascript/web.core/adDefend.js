@@ -111,10 +111,10 @@ AdDefend.prototype.handleOverlay = function() {
 
     // reload-button
     $( '#addefend-reload' ).click( function() {
-        location.reload();
-
         // tracking
         that.track( 'refresh', 'anleitung', that.config.trackingId );
+
+        location.reload();
     });
 
     // remove layer and add cookie
