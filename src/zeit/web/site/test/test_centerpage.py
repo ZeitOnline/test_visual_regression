@@ -311,16 +311,16 @@ def test_hp_shows_alternative_popover(selenium_driver, testserver):
     driver.get('{}/zeit-online/slenderized-index?force-popover'.format(
         testserver.url))
 
-    text = driver.find_elements_by_css_selector(".overlay__text")[0]
+    text = driver.find_element_by_css_selector(".overlay__text")
     assert text.is_displayed()
 
     # alternative popover hides text, so after running the script
     # -> the text should not be shown
 
-    script = """var element = document.getElementById('overlay-wrapper');
-        element.classList.add('overlay-wrapper--alternative');"""
-    updated_driver = driver.execute_script(script)
-    text = driver.find_elements_by_css_selector(".overlay__text")[0]
+    script = 'arguments[0].classList.add("overlay-wrapper--alternative");'
+    element = driver.find_element_by_css_selector('#overlay-wrapper')
+    driver.execute_script(script, element)
+    text = driver.find_element_by_css_selector(".overlay__text")
     assert not text.is_displayed()
 
 
