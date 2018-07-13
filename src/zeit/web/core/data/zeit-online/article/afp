@@ -13,14 +13,13 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments_premoderate">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">afp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights"></attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2018-03-06T23:46:04.316118+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2018-03-06T23:46:03+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-03-06T23:46:06.092872+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2018-03-06T23:46:06.045345+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2018-03-06T23:46:03.910987+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-02-14T23:00:00.000000+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-02-16T11:27:56.581409+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-02-16T11:28:56.503848+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-02-16T10:59:01.368997+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
     <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
@@ -29,7 +28,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2018-03-06T23:46:03+00:00</attribute>

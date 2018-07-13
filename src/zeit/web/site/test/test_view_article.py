@@ -2223,13 +2223,14 @@ def test_dpa_noimage_article_renders_empty_image_block(testbrowser):
 
 
 @pytest.mark.parametrize(
-    'parameter', [
-        ('dpa'),
-        ('afp')
+    'file, text', [
+        ('dpa', 'Deutschen Presse-Agentur (dpa)'),
+        ('afp', 'Agence France-Presse (AFP)')
     ])
-def test_dpa_afp_article_should_have_notice(testbrowser, parameter):
-    browser = testbrowser('/zeit-online/article/' + parameter)
-    assert len(browser.cssselect('.article-notice')) == 1
+def test_news_article_should_have_notice(testbrowser, file, text):
+    browser = testbrowser('/zeit-online/article/' + file)
+    notice = browser.cssselect('.article-notice')[0]
+    assert text in notice.text_content()
 
 
 def test_faq_page_should_present_a_link_for_each_intertitle(testbrowser):

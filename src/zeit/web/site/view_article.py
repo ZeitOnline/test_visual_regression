@@ -179,24 +179,6 @@ class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
 
 
 @zeit.web.view_config(
-    custom_predicates=(zeit.web.core.view.is_dpa_article,),
-    # just render the first page because we expect only one page for DPA-news
-    renderer='zeit.web.site:templates/article.html')
-class DPAArticle(Article):
-
-    header_layout = news_type = 'dpa'
-
-
-@zeit.web.view_config(
-    custom_predicates=(zeit.web.core.view.is_afp_article,),
-    # just render the first page because we expect only one page for AFP-news
-    renderer='zeit.web.site:templates/article.html')
-class AFPArticle(Article):
-
-    news_type = 'afp'
-
-
-@zeit.web.view_config(
     context=zeit.web.core.article.IFAQArticle,
     renderer='templates/faq.html')
 class FAQArticle(Article):

@@ -51,68 +51,6 @@
 		display: inline-block
 
 
-.pager
-	margin: remify(16px auto 32px)
-	padding: 0 $page-padding--small
-	&__button
-		+zon-button-inky($margin: remify(20px 14px 0 0))
-		&--previous
-			&:before
-				content: "\2039" // ‹ = single left-pointing angle quotation mark
-				padding-right: .5em
-				font-size: 1rem
-				line-height: 1
-		&--next
-			&:after
-				content: "\203A" // › = single right-pointing angle quotation mark
-				padding-left: .5em
-				font-size: 1rem
-				line-height: 1
-	&__pages
-		+inline-block
-		font-size: remify(14px)
-		letter-spacing: $zon-letter-spacing-m
-		line-height: 2
-		margin: remify(20px) 0 0 0
-		padding: 0
-	&__page
-		+inline-block
-		color: $color-separator
-		&:before
-			content: "/"
-		&:first-child:before
-			content: none
-		&--current
-			span
-				color: $zon-charcoal
-				font-weight: bold
-		a, span
-			+inline-block
-			padding: 0 .7em
-
-	&--overview
-		border-style: solid
-		border-width: 0 0 1px
-		border-color: $zon-lighter-grey
-
-		+respond-max($break-tablet-min)
-			.pager__pages
-				margin-top: 0
-
-			.pager__page
-				display: none
-				&:before
-					content: none
-				&--current
-					display: inline-block
-
-		.pager__button
-			margin: remify(0 14px 20px 0)
-
-	&--volume-overview
-		display: table // align center
-
-
 +respond-min($break-tablet-min)
 	.article-pagination
 		&__link
@@ -123,6 +61,7 @@
 		&__nexttitle
 			display: inline-flex
 			width: 70%
+
 	.article-pager
 		line-height: 2
 		&__label,
@@ -136,13 +75,6 @@
 			display: inline-block // needed for text-transform to work
 			&:first-letter
 				text-transform: uppercase
-	.pager
-		padding: 0
-		&__page
-			a, span
-				padding: 0 1.2em
-		&--overview
-			border-width: 1px 0
 
 
 // hide "single quotation mark" from being read by screen readers

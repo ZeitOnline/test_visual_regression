@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import json
 import pytest
 
 
@@ -220,3 +219,22 @@ def test_amp_article_contains_structured_data_for_author(
         assert author['url'] == 'http://localhost/{}'.format(url)
     else:
         assert 'url' not in author
+
+
+@pytest.mark.parametrize(
+    'file, text', [
+        ('dpa', 'Deutschen Presse-Agentur (dpa)'),
+        ('afp', 'Agence France-Presse (AFP)')
+    ])
+def test_amp_news_article_should_have_notice(testbrowser, file, text):
+    browser = testbrowser('/amp/zeit-online/article/' + file)
+    notice = browser.cssselect('.article-notice')[0]
+    assert text in notice.text_content()
+
+
+def test_amp_dpa_article_should_have_correct_header(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/dpa')
+    assert browser.cssselect('.article__header')
+
+    browser = testbrowser('/amp/zeit-online/article/dpa-image')
+    assert browser.cssselect('.article__header .figure--column-width')

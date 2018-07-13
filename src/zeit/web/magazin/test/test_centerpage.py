@@ -466,3 +466,21 @@ def test_if_all_followbox_elements_present(testbrowser):
     buttons = select('.follow-us__link')
 
     assert len(buttons) == 3
+
+
+def test_seriespage_contains_required_elements(testbrowser, data_solr):
+    browser = testbrowser('/serie/martenstein')
+    headline = browser.cssselect('h1')[0]
+    select = browser.cssselect
+
+    assert select('header[data-ct-area="zmo-topnav"]')
+    assert select('footer[data-ct-area="zmo-footernav"]')
+    assert select('nav.breadcrumbs')
+    assert len(select('.cp-area--zmo-ranking .teaser-ranking')) == 5
+    assert len(select('.cp-area--zmo-ranking .pager--zmo-ranking')) == 1
+    assert headline.text_content().strip() == 'Serie: Martenstein'
+
+    assert select('link[rel="canonical"]')[0].get('href') == (
+        'http://localhost/serie/martenstein')
+    assert select('link[rel="next"]')[0].get('href') == (
+        'http://localhost/serie/martenstein?p=2')

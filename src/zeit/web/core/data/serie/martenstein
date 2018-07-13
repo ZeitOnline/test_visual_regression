@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ins_serienseite">
   <head>
-    <header_image xsi:nil="true"/>
-    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
-    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
-    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
-    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
-    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
-    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">zeit-magazin</attribute>
-    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
-    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
-    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
-    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">01</attribute>
-    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
+    <header_image/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2018-06-26T09:14:34.881423+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-06-26T14:35:02.455578+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-06-23T12:48:17.964289+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-robots">index, follow, noodp, noydir, noarchive</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Serie: Martenstein</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-10T15:04:06.000180+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.wismeth</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEITmagazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Martenstein</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">template</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9725785e-810f-4f11-b5c9-531bb2f331a4}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
     <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
@@ -47,8 +63,8 @@
     <title>Martenstein</title>
     <supertitle>Serie</supertitle>
     <subtitle></subtitle>
-    <cluster area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo" visible="True" visible_mobile="True">
-      <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e" hide-dupes="True" kind="solo" visible="True" visible_mobile="True">
+    <cluster area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo">
+      <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e" kind="solo" hide-dupes="True">
         <container cp:__name__="id-5703525b-6449-45f3-93fb-801b281a9af4" cp:type="headerimage" module="headerimage" supertitle="Serie" title="Martenstein">
           <image>http://xml.zeit.de/campus/image/jura-studium-fleiss/</image>
         </container>
@@ -60,19 +76,14 @@
         </container>
       </region>
     </cluster>
-    <cluster area="id-c993c09c-2a27-4aa8-87da-fecaf8797606" kind="solo" visible="True" visible_mobile="True" kind_title="Simple-Region">
-      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-74ca0250-6332-4ea0-a944-053ed85a4a9f" kind="ranking" count="10" automatic="True" automatic_type="query">
-        <raw_query>published:"published" AND serie:"foo"</raw_query>
-        <container cp:__name__="id-167b003d-0199-4cc5-831e-c1eaac5f925c" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <container cp:__name__="id-4a960096-2165-4f23-bdf9-c38a34655c43" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <container cp:__name__="id-aa3d66b6-5a83-4c28-98de-78686d074a62" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <container cp:__name__="id-13b34132-500d-41b4-b565-2e29f7f9840f" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <container cp:__name__="id-097121c4-56ca-4711-950d-54989b5ed453" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <container cp:__name__="id-167b003d-0199-4cc8-531e-c1eaac5f925c" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <container cp:__name__="id-4a960096-2165-4f32-bdf9-c38a34655c43" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <container cp:__name__="id-aa3d66b6-5a83-4c28-89de-78686d074a62" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <container cp:__name__="id-13b34132-500d-414b-b565-2e29f7f9840f" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <container cp:__name__="id-097121c4-65ca-4171-950d-54989b5ed453" cp:type="auto-teaser" module="zon-small" visible="True"/>
+    <cluster area="id-c993c09c-2a27-4aa8-87da-fecaf8797606" kind="solo" kind_title="Teaserliste / Paginierung">
+      <region area="id-74ca0250-6332-4ea0-a944-053ed85a4a9f" kind="zmo-ranking" hide-dupes="True" count="5" automatic="True" automatic_type="query">
+        <raw_query>+published:"published" +type:"article"</raw_query>
+        <container cp:__name__="id-167b003d-0199-4cc5-831e-c1eaac5f925c" cp:type="auto-teaser" module="zmo-ranking"/>
+        <container cp:__name__="id-4a960096-2165-4f23-bdf9-c38a34655c43" cp:type="auto-teaser" module="zmo-ranking"/>
+        <container cp:__name__="id-aa3d66b6-5a83-4c28-98de-78686d074a62" cp:type="auto-teaser" module="zmo-ranking"/>
+        <container cp:__name__="id-13b34132-500d-41b4-b565-2e29f7f9840f" cp:type="auto-teaser" module="zmo-ranking"/>
+        <container cp:__name__="id-097121c4-56ca-4711-950d-54989b5ed453" cp:type="auto-teaser" module="zmo-ranking"/>
       </region>
     </cluster>
   </body>

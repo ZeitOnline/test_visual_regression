@@ -72,7 +72,7 @@
     <title>Arbeit</title>
   </ressort>
   <!-- Zeit Magazin -->
-  <ressort name="zeit-magazin">
+  <ressort name="zeit-magazin" ligatus="no">
     <title>Zeit Magazin</title>
     <subnavigation name="mode-design" uniqueId="http://xml.zeit.de/zeit-magazin/mode-design">
       <title>Mode &amp; Design</title>
@@ -91,7 +91,7 @@
       <title>Reisen</title>
     </subnavigation>
   </ressort>
-  <ressort name="Mobilitaet" uniqueId="http://xml.zeit.de/mobilitaet">
+  <ressort name="Mobilitaet" uniqueId="http://xml.zeit.de/mobilitaet" ligatus="no">
     <title>Mobilität</title>
   </ressort>
   <ressort name="Hamburg" uniqueId="http://xml.zeit.de/hamburg">
