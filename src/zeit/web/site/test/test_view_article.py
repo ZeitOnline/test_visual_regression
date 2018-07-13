@@ -2426,3 +2426,34 @@ def test_article_has_valid_facebook_meta_tags(testbrowser):
         'filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
     assert select('[property="og:image:width"]') == '1300'
     assert select('[property="og:image:height"]') == '731'
+
+
+def test_article_considers_seo_data(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    data = browser.structured_data()
+
+    article = data['Article']
+
+    seo_title = u'Williams: Tennis wackelt weiter'
+    seo_description = u'Serena Williams quält sich weiter'
+
+    page_title = browser.cssselect('title')[0].text
+    page_description = browser.cssselect(
+        'meta[name="description"]')[0].get('content')
+    og_title = browser.cssselect(
+        'meta[property="og:title"]')[0].get('content')
+    og_desciption = browser.cssselect(
+        'meta[property="og:description"]')[0].get('content')
+    twitter_title = browser.cssselect(
+        'meta[name="twitter:title"]')[0].get('content')
+    twitter_description = browser.cssselect(
+        'meta[name="twitter:description"]')[0].get('content')
+
+    assert page_title == seo_title + u' | ZEIT ONLINE'
+    assert page_description == seo_description
+    assert og_title == seo_title
+    assert og_desciption == seo_description
+    assert twitter_title == seo_title
+    assert twitter_description == seo_description
+    assert article['headline'] == seo_title
+    assert article['description'] == seo_description
