@@ -105,10 +105,7 @@
     <subtitle>Egal, wie eine Beziehung endet, jede Trennung beginnt mit dem Gefühl: Es geht nicht mehr. Fünf Geschichten über den Schlussmach-Moment</subtitle>
     <byline>von Laura Cwiertnia,  Esther Göbel,  Benedikt Peters,  Amadeus Ulrich</byline>
     <division type="page">
-      <image base-id="http://xml.zeit.de/campus/image/02-maedchen-koffer-zug/" type="jpg" title="Beziehung: Schluss jetzt!" alt="Studium, Beziehung, Partnerschaft, Beziehung" align="left" publication-date="" expires="" layout="large" is_empty="False" alt_local="Studium, Beziehung, Partnerschaft, Beziehung" title_local="Beziehung: Schluss jetzt!">
-        <bu>Alleine weiter</bu>
-        <copyright link="http://www.photocase.de/foto/257994-stock-photo-frau-schoen-ferien-urlaub-reisen-erwachsene-ferne-freiheit">© JoeEsco/photocase.de</copyright>
-      </image>
+      <image is_empty="True" />
       <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/studium/uni-leben/2015-06/anna-petermann-box" publication-date="" expires=""/>
       <p>"Bei der Schlüsselübergabe
         für unsere gemeinsame Wohnung wurde mir klar: Ich

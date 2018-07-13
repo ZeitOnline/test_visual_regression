@@ -177,7 +177,7 @@ def test_storystream_atom_should_show_no_fallback_image(testbrowser):
     images = browser.cssselect('article.storystream-atom img')
 
     assert len(teaser) == 4
-    assert len(images) == 1
+    assert not [x for x in images if '/default/teaser_image/' in x.get('src')]
 
 
 def test_storystream_update_date_in_header(testbrowser):

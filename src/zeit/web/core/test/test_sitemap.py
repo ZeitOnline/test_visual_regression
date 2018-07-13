@@ -9,7 +9,9 @@ import lxml.etree
 import zope.component
 
 from zeit.cms.checkout.helper import checked_out
+import zeit.content.article.testing
 import zeit.cms.interfaces
+import zeit.cms.repository.interfaces
 import zeit.solr.interfaces
 
 import zeit.web.core.solr
@@ -91,14 +93,15 @@ def test_gsitemap_page_with_image_copyright(testbrowser):
         u'(©\xa0Warner Bros./dpa)')
 
 
-def test_gsitemap_page_without_image(testbrowser, monkeypatch):
+def test_gsitemap_page_without_image(testbrowser, monkeypatch, workingcopy):
+    repository = zope.component.getUtility(
+        zeit.cms.repository.interfaces.IRepository)
+    repository['article'] = zeit.content.article.testing.create_article()
     set_sitemap_solr_results([{
-        'uniqueId': 'http://xml.zeit.de/zeit-online/article/'
-                    'article_with_broken_image_asset'}])
+        'uniqueId': 'http://xml.zeit.de/article'}])
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
-            'http://localhost/zeit-online/article/'
-            'article_with_broken_image_asset')
+            'http://localhost/article')
     xml = lxml.etree.fromstring(browser.contents)
     ns = 'http://www.google.com/schemas/sitemap-image/1.1'
     assert not xml.xpath('//image:image', namespaces={'image': ns})
