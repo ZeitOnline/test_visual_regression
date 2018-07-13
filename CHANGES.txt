@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4793: Enable ZMO series pages
 
+- ZON-4778: Alternative design for A/B-Test of homepage reload dialog
+
 
 3.170 (2018-07-13)
 ------------------
