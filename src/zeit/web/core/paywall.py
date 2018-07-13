@@ -211,9 +211,11 @@ class CeleraOneMixin(object):
         response = self.request.response
 
         # Set header when feature is activated and notification is not hidden.
+        # Default header value is set to 'true', in case the property is not
+        # available on context at all.
         if zeit.web.core.application.FEATURE_TOGGLES.find(
                 'c1_adblocker_blocker') and not (
-                self.context.hide_adblocker_notification):
+                getattr(self.context, 'hide_adblocker_notification', False)):
             response.headers['C1-Track-Adblocker-Targeting'] = 'true'
         else:
             response.headers['C1-Track-Adblocker-Targeting'] = 'false'
