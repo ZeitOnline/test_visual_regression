@@ -12,10 +12,139 @@ POSTDEPLOY
 - Nothing
 
 
-3.163 (unreleased)
+3.171 (unreleased)
 ------------------
 
+- ZON-4793: Enable ZMO series pages
+
+- ZON-4778: Alternative design for A/B-Test of homepage reload dialog
+
+- ZON-4754: Set C1 adblocker header according to article property
+
+- FEM-81: Enable proper import of normalize.css file
+
+- BUG-937: Bring back comment form character counter
+
+
+
+3.170 (2018-07-13)
+------------------
+
+- ZON-4794: De-/Activate ligatus widget by ressort switch
+
+- BUG-961: Remove redundant subtitle in ZEIT Arbeit gallerie
+
+
+3.169 (2018-07-12)
+------------------
+
+- ZON-4776: Change WM-Ticker date format
+
+- ZON-4571: Use unpublished TMS for preview
+
+- BUG-955: Show news agency note in AMP articles
+
+- BUG-959: Author Feedback Form now displays author name again
+
+- TMS-236: Increase sanity bound of items per day page,
+  so sitemaps get all content published per day
+
+- FEM-84: Load app functions dynamically on runtime
+
+- FEM-85: Update node packages
+
+- FIX: Serialize jinja `Undefined` to json as None
+
+- FIX: Handle non-ascii author facebook/twitter/etc values
+
+- MAINT: Add cached health check for elasticsearch to short-circuit requests
+  when the server is already down
+
+
+3.168 (2018-07-09)
+------------------
+
+- ZON-4777: Add structured data in JSON-LD format
+
+- ZON-4744: Feed for ZON content on z2x.zeit.de
+
+- BUG-954: Enable padding on <main> element in IE11
+
+- BUG-952: Copy missing vendor script to enable Modernizr loading
+
+- Fix: Adjust authorbox image width in AMP for tablet
+
+- FIX: Be defensive about nonexistent videos
+
+- FIX: Rename puzzle form field
+
+- MAINT: Refactor liveblog
+
+
+3.167 (2018-07-04)
+------------------
+
+- ZON-4775: Use core layout template
+
+- BUG-948: Add styles for tag logo in Buzzbox teasers
+
+- BUG-949: Fix transparent gradient for webkit and iOS
+
+- BUG-950: Fix empty page when Liveblog API down
+
+- FEM-83: Update NPM Packages
+
+
+3.166 (2018-07-02)
+------------------
+
+- ZON-4734: Ad-Position P5 differenziert nach Ressorts
+
+- ZON-4745: Disable HP Overlay for 365 days for logged in Users
+
+- ZON-4764: Use JSON-LD structured data for AMP
+
+- FEM-67: Delay Modernizr (own js-check) + fix Modernizr integration
+
+- FEM-77: Contrast polishing
+
+- FIX: Fix minor glitches of puzzle form
+
+- MAINT: Polish styles
+
+
+3.165 (2018-06-27)
+------------------
+
+- BUG-906: Bring back duration on video teasers
+
+- BUG-946: Adjust small sharing buttons in ZEIT Arbeit
+
+- FIX: Format sitemap link dates as yyyy-mm-dd (instead of yyyy-m-d)
+
+
+3.164 (2018-06-26)
+------------------
+
+- BUG-934: Update author contact FB Icon width (mobile)
+
+- BUG-942: Show current liveblog status in buzz-box and buzz-board teasers
+
+- FIX: Use correct date range syntax for ES fulltext query
+
+- TMS-236: Support date-based pagination of sitemaps
+
+
+3.163 (2018-06-22)
+------------------
+
+- ZON-4663: WM Ticker Tweaks (Use Websockets, Link Styling)
+
 - ZON-4705: Add ZMO seriespage
+
+- FIX: Use only fragment identifier in TOC links for FAQ pages
+
+- MAINT: Serve different robots.txt content according to host header
 
 
 3.162 (2018-06-21)

@@ -32,7 +32,7 @@ $minor-width: 35%
 		&__title
 			margin: remify(0 14px)
 
-	+respond-min($break-2)
+	+respond-min($break-areas)
 		&--major,
 		&--minor
 			margin-top: $compact
@@ -49,3 +49,7 @@ $minor-width: 35%
 			width: $minor-width
 		&--trio
 			margin-bottom: $compact
+		&--zmo-ranking
+			margin: 0 auto
+			max-width: $medium-content-width + 2 * remify(28px)
+			padding: remify(0 28px)

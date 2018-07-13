@@ -65,12 +65,6 @@
         image_pattern="wide"
         areas="zar-ranking tube"
         />
-     <layout
-        id="zmo-ranking"
-        title="kleiner Teaser Suchergebnis und Themenseite"
-        image_pattern="wide"
-        areas="zmo-ranking tube"
-        />
     <layout
         id="zar-podcast"
         title="Podcast"
@@ -82,7 +76,7 @@
         id="zco-wide-small"
         title="kleiner Teaser"
         image_pattern="cinema"
-        areas="trio ranking"
+        areas="trio zco-ranking"
         />
     <layout
         id="zco-wide-large"
@@ -337,6 +331,14 @@
         available="zeit.magazin.interfaces.IZMOContent"
     />
     <layout
+        id="zmo-ranking"
+        title="ZMO kleiner Teaser Serien- und Themenseite"
+        image_pattern="wide"
+        areas="zmo-ranking tube"
+        default="zmo-ranking"
+        available="zeit.magazin.interfaces.IZMOContent"
+    />
+    <layout
         id="zmo-leader-fullwidth-light"
         title="ZMO Vollbreiter Aufmacher (helles Bild)"
         image_pattern="wide"
@@ -348,7 +350,7 @@
         id="zmo-square"
         title="ZMO Quadrat"
         image_pattern="square"
-        areas="solo duo major minor ranking parquet"
+        areas="solo duo major minor parquet"
         available="zeit.web.core.interfaces.IInternalUse"
     />
 
@@ -388,7 +390,7 @@
         id="zmo-landscape-small"
         title="ZMO kleiner Teaser 16:9"
         image_pattern="wide"
-        areas="major minor"
+        areas="major minor zmo-ranking tube"
         available="zeit.magazin.interfaces.IZMOContent"
     />
 
@@ -450,7 +452,7 @@
     <layout
         id="sitemap-default"
         title="Sitemap Teaser"
-        areas="ranking"
+        areas="ranking overview"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
@@ -462,7 +464,7 @@
     <layout
         id="sitemap-video"
         title="Video Sitemap Teaser"
-        areas="ranking"
+        areas="ranking overview"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
@@ -474,7 +476,7 @@
     <layout
         id="sitemap-apps"
         title="Appcon Sitemap Teaser"
-        areas="ranking"
+        areas="ranking overview"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout

@@ -59,6 +59,9 @@ class Application(object):
             settings.get('linkreach_host', ''))
         self.settings['sso_key'] = self.load_sso_key(
             settings.get('sso_key', None))
+        # If a zodb connection is given, we assume we have preview friedbert
+        self.settings['is_preview'] = bool(self.settings.get('zodbconn.uri'))
+
         # NOTE: non-pyramid utilities can only access deployment settings,
         # runtime settings are not available until Application setup is done.
         zope.component.provideUtility(
@@ -102,7 +105,7 @@ class Application(object):
         self.config.include('pyramid_tm')
         self.configure_jinja()
 
-        if self.settings.get('zodbconn.uri'):
+        if self.settings.get('is_preview'):
             self.config.include('pyramid_zodbconn')
 
         config.add_view_predicate(
@@ -119,8 +122,11 @@ class Application(object):
         config.add_subscriber(register_standard_site_manager,
                               pyramid.interfaces.INewRequest)
 
+        config.add_route('robots', '/robots.txt')
+
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('campus_framebuilder', '/campus/framebuilder')
+
         config.add_route('instantarticle', '/instantarticle/*traverse')
         config.add_route(
             'instantarticle-item', '/instantarticle-item/*traverse')
@@ -191,7 +197,7 @@ class Application(object):
         return config
 
     def get_repository(self, request):
-        if self.settings.get('zodbconn.uri'):
+        if self.settings.get('is_preview'):
             connection = pyramid_zodbconn.get_connection(request)
             root = connection.root()
             # We probably should not hardcode the name, but use
@@ -253,7 +259,7 @@ class Application(object):
         setattr(zope.app.appsetup.appsetup, '__config_context', context)
 
     def configure_connector(self, context):
-        if not self.settings.get('zodbconn.uri'):
+        if not self.settings.get('is_preview'):
             zope.component.provideUtility(
                 zeit.cms.repository.repository.Repository(),
                 zeit.cms.repository.interfaces.IRepository)

@@ -9,10 +9,6 @@
 %teaser__media
 	margin: 0 0 remify(18px)
 
-%teaser__text
-	color: inherit
-	display: block
-
 %teaser__link
 	color: inherit
 	display: block
@@ -22,8 +18,8 @@
 %teaser__kicker
 	display: block
 	font-size: $font-s
-	letter-spacing: $hair
-	margin: 0
+	font-weight: normal
+	letter-spacing: $letter-spacing-l
 
 %teaser__title-box
 	align-items: center
@@ -42,7 +38,6 @@
 
 %teaser__subtitle
 	font-size: $font-s
-	line-height: 1.5
 	margin: remify(9px 0 0)
 
 // standart teaser shadows
@@ -55,24 +50,10 @@
 		+fake-box-shadow-inset($white)
 
 %teaser__series-label
-	color: inherit
 	font-size: em(12px)
 	letter-spacing: $letter-spacing-l
 	margin: 0 0 remify(4px)
 	text-transform: uppercase
-	
-%teaser__metadata
-	color: $color-text--light
-	+scaled-font(15px)
-	letter-spacing: $letter-spacing-s
-	line-height: 1.4
-	+respond-min($break-tablet-min)
-		+scaled-font(14px)
-	time
-		white-space: nowrap
-		
-%teaser__commentcount
-	@extend %commentcount
 
 // standart teaser if nothing else applies
 // will hopefully be never shown
@@ -86,8 +67,6 @@
 		max-height: remify(165px)
 	&__title-box
 		@extend %teaser__title-box
-	&__text
-		@extend %teaser__text
 	&__kicker
 		@extend %teaser__kicker
 	&__title

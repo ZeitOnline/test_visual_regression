@@ -1,0 +1,117 @@
+{
+	"_created": "2017-11-03T13:20:49+00:00",
+	"_etag": "204093e24d56266b1a50aed908619058f8289c6a",
+	"_id": "invalid",
+	"_links": {
+		"collection": {
+			"href": "blogs",
+			"title": "blogs"
+		},
+		"parent": {
+			"href": "/",
+			"title": "home"
+		},
+		"self": {
+			"href": "blogs/invalid",
+			"title": "Blog"
+		}
+	},
+	"_updated": "invalid_value",
+	"blog_preferences": {
+		"language": "en",
+		"theme": "zon-default-solo"
+	},
+	"blog_status": "open",
+	"category": "",
+	"description": "Test default solo theme and AMP solo theme as an outputchannel.<br>",
+	"last_created_post": {
+		"_id": "urn:newsml:localhost:2017-12-05T16:12:54.634174:30810b37-6b94-414b-a1bb-d903625590ef",
+		"_updated": "invalid_value"
+	},
+	"last_updated_post": {
+		"_id": "urn:newsml:localhost:2017-11-03T14:22:43.065493:b1801432-de7b-4bcf-ad23-36ff1d7db69a",
+		"_updated": "2017-11-21T14:55:55+00:00"
+	},
+	"market_enabled": false,
+	"members": [],
+	"original_creator": "57c7ef6e1479f606d9f3fe73",
+	"picture": "urn:newsml:localhost:2017-11-03T14:20:47.745168:01c84ddd-1684-490e-ab9a-6a1d8bc8b2b6",
+	"picture_renditions": {
+		"baseImage": {
+			"height": 1080,
+			"href": "https://zeit.liveblog.pro/zeit/20171103141120/7163e0a62d5d40fc96046daebfbd90c63a5cac2cb7c9233f1824ac4e303c9349.jpg",
+			"media": "zeit/20171103141120/7163e0a62d5d40fc96046daebfbd90c63a5cac2cb7c9233f1824ac4e303c9349.jpg",
+			"mimetype": "image/jpeg",
+			"width": 1080
+		},
+		"original": {
+			"height": 300,
+			"href": "https://zeit.liveblog.pro/zeit/20171103141120/c114d70f8acf1fb49997ecb104ba0d19f7fbe66fea3910408811f092b5e65bac.jpg",
+			"media": "zeit/20171103141120/c114d70f8acf1fb49997ecb104ba0d19f7fbe66fea3910408811f092b5e65bac.jpg",
+			"mimetype": "image/jpeg",
+			"width": 300
+		},
+		"thumbnail": {
+			"height": 320,
+			"href": "https://zeit.liveblog.pro/zeit/20171103141120/a9cb4b51a9373aa471edc39dd379247ad87492a41e55571c2ba542ac09eed3b4.jpg",
+			"media": "zeit/20171103141120/a9cb4b51a9373aa471edc39dd379247ad87492a41e55571c2ba542ac09eed3b4.jpg",
+			"mimetype": "image/jpeg",
+			"width": 320
+		},
+		"viewImage": {
+			"height": 720,
+			"href": "https://zeit.liveblog.pro/zeit/20171103141120/e48b2bb6a9798f2000c1d0a084e35816f85197af49ca80f6ca2cba80fc0c5cca.jpg",
+			"media": "zeit/20171103141120/e48b2bb6a9798f2000c1d0a084e35816f85197af49ca80f6ca2cba80fc0c5cca.jpg",
+			"mimetype": "image/jpeg",
+			"width": 720
+		}
+	},
+	"picture_url": "https://zeit.liveblog.pro/zeit/20171103141120/e48b2bb6a9798f2000c1d0a084e35816f85197af49ca80f6ca2cba80fc0c5cca.jpg",
+	"posts_order_sequence": 7.0,
+	"public_url": "https://zeit.liveblog.pro/zeit/blogs/invalid/index.html",
+	"public_urls": {
+		"output": {
+			"5a3d05af6aa4f500f30315d3": "https://zeit.liveblog.pro/zeit/blogs/invalid/zon-amp-solo/5a3d05af6aa4f500f30315d3/index.html",
+			"undefined": ""
+		},
+		"theme": {}
+	},
+	"start_date": "2017-11-03T13:20:49+00:00",
+	"syndication_enabled": false,
+	"theme_settings": {
+		"authorNameFormat": "display_name",
+		"authorNameLinksToEmail": false,
+		"autoApplyUpdates": true,
+		"blockSearchEngines": true,
+		"canComment": false,
+		"clientDatetimeOnly": false,
+		"datetimeFormat": "ago",
+		"gaCode": "",
+		"hasHighlights": true,
+		"infinitScroll": true,
+		"language": "de",
+		"livestream": false,
+		"livestreamAutoplay": false,
+		"loadNewPostsManually": true,
+		"permalinkDelimiter": "?",
+		"postOrder": "newest_first",
+		"postsPerPage": 10,
+		"removeStylesESI": false,
+		"renderForESI": true,
+		"showAuthor": false,
+		"showAuthorAvatar": true,
+		"showDescription": false,
+		"showGallery": true,
+		"showImage": false,
+		"showLiveblogLogo": false,
+		"showSocialShare": true,
+		"showSyndicatedAuthor": false,
+		"showTitle": false,
+		"showUpdateDatetime": false,
+		"stickyPosition": "bottom"
+	},
+	"title": "Testing Solo Theme",
+	"total_posts": 7,
+	"version_creator": "596f7d516aa4f573efa7b4ab",
+	"versioncreated": "2017-12-22T13:17:22+00:00"
+}

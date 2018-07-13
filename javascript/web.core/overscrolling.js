@@ -4,12 +4,11 @@
  * @version  0.2
  */
 define([
-    'modernizr',
     'jquery',
     'velocity.ui',
     'web.core/zeit',
     'web.core/clicktracking',
-    'jquery.inview' ], function( Modernizr, $, Velocity, Zeit, Clicktracking ) {
+    'jquery.inview' ], function( $, Velocity, Zeit, Clicktracking ) {
     var defaults = {
             documentMinHeight: 800,
             jumpHash: '#overscroll-article',
@@ -40,9 +39,6 @@ define([
             }, {
                 isActive: $( document ).height() >= config.documentMinHeight,
                 message: 'documentMinHeight not matched'
-            }, {
-                isActive: Modernizr.svg,
-                message: 'no svg available'
             }, {
                 isActive: Zeit.breakpoint.get() === 'desktop',
                 message: 'only on desktop'

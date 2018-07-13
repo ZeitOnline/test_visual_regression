@@ -24,6 +24,7 @@ import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.push.interfaces
 
+from zeit.web.core.source import LIGATUS_BLACKLIST
 import zeit.web
 import zeit.web.core.application
 import zeit.web.core.banner
@@ -80,14 +81,6 @@ def redirect_on_trailing_slash(request):
 
 def is_paywalled(context, request):
     return zeit.web.core.paywall.Paywall.status(request)
-
-
-def is_dpa_article(context, request):
-    return context.product and context.product.id == 'News'
-
-
-def is_afp_article(context, request):
-    return context.product and context.product.id == 'afp'
 
 
 class Base(object):
@@ -713,6 +706,10 @@ class Base(object):
         return 'ZEIT ONLINE'
 
     @zeit.web.reify
+    def site_name(self):
+        return self.publisher_name
+
+    @zeit.web.reify
     def twitter_username(self):
         return 'zeitonline'
 
@@ -1067,13 +1064,12 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def ligatus(self):
-        # self.package is "zeit.web.arbeit"
-        shortpackage = self.package.replace('zeit.web.', '')
-        verticaltoggle = 'ligatus_on_{}'.format(shortpackage)
+        ressort_blacklisted = (self.ressort in LIGATUS_BLACKLIST) or (
+            self.sub_ressort in LIGATUS_BLACKLIST)
+
         return (
             zeit.web.core.application.FEATURE_TOGGLES.find('ligatus') and
-            zeit.web.core.application.FEATURE_TOGGLES.find(verticaltoggle) and
-            self.advertising_enabled and
+            self.advertising_enabled and not ressort_blacklisted and
             not getattr(self.context, 'hide_ligatus_recommendations', False))
 
     @zeit.web.reify
@@ -1316,3 +1312,21 @@ def invalid_unicode_in_request(request):
     http_cache=60)
 def login_state_footer(request):
     return zeit.web.core.security.get_login_state(request)
+
+
+@zeit.web.view_config(
+    route_name='robots',
+    host_restriction=False)
+def robots_txt(request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    hostname = request.headers.get('host', 'www.zeit.de').lower()
+    subdomain = hostname.split('.')[0]
+
+    folder = conf.get('robots_txt_prefix')
+    if zeit.cms.interfaces.ICMSContent(
+            '%s/%s' % (folder, subdomain), None) is None:
+        subdomain = 'www'
+
+    prefix = urlparse.urlparse(folder).path
+    subrequest = pyramid.request.Request.blank('%s/%s' % (prefix, subdomain))
+    return request.invoke_subrequest(subrequest, use_tweens=True)

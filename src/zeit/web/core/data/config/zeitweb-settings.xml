@@ -74,6 +74,7 @@
   <setting name="c1_prefix" xsi:type="xsd:string">/config</setting>
   <setting name="series_prefix" xsi:type="xsd:string">http://xml.zeit.de/serie</setting>
   <setting name="topic_prefix" xsi:type="xsd:string">http://xml.zeit.de/thema</setting>
+  <setting name="robots_txt_prefix" xsi:type="xsd:string">http://xml.zeit.de/robots</setting>
   <setting name="volume_navigation_base" xsi:type="xsd:string">https://premium.zeit.de/abo/diezeit/%s/%02d</setting>
   <setting name="webtrekk_version" xsi:type="xsd:string">4.3.1</setting>
   <setting name="webtrekk_id" xsi:type="xsd:string">674229970930653</setting>

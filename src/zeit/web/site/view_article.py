@@ -179,24 +179,6 @@ class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
 
 
 @zeit.web.view_config(
-    custom_predicates=(zeit.web.core.view.is_dpa_article,),
-    # just render the first page because we expect only one page for DPA-news
-    renderer='zeit.web.site:templates/article.html')
-class DPAArticle(Article):
-
-    header_layout = news_type = 'dpa'
-
-
-@zeit.web.view_config(
-    custom_predicates=(zeit.web.core.view.is_afp_article,),
-    # just render the first page because we expect only one page for AFP-news
-    renderer='zeit.web.site:templates/article.html')
-class AFPArticle(Article):
-
-    news_type = 'afp'
-
-
-@zeit.web.view_config(
     context=zeit.web.core.article.IFAQArticle,
     renderer='templates/faq.html')
 class FAQArticle(Article):
@@ -225,10 +207,12 @@ class FAQArticle(Article):
 
     @zeit.web.reify
     def subheadings(self):
+        intertitles = []
         for block in self.pages[0].blocks:
             if isinstance(block, zeit.web.core.article.FAQItemBlock):
                 if isinstance(block[0], zeit.web.core.block.Intertitle):
-                    yield block[0].context
+                    intertitles.append(block[0].context)
+        return intertitles
 
 
 @zeit.web.view_config(
@@ -241,9 +225,11 @@ class FlexibleTOCArticle(Article):
         """Like FAQs, flexible tables of content are by definition only able to
         present intertitles from the first page.
         """
+        intertitles = []
         for block in self.pages[0].blocks:
             if isinstance(block, zeit.web.core.block.Intertitle):
-                yield block.context
+                intertitles.append(block.context)
+        return intertitles
 
 
 @zeit.web.view_config(

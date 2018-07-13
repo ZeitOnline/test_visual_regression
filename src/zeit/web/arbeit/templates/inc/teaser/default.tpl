@@ -1,4 +1,4 @@
-{% import 'zeit.web.arbeit:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.arbeit:templates/macros/centerpage_macro.tpl' as cp %}
 
 {% block teaser %}
@@ -8,7 +8,7 @@
     {%- if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="
     {{- teaser.uniqueId }}"
     {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
-    {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %} itemscope itemtype="http://schema.org/Article" itemref="publisher">
+    {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %}>
 
     {% block teaser_allcontent %}
 
@@ -24,33 +24,38 @@
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url | append_campaign_params }}"
                    {%- block teaser_additional_attribute_for_textlink %}{% endblock %}>
-                    {% block teaser_kicker %}
-                        {#- We need to strip all the template whitespeces within this block, hence all the whitespace control chars.
-                        Whitespace control even needs to be applied for template commments. -#}
-                        {%- if teaser.teaserSupertitle or teaser.supertitle  or teaser is zplus_abo_content or (teaser is zplus_registration_content and toggles('zplus_badge_gray')) -%}
-                            <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
-                                {%- block zplus_kicker_logo -%}
-                                    {%- if teaser is zplus_abo_content -%}
-                                        {{- lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--s svg-symbol--hide-ie', view.package, a11y=False) -}}
-                                    {%- elif teaser is zplus_registration_content and toggles('zplus_badge_gray') -%}
-                                        {{- lama.use_svg_icon('zplus', 'zplus-logo zplus-logo-register zplus-logo--s svg-symbol--hide-ie', view.package, a11y=False) -}}
-                                    {%- endif -%}
-                                {%- endblock -%}
-                                {%- if teaser.serie or teaser.blog -%}<span>{# needed for flexbox #}{%- endif -%}
-                                {%- block teaser_journalistic_format -%}
-                                    {%- if teaser.serie -%}
-                                        <span class="series-label">{{ teaser.serie.serienname }}</span>
-                                    {%- elif teaser.blog -%}
-                                        <span class="blog-label">{{ teaser.blog.name }}</span>
-                                    {%- endif -%}
-                                {%- endblock teaser_journalistic_format -%}
-                                {#- There must be no whitespace between kicker and : (for Google(News) representation) -#}
-                                <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span>{%- if teaser.serie or teaser.blog -%}</span>{# needed for flexbox #}{%- endif -%}</span><span class="visually-hidden">: </span>
-                        {%- endif -%}
-                    {%- endblock -%}
-                    {% block teaser_title %}
+                    {% block teaser_kicker -%}
+                        <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
+                            {% block zplus_kicker_logo -%}
+                                {% if teaser is zplus_abo_content -%}
+                                    {{- lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--s', view.package, a11y=False) -}}
+                                {% elif teaser is zplus_registration_content and toggles('zplus_badge_gray') -%}
+                                    {{- lama.use_svg_icon('zplus', 'zplus-logo zplus-logo-register zplus-logo--s', view.package, a11y=False) -}}
+                                {% endif -%}
+                            {% endblock -%}
+
+                            <span>
+                            {% block teaser_journalistic_format -%}
+                                {% if view.context is seriespage -%}
+                                {% elif teaser.serie -%}
+                                    <span class="series-label">{{ teaser.serie.serienname }}</span>
+                                {% elif teaser.blog -%}
+                                    <span class="blog-label">{{ teaser.blog.name }}</span>
+                                {% endif -%}
+                            {% endblock teaser_journalistic_format -%}
+
+                            {% if teaser.teaserSupertitle or teaser.supertitle -%}
+                                <span>
+                                    {{- teaser.teaserSupertitle or teaser.supertitle -}}
+                                </span><span class="visually-hidden">: </span>
+                            {% endif -%}
+                            </span>
+                        </span>
+                    {% endblock teaser_kicker -%}
+
+                    {% block teaser_title -%}
                         <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
-                    {% endblock %}
+                    {% endblock teaser_title -%}
                 </a>
                 {% endblock teaser_link %}
             </h2>

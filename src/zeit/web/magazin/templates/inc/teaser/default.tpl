@@ -2,7 +2,7 @@
 Default teaser template to inherit from.
 #}
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
-{%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
+{%- import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama with context %}
 
 {%- set image = get_image(module, fallback=True) %}
 {%- set video = get_video(teaser) %}
@@ -40,20 +40,21 @@ Default teaser template to inherit from.
 
         {% block icon %}{% endblock %}
 
-        {% block teaser_journalistic_format %}
-            {% if teaser.serie and not teaser.serie.column and not teaser.serie.serienname == 'Martenstein' %}
+        {% block teaser_journalistic_format -%}
+            {% if view.context is seriespage  -%}
+            {% elif teaser.serie and not teaser.serie.column and not teaser.serie.serienname == 'Martenstein' -%}
                 <div class="{{ '%s__series-label' | format(self.layout()) }}">Serie: {{ teaser.serie.serienname }}</div>
-            {% endif %}
-        {% endblock teaser_journalistic_format %}
+            {% endif -%}
+        {% endblock teaser_journalistic_format -%}
 
         <a href="{{ teaser | create_url }}" class="{{ self.layout() }}__link" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}">
             <h2 class="{{ self.layout() }}__title-box">
                 {% block teaser_kicker -%}
                     {% block zplus_kicker_logo %}
                         {% if teaser is zplus_abo_content %}
-                            {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
+                            {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--xs', view.package, a11y=False) }}
                         {% elif teaser is zplus_registration_content and toggles('zplus_badge_gray') %}
-                            {{ lama.use_svg_icon('zplus', 'zplus-logo-register zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
+                            {{ lama.use_svg_icon('zplus', 'zplus-logo-register zplus-logo--xs', view.package, a11y=False) }}
                         {% endif %}
                     {% endblock %}
                     <span class="{{ self.layout() }}__kicker">

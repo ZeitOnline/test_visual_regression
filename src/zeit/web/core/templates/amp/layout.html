@@ -1,5 +1,5 @@
 <!doctype html>
-<html ⚡ lang="de" itemscope itemtype="http://schema.org/WebPage">
+<html ⚡ lang="de">
 <head>
     <meta charset="utf-8">
     <title>{{ view.pagetitle }}</title>
@@ -9,14 +9,18 @@
     {% endif -%}
     <meta name="robots" content="{{ view.meta_robots }}">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-    <link rel="canonical" href="{{ view.content_url }}">
+    <link rel="canonical" href="{{ view.canonical_url | safe }}">
     {% if view.syndication_source -%}
         <link rel="syndication-source" href="{{ view.syndication_source }}">
     {% endif -%}
-    {%- include "zeit.web.core:templates/inc/meta/date.html" %}
-    {%- block sharing_meta %}
-        {%- include "zeit.web.core:templates/inc/meta/sharing.html" -%}
-    {% endblock sharing_meta %}
+    {% include "zeit.web.core:templates/inc/meta/date.html" -%}
+    {% include "zeit.web.core:templates/inc/meta/sharing.html" -%}
+    {% include [
+        "{}:templates/inc/structured-data/organization.html".format(view.package),
+        "zeit.web.core:templates/inc/structured-data/organization.html"] %}
+    {% include "zeit.web.core:templates/inc/structured-data/webpage.html" %}
+    {% include "zeit.web.core:templates/inc/structured-data/breadcrumblist.html" %}
+    {% block structured_data %}{% endblock structured_data -%}
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <style amp-custom>
         {%- block style -%}
@@ -66,20 +70,13 @@
     {%- include "zeit.web.core:templates/amp/tracking/ivw.html" -%}
 
     <div class="content" id="top">
-        <header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <header class="header">
             {% block logo %}
             <div class="article__item article__item--wide">
-                <a itemprop="url" href="{{ request.route_url('home') }}index">
-                    <meta itemprop="name" content="ZEIT ONLINE">
-                    <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-                        <svg class="header__logo">
-                            <use xlink:href="#svg-logo-zon"/>
-                        </svg>
-                        {# The "logo" dimensions must not exceed 600x60 -#}
-                        <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
-                        <meta itemprop="width" content="565">
-                        <meta itemprop="height" content="60">
-                    </span>
+                <a href="{{ request.route_url('home') }}index">
+                    <svg class="header__logo">
+                        <use xlink:href="#svg-logo-zon"/>
+                    </svg>
                 </a>
             </div>
             {% endblock logo %}
@@ -94,26 +91,17 @@
             {% include "zeit.web.core:templates/amp/amp-ads/tile_1.html" %}
         {% endif %}
 
-        <main itemprop="mainContentOfPage">
+        <main>
         {% block main %}
             {% block content %}
-            <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/
-                {%- if view.liveblog and view.liveblog.liveblog -%}
-                    LiveBlogPosting
-                {%- else -%}
-                    Article
-                {%- endif -%}">
-                {% include [
-                    "{}:templates/amp/article/publisher.html".format(view.package),
-                    "zeit.web.core:templates/amp/article/publisher.html"] %}
-                <meta itemprop="mainEntityOfPage" content="{{ view.content_url }}">
+            <article class="article">
                 {% block article_head -%}
                     {% include ["zeit.web.core:templates/amp/article-header/{}.html".format(view.header_layout),
                                 "zeit.web.core:templates/amp/article-header/default.html"] %}
                 {%- endblock %}
 
                 {% block article_body -%}
-                <div class="article__body" itemprop="articleBody">
+                <div class="article__body">
                     {% block article_pages %}
                         {% for page in view.pages %}
                             {% set adplaces = view.pages | adplaces([(0, 3),(3, 4)]) %}
@@ -132,6 +120,7 @@
                                     {% endfor %}
                                 {%- endif %}
                             {% endfor %}
+                            {% block article_notice %}{% endblock %}
                             </section>
                         {% endfor %}
                     {% endblock article_pages %}
@@ -165,7 +154,7 @@
                                     <span class="article-sharing__text">Twittern</span>
                                 </a>
                             </li>
-                            
+
                             <li class="article-sharing__item">
                                 <a class="article-sharing__link article-sharing__link--flipboard" href="https://share.flipboard.com/bookmarklet/popout?v=2&title={{ view.title | urlencode }}&url={{ content_url.format('flipboard') | urlencode | replace('sm.ext', 'soref.ext') }}">
                                     <svg class="article-sharing__icon">
@@ -174,7 +163,7 @@
                                     <span class="article-sharing__text">Flippen</span>
                                 </a>
                             </li>
-                            
+
                             <li class="article-sharing__item article-sharing__item--whatsapp">
                                 <a class="article-sharing__link article-sharing__link--whatsapp" href="whatsapp://send?text={{ '%s - Artikel auf %s: %s' | format(view.title, view.publisher_name, content_url.format('whatsapp')) | urlencode }}">
                                     <svg class="article-sharing__icon">
@@ -213,7 +202,7 @@
                 {% if view.keywords %}
                     <nav class="article-tags">
                         <h4 class="article-tags__title">Schlagwörter</h4>
-                        <ul class="article-tags__list" itemprop="keywords">
+                        <ul class="article-tags__list">
                         {% for keyword in view.keywords[:6] -%}
                             {% if keyword.link %}
                                 <li><a href="{{ request.route_url('home') }}{{ keyword.link }}" class="article-tags__link"
@@ -258,12 +247,15 @@
 
         <footer class="footer">
             {% block footer_logo %}
-                <a href="{{ request.route_url('home') }}">
+                <a href="{{ request.route_url('home') }}index">
                     <svg class="footer__logo">
                         <use xlink:href="#svg-logo-zon"/>
                     </svg>
                 </a>
             {% endblock footer_logo %}
+
+            {% include "zeit.web.core:templates/inc/breadcrumbs.html" %}
+
             <nav class="footer__navigation">
                 <ul>
                     <li><a href="{{ request.route_url('home') }}impressum/index">Impressum</a></li>

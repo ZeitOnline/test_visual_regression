@@ -3,23 +3,23 @@
 <article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}"
     data-unique-id="{{ teaser.uniqueId }}"
     {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
-    {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %} itemscope itemtype="http://schema.org/Article" itemref="publisher">
+    {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %}>
 
     {% block teaser_media %}{% endblock %}
 
     {% block teaser_content %}
         {% block teaser_heading %}
-            <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}"
-                {%- if not self.teaser_journalistic_format() | length %} itemprop="headline"{% endif %}>
+            <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
                 {% block teaser_link -%}
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
-                   href="{{ teaser | create_url | append_campaign_params }}" itemprop="mainEntityOfPage">
+                   href="{{ teaser | create_url | append_campaign_params }}">
                     {% block teaser_kicker %}
                         {% if teaser.teaserSupertitle or teaser.supertitle %}
                             <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
                                 {% block teaser_journalistic_format -%}
-                                    {% if teaser.serie -%}
+                                    {% if view.context is seriespage -%}
+                                    {% elif teaser.serie -%}
                                         <span class="series-label">{{ teaser.serie.serienname }}</span>
                                     {% elif teaser.blog -%}
                                         <span class="blog-label">{{ teaser.blog.name }}</span>
@@ -33,10 +33,7 @@
                         <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
                     {% endblock %}
                 </a>
-                {% endblock teaser_link %}
-                {%- if self.teaser_journalistic_format() | length -%}
-                    <meta itemprop="headline" content="{{ teaser.teaserSupertitle or teaser.supertitle }}: {{ teaser.teaserTitle or teaser.title }}">
-                {%- endif -%}
+                {% endblock teaser_link -%}
             </h2>
         {% endblock teaser_heading %}
 
@@ -44,7 +41,7 @@
 
         {% block teaser_container %}
             {% block teaser_text %}
-                <p class="{{ self.layout() }}__text" itemprop="description">{{ teaser.teaserText }}</p>
+                <p class="{{ self.layout() }}__text">{{ teaser.teaserText }}</p>
             {% endblock teaser_text %}
             {% block teaser_metadata_default %}
             <div class="{{ self.layout() }}__metadata">
@@ -74,6 +71,4 @@
         {% endblock teaser_container %}
 
     {% endblock teaser_content %}
-    <meta itemprop="datePublished" content="{{ teaser | release_date | format_date('iso8601') }}">
-    <meta itemprop="dateModified" content="{{ teaser | mod_date | format_date('iso8601') }}">
 </article>

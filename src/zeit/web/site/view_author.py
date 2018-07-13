@@ -137,6 +137,20 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
         return self.context.enable_feedback
 
     @zeit.web.reify
+    def same_as(self):
+        links = []
+        if self.context.facebook:
+            links.append(u'https://www.facebook.com/{}'.format(
+                self.context.facebook))
+        if self.context.twitter:
+            links.append(u'https://twitter.com/{}'.format(
+                self.context.twitter.lstrip('@')))
+        if self.context.instagram:
+            links.append(u'https://www.instagram.com/{}'.format(
+                self.context.instagram))
+        return links
+
+    @zeit.web.reify
     def followpush_available(self):
         return bool(self.context.enable_followpush)
 
@@ -174,7 +188,6 @@ class Feedback(Author):
         area = create_area(self.context, 'author-feedback')
         module = area.create_item('mail')
         module.subject = 'Sie haben Feedback erhalten'
-        module.author_name = self.context.display_name
         module.success_message = 'Ihr Feedback wurde erfolgreich ' \
             'verschickt.'
         return zeit.web.core.centerpage.IRendered(area)

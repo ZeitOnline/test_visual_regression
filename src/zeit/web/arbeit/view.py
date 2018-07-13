@@ -26,7 +26,7 @@ def arbeit_topiclink(context):
 
 class Base(zeit.web.core.view.Base):
 
-    seo_title_default = u'ZEIT Arbeit ONLINE | arbeiten. leben.'
+    seo_title_default = u'ZEIT ONLINE Arbeit | arbeiten. leben.'
     pagetitle_suffix = u' | ZEIT Arbeit'
 
     @zeit.web.reify
@@ -55,6 +55,14 @@ class Base(zeit.web.core.view.Base):
         if self.type in replacements:
             return '{}{}'.format(replacements[self.type], suffix)
         return 'centerpage{}'.format(suffix)
+
+    @zeit.web.reify
+    def publisher_name(self):
+        return 'ZEIT ONLINE Arbeit'
+
+    @zeit.web.reify
+    def twitter_username(self):
+        return 'wandelderarbeit'
 
 
 class Content(Base):

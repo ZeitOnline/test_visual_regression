@@ -1,6 +1,6 @@
 {% if view.serie and view.context is not longform %}
     {% set series_cp = context | find_series_cp %}
-    <a href="{{ series_cp | create_url }}" class="meta__serie" itemprop="isPartOf" data-ct-row="series" data-ct-column="false" data-ct-label="{{ view.serie }}">
+    <a href="{{ series_cp | create_url }}" class="meta__serie" data-ct-row="series" data-ct-column="false" data-ct-label="{{ view.serie }}">
         Aus der Serie: {{ view.serie }}
     </a>
 {% endif %}
@@ -16,14 +16,12 @@
     </span>
     {% endif -%}
 
-    <time itemprop="datePublished" datetime="
-        {{- view.date_last_modified | format_date('iso8601') }}" class="meta__date
+    <time datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="meta__date
         {%- if view.obfuscated_date %} encoded-date" data-obfuscated="{{ view.obfuscated_date }}{% endif %}">
         {{- view.date_last_modified | format_date(view.show_date_format) -}}
     </time>
 
-    <time itemprop="dateModified" datetime="
-        {{- view.date_last_modified | format_date('iso8601') }}" class="
+    <time datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="
         {{- 'meta__date' | with_mods('has-series' if series_cp) }}">
         {{- view.last_modified_label -}}
     </time>

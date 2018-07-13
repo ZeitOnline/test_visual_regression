@@ -2,11 +2,7 @@
 {% if block.blog_id -%}
     <div class="liveblog
         {%- if block.collapse_preceding_content %} js-liveblog{% endif %}">
-        {% if block.version == '3' %}
-            {% set esi_source = '{}/{}/index.html'.format(settings('liveblog_backend_url_v3'), block.blog_id) %}
-        {% else %}
-            {% set esi_source = '{}/{}.html'.format(settings('liveblog_backend_url'), block.blog_id) %}
-        {% endif %}
+        {% set esi_source = '{}/{}/index.html'.format(settings('liveblog_backend_url_v3'), block.blog_id) %}
         {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
     </div>
 {%- endif %}

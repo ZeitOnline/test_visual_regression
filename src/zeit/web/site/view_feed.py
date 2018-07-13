@@ -8,7 +8,6 @@ import types
 import urllib
 import urlparse
 import pyramid
-
 import lxml.builder
 import lxml.etree
 import zope.interface
@@ -327,96 +326,145 @@ class InstantArticleFeed(Base):
         return root
 
 
+class ChannelAttr(object):
+    def __init__(self, channel_attr):
+        self.channel_attr = channel_attr
+
+    def __get__(self, obj, objtype):
+        return obj.channel.findtext(self.channel_attr)
+
+    def __set__(self, obj, val):
+        obj.channel.find(self.channel_attr).text = val
+
+
+class AtomLink(object):
+    def _atom(self, obj):
+        return obj.channel.find('{http://www.w3.org/2005/Atom}link')
+
+    def __get__(self, obj, objtype):
+        return self._atom(obj).attrib['href'], self._atom(obj).attrib['type']
+
+    def __set__(self, obj, val):
+        self._atom(obj).attrib['href'] = val[0]
+        self._atom(obj).attrib['type'] = val[1]
+
+
+class RSSBase(Base):
+    rss_title = ChannelAttr('title')
+    rss_link = ChannelAttr('link')
+    atom_link = AtomLink()
+
+    def __init__(self, context, request):
+        super(RSSBase, self).__init__(context, request)
+        self.root = ELEMENT_MAKER('rss', version='2.0')
+        self.channel = ELEMENT_MAKER(
+            'channel',
+            ELEMENT_MAKER('title', ''),
+            ELEMENT_MAKER('link', ''),
+            ELEMENT_MAKER('description'),
+            ELEMENT_MAKER('language', 'de-de'),
+            ELEMENT_MAKER('copyright',
+                          'Copyright ZEIT ONLINE GmbH.'
+                          'Alle Rechte vorbehalten'),
+            ELEMENT_NS_MAKER('atom', 'link', href='', type='')
+        )
+
+        self.rss_link = self.request.route_url('home')
+        self.atom_link = (self.request.url,
+                          self.request.response.content_type)
+        self.root.append(self.channel)
+
+    def build_item(self, content, tracking_prefix="rss"):
+        E = ELEMENT_MAKER
+        EN = ELEMENT_NS_MAKER
+        try:
+            normalized_title = zeit.cms.interfaces.normalize_filename(
+                content.title)
+            tracking = [
+                ('wt_zmc', ('koop.ext.zonaudev.'
+                            '{}.feed.{}.bildtext.'
+                            'link.x'.format(
+                                tracking_prefix, normalized_title))),
+                ('utm_medium', 'koop'),
+                ('utm_source', '{}_zonaudev_ext'.format(tracking_prefix)),
+                ('utm_campaign', 'feed'),
+                ('utm_content', '%s_bildtext_link_x' % normalized_title),
+            ]
+
+            content_url = zeit.web.core.template.create_url(
+                None, content, self.request)
+            content_url = create_public_url(content_url)
+            link = join_queries(content_url, tracking)
+            item = E(
+                'item',
+                E('title', content.title),
+                E('link', link),
+                E('description', content.teaserText),
+                E('pubDate', format_rfc822_date(
+                    last_published_semantic(content))),
+                E('guid', self.make_guid(content), isPermaLink='false'),
+            )
+            image = zeit.web.core.template.get_image(content,
+                                                     fallback=False)
+            if image:
+                item.append(E.enclosure(
+                    url='{}{}__640x360'.format(
+                        self.request.image_host, image.path),
+                    length='20480',  # ¯\_(ツ)_/¯
+                    type='image/jpeg'))  # ¯\_(ツ)_/¯
+
+            self.channel.append(item)
+        except:
+            log.warning(
+                'Error adding %s to %s',
+                content, self.__class__.__name__, exc_info=True)
+
+
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-z2x-flavoured',
+    host_restriction='newsfeed')
+class Z2XFeed(RSSBase):
+    """ This feed is used as an interchange format for the Z2X Website.
+        It contains items in document order and has no sorting by date. """
+
+    def __init__(self, context, request):
+        super(Z2XFeed, self).__init__(context, request)
+        self.rss_title = 'Z2X Kooperationsfeed'
+
+    def build_feed(self):
+        for content in self.items:
+            self.build_item(content, tracking_prefix="z2x")
+        return self.root
+
+
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-spektrum-flavoured',
     host_restriction='newsfeed')
-class SpektrumFeed(Base):
+class SpektrumFeed(RSSBase):
+
+    def __init__(self, context, request):
+        super(SpektrumFeed, self).__init__(context, request)
+        self.rss_title = 'Spektrum Kooperationsfeed'
 
     def build_feed(self):
-        E = ELEMENT_MAKER
-        EN = ELEMENT_NS_MAKER
-        root = E('rss', version='2.0')
-        channel = E(
-            'channel',
-            E('title', 'Spektrum Kooperationsfeed'),
-            E('link', self.request.route_url('home')),
-            E('description'),
-            E('language', 'de-de'),
-            E('copyright',
-              'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
-            EN('atom', 'link',
-               href=self.request.url, type=self.request.response.content_type)
-        )
-        root.append(channel)
         for content in filter_and_sort_entries(self.items)[:100]:
-            try:
-                normalized_title = zeit.cms.interfaces.normalize_filename(
-                    content.title)
-                tracking = [
-                    ('wt_zmc', ('koop.ext.zonaudev.'
-                                'spektrumde.feed.{}.bildtext.'
-                                'link.x'.format(normalized_title))),
-                    ('utm_medium', 'koop'),
-                    ('utm_source', 'spektrumde_zonaudev_ext'),
-                    ('utm_campaign', 'feed'),
-                    ('utm_content', '%s_bildtext_link_x' % normalized_title),
-                ]
-
-                content_url = zeit.web.core.template.create_url(
-                    None, content, self.request)
-                content_url = create_public_url(content_url)
-                link = join_queries(content_url, tracking)
-                item = E(
-                    'item',
-                    E('title', content.title),
-                    E('link', link),
-                    E('description', content.teaserText),
-                    E('pubDate', format_rfc822_date(
-                        last_published_semantic(content))),
-                    E('guid', self.make_guid(content), isPermaLink='false'),
-                )
-                image = zeit.web.core.template.get_image(content,
-                                                         fallback=False)
-                if image:
-                    item.append(E.enclosure(
-                        url='{}{}__640x360'.format(
-                            self.request.image_host, image.path),
-                        length='20480',  # ¯\_(ツ)_/¯
-                        type='image/jpeg'))  # ¯\_(ツ)_/¯
-
-                channel.append(item)
-            except:
-                log.warning(
-                    'Error adding %s to %s',
-                    content, self.__class__.__name__, exc_info=True)
-                continue
-        return root
+            self.build_item(content, tracking_prefix="spektrumde")
+        return self.root
 
 
-# XXX This is a copy&paste&tweak of the above SpektrumFeed.
-# Could we extract common functionality somehow?
-class SocialFeed(Base):
+class SocialFeed(RSSBase):
 
-    social_field = NotImplemented
+    social_value = NotImplemented
+
+    def __init__(self, context, request):
+        super(SocialFeed, self).__init__(context, request)
+        self.rss_title = 'ZEIT ONLINE Social Flow'
 
     def build_feed(self):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
-        root = E('rss', version='2.0')
-        channel = E(
-            'channel',
-            E('title', 'ZEIT ONLINE SocialFlow'),
-            E('link', self.request.route_url('home')),
-            E('description'),
-            E('language', 'de-de'),
-            E('copyright',
-              'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
-            EN('atom', 'link',
-               href=self.request.url, type=self.request.response.content_type)
-        )
-        root.append(channel)
-
         for content in self.items:
             try:
                 content_url = zeit.web.core.template.create_url(
@@ -431,16 +479,17 @@ class SocialFeed(Base):
                       format_rfc822_date(last_published_semantic(content))),
                     E('guid', self.make_guid(content), isPermaLink='false'),
                 )
+
                 social_value = self.social_value(content)
                 if social_value:
                     item.append(EN('content', 'encoded', social_value))
-                channel.append(item)
+                self.channel.append(item)
             except:
                 log.warning(
                     'Error adding %s to %s',
                     content, self.__class__.__name__, exc_info=True)
                 continue
-        return root
+        return self.root
 
 
 @zeit.web.view_config(

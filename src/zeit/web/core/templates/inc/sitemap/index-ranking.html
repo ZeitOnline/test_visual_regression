@@ -1,0 +1,9 @@
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for i in range(view.area_providing_pagination.total_pages + 1) -%}
+    {%- if i > 0 -%}
+    <sitemap>
+        <loc>{{ view.content_url }}?p={{ i }}</loc>
+    </sitemap>
+    {%- endif -%}
+{%- endfor -%}
+</sitemapindex>

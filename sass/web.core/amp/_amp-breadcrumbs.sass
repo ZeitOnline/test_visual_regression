@@ -1,0 +1,17 @@
+.breadcrumbs
+	border-top: 1px solid $color-border
+
+	&__list
+		margin: 1em 0
+		padding: 0
+
+	&__item
+		color: $color-text--light
+		display: inline
+		letter-spacing: $letter-spacing-s
+		&:not(:last-child):after
+			content: " › "
+			margin: 0 .25em
+
+	&__link
+		color: inherit

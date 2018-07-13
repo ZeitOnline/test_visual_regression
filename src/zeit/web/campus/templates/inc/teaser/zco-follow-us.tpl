@@ -1,4 +1,4 @@
-{%- import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama -%}
+{%- import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama -%}
 <aside class="{% block layout %}teaser-follow-us{% endblock %} {% if module.visible_mobile == False %} mobile-hidden{% endif %}"
     data-unique-id="{{ teaser.uniqueId }}"
     data-meetrics="{{ area.kind }}">

@@ -255,65 +255,6 @@ def test_stale_breaking_news_article_must_not_render_breaking_bar(testbrowser):
     assert len(browser.cssselect('.breaking-news-heading')) == 0
 
 
-def test_schema_org_main_content_of_page(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-
-    assert len(select('main[itemprop="mainContentOfPage"]')) == 1
-
-
-def test_schema_org_article_mark_up(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
-    publisher = browser.cssselect('[itemprop="publisher"]')[0]
-    logo = publisher.cssselect('[itemprop="logo"]')[0]
-
-    article = browser.cssselect('article[itemprop="mainEntity"]')[0]
-    main_entity_of_page = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
-    headline = article.cssselect('[itemprop="headline"]')[0]
-    description = article.cssselect('[itemprop="description"]')[0]
-    date_published = article.cssselect('[itemprop="datePublished"]')[0]
-    author = article.cssselect('[itemprop="author"]')[0]
-
-    image = article.cssselect('[itemprop="image"]')[0]
-    copyright_holder = image.cssselect('[itemprop="copyrightHolder"]')[0]
-
-    # check Organization
-    assert publisher.get('itemtype') == 'http://schema.org/Organization'
-    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
-        'ZEIT ONLINE')
-    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
-        'http://localhost/index')
-    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
-    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
-        'http://localhost/static/latest/images/'
-        'structured-data-publisher-logo-zon.png')
-    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '565'
-    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'
-
-    # check Article
-    assert article.get('itemtype') == 'http://schema.org/Article'
-    assert main_entity_of_page.get('href') == (
-        'http://localhost/zeit-online/article/01')
-    assert ' '.join(headline.text_content().strip().split()) == (
-        u'"Der Hobbit": Geht\'s noch gr\xf6\xdfer?')
-
-    assert len(description.text_content().strip())
-    assert len(article.cssselect('[itemprop="articleBody"]')) == 1
-
-    # check ImageObject
-    assert image.get('itemtype') == 'http://schema.org/ImageObject'
-    assert len(image.cssselect('[itemprop="caption"]')) == 1
-    assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
-    person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros./dpa'
-
-    assert date_published.get('datetime') == '2015-05-27T19:11:30+02:00'
-
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.cssselect('[itemprop="name"]')[0].text == 'Wenke Husmann'
-    assert author.cssselect('[itemprop="url"]')[0].get('href') == (
-        'http://localhost/autoren/H/Wenke_Husmann/index.xml')
-
-
 def test_multipage_article_should_designate_meta_pagination(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     assert not browser.xpath('//head/link[@rel="prev"]')
@@ -2240,20 +2181,6 @@ def test_narrow_header_should_render_image_column_width(testbrowser):
     assert 'article__item--apart' in figure.get('class')
 
 
-def test_abo_paywall_schema_attr(testbrowser):
-    browser = testbrowser('/zeit-online/article/zplus-zon')
-    jsonld = browser.cssselect('script[type="application/ld+json"]')
-    assert len(jsonld) == 1
-    jsonld = jsonld[0]
-    assert '"isAccessibleForFree": "False"' in jsonld.text
-
-
-def test_abo_paywall_schema_attr_not_on_free_content(testbrowser):
-    browser = testbrowser('/zeit-online/article/simple')
-    jsonld = browser.cssselect('script[type="application/ld+json"]')
-    assert len(jsonld) == 0
-
-
 def test_dpa_article_should_have_correct_header(testbrowser):
     browser = testbrowser('/zeit-online/article/dpa')
     assert len(browser.cssselect('.dpa-header')) == 1
@@ -2296,13 +2223,14 @@ def test_dpa_noimage_article_renders_empty_image_block(testbrowser):
 
 
 @pytest.mark.parametrize(
-    'parameter', [
-        ('dpa'),
-        ('afp')
+    'file, text', [
+        ('dpa', 'Deutschen Presse-Agentur (dpa)'),
+        ('afp', 'Agence France-Presse (AFP)')
     ])
-def test_dpa_afp_article_should_have_notice(testbrowser, parameter):
-    browser = testbrowser('/zeit-online/article/' + parameter)
-    assert len(browser.cssselect('.article-notice')) == 1
+def test_news_article_should_have_notice(testbrowser, file, text):
+    browser = testbrowser('/zeit-online/article/' + file)
+    notice = browser.cssselect('.article-notice')[0]
+    assert text in notice.text_content()
 
 
 def test_faq_page_should_present_a_link_for_each_intertitle(testbrowser):
@@ -2314,14 +2242,14 @@ def test_faq_page_should_present_a_link_for_each_intertitle(testbrowser):
 def test_faq_page_should_present_links_to_intertitles(testbrowser):
     browser = testbrowser('/zeit-online/article/faq')
 
-    browser.cssselect('.article-flexible-toc__item')[0]
-    for index, subheading in enumerate(
-            browser.cssselect('.article__subheading')):
-        link_text = browser.cssselect(
-            '.article-flexible-toc__link')[index].get('href')
-        assert link_text == ("{}#{}".format(
-            browser.url,
-            zeit.web.core.template.format_faq(subheading.text)))
+    subheadings = browser.cssselect('.article__subheading')
+    links = browser.cssselect('.article-flexible-toc__link')
+
+    assert (subheadings)
+
+    for index, subheading in enumerate(subheadings):
+        href = links[index].get('href')
+        assert href == '#' + subheading.get('id')
 
 
 def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
@@ -2339,7 +2267,10 @@ def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
 def test_faq_page_should_render_show_more_button(testbrowser):
     select = testbrowser('/zeit-online/article/faq').cssselect
 
-    assert len(select('.article-flexible-toc__item--showall')) == 1
+    buttons = select('.article-flexible-toc__showall')
+
+    assert len(buttons) == 1
+    assert buttons[0].get('onclick')
 
 
 def test_faq_page_should_follow_schema_org(testbrowser):
@@ -2388,16 +2319,13 @@ def test_faq_page_should_contain_exactly_one_flexible_toc(testbrowser):
 def test_faq_page_should_render_flexible_toc_above_first_question(testbrowser):
     select = testbrowser('/zeit-online/article/faq').cssselect
 
-    first_block = select('.article-page')[0].getchildren()[0]
-    assert 'article__item' in first_block.get('class')
+    blocks = select('.article-page')[0].getchildren()
 
-    flexible_toc = first_block.getnext()
-    assert 'article-flexible-toc' in flexible_toc.get('class')
-    assert flexible_toc.getnext().tag == 'script'
+    assert 'paragraph' in blocks[0].get('class')
+    assert 'article-flexible-toc' in blocks[1].get('class')
 
-    first_question = flexible_toc.getnext().getnext()
-    assert 'http://schema.org/Question' in (
-        flexible_toc.getnext().getnext().get('itemtype'))
+    for i in range(2, 5):
+        assert blocks[i].get('itemtype') == 'http://schema.org/Question'
 
 
 def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
@@ -2409,14 +2337,16 @@ def test_flexible_toc_article_should_have_flexible_toc(testbrowser):
     assert len(select('.article-flexible-toc')) == 1
 
     first_block = select('.article-page')[0].getchildren()[0]
-    assert 'article__item' in first_block.get('class')
+    assert 'paragraph' in first_block.get('class')
 
     flexible_toc = first_block.getnext()
     assert 'article-flexible-toc' in flexible_toc.get('class')
-    assert flexible_toc.getnext().tag == 'script'
 
-    first_question = flexible_toc.getnext().getnext()
-    assert 'article__item' in first_block.get('class')
+    first_topic = flexible_toc.getnext()
+    assert 'article-flexible-toc__subheading' in first_topic.get('class')
+
+    first_content = first_topic.getnext()
+    assert 'paragraph' in first_content.get('class')
 
 
 def test_each_faq_answer_should_have_one_itemprop_text(testbrowser):
@@ -2460,3 +2390,39 @@ def test_article_can_include_optimize(testbrowser):
     settings['optimize_on_zon_article'] = optimize_url
     browser = testbrowser('/zeit-online/article/simple')
     assert optimize_url in browser.contents
+
+
+def test_article_has_valid_twitter_meta_tags(testbrowser):
+    select = testbrowser('/zeit-online/article/amp').metaselect
+
+    assert select('[name="twitter:card"]') == 'summary_large_image'
+    assert select('[name="twitter:site"]') == '@zeitonline'
+    assert select('[name="twitter:creator"]') == '@zeitonline'
+    assert select('[name="twitter:title"]') == (
+        u'Flüchtlinge: Mehr Davos, weniger Kreuth')
+    assert select('[name="twitter:description"]').startswith(
+        u'Zwei Bergdörfer diskutieren die Flüchtlingskrise:')
+    assert select('[name="twitter:image"]') == (
+        'http://localhost/zeit-online/image/'
+        'filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+
+
+def test_article_has_valid_facebook_meta_tags(testbrowser):
+    select = testbrowser('/zeit-online/article/amp').metaselect
+
+    assert select('[property="og:site_name"]') == 'ZEIT ONLINE'
+    assert select('[property="fb:app_id"]') == '638028906281625'
+    assert select('[property="fb:pages"]') == (
+        '37816894428, 63948163305, 327602816926, 114803848589834')
+    assert select('[property="og:type"]') == 'article'
+    assert select('[property="og:title"]') == (
+        u'Flüchtlinge: Mehr Davos, weniger Kreuth')
+    assert select('[property="og:description"]').startswith(
+        u'Zwei Bergdörfer diskutieren die Flüchtlingskrise:')
+    assert select('[property="og:url"]') == (
+        'http://localhost/zeit-online/article/amp')
+    assert select('[property="og:image"]') == (
+        'http://localhost/zeit-online/image/'
+        'filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+    assert select('[property="og:image:width"]') == '1300'
+    assert select('[property="og:image:height"]') == '731'

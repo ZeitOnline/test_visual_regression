@@ -585,7 +585,7 @@ def test_notification_after_paywall_registration_renders_correctly(
 
     def assert_notification(pathname, css_class, text, query=''):
         driver.get('%s%s%s%s' % (testserver.url, pathname, query, url_hash))
-        selector = 'link[itemprop="mainEntityOfPage"][href="{}{}"]'.format(
+        selector = 'link[rel="canonical"][href="{}{}"]'.format(
             testserver.url, pathname)
         try:
             # assure we are seeing the right page
@@ -626,7 +626,7 @@ def test_notification_script_does_not_edit_unknown_hashes(
     driver = selenium_driver
     url_hash = '#debug-clicktracking'
     driver.get('{}/zeit-online/article/01{}'.format(testserver.url, url_hash))
-    selector = 'link[itemprop="mainEntityOfPage"][href="{}{}"]'.format(
+    selector = 'link[rel="canonical"][href="{}{}"]'.format(
         testserver.url, '/zeit-online/article/01')
     try:
         # assure we are seeing the right page
@@ -894,7 +894,7 @@ def test_retrieve_keywords_from_tms(application):
             tms.return_value = [mock.sentinel.tag]
             assert view.keywords == [mock.sentinel.tag]
             assert not kw.called
-            tms.assert_called_with(article, timeout=0.42)
+            tms.assert_called_with(article, timeout=0.42, published=True)
 
 
 def test_fall_back_on_vivi_keywords_on_tms_failure(application):
@@ -989,3 +989,38 @@ def test_view_should_return_none_if_it_has_no_channels(application):
     request = pyramid.testing.DummyRequest()
     view = zeit.web.site.view_author.Author(author, request)
     assert view.channels is None
+
+
+def test_robots_txt_should_be_dispatched_according_to_host(testserver):
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'www.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' in r.content
+
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'www.staging.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' in r.content
+
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'img.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' not in r.content
+    assert 'Googlebot-News' in r.content
+
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'img.staging.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' not in r.content
+    assert 'Googlebot-News' in r.content
+
+    # Falls back to www if no specific file exists.
+    r = requests.get(
+        '%s/robots.txt' % testserver.url,
+        headers={'Host': 'anything.zeit.de'})
+    assert r.status_code == 200
+    assert 'Sitemap' in r.content

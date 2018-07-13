@@ -1,12 +1,10 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-<!DOCTYPE html>
-<!--[if IE 9]> <html lang="de" class="no-js lt-ie10"> <![endif]-->
-<!--[if gt IE 9]><!-->
-<html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
-<!--<![endif]-->
-<head>
-    {% include "zeit.web.core:templates/inc/meta/basics.html" %}
+{% extends "zeit.web.core:templates/layout.html" %}
 
+{% block css_link -%}
+    <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">
+{% endblock css_link -%}
+
+{%- block head %}
     {% if view.is_hp -%}
         <meta name="apple-itunes-app" content="app-id=828889166">
     {% endif -%}
@@ -14,69 +12,20 @@
     <meta name="msapplication-TileImage" content="{{ request.image_host }}/static/img/zo-icon-win8-144x144.png">
     <meta name="msapplication-TileColor" content="#e6e6e6">
 
-    {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
-
-    {% if toggles('preload_webfonts') %}
-        {# ../latest/ for escaping the version number. Same is used in CSS. #}
-        <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/tabletgothic/TabletGothic-Regular.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/tabletgothic/TabletGothic-Bold.woff2" as="font" type="font/woff2" crossorigin>
-        {% if not view.is_hp %}
-            <link rel="preload" href="{{ request.asset_host }}/../latest/fonts/franziska/FranziskaWebPro.woff" as="font" type="font/woff" crossorigin>
-        {% endif %}
-    {% endif %}
-
-    <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
-    <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
-
-    {% if view.is_podcastseries %}
-    <link type="application/rss+xml" rel="alternate" title="{{ view.series_title }}" href="https://{{ view.podcastseries_feed }}.podigee.io/feed/mp3"/>
-    {% else %}
-    <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
-    {% endif %}
-
-    {% block css_link %}
-        <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">
-    {% endblock css_link %}
-
-    {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
-    {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
-    {%- include "zeit.web.site:templates/inc/meta/sharing.html" -%}
-    {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
-    {% block ligatus_include %}{% endblock %}
-    {% block schemaorg_data %}{% endblock %}
+    {% if view.is_podcastseries -%}
+        <link type="application/rss+xml" rel="alternate" title="{{ view.series_title }}" href="https://{{ view.podcastseries_feed }}.podigee.io/feed/mp3"/>
+    {% else -%}
+        <link rel="alternate" type="application/rss+xml" href="https://newsfeed.zeit.de/index">
+    {% endif -%}
 
     {% if view.include_optimize -%}
         <script src="{{ view.include_optimize }}"></script>
     {% endif %}
 
-    <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
     {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
-    {% if toggles('third_party_modules') -%}
-        <script src="https://script.ioam.de/iam.js"></script>
-    {% endif -%}
+{% endblock head %}
 
-    {% if toggles('third_party_modules', 'iqd') %}
-        {% include "zeit.web.core:templates/inc/ads/head.html" %}
-    {% endif %}
-    {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
-    {% if settings('livereload') %}
-        <script src="//localhost:35729/livereload.js"></script>
-    {% endif %}
-    {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
-    {% block babator_include %}{% endblock %}
-</head>
-<body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
-
-    {% if toggles('third_party_modules', 'tracking', 'optimize_ab_testing_to_webtrekk') -%}
-        {% include "zeit.web.core:templates/inc/tracking/webtrekk_googleoptimize.html" %}
-    {% endif -%}
-    {% include "zeit.web.core:templates/inc/tag-manager.html" %}
-    {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
-    {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
-
-    {% block skiplink %}
-    <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
-    {% endblock skiplink %}
+{%- block body %}
     <div class="page">
         {% block adplace_top %}
             {% include "zeit.web.core:templates/inc/ads/mainad.html" %}
@@ -101,7 +50,7 @@
                 {# mobile ad place 1 #}
                 {% include "zeit.web.core:templates/inc/ads/places/mobile/place1.html" %}
             {% endblock adplace_billboard %}
-            <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
+            <main class="{{ 'main' | with_mods(view.type) }}" id="main">
                 {% block main %}{% endblock main %}
             </main>
             {% block adplace_floor %}
@@ -147,5 +96,4 @@
     <!--end: vgwort-->
     {% endif %}
     {% include "zeit.web.core:templates/inc/cardstack/footer.tpl" %}
-</body>
-</html>
+{% endblock body %}

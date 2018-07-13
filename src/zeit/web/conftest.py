@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+import collections
 import copy
 import json
 import logging
@@ -32,13 +33,16 @@ import waitress
 import webtest
 import wesgi
 import zope.browserpage.metaconfigure
+import zope.component
 import zope.event
 import zope.interface
 import zope.processlifetime
 import zope.testbrowser.wsgi
 
+import zeit.cms.interfaces
 import zeit.content.image.interfaces
 import zeit.retresco.interfaces
+import zeit.retresco.connection
 import zeit.solr.interfaces
 
 import zeit.web.core.application
@@ -51,7 +55,7 @@ log = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope='session')
-def app_settings(mockserver):
+def app_settings(mockserver_session):
     return {
         'pyramid.reload_templates': False,
         'pyramid.debug_authorization': False,
@@ -72,44 +76,46 @@ def app_settings(mockserver):
         # vivi config setup too, so we need to satisfy it.
         'vivi_zeit.cms_cache-expiration-config': '600',
         'session.reissue_time': '1',
-        'liveblog_backend_url': mockserver.url + '/liveblog/backend',
-        'liveblog_status_url': mockserver.url + '/liveblog/status',
-        'liveblog_backend_url_v3': mockserver.url + '/liveblog/v3',
+        'liveblog_backend_url': mockserver_session.url + '/liveblog/backend',
+        'liveblog_status_url': mockserver_session.url + '/liveblog/status',
+        'liveblog_backend_url_v3': mockserver_session.url + '/liveblog/v3',
         'liveblog_amp_theme_v3': 'zon-amp',
-        'liveblog_api_auth_url_v3': mockserver.url + '/liveblog/v3/api/auth',
+        'liveblog_api_auth_url_v3': mockserver_session.url + (
+            '/liveblog/v3/api/auth'),
         'liveblog_api_auth_username_v3': 'apiuser',
         'liveblog_api_auth_password_v3': 'geheim',
-        'liveblog_api_url_v3': mockserver.url + '/liveblog/v3/api/blogs',
+        'liveblog_api_url_v3': mockserver_session.url + (
+            '/liveblog/v3/api/blogs'),
         # XXX I'd rather put None here and change the settings for a specific
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
         'cookie_fallback_domain': 'localhost',
         'comment_page_size': '4',
-        'community_host': mockserver.url + '/comments',
+        'community_host': mockserver_session.url + '/comments',
         'community_profile_url': 'https://community.zeit.de',
         'community_admin_host': 'http://community_admin',
         'community_static_host': 'http://static_community',
         'community_maintenance': (
             'http://xml.zeit.de/config/community_maintenance.xml'),
-        'agatho_host': mockserver.url + '/comments',
-        'linkreach_host': mockserver.url + '/linkreach/api',
-        'podigee_url': mockserver.url + '/podigee',
+        'agatho_host': mockserver_session.url + '/comments',
+        'linkreach_host': mockserver_session.url + '/linkreach/api',
+        'podigee_url': mockserver_session.url + '/podigee',
         'itunes_podcast_base_url': 'http://xml.zeit.de/podcast/id',
         'app_servers': '',
         'health_check_with_fs': True,
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
-        'brandeins_hp_feed': mockserver.url + '/brandeins/feed.xml',
-        'brandeins_img_host': mockserver.url + '/brandeins',
-        'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
-        'spektrum_img_host': mockserver.url + '/spektrum',
+        'brandeins_hp_feed': mockserver_session.url + '/brandeins/feed.xml',
+        'brandeins_img_host': mockserver_session.url + '/brandeins',
+        'spektrum_hp_feed': mockserver_session.url + '/spektrum/feed.xml',
+        'spektrum_img_host': mockserver_session.url + '/spektrum',
         'brandeins_host': 'https://www.brandeins.de',
         'zett_host': 'https://ze.tt',
-        'zett_hp_feed': mockserver.url + '/zett/feed.xml',
-        'zett_img_host': mockserver.url + '/zett',
-        'academics_hp_feed': mockserver.url + '/academics/feed.xml',
-        'academics_img_host': mockserver.url + '/academics',
-        'cardstack_backend': mockserver.url + '/cardstack',
+        'zett_hp_feed': mockserver_session.url + '/zett/feed.xml',
+        'zett_img_host': mockserver_session.url + '/zett',
+        'academics_hp_feed': mockserver_session.url + '/academics/feed.xml',
+        'academics_img_host': mockserver_session.url + '/academics',
+        'cardstack_backend': mockserver_session.url + '/cardstack',
         'connector_type': 'mock',
         'solr_timeout': 2,
         'solr_sitemap_timeout': 10,
@@ -224,7 +230,7 @@ def app_settings(mockserver):
         'vivi_zeit.web_feature-toggle-source': (
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
         'vivi_zeit.imp_scale-source':
-            'egg://zeit.web.core/data/config/scales.xml',
+        'egg://zeit.web.core/data/config/scales.xml',
         'vivi_zeit.web_intextlink-blacklist-url': (
             'egg://zeit.web.core/data/config/intextlink-blacklist.xml'),
         'vivi_zeit.content.link_source-blogs': (
@@ -248,7 +254,8 @@ def app_settings(mockserver):
         'vivi_zeit.content.author_biography-questions': (
             'egg://zeit.web.core/data/config/author-biography-questions.xml'),
         'vivi_zeit.cms_celery-config': '/dev/null',
-        'vivi_zeit.brightcove_playback-url': mockserver.url + '/brightcove',
+        'vivi_zeit.brightcove_playback-url': mockserver_session.url + (
+            '/brightcove'),
         'vivi_zeit.brightcove_playback-policy-key': 'None',
         'vivi_zeit.brightcove_playback-timeout': '2',
         'sso_activate': '',
@@ -360,6 +367,8 @@ def application_session(app_settings, set_loglevel, request):
                                   zeit.web.core.solr.ISitemapSolrConnection)
     zope.component.provideUtility(MockES(),
                                   zeit.retresco.interfaces.IElasticsearch)
+    zope.component.provideUtility(MockTMS(),
+                                  zeit.retresco.interfaces.ITMS)
     zope.component.provideUtility(mock.Mock(),
                                   zeit.objectlog.interfaces.IObjectLog)
     zope.component.provideUtility(mock.Mock(),
@@ -551,7 +560,7 @@ class StaticViewMaybeReplaceHostURL(pyramid.static.static_view):
 
 
 @pytest.fixture(scope='session')
-def mockserver(request):
+def mockserver_session(request):
     """Used for mocking external HTTP dependencies like agatho or spektrum."""
     from pyramid.config import Configurator
 
@@ -574,6 +583,28 @@ def mockserver(request):
     server.url = 'http://%s' % server['http_address']
     request.addfinalizer(server.tearDown)
     return server
+
+
+@pytest.fixture
+def preserve_mockserver_settings(mockserver_session, request):
+    def restore_settings():
+        settings = zope.component.queryUtility(ISettings)
+        if settings is not None and settings_orig is not None:
+            for key, value in settings_orig.items():
+                settings[key] = value
+            for key in list(settings):
+                if key not in settings_orig:
+                    del settings[key]
+    settings_orig = None
+    settings = zope.component.queryUtility(ISettings)
+    if settings is not None:
+        request.addfinalizer(restore_settings)
+        settings_orig = copy.copy(settings)
+
+
+@pytest.fixture
+def mockserver(mockserver_session, preserve_mockserver_settings):
+    return mockserver_session
 
 
 @pytest.fixture(scope='session')
@@ -825,6 +856,25 @@ class WsgiBrowser(BaseBrowser, zope.testbrowser.wsgi.Browser):
             uri = 'http://localhost/{}'.format(uri.lstrip('/'))
         return super(WsgiBrowser, self).open(uri, data)
 
+    def metaselect(self, selector):
+        """Return the content attribute value of a HTML <meta> tag that match
+        a given CSS attribute selector.
+        """
+        meta = self.cssselect('head meta{}'.format(selector))
+        if len(meta) == 1:
+            return meta[0].get('content')
+
+    def structured_data(self):
+        """Return all structured data in JSON-LD format as dict by type
+        """
+        data = {}
+
+        for script in self.cssselect('script[type="application/ld+json"]'):
+            content = json.loads(script.text_content().strip())
+            data[content['@type']] = content
+
+        return data
+
 
 class TemplateBrowser(BaseBrowser):
 
@@ -949,6 +999,27 @@ class MockES(MockSearch):
         self._results = value
 
 
+class MockTMS(zeit.retresco.connection.TMS):
+    """Stub with empty results."""
+
+    def __init__(self):
+        pass
+
+    def is_healthy(self):
+        return True
+
+    def _request(self, *args, **kw):
+        # XXX unclear if this properly stubs out all public functions
+        return collections.defaultdict(lambda: None)
+
+    def get_topicpages(self, *args, **kw):
+        return zeit.cms.interfaces.Result()
+
+    def get_article_body(self, content, timeout=None):
+        content = zeit.cms.interfaces.ICMSContent(content.uniqueId)
+        return lxml.etree.tostring(content.xml.body)
+
+
 @pytest.fixture
 def data_solr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
@@ -964,6 +1035,15 @@ def data_es(request):
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
     zope.component.provideUtility(zeit.web.core.retresco.DataES())
+
+
+@pytest.fixture
+def data_tms(request):
+    previous = zope.component.queryUtility(
+        zeit.retresco.interfaces.ITMS)
+    if previous is not None:
+        request.addfinalizer(lambda: zope.component.provideUtility(previous))
+    zope.component.provideUtility(zeit.web.core.retresco.DataTMS())
 
 
 @pytest.fixture(scope='session')

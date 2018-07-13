@@ -1,4 +1,4 @@
-{% if view.advertising_enabled %}
+{% if toggles('third_party_modules', 'iqd') and view.advertising_enabled %}
 <!-- ad controller head start -->
 
 <!-- adcontroller load -->

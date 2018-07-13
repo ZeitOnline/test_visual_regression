@@ -21,15 +21,9 @@
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
   <iqd_touchpoint>true</iqd_touchpoint>
-  <iqd_contentmarketing_ad>false</iqd_contentmarketing_ad>
   <keywords_from_tms>false</keywords_from_tms>
-
   <ligatus>false</ligatus>
-  <ligatus_on_arbeit>false</ligatus_on_arbeit>
-  <ligatus_on_campus>false</ligatus_on_campus>
-  <ligatus_on_magazin>false</ligatus_on_magazin>
-  <ligatus_on_site>false</ligatus_on_site>
-
+  <modernizr_js_file>false</modernizr_js_file>
   <optimize_ab_testing_to_webtrekk>false</optimize_ab_testing_to_webtrekk>
   <podlove_button>true</podlove_button>
   <preload_webfonts>true</preload_webfonts>

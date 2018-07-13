@@ -118,7 +118,7 @@ def test_buzzboard_should_avoid_same_teaser_image_twice(
     browser = testbrowser('/zeit-online/buzz-box')
     area = browser.cssselect('.cp-area--buzzboard')[0]
     assert len(area.cssselect('.teaser-buzzboard__media')) == 4
-    assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 2
+    assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 1
 
 
 def test_printbox_is_present_and_has_digital_offerings(
@@ -304,6 +304,26 @@ def test_hp_shows_popover(selenium_driver, testserver):
     assert box.is_displayed()
 
 
+def test_hp_shows_alternative_popover(selenium_driver, testserver):
+    driver = selenium_driver
+
+    # default
+    driver.get('{}/zeit-online/slenderized-index?force-popover'.format(
+        testserver.url))
+
+    text = driver.find_element_by_css_selector(".overlay__text")
+    assert text.is_displayed()
+
+    # alternative popover hides text, so after running the script
+    # -> the text should not be shown
+
+    script = 'arguments[0].classList.add("overlay-wrapper--alternative");'
+    element = driver.find_element_by_css_selector('#overlay-wrapper')
+    driver.execute_script(script, element)
+    text = driver.find_element_by_css_selector(".overlay__text")
+    assert not text.is_displayed()
+
+
 def test_zon_campus_teaser_fullwidth_has_campus_signet(testbrowser):
     select = testbrowser('zeit-online/centerpage/teasers-to-campus').cssselect
     svg = select('.teaser-fullwidth .teaser-fullwidth__kicker-logo--zco')
@@ -373,8 +393,8 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
     liveblog = main.cssselect('span[class*="__kicker-logo--liveblog"]')
     offline = main.cssselect('span[class*="__kicker-logo--liveblog-closed"]')
 
-    assert len(liveblog) == 17
-    assert len(offline) == 8
+    assert len(liveblog) == 21
+    assert len(offline) == 10
 
 
 def test_format_date_returns_expected_value_in_newsbox(clock):

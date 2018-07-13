@@ -1,0 +1,36 @@
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) -%}
+    "primaryImageOfPage": {
+        {% set image_width = 1300 -%}
+        {% set image_height = (image_width / image.ratio) | round | int -%}
+        {% set image_source = '%s%s__%dx%d' | format (request.image_host, image.path, image_width, image_height) -%}
+        "@type": "ImageObject",
+        "url": "{{ image_source }}",
+        "width": {{ image_width }},
+        "height": {{ image_height }}
+    },
+    {% endrequire -%}
+    {#
+        this breaks the images in google search results for AMPs, although it's valid JSON-LD
+        luckily this is a 2-way reference, so we still describe the relation in one way
+        - WebPage.mainEntity -> Article
+        - Article.mainEntityOfPage -> WebPage
+    {% if view.type != 'centerpage' -%}
+    "mainEntity": {
+        "@id": "#{{ view.type }}"
+    },
+    {% endif -%}
+    -#}
+    {% if view.breadcrumbs -%}
+    "breadcrumb": {
+        "@id": "#breadcrumb"
+    },
+    {% endif -%}
+    "publisher": {
+        "@id": "#publisher"
+    }
+}
+</script>

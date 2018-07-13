@@ -1,4 +1,4 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 
 {% set image = get_image(module, fallback=False) %}
 {% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
@@ -13,7 +13,7 @@
 
 <article id="{{ module_layout }}"
          class="{% block layout %}nextread{% endblock %} {{ module_layout }}{{ '--with-image' if (image and teaser is not column) else '--no-image' }}">
-    <a class="{{ module_layout }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id={{ data_id }} itemprop="relatedLink">
+    <a class="{{ module_layout }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id="{{ data_id }}">
         <div class="{{ module_layout }}__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
         {% if teaser is not column %}
             {% include "zeit.web.core:templates/inc/asset/image_nextread.tpl" %}

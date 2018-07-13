@@ -21,62 +21,54 @@ def test_amp_paragraph_should_contain_expected_structure(tplbrowser):
         u'Wie lässt sich diese Floskel übersetzen?')
 
 
-def test_amp_contains_required_microdata(testbrowser):
-    browser = testbrowser('/amp/zeit-online/article/amp')
-    publisher = browser.cssselect('[itemprop="publisher"]')[0]
-    logo = publisher.cssselect('[itemprop="logo"]')[0]
+def test_amp_contains_required_structured_data(testbrowser):
+    data = testbrowser('/amp/zeit-online/article/amp').structured_data()
+    page = data['WebPage']
+    article = data['Article']
+    publisher = data['Organization']
+    breadcrumb = data['BreadcrumbList']
 
-    article = browser.cssselect('article[itemprop="mainEntity"]')[0]
-    main_entity_of_page = article.cssselect('[itemprop="mainEntityOfPage"]')[0]
-    headline = article.cssselect('[itemprop="headline"]')[0]
-    description = article.cssselect('[itemprop="description"]')[0]
-    date_published = article.cssselect('[itemprop="datePublished"]')[0]
-    date_modified = article.cssselect('[itemprop="dateModified"]')[0]
-    author = article.cssselect('[itemprop="author"]')[0]
-
-    image = article.cssselect('[itemprop="image"]')[0]
-    copyright_holder = image.cssselect('[itemprop="copyrightHolder"]')[0]
+    # check WebPage
+    assert page['publisher']['@id'] == publisher['@id']
+    assert page['breadcrumb']['@id'] == breadcrumb['@id']
+    # disabled for now, as long as google can't handle this reference
+    # assert page['mainEntity']['@id'] == article['@id']
 
     # check Organization
-    assert publisher.get('itemtype') == 'http://schema.org/Organization'
-    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
-        'ZEIT ONLINE')
-    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
-        'http://localhost/index')
-    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
-    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
+    assert publisher['@id'] == '#publisher'
+    assert publisher['name'] == 'ZEIT ONLINE'
+    assert publisher['url'] == 'http://localhost/index'
+    assert publisher['logo']['@type'] == 'ImageObject'
+    assert publisher['logo']['url'] == (
         'http://localhost/static/latest/images/'
         'structured-data-publisher-logo-zon.png')
-    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '565'
-    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'
+    assert publisher['logo']['width'] == 565
+    assert publisher['logo']['height'] == 60
 
     # check Article
-    assert article.get('itemtype') == 'http://schema.org/Article'
-    assert main_entity_of_page.get('content') == (
+    assert article['mainEntityOfPage']['@id'] == (
         'http://localhost/zeit-online/article/amp')
-    text = headline.text_content().strip()
-    assert text.startswith(u'Flüchtlinge: ')
-    assert text.endswith(u'Mehr Davos, weniger Kreuth')
-    assert len(description.text_content().strip())
+    assert article['headline'] == u'Flüchtlinge: Mehr Davos, weniger Kreuth'
+    assert len(article['description'])
+    assert article['datePublished'] == '2016-01-22T11:55:46+01:00'
+    assert article['dateModified'] == '2016-01-22T11:55:46+01:00'
+    assert article['keywords'] == (
+        u'Flüchtling, Weltwirtschaftsforum Davos, '
+        u'Arbeitsmarkt, Migration, Europäische Union')
+    assert article['publisher']['@id'] == publisher['@id']
 
     # check ImageObject
-    assert image.get('itemtype') == 'http://schema.org/ImageObject'
-    assert image.cssselect('[itemprop="url"]')[0].get('content') == (
+    assert article['image']['@type'] == 'ImageObject'
+    assert article['image']['url'] == (
         'http://localhost/zeit-online/image/'
-        'filmstill-hobbit-schlacht-fuenf-hee/wide__820x461')
-    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
-    assert image.cssselect('[itemprop="height"]')[0].get('content') == '461'
-    assert len(image.cssselect('[itemprop="caption"]')) == 1
-    assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
-    person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros./dpa'
+        'filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+    assert article['image']['width'] == 1300
+    assert article['image']['height'] == 731
 
-    assert date_published.get('datetime') == '2016-01-22T11:55:46+01:00'
-    assert date_modified.get('datetime') == '2016-01-22T11:55:46+01:00'
-
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.cssselect('[itemprop="name"]')[0].text == 'Jochen Wegner'
-    assert author.cssselect('[itemprop="url"]')[0].get('href') == (
+    # check author
+    assert article['author']['@type'] == 'Person'
+    assert article['author']['name'] == 'Jochen Wegner'
+    assert article['author']['url'] == (
         'http://localhost/autoren/W/Jochen_Wegner/index')
 
 
@@ -171,12 +163,8 @@ def test_amp_article_contains_sharing_links(testbrowser):
 def test_amp_article_shows_tags_correctly(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     tags = browser.cssselect('.article-tags')[0]
-    keywords = tags.cssselect('[itemprop="keywords"]')[0]
     assert tags.cssselect('.article-tags__title')[0].text == u'Schlagwörter'
     assert len(tags.cssselect('.article-tags__link')) == 5
-    assert ' '.join(keywords.text_content().strip().split()) == (
-        u'Flüchtling, Weltwirtschaftsforum Davos, '
-        u'Arbeitsmarkt, Migration, Europäische Union')
 
 
 def test_amp_article_shows_ads_correctly(testbrowser):
@@ -251,22 +239,22 @@ def test_amp_article_contains_authorbox(testbrowser):
     author = authorbox[0]
     description = author.cssselect('.authorbox__summary')[0]
     assert description.text.strip() == 'Text im Feld Kurzbio'
-    assert description.get('itemprop') == 'description'
 
-    # test author content and microdata
+    # test author content
     author = authorbox[1]
-    image = author.cssselect('[itemprop="image"]')[0]
-    name = author.cssselect('strong[itemprop="name"]')[0]
-    description = author.cssselect('[itemprop="description"]')[0]
-    url = author.cssselect('a[itemprop="url"]')[0]
+    image = author.cssselect('.authorbox__media amp-img')[0]
+    name = author.cssselect('.authorbox__name')[0]
+    description = author.cssselect('.authorbox__summary')[0]
+    button = author.cssselect('.authorbox__button')[0]
 
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.get('itemscope') is not None
-    assert ('http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/square'
-            ) in image.cssselect('[itemprop="url"]')[0].get('content')
+    assert image.get('src') == (
+        'http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/'
+        'square__460x460')
+    assert image.get('sizes') == '(min-width: 48em) 100px, 72px'
     assert name.text.strip() == 'Jochen Wegner'
     assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
-    assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
+    assert button.get('href') == (
+        'http://localhost/autoren/W/Jochen_Wegner/index')
 
 
 def test_amp_article_shows_amp_accordion_for_infobox(testbrowser):

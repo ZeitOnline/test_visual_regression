@@ -41,6 +41,8 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_layout(self):
+        if self.product_id == 'News':
+            return 'dpa'
         return self.context.header_layout or 'default'
 
     @zeit.web.reify
@@ -408,6 +410,12 @@ class Article(zeit.web.core.view.Content):
 
 
 class AcceleratedMobilePageArticle(Article):
+
+    @zeit.web.reify
+    def canonical_url(self):
+        return u"{}{}".format(
+            self.request.route_url('home'),
+            self.request.path_info.lstrip('/amp/'))
 
     @zeit.web.reify
     def meta_robots(self):

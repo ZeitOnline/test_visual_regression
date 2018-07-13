@@ -1,22 +1,16 @@
 {% if view.breadcrumbs -%}
 <nav class="breadcrumbs" data-ct-row="breadcrumbs">
-    <ul class="breadcrumbs__list" itemprop="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList" data-ct-column="1">
-        <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    <ul class="breadcrumbs__list" data-ct-column="1">
+        <li class="breadcrumbs__item">
             <a class="breadcrumbs__link" href="{{ request.route_url('home') }}index" title="ZEIT ONLINE">Start</a>
-            <link itemprop="item" href="{{ request.route_url('home') }}">
-            <meta itemprop="name" content="ZEIT ONLINE">
-            <meta itemprop="position" content="1">
         </li>
         {% for text, link in view.breadcrumbs -%}
-        <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+        <li class="breadcrumbs__item">
             {%- if link -%}
-            <a class="breadcrumbs__link" itemprop="item" href="{{ link | create_url }}">
-                <span itemprop="name">{{ text }}</span>
-            </a>
+                <a class="breadcrumbs__link" href="{{ link | create_url }}">{{ text }}</a>
             {%- else -%}
-            <span itemprop="name">{{ text }}</span>
+                {{ text }}
             {%- endif -%}
-            <meta itemprop="position" content="{{ loop.index + 1 }}">
         </li>
         {% endfor -%}
     </ul>

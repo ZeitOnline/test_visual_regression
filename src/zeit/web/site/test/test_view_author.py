@@ -43,10 +43,23 @@ def test_author_page_should_hide_favourite_content_if_missing(testbrowser):
     assert len(browser.cssselect('.teaser-small')) == 0
 
 
-def test_author_page_should_feature_schema_org_props(testbrowser):
-    doc = testbrowser('/autoren/anne_mustermann').document
-    name = doc.xpath('//*[@itemprop="author"]/*[@itemprop="name"]')
-    assert name[0].text.strip() == 'Anne Mustermann'
+def test_author_page_contains_required_structured_data(testbrowser):
+    data = testbrowser('/autoren/W/Jochen_Wegner/index').structured_data()
+
+    author = data['Person']
+
+    assert author['mainEntityOfPage']['@id'] == (
+        'http://localhost/autoren/W/Jochen_Wegner/index')
+    assert author['name'] == 'Jochen Wegner'
+    assert author['jobTitle'] == 'Chefredakteur, ZEIT ONLINE.'
+    assert author['description']
+    assert author['image']['url'] == (
+        'http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/'
+        'square__900x900')
+    assert author['image']['width'] == 900
+    assert author['image']['height'] == 900
+    assert len(author['sameAs']) == 3
+    assert author['url'] == 'http://localhost/autoren/W/Jochen_Wegner/index'
 
 
 def test_author_page_should_show_articles_by_author(testbrowser):
@@ -214,8 +227,7 @@ def test_author_comments_should_correctly_validate_pagination(
 
 
 def test_author_contact_should_be_fully_rendered(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'author_feedback': True}.get)
+    zeit.web.core.application.FEATURE_TOGGLES.set('author_feedback')
     browser = testbrowser('/autoren/j_random')
     container = browser.cssselect('.author-contact')[0]
     items = container.cssselect('.author-contact__item')
@@ -227,6 +239,21 @@ def test_author_contact_should_be_fully_rendered(testbrowser, monkeypatch):
     assert len(twitter) == 1
     assert len(facebook) == 1
     assert len(instagram) == 1
+
+
+def test_author_feedback_should_be_fully_rendered(testbrowser, monkeypatch):
+    zeit.web.core.application.FEATURE_TOGGLES.set('author_feedback')
+    browser = testbrowser('/autoren/j_random/feedback')
+    container = browser.cssselect('.feedback-section')[0]
+    form = container.cssselect('.feedback-form')
+    title = container.cssselect('.feedback-form__inner p')[0].text
+    textarea = container.cssselect('#feedbacktext')
+    mail_input = container.cssselect('#feedbackmail')
+
+    assert len(form) == 1
+    assert title == 'Ihr Feedback an J. Random Hacker'
+    assert len(textarea) == 1
+    assert len(mail_input) == 1
 
 
 def test_author_should_have_user_comments(testbrowser, clock):

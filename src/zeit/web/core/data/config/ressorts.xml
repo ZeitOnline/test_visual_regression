@@ -1,74 +1,666 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <ressorts>
-    <ressort name="Deutschland" uniqueId="http://xml.zeit.de/deutschland">
-        <title>Deutschland</title>
-        <subnavigation name="Integration" uniqueId="http://xml.zeit.de/deutschland/integration">
-            <title>Integration</title>
-        </subnavigation>
-        <subnavigation name="Datenschutz" uniqueId="http://xml.zeit.de/deutschland/datenschutz">
-            <title>Datenschutz</title>
-        </subnavigation>
-        <subnavigation name="Meinung" uniqueId="http://xml.zeit.de/deutschland/meinung">
-            <title>Meinung</title>
-        </subnavigation>
-        <subnavigation name="Osten" uniqueId="http://xml.zeit.de/deutschland/osten">
-            <title>Osten</title>
-        </subnavigation>
-    </ressort>
-
-    <ressort name="International" uniqueId="http://xml.zeit.de/international">
-        <title>International</title>
-        <subnavigation name="US-Wahl" uniqueId="http://xml.zeit.de/international/us-wahl">
-            <title>US-Wahl</title>
-        </subnavigation>
-        <subnavigation name="Nahost" uniqueId="http://xml.zeit.de/international/nahost">
-            <title>Nahost</title>
-        </subnavigation>
-        <subnavigation name="Meinung" uniqueId="http://xml.zeit.de/international/meinung">
-            <title>Meinung</title>
-        </subnavigation>
-    </ressort>
-
-    <ressort name="Wirtschaft" uniqueId="http://xml.zeit.de/zeit-online/article"><title>Wirtschaft</title></ressort>
-    <ressort name="Finanzen" uniqueId="http://xml.zeit.de/finanzen"><title>Finanzen</title></ressort>
-    <ressort name="Wissen" uniqueId="http://xml.zeit.de/wissen"><title>Wissen</title></ressort>
-    <ressort name="Gesundheit" uniqueId="http://xml.zeit.de/gesundheit"><title>Gesundheit</title></ressort>
-    <ressort name="Computer" uniqueId="http://xml.zeit.de/computer"><title>Computer</title></ressort>
-
-    <ressort name="Bildung &amp; Beruf" uniqueId="http://xml.zeit.de/bildung-beruf">
-        <title>Bildung &amp; Beruf</title>
-    </ressort>
-    <ressort name="Studium" uniqueId="http://xml.zeit.de/studium"><title>Studium</title></ressort>
-    <ressort name="Campus" uniqueId="http://xml.zeit.de/campus"><title>Campus</title></ressort>
-    <ressort name="Arbeit" uniqueId="http://xml.zeit.de/arbeit"><title>Arbeit</title></ressort>
-    <ressort name="Zeit für die Schule" uniqueId="http://xml.zeit.de/schule"><title>Zeit für die Schule</title></ressort>
-
-    <ressort name="Kultur" uniqueId="http://xml.zeit.de/kultur">
-        <title>Kultur</title>
-        <subnavigation name="Musik" uniqueId="http://xml.zeit.de/kultur/musik">
-            <title>Musik</title>
-        </subnavigation>
-        <subnavigation name="Literatur" uniqueId="http://xml.zeit.de/kultur/literatur">
-            <title>Literatur</title>
-        </subnavigation>
-        <subnavigation name="Film" uniqueId="http://xml.zeit.de/kultur/film">
-            <title>Film &amp; TV</title>
-        </subnavigation>
-        <subnavigation name="Kunst" uniqueId="http://xml.zeit.de/kultur/kunst">
-            <title>Kunst</title>
-        </subnavigation>
-    </ressort>
-    <ressort name="Feuilleton" uniqueId="http://xml.zeit.de/feuilleton"><title>Feuilleton</title></ressort>
-    <ressort name="Musik" uniqueId="http://xml.zeit.de/musik"><title>Musik</title></ressort>
-    <ressort name="Literatur" uniqueId="http://xml.zeit.de/literatur"><title>Literatur</title></ressort>
-
-
-    <ressort name="Leben" uniqueId="http://xml.zeit.de/leben"><title>Leben</title></ressort>
-    <ressort name="ZUENDER" uniqueId="http://xml.zeit.de/zuender"><title>ZUENDER</title></ressort>
-    <ressort name="Reisen" uniqueId="http://xml.zeit.de/reisen"><title>Reisen</title></ressort>
-    <ressort name="Sport" uniqueId="http://xml.zeit.de/sport"><title>Sport</title></ressort>
-    <ressort name="Spiele" uniqueId="http://xml.zeit.de/spiele"><title>Spiele</title></ressort>
-    <ressort name="Auto" uniqueId="http://xml.zeit.de/auto"><title>Auto</title></ressort>
-    <ressort name="Video" uniqueId="http://xml.zeit.de/video"><title>Video</title></ressort>
-
+  <ressort name="Politik" uniqueId="http://xml.zeit.de/politik" ctmTeaser="yes">
+    <title>Politik</title>
+    <subnavigation name="Ausland" uniqueId="http://xml.zeit.de/politik/ausland">
+      <title>Ausland</title>
+    </subnavigation>
+    <subnavigation name="Deutschland" uniqueId="http://xml.zeit.de/politik/deutschland">
+      <title>Deutschland</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Wirtschaft" uniqueId="http://xml.zeit.de/zeit-online/article" ctmTeaser="yes">
+    <title>Wirtschaft</title>
+    <subnavigation name="Unternehmen" uniqueId="http://xml.zeit.de/wirtschaft/unternehmen">
+      <title>Unternehmen</title>
+    </subnavigation>
+    <subnavigation name="Geldanlage" uniqueId="http://xml.zeit.de/wirtschaft/geldanlage">
+      <title>Geldanlage</title>
+    </subnavigation>
+    <subnavigation name="Boerse" uniqueId="http://xml.zeit.de/wirtschaft/boerse">
+      <title>Boerse</title>
+    </subnavigation>
+    <subnavigation name="Wirtschaft" uniqueId="http://xml.zeit.de/wirtschaft/wirtschaft">
+      <title>Wirtschaft</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Kultur" uniqueId="http://xml.zeit.de/kultur">
+    <title>Kultur</title>
+    <subnavigation name="Musik" uniqueId="http://xml.zeit.de/kultur/musik">
+      <title>Musik</title>
+    </subnavigation>
+    <subnavigation name="Literatur" uniqueId="http://xml.zeit.de/kultur/literatur">
+      <title>Literatur</title>
+    </subnavigation>
+    <subnavigation name="Film" uniqueId="http://xml.zeit.de/kultur/film">
+      <title>Film &amp; TV</title>
+    </subnavigation>
+    <subnavigation name="Kunst" uniqueId="http://xml.zeit.de/kultur/kunst">
+      <title>Kunst</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Wissen" uniqueId="http://xml.zeit.de/wissen">
+    <title>Wissen</title>
+    <subnavigation name="Gesundheit" uniqueId="http://xml.zeit.de/wissen/gesundheit">
+      <title>Gesundheit</title>
+    </subnavigation>
+    <subnavigation name="Umwelt" uniqueId="http://xml.zeit.de/wissen/umwelt">
+      <title>Umwelt</title>
+    </subnavigation>
+    <subnavigation name="Geschichte" uniqueId="http://xml.zeit.de/wissen/geschichte">
+      <title>Geschichte</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Digital" uniqueId="http://xml.zeit.de/digital">
+    <title>Digital</title>
+    <subnavigation name="Internet" uniqueId="http://xml.zeit.de/digital/internet">
+      <title>Internet</title>
+    </subnavigation>
+    <subnavigation name="Datenschutz" uniqueId="http://xml.zeit.de/digital/datenschutz">
+      <title>Datenschutz</title>
+    </subnavigation>
+    <subnavigation name="Mobil" uniqueId="http://xml.zeit.de/digital/mobil">
+      <title>Mobil</title>
+    </subnavigation>
+    <subnavigation name="Games" uniqueId="http://xml.zeit.de/digital/games">
+      <title>Games</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Campus" uniqueId="http://xml.zeit.de/campus">
+    <title>Campus</title>
+  </ressort>
+  <ressort name="Arbeit" uniqueId="http://xml.zeit.de/arbeit">
+    <title>Arbeit</title>
+  </ressort>
+  <!-- Zeit Magazin -->
+  <ressort name="zeit-magazin" ligatus="no">
+    <title>Zeit Magazin</title>
+    <subnavigation name="mode-design" uniqueId="http://xml.zeit.de/zeit-magazin/mode-design">
+      <title>Mode &amp; Design</title>
+    </subnavigation>
+    <subnavigation name="essen-trinken" uniqueId="http://xml.zeit.de/zeit-magazin/essen-trinken">
+      <title>Essen &amp; Trinken</title>
+    </subnavigation>
+    <subnavigation name="leben" uniqueId="http://xml.zeit.de/zeit-magazin/leben">
+      <title>Leben</title>
+    </subnavigation>
+  </ressort>
+  <!-- /Zeit Magazin -->
+  <ressort name="Entdecken" uniqueId="http://xml.zeit.de/entdecken" ctmTeaser="yes">
+    <title>Entdecken</title>
+    <subnavigation name="Reisen" uniqueId="http://xml.zeit.de/entdecken/reisen">
+      <title>Reisen</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Mobilitaet" uniqueId="http://xml.zeit.de/mobilitaet" ligatus="no">
+    <title>Mobilität</title>
+  </ressort>
+  <ressort name="Hamburg" uniqueId="http://xml.zeit.de/hamburg">
+    <title>Hamburg</title>
+    <subnavigation name="politik-wirtschaft" uniqueId="http://xml.zeit.de/hamburg/politik-wirtschaft" available="zeit.web.core.interfaces.IInternalUse">
+      <title>Politik &amp; Wirtschaft</title>
+    </subnavigation>
+    <subnavigation name="stadtleben" uniqueId="http://xml.zeit.de/hamburg/stadtleben" available="zeit.web.core.interfaces.IInternalUse">
+      <title>Stadtleben</title>
+    </subnavigation>
+    <subnavigation name="kultur" uniqueId="http://xml.zeit.de/hamburg/kultur" available="zeit.web.core.interfaces.IInternalUse">
+      <title>Kultur</title>
+    </subnavigation>
+    <subnavigation name="fussball" uniqueId="http://xml.zeit.de/hamburg/fussball" available="zeit.web.core.interfaces.IInternalUse">
+      <title>Fußball</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Community" uniqueId="http://xml.zeit.de/community">
+    <title>Community</title>
+  </ressort>
+  <ressort name="Sport" uniqueId="http://xml.zeit.de/sport">
+    <title>Sport</title>
+  </ressort>
+  <ressort name="Spiele" uniqueId="http://xml.zeit.de/spiele">
+    <title>Spiele</title>
+    <subnavigation name="Erinnere dich" uniqueId="http://xml.zeit.de/spiele/erinnere-dich/">
+      <title>Erinnere dich</title>
+    </subnavigation>
+    <subnavigation name="Schach" uniqueId="http://xml.zeit.de/spiele/schach/">
+      <title>Schach</title>
+    </subnavigation>
+    <subnavigation name="Sudoku" uniqueId="http://xml.zeit.de/spiele/sudoku/">
+      <title>Sudoku</title>
+    </subnavigation>
+    <subnavigation name="Um die Ecke gedacht" uniqueId="http://xml.zeit.de/spiele/um-die-ecke-gedacht/">
+      <title>Um die Ecke gedacht</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Video" uniqueId="http://xml.zeit.de/video">
+    <title>Video</title>
+  </ressort>
+  <ressort name="Foto" uniqueId="http://xml.zeit.de/foto">
+    <title>Foto</title>
+  </ressort>
+  <ressort name="Z2X" uniqueId="http://xml.zeit.de/z2x">
+    <title>Z2X</title>
+  </ressort>
+  <ressort name="Administratives" uniqueId="http://xml.zeit.de/administratives">
+    <title>Administratives</title>
+    <subnavigation name="bannertestallgemein" uniqueId="http://xml.zeit.de/administratives/bannertestallgemein">
+      <title>Bannertest-Allgemein</title>
+    </subnavigation>
+    <subnavigation name="bannertestvideo" uniqueId="http://xml.zeit.de/administratives/bannertestvideo">
+      <title>Bannertest-Video</title>
+    </subnavigation>
+    <subnavigation name="arena" uniqueId="http://xml.zeit.de/administratives/arena">
+      <title>Arena</title>
+    </subnavigation>
+    <subnavigation name="frame">
+      <title>Frame</title>
+    </subnavigation>
+    <subnavigation name="template" uniqueId="http://xml.zeit.de/administratives/template">
+      <title>Template</title>
+    </subnavigation>
+    <subnavigation name="iframe" uniqueId="http://xml.zeit.de/administratives/iframe">
+      <title>Iframe</title>
+    </subnavigation>
+    <subnavigation name="search">
+      <title>Suche</title>
+    </subnavigation>
+    <subnavigation name="archive" uniqueId="http://xml.zeit.de/administratives/archive">
+      <title>Print-Archiv</title>
+    </subnavigation>
+    <subnavigation name="keywords">
+      <title>Schlagworte</title>
+    </subnavigation>
+    <subnavigation name="series" uniqueId="http://xml.zeit.de/administratives/series">
+      <title>Serien</title>
+    </subnavigation>
+    <subnavigation name="authors" uniqueId="http://xml.zeit.de/administratives/authors">
+      <title>Autorenregister</title>
+    </subnavigation>
+    <subnavigation name="events" uniqueId="http://xml.zeit.de/administratives/events">
+      <title>Events</title>
+    </subnavigation>
+    <subnavigation name="community-services">
+      <title>Community-Services</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="News" uniqueId="http://xml.zeit.de/news">
+    <title>News</title>
+    <subnavigation name="Hamburg" uniqueId="http://xml.zeit.de/news/hamburg">
+      <title>Hamburg</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="ZEIT-Verlag" uniqueId="http://xml.zeit.de/zeit-verlag">
+    <title>ZEIT-Verlag</title>
+  </ressort>
+  <ressort name="Angebote" uniqueId="http://xml.zeit.de/angebote">
+    <title>Angebote</title>
+    <subnavigation name="hennessy" uniqueId="http://xml.zeit.de/angebote/hennessy">
+      <title>Hennessy</title>
+    </subnavigation>
+    <subnavigation name="250-jahre-hennessy" uniqueId="http://xml.zeit.de/angebote/250-jahre-hennessy">
+      <title>250 Jahre Hennessy</title>
+    </subnavigation>
+    <subnavigation name="jobs" uniqueId="http://xml.zeit.de/angebote/jobs">
+      <title>Jobs</title>
+    </subnavigation>
+    <subnavigation name="demenz" uniqueId="http://xml.zeit.de/angebote/demenz">
+      <title>Demenz</title>
+    </subnavigation>
+    <subnavigation name="specials" uniqueId="http://xml.zeit.de/angebote/specials">
+      <title>Specials</title>
+    </subnavigation>
+    <subnavigation name="zfds" uniqueId="http://xml.zeit.de/angebote/zfds">
+      <title>Zeit für die Schule</title>
+    </subnavigation>
+    <subnavigation name="Axa" uniqueId="http://xml.zeit.de/angebote/axa">
+      <title>Draegerwerk</title>
+    </subnavigation>
+    <subnavigation name="Icelandair" uniqueId="http://xml.zeit.de/angebote/icelandair">
+      <title>Draegerwerk</title>
+    </subnavigation>
+    <subnavigation name="audio" uniqueId="http://xml.zeit.de/angebote/audio">
+      <title>Audio</title>
+    </subnavigation>
+    <subnavigation name="anzeige" uniqueId="http://xml.zeit.de/angebote/anzeige">
+      <title>Anzeige</title>
+    </subnavigation>
+    <subnavigation name="versicherungsvergleich">
+      <title>Versicherungsvergleich</title>
+    </subnavigation>
+    <subnavigation name="philharmonie" uniqueId="http://xml.zeit.de/angebote/philharmonie">
+      <title>Philharmonie</title>
+    </subnavigation>
+    <subnavigation name="zukunftswerkstatt" uniqueId="http://xml.zeit.de/angebote/zukunftswerkstatt">
+      <title>Zukunftswerkstatt</title>
+    </subnavigation>
+    <subnavigation name="jordanien" uniqueId="http://xml.zeit.de/angebote/jordanien">
+      <title>Jordanien</title>
+    </subnavigation>
+    <subnavigation name="bahn">
+      <title>Deutsche Bahn</title>
+    </subnavigation>
+    <subnavigation name="schleswig-holstein" uniqueId="http://xml.zeit.de/angebote/schleswig-holstein">
+      <title>Schleswig-Holstein</title>
+    </subnavigation>
+    <subnavigation name="honda" uniqueId="http://xml.zeit.de/angebote/honda">
+      <title>Honda</title>
+    </subnavigation>
+    <subnavigation name="krebs">
+      <title>Krebs</title>
+    </subnavigation>
+    <subnavigation name="hochschulprofile" uniqueId="http://xml.zeit.de/angebote/hochschulprofile">
+      <title>Hochschulprofile</title>
+    </subnavigation>
+    <subnavigation name="dav">
+      <title>DAV</title>
+    </subnavigation>
+    <subnavigation name="cs">
+      <title>Credit Suisse</title>
+    </subnavigation>
+    <subnavigation name="espresso" uniqueId="http://xml.zeit.de/angebote/espresso">
+      <title>Espresso</title>
+    </subnavigation>
+    <subnavigation name="bergeundmeer" uniqueId="http://xml.zeit.de/angebote/bergeundmeer">
+      <title>Berge und Meer</title>
+    </subnavigation>
+    <subnavigation name="beispiel" uniqueId="http://xml.zeit.de/angebote/beispiel">
+      <title>Beispiel</title>
+    </subnavigation>
+    <subnavigation name="partnersuche" uniqueId="http://xml.zeit.de/angebote/partnersuche">
+      <title>Partnersuche</title>
+    </subnavigation>
+    <subnavigation name="unsere-autos" uniqueId="http://xml.zeit.de/angebote/unsere-autos">
+      <title>Unsere Autos</title>
+    </subnavigation>
+    <subnavigation name="seitenweise" uniqueId="http://xml.zeit.de/angebote/zeit-magazin/seitenweise">
+      <title>Seitenweise</title>
+    </subnavigation>
+    <subnavigation name="microsoft">
+      <title>Microsoft</title>
+    </subnavigation>
+    <subnavigation name="reisetraeume">
+      <title>Reiseträume</title>
+    </subnavigation>
+    <subnavigation name="poetry-slam" uniqueId="http://xml.zeit.de/angebote/poetry-slam">
+      <title>Poetry Slam</title>
+    </subnavigation>
+    <subnavigation name="bahngeschichten" uniqueId="http://xml.zeit.de/angebote/bahngeschichten">
+      <title>Bahngeschichten</title>
+    </subnavigation>
+    <subnavigation name="taiwan" uniqueId="http://xml.zeit.de/angebote/taiwan">
+      <title>Taiwan</title>
+    </subnavigation>
+    <subnavigation name="penfolds" uniqueId="http://xml.zeit.de/angebote/penfolds">
+      <title>Penfolds</title>
+    </subnavigation>
+    <subnavigation name="vorweggehen" uniqueId="http://xml.zeit.de/angebote/vorweggehen">
+      <title>Vorweggehen</title>
+    </subnavigation>
+    <subnavigation name="kaffeegenuss" uniqueId="http://xml.zeit.de/angebote/kaffeegenuss">
+      <title>Kaffeegenuss</title>
+    </subnavigation>
+    <subnavigation name="buchtipp" uniqueId="http://xml.zeit.de/angebote/buchtipp">
+      <title>Buchtipp</title>
+    </subnavigation>
+    <subnavigation name="joop" uniqueId="http://xml.zeit.de/angebote/joop">
+      <title>Joop</title>
+    </subnavigation>
+    <subnavigation name="malta" uniqueId="http://xml.zeit.de/angebote/malta">
+      <title>Malta</title>
+    </subnavigation>
+    <subnavigation name="norwegen" uniqueId="http://xml.zeit.de/angebote/norwegen">
+      <title>Norwegen</title>
+    </subnavigation>
+    <subnavigation name="nordnorwegen" uniqueId="http://xml.zeit.de/angebote/nordnorwegen">
+      <title>Nordnorwegen</title>
+    </subnavigation>
+    <subnavigation name="denmark" uniqueId="http://xml.zeit.de/angebote/denkmark">
+      <title>Denmark</title>
+    </subnavigation>
+    <subnavigation name="australien" uniqueId="http://xml.zeit.de/angebote/australien">
+      <title>Australien</title>
+    </subnavigation>
+    <subnavigation name="schulzeit" uniqueId="http://xml.zeit.de/angebote/schulzeit">
+      <title>Schulzeit</title>
+    </subnavigation>
+    <subnavigation name="bahn-umweltquiz" uniqueId="http://xml.zeit.de/angebote/bahn-umweltquiz">
+      <title>Bahn-Umweltquiz</title>
+    </subnavigation>
+    <subnavigation name="suedaustralien-mit-singapore-airlines" uniqueId="http://xml.zeit.de/angebote/suedaustralien-mit-singapore-airlines">
+      <title>Südaustralien</title>
+    </subnavigation>
+    <subnavigation name="dpd" uniqueId="http://xml.zeit.de/angebote/dpd">
+      <title>DPD</title>
+    </subnavigation>
+    <subnavigation name="ck-encounter" uniqueId="http://xml.zeit.de/angebote/ck-encounter">
+      <title>CK Encounter</title>
+    </subnavigation>
+    <subnavigation name="wie-wird-geforscht-in">
+      <title>wie-wird-geforscht-in</title>
+    </subnavigation>
+    <subnavigation name="weber" uniqueId="http://xml.zeit.de/angebote/weber">
+      <title>Weber</title>
+    </subnavigation>
+    <subnavigation name="tirol" uniqueId="http://xml.zeit.de/angebote/tirol">
+      <title>Tirol</title>
+    </subnavigation>
+    <subnavigation name="panasonic" uniqueId="http://xml.zeit.de/angebote/panasonic">
+      <title>Panasonic</title>
+    </subnavigation>
+    <subnavigation name="erdgas" uniqueId="http://xml.zeit.de/angebote/erdgas">
+      <title>Erdgas</title>
+    </subnavigation>
+    <subnavigation name="tirol-langlauf" uniqueId="http://xml.zeit.de/angebote/tirol-langlauf">
+      <title>Tirol-Langlauf</title>
+    </subnavigation>
+    <subnavigation name="bildungsideen" uniqueId="http://xml.zeit.de/angebote/bildungsideen">
+      <title>Bildungsideen</title>
+    </subnavigation>
+    <subnavigation name="dorint-hotels" uniqueId="http://xml.zeit.de/angebote/dorint-hotels">
+      <title>Dorint-Hotels</title>
+    </subnavigation>
+    <subnavigation name="wissenschaftsregion-nrw" uniqueId="http://xml.zeit.de/angebote/wissenschaftsregion-nrw">
+      <title>Wissenschaftsregion-NRW</title>
+    </subnavigation>
+    <subnavigation name="laureus" uniqueId="http://xml.zeit.de/angebote/laureus">
+      <title>Laureus</title>
+    </subnavigation>
+    <subnavigation name="olympus" uniqueId="http://xml.zeit.de/angebote/olympus">
+      <title>Olympus</title>
+    </subnavigation>
+    <subnavigation name="newzealand-singaporeairlines" uniqueId="http://xml.zeit.de/angebote/newzealand-singaporeairlines">
+      <title>Newzealand-Singaporeairlines</title>
+    </subnavigation>
+    <subnavigation name="draegerwerk" uniqueId="http://xml.zeit.de/angebote/draegerwerk">
+      <title>Draegerwerk</title>
+    </subnavigation>
+    <subnavigation name="wissenschaftsregion-bw" uniqueId="http://xml.zeit.de/angebote/wissenschaftsregion-bw">
+      <title>Wissenschaftsregion-BW</title>
+    </subnavigation>
+    <subnavigation name="hausarbeiten" uniqueId="http://xml.zeit.de/angebote/hausarbeiten">
+      <title>Hausarbeiten</title>
+    </subnavigation>
+    <subnavigation name="almodovar" uniqueId="http://xml.zeit.de/angebote/almodovar">
+      <title>Almodovar</title>
+    </subnavigation>
+    <subnavigation name="wissenschaftsregion-b" uniqueId="http://xml.zeit.de/angebote/wissenschaftsregion-b">
+      <title>Wissenschaftsregion-B</title>
+    </subnavigation>
+    <subnavigation name="wissenschaftsregion-hrs" uniqueId="http://xml.zeit.de/angebote/wissenschaftsregion-hrs">
+      <title>Wissenschaftsregion-HRS</title>
+    </subnavigation>
+    <subnavigation name="windrose" uniqueId="http://xml.zeit.de/angebote/windrose">
+      <title>Windrose</title>
+    </subnavigation>
+    <subnavigation name="serfaus-fiss-ladis" uniqueId="http://xml.zeit.de/angebote/serfaus-fiss-ladis">
+      <title>Serfaus-Fiss-Ladis</title>
+    </subnavigation>
+    <subnavigation name="wissenschaftsregion-by" uniqueId="http://xml.zeit.de/angebote/wissenschaftsregion-by">
+      <title>Wissenschaftsregion-BY</title>
+    </subnavigation>
+    <subnavigation name="seat-leon" uniqueId="http://xml.zeit.de/angebote/seat-leon">
+      <title>Seat-Leon</title>
+    </subnavigation>
+    <subnavigation name="europa-spezial" uniqueId="http://xml.zeit.de/angebote/europa-spezial">
+      <title>Europa-Spezial</title>
+    </subnavigation>
+    <subnavigation name="visit-britain" uniqueId="http://xml.zeit.de/angebote/visit-britain">
+      <title>Visit Britain</title>
+    </subnavigation>
+    <subnavigation name="senioren-portal" uniqueId="http://xml.zeit.de/angebote/senioren-portal">
+      <title>Senioren-Portal</title>
+    </subnavigation>
+    <subnavigation name="great-place-to-work" uniqueId="http://xml.zeit.de/angebote/great-place-to-work">
+      <title>Great-Place-to-Work</title>
+    </subnavigation>
+    <subnavigation name="suedafrika" uniqueId="http://xml.zeit.de/angebote/suedafrika">
+      <title>Südafrika</title>
+    </subnavigation>
+    <subnavigation name="leolux" uniqueId="http://xml.zeit.de/angebote/leolux">
+      <title>Leolux</title>
+    </subnavigation>
+    <subnavigation name="griechenland-spezial" uniqueId="http://xml.zeit.de/angebote/griechenland-spezial">
+      <title>Griechenland-Spezial</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-demografischer-wandel" uniqueId="http://xml.zeit.de/angebote/forschungswelten-demografischer-wandel">
+      <title>Forschungswelten Demografischer Wandel</title>
+    </subnavigation>
+    <subnavigation name="cbbs-uni-magdeburg">
+      <title>CBBS Uni Magdeburg</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-technik-der-zukunft" uniqueId="http://xml.zeit.de/angebote/forschungswelten-technik-der-zukunft">
+      <title>Forschungswelten Technik der Zukunft</title>
+    </subnavigation>
+    <subnavigation name="andalusien" uniqueId="http://xml.zeit.de/angebote/andalusien">
+      <title>Andalusien</title>
+    </subnavigation>
+    <subnavigation name="erdgas-und-klimaschutz" uniqueId="http://xml.zeit.de/angebote/erdgas-und-klimaschutz">
+      <title>Erdgas und Klimaschutz</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-neue-energien" uniqueId="http://xml.zeit.de/angebote/forschungswelten-neue-energien">
+      <title>Forschungswelten Neue Energien</title>
+    </subnavigation>
+    <subnavigation name="berufliche-anerkennung" uniqueId="http://xml.zeit.de/angebote/berufliche-anerkennung">
+      <title>Berufliche Anerkennung</title>
+    </subnavigation>
+    <subnavigation name="cunard-kreuzfahrten" uniqueId="http://xml.zeit.de/angebote/cunard-kreuzfahrten">
+      <title>Cunard Kreuzfahrten</title>
+    </subnavigation>
+    <subnavigation name="australienssueden" uniqueId="http://xml.zeit.de/angebote/australienssueden">
+      <title>Australiens Süden</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-forschung-an-fachhochschulen" uniqueId="http://xml.zeit.de/angebote/orschungswelten-forschung-an-fachhochschulen">
+      <title>Forschungswelten Forschung an Fachhochschulen</title>
+    </subnavigation>
+    <subnavigation name="beste-arbeitgeber-gesundheit-2015" uniqueId="http://xml.zeit.de/angebote/beste-arbeitgeber-gesundheit-2015">
+      <title>Beste Arbeitgeber Gesundheit 2015</title>
+    </subnavigation>
+    <subnavigation name="zukunftsfaktor-technologie" uniqueId="http://xml.zeit.de/angebote/zukunftsfaktor-technologie">
+      <title>Zukunftsfaktor Technologie</title>
+    </subnavigation>
+    <subnavigation name="automarkt">
+      <title>Automarkt</title>
+    </subnavigation>
+    <subnavigation name="interhyp" uniqueId="http://xml.zeit.de/angebote/interhyp">
+      <title>Interhyp</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-vereinbarkeit" uniqueId="http://xml.zeit.de/angebote/forschungswelten-vereinbarkeit">
+      <title>Forschungswelten Vereinbarkeit</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-vereinbarkeit-haw" uniqueId="http://xml.zeit.de/angebote/forschungswelten-vereinbarkeit-haw">
+      <title>Forschungswelten Vereinbarkeit HAW</title>
+    </subnavigation>
+    <subnavigation name="visitgreece" uniqueId="http://xml.zeit.de/angebote/visitgreece">
+      <title>Visit Greece</title>
+    </subnavigation>
+    <subnavigation name="axa" uniqueId="http://xml.zeit.de/angebote/axa">
+      <title>Axa</title>
+    </subnavigation>
+    <subnavigation name="icelandair" uniqueId="http://xml.zeit.de/angebote/icelandair">
+      <title>Icelandair</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-world-health-summit" uniqueId="http://xml.zeit.de/angebote/forschungswelten-world-health-summit">
+      <title>Forschungswelten World Health Summit</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-spitzenforschung" uniqueId="http://xml.zeit.de/angebote/forschungswelten-spitzenforschung">
+      <title>Forschungswelten Spitzenforschung</title>
+    </subnavigation>
+    <subnavigation name="helmutschmidtjournalistenpreis" uniqueId="http://xml.zeit.de/angebote/helmutschmidtjournalistenpreis ">
+      <title>Helmut Schmidt Journalistenpreis</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-forschende-fachhochschulen" uniqueId="http://xml.zeit.de/angebote/forschungswelten-forschende-fachhochschulen">
+      <title>Forschungswelten Forschende Fachhochschulen</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-nachhaltigkeit" uniqueId="http://xml.zeit.de/angebote/forschungswelten-nachhaltigkeit">
+      <title>Forschungswelten Nachhaltigkeit</title>
+    </subnavigation>
+    <subnavigation name="citrix-office-solutions" uniqueId="http://xml.zeit.de/angebote/citrix-office-solutions">
+      <title>Citrix Office Solutions</title>
+    </subnavigation>
+    <subnavigation name="visitelba" uniqueId="http://xml.zeit.de/angebote/visitelba">
+      <title>Visit Elba</title>
+    </subnavigation>
+    <subnavigation name="enbw-macherbus" uniqueId="http://xml.zeit.de/angebote/enbw-macherbus">
+      <title>EnBW-Macherbus</title>
+    </subnavigation>
+    <subnavigation name="peru" uniqueId="http://xml.zeit.de/angebote/peru">
+      <title>Peru</title>
+    </subnavigation>
+    <subnavigation name="sos-kinderdorf" uniqueId="http://xml.zeit.de/angebote/sos-kinderdorf">
+      <title>SOS-Kinderdorf</title>
+    </subnavigation>
+    <subnavigation name="griechenland" uniqueId="http://xml.zeit.de/angebote/griechenland">
+      <title>Griechenland</title>
+    </subnavigation>
+    <subnavigation name="spanien" uniqueId="http://xml.zeit.de/angebote/spanien">
+      <title>Spanien</title>
+    </subnavigation>
+    <subnavigation name="hawesko" uniqueId="http://xml.zeit.de/angebote/hawesko">
+      <title>Hawesko</title>
+    </subnavigation>
+    <subnavigation name="ruhrtriennale" uniqueId="http://xml.zeit.de/angebote/ruhrtriennale">
+      <title>Ruhrtriennale</title>
+    </subnavigation>
+    <subnavigation name="100-tage" uniqueId="http://xml.zeit.de/angebote/100-tage">
+      <title>100 Tage</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten-interdisziplinaritaet" uniqueId="http://xml.zeit.de/angebote/forschungswelten-interdisziplinaritaet">
+      <title>Forschungswelten Interdisziplinarität</title>
+    </subnavigation>
+    <subnavigation name="augustus" uniqueId="http://xml.zeit.de/angebote/augustus">
+      <title>Augustus</title>
+    </subnavigation>
+    <subnavigation name="reeperbahnfestival" uniqueId="http://xml.zeit.de/angebote/reeperbahnfestival">
+      <title>Reeperbahnfestival</title>
+    </subnavigation>
+    <subnavigation name="suedtirol" uniqueId="http://xml.zeit.de/angebote/suedtirol">
+      <title>Südtirol</title>
+    </subnavigation>
+    <subnavigation name="brunel" uniqueId="http://xml.zeit.de/angebote/brunel">
+      <title>Brunel</title>
+    </subnavigation>
+    <subnavigation name="ullstein-fuenf" uniqueId="http://xml.zeit.de/angebote/zeit-magazin/ullstein-fuenf">
+      <title>Ullstein-Fünf</title>
+    </subnavigation>
+    <subnavigation name="suedtirol-balance" uniqueId="http://xml.zeit.de/angebote/suedtirol-balance">
+      <title>Südtirol-Balance</title>
+    </subnavigation>
+    <subnavigation name="daniel-cole" uniqueId="http://xml.zeit.de/angebote/zeit-magazin/daniel-cole">
+      <title>Daniel Cole</title>
+    </subnavigation>
+    <subnavigation name="cunard-line" uniqueId="http://xml.zeit.de/angebote/cunard-line">
+      <title>Cunard-Line</title>
+    </subnavigation>
+    <subnavigation name="hackathon" uniqueId="http://xml.zeit.de/angebote/hackathon">
+      <title>Hackathon </title>
+    </subnavigation>
+    <subnavigation name="brita" uniqueId="http://xml.zeit.de/angebote/brita">
+      <title>Brita</title>
+    </subnavigation>
+    <subnavigation name="visitgreece-2017" uniqueId="http://xml.zeit.de/angebote/visitgreece-2017">
+      <title>Visit Greece 2017</title>
+    </subnavigation>
+    <subnavigation name="andermatt-traumimmobilien" uniqueId="http://xml.zeit.de/angebote/andermatt-traumimmobilien">
+      <title>Andermatt-Traumimmobilien</title>
+    </subnavigation>
+    <subnavigation name="talents" uniqueId="http://xml.zeit.de/angebote/talents">
+      <title>Talents</title>
+    </subnavigation>
+    <subnavigation name="talents" uniqueId="http://xml.zeit.de/angebote/zeit-magazin/literatur-zeit-beispiel">
+      <title>Literaturzeit</title>
+    </subnavigation>
+    <subnavigation name="baskenland" uniqueId="http://xml.zeit.de/angebote/baskenland">
+      <title>Baskenland</title>
+    </subnavigation>
+    <subnavigation name="gegen-alle-regeln" uniqueId="http://xml.zeit.de/angebote/gegen-alle-regeln">
+      <title>Gegen alle Regeln</title>
+    </subnavigation>
+    <subnavigation name="liqid-vermoegensverwaltung" uniqueId="http://xml.zeit.de/angebote/liqid-vermoegensverwaltung">
+      <title>Liqid Vermögensverwaltung</title>
+    </subnavigation>
+    <subnavigation name="reeperbahnfestival-2017" uniqueId="http://xml.zeit.de/angebote/reeperbahnfestival-2017">
+      <title>Reeperbahnfestival 2017</title>
+    </subnavigation>
+    <subnavigation name="basel-entdecken" uniqueId="http://xml.zeit.de/angebote/basel-entdecken">
+      <title>Basel entdecken</title>
+    </subnavigation>
+    <subnavigation name="forschungswelten" uniqueId="http://xml.zeit.de/angebote/forschungswelten">
+      <title>Forschungswelten</title>
+    </subnavigation>
+    <subnavigation name="aktionmensch" uniqueId="http://xml.zeit.de/angebote/aktionmensch">
+      <title>Aktion Mensch</title>
+    </subnavigation>
+    <subnavigation name="privatschulen" uniqueId="http://xml.zeit.de/angebote/privatschulen">
+      <title>Privatschulen</title>
+    </subnavigation>
+    <subnavigation name="murakami" uniqueId="http://xml.zeit.de/angebote/murakami">
+      <title>Murakami</title>
+    </subnavigation>
+    <subnavigation name="weiterbildung" uniqueId="http://xml.zeit.de/angebote/weiterbildung">
+      <title>Weiterbildung</title>
+    </subnavigation>
+    <subnavigation name="zuerich" uniqueId="http://xml.zeit.de/angebote/zuerich">
+      <title>Zürich</title>
+    </subnavigation>
+    <subnavigation name="scalable-capital" uniqueId="http://xml.zeit.de/angebote/scalable-capital">
+      <title>Scalable Capital</title>
+    </subnavigation>
+    <subnavigation name="huf-haus" uniqueId="http://xml.zeit.de/angebote/huf-haus">
+      <title>HUF HAUS</title>
+    </subnavigation>
+    <!-- Ende Angebote -->
+  </ressort>
+  <ressort name="Meinung" uniqueId="http://xml.zeit.de/meinung">
+    <title>Meinung</title>
+  </ressort>
+  <ressort name="Premium" uniqueId="http://xml.zeit.de/premium">
+    <title>Premium</title>
+  </ressort>
+  <ressort name="Aktuelles" uniqueId="http://xml.zeit.de/aktuelles/" available="zeit.web.core.interfaces.IInternalUse">
+    <title>Aktuelles</title>
+  </ressort>
+  <!-- legacy Ressorts: -->
+  <ressort name="Studium" uniqueId="http://xml.zeit.de/studium" available="zeit.web.core.interfaces.IInternalUse">
+    <title>Studium</title>
+    <subnavigation name="Uni-Leben" uniqueId="http://xml.zeit.de/studium/uni-leben">
+      <title>Uni-Leben</title>
+    </subnavigation>
+    <subnavigation name="Hochschule" uniqueId="http://xml.zeit.de/studium/hochschule">
+      <title>Hochschule</title>
+    </subnavigation>
+    <subnavigation name="Rankings" uniqueId="http://xml.zeit.de/studium/rankings">
+      <title>Rankings</title>
+    </subnavigation>
+    <subnavigation name="Studiengaenge" uniqueId="http://xml.zeit.de/studium/studiengaenge">
+      <title>Studiengänge</title>
+    </subnavigation>
+    <subnavigation name="Interessentest">
+      <title>Interessentest</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Karriere" uniqueId="http://xml.zeit.de/karriere" available="zeit.web.core.interfaces.IInternalUse">
+    <title>Karriere</title>
+    <subnavigation name="Bewerbung" uniqueId="http://xml.zeit.de/studium/bewerbung">
+      <title>Bewerbung</title>
+    </subnavigation>
+    <subnavigation name="Beruf" uniqueId="http://xml.zeit.de/studium/beruf">
+      <title>Beruf</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Lebensart" uniqueId="http://xml.zeit.de/lebensart" available="zeit.web.core.interfaces.IInternalUse">
+    <title>Lebensart</title>
+    <subnavigation name="Mode">
+      <title>Mode</title>
+    </subnavigation>
+    <subnavigation name="essen-trinken">
+      <title>Essen &amp; Trinken</title>
+    </subnavigation>
+    <subnavigation name="Partnerschaft">
+      <title>Partnerschaft</title>
+    </subnavigation>
+  </ressort>
+  <ressort name="Reisen" uniqueId="http://xml.zeit.de/reisen" available="zeit.web.core.interfaces.IInternalUse">
+    <title>Reisen</title>
+  </ressort>
+  <ressort name="Weblogs" uniqueId="http://xml.zeit.de/weblogs" available="zeit.web.core.interfaces.IInternalUse">
+    <title>Weblogs</title>
+  </ressort>
 </ressorts>

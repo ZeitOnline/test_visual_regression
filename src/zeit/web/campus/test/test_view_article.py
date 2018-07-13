@@ -334,8 +334,8 @@ def test_article_contains_campus_authorbox(testbrowser):
     assert len(figure) == 1
 
     # test if no link to author page is available
-    url = author.cssselect('a[itemprop="url"]')
-    assert not url
+    link = author.cssselect('a.authorbox__button')
+    assert not link
 
     # check if mobile and desktop resource are given
     image = figure[0].cssselect('.authorbox__media-item')
@@ -436,3 +436,37 @@ def test_campus_column_renders_correct_header(testbrowser):
     assert cssselect('.article-header__title--column')
     assert cssselect('.article-header__column-info')
     'Eine Kolumne von' in cssselect('.article-header__byline')[0].text
+
+
+def test_article_has_valid_twitter_meta_tags(testbrowser):
+    select = testbrowser('/campus/article/common').metaselect
+
+    assert select('[name="twitter:card"]') == 'summary_large_image'
+    assert select('[name="twitter:site"]') == '@zeitonline'
+    assert select('[name="twitter:creator"]') == '@zeitcampus'
+    assert select('[name="twitter:title"]') == (
+        u'"Der Hobbit": Geht\'s noch größer?')
+    assert select('[name="twitter:description"]').startswith(
+        u'Der letzte Herr-der-Ringe-Hobbit-Teil läuft an.')
+    assert select('[name="twitter:image"]') == (
+        'http://localhost/campus/image/jura-studium-fleiss/wide__1300x731')
+
+
+def test_article_has_valid_facebook_meta_tags(testbrowser):
+    select = testbrowser('/campus/article/common').metaselect
+
+    assert select('[property="og:site_name"]') == 'ZEIT Campus'
+    assert select('[property="fb:app_id"]') == '638028906281625'
+    assert select('[property="fb:pages"]') == (
+        '37816894428, 63948163305, 327602816926, 114803848589834')
+    assert select('[property="og:type"]') == 'article'
+    assert select('[property="og:title"]') == (
+        u'"Der Hobbit": Geht\'s noch größer?')
+    assert select('[property="og:description"]').startswith(
+        u'Der letzte Herr-der-Ringe-Hobbit-Teil läuft an.')
+    assert select('[property="og:url"]') == (
+        'http://localhost/campus/article/common')
+    assert select('[property="og:image"]') == (
+        'http://localhost/campus/image/jura-studium-fleiss/wide__1300x731')
+    assert select('[property="og:image:width"]') == '1300'
+    assert select('[property="og:image:height"]') == '731'

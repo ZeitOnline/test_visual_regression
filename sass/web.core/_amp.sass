@@ -12,7 +12,8 @@ $zon-letter-spacing-s: 0.03em !default
 
 $zon-charcoal: #313131
 $zon-dark-grey: #444
-$zon-grey: #707070
+$old-zon-grey: #707070
+$zon-grey: darken($old-zon-grey, 2.75) // #696969
 $zon-mid-grey: #999
 $zon-alto: #ddd
 $zon-lighter-grey: #eee
@@ -88,7 +89,9 @@ svg use
 @import "amp/amp-infobox"
 @import "amp/amp-liveblog-status"
 @import "amp/amp-article-sharing"
+@import "amp/amp-article-series"
 @import "amp/amp-article-tags"
+@import "amp/amp-breadcrumbs"
 @import "amp/amp-nextread"
 @import "amp/amp-nextad"
 @import "amp/amp-footer"

@@ -1,12 +1,17 @@
 # coding: utf-8
 import datetime
+import urllib2
+
 import mock
+import pytest
 import pytz
 import lxml.etree
 import zope.component
 
-import zeit.web.core.view_centerpage
+from zeit.cms.checkout.helper import checked_out
+import zeit.cms.interfaces
 import zeit.solr.interfaces
+
 import zeit.web.core.solr
 
 
@@ -15,8 +20,13 @@ def set_sitemap_solr_results(results):
     solr.results = results
 
 
-def test_gsitemap_overview_pagination(testbrowser):
+def test_gsitemap_index_ranking_pagination(testbrowser, workingcopy):
     """total_pages is 2, look at count attribute in gsitemaps/index.xml"""
+    with checked_out(zeit.cms.interfaces.ICMSContent(
+            'http://xml.zeit.de/gsitemaps/index.xml')) as co:
+        area = co.body.values()[0].values()[0]
+        area.kind = 'ranking'
+
     set_sitemap_solr_results([{'uniqueId': 'http://xml.zeit.de/doc1'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 1
@@ -46,12 +56,21 @@ def test_gsitemap_overview_pagination(testbrowser):
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 6
 
 
+def test_gsitemap_index_overview_stops_at_current_date(testbrowser, clock):
+    clock.freeze(datetime.datetime(1946, 1, 10))
+    browser = testbrowser('/gsitemaps/index.xml')
+    links = browser.document.xpath('//sitemapindex/sitemap/loc')
+    assert len(links) == 10
+    assert (links[0].text ==
+            'http://localhost/gsitemaps/index.xml?date=1946-01-01')
+
+
 def test_gsitemap_page_with_image_copyright(testbrowser):
     set_sitemap_solr_results([{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
                           'filmstill-hobbit-schlacht-fuenf-hee/'],
         'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
-    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/campus/article/01-countdown-studium')
     assert (browser.document.xpath('//url/lastmod')[0].text ==
@@ -76,7 +95,7 @@ def test_gsitemap_page_without_image(testbrowser, monkeypatch):
     set_sitemap_solr_results([{
         'uniqueId': 'http://xml.zeit.de/zeit-online/article/'
                     'article_with_broken_image_asset'}])
-    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/zeit-online/article/'
             'article_with_broken_image_asset')
@@ -92,13 +111,19 @@ def test_gsitemap_page_does_not_break_without_image_caption(
                           'filmstill-hobbit-schlacht-fuenf-hee/'],
         'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
     monkeypatch.setattr(zeit.web.core.image.Image, 'caption', None)
-    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     xml = lxml.etree.fromstring(browser.contents)
     ns = 'http://www.google.com/schemas/sitemap-image/1.1'
     assert (
         xml.xpath(
             '//image:image/image:caption', namespaces={'image': ns})[0].text ==
         u'(©\xa0Warner Bros./dpa)')
+
+
+def test_gsitemap_rejects_invalid_page_parameter(testbrowser):
+    with pytest.raises(urllib2.HTTPError) as err:
+        testbrowser('/gsitemaps/themenindex.xml?p=invalid')
+    assert err.value.getcode() == 404
 
 
 def test_gsitemap_page_does_not_contain_invalid_lastmod_date(
@@ -108,7 +133,7 @@ def test_gsitemap_page_does_not_contain_invalid_lastmod_date(
     monkeypatch.setattr(
         zeit.content.article.article.ArticleWorkflow, 'date_first_released',
         datetime.datetime(1967, 1, 1, 12, 50, 52, 380804, tzinfo=pytz.UTC))
-    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/campus/article/01-countdown-studium')
     assert not browser.document.xpath('//url/lastmod')
@@ -200,7 +225,7 @@ def test_gsitemap_video(testbrowser):
     }])
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['image_prefix'] = 'http://img.example.com'
-    browser = testbrowser('/gsitemaps/video.xml?p=1')
+    browser = testbrowser('/gsitemaps/video.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/video/2014-01/1953013471001')
     xml = lxml.etree.fromstring(browser.contents)
@@ -242,7 +267,7 @@ def test_gsitemap_video_creates_no_publication_date_field_if_no_date_is_set(
         'date_last_published_semantic', None)
     monkeypatch.setattr(
         zeit.workflow.asset.AssetWorkflow, 'date_first_released', None)
-    browser = testbrowser('/gsitemaps/video.xml?p=1')
+    browser = testbrowser('/gsitemaps/video.xml?date=2000-01-01')
     xml = lxml.etree.fromstring(browser.contents)
     ns = {'video': 'http://www.google.com/schemas/sitemap-video/1.1'}
     assert xml.xpath('//video:video', namespaces=ns)[0] is not None
@@ -262,11 +287,12 @@ def test_gsitemap_video_does_not_call_bc_api(testbrowser, monkeypatch):
     }
     monkeypatch.setattr(
         zeit.brightcove.connection.PlaybackAPI, 'get_video', mocked_get_video)
+    testbrowser('/gsitemaps/video.xml?date=2000-01-01')
     assert not mocked_get_video.called, \
         'get_video from BC-API was called and should not have been'
 
 
-def test_gsitemap_themen_overview(testbrowser):
+def test_gsitemap_themen_overview(testbrowser, data_tms):
     browser = testbrowser('/gsitemaps/themenindex.xml')
     assert browser.document.xpath('//sitemapindex')[0] is not None
     assert (
@@ -274,7 +300,7 @@ def test_gsitemap_themen_overview(testbrowser):
         'http://localhost/gsitemaps/themenindex.xml?p=6')
 
 
-def test_gsitemap_themen_page(testbrowser):
+def test_gsitemap_themen_page(testbrowser, data_tms):
     browser = testbrowser('/gsitemaps/themenindex.xml?p=5')
     assert len(browser.document.xpath('//url')) == 10
     assert (
@@ -282,7 +308,7 @@ def test_gsitemap_themen_page(testbrowser):
         'http://localhost/thema/addis-abeba')
 
 
-def test_gsitemap_themen_last_page(testbrowser):
+def test_gsitemap_themen_last_page(testbrowser, data_tms):
     browser = testbrowser('/gsitemaps/themenindex.xml?p=495')
     assert len(browser.document.xpath('//url')) == 7
     assert (
@@ -296,7 +322,7 @@ def test_gsitemap_appcon(monkeypatch, testbrowser):
         {'uniqueId': 'http://blog.zeit.de/blogs/nsu-blog-bouffier'}
     ])
     monkeypatch.setattr(zeit.web.core.interfaces, 'IImage', None)
-    browser = testbrowser('/gsitemaps/appconsitemap.xml?p=1')
+    browser = testbrowser('/gsitemaps/appconsitemap.xml?date=2000-01-01')
     assert (
         browser.document.xpath('//url/loc')[0].text ==
         'http://localhost/campus/article/01-countdown-studium')
@@ -319,7 +345,7 @@ def test_gsitemap_appcon_creates_https_urls(monkeypatch, testbrowser):
     ])
     zeit.web.core.application.FEATURE_TOGGLES.set('https')
     monkeypatch.setattr(zeit.web.core.interfaces, 'IImage', None)
-    browser = testbrowser('/gsitemaps/appconsitemap.xml?p=1')
+    browser = testbrowser('/gsitemaps/appconsitemap.xml?date=2000-01-01')
     xml = lxml.etree.fromstring(browser.contents)
     ns = {'xhtml': 'http://www.w3.org/1999/xhtml'}
     assert (
@@ -345,7 +371,7 @@ def test_gsitemap_solr_uses_different_timeout_than_normal_solr(testbrowser):
     zope.component.hooks.setSite()
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     old_timeout = solr.timeout
-    testbrowser('/gsitemaps/appconsitemap.xml?p=1')
+    testbrowser('/gsitemaps/appconsitemap.xml?date=2000-01-01')
     sitemap_solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     assert sitemap_solr.timeout != old_timeout
     # request some random url which is not a sitemap
@@ -360,7 +386,7 @@ def test_sitemaps_support_link_objects(testbrowser):
         'doc_type': 'link',
         'url': 'http://example.com/link'
     }])
-    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://example.com/link')
 
@@ -370,6 +396,6 @@ def test_sitemaps_treat_blogpost_as_link(testbrowser):
         'uniqueId': 'http://blog.zeit.de/meinblog/foo',
         'doc_type': 'blogpost',
     }])
-    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'https://blog.zeit.de/meinblog/foo')

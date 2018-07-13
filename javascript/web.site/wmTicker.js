@@ -63,16 +63,26 @@ function wmTicker( element ) {
         this.debugHelper();
         this.setConfigurableAttributes();
 
-        if ( !this.debugLocally() ) {
-            // initial GET Request
-            this.fetchData( true );
-        } else {
+        if ( this.debugLocally() ) {
             // mock response for local testing
             console.log( 'WM-TICKER: debugging locally with mocked response' );
             require([ 'web.site/wmTickerData' ], function( data ) {
-                this.renderView( this.mapData( data ) );
+                this.data = data;
+                this.renderView();
             }.bind( this ) );
+        } else {
+            // initial GET Request
+            this.fetchData();
+            if ( defaults.wsEnabled ) {
+                this.initWebSocket();
+            } else {
+                this.addFallbackInterval();
+            }
         }
+
+        // Update game time display every 10 seconds
+        // => ONLY if game not finished or pre-match
+        setInterval( this.updateTime.bind( this ), 10000 );
     };
 
 
@@ -129,6 +139,7 @@ function wmTicker( element ) {
             headline = element.getAttribute( 'data-headline' ),
             refreshSeconds = element.getAttribute( 'data-refresh-seconds' ),
             showRunningGameTime = element.getAttribute( 'data-show-running-time' ),
+            webSocketURL = element.getAttribute( 'data-websocket-url' ),
             wsenabled = element.getAttribute( 'data-wsenabled' );
 
         defaults.dataURL = backendURL || defaults.dataURL;
@@ -137,6 +148,7 @@ function wmTicker( element ) {
         defaults.refreshSeconds = parseInt( refreshSeconds ) > 0 ? parseInt( refreshSeconds ) : defaults.refreshSeconds;
         defaults.showRunningGameTime = showRunningGameTime ? showRunningGameTime.toLowerCase() === 'true' : defaults.showRunningGameTime;
         defaults.wsEnabled = wsenabled ? wsenabled.toLowerCase() === 'true' : defaults.wsEnabled;
+        defaults.webSocketURL = webSocketURL || defaults.webSocketURL;
     };
 
 
@@ -182,12 +194,79 @@ function wmTicker( element ) {
      * @return {integer} negative if game is in past!
      */
     function getMinuteDifference( date ) {
-        date = new Date( date );
-        var today = new Date();
-        today.setHours( date.getHours() );
-        today.setMinutes( date.getMinutes() );
-        var difference = new Date().getTime() - today.getTime();
+        var difference = new Date() - new Date( date );
         return Math.ceil( difference / 1000 / 60 );
+    }
+
+
+    /**
+     * check if Date is after midnight / is the next day
+     * @param  {string}  date
+     * @return {boolean}
+     */
+    function dateIsToday( date ) {
+        return new Date().toDateString() === date.toDateString();
+    }
+
+    /**
+     * add leading zero to numbers < 10
+     * @param  {integer}  number
+     * @return {integer}
+     */
+    function addLeadingZero( number ) {
+        return ( number < 10 ? '0' : '' ) + number;
+    }
+
+    /**
+     * generate time String containing all needed words
+     * @param  {string}  date string supplied by API
+     * @return {string}
+     */
+    function timeString( date, kickoff, period, status ) {
+        var begin = new Date( date ),
+            dateString = addLeadingZero( begin.getDate() ) + '.' + addLeadingZero( ( begin.getMonth() + 1 ) );
+        kickoff = new Date( kickoff );
+
+        if ( defaults.showRunningGameTime ) {
+            switch ( status ) {
+                case 'LIVE':
+                    var minuteDifference = getMinuteDifference( kickoff ),
+                        offsetArray = [ 0, 45, 90, 105, 120 ],
+                        cutoff = offsetArray[ period ],
+                        min = minuteDifference + offsetArray[ period - 1 ];
+
+                    if ( min > cutoff ) {
+                        return cutoff + '. + ' + ( min - cutoff );
+                    }
+
+                    return min + '.';
+
+                case 'HALF-TIME':
+                    return 'Halbzeit';
+
+                case 'HALF-EXTRATIME':
+                    return 'Halbzeit Verlängerung';
+
+                case 'PENALTY-SHOOTOUT':
+                    return 'Elfmeterschießen';
+
+                case 'FULL':
+                    return '';
+
+                default:
+                    if ( !dateIsToday( begin ) ) {
+                        return dateString;
+                    }
+                    break;
+            }
+        } else {
+            if ( status === 'PRE-MATCH' && !dateIsToday( begin ) ) {
+                return dateString;
+            }
+        }
+        // default return value: "gameHour.minutes Uhr" e.g "16.04 Uhr"
+        // use dot instead of colon to match corporate usage
+        return addLeadingZero( begin.getHours() ) + '.' + addLeadingZero( begin.getMinutes() ) + ' Uhr';
     }
 
 
@@ -205,20 +284,14 @@ function wmTicker( element ) {
 
         data.forEach( function( game ) {
             var teams = this.mapCountryCodes( game.away_name, game.home_name );
-
-            var time = this.timeString( game.date, game.kickoff, game.period, game.status );
-
-            // set hour or game status time
-            var gameHour = new Date( game.date ).getHours();
-            var currentHour = new Date().getHours();
-            var gameShallBeBig = ( gameHour - currentHour ) === 1;
+            var time = timeString( game.date, game.kickoff, game.period, game.status );
+            var minutesTillGameBegins = ( new Date( game.date ) - new Date() ) / 1000;
+            var preGame = minutesTillGameBegins < 3600 && game.status === 'PRE-MATCH';
+            var gameShallBeBig = preGame || game.running;
             // only one game. Which shall then be displayed big
             if ( data.length === 1 ) {
                 gameShallBeBig = true;
-                // single game big and finished shall write 'beendet'
-                if ( game.status === 'FULL' ) {
-                    time = 'beendet';
-                }
+                time = ( game.status === 'FULL' ) ? 'beendet' : time; // single game big and finished shall write 'beendet'
             }
 
             var gameData = {
@@ -274,62 +347,17 @@ function wmTicker( element ) {
         return points;
     };
 
+
     /**
-     * generate time String containing all needed words
-     * @param  {string}  date string supplied by API
-     * @return {string}
+     * Count ticker time up and update view
      */
-    WmTicker.prototype.timeString = function( date, kickoff, period, status ) {
-
-        var minuteDifference = getMinuteDifference( kickoff ),
-            returnString = '';
-
-        // date === false if called by WS-handler
-        if ( date ) {
-            var begin = new Date( date ),
-                minutes = ( begin.getMinutes() < 10 ? '0' : '' ) + begin.getMinutes();
-            returnString = 'um ' + begin.getHours() + ':' + minutes;
-        }
-
-        kickoff = new Date( kickoff );
-
-        if ( defaults.showRunningGameTime ) {
-            switch ( status ) {
-                case 'LIVE':
-                    var offsetArray = [ 0, 45, 90, 105, 120 ];
-                    var cutoff = offsetArray[ period ];
-                    var min = minuteDifference + offsetArray[ period - 1 ];
-                    if ( min > cutoff ) {
-                        returnString = cutoff + '. + ' + ( min - cutoff );
-                    } else {
-                        returnString = min + '.';
-                    }
-                    break;
-                case 'HALF-TIME':
-                    returnString = 'Halbzeit';
-                    break;
-                case 'HALF-EXTRATIME':
-                    returnString = 'Halbzeit Verlängerung';
-                    break;
-                case 'PENALTY-SHOOTOUT':
-                    returnString = 'Elfmeterschießen';
-                    break;
-                case 'FULL':
-                    returnString = '';
-                    break;
-                default:
-                    break;
+    WmTicker.prototype.updateTime = function() {
+        this.data.forEach( function( game ) {
+            var elem = document.getElementById( 'time-' + game.id );
+            if ( elem ) {
+                elem.innerText = timeString( game.date, game.kickoff, game.period, game.status );
             }
-        } else {
-            switch ( status ) {
-                case 'PRE-MATCH':
-                    returnString = 'um ' + begin.getHours() + ':' + minutes;
-                    break;
-                default:
-                    break;
-            }
-        }
-        return returnString;
+        });
     };
 
     /**
@@ -372,58 +400,20 @@ function wmTicker( element ) {
     /**
      * fetch data via XMLHttpRequest
      */
-    WmTicker.prototype.fetchData = function( initial ) {
+    WmTicker.prototype.fetchData = function() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if ( xhr.readyState === 4 && xhr.status === 200 ) {
-                var receivedData = this.mapData( JSON.parse( xhr.responseText ) );
-
-                this.renderView( receivedData );
-
-                if ( initial ) {
-                    if ( defaults.wsEnabled ) {
-                        this.initWebSocket();
-                    } else {
-                        this.addFallbackInterval();
-                    }
+                var data = JSON.parse( xhr.responseText );
+                if ( JSON.stringify( this.data ) === JSON.stringify( data ) ) {
+                    return;
                 }
+                this.data = data;
+                this.renderView();
             }
         }.bind( this );
         xhr.open( 'GET', defaults.dataURL + defaults.dataPath, true );
         xhr.send();
-    };
-
-    /**
-     * Count ticker time up and update view
-     */
-    WmTicker.prototype.updateTime = function() {
-        var data = JSON.parse( JSON.stringify( this.data ) );
-        data.matches.forEach( function( game ) {
-            if ( game.status !== 'PRE-MATCH' && game.status !== 'FULL' ) {
-                game.time = this.timeString(
-                    false,
-                    game.kickoff,
-                    game.period,
-                    game.status
-                );
-            }
-        }.bind( this ) );
-
-        this.renderView( data );
-    };
-
-    /**
-     * Update Time if WebSockets enabled every 30 seconds
-     */
-    WmTicker.prototype.addWebSocketTimeIntervall = function() {
-        setInterval( this.updateTime.bind( this ), 30000 );
-    };
-
-    /**
-     * what shall happen when websocket connection is openened is described here
-     */
-    WmTicker.prototype.handleWebSocketOpen = function() {
-        this.addWebSocketTimeIntervall();
     };
 
     /**
@@ -432,26 +422,25 @@ function wmTicker( element ) {
      */
     WmTicker.prototype.handleWebSocketMessage = function( event ) {
         var receivedData = JSON.parse( event.data );
-        // decouple reference to this.data
-        var data = JSON.parse( JSON.stringify( this.data ) );
+        var data = this.data; // work with reference to this.data
 
         // do not iterate over list data. That should be useless. Only large games needed
         // iterate over old data. Update if needed.
-        for ( var i = 0, len = data.matches.length; i < len; i++ ) {
-            if ( data.matches[ i ].id === receivedData.id ) {
-                data.matches[ i ].status = receivedData.status;
-                var period = receivedData.period || data.matches[ i ].period;
-                data.matches[ i ].period = period;
-                data.matches[ i ].time = ( receivedData.status === 'FULL' ) ? 'beendet' : this.timeString(
-                    false,
-                    receivedData.kickoff,
-                    period,
-                    receivedData.status
-                );
-                data.matches[ i ].homePoints = receivedData.home_score; // eslint-disable-line camelcase
-                data.matches[ i ].awayPoints = receivedData.away_score; // eslint-disable-line camelcase
+        for ( var i = 0, len = data.length; i < len; i++ ) {
+            if ( data[ i ].id === receivedData.id ) {
+                data[ i ].status = receivedData.status;
+                data[ i ].period = receivedData.period;
+                data[ i ].kickoff = receivedData.kickoff;
+                data[ i ].home_score = receivedData.home_score; // eslint-disable-line camelcase
+                data[ i ].away_score = receivedData.away_score; // eslint-disable-line camelcase
 
-                this.renderView( data );
+                // TODO: the backend should send this...
+                data[ i ].running = ( receivedData.status === 'LIVE' ||
+                    receivedData.status === 'HALF-TIME' ||
+                    receivedData.status === 'HALF-EXTRATIME' ||
+                    receivedData.status === 'PENALTY-SHOOTOUT' );
+
+                this.renderView();
                 break;
             }
         }
@@ -470,21 +459,16 @@ function wmTicker( element ) {
     WmTicker.prototype.initWebSocket = function() {
         var ws = new WebSocket( defaults.webSocketURL + defaults.webSocketPath );
 
-        ws.onopen = this.handleWebSocketOpen.bind( this );
         ws.onmessage = this.handleWebSocketMessage.bind( this );
         ws.onerror = this.handleWebSocketError.bind( this );
     };
 
-    WmTicker.prototype.renderView = function( data ) {
-        if ( JSON.stringify( this.data ) === JSON.stringify( data ) ) {
-            return;
-        } else {
-            this.data = data;
-        }
-
+    WmTicker.prototype.renderView = function() {
+        var data = this.mapData( this.data );
         var singleGame = ( data.matches.length + data.list.length ) === 1;
+        var todaysGames = data.matches.length + data.list.length;
 
-        if ( data.matches.length !== 0 || data.list.length !== 0 ) {
+        if ( todaysGames > 0 ) {
             var template = require( 'web.core/templates/wmTicker.html' );
             template = template({
                 headline: defaults.headline,

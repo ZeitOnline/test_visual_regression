@@ -92,7 +92,7 @@ class Page(object):
             self.blocks.append(wrapped)
 
 
-def _inject_banner_code(pages, pubtype):
+def _inject_banner_code(pages, pubtype, ressort, sub_ressort):
     adconfig = {
         'zon': {
             'pages': range(1, len(pages) + 1),
@@ -111,13 +111,21 @@ def _inject_banner_code(pages, pubtype):
     toggles = zeit.web.core.application.FEATURE_TOGGLES
     place5 = ({'tile': 5, 'paragraph': 6, 'type': 'desktop'},
               {'tile': 'content_ad', 'paragraph': 6, 'type': ''},)
-    if toggles.find('iqd_contentmarketing_ad'):
-        adconfig['zon']['ads'].append(place5[1])
-    else:
-        adconfig['zon']['ads'].append(place5[0])
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)
+
+    # split settings string
+    ctm_teaser_ressorts = CTM_TEASER_RESSORTS_SOURCE
+
+    try:
+        if (ressort in ctm_teaser_ressorts) or (
+                sub_ressort in ctm_teaser_ressorts):
+            adconfig['zon']['ads'].append(place5[1])
+        else:
+            raise Exception
+    except Exception:
+        adconfig['zon']['ads'].append(place5[0])
 
     for page_number, page in enumerate(pages, start=1):
 
@@ -188,7 +196,6 @@ def get_retresco_body(article):
     seo = zeit.seo.interfaces.ISEO(article)
 
     if (toggles.find('enable_intext_links') and
-            not zeit.retresco.interfaces.ITMSContent.providedBy(article) and
             not ILocalContent.providedBy(article) and
             not seo.disable_intext_links and
             not suppress_intextlinks(article)):
@@ -208,6 +215,11 @@ def get_retresco_body(article):
                     exc_info=True)
             else:
                 article._v_retresco_body = xml
+    elif zeit.retresco.interfaces.ITMSContent.providedBy(article):
+        # While this branch is quite correct, it is mostly a fallback for tests
+        content = zeit.cms.interfaces.ICMSContent(article.uniqueId, None)
+        if zeit.content.article.interfaces.IArticle.providedBy(content):
+            xml = content.xml.body
 
     return zope.component.queryMultiAdapter(
         (article, xml),
@@ -232,6 +244,9 @@ def pages_of_article(article, advertising_enabled=True):
     body = zeit.content.article.edit.interfaces.IEditableBody(article)
     # Call values() first, to ensure that ensure_divsion() was called.
     blocks = body.values()
+
+    ressort = zeit.content.article.interfaces.IArticle(article).ressort
+    sub_ressort = zeit.content.article.interfaces.IArticle(article).sub_ressort
 
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
@@ -261,7 +276,7 @@ def pages_of_article(article, advertising_enabled=True):
     else:
         pubtype = 'zon'
 
-    return _inject_banner_code(pages, pubtype)
+    return _inject_banner_code(pages, pubtype, ressort, sub_ressort)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IArticleModule)
@@ -486,7 +501,13 @@ def get_keywords(context):
         tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
         try:
             timeout = conf.get('retresco_timeout', 0.1)
-            return tms.get_article_keywords(context, timeout=timeout)
+            published_content = not (
+                    conf.get('is_preview', False) and
+                    zeit.web.core.application.FEATURE_TOGGLES.find(
+                        'keywords_from_unpublished_content'))
+            return tms.get_article_keywords(context,
+                                            timeout=timeout,
+                                            published=published_content)
         except Exception:
             log.warning(
                 'Retresco keywords failed for %s', context.uniqueId,
@@ -550,3 +571,28 @@ def suppress_intextlinks(article):
         if keyword in INTEXTLINK_BLACKLIST:
             return True
     return False
+
+
+class CtmTeaserRessortsSource(
+        zeit.cms.content.sources.SimpleContextualXMLSource):
+
+    product_configuration = 'zeit.cms'
+    config_url = 'source-ressorts'
+
+    def getValues(self, context):
+        try:
+            tree = self._get_tree()
+        except (TypeError, IOError):
+            return []
+
+        ressorts = tree.xpath(
+            '//ressort[@ctmTeaser="yes"]|//subnavigation[@ctmTeaser="yes"]')
+
+        result = []
+        for node in ressorts:
+            result.append(node.get('name'))
+
+        return result
+
+
+CTM_TEASER_RESSORTS_SOURCE = CtmTeaserRessortsSource()(None)

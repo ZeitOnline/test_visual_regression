@@ -3,7 +3,7 @@
  * @author anika.szuppa@zeit.de
  * @version  0.1
  */
-( function( $, Modernizr ) {
+( function( $ ) {
 
     /**
      * See (http://jquery.com/).
@@ -54,9 +54,7 @@
             setVideoPosition( $element );
 
             //start video
-            if ( Modernizr.video ) {
-                $( video ).get( 0 ).play();
-            }
+            $( video ).get( 0 ).play();
 
             //on video play, hide image and show video
             $( video ).on( 'play', function() {
@@ -73,4 +71,4 @@
 
     };
 
-})( jQuery, window.Modernizr );
+})( jQuery );

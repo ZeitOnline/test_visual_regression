@@ -1,0 +1,145 @@
+.article-flexible-toc
+	margin: remify(30px auto)
+	position: relative
+	+respond-min($break-tablet-min)
+		margin: remify(50px auto 80px)
+
+	// mimic .article__subheading
+	&__headline
+		font-size: remify(20px)
+		line-height: 1.3
+		margin: remify(0 0 30px)
+		+respond-min($break-desktop-min)
+			font-size: remify(24px)
+
+	&__list
+		border-top: 1px solid $color-border
+		list-style: none
+		margin: 0
+		overflow: hidden
+		padding: 0
+
+		&--wrapped
+			max-height: (320px)
+
+		&:not(&--wrapped) + a
+			display: none
+
+	&__link
+		border-bottom: 1px solid $color-border
+		display: block
+		font-size: remify(16px)
+		line-height: 1.3
+		padding: remify(10px) 0
+
+		&:hover
+			color: inherit
+		&:before
+			color: $zon-light-grey
+			content: "\203A"
+			font-size: remify(24px)
+			line-height: 0.6
+			margin-right: remify(6px)
+		+respond-min($break-tablet-min)
+			font-size: remify(18px)
+			padding: remify(14px)
+			&:hover
+				background-color: #f6f6f7
+			&:before
+				+font-smoothing
+				background-color: $zon-mid-grey
+				border-radius: 50%
+				color: $white
+				display: none
+				font-size: remify(24px)
+				height: remify(20px)
+				left: remify(-30px)
+				line-height: 0.6
+				position: absolute
+				text-align: center
+				text-indent: 1px
+				width: remify(20px)
+			&:hover:before
+				display: block
+				transform: rotate(90deg)
+
+	&__showall
+		display: block
+		padding-top: remify(10px)
+		position: relative
+
+		&:hover .article-flexible-toc__more
+			border-bottom-color: $zon-mid-grey
+			color: $zon-dark-grey
+		&:before
+			+font-smoothing
+			background-color: $zon-trout
+			border-radius: 1em
+			color: $zon-lighter-grey
+			content: "+"
+			display: inline-block
+			font-size: remify(22px)
+			line-height: round-to-precision(19/22)
+			margin-right: remify(8px)
+			padding: remify(0 8px 2px)
+			text-align: center
+			transition: background-color .2s
+			vertical-align: middle
+
+		&:hover:before
+			background-color: $zon-charcoal
+		&:after
+			background-image: linear-gradient(0deg, rgba($color-page-bg, 1), rgba($color-page-bg, 0))
+			top: remify(-56px)
+			content: ""
+			height: remify(56px)
+			left: 0
+			position: absolute
+			right: 0
+
+	&__more
+		border-bottom: 1px solid rgba($zon-grey, .5)
+		color: $zon-grey
+		font-size: remify(15px)
+		letter-spacing: $letter-spacing-s
+		transition-duration: .2s
+		transition-property: border-bottom-color, color
+
+	&__subheading
+		position: relative
+
+	+respond-min($break-desktop-min)
+		&__subheading-link
+			font-weight: normal
+			left: remify(-30px)
+			position: absolute
+			top: remify(5px)
+
+			&:after
+				+font-smoothing
+				background-color: $zon-mid-grey
+				border-radius: 50%
+				color: $white
+				content: "\203A"
+				display: block
+				font-size: remify(24px)
+				height: remify(20px)
+				line-height: 0.6
+				opacity: .5
+				text-align: center
+				text-indent: 1px
+				transition: opacity .2s
+				width: remify(20px)
+			&:hover:after
+				opacity: 1
+				transform: rotate(-90deg)
+			&:hover:before
+				color: $zon-mid-grey
+				content: "Nach oben"
+				font-size: remify(12px)
+				letter-spacing: $letter-spacing-m
+				line-height: remify(20px)
+				position: absolute
+				right: remify(30px)
+				text-transform: uppercase
+				white-space: nowrap

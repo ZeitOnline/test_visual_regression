@@ -36,7 +36,7 @@ def test_storystream_teaser_should_hide_age_for_old_storystreams(testbrowser):
 def test_storystream_teaser_should_show_age_for_new_storystreams(
         testbrowser, clock):
 
-    clock.freeze(datetime.datetime(2015, 9, 27))
+    clock.freeze(datetime.datetime(2015, 6, 27))
     browser = testbrowser('/zeit-online/storystream-teaser')
 
     updated = browser.cssselect('.teaser-storystream__update')
@@ -48,24 +48,73 @@ def test_storystream_teaser_should_show_age_for_new_storystreams(
     assert updated_text == 'Aktualisiert vor 1 Tag'
 
 
-def test_storystream_contains_structured_data(testbrowser):
-    browser = testbrowser('/zeit-online/storystream/dummy')
+def test_storystream_contains_required_structured_data(testbrowser):
+    data = testbrowser('/zeit-online/storystream/dummy').structured_data()
 
-    # this "should" be done better sometimes (in the template)
-    # e.g. wrap the storystream content in an article
-    article = browser.cssselect('main[itemprop="mainContentOfPage"]')[0]
+    page = data['WebPage']
+    article = data['Article']
+    itemlist = data['ItemList']
+    publisher = data['Organization']
+    breadcrumb = data['BreadcrumbList']
 
-    assert article.cssselect('[itemprop="headline"]')
-    assert article.cssselect('[itemprop="description"]')
-    assert article.cssselect('[itemprop="datePublished"]')
-    assert article.cssselect('[itemprop="dateModified"]')
+    # check WebPage
+    assert page['publisher']['@id'] == publisher['@id']
+    assert page['breadcrumb']['@id'] == breadcrumb['@id']
 
-    author = article.cssselect('[itemprop="author"]')[0]
-    assert author.get('itemtype') == 'http://schema.org/Person'
-    assert author.cssselect('[itemprop="name"]')[0].text == (
-        'Zacharias Zacharakis')
-    assert author.cssselect('[itemprop="url"]')[0].get('href') == (
+    # check Organization
+    assert publisher['@id'] == '#publisher'
+    assert publisher['name'] == 'ZEIT ONLINE'
+    assert publisher['url'] == 'http://localhost/index'
+    assert publisher['logo']['@type'] == 'ImageObject'
+    assert publisher['logo']['url'] == (
+        'http://localhost/static/latest/images/'
+        'structured-data-publisher-logo-zon.png')
+    assert publisher['logo']['width'] == 565
+    assert publisher['logo']['height'] == 60
+
+    # check BreadcrumbList
+    assert len(breadcrumb['itemListElement']) == 2
+
+    for index, item in enumerate(breadcrumb['itemListElement'], start=1):
+        assert item['@type'] == 'ListItem'
+        assert item['position'] == index
+        if index == 1:
+            assert item['item']['@id'] == 'http://localhost/'
+            assert item['item']['name'] == 'ZEIT ONLINE'
+        elif index == 2:
+            assert item['item']['@id'] == 'http://localhost/politik/index'
+            assert item['item']['name'] == 'Politik'
+
+    # check Article
+    assert article['mainEntityOfPage']['@id'] == (
+        'http://localhost/zeit-online/storystream/dummy')
+    assert article['headline'] == u'Griechenland: Das linke Experiment'
+    assert len(article['description'])
+    assert article['datePublished'] == '2015-06-11T12:09:57+02:00'
+    assert article['dateModified'] == '2015-07-05T07:40:50+00:00'
+    assert article['publisher']['@id'] == publisher['@id']
+
+    # check ImageObject
+    assert article['image']['@type'] == 'ImageObject'
+    assert article['image']['url'] == (
+        'http://localhost/zeit-online/image/stress-frau-springen/'
+        'wide__1300x731')
+    assert article['image']['width'] == 1300
+    assert article['image']['height'] == 731
+
+    # check author
+    assert article['author']['@type'] == 'Person'
+    assert article['author']['name'] == 'Zacharias Zacharakis'
+    assert article['author']['url'] == (
         'http://localhost/autoren/Z/Zacharias_Zacharakis/index.xml')
+
+    # check ItemList
+    assert len(itemlist['itemListElement']) == 5
+
+    for index, item in enumerate(itemlist['itemListElement'], start=1):
+        assert item['@type'] == 'ListItem'
+        assert item['position'] == index
+        assert item['url'].startswith('http://localhost/zeit-online/')
 
 
 def test_storystream_should_get_layout_from_context(testbrowser):

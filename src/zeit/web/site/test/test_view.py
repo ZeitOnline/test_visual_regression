@@ -182,27 +182,6 @@ def test_article_should_show_premoderation_and_article_warning(application):
     assert view.comment_area['show_premoderation_warning_user'] is True
 
 
-def test_schema_org_publisher_mark_up(testbrowser):
-    # @see https://developers.google.com/structured-data/rich-snippets/articles
-    # #article_markup_properties
-    browser = testbrowser('/zeit-online/article/01')
-    publisher = browser.cssselect('[itemprop="publisher"]')[0]
-    logo = publisher.cssselect('[itemprop="logo"]')[0]
-
-    # check Organization
-    assert publisher.get('itemtype') == 'http://schema.org/Organization'
-    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
-        'ZEIT ONLINE')
-    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
-        'http://localhost/index')
-    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
-    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
-        'http://localhost/static/latest/images/'
-        'structured-data-publisher-logo-zon.png')
-    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '565'
-    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'
-
-
 def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
     # browser without sso session
     b = testbrowser()

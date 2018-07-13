@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+import calendar
+import collections
 import datetime
 import urlparse
 
 import pyramid.httpexceptions
+import pytz
 import zope.component
 import babel.dates
 
@@ -183,7 +186,8 @@ class Centerpage(AreaProvidingPaginationMixin,
         # Dynamic folder
         elif zeit.content.dynamicfolder.interfaces.\
                 IRepositoryDynamicFolder.providedBy(self.context.__parent__):
-            breadcrumbs.extend([(self.title, None)])
+            self.breadcrumbs_by_navigation(breadcrumbs)
+            self.breadcrumbs_by_title(breadcrumbs)
         else:
             return self.breadcrumbs_by_navigation(breadcrumbs)
 
@@ -258,12 +262,13 @@ class Centerpage(AreaProvidingPaginationMixin,
     @zeit.web.reify
     def jsonld_listing(self):
         allowed_cp_types = [
+            'storystream',
             'autotopic',
             'manualtopic',
             'serienseite',
             'ins_serienseite']
         if self.context.type in allowed_cp_types:
-            item_list_element = {}
+            item_list_element = collections.OrderedDict()
             item_list_element_counter = 0
             article_interface = zeit.content.article.interfaces.IArticle
             for region in self.regions:
@@ -345,11 +350,43 @@ class CenterpagePage(object):
     renderer='templates/sitemap.html')
 class Sitemap(Centerpage):
 
-    # Seems like google does not accept dates < 1970 but this can be the case
-    min_date = babel.dates.get_timezone('Europe/Berlin').localize(
+    # Seems like Google does not accept modification dates < 1970
+    min_modified_display = babel.dates.get_timezone('Europe/Berlin').localize(
         datetime.datetime(1970, 1, 1))
+    zeit_start = 1946
 
     def __init__(self, context, request):
         super(Sitemap, self).__init__(context, request)
         self.request.response.content_type = 'application/xml'
         zeit.web.core.solr.register_sitemap_solr_utility()
+
+    @zeit.web.reify
+    def show_index(self):
+        try:
+            # newssitemap has no overview (the detection is a bit kludgy).
+            if (self.area_providing_pagination.values()[0].layout.id ==
+                    'sitemap-news'):
+                return False
+        except Exception:
+            pass
+
+        if self.area_providing_pagination.kind == 'ranking':
+            try:
+                return int(self.request.GET.get('p', 0)) == 0
+            except ValueError:
+                raise pyramid.httpexceptions.HTTPNotFound()
+        elif self.area_providing_pagination.kind == 'overview':
+            return 'date' not in self.request.GET
+        else:
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+    @zeit.web.reify
+    def calendar(self):
+        today = datetime.datetime.now()
+        for year in range(self.zeit_start, today.year + 1):
+            for month in range(1, 12 + 1):
+                for day in range(1, calendar.monthrange(year, month)[1] + 1):
+                    date = (year, month, day)
+                    if date > (today.year, today.month, today.day):
+                        return
+                    yield '%s-%02d-%02d' % date

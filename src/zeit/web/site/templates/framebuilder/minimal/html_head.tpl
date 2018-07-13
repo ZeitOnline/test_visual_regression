@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" itemscope itemtype="http://schema.org/WebPage">
+<html lang="de">
 <head>
     <meta charset="utf-8">
     <title>ZEIT ONLINE</title>
@@ -8,7 +8,7 @@
     <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.asset_host }}/icons/favicon.ico">
     {% block css_link -%}
         <link href="{{ request.asset_host }}/css/web.site/framebuilder-minimal.css" media="screen" rel="stylesheet" type="text/css">
-    {%- endblock css_link %}
+    {% endblock css_link -%}
 
     {% include "zeit.web.core:templates/inc/inline_js/library.html" %}
 

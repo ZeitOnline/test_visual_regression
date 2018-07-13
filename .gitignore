@@ -26,3 +26,4 @@ tools/resource.meta
 /smoketest/pip-selfcheck.json
 /smoketest/selenium
 /webpack-stats.json
+/sass/_normalize.scss

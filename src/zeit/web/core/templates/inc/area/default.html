@@ -1,4 +1,4 @@
-{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% import '{}:templates/macros/centerpage_macro.tpl'.format(view.package) as cp %}
 <div class="{{ 'cp-area' | with_mods(area.kind, cp_area_modifier) }}
     {%- if area.visible_mobile == False %} mobile-hidden{% endif %}

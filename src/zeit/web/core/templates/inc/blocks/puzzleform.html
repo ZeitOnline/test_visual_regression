@@ -14,17 +14,17 @@
                 <input type="text" name="solution" placeholder="Lösungswort*" required="required" class="feedback-form__input" aria-label="Textfeld für das Lösungswort" />
                 {% if block.puzzle_type.id == 'scrabble' %}
                     <input type="text" name="coordinates" placeholder="Koordinaten (z.b. A1-A7)*" required="required" class="feedback-form__input" aria-label="Koordinaten" />
-                    <input type="number" min="1" name="points" placeholder="Punkte" class="feedback-form__input" aria-label="Punkte" />
+                    <input type="number" min="1" name="points" placeholder="Punkte*" required="required" class="feedback-form__input" aria-label="Punkte" />
                 {% endif %}
                 {% if block.is_multiple %}
-                    <input type="number" min="1" name="episode" placeholder="Folge*" required="required" class="feedback-form__input" aria-label="Folge" />
+                    <input type="number" min="1" name="episode" placeholder="Rätselfolge*" required="required" class="feedback-form__input" aria-label="Rätselfolge" />
                 {% endif %}
                 <input type="text" name="first_name" placeholder="Vorname*" required="required" class="feedback-form__input" aria-label="Ihr Vorname" />
                 <input type="text" name="name" placeholder="Nachname*" required="required" class="feedback-form__input" aria-label="Ihr Nachname" />
                 <input type="email" name="e_mail" placeholder="E-Mail-Adresse*" required="required" class="feedback-form__input" aria-label="Ihre E-Mail-Adresse" />
                 <input type="text" name="street" placeholder="Straße + Hausnummer*" required="required" class="feedback-form__input" aria-label="Straße und Hausnummer" />
                 <input type="text" name="zipcode" placeholder="PLZ*" size="8" required="required" class="feedback-form__input" aria-label="Postleitzahl" />
-                <input type="text" name="city" placeholder="Wohnort" required="required" class="feedback-form__input" aria-label="Ihr Wohnort" />
+                <input type="text" name="city" placeholder="Wohnort*" required="required" class="feedback-form__input" aria-label="Ihr Wohnort" />
                 <input type="text" name="country" placeholder="Land" value="Deutschland" class="feedback-form__input" aria-label="Land" />
                 <input type="tel" name="phone" placeholder="Telefon (inkl. Vorwahl)" class="feedback-form__input" aria-label="Telefonnummer inklusive Vorwahl" />
                 <label for="edit-agreement" class="feedback-form__label--agreement">

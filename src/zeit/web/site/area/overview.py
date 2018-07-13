@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 import copy
 import datetime
-import json
 import logging
 
+import bugsnag
 import dateutil
 import grokcore.component
 import zope.component
 
 import zeit.solr.query
 
+from zeit.web.core.jinja import get_current_request_path
 import zeit.web
 import zeit.web.core.area.automatic
 import zeit.web.core.area.ranking
@@ -18,7 +19,10 @@ import zeit.web.core.area.ranking
 log = logging.getLogger(__name__)
 
 
-SANITY_BOUND = 500
+# In sitemaps we routinely see ~600 items per day, rarely up to 900, but so far
+# not more than 1000. The query takes about 1.5s which is just inside the 2s
+# limit that we aspire to.
+SANITY_BOUND = 1000
 
 
 @zeit.web.register_area('overview')
@@ -110,6 +114,12 @@ class OverviewContentQueryMixin(object):
         values = area.values()
         length = len(values)
         if length and self.total_hits > length:
+            if self.total_hits > SANITY_BOUND:
+                message = '%s returned %s hits, truncated to %s' % (
+                    self.context.context, self.total_hits, SANITY_BOUND)
+                log.warning(message)
+                bugsnag.notify(
+                    ValueError(message), context=get_current_request_path())
             overhang = min(self.total_hits, SANITY_BOUND) - length
             for clone in self.clone_factory(values[-1], overhang):
                 area.add(clone)
