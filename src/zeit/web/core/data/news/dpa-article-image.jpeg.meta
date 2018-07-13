@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/news/dpa-article-image.jpeg/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_images">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;string&gt;desktop&lt;/string&gt; &lt;string&gt;image&lt;/string&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2018-07-04T18:26:31.119832+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2018-07-04T08:18:15.776781+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:fce608b5-5e02-4929-893f-b2a062e68522}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="ImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2018-07-04T18:26:24Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 04 Jul 2018 18:26:24 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"1000-570309171eebb"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>
