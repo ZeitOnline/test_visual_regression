@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4793: Enable ZMO series pages
 
+- BUG-937: Bring back comment form character counter
+
 
 3.170 (2018-07-13)
 ------------------
