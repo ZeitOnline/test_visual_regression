@@ -18,7 +18,8 @@
                         {% if teaser.teaserSupertitle or teaser.supertitle %}
                             <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
                                 {% block teaser_journalistic_format -%}
-                                    {% if teaser.serie -%}
+                                    {% if view.context is seriespage -%}
+                                    {% elif teaser.serie -%}
                                         <span class="series-label">{{ teaser.serie.serienname }}</span>
                                     {% elif teaser.blog -%}
                                         <span class="blog-label">{{ teaser.blog.name }}</span>

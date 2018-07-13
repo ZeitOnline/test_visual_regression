@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<centerpage type="manualtopic" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -25,12 +25,11 @@
         <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
         <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
         <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
-        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Campus</attribute>
         <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
-        <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">manualtopic</attribute>
         <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
         <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
@@ -63,7 +62,8 @@
         </topiclinks>
     </head>
     <body>
-        <title>Tube CP</title>
+        <title>Inszenierte Themenseite</title>
+        <supertitle>Teaserliste</supertitle>
         <cluster visible="True" visible_mobile="True" area="id-8458d4a8-7cee-4b15-be25-0e0e36e327cd" kind="solo">
           <region visible="True" visible_mobile="True" hide-dupes="True" area="id-0b68c298-c9de-4a92-b0f4-d1ac839b2ae9" kind="solo">
             <container cp:type="headerimage" module="headerimage" visible="True" visible_mobile="True" cp:__name__="id-3e6bf101-bd4b-49a7-a27e-82e2df102cd2" supertitle="Schlauchig" title="Es geht auch ohne Paginierung">
