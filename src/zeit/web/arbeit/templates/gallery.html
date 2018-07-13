@@ -3,9 +3,6 @@
 {% block article_pages %}
     {% require gallery = view.gallery %}
     <div class="article-page">
-        <p class="article__summary article__item">
-            {{- view.subtitle -}}
-        </p>
         {% include "zeit.web.core:templates/inc/article/gallery.html" %}
     </div>
     <div class="article-page">

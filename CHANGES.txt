@@ -12,7 +12,28 @@ POSTDEPLOY
 - Nothing
 
 
-3.169 (unreleased)
+3.171 (unreleased)
+------------------
+
+- ZON-4793: Enable ZMO series pages
+
+- ZON-4778: Alternative design for A/B-Test of homepage reload dialog
+
+- ZON-4754: Set C1 adblocker header according to article property
+
+- BUG-937: Bring back comment form character counter
+
+
+
+3.170 (2018-07-13)
+------------------
+
+- ZON-4794: De-/Activate ligatus widget by ressort switch
+
+- BUG-961: Remove redundant subtitle in ZEIT Arbeit gallerie
+
+
+3.169 (2018-07-12)
 ------------------
 
 - ZON-4776: Change WM-Ticker date format
@@ -22,6 +43,9 @@ POSTDEPLOY
 - BUG-955: Show news agency note in AMP articles
 
 - BUG-959: Author Feedback Form now displays author name again
+
+- TMS-236: Increase sanity bound of items per day page,
+  so sitemaps get all content published per day
 
 - FEM-84: Load app functions dynamically on runtime
 

@@ -186,7 +186,8 @@ class Centerpage(AreaProvidingPaginationMixin,
         # Dynamic folder
         elif zeit.content.dynamicfolder.interfaces.\
                 IRepositoryDynamicFolder.providedBy(self.context.__parent__):
-            breadcrumbs.extend([(self.title, None)])
+            self.breadcrumbs_by_navigation(breadcrumbs)
+            self.breadcrumbs_by_title(breadcrumbs)
         else:
             return self.breadcrumbs_by_navigation(breadcrumbs)
 

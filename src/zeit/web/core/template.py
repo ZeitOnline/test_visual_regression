@@ -285,6 +285,11 @@ def hidden_slide(context):
 
 
 @zeit.web.register_test
+def seriespage(context):
+    return getattr(context, 'type', None) in ['serienseite', 'ins_serienseite']
+
+
+@zeit.web.register_test
 def framebuilder(view):
     return isinstance(view, zeit.web.core.view.FrameBuilder)
 
