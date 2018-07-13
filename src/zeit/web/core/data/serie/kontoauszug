@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="serienseite">
+  <head>
+    <header_image/>
+    <topiclinks>
+        </topiclinks>
+    <rankedTags>
+      <tag type="keyword">Kontoauszug</tag>
+    </rankedTags>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments_premoderate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2018-06-26T09:13:56.092385+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2017-11-28T15:49:24.337723+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-06-26T09:13:56.533847+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2018-06-26T09:13:56.489973+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2017-11-28T15:49:24.237714+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-06-23T12:48:17.964289+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-robots">index, follow, noodp, noydir, noarchive</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Serie: Kontoauszug</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-10T15:04:06.000180+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.manager</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="overscrolling">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Arbeit</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">template</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:27e9e9fd-9eed-4b80-a230-c79d78021c57}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZARContent" module="zeit.arbeit.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Serie: Kontoauszug</title>
+    <cluster visible="True" visible_mobile="True" area="id-57985761-9484-40cc-8342-5d2669548df2" kind="solo" kind_title="Solo-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-957392b6-7e6b-4adf-b9b6-77f47b951c30" kind="solo">
+        <container cp:type="headerimage" module="headerimage" visible="True" visible_mobile="True" cp:__name__="id-49ac234f-4f39-43a4-866c-3b35d16d7c08" supertitle="Serie" title="Kontoauszug"/>
+      </region>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-c30b7dd0-0254-4c2b-b8ef-17eafa25e517" kind="solo" kind_title="Teaserliste/Paginierung">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-f4148db6-cf01-4829-bd47-886ce03c28ec" kind="zar-ranking" count="10" automatic="True" automatic_type="custom">
+        <container cp:type="auto-teaser" module="zar-ranking" cp:__name__="id-32b17c6f-888f-42d1-8e3b-73a817f65576"/>
+        <container cp:type="auto-teaser" module="zar-ranking" cp:__name__="id-9d24297b-ac6d-49cb-a8b0-bdaab426e1f1"/>
+        <container cp:type="auto-teaser" module="zar-ranking" cp:__name__="id-1f420943-e626-4801-8fe7-2778172dce7c"/>
+        <container cp:type="auto-teaser" module="zar-ranking" cp:__name__="id-c3b1201a-ee38-45a7-94ac-1e0d4906389b"/>
+        <container cp:type="auto-teaser" module="zar-ranking" cp:__name__="id-4b64dbda-27a1-491e-b8e1-beb94edf2a72"/>
+        <container cp:type="auto-teaser" module="zar-ranking" cp:__name__="id-4425a49d-ecec-4c1a-a555-735b73809239"/>
+        <container cp:type="auto-teaser" module="zar-ranking" cp:__name__="id-edd12ee1-dff4-42c3-9479-fed66aa5d5b5"/>
+        <container cp:type="auto-teaser" module="zar-ranking" cp:__name__="id-c6baa187-4e48-4aee-bcd8-b9a413cc43c6"/>
+        <container cp:type="auto-teaser" module="zar-ranking" cp:__name__="id-750653d1-74f6-43e0-a29f-d750772ecc7b"/>
+        <container cp:type="auto-teaser" module="zar-ranking" cp:__name__="id-1df1c0fa-4237-488c-9a14-8e7f9b67dac3"/>
+        <query>
+          <condition type="serie">Kontoauszug</condition>
+        </query>
+      </region>
+    </cluster>
+  </body>
+</centerpage>

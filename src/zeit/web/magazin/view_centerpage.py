@@ -20,3 +20,12 @@ class Centerpage(zeit.web.core.view_centerpage.Centerpage,
     @zeit.web.reify
     def is_hp(self):
         return self.context.type == 'ZMO'
+
+
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    vertical='zmo',
+    custom_predicates=(zeit.web.core.view.is_paginated,),
+    renderer='templates/centerpage.html')
+class CenterpagePage(zeit.web.core.view_centerpage.CenterpagePage, Centerpage):
+    pass

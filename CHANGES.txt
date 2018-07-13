@@ -12,7 +12,47 @@ POSTDEPLOY
 - Nothing
 
 
-3.168 (unreleased)
+3.171 (unreleased)
+------------------
+
+- ZON-4793: Enable ZMO series pages
+
+
+3.170 (2018-07-13)
+------------------
+
+- ZON-4794: De-/Activate ligatus widget by ressort switch
+
+- BUG-961: Remove redundant subtitle in ZEIT Arbeit gallerie
+
+
+3.169 (2018-07-12)
+------------------
+
+- ZON-4776: Change WM-Ticker date format
+
+- ZON-4571: Use unpublished TMS for preview
+
+- BUG-955: Show news agency note in AMP articles
+
+- BUG-959: Author Feedback Form now displays author name again
+
+- TMS-236: Increase sanity bound of items per day page,
+  so sitemaps get all content published per day
+
+- FEM-84: Load app functions dynamically on runtime
+
+- FEM-85: Update node packages
+
+- FIX: Serialize jinja `Undefined` to json as None
+
+- FIX: Handle non-ascii author facebook/twitter/etc values
+
+- MAINT: Add cached health check for elasticsearch to short-circuit requests
+  when the server is already down
+
+
+3.168 (2018-07-09)
 ------------------
 
 - ZON-4777: Add structured data in JSON-LD format

@@ -14,6 +14,7 @@ import urlparse
 import hashlib
 
 import babel.dates
+import jinja2
 import lxml.etree
 import pyramid.path
 import zope.component
@@ -281,6 +282,11 @@ def leserartikel(context):
 def hidden_slide(context):
     if zeit.content.gallery.interfaces.IGalleryEntry.providedBy(context):
         return context.layout == 'hidden'
+
+
+@zeit.web.register_test
+def seriespage(context):
+    return getattr(context, 'type', None) in ['serienseite', 'ins_serienseite']
 
 
 @zeit.web.register_test
@@ -874,6 +880,8 @@ def join_if_exists(iterable, string=''):
 
 @zeit.web.register_filter
 def tojson(value):
+    if isinstance(value, jinja2.Undefined):
+        return 'null'
     result = json.dumps(remove_break(value))
     # <https://html.spec.whatwg.org/multipage
     #  /scripting.html#restrictions-for-contents-of-script-elements>
