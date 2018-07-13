@@ -121,6 +121,24 @@ def test_retresco_body_is_not_used_for_articles_with_keywords_on_blacklist(
     assert not get_article_body.called
 
 
+def test_keywords_from_tms_uses_unpublished_state_for_preview(application,
+                                                              monkeypatch):
+    zeit.web.core.application.FEATURE_TOGGLES.set('keywords_from_tms')
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'keywords_from_unpublished_content')
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['is_preview'] = True
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    get_article_keywords = mock.Mock(return_value=[])
+    monkeypatch.setattr(
+        zeit.retresco.connection.TMS, 'get_article_keywords',
+        get_article_keywords)
+    zeit.web.core.article.get_keywords(article)
+    assert not get_article_keywords.call_args[1].get('published')
+
+
 def test_first_division_is_available_for_old_articles(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/news/72722.xml')

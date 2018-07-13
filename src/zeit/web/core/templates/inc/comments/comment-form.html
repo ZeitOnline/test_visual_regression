@@ -9,6 +9,11 @@
     {% set class = '' %}
 {% else %}
     {% set submit_value = 'Kommentar senden' %}
+
+    {% if request.user and not request.user.name %}
+        {% set submit_value = 'Absenden' %}
+    {% endif %}
+
     {% set placeholder = 'Ihr Kommentar' %}
     {% set class = 'comment-form__cancel--hidden' %}
 {% endif %}
@@ -45,20 +50,20 @@
     <form action="#comments" class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
         {%- if is_mod %} data-mod="mod"{% endif %}>
         {% if view.comment_form.show_comment_form -%}
-        {% if request.user.name %}
+            {% if request.user.name -%}
             <div class="comment-form__text comment-form__text--metadata" data-ct-row="1">
-                {% if request.user.picture %}
+                {% if request.user.picture -%}
                     <img class="comment-form__avatar" alt="Avatarbild von {{ request.user.name }}" src="{{ request.user.picture }}">
-                {% endif %}
-                {% if request.user.name %}
-                    Angemeldet als
-                    <a class="comment-form__username" href="{{ request.registry.settings.community_profile_url}}/user" data-ct-label="username">
-                        {{ request.user.name }}
-                    </a>
-                {% endif %}
+                {% endif -%}
+                Angemeldet als
+                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user" data-ct-label="username">
+                    {{- request.user.name -}}
+                </a>
+                <span class="comment-form__charcount">
+                    <span class="js-count-formchars"></span> 1500 Zeichen
+                </span>
             </div>
-        {% endif %}
-            {% if not request.user.name %}
+            {% else -%}
             <div class="comment-form__sso-username">
                 <span class="comment-form__charcount">
                     <span class="js-count-formchars"></span> 1500 Zeichen
@@ -68,11 +73,11 @@
                     Wenn Sie an der Diskussion zu diesem Artikel teilnehmen möchten, setzen Sie bitte einmalig Ihren persönlichen Benutzernamen. Dieser wird öffentlich angezeigt und kann nachträglich nicht geändert werden. Viel Spaß, Ihr Community-Team.
                 </p>
                 <input class="comment-form__input" placeholder="Ihr Benutzername" type="text" name="username" {% if view.error.user_name %}value="{{ view.error.user_name }}"{% endif %}>
-                {% if view.error.error == 'username_exists_or_invalid' %}
+                {% if view.error.error == 'username_exists_or_invalid' -%}
                     <div class='comment-form__error'>Benutzername ist bereits vergeben oder enthält ungültige Zeichen.</div>
-                {% endif %}
+                {% endif -%}
             </div>
-            {% endif %}
+            {% endif -%}
         <textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500" aria-label="Schreiben Sie hier Ihren Kommentar für den Artikel {{ view.title }} hinein." >
             {%- if view.error and view.error.comment %}{{ view.error.comment }}{% endif -%}
         </textarea>
@@ -96,7 +101,7 @@
             <a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
             <input class="comment-form__button button" type="submit" value="{{ submit_value }}" data-ct-label="kommentar_senden" />
         </p>
-    {% endif %}
+        {% endif -%}
     </form>
     {%- endblock %}
 {%- elif view.comment_form.show_comment_form %}
