@@ -19,6 +19,9 @@ POSTDEPLOY
 
 - ZON-4778: Alternative design for A/B-Test of homepage reload dialog
 
+- BUG-937: Bring back comment form character counter
+
+
 
 3.170 (2018-07-13)
 ------------------
