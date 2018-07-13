@@ -17,6 +17,15 @@ POSTDEPLOY
 
 - ZON-4793: Enable ZMO series pages
 
+- ZON-4778: Alternative design for A/B-Test of homepage reload dialog
+
+- ZON-4754: Set C1 adblocker header according to article property
+
+- FEM-81: Enable proper import of normalize.css file
+
+- BUG-937: Bring back comment form character counter
+
+
 
 3.170 (2018-07-13)
 ------------------

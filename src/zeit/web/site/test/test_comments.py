@@ -458,3 +458,32 @@ def test_comment_deeplink_should_have_page_number(application):
     thread = community.get_thread(
         'http://xml.zeit.de/zeit-online/article/01', cid=92)
     assert int(thread['pages']['current']) == 1
+
+
+def test_comment_form_for_logged_in_user_contains_formchars_counter(
+        tplbrowser, dummy_request):
+    dummy_request.user = {
+        'ssoid': 123,
+        'blocked': False,
+        'premoderation': False,
+        'has_community_data': True,
+        'uid': 123,
+        'name': None
+    }
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.core.view_comment.CommentForm(article, dummy_request)
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/comments/comment-form.html',
+        view=view, request=dummy_request)
+    assert browser.cssselect('.js-count-formchars')
+    assert browser.cssselect('.comment-form__headline')
+
+    dummy_request.user['name'] = 'Max'
+
+    view = zeit.web.core.view_comment.CommentForm(article, dummy_request)
+    browser_comment_form = tplbrowser(
+        'zeit.web.core:templates/inc/comments/comment-form.html',
+        view=view, request=dummy_request)
+    assert browser.cssselect('.js-count-formchars')
+    assert browser.cssselect('.comment-form__username')
