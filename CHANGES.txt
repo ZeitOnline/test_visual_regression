@@ -27,6 +27,8 @@ POSTDEPLOY
 
 - FIX: Be defensive about comment errors on author pages
 
+- FIX: Consider SEO in structured data for article
+
 
 3.170 (2018-07-13)
 ------------------
