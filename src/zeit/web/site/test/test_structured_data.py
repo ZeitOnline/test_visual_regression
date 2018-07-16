@@ -117,3 +117,21 @@ def test_article_full_view_contains_required_structured_data(testbrowser):
 
     assert article['mainEntityOfPage']['@id'] == (
         'http://localhost/zeit-online/article/zeit')
+
+
+def test_news_article_contains_required_structured_data(testbrowser):
+    # @see https://developers.google.com/structured-data/rich-snippets/articles
+    data = testbrowser('/news/dpa-article').structured_data()
+
+    page = data['WebPage']
+    article = data['Article']
+
+    # check WebPage image
+    assert page['primaryImageOfPage']['@type'] == 'ImageObject'
+    assert page['primaryImageOfPage']['url'] == (
+        'http://localhost/news/dpa-article-image.jpeg/wide__1300x731')
+
+    # check Article image
+    assert article['image']['@type'] == 'ImageObject'
+    assert article['image']['url'] == (
+        'http://localhost/news/dpa-article-image.jpeg/wide__1300x731')

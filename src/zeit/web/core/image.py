@@ -15,6 +15,7 @@ import grokcore.component
 import zope.component
 import zope.interface
 
+from zeit.cms.checkout.interfaces import ILocalContent
 import zeit.cms.workflow.interfaces
 import zeit.content.author.interfaces
 import zeit.content.gallery.interfaces
@@ -343,6 +344,29 @@ def image_from_block_content(context):
     if image is not None:
         image.variant_id = context.layout.image_pattern
     return image
+
+
+@zope.interface.implementer(zeit.content.image.interfaces.IImages)
+class InMemoryImages(object):
+
+    fill_color = None
+
+    def __init__(self, context, image):
+        self.context = context
+        self.image = image
+
+
+@grokcore.component.adapter(
+    zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+def images_from_article_with_fallback_body_image(context):
+    # ZCA does not support "fall back to the next less specific adapter",
+    # so we hardcode it.
+    teaser_img = zeit.content.image.imagereference.ImagesAdapter(context)
+    if teaser_img.image is not None or ILocalContent.providedBy(context):
+        return teaser_img
+    article_img = context.main_image.target
+    return InMemoryImages(context, article_img)
 
 
 @grokcore.component.adapter(
