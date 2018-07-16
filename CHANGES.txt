@@ -25,6 +25,7 @@ POSTDEPLOY
 
 - BUG-937: Bring back comment form character counter
 
+- FIX: Be defensive about comment errors on author pages
 
 
 3.170 (2018-07-13)
