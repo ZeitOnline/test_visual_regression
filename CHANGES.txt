@@ -25,6 +25,8 @@ POSTDEPLOY
 
 - BUG-937: Bring back comment form character counter
 
+- BUG-962: Fall back to article image if it has no teaser image
+
 - FIX: Be defensive about comment errors on author pages
 
 - FIX: Consider SEO in structured data for article
