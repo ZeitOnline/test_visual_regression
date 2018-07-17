@@ -339,7 +339,8 @@ class Base(object):
 
     @zeit.web.reify
     def js_vars(self):
-        names = ('banner_channel', 'ressort', 'sub_ressort', 'type',
+        names = ('addefend_cookie_expire', 'addefend_height', 'banner_channel',
+                 'ressort', 'sub_ressort', 'type',
                  'update_signals_comments_interval',
                  'update_signals_time_interval', 'paywall')
         return [(name, getattr(self, name, '')) for name in names]
@@ -725,6 +726,16 @@ class Base(object):
     def update_signals_time_interval(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('update_signals_time_interval', '')
+
+    @zeit.web.reify
+    def addefend_height(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('addefend_height', '')
+
+    @zeit.web.reify
+    def addefend_cookie_expire(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('addefend_cookie_expire', '')
 
 
 class CommentMixin(object):

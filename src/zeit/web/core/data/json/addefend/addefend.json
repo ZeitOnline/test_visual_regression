@@ -1,0 +1,11 @@
+{
+  "headline_notice": "Bitte deaktivieren Sie Ihren Adblocker.",
+  "description": "Durch die Ausspielung von Werbung unterstützen Sie die Refinanzierung unserer Berichterstattung. Vielen Dank!",
+  "btn_deactivate": "Für zeit.de deaktivieren",
+  "notice": "Mit AdBlocker weitersurfen",
+  "hl_manual": "So deaktivieren Sie den Ad Blocker",
+  "list_manual1": "Klicken Sie auf das Symbol des AdBlockers in Ihren Browser, um seine Einstellungen zu öffnen.",
+  "list_manual2": "Wählen Sie aus, dass Sie den AdBlocker für Seiten www.zeit.de deaktivieren wollen.",
+  "list_manual3": "Wenn Sie www.zeit.de auf die Whitelist gesetzt haben, laden Sie die Seite bitte neu.",
+  "btn_reload": "Seite aktualisieren"
+}

@@ -10,6 +10,7 @@ import zope.component
 import zeit.web.core.interfaces
 import zeit.web.site.view
 
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
@@ -316,3 +317,20 @@ def test_page_1_of_ranking_redirects(testserver):
         allow_redirects=False)
     assert resp.status_code == 301
     assert resp.headers['Location'] == '%s/dynamic/es-berlin' % testserver.url
+
+
+def test_addefend_notice_is_working(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(375, 667)
+    script = 'return window.Zeit.adDefend()'
+    driver.get(
+        '{}/zeit-online/slenderized-index'.format(
+            testserver.url))
+    driver.execute_script(script)
+    try:
+        WebDriverWait(driver, 2).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.addefend')))
+        assert True
+    except TimeoutException:
+        assert False, 'adDefend message not shown within 2 seconds'

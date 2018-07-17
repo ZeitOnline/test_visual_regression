@@ -25,6 +25,11 @@ var Zeit = window.Zeit || {},
 
                 this.queue = [];
             }
+        },
+        adDefend: function() {
+            require([ 'web.core/adDefend' ], function( adDefend ) {
+                new adDefend();
+            });
         }
     },
     key;
