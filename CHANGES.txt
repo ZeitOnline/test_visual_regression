@@ -12,7 +12,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.171 (unreleased)
+3.171 (2018-07-17)
 ------------------
 
 - ZON-4346: Notice for adblocker
