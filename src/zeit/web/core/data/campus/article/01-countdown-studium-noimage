@@ -97,10 +97,7 @@
     <supertitle>Studienbeginn</supertitle>
     <title>Countdown zum Studium</title>
     <division type="page">
-      <image base-id="http://xml.zeit.de/campus/image/01-junge-vor-unscharfem-hintergrund/" type="jpg" title="Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben." alt="Studienbeginn: Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben." align="left" publication-date="" expires="" layout="large" is_empty="False" alt_local="Studienbeginn: Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben." title_local="Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben.">
-        <bu>Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben.</bu>
-        <copyright link="http://www.photocase.de/fotos/207896">© &lt;&lt;bananarama&gt;&gt;/photocase.de</copyright>
-      </image>
+      <image is_empty="True" />
       <intertitle>
         <b>Mai</b>
       </intertitle>

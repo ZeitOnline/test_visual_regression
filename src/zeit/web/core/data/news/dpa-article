@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags>
+      <tag type="person">Andrea Nahles</tag>
+      <tag type="location">Österreich</tag>
+      <tag type="organisation">SPD</tag>
+      <tag type="organisation">CDU</tag>
+      <tag type="organisation">CSU</tag>
+      <tag type="keyword">Asyldebatte</tag>
+    </rankedTags>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">News</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments_premoderate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2018-07-04T18:26:24.565573+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2018-07-04T18:23:11+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-07-04T18:26:27.072349+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2018-07-04T18:26:27.010558+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2018-07-04T18:26:18.017218+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="fixture">/infoline/topthemen/</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="hide_ligatus_recommendations">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2018-07-04T18:23:11+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.dpa</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="local_image_path">../publishedPictures/large/urn-newsml-dpa-com-20090101-180704-99-07375_large_4_3.jpg</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn-newsml-dpa-com-20090101-180704-99-06367</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-version">1530728591000</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="overscrolling">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">News</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">News</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">a5832a9fdb7b4b7b9218784488b96c32</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="recent_comments_first">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">News</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">7207</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">SPD zieht rote Linie: «Keine geschlossenen Lager»</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:f8b5018c-774d-4744-9644-701c189f1f3b}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body><title>SPD zieht rote Linie: "Keine geschlossenen Lager"</title>Asyldebatte<supertitle>Asyldebatte</supertitle><division type="page"><image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/news/dpa-article-image.jpeg/" type="" publication-date="" expires="" display_mode="column-width" variant_name="wide" is_empty="False"><bu xsi:nil="true"/><copyright>©</copyright></image><p>Berlin (dpa) - Im Streit zwischen Union und SPD über die Asylpolitik zeichnet sich eine Annäherung ab. Kanzlerin Angela Merkel (CDU) stellte klar, dass Asylbewerber maximal zwei Tage unter Aufsicht der Polizei in den geplanten sogenannten Transitzentren an der Grenze zu Österreich bleiben sollen.</p><p>"Man muss mit 48 Stunden hinkommen, das sagt das Grundgesetz", betonte sie am Mittwoch in der ARD-Sendung "Farbe bekennen". Nach dieser Zeitspanne müssten die Schutzsuchendenden in normale Einrichtungen gebracht werden.</p><p>Mit der Begrenzung auf zwei Tage könnten Merkel und Innenminister Horst Seehofer (CSU) versuchen, der SPD eine Brücke zu bauen. Sie hat den sogenannten Transitzentren bislang nicht zugestimmt und betont, sie werde keine "geschlossenen Lager" akzeptieren. Eine Entscheidung soll ein neuerliches Spitzentreffen der großen Koalition am Donnerstag bringen. Die SPD zeigte sich vorsichtig optimistisch, dass eine Einigung gelingen könnte.</p><p>Seehofer will zuvor in Wien eine Verständigung mit der österreichischen Regierung erreichen. Der Innenminister und CSU-Chef wies bei n-tv den Vorwurf zurück, es handele sich bei den Zentren um eine Art Internierungslager. Zum Konflikt mit der SPD sagte er: "Ich glaube, dass wir da schon zusammenkommen. Ich hab da keine Zweifel." Nach wochenlangem Unionsstreit hatten sich Merkel und Seehofer erst am Montagabend auf einen Kompromiss verständigt, den die SPD so aber nicht mitträgt.</p><p>Geplant sind diese Transitzentren in Bayern an drei Grenzübergängen an der deutsch-österreichischen Grenze. Von dort aus sollen bereits in anderen EU-Staaten registrierte Asylbewerber in diese zurückgeführt werden. Hierzu bedarf es aber zunächst einer Übereinkunft mit Österreich. Seehofer könnte bestehende Einrichtungen der Bundespolizei für die Zentren nutzen. Das berichteten die Zeitungen des Redaktionsnetzwerks Deutschland unter Berufung auf CSU-Kreise. Seehofer habe dies am Dienstag im Koalitionsausschuss vorgeschlagen. Es müssten keine großen neuen Zentren gebaut werden.</p><p>Die Asylpolitik bestimmte auch weitgehend die Generaldebatte über den Haushalt im Bundestag. Merkel verteidigte den Asylkompromiss mit der CSU, forderte gleichzeitig aber europäische Antworten in der Flüchtlingspolitik. Der Umgang mit dem Thema Migration werde darüber entscheiden, ob die Europäische Union Bestand habe. Es brauche rechtlich tragbare, realistische, solidarische Antworten, die die Menschen nicht überforderten. "Es muss mehr Ordnung in alle Arten der Migration kommen, damit Menschen den Eindruck haben, Recht und Ordnung werden durchgesetzt."</p><p>Mit Griechenland sei bereits vereinbart, dass dort registrierte Flüchtlinge aus dem "grenznahen Bereich" direkt zurückgeschickt werden könnten, sagte Merkel weiter. Im Gegenzug sollen im Rahmen des Familiennachzugs Menschen aus Griechenland nach Deutschland kommen können. Ähnliche Abmachungen sollten auch mit anderen Ländern geschlossen werden. Seehofer werde entsprechende Gespräche führen. Am Donnerstag trifft Merkel den ungarischen Ministerpräsidenten Viktor Orban. Der sagte am Mittwoch: "Ungarn wird so lange keine bilaterale Vereinbarung mit Deutschland treffen, so lange es kein Abkommen zwischen Deutschland und Österreich gibt."</p><p>SPD-Chefin Andrea Nahles stellte in der Haushaltsdebatte fest, dass im Koalitionsvertrag von sogenannten Transitzentren keine Rede sei. "Seit der Unterzeichnung des Koalitionsvertrags am 12. März hat sich in der Flüchtlingsfrage keine neue Sachlage ergeben", sagte sie. "Wer darüber hinausgehende Vorschläge hat, muss diese vorstellen, begründen und mit dem Koalitionspartner abstimmen." Dafür würden für die SPD folgende drei Grundsätze gelten: "Keine nationalen Alleingänge, rechtsstaatliche Verfahren müssen eingehalten werden, geschlossene Lager lehnen wir ab."
+      </p><p>Auch SPD-Generalsekretär Lars Klingbeil betonte: "Massenlager, wo Flüchtlinge wochenlang eingesperrt werden, wird es mit der SPD nicht geben." Im ZDF zeigte er sich jedoch zuversichtlich,
+        dass die große Koalition einen Kompromiss finden könne. Zunächst müsse Seehofer aber ein Abkommen mit Wien aushandeln. "Wenn es mit Österreich dieses Abkommen nicht gibt, dann steht auch der ganze Unionskompromiss auf wackeligen Füßen", sagte Klingbeil.
+      </p><p>Als klare Botschaft wertete CSU-Landesgruppenchef Alexander Dobrindt den Unionskompromiss. Man habe mit der Ankündigung, Asylbewerber zurückzuschicken in die Länder, die für ihre Verfahren verantwortlich seien, ein "Signal in die Welt gesetzt", sagte Dobrindt im Bundestag. "Es reicht nicht mehr, einfach europäischen Boden zu betreten, um dann automatisch nach Deutschland kommen zu können."</p><p>Grünen-Fraktionschef Anton Hofreiter warf der CSU eine autoritäre und nationalistische Politik vor. Im Asylstreit habe sie die Regierung "an den Rand des Abgrunds gedrängt" und "massive Verunsicherung" verursacht, sagte Hofreiter im Bundestag. Die CSU sei in einem "populistischen Rausch". Die geplanten Transitzentren nannte Hofreiter "Inhaftierungslager".</p><p>Nach Einschätzung von Linken-Fraktionschef Dietmar Bartsch beschädigte der Asylstreit die Demokratie in Deutschland schwer und befördert die Politikverdrossenheit in Deutschland. "Es gibt keine Sieger", betonte er. FDP-Chef Christian Lindner sah Seehofer als klaren Verlierer der Auseinandersetzung. Der unionsinterne Kompromiss setze Absprachen mit anderen EU-Staaten zur Rücknahme von Migranten voraus, die Seehofer nun aushandeln müsse, obwohl dies zuvor Merkel schon nicht gelungen sei.</p><p>Einige Begriffe, die in der Asyldebatte eine Rolle spielen:</p><p>DUBLIN-VERORDNUNG: Danach sollen Asylbewerber dort registriert werden, wo sie die Europäische Union zuerst betreten. Dieses Land ist auch für den Asylantrag zuständig. Wird der Betreffende in einem anderen EU-Staat aufgegriffen, könnte er im Prinzip in das Einreise-Land zurückgeschickt werden. So soll sichergestellt werden, dass ein Asylantrag nur von einem Mitgliedstaat geprüft wird. Das Regelwerk wurde 1990 in der irischen Hauptstadt Dublin vereinbart. Zum Dublin-Raum gehören neben den EU-Mitgliedstaaten auch Island, Norwegen, die Schweiz und Liechtenstein.</p><p>TRANSITZENTREN: Aus diesen Zentren sollen Asylbewerber, die bereits in einem anderen EU-Land registriert sind, direkt in den zuständigen Staat zurückgewiesen werden. Nach ihrer jüngsten Vereinbarung wollen CDU und CSU diese an der deutsch-österreichischen Grenze einrichten.</p><p>EURODAC: Mit dem zentralen europäischen System Eurodac werden Fingerabdrücke von Asylbewerbern und illegal Eingewanderten europaweit abgeglichen. Erhoben werden die Daten von mindestens 14 Jahre alten Asylantragstellern sowie von illegal Eingereisten, die im Grenzbereich eines Landes angetroffen werden.</p><p>ANKERZENTREN: In den geplanten Einrichtungen sollen Schutzsuchende das gesamte Asylverfahren durchlaufen - Ankunft, Entscheidung, kommunale Verteilung beziehungsweise Rückführung (kurz: Anker). Die Arbeit der zuständigen Behörden und Ansprechpartner sollen dort gebündelt und die Verfahren so beschleunigt werden. Bundesinnenminister Horst Seehofer (CSU) will Ankerzentren deutschlandweit einrichten, stößt aber bei vielen Bundesländern auf Widerstand.</p></division></body>
+</article>

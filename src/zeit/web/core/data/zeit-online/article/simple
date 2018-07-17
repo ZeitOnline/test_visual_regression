@@ -30,6 +30,9 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Serena Williams quält sich weiter</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Williams: Tennis wackelt weiter</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
