@@ -13,14 +13,11 @@ function AdDefend() {
     this.config = {
         template: require( 'web.core/templates/addefend.html' ), // the template we use
         windowHeight: zeit.view.get( 'addefend_height' ), // config zeitweb-settings, mobileView is always 500px
-        jsonPath: '/json/addefend/addefend.json', // config zeitweb-settings for path to config file
         inViewElement: '.footer', // hide notice bar when footer is in view
         cookieName: 'addefend', // cookiename for AdDefend
         cookieExpire: zeit.view.get( 'addefend_cookie_expire' ), // config zeitweb-settings for expiringtime for cookies
         trackingId: '#adb' // identifier for clicktracking
     };
-
-    this.path = '//' + location.host + this.config.jsonPath;
 
     // instantiate just once
     if ( !document.querySelector( '#addefend-overlay' ) ) {
@@ -28,46 +25,19 @@ function AdDefend() {
     }
 }
 
-AdDefend.prototype.getData = function( url ) {
-    return new window.Promise( function( resolve, reject ) {
-        var xhr = new XMLHttpRequest(),
-            errorURL;
-        xhr.open( 'GET', url );
-        xhr.onload = function() {
-            // this is called even on 404 etc
-            // so check the status
-            if ( xhr.status === 200 ) {
-                // resolve the promise with the settings text
-                resolve( JSON.parse( xhr.response ) );
-            } else {
-                // otherwise reject with the status text
-                // error out meaningfully w/ request URL if possible
-                errorURL = xhr.responseURL ? ': ' + xhr.responseURL : '';
-                reject( Error( xhr.statusText + errorURL ) );
-            }
-        };
-        // handle network errors
-        xhr.onerror = function() {
-            reject( Error( 'Network Error' ) );
-        };
-        // make the request
-        xhr.send();
-    });
-};
-
-AdDefend.prototype.renderTemplate = function( data ) {
+AdDefend.prototype.renderTemplate = function() {
 
     // text for different sections from json-file
     var html = this.config.template({
-        hl: data.headline_notice,
-        description: data.description,
-        btnDeactivate: data.btn_deactivate,
-        notice: data.notice,
-        hlManual: data.hl_manual,
-        listManual1: data.list_manual1,
-        listManual2: data.list_manual2,
-        listManual3: data.list_manual3,
-        btnReload: data.btn_reload
+        hl: 'Bitte deaktivieren Sie Ihren Adblocker.',
+        description: 'Durch die Ausspielung von Werbung unterstützen Sie die Refinanzierung unserer Berichterstattung. Vielen Dank!',
+        btnDeactivate: 'Für zeit.de deaktivieren',
+        notice: 'Mit AdBlocker weitersurfen',
+        hlManual: 'So deaktivieren Sie den Ad Blocker',
+        listManual1: 'Klicken Sie auf das Symbol des AdBlockers in Ihren Browser, um seine Einstellungen zu öffnen.',
+        listManual2: 'Wählen Sie aus, dass Sie den AdBlocker für Seiten www.zeit.de deaktivieren wollen.',
+        listManual3: 'Wenn Sie www.zeit.de auf die Whitelist gesetzt haben, laden Sie die Seite bitte neu.',
+        btnReload: 'Seite aktualisieren'
     });
 
     document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', html );
@@ -140,11 +110,9 @@ AdDefend.prototype.init = function() {
     var that = this;
     // only init when cookie is not set
     if ( document.cookie.indexOf( this.config.cookieName ) <= 0  ) {
-        this.getData( this.path ).then( function( response ) {
-            that.renderTemplate( response );
-            that.handleOverlay();
-            that.track();
-        });
+        that.renderTemplate();
+        that.handleOverlay();
+        that.track();
     }
 };
 
