@@ -12,7 +12,13 @@ POSTDEPLOY
 - Nothing
 
 
-3.171 (unreleased)
+3.172 (unreleased)
+------------------
+
+- ZON-4778: minor styling fixes for HP Overlay A/B Test
+
+
+3.171 (2018-07-17)
 ------------------
 
 - ZON-4346: Notice for adblocker
