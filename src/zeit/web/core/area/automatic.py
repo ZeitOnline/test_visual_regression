@@ -160,6 +160,13 @@ class ElasticsearchContentQuery(
     include_payload = True
 
 
+class CustomContentQuery(
+        TMSContentResolveMixin,
+        zeit.content.cp.automatic.CustomContentQuery):
+
+    include_payload = True
+
+
 class TopicsitemapContentQuery(zeit.content.cp.automatic.ContentQuery):
 
     grokcore.component.name('topicsitemap')
