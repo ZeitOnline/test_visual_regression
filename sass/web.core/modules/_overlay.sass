@@ -81,20 +81,19 @@
 		pointer-events: none
 
 		&__dialog
-			animation: slideIn 350ms ease-in-out
-			bottom: 5%
+			animation: slideIn 350ms ease-in-out forwards
+			bottom: remify(30px)
 			border: 1px solid #f9f9f9
-			box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2)
-			min-width: 475px
+			box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.3), 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+			min-width: 488px
 			padding: remify(10px 10px 10px 30px)
 			top: auto
 
 			+respond-min($break-tablet-min)
-				top: auto
-				bottom: remify(50px)
 				left: 50%
 				right: auto
 				transform: translateX(-50%)
+				will-change: transform
 
 		&__content
 			text-align: left
@@ -126,4 +125,4 @@
 	from
 		bottom: remify(-100px)
 	to
-		bottom: remify(50px)
+		bottom: remify(30px)
