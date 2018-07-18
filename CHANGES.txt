@@ -12,7 +12,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.172 (unreleased)
+3.172 (2018-07-18)
 ------------------
 
 - ZON-4778: minor styling fixes for HP Overlay A/B Test
