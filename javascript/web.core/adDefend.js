@@ -56,9 +56,6 @@ AdDefend.prototype.handleOverlay = function() {
     $( '#addefend-guide' ).click( function() {
         $( '#addefend-note' ).fadeOut();
 
-        // tracking
-        that.track( 'view', 'banner', that.config.trackingId );
-
         var overlayHeight;
 
         if ( that.config.windowHeight === 'max' ) {
@@ -112,7 +109,6 @@ AdDefend.prototype.init = function() {
     if ( document.cookie.indexOf( this.config.cookieName ) <= 0  ) {
         that.renderTemplate();
         that.handleOverlay();
-        that.track();
     }
 };
 
