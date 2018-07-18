@@ -180,7 +180,7 @@ class TopicsitemapContentQuery(zeit.content.cp.automatic.ContentQuery):
                 }, None)
                 if content is not None:
                     result.append(content)
-        except:
+        except Exception:
             log.warning(
                 'Error retrieving topic pages for %s',
                 self.context.uniqueId, exc_info=True)
