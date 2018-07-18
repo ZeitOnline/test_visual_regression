@@ -15,7 +15,7 @@ POSTDEPLOY
 3.172 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4778: minor styling fixes for HP Overlay A/B Test
 
 
 3.171 (2018-07-17)
