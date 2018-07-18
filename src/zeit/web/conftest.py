@@ -409,17 +409,16 @@ def preserve_settings(application_session, request):
 
 
 @pytest.fixture
-def reset_solr(application_session, request):
+def reset_search(application_session, request):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     if isinstance(solr, MockSolr):
         solr.reset()
-
-
-@pytest.fixture
-def reset_es(application_session, request):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
     if isinstance(es, MockES):
         es.reset()
+    tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
+    if isinstance(es, MockTMS):
+        tms.reset()
 
 
 @pytest.fixture
@@ -429,7 +428,7 @@ def reset_cache(application_session, request):
 
 @pytest.fixture
 def application(
-        application_session, preserve_settings, reset_solr, reset_es,
+        application_session, preserve_settings, reset_search,
         reset_cache, zodb, request):
     # This application_session/application split is a bit clumsy, but some
     # things (e.g. reset connector, teardown zodb) needs to be called after
@@ -999,7 +998,7 @@ class MockES(MockSearch):
         self._results = value
 
 
-class MockTMS(zeit.retresco.connection.TMS):
+class MockTMS(zeit.retresco.connection.TMS, MockSearch):
     """Stub with empty results."""
 
     def __init__(self):
@@ -1009,11 +1008,16 @@ class MockTMS(zeit.retresco.connection.TMS):
         return True
 
     def _request(self, *args, **kw):
-        # XXX unclear if this properly stubs out all public functions
+        # XXX unclear if this properly stubs out all remaining public functions
         return collections.defaultdict(lambda: None)
 
     def get_topicpages(self, *args, **kw):
         return zeit.cms.interfaces.Result()
+
+    def get_topicpage_documents(self, id, start=0, rows=25, filter=None):
+        result = zeit.cms.interfaces.Result(self.pop_results(rows))
+        result.hits = self._hits
+        return result
 
     def get_article_body(self, content, timeout=None):
         content = zeit.cms.interfaces.ICMSContent(content.uniqueId)

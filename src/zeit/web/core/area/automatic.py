@@ -138,7 +138,7 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
 
 
-class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery):
+class TMSContentResolveMixin(object):
 
     def _resolve(self, doc):
         content = zeit.retresco.interfaces.ITMSContent(doc)
@@ -147,16 +147,24 @@ class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery):
         return content
 
 
+class TMSContentQuery(
+        TMSContentResolveMixin,
+        zeit.content.cp.automatic.TMSContentQuery):
+    pass
+
+
 class ElasticsearchContentQuery(
+        TMSContentResolveMixin,
         zeit.content.cp.automatic.ElasticsearchContentQuery):
 
     include_payload = True
 
-    def _resolve(self, doc):
-        content = zeit.retresco.interfaces.ITMSContent(doc)
-        zeit.web.core.repository.add_marker_interfaces(
-            content, in_repository=False)
-        return content
+
+class CustomContentQuery(
+        TMSContentResolveMixin,
+        zeit.content.cp.automatic.CustomContentQuery):
+
+    include_payload = True
 
 
 class TopicsitemapContentQuery(zeit.content.cp.automatic.ContentQuery):
@@ -180,7 +188,7 @@ class TopicsitemapContentQuery(zeit.content.cp.automatic.ContentQuery):
                 }, None)
                 if content is not None:
                     result.append(content)
-        except:
+        except Exception:
             log.warning(
                 'Error retrieving topic pages for %s',
                 self.context.uniqueId, exc_info=True)
