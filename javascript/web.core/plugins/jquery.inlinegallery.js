@@ -193,11 +193,12 @@
 
                     /* additional buttons on image */
                     nextButton.insertAfter( gallery ).on( 'click', function() {
-                        triggerNextSlide();
-
+                        // triggerNextSlide is not working here...-> duplicate tracking
+                        slider.goToNextSlide();
                     });
                     backButton.insertAfter( gallery ).on( 'click', function() {
-                        triggerPrevSlide();
+                        // triggerPrevSlide is not working here... -> duplicate tracking
+                        slider.goToPrevSlide();
                     });
 
                     /* add icons to existing gallery buttons */
@@ -219,12 +220,16 @@
                 setFigCaptionWidth( figures.first() );
             };
 
-            options.onSlideBefore = function( slide ) {
+            options.onSlideBefore = function( slide, previous, next ) {
                 setFigCaptionWidth( slide );
-            };
 
-            options.onSliderResize = function() {
-                galleryWidth = gallery.width();
+                // clicktracking on mobile devices (only swipe)
+                if ( hasTouch ) {
+                    // no need to check if dots clicked or swiped.
+                    // those where not triggered for me
+                    var nextitemIndex = ( previous < next ) ? previous : next;
+                    $( '.bx-pager-link' )[ nextitemIndex ].click();
+                }
             };
 
             slider = gallery.bxSlider( options );
