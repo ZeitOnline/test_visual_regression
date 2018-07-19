@@ -71,6 +71,21 @@
             );
         }
 
+        // trigger next slide
+        // this shall be used, rather then `slider.goToNextSlide();`
+        // BECAUSE: Clicktracking only possible that way
+        function triggerNextSlide() {
+            $( '.bx-next' ).click();
+        }
+
+        // trigger next slide
+        // this shall be used, rather then `slider.goToNextSlide();`
+        // BECAUSE: Clicktracking only possible that way
+        function triggerPrevSlide() {
+            $( '.bx-prev' ).click();
+        }
+
+
         return this.each( function() {
             var gallery = $( this ),
                 galleryWidth = gallery.width(),
@@ -94,12 +109,12 @@
                     switch ( e.keyCode ) {
                         case DOM_VK_RIGHT:
                             if ( isElementInViewport( sliderViewport ) ) {
-                                slider.goToNextSlide();
+                                triggerNextSlide();
                             }
                             break;
                         case DOM_VK_LEFT:
                             if ( isElementInViewport( sliderViewport ) ) {
-                                slider.goToPrevSlide();
+                                triggerPrevSlide();
                             }
                             break;
                     }
@@ -178,10 +193,11 @@
 
                     /* additional buttons on image */
                     nextButton.insertAfter( gallery ).on( 'click', function() {
-                        slider.goToNextSlide();
+                        triggerNextSlide();
+
                     });
                     backButton.insertAfter( gallery ).on( 'click', function() {
-                        slider.goToPrevSlide();
+                        triggerPrevSlide();
                     });
 
                     /* add icons to existing gallery buttons */
