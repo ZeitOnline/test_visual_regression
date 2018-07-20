@@ -68,9 +68,14 @@
 
 	&__manualimage
 		display: none
-		+respond-min($break-tablet-min)
-			display: inline
-			margin: remify(20px 0 10px)
+		+respond-min($break-phablet-min)
+			background-image: url("../../images/addefend-browser.png")
+			background-position: top center
+			background-repeat: no-repeat
+			background-size: 95%
+			display: block
+			height: 175px
+			margin: remify(30px 0 10px)
 
 	&__list
 		counter-reset: numList

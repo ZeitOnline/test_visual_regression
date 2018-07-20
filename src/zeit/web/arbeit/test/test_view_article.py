@@ -274,7 +274,17 @@ def test_zar_article_should_provide_jobboxticker(
     assert 'http://my_landing_page' == jobbox_ticker.landing_page_url
 
 
-def test_zar_article_should_show_jobboxticker(testbrowser):
+def test_zar_article_should_show_jobboxticker(
+        testbrowser, monkeypatch, file_from_data):
+
+    def myget(url, timeout=1):
+        xml = lxml.etree.parse(file_from_data('/jobboxticker/feed.rss'))
+        mymock = mock.Mock()
+        mymock.content = lxml.etree.tostring(xml)
+        return mymock
+
+    monkeypatch.setattr(requests, 'get', myget)
+
     browser = testbrowser('/arbeit/article/jobbox-ticker')
     assert browser.cssselect('.jobbox-ticker')
     assert browser.cssselect('.jobbox-ticker-item__title')

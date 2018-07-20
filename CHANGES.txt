@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - PERF: Use ES results for rendering of custom queries too
 
+- FIX: Adjust imagepath in addefend hint
+
 
 3.172 (2018-07-18)
 ------------------
