@@ -148,7 +148,7 @@ def test_gallery_provides_expected_webtrekk_string(
     driver.find_element_by_class_name('bx-overlay-next').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.gallery.2.2.2.ein_bild_vor')
+        'stationaer.gallery.1.2.2.ein_bild_vor')
     assert tracking_data.endswith(pathname)
 
     # wait for sliding animation
@@ -157,7 +157,7 @@ def test_gallery_provides_expected_webtrekk_string(
     driver.find_element_by_class_name('bx-overlay-prev').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.gallery.2.1.1.ein_bild_zurueck')
+        'stationaer.gallery.1.1.1.ein_bild_zurueck')
     assert tracking_data.endswith(pathname)
 
 

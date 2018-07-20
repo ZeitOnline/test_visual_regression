@@ -15,9 +15,9 @@ POSTDEPLOY
 3.173 (unreleased)
 ------------------
 
-- PERF: Use ES results for rendering of custom queries too
+- BUG-879: Image galleries - mobile tracking incomplete
 
-- FIX: Adjust imagepath in addefend hint
+- PERF: Use ES results for rendering of custom queries too
 
 
 3.172 (2018-07-18)

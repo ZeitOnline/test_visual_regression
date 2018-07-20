@@ -71,6 +71,21 @@
             );
         }
 
+        // trigger next slide
+        // this shall be used, rather then `slider.goToNextSlide();`
+        // BECAUSE: Clicktracking only possible that way
+        function triggerNextSlide() {
+            $( '.bx-next' ).click();
+        }
+
+        // trigger next slide
+        // this shall be used, rather then `slider.goToNextSlide();`
+        // BECAUSE: Clicktracking only possible that way
+        function triggerPrevSlide() {
+            $( '.bx-prev' ).click();
+        }
+
+
         return this.each( function() {
             var gallery = $( this ),
                 galleryWidth = gallery.width(),
@@ -94,12 +109,12 @@
                     switch ( e.keyCode ) {
                         case DOM_VK_RIGHT:
                             if ( isElementInViewport( sliderViewport ) ) {
-                                slider.goToNextSlide();
+                                triggerNextSlide();
                             }
                             break;
                         case DOM_VK_LEFT:
                             if ( isElementInViewport( sliderViewport ) ) {
-                                slider.goToPrevSlide();
+                                triggerPrevSlide();
                             }
                             break;
                     }
@@ -177,11 +192,13 @@
                 if ( !hasTouch ) {
 
                     /* additional buttons on image */
-                    nextButton.insertAfter( gallery ).on( 'click', function() {
-                        slider.goToNextSlide();
+                    nextButton.insertAfter( gallery ).on( 'click', function( e ) {
+                        triggerNextSlide();
+                        e.stopImmediatePropagation(); // do not click the button too
                     });
-                    backButton.insertAfter( gallery ).on( 'click', function() {
-                        slider.goToPrevSlide();
+                    backButton.insertAfter( gallery ).on( 'click', function( e ) {
+                        triggerPrevSlide();
+                        e.stopImmediatePropagation(); // do not click the button too
                     });
 
                     /* add icons to existing gallery buttons */
@@ -203,12 +220,16 @@
                 setFigCaptionWidth( figures.first() );
             };
 
-            options.onSlideBefore = function( slide ) {
+            options.onSlideBefore = function( slide, previous, next ) {
                 setFigCaptionWidth( slide );
-            };
 
-            options.onSliderResize = function() {
-                galleryWidth = gallery.width();
+                // clicktracking on mobile devices (only swipe)
+                if ( hasTouch ) {
+                    // no need to check if dots clicked or swiped.
+                    // those where not triggered for me
+                    var nextitemIndex = ( previous < next ) ? previous : next;
+                    $( '.bx-pager-link' )[ nextitemIndex ].click();
+                }
             };
 
             slider = gallery.bxSlider( options );
