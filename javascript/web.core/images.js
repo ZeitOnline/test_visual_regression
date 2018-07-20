@@ -11,6 +11,10 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     var images = [],
         $w = $( window ),
         threshold = 300,
+        intersectionObserverConfig = {
+            rootMargin: '300px 0px',
+            threshold: 0.01
+        },
         proxyScreen = {
             breakpoint: Zeit.breakpoint.get(),
             width: $w.width()
@@ -271,6 +275,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         return elementBottom >= windowTop - threshold && elementTop <= windowBottom + threshold;
     }
 
+
     /**
      * images.js: collect images in viewport and show them
      * event for unveiling lazy images
@@ -353,6 +358,32 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     }
 
     /**
+     * images.js: add intersection observer to images and handle showing
+     * @function addIntersectionObserver
+     */
+    function addIntersectionObserver() {
+        // init intersection observer with configurations
+        var observer = new IntersectionObserver( onIntersection, intersectionObserverConfig );
+
+        // function to be called when image is almost in viewport
+        function onIntersection( entries ) {
+            entries.forEach( function( entry ) {
+                if ( entry.intersectionRatio > 0 ) {
+                    // remove listener to only call once
+                    observer.unobserve( entry.target );
+                    // show images which will be in viewport
+                    showLazyImages();
+                }
+            });
+        }
+
+        // add intersection observer to images
+        images.forEach( function( image ) {
+            observer.observe( image[ 0 ]);
+        });
+    }
+
+    /**
      * images.js: initialize images
      * @function init
      * @param  {object} options jQuery styled preferences object
@@ -375,7 +406,17 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
         images = prepareImages();
         showImages();
-        $w.on( 'scroll.lazy', Zeit.throttle( showLazyImages, 50 ) );
+
+        if ( !( 'IntersectionObserver' in window ) &&
+            !( 'IntersectionObserverEntry' in window ) &&
+            !( 'intersectionRatio' in window.IntersectionObserverEntry.prototype ) ) {
+            // does not support intersectionObserver
+            $w.on( 'scroll.lazy', Zeit.throttle( showLazyImages, 50 ) );
+        } else {
+            addIntersectionObserver();
+        }
+
+        // show inital images
         showLazyImages();
         $w.on( 'resize.rescale', Zeit.debounce( rescaleAll, 1000 ) );
     }
