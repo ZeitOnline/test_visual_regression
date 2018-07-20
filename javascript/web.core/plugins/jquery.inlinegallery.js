@@ -192,13 +192,13 @@
                 if ( !hasTouch ) {
 
                     /* additional buttons on image */
-                    nextButton.insertAfter( gallery ).on( 'click', function() {
-                        // triggerNextSlide is not working here...-> duplicate tracking
-                        slider.goToNextSlide();
+                    nextButton.insertAfter( gallery ).on( 'click', function( e ) {
+                        triggerNextSlide();
+                        e.stopImmediatePropagation(); // do not click the button too
                     });
-                    backButton.insertAfter( gallery ).on( 'click', function() {
-                        // triggerPrevSlide is not working here... -> duplicate tracking
-                        slider.goToPrevSlide();
+                    backButton.insertAfter( gallery ).on( 'click', function( e ) {
+                        triggerPrevSlide();
+                        e.stopImmediatePropagation(); // do not click the button too
                     });
 
                     /* add icons to existing gallery buttons */
