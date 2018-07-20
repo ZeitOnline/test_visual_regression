@@ -1365,43 +1365,53 @@ def test_zmo_parquet_has_zmo_styles(testbrowser):
         assert 'teaser-small__kicker--zmo-parquet' in kicker_classname
 
 
-def test_jobbox_is_displayed_correctly(testbrowser):
+def test_jobbox_is_displayed_correctly(
+        testbrowser, monkeypatch, file_from_data):
+
+    def myget(url, timeout=1):
+        xml = lxml.etree.parse(file_from_data('/jobboxticker/feed.rss'))
+        mymock = mock.Mock()
+        mymock.content = lxml.etree.tostring(xml)
+        return mymock
+
+    monkeypatch.setattr(requests, 'get', myget)
+
     browser = testbrowser('/zeit-online/jobbox')
 
     # in main area
     box = browser.cssselect('.jobbox--major')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 10
-    assert len(box.cssselect('.jobbox__title')) == 10
-    assert len(box.cssselect('.jobbox__byline')) == 10
+    assert len(box.cssselect('.jobbox__job')) == 2
+    assert len(box.cssselect('.jobbox__title')) == 2
+    assert len(box.cssselect('.jobbox__byline')) == 2
     assert len(box.cssselect('.jobbox__action'))
 
     # in minor area
     box = browser.cssselect('.jobbox--minor')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 10
-    assert len(box.cssselect('.jobbox__title')) == 10
-    assert len(box.cssselect('.jobbox__byline')) == 10
+    assert len(box.cssselect('.jobbox__job')) == 2
+    assert len(box.cssselect('.jobbox__title')) == 2
+    assert len(box.cssselect('.jobbox__byline')) == 2
     assert len(box.cssselect('.jobbox__action'))
 
     # in duo area
     box = browser.cssselect('.jobbox--duo')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__header'))
-    assert len(box.cssselect('.jobbox__job')) == 10
-    assert len(box.cssselect('.jobbox__title')) == 10
-    assert len(box.cssselect('.jobbox__byline')) == 10
+    assert len(box.cssselect('.jobbox__job')) == 2
+    assert len(box.cssselect('.jobbox__title')) == 2
+    assert len(box.cssselect('.jobbox__byline')) == 2
     assert len(box.cssselect('.jobbox__action'))
 
     # in parquet area
     box = browser.cssselect('.jobbox--parquet')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 10
-    assert len(box.cssselect('.jobbox__title')) == 10
-    assert len(box.cssselect('.jobbox__byline')) == 10
+    assert len(box.cssselect('.jobbox__job')) == 2
+    assert len(box.cssselect('.jobbox__title')) == 2
+    assert len(box.cssselect('.jobbox__byline')) == 2
     assert len(box.cssselect('.jobbox__action'))
 
 
@@ -1431,7 +1441,17 @@ def test_partnerbox_jobs_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.partner__dropdown-option')) == 9
 
 
-def test_partnerbox_jobs_dropdown_works(selenium_driver, testserver):
+def test_partnerbox_jobs_dropdown_works(
+        selenium_driver, testserver, monkeypatch, file_from_data):
+
+    def myget(url, timeout=1):
+        xml = lxml.etree.parse(file_from_data('/jobboxticker/feed.rss'))
+        mymock = mock.Mock()
+        mymock.content = lxml.etree.tostring(xml)
+        return mymock
+
+    monkeypatch.setattr(requests, 'get', myget)
+
     driver = selenium_driver
     driver.get('%s/zeit-online/partnerbox-jobs' % testserver.url)
     dropdown = driver.find_elements_by_class_name('partner__dropdown')[0]
@@ -1440,7 +1460,6 @@ def test_partnerbox_jobs_dropdown_works(selenium_driver, testserver):
     # test without selecting anything
     button.click()
     assert 'jobs.zeit.de' in driver.current_url
-    assert 'stellenmarkt.funktionsbox.streifen' in driver.current_url
 
     # test with selected dropdown
     driver.get('%s/zeit-online/partnerbox-jobs' % testserver.url)
@@ -1450,8 +1469,7 @@ def test_partnerbox_jobs_dropdown_works(selenium_driver, testserver):
     dropdown.find_element_by_xpath(
         "//option[text()='Kunst & Kultur']").click()
     button.click()
-    assert 'stellenmarkt/kultur_kunst' in driver.current_url
-    assert 'stellenmarkt.funktionsbox.streifen' in driver.current_url
+    assert 'stellenanzeigen/branche-kultur' in driver.current_url
 
 
 def test_partnerbox_reisen_is_displayed_correctly(testbrowser):
