@@ -52,6 +52,14 @@ AdDefend.prototype.handleOverlay = function() {
     // tracking
     this.track( 'view', 'banner', this.config.trackingId );
 
+    // generate time for cookie expiring
+    var date = new Date();
+    var minutes = that.config.cookieExpire;
+    date.setTime( date.getTime() + ( minutes * 60 * 1000 ) );
+
+    // keep update-overlay back
+    document.cookie = 'overlaycanceled' + '=' + 'canceled' + ';path=/;expires=' + date;
+
     // Show manual button
     $( '#addefend-guide' ).click( function() {
         $( '#addefend-note' ).fadeOut();
@@ -68,9 +76,6 @@ AdDefend.prototype.handleOverlay = function() {
 
         // fadein manual
         $( '#addefend-manual' ).delay( 500 ).fadeIn();
-
-        // keep update-overlay back
-        zeit.cookieCreate( 'overlaycanceled', 'canceled', that.config.cookieExpire );
 
         // track click
         that.track( 'deactivate', 'banner', that.config.trackingId );
@@ -94,7 +99,7 @@ AdDefend.prototype.handleOverlay = function() {
         that.track( 'cancel', '', that.config.trackingId );
 
         // hide addefend notice for the time that are set in the config
-        zeit.cookieCreate( that.config.cookieName, 'true', that.config.cookieExpire );
+        document.cookie = that.config.cookieName + '=' + 'true' + ';path=/;expires=' + date;
     });
 };
 

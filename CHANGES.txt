@@ -12,10 +12,21 @@ POSTDEPLOY
 - Nothing
 
 
-3.173 (unreleased)
+3.174 (unreleased)
 ------------------
 
+- Nothing changed yet.
+
+
+3.173 (2018-07-23)
+------------------
+
+- BUG-879: Image galleries - mobile tracking incomplete
+
 - PERF: Use ES results for rendering of custom queries too
+
+- PERF: Don't fall back to article image for ES results,
+  as accessing the body on CPs with many teasers is too expensive
 
 
 3.172 (2018-07-18)
