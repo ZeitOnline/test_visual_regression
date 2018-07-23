@@ -1,0 +1,51 @@
+// letter-spacing
+$zon-letter-spacing-m: 0.05em !default
+$zon-letter-spacing-s: 0.03em !default
+
+// colors
+$zon-red: #b91109
+$zon-mid-dark-grey: #767676
+
+// semantic colors
+$color-text-highlighted: $zon-red
+
+.newsteaser
+	font-size: remify(15px)
+	padding-bottom: remify(5px)
+	line-height: 1.33
+
+	&__time
+		float: left
+		color: $zon-mid-dark-grey
+		letter-spacing: $zon-letter-spacing-s
+		font-variant-numeric: tabular-nums
+	&__text
+		margin-left: remify(64px)
+		&--on-autotopic,
+		&--on-manualtopic
+			margin-left: remify(112px)
+	&__heading
+		display: inline
+		font-size: 1em
+		font-weight: normal
+		margin: 0
+	&__kicker
+		color: $color-text-highlighted
+		font-weight: bold
+		letter-spacing: $zon-letter-spacing-m
+		margin-right: remify(5px)
+	&__product
+		color: $zon-mid-dark-grey
+		font-size: remify(12px)
+		white-space: nowrap
+		&:before
+			content: "\2014"
+			margin-right: remify(5px)
+
++respond-min($break-tablet-min)
+	.newsticker
+		&__column
+			float: left
+			width: 50%
+			&:nth-last-child(even)
+				padding-right: remify(15px)
