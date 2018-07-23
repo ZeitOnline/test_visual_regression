@@ -408,8 +408,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         showImages();
 
         if ( !( 'IntersectionObserver' in window ) &&
-            !( 'IntersectionObserverEntry' in window ) &&
-            !( 'intersectionRatio' in window.IntersectionObserverEntry.prototype ) ) {
+            !( 'IntersectionObserverEntry' in window ) ) {
             // does not support intersectionObserver
             $w.on( 'scroll.lazy', Zeit.throttle( showLazyImages, 50 ) );
         } else {
