@@ -372,7 +372,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     // remove listener to only call once
                     observer.unobserve( entry.target );
                     // show images which will be in viewport
-                    showLazyImages();
+                    showImages( entry.target );
                 }
             });
         }
