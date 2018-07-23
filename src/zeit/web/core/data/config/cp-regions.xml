@@ -93,6 +93,9 @@
     <region kind="solo" title="Schlagzeilen-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="newsticker"/>
     </region>
+    <region kind="solo" title="Schlagzeilen-Region" type="!storystream" available="zeit.arbeit.interfaces.IZARContent">
+        <area kind="newsticker"/>
+    </region>
     <region kind="topic" title="Thema-Region (Dossier)" type="!storystream">
         <area kind="topic"/>
     </region>
