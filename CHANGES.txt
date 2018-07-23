@@ -12,7 +12,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.173 (unreleased)
+3.173 (2018-07-23)
 ------------------
 
 - BUG-879: Image galleries - mobile tracking incomplete
