@@ -2,6 +2,8 @@
 
 {% set image = get_image(module, fallback=fallback_image) %}
 {% set href = teaser | create_url | append_campaign_params %}
+{% set target = teaser.target %}
+{% set rel = 'noopener' if target == '_blank' %}
 {% set media_caption_additional_class = 'figcaption--hidden' %}
 
 {% block media_link_title %}{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}{% endblock %}
