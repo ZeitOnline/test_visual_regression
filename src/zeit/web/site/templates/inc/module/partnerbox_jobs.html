@@ -11,7 +11,14 @@
 {% block intro %}Starten Sie jetzt die Jobsuche und entdecken Sie passende Stellenangebote mit Perspektive.{% endblock %}
 
 {% block dropdown %}
-    {{ partner_macro.dropdown_jobs() }}
+    <select class="partner__dropdown" data-tracklink="?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.funktionsbox.streifen.berufsfeld_auswahl.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=funktionsbox_streifen_berufsfeld_auswahl_">
+        <option class="partner__dropdown-option">Berufsfeld auswählen</option>
+        {% for joblist in module.jobs %}
+            {% for job in joblist %}
+                <option class="partner__dropdown-option" value="{{ job.href }}">{{ job.title }}</option>
+            {% endfor %}
+        {% endfor %}
+    </select>
 {% endblock %}
 
 {% block button %}Jobs finden{% endblock %}
