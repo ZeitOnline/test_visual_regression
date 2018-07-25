@@ -108,14 +108,21 @@
 			display: none
 
 		&__text-button
-			margin-top: 0
+			height: 10px
+			left: remify(10px)
+			margin: 0
 			padding: 0
 			position: absolute
-			top: 0
-			left: remify(7px)
-			right: auto
-			width: auto
-			font-size: 1.5rem
+			top: remify(10px)
+			width: 10px
+			&::after
+				content: '\d7' // close icon
+				font-size: 1.5rem
+				position: absolute
+				top: -10px
+				left: 0
+			span
+				+visuallyhidden
 
 @keyframes slideIn
 	from
