@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - FEM-74: Use IntersectionObserver to lazy load Images
 
+- BUG-970: Make overlay cancel button clickable in FF
+
 
 3.173 (2018-07-23)
 ------------------
