@@ -6,7 +6,7 @@
         <h2 class="{{ self.layout() }}__title">Der Stellenmarkt der ZEIT</h2>
         <p class="{{ self.layout() }}__text">Starten Sie jetzt die Jobsuche und entdecken Sie passende Stellenangebote mit Perspektive.</p>
 
-        <select class="{{ self.layout() }}__dropdown" data-tracklink="?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.funktionsbox.streifen.berufsfeld_auswahl.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=funktionsbox_streifen_berufsfeld_auswahl_">
+        <select class="{{ self.layout() }}__dropdown" data-tracklink="">
             <option class="{{ self.layout() }}__dropdown-option">Berufsfeld auswählen</option>
             {% for joblist in module.jobs %}
                 {% for job in joblist %}
@@ -14,8 +14,9 @@
                 {% endfor %}
             {% endfor %}
         </select>
-        <a class="{{ self.layout() }}__button js-dropdownlink-submit" href="https://jobs.zeit.de/action/account/create/agent-all?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.funktionsbox.streifen.startseite.&amp;utm_medium=fix&amp;utm_source=zeitde_zonpmr_int&amp;utm_campaign=stellenmarkt&amp;utm_content=funktionsbox_streifen_startseite_">Jobs finden</a>
 
-        <p class="{{ self.layout() }}__text"><a class="{{ self.layout() }}__link" href="https://jobs.zeit.de/action/account/create/agent-all?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.funktionsbox.streifen.job_nl_bestellen.&amp;utm_medium=fix&amp;utm_source=zeitde_zonpmr_int&amp;utm_campaign=stellenmarkt&amp;utm_content=funktionsbox_streifen_job_nl_bestellen_">Jobs per Mail</a></p>
+        <a class="{{ self.layout() }}__button js-dropdownlink-submit" href="{{ module.button.link }}">Jobs finden</a>
+
+        <p class="{{ self.layout() }}__text"><a class="{{ self.layout() }}__link" href="{{ module.link.link }}">{{ module.link.title }}</a></p>
     </div>
 </aside>

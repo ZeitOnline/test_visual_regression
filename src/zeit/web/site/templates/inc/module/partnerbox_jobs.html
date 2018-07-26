@@ -11,7 +11,7 @@
 {% block intro %}Starten Sie jetzt die Jobsuche und entdecken Sie passende Stellenangebote mit Perspektive.{% endblock %}
 
 {% block dropdown %}
-    <select class="partner__dropdown" data-tracklink="?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.funktionsbox.streifen.berufsfeld_auswahl.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=funktionsbox_streifen_berufsfeld_auswahl_">
+    <select class="partner__dropdown" data-tracklink="">
         <option class="partner__dropdown-option">Berufsfeld auswählen</option>
         {% for joblist in module.jobs %}
             {% for job in joblist %}
@@ -23,10 +23,6 @@
 
 {% block button %}Jobs finden{% endblock %}
 
-{% block link_button %}https://jobs.zeit.de/action/account/create/agent-all?wt_zmc=fix.int.zonpmr.z
-eitde.stellenmarkt.funktionsbox.streifen.startseite.&amp;utm_medium=fix&amp;utm_sou
-rce=zeitde_zonpmr_int&amp;utm_campaign=stellenmarkt&amp;utm_content=funktionsbox_st
-reifen_startseite_{% endblock %}
+{% block link_button %}{{ module.button.link }}{% endblock %}
 
-{% block link_bottom %}<a class="partner__link-url" href="https://jobs.zeit.de/action/account/create/agent-all?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.funktionsbox.streifen.job_nl_bestellen.&amp;utm_medium=fix&amp;utm_source=zeitde_zonpmr_int&amp;utm_campaign=stellenmarkt&amp;utm_content=funktionsbox_streifen_job_nl_bestellen_
-">Jobs per Mail</a>{% endblock %}
+{% block link_bottom %}<a class="partner__link-url" href="{{ module.link.link }}">{{ module.link.title }}</a>{% endblock %}

@@ -29,7 +29,16 @@ class JobboxDropdownSource(zeit.cms.content.sources.SimpleXMLSourceBase):
             unicode(job.get('id')),
             unicode(job.get('title')),
             unicode(job.text.strip()))
-            for job in tree.getchildren()]
+            for job in tree.xpath('//job')]
+
+    def get_info(self, type):
+        tree = self._get_tree()
+        element = tree.xpath('//{}'.format(type))[0]
+        return {
+            'id': unicode(element.get('id')),
+            'title': unicode(element.get('title')),
+            'link': unicode(element.text.strip())
+        }
 
 
 class JobboxDropdown(zeit.web.core.centerpage.Module):
@@ -40,3 +49,11 @@ class JobboxDropdown(zeit.web.core.centerpage.Module):
     @zeit.web.reify
     def jobs(self):
         return iter(self.source)
+
+    @zeit.web.reify
+    def button(self):
+        return JobboxDropdownSource.get_info(self.source, 'defaultLink')
+
+    @zeit.web.reify
+    def link(self):
+        return JobboxDropdownSource.get_info(self.source, 'mailLink')
