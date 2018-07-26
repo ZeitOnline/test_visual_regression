@@ -16,6 +16,7 @@ import zope.component
 import zope.interface
 
 from zeit.cms.checkout.interfaces import ILocalContent
+from zeit.retresco.interfaces import ITMSContent
 import zeit.cms.workflow.interfaces
 import zeit.content.author.interfaces
 import zeit.content.gallery.interfaces
@@ -363,7 +364,11 @@ def images_from_article_with_fallback_body_image(context):
     # ZCA does not support "fall back to the next less specific adapter",
     # so we hardcode it.
     teaser_img = zeit.content.image.imagereference.ImagesAdapter(context)
-    if teaser_img.image is not None or ILocalContent.providedBy(context):
+    if (teaser_img.image is not None or
+            # workingcopy needs to be writeable
+            ILocalContent.providedBy(context) or
+            # has prohibitive performance impact on CPs with lots of teasers
+            ITMSContent.providedBy(context)):
         return teaser_img
     article_img = context.main_image.target
     return InMemoryImages(context, article_img)
