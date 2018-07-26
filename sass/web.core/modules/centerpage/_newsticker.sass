@@ -1,14 +1,3 @@
-// letter-spacing
-$zon-letter-spacing-m: 0.05em !default
-$zon-letter-spacing-s: 0.03em !default
-
-// colors
-$zon-red: #b91109
-$zon-mid-dark-grey: #767676
-
-// semantic colors
-$color-text-highlighted: $zon-red
-
 .newsteaser
 	font-size: remify(15px)
 	padding-bottom: remify(5px)
@@ -17,7 +6,7 @@ $color-text-highlighted: $zon-red
 	&__time
 		float: left
 		color: $zon-mid-dark-grey
-		letter-spacing: $zon-letter-spacing-s
+		letter-spacing: $letter-spacing-s
 		font-variant-numeric: tabular-nums
 	&__text
 		margin-left: remify(64px)
@@ -30,9 +19,9 @@ $color-text-highlighted: $zon-red
 		font-weight: normal
 		margin: 0
 	&__kicker
-		color: $color-text-highlighted
+		color: $zon-red
 		font-weight: bold
-		letter-spacing: $zon-letter-spacing-m
+		letter-spacing: $letter-spacing-m
 		margin-right: remify(5px)
 	&__product
 		color: $zon-mid-dark-grey

@@ -17,31 +17,28 @@
 			margin: 0 auto
 			max-width: $medium-content-width
 
-		&--newsticker
-			padding: 0 $page-padding--small
+.cp-area--newsticker
+	padding: 0 $page-padding--small
 
-		&--newsticker-on-autotopic,
-		&--newsticker-on-manualtopic
-			+pie-clearfix
-			border-color: $color-border
-			border-style: solid
-			border-width: 1px 0
-			padding-bottom: $vertical-space
+	&-on-autotopic,
+	&-on-manualtopic
+		+pie-clearfix
+		border-color: $color-border
+		border-style: solid
+		border-width: 1px 0
+		padding: $vertical-space $page-padding--small
 
-		+respond-min($break-areas)
-			&--newsticker
-				clear: both
-				margin: 0 auto
-				padding: 0 $page-padding
-			&--newsticker-on-autotopic,
-			&--newsticker-on-manualtopic
-				padding: remify(20px) $page-padding
-			&--newsticker-on-autotopic,
-			&--newsticker-on-manualtopic
-				$max-ranking-width: $medium-content-width + 2 * $page-padding
-				$ranking-box-shadow-width: (remify(780px) - $max-ranking-width) / 2
-				background-color: $color-page-bg
-				box-shadow: remify(-$ranking-box-shadow-width) 0 0 $color-page-bg, remify($ranking-box-shadow-width) 0 0 $color-page-bg
-				max-width: $max-ranking-width
-				padding-top: remify(20px)
-				position: relative // give stacking context to align above header-image
+	+respond-min($break-tablet-min)
+		clear: both
+		margin: 0 auto
+		padding: 0 $page-padding
+
+		&-on-autotopic,
+		&-on-manualtopic
+			$max-ranking-width: $medium-content-width + 2 * $page-padding
+			$ranking-box-shadow-width: (remify(780px) - $max-ranking-width) / 2
+			background-color: $color-page-bg
+			box-shadow: remify(-$ranking-box-shadow-width) 0 0 $color-page-bg, remify($ranking-box-shadow-width) 0 0 $color-page-bg
+			max-width: $max-ranking-width
+			padding: remify(20px) $page-padding
+			position: relative // give stacking context to align above header-image
