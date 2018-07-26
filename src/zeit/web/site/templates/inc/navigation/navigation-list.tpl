@@ -10,7 +10,7 @@
         {% set link_css_class = '{}-link--current'.format(class) %}
     {% endif %}
 
-    <li {%- if item.label %} class="{{ class }}-item--has-label" data-label="{{ item.label }}"{% endif %}
+    <li {%- if item.label %} class="{{ class }}-item--has-label" data-label="{{ item.label }}" {% else %} class="nav__dropdown-item--{{ item.text|format_webtrekk }}"{% endif %}
         {%- if item | length %} class="{{ class }}-item--has-dropdown"{% endif %}>
         <a href="{{ item.href | create_url }}"
             {%- if link_css_class %} class="{{ link_css_class }}" {% endif -%}
@@ -39,8 +39,8 @@
     </li>
     {% if toggles('dtag_navigation') -%}
     <li class="{{ class }}-item--featured">
-        <a itemprop="url" href="{{ request.route_url('home') }}thema/d18">
-           {{ lama.use_svg_icon('logo-d18-yellow', 'nav__ressorts-item--icon-featured-d18', view.package) }}
+        <a itemprop="url" href="{{ request.route_url('home') }}exklusive-zeit-artikel">
+           {{ lama.use_svg_icon('zplus', 'svg-symbol teaser-small__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
         </a>
     </li>
     {% endif %}
