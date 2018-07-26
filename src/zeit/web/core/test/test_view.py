@@ -882,7 +882,7 @@ def test_404_page_should_have_fallback_for_errors(testbrowser):
 def test_retrieve_keywords_from_tms(application):
     zeit.web.core.application.FEATURE_TOGGLES.set('keywords_from_tms')
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['retresco_timeout'] = 0.42
+    conf['retresco_body_timeout'] = 0.42
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
