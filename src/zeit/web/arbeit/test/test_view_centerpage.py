@@ -62,13 +62,16 @@ def test_zar_jobbox_dropdown_changes_link_on_select(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/arbeit/centerpage/jobbox-dropdown' % testserver.url)
-    dropdown = driver.find_element_by_class_name('jobbox-dropdown__dropdown')
-    dropdown.find_element_by_xpath("//option[text()='Kunst & Kultur']").click()
+
+    dropdown = driver.find_element_by_css_selector(
+        '.jobbox-dropdown__dropdown')
+    option = dropdown.find_element_by_css_selector('option:nth-of-type(5)')
+    option.click()
 
     button = driver.find_element_by_class_name('jobbox-dropdown__button')
     button_url = button.get_attribute('href')
-    assert 'stellenmarkt/kultur_kunst' in button_url
-    assert 'stellenmarkt.funktionsbox.streifen' in button_url
+    assert option.text == u'Kunst & Kultur'
+    assert option.get_attribute('value') == button_url
 
 
 def test_zar_teaser_topic_has_correct_structure(testbrowser):
