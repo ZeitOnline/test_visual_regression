@@ -473,8 +473,6 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
     nav_ressort_links = '.nav__ressorts-list > li > a'
     chosen_nav_item = ressorts.find_elements_by_css_selector(
         nav_ressort_links)[9]
-    cloned_nav_item = more_dropdown.find_elements_by_css_selector(
-        '.nav__dropdown-list > li > a')[9]
     menu_link = driver.find_element_by_class_name('header__menu-link')
 
     assert chosen_nav_item.get_attribute('textContent') == 'Sport'
@@ -507,9 +505,6 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
     assert more_dropdown.is_displayed(), (
         '[on tablet] more dropdown should be visible')
     actions.move_to_element(more_dropdown).perform()
-    assert cloned_nav_item.is_displayed(), (
-        '[on tablet] chosen nav item should be visible'
-        ' in more-dropdown on :hover')
 
     # desktop
     driver.set_window_size(1000, 1024)
