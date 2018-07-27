@@ -92,9 +92,9 @@ zeit.retresco.connection.TMS._intextlink_data = TransactionBoundCache(
 class ESConnection(zeit.retresco.search.Connection):
 
     def _user_agent(self):
-        return 'zeit.web-%s/retresco/python-urllib3-%s' % (
-            pkg_resources.get_distribution('zeit.web').version,
-            urllib3.__version__)
+        return requests.utils.default_user_agent(
+            'zeit.web-%s/retresco/python-requests' % (
+                pkg_resources.get_distribution('zeit.web').version))
 
     def perform_request(self, *args, **kw):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
