@@ -15,7 +15,13 @@ POSTDEPLOY
 3.174 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4809: Add Linktracking to Brandeins Parquet
+
+- FEM-74: Use IntersectionObserver to lazy load Images
+
+- BUG-958: Make Newsticker available in ZAR
+
+- BUG-970: Make overlay cancel button clickable in FF
 
 
 3.173 (2018-07-23)
