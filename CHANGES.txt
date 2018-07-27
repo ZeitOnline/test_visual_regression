@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - FEM-74: Use IntersectionObserver to lazy load Images
 
+- BUG-945: Add target='_blank' on advertorial teaser
+
 - BUG-958: Make Newsticker available in ZAR
 
 - BUG-970: Make overlay cancel button clickable in FF
