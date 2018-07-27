@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4809: Add Linktracking to Brandeins Parquet
 
+- ZON-4815: Add Configuration for Jobbox Dropdown and Partnerbox Jobs
+
 - FEM-74: Use IntersectionObserver to lazy load Images
 
 - BUG-945: Add target='_blank' on advertorial teaser
