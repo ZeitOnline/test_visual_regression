@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/angebote/Links/das-deutsche-schulportal/das-deutsche-schulportal-3</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Link" module="zeit.content.link.link"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2018</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="cap_title">ANZEIGE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2018-05-03T11:43:15.230187+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2018-05-03T11:44:56.808868+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments_premoderate">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Verlag</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Advertorial</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2018-05-03T11:44:56.740194+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:6bc016f2-377d-45a2-875f-365c69545231}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;tuple&gt; &lt;dictionary&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;mobile&lt;/string&gt; &lt;/item&gt; &lt;item key="uses_image"&gt; &lt;false/&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;item key="variant"&gt; &lt;string&gt;ressort&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="overscrolling">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Angebote</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2018-05-03T11:44:56.573026+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2018-05-03T11:44:56.662296+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.joeres</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">link</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ADV</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2018-05-03T11:44:56.662296+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="keywords">&lt;ns0:rankedTags xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/tagging"&gt;&lt;ns0:rankedTags&gt;&lt;tag type="keyword" py:pytype="str"&gt;Schulportal&lt;/tag&gt;&lt;/ns0:rankedTags&gt;&lt;/ns0:rankedTags&gt;</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2018-05-03T11:44:56Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">6537</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Thu, 03 May 2018 11:44:56 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"1989-56b4bbb8cfca1"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
