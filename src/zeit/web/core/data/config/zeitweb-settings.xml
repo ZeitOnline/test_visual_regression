@@ -36,6 +36,7 @@
 
   <setting name="retresco_timeout" xsi:type="xsd:double">2</setting>
   <setting name="retresco_body_timeout" xsi:type="xsd:double">0.2</setting>
+  <setting name="elasticsearch_timeout" xsi:type="xsd:double">2</setting>
 
   <setting name="reach_timeout" xsi:type="xsd:double">0.2</setting>
 

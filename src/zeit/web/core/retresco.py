@@ -89,13 +89,17 @@ zeit.retresco.connection.TMS._intextlink_data = TransactionBoundCache(
     '_v_intextlink_data', dict)
 
 
-def es_user_agent(self):
-    return 'zeit.web-%s/retresco/python-urllib3-%s' % (
-        pkg_resources.get_distribution('zeit.web').version,
-        urllib3.__version__)
+class ESConnection(zeit.retresco.search.Connection):
 
+    def _user_agent(self):
+        return 'zeit.web-%s/retresco/python-urllib3-%s' % (
+            pkg_resources.get_distribution('zeit.web').version,
+            urllib3.__version__)
 
-zeit.retresco.search.Connection._user_agent = es_user_agent
+    def perform_request(self, *args, **kw):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        kw['timeout'] = conf.get('elasticsearch_timeout', 2)
+        return super(ESConnection, self).perform_request(*args, **kw)
 
 
 @SHORT_TERM_CACHE.cache_on_arguments()
