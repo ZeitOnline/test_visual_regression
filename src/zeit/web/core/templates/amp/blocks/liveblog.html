@@ -3,9 +3,9 @@
 {% if amp_blog_id -%}
     <div class="liveblog article__item article__item--large">
         {%- if block.version == '3' -%}
-            {% set esi_source = '{}/{}/{}/index.html'.format(settings('liveblog_backend_url_v3'), block.blog_id, amp_blog_id) %}
+            {% set esi_source = '/liveblog-backend-v3/{}/{}/index.html'.format(block.blog_id, amp_blog_id) %}
         {%- else -%}
-            {% set esi_source = '{}/{}.html'.format(settings('liveblog_backend_url'), amp_blog_id) %}
+            {% set esi_source = '/liveblog-backend/{}.html'.format(amp_blog_id) %}
         {%- endif -%}
         {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
     </div>

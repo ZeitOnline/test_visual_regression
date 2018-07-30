@@ -524,25 +524,19 @@ class Base(object):
 
     @zeit.web.reify
     def cardstack_head(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        url = conf.get('cardstack_backend', '').rstrip('/')
         stack_id = (u'/' + self.shared_cardstack_id if self.shared_cardstack_id
                     else u'')
-        return url + u'/stacks' + stack_id + u'/esi/head'
+        return u'/cardstack-backend/stacks' + stack_id + u'/esi/head'
 
     @zeit.web.reify
     def cardstack_body(self):
         # We use __STACK__ because {} or %s would not survive urlencoding
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        url = conf.get('cardstack_backend', '').rstrip('/')
-        return url + (u'/stacks/__STACK__/esi/body'
-                      u'?shareUrlQuerySuffix=stackId%3D__STACK__')
+        return (u'/cardstack-backend/stacks/__STACK__/esi/body'
+                u'?shareUrlQuerySuffix=stackId%3D__STACK__')
 
     @zeit.web.reify
     def cardstack_scripts(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        url = conf.get('cardstack_backend', '').rstrip('/')
-        return url + u'/stacks/esi/scripts'
+        return u'/cardstack-backend/stacks/esi/scripts'
 
     @zeit.web.reify
     def breadcrumbs(self):

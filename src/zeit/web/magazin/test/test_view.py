@@ -606,11 +606,3 @@ def test_navigation_should_handle_logged_out_user_correctly(
         request=dummy_request, **info)
 
     assert browser.cssselect('a')[0].get('href') == '/login'
-
-
-def test_url_encoding_in_login_state(testbrowser):
-    path = '/zeit-magazin/article/03?a=foo&b=<b>&c=u + i'
-    browser = testbrowser(path)
-    assert browser.document.xpath('body//header//include/@src')[0] == (
-        'http://localhost/login-state?for=magazin&context-uri={}'.format(
-            urllib.quote_plus('http://localhost' + path)))

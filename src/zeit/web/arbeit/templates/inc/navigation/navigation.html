@@ -21,7 +21,7 @@
     {%- include "zeit.web.core:templates/inc/navigation/navigation-vertical.html" -%}
     <div class="nav__login">
         {% block login %}
-            {%- set esi_source = '{}login-state?for=arbeit&context-uri={}'.format(request.route_url('home'), request.url | urlquote_plus) -%}
+            {%- set esi_source = '/login-state?for=arbeit&context-uri={}'.format(request.url | urlquote_plus) -%}
             {{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
         {% endblock login %}
     </div>

@@ -1,4 +1,4 @@
-{% set esi_source = '%slogin-state?%s' | format(request.route_url('home'), {
+{% set esi_source = '/login-state?%s' | format({
     'for': 'footer',
     'content_id': view.webtrekk_content_id,
     'content_group': view.webtrekk.contentGroup | urlencode,

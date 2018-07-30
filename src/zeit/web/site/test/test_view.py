@@ -296,7 +296,7 @@ def test_url_encoding_in_login_state(testbrowser):
     path = '/zeit-online/article/simple?a=foo&b=<b>&c=u + i'
     browser = testbrowser(path)
     assert browser.document.xpath('body//header//include/@src')[0] == (
-        'http://localhost/login-state?for=site&context-uri={}'.format(
+        '/login-state?for=site&context-uri={}'.format(
             urllib.quote_plus('http://localhost' + path)))
 
 

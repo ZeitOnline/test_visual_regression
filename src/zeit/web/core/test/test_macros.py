@@ -35,14 +35,3 @@ def test_esi_macro_should_produce_directive_depending_on_environment(
     for line in markup.splitlines():
         varnish_string += line.strip()
     assert varnish_string == html_for_varnish
-
-
-def test_esi_macro_should_not_produce_https_includes(
-        jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.core:templates/macros/layout_macro.tpl')
-    source = 'https://foo.com/bar'
-    markup = tpl.module.insert_esi(source)
-    assert markup.replace("\n", "").replace(" ", "") == (
-        '<!--[esi-debug]src="http://foo.com/bar"error_text=""-->'
-        '<esi:includesrc="http://foo.com/bar"onerror="continue"/>')

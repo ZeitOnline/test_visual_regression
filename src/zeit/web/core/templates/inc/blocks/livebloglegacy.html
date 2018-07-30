@@ -2,7 +2,7 @@
 {% if block.blog_id -%}
     <div class="liveblog
         {%- if block.collapse_preceding_content %} js-liveblog{% endif %}">
-        {% set esi_source = '{}/{}.html'.format(settings('liveblog_backend_url'), block.blog_id) %}
+        {% set esi_source = '/liveblog-backend/{}.html'.format(block.blog_id) %}
         {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
     </div>
 {%- endif %}

@@ -84,7 +84,6 @@ def test_article_renders_if_liveblog_content_backend_is_down(testbrowser):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['liveblog_api_url_v3'] = 'http://unavailable//api/blogs'
     conf['liveblog_api_auth_url_v3'] = 'http://unavailable/auth'
-    conf['liveblog_backend_url_v3'] = 'http://unavailable/v3'
     browser = testbrowser('/zeit-online/article/liveblog3')
     assert browser.cssselect('body')
     assert browser.cssselect('div#navigation')
