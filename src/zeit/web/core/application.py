@@ -15,6 +15,7 @@ import pyramid.request
 import pyramid.interfaces
 import pyramid_jinja2
 import pyramid_zodbconn
+import werkzeug.wsgi
 import venusian
 import zc.sourcefactory.source
 import zope.app.appsetup.appsetup
@@ -469,3 +470,24 @@ class SSLRequest(pyramid.request.Request):
         else:
             self.environ['wsgi.url_scheme'] = 'http'
         return super(SSLRequest, self).host_port
+
+
+def wsgi_proxy_filter(global_conf, **local_conf):
+    """WSGI middleware that catches a set of configured url paths and proxies
+    them through to another URL instead of the original application.
+    Example usage::
+        [filter:esiproxy]
+        use = egg:zeit.web#proxy
+        target = https://www.zeit.de
+        paths =
+            /cardstack-backend
+            /liveblog-backend
+            /liveblog-backend-v3
+    """
+    mapping = {}
+    for path in local_conf['paths'].split():
+        mapping[path.strip()] = {'target': local_conf['target']}
+
+    def wsgi_proxy_filter(app):
+        return werkzeug.wsgi.ProxyMiddleware(app, mapping)
+    return wsgi_proxy_filter

@@ -49,7 +49,7 @@ setup(
         'requests',
         'requests-file',
         'setuptools',
-        'wsgiproxy',
+        'werkzeug',
         'zc.iso8601',
         'zc.sourcefactory',
         'zeit.arbeit>=1.2.2.dev0',
@@ -93,6 +93,9 @@ setup(
     entry_points={
         'paste.app_factory': [
             'main=zeit.web.core.application:factory'
+        ],
+        'paste.filter_factory': [
+            'proxy=zeit.web.core.application:wsgi_proxy_filter'
         ]
     },
     extras_require={
