@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - ZON-4815: Add Configuration for Jobbox Dropdown and Partnerbox Jobs
 
+- ZON-4825: Edit video-stage headlines
+
 - FEM-74: Use IntersectionObserver to lazy load Images
 
 - BUG-945: Add target='_blank' on advertorial teaser

@@ -500,10 +500,10 @@ def test_videostage_thumbnail_should_be_replaced(selenium_driver, testserver):
         assert False, 'Thumbnail not replaced by video'
 
 
-def test_videostage_has_zon_svg_logo(testbrowser):
+def test_videostage_has_no_zon_logo(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     logo = browser.cssselect('svg.video-stage-heading__logo')
-    assert len(logo) == 1
+    assert len(logo) == 0
 
 
 def test_module_printbox_should_produce_teaser_image(
