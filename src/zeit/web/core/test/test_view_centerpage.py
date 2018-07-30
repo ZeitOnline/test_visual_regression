@@ -374,3 +374,31 @@ def test_podcast_module_considers_series(testbrowser):
         '.teaser-podcast')[0].text_content()
     assert u'Alle Folgen' in browser.cssselect(
         '.teaser-podcast')[1].text_content()
+
+
+def test_ad_teaser_link_contains_target_blank(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/cp-angebote-teaser')
+    blank = browser.cssselect(
+        '.teaser-small--ad a.teaser-small__combined-link[target=_blank]')
+    assert len(blank) == 1
+
+
+def test_ad_teaser_link_contains_rel_noopener(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/cp-angebote-teaser')
+    rel = browser.cssselect(
+        '.teaser-small--ad a.teaser-small__combined-link[rel=noopener]')
+    assert len(rel) == 1
+
+
+def test_ad_teaser_image_link_contains_target(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/cp-angebote-teaser')
+    blank = browser.cssselect(
+        '.teaser-small--ad .teaser-small__media-container a[target=_blank]')
+    assert len(blank) == 1
+
+
+def test_ad_teaser_image_link_contains_rel_noopener(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/cp-angebote-teaser')
+    rel = browser.cssselect(
+        '.teaser-small--ad .teaser-small__media-container a[rel=noopener]')
+    assert len(rel) == 1

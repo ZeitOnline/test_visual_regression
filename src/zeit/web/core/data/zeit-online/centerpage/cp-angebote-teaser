@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
+  <head>
+    <header_image xsi:nil="true"/>
+    <snapshot xsi:nil="true"/>
+    <topiclinks>
+      <topiclink>
+        <topiclink_label_1>Flüchtlinge</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/thema/fluechtling</topiclink_url_1>
+        <topiclink_label_2>NSU-Prozess</topiclink_label_2>
+        <topiclink_url_2>http://blog.zeit.de/nsu-prozess-blog/</topiclink_url_2>
+        <topiclink_label_3>Familienleben</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/thema/familienleben</topiclink_url_3>
+      </topiclink>
+    </topiclinks>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2017-02-10T14:31:20.765856+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-10-01T14:24:31.256098+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2017-02-10T14:31:31.415575+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2017-02-10T14:31:18.479171+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2017-02-10T14:31:01.920362+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2017-02-10T14:31:30.171200+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Aktuelle Nachrichten und Hintergründe aus Gesellschaft und Zeitgeschehen bei ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Gesellschaft</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2017-02-10T14:30:55.520545+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schlieben</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/gesellschaft/index-2.cp2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Gesellschaft</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:86666fa5-f37c-4a05-b312-165066b82728}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Gesellschaft</title>
+    <cluster visible="True" visible_mobile="True" area="id-cbbc4eff-278b-4fb2-be6e-52a0625b104e" kind="duo" kind_title="Standard-Region">
+      <region area="lead" visible="True" hide-dupes="True" count="11" automatic="True" automatic_type="channel" visible_mobile="True" title="Gesellschaft" read_more_url="http://www.zeit.de/gesellschaft/index">
+        <referenced_cp>http://xml.zeit.de/gesellschaft/index</referenced_cp>
+        <query>
+          <condition type="Channel" py:pytype="str">Gesellschaft</condition>
+        </query>
+        <container cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3" cp:type="teaser" module="zon-large">
+            <block contenttype="article" date-first-released="" date-last-modified="2014-03-17T11:58:05+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2014-03-17T09:58:02.437939+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008"/>
+        </container>
+        <container cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13" cp:type="teaser" module="zon-small">
+            <block contenttype="article" date-first-released="" date-last-modified="2014-03-17T11:58:05+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-02" issue="26" last-semantic-change="2014-03-17T09:58:02.437939+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008"/>
+        </container>
+      </region>
+      <region area="informatives" visible="True" hide-dupes="True" visible_mobile="True" title="Marginalspalte">
+        <container cp:type="cpextra" module="mostread" visible="True" cp:__name__="id-5d1b3163-85bf-4e12-ab74-5907b1ffeabb" visible_mobile="True">
+          <cp_extra id="mostread"/>
+        </container>
+        <container cp:type="cpextra" module="mostcommented" visible="True" cp:__name__="id-6a5d890d-7280-407e-913d-08a447632e81" visible_mobile="True">
+          <cp_extra id="mostcommented"/>
+        </container>
+        <container cp:type="cpextra" module="mostshared" visible="True" visible_mobile="True" cp:__name__="id-e47982d2-c0ac-46eb-af5f-be5ab1067344">
+          <cp_extra id="mostshared"/>
+        </container>
+        <container cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13" cp:type="teaser" module="zon-small">
+            <block contenttype="article" date-first-released="" date-last-modified="2014-03-17T11:58:05+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-02" issue="26" last-semantic-change="2014-03-17T09:58:02.437939+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008"/>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-ce33b4ec-f212-497e-b201-6045478b7e95" kind="solo">
+        <region area="id-13ae5250-58f2-4d47-8fe9-5c24164389e6" kind="solo" visible="True">
+            <container cp:__name__="id-d976a64d-1589-4b49-a765-12bdcdf94d1f" cp:type="cpextra" module="adplace4" visible="True">
+                <cp_extra for="zeit.content.cp.interfaces.IArea" id="adplace4" />
+            </container>
+        </region>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-a9838681-eb83-47a2-b9e5-199ad9f65a0e" kind="parquet" kind_title="Parkett-Region">
+      <region visible="True" hide-dupes="False" area="id-75b7fe98-891d-4107-bc21-e7924053f1cf" kind="parquet" count="4" automatic="True" automatic_type="centerpage" visible_mobile="True" title="Zeitgeschehen" read_more_url="http://www.zeit.de/gesellschaft/zeitgeschehen/index.cp2015">
+        <container cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13" cp:type="teaser" module="zon-small">
+            <block contenttype="article" date-first-released="" date-last-modified="2014-03-17T11:58:05+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-02" issue="26" last-semantic-change="2014-03-17T09:58:02.437939+00:00" publication-date="" ressort="Lebensart" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-02" year="2008"/>
+        </container>
+        <container module="zon-ad" overlay_level="3" text_color="dark" visible="True" visible_mobile="True" cp:__name__="id-eef70dfd-7e07-4f9e-b65c-b6e08fd9228f" cp:type="teaser">
+            <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-online/angebote/links/das-deutsche-schulportal-3" uniqueId="http://xml.zeit.de/zeit-online/angebote/links/das-deutsche-schulportal-3" year="2018" ressort="Angebote" contenttype="link" publication-date="" expires="" ns0:href="https://www.deutsches-schulportal.de/" ns0:target="_blank" ns0:rel="nofollow">
+                <supertitle py:pytype="str">Das Deutsche Schulportal</supertitle>
+                <title py:pytype="str">Kann Inklusion gelingen?</title>
+                <text py:pytype="str">
+                    Seit Jahren wird in der Bildungspolitik dazu gestritten. Welche Ansätze sind aus der Debatte entstanden und wie sind sie zu bewerten? Bei Experten herrscht Uneinigkeit.
+                </text>
+                <description py:pytype="str">
+                    Seit Jahren wird in der Bildungspolitik dazu gestritten. Welche Ansätze sind aus der Debatte entstanden und wie sind sie zu bewerten? Bei Experten herrscht Uneinigkeit.
+                </description>
+                <byline xsi:nil="true"/>
+                <breadcrumb_title xsi:nil="true"/>
+                <image base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" publication-date="" expires="">
+                    <bu xsi:nil="true"/>
+                </image>
+            </block>
+        </container>
+      </region>
+    </cluster>
+  </body>
+  <teaser>
+    <title>Gesellschaft</title>
+  </teaser>
+</centerpage>

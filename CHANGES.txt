@@ -15,9 +15,17 @@ POSTDEPLOY
 3.174 (unreleased)
 ------------------
 
+- ZON-4809: Add Linktracking to Brandeins Parquet
+
+- ZON-4815: Add Configuration for Jobbox Dropdown and Partnerbox Jobs
+
 - ZON-4825: Edit video-stage headlines
 
 - FEM-74: Use IntersectionObserver to lazy load Images
+
+- BUG-945: Add target='_blank' on advertorial teaser
+
+- BUG-958: Make Newsticker available in ZAR
 
 - BUG-970: Make overlay cancel button clickable in FF
 

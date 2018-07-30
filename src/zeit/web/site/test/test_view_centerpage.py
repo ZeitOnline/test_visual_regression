@@ -3053,6 +3053,18 @@ def test_brandeins_teaser_should_display_its_image_on_mobile(
         assert image.is_displayed()
 
 
+def test_brandeins_teaser_kicker_should_contain_linktracking(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/teasers-to-brandeins')
+    links = browser.cssselect(
+        '.cp-area--brandeins a[href*="utm_source=zeit&utm_medium=navigation"]')
+    assert len(links) == 5
+    assert 'utm_content=logo' in links[0].get('href')
+    assert 'utm_content=wiz' in links[1].get('href')
+    assert 'utm_content=ls' in links[2].get('href')
+    assert 'utm_content=mo' in links[3].get('href')
+    assert 'utm_content=mehr' in links[4].get('href')
+
+
 def test_if_series_is_podcast(testbrowser):
     browser = testbrowser('/serie/ist-das-normal')
     link = browser.cssselect('link[rel="alternate"]')
