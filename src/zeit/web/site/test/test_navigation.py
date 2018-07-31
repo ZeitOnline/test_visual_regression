@@ -54,7 +54,7 @@ def test_nav_ressorts_should_produce_markup(
 
     # cowardish workaround, because tplbrowser cannot render macros,
     # which are needed for D18 tag (lama.render_svg)
-    zeit.web.core.application.FEATURE_TOGGLES.unset('dtag_navigation')
+    zeit.web.core.application.FEATURE_TOGGLES.unset('nav_extraitem')
 
     browser = tplbrowser(
         'zeit.web.site:templates/inc/navigation/navigation-list.tpl',
@@ -132,7 +132,7 @@ def test_nav_contains_essential_elements(tplbrowser, dummy_request):
 def test_nav_should_contain_schema_org_markup(testbrowser):
     # cowardish workaround, because tplbrowser cannot render macros,
     # which are needed for D18 tag (lama.render_svg)
-    zeit.web.core.application.FEATURE_TOGGLES.unset('dtag_navigation')
+    zeit.web.core.application.FEATURE_TOGGLES.unset('nav_extraitem')
 
     browser = testbrowser('/zeit-online/zeitonline')
     select = browser.cssselect
@@ -543,10 +543,10 @@ def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
     assert len(header_date) == 0
 
 
-def test_d18_link_exists(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set('dtag_navigation')
+def test_zplus_link_exists(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('nav_extraitem')
     browser = testbrowser('/zeit-online/zeitonline')
     select = browser.cssselect
-    d18_navigation_badge = select('nav a[href$="thema/d18"]')
+    zplus_navigation_badge = select('nav a[href$="exklusive-zeit-artikel"]')
 
-    assert len(d18_navigation_badge) == 1
+    assert len(zplus_navigation_badge) == 1
