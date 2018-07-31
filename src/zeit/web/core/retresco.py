@@ -179,7 +179,7 @@ class DataTMS(
                 result.append(data)
         self._response = {
             'num_found': len(result),
-            'docs': [random.choice(result) for x in range(rows)],
+            'docs': random.sample(result, rows),
         }
         result = super(DataTMS, self).get_topicpage_documents(id, start, rows)
         self._response = {}
@@ -216,7 +216,7 @@ class DataES(
 
         self._response = {'hits': {
             'total': len(result),
-            'hits': [random.choice(result) for x in range(rows)],
+            'hits': random.sample(result, rows),
         }}
         result = super(DataES, self).search(
             query, sort_order, start, rows, include_payload)
