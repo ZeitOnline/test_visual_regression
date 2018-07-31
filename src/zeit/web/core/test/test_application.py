@@ -132,7 +132,7 @@ def test_assets_are_not_cached(testbrowser):
 
 
 def test_feature_toggle_source_should_be_parsed(application):
-    assert zeit.web.core.application.FEATURE_TOGGLES.find('dtag_navigation')
+    assert zeit.web.core.application.FEATURE_TOGGLES.find('nav_extraitem')
     assert not zeit.web.core.application.FEATURE_TOGGLES.find('dummy')
     assert not zeit.web.core.application.FEATURE_TOGGLES.find('nonexistent')
 
