@@ -37,10 +37,10 @@
         <ul class="nav__dropdown-list" id="more-ressorts" aria-hidden="true" data-ct-column>
         </ul>
     </li>
-    {% if toggles('dtag_navigation') -%}
+    {% if toggles('nav_extraitem') -%}
     <li class="{{ class }}-item--featured">
-        <a itemprop="url" href="{{ request.route_url('home') }}exklusive-zeit-artikel">
-           {{ lama.use_svg_icon('zplus', 'svg-symbol teaser-small__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
+        <a itemprop="url" title="exklusive Zeit Artikel" href="{{ request.route_url('home') }}exklusive-zeit-artikel">
+           {{ lama.use_svg_icon('zplus', 'svg-symbol teaser-small__kicker-logo--zplus', view.package, a11y=False) }}
         </a>
     </li>
     {% endif %}
