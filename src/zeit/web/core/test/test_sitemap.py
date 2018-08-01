@@ -15,9 +15,15 @@ import zeit.cms.repository.interfaces
 import zeit.retresco.interfaces
 
 
+def convert_results(result):
+    content = zeit.cms.interfaces.ICMSContent(result['uniqueId'])
+    converter = zeit.retresco.interfaces.ITMSRepresentation(content)
+    return converter()
+
+
 def set_sitemap_solr_results(results):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
-    es.results = results
+    es.results = map(convert_results, results)
 
 
 def test_gsitemap_index_ranking_pagination(testbrowser, workingcopy):
@@ -67,14 +73,12 @@ def test_gsitemap_index_overview_stops_at_current_date(testbrowser, clock):
 
 def test_gsitemap_page_with_image_copyright(testbrowser):
     set_sitemap_solr_results([{
-        'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
-                          'filmstill-hobbit-schlacht-fuenf-hee/'],
-        'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
+        'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'}])
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
-            'http://localhost/campus/article/01-countdown-studium')
+            'http://localhost/zeit-online/article/01')
     assert (browser.document.xpath('//url/lastmod')[0].text ==
-            '2016-02-18T13:50:52+01:00')
+            '2015-05-27T19:11:30+02:00')
     xml = lxml.etree.fromstring(browser.contents)
     ns = 'http://www.google.com/schemas/sitemap-image/1.1'
     assert xml.xpath('//image:image', namespaces={'image': ns})[0] is not None
