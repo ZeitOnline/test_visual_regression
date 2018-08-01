@@ -12,14 +12,12 @@ from zeit.cms.checkout.helper import checked_out
 import zeit.content.article.testing
 import zeit.cms.interfaces
 import zeit.cms.repository.interfaces
-import zeit.solr.interfaces
-
-import zeit.web.core.solr
+import zeit.retresco.interfaces
 
 
 def set_sitemap_solr_results(results):
-    solr = zope.component.getUtility(zeit.web.core.solr.ISitemapSolrConnection)
-    solr.results = results
+    es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.results = results
 
 
 def test_gsitemap_index_ranking_pagination(testbrowser, workingcopy):
