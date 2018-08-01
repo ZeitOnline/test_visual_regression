@@ -111,6 +111,10 @@
   <setting name="optimize_on_zon_homepage" xsi:type="xsd:string"></setting>
   <setting name="optimize_on_zon_centerpage" xsi:type="xsd:string"></setting>
   <setting name="optimize_on_zon_article" xsi:type="xsd:string"></setting>
+  <!-- Interval of how often to check if data is send -->
+  <setting name="optimize_wt_interval_script" xsi:type="xsd:int">20</setting>
+  <!-- Set timeout in milliseconds -->
+  <setting name="optimize_wt_timeout_script" xsi:type="xsd:int">500</setting>
 
   <!-- addefend settings min = auto or full = max pageheight -->
   <setting name="addefend_height" xsi:type="xsd:string">min</setting>
