@@ -212,9 +212,10 @@ class DataSolr(RandomContent):
                 results.append(data)
             except (AttributeError, TypeError):
                 continue
-        if len(results) > rows:
+        total = len(results)
+        if total > rows:
             results = random.sample(results, rows)
-        return pysolr.Results(results, len(results))
+        return pysolr.Results(results, total)
 
     def update_raw(self, xml, **kw):
         pass
