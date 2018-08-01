@@ -34,9 +34,12 @@
     a[containerId] = true;
     a.start = 1*new Date;
     a.end = function(){
-        var experiments, expVarName, data = win.gaData;
+        var experiments,
+            expVarName,
+            data = win.gaData;
+
         // check for optimizely object moved to top level
-        if ( typeof data[property] !== 'undefined' && data[property].experiments !== 'undefined' && typeof win['wt'] === 'object') {
+        if ( typeof data[property] !== 'undefined' && data[property].experiments !== 'undefined' ) {
             experiments = data[property].experiments;
             for (var key in experiments) {
                 if (!experiments.hasOwnProperty(key)) continue;
@@ -47,13 +50,24 @@
                     expVarName = "variation_" + experiments[key];
                 }
                 // track here
-                wt.sendinfo({linkId:'#google-optimize', customClickParameter:{
-                    4: win.Zeit.breakpoint.getTrackingBreakpoint() ,
-                    5: formatStringForWebtrekk(key),
-                    6: expVarName,
-                    9: 'view'
-                    }
-                });
+                function defer(method, i) {
+					if (typeof win['wt'] === 'object') {
+                        method();
+					} else {
+						if (i < win.Zeit.view.get( 'optimize_wt_interval_script' ) ){
+                            setTimeout(function() { defer(method, i + 1) }, win.Zeit.view.get( 'optimize_wt_timeout_script' ) );
+						}
+					}
+				}
+                defer(function () {
+					wt.sendinfo({linkId:'#google-optimize', customClickParameter:{
+						4: win.Zeit.breakpoint.getTrackingBreakpoint() ,
+						5: formatStringForWebtrekk(key),
+						6: expVarName,
+						9: 'view'
+						}
+					});
+				},0);
             }
         }
     }
