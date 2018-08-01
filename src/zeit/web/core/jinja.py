@@ -150,7 +150,12 @@ class Undefined(jinja2.runtime.Undefined):
 
     # The superclass assigns these method by copying the function, too,
     # so they don't pick up our overriden method by themselves unfortunately.
-    __getattr__ = __getitem__ = __call__ = _fail_with_undefined_error
+    __add__ = __radd__ = __mul__ = __rmul__ = __div__ = __rdiv__ = \
+        __truediv__ = __rtruediv__ = __floordiv__ = __rfloordiv__ = \
+        __mod__ = __rmod__ = __pos__ = __neg__ = __call__ = \
+        __getitem__ = __lt__ = __le__ = __gt__ = __ge__ = __int__ = \
+        __float__ = __complex__ = __pow__ = __rpow__ = __sub__ = \
+        __rsub__ = __getattr__ = _fail_with_undefined_error
 
 
 def cmscontent_repr(content):
