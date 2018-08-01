@@ -14,7 +14,7 @@ POSTDEPLOY
 - add feature toggle `<nav_extraitem>true</nav_extraitem>`
 
 
-3.174 (unreleased)
+3.174 (2018-08-01)
 ------------------
 
 - ZON-4809: Add Linktracking to Brandeins Parquet
