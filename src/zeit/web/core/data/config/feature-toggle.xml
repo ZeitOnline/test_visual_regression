@@ -8,12 +8,12 @@
   <c1_adblocker_blocker>true</c1_adblocker_blocker>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
   <dataprotection_popover>false</dataprotection_popover>
-  <dtag_navigation>true</dtag_navigation>
   <campus_toolbox>true</campus_toolbox>
   <dummy>false</dummy>
   <elasticsearch_zoca>false</elasticsearch_zoca>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
+  <nav_extraitem>true</nav_extraitem>
 
   <!-- Produce https link, when set to true (only for certain domains, when
   'transform_to_secure_links_for[cs-list_with_fqdn]` is configured in web-settings) -->

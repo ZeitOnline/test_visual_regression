@@ -9,13 +9,17 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- Nothing
+- remove feature toggle `<dtag_navigation>true</dtag_navigation>`
+
+- add feature toggle `<nav_extraitem>true</nav_extraitem>`
 
 
 3.174 (unreleased)
 ------------------
 
 - ZON-4809: Add Linktracking to Brandeins Parquet
+
+- ZON-4812: Move d18 into Dropdown, add ZPlus badge
 
 - ZON-4815: Add Configuration for Jobbox Dropdown and Partnerbox Jobs
 
