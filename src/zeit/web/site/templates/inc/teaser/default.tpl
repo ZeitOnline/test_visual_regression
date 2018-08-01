@@ -36,7 +36,9 @@
                 {% block teaser_link %}
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
-                   href="{{ teaser | create_url | append_campaign_params }}">
+                   href="{{ teaser | create_url | append_campaign_params }}"
+                   {% if teaser.target %} target="{{ teaser.target }}"{% endif %}
+                   {% if teaser.target == '_blank' %} rel="noopener"{% endif %}>
                     {% block teaser_kicker %}
                         <span class="{%- block kicker_class -%}{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, teaser | branding) }}{%- endblock -%}">
                             {% block kicker_logo scoped %}

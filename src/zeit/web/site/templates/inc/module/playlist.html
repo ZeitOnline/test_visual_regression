@@ -9,7 +9,7 @@
     <div class="video-stage-main">
         {# html5, eine section braucht eine headline, falls das seomäßig nicht geht, können wir auch nicht section nehmen (NB) -#}
         <header>
-            <h6 class="video-stage-heading">Videos auf {{ lama.use_svg_icon('logo-zon-white', 'video-stage-heading__logo', view.package) }}</h6>
+            <h6 class="video-stage-heading">Unsere besten Videos</h6>
         </header>
         {# We heard you like modules, so we put some modules in your module (ND) #}
         {% with %}
@@ -19,7 +19,6 @@
         {% endwith %}
     </div>
     <div class="video-stage-secondary">
-        <h6 class="video-stage-secondary__title">Die neuesten Videos</h6>
         {% for teaser in module.videos[1:4] %}
             {% include "zeit.web.site:templates/inc/teaser/video-small.tpl" %}
             {{- view.append_to_webtrekk_assets(['video', region_loop.index, 2, loop.index] | join('.')) -}}

@@ -177,9 +177,11 @@ class DataTMS(
                     'http://xml.zeit.de/zeit-online/'
                     'image/filmstill-hobbit-schlacht-fuenf-hee/')
                 result.append(data)
+        if len(result) > rows:
+            result = random.sample(result, rows)
         self._response = {
             'num_found': len(result),
-            'docs': [random.choice(result) for x in range(rows)],
+            'docs': result,
         }
         result = super(DataTMS, self).get_topicpage_documents(id, start, rows)
         self._response = {}
@@ -214,9 +216,11 @@ class DataES(
                     del data['payload']
                 result.append({'_source': data})
 
+        if len(result) > rows:
+            result = random.sample(result, rows)
         self._response = {'hits': {
             'total': len(result),
-            'hits': [random.choice(result) for x in range(rows)],
+            'hits': result,
         }}
         result = super(DataES, self).search(
             query, sort_order, start, rows, include_payload)
