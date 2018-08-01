@@ -56,7 +56,7 @@
                     <img class="comment-form__avatar" alt="Avatarbild von {{ request.user.name }}" src="{{ request.user.picture }}">
                 {% endif -%}
                 Angemeldet als
-                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user" data-ct-label="username">
+                <a class="comment-form__username" href="{{ settings('community_profile_url', '') }}/user" data-ct-label="username">
                     {{- request.user.name -}}
                 </a>
                 <span class="comment-form__charcount">
