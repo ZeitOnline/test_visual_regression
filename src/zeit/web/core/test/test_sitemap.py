@@ -326,7 +326,7 @@ def test_gsitemap_themen_last_page(testbrowser, data_tms):
 def test_gsitemap_appcon(monkeypatch, testbrowser):
     set_results([
         {'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'},
-        {'uniqueId': 'http://blog.zeit.de/blogs/nsu-blog-bouffier'}
+        {'uniqueId': 'http://xml.zeit.de/blogs/nsu-blog-bouffier'},
     ])
     monkeypatch.setattr(zeit.web.core.interfaces, 'IImage', None)
     browser = testbrowser('/gsitemaps/appconsitemap.xml?date=2000-01-01')
@@ -341,14 +341,15 @@ def test_gsitemap_appcon(monkeypatch, testbrowser):
         'article/01-countdown-studium')
     assert (
         xml.xpath('//xhtml:link/@href', namespaces=ns)[1] ==
-        'android-app://de.zeit.online/https/blog.zeit.de/blogs/'
-        'nsu-blog-bouffier')
+        'android-app://de.zeit.online/https/blog.zeit.de/'
+        'nsu-prozess-blog/2015/02/25/'
+        'medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/')
 
 
 def test_gsitemap_appcon_creates_https_urls(monkeypatch, testbrowser):
     set_results([
         {'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'},
-        {'uniqueId': 'http://blog.zeit.de/blogs/nsu-blog-bouffier'}
+        {'uniqueId': 'http://xml.zeit.de/blogs/nsu-blog-bouffier'}
     ])
     zeit.web.core.application.FEATURE_TOGGLES.set('https')
     monkeypatch.setattr(zeit.web.core.interfaces, 'IImage', None)
@@ -366,11 +367,13 @@ def test_gsitemap_appcon_creates_https_urls(monkeypatch, testbrowser):
     # Well, both should be transformed
     assert (
         browser.document.xpath('//url/loc')[1].text ==
-        'https://blog.zeit.de/blogs/nsu-blog-bouffier')
+        'https://blog.zeit.de/nsu-prozess-blog/2015/02/25/'
+        'medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/')
     assert (
         xml.xpath('//xhtml:link/@href', namespaces=ns)[1] ==
-        'android-app://de.zeit.online/https/blog.zeit.de/blogs/'
-        'nsu-blog-bouffier')
+        'android-app://de.zeit.online/https/blog.zeit.de/'
+        'nsu-prozess-blog/2015/02/25/'
+        'medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/')
 
 
 def test_gsitemap_solr_uses_different_timeout_than_normal_solr(testbrowser):
@@ -391,7 +394,7 @@ def test_sitemaps_support_link_objects(testbrowser):
     set_results([{
         'uniqueId': 'http://xml.zeit.de/mylink',
         'doc_type': 'link',
-        'url': 'http://example.com/link'
+        'payload': {'body': {'url': 'http://example.com/link'}},
     }])
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
@@ -402,6 +405,7 @@ def test_sitemaps_treat_blogpost_as_link(testbrowser):
     set_results([{
         'uniqueId': 'http://blog.zeit.de/meinblog/foo',
         'doc_type': 'blogpost',
+        'payload': {'body': {'url': 'http://blog.zeit.de/meinblog/foo'}},
     }])
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
