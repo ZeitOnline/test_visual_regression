@@ -28,6 +28,7 @@ def convert_results(result):
 def set_results(results):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
     es.results = map(convert_results, results)
+    return es.results
 
 
 def test_gsitemap_index_ranking_pagination(testbrowser, workingcopy):
@@ -135,11 +136,12 @@ def test_gsitemap_rejects_invalid_page_parameter(testbrowser):
 
 def test_gsitemap_page_does_not_contain_invalid_lastmod_date(
         testbrowser, monkeypatch):
-    set_results([{
+    (result,) = set_results([{
         'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
-    monkeypatch.setattr(
-        zeit.content.article.article.ArticleWorkflow, 'date_first_released',
-        datetime.datetime(1967, 1, 1, 12, 50, 52, 380804, tzinfo=pytz.UTC))
+    invalid = '1967-01-01T12:50:52.380804+00:00'
+    result['payload']['document']['date_first_released'] = invalid
+    del result['date']
+    del result['payload']['workflow']['date_last_published_semantic']
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/campus/article/01-countdown-studium')
