@@ -16,9 +16,13 @@ import zeit.retresco.interfaces
 
 
 def convert_results(result):
-    content = zeit.cms.interfaces.ICMSContent(result['uniqueId'])
-    converter = zeit.retresco.interfaces.ITMSRepresentation(content)
-    return converter()
+    try:
+        content = zeit.cms.interfaces.ICMSContent(result['uniqueId'])
+    except TypeError:
+        return result
+    else:
+        converter = zeit.retresco.interfaces.ITMSRepresentation(content)
+        return converter()
 
 
 def set_results(results):
