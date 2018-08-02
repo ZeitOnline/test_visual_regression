@@ -263,10 +263,9 @@ def test_undefined_error_logs_repr_for_cms_content(jinja_log):
         "attribute 'foo'" in jinja_log.getvalue())
 
 
-# XXX Is there an easier/faster way to set up an Application with different
-# settings than copying the application_session fixture wholesale?
 @pytest.fixture
-def error_swallowing_application(app_settings, request):
+def error_swallowing_application(application, app_settings, request):
+    old_env = application.zeit_app.jinja_env
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
@@ -275,6 +274,16 @@ def error_swallowing_application(app_settings, request):
     factory = zeit.web.core.application.Application()
     app = factory({}, **app_settings)
     app.zeit_app = factory
+    # XXX venusian is stateful: on first run it sets the "attached category" on
+    # decorated objects, when run again, only those without attachments are
+    # picked up. So to register the jinja things, we have to copy them from
+    # the first run (which ended up in the "normal" jinja environment).
+    new_env = app.zeit_app.jinja_env
+    for name in ['filters', 'globals', 'tests']:
+        old = getattr(old_env, name)
+        new = getattr(new_env, name)
+        for key, value in old.items():
+            new.setdefault(key, value)
     return app
 
 
