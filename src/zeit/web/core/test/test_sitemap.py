@@ -33,31 +33,31 @@ def test_gsitemap_index_ranking_pagination(testbrowser, workingcopy):
         area = co.body.values()[0].values()[0]
         area.kind = 'ranking'
 
-    set_results([{'uniqueId': 'http://xml.zeit.de/doc1'}])
+    set_results([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 1
-    set_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
-                 {'uniqueId': 'http://xml.zeit.de/doc2'},
-                 {'uniqueId': 'http://xml.zeit.de/doc3'}])
+    set_results([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 2
-    set_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
-                 {'uniqueId': 'http://xml.zeit.de/doc2'},
-                 {'uniqueId': 'http://xml.zeit.de/doc3'},
-                 {'uniqueId': 'http://xml.zeit.de/doc4'}])
+    set_results([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/04'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 2
-    set_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
-                 {'uniqueId': 'http://xml.zeit.de/doc2'},
-                 {'uniqueId': 'http://xml.zeit.de/doc3'},
-                 {'uniqueId': 'http://xml.zeit.de/doc4'},
-                 {'uniqueId': 'http://xml.zeit.de/doc5'},
-                 {'uniqueId': 'http://xml.zeit.de/doc6'},
-                 {'uniqueId': 'http://xml.zeit.de/doc7'},
-                 {'uniqueId': 'http://xml.zeit.de/doc8'},
-                 {'uniqueId': 'http://xml.zeit.de/doc9'},
-                 {'uniqueId': 'http://xml.zeit.de/doc10'},
-                 {'uniqueId': 'http://xml.zeit.de/doc11'}])
+    set_results([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03a'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/04'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/05'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/06'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/07'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/08'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/09'},
+                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/10'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 6
 
