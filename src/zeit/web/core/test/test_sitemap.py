@@ -21,7 +21,7 @@ def convert_results(result):
     return converter()
 
 
-def set_sitemap_solr_results(results):
+def set_results(results):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
     es.results = map(convert_results, results)
 
@@ -33,31 +33,31 @@ def test_gsitemap_index_ranking_pagination(testbrowser, workingcopy):
         area = co.body.values()[0].values()[0]
         area.kind = 'ranking'
 
-    set_sitemap_solr_results([{'uniqueId': 'http://xml.zeit.de/doc1'}])
+    set_results([{'uniqueId': 'http://xml.zeit.de/doc1'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 1
-    set_sitemap_solr_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
-                              {'uniqueId': 'http://xml.zeit.de/doc2'},
-                              {'uniqueId': 'http://xml.zeit.de/doc3'}])
+    set_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
+                 {'uniqueId': 'http://xml.zeit.de/doc2'},
+                 {'uniqueId': 'http://xml.zeit.de/doc3'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 2
-    set_sitemap_solr_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
-                              {'uniqueId': 'http://xml.zeit.de/doc2'},
-                              {'uniqueId': 'http://xml.zeit.de/doc3'},
-                              {'uniqueId': 'http://xml.zeit.de/doc4'}])
+    set_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
+                 {'uniqueId': 'http://xml.zeit.de/doc2'},
+                 {'uniqueId': 'http://xml.zeit.de/doc3'},
+                 {'uniqueId': 'http://xml.zeit.de/doc4'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 2
-    set_sitemap_solr_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
-                              {'uniqueId': 'http://xml.zeit.de/doc2'},
-                              {'uniqueId': 'http://xml.zeit.de/doc3'},
-                              {'uniqueId': 'http://xml.zeit.de/doc4'},
-                              {'uniqueId': 'http://xml.zeit.de/doc5'},
-                              {'uniqueId': 'http://xml.zeit.de/doc6'},
-                              {'uniqueId': 'http://xml.zeit.de/doc7'},
-                              {'uniqueId': 'http://xml.zeit.de/doc8'},
-                              {'uniqueId': 'http://xml.zeit.de/doc9'},
-                              {'uniqueId': 'http://xml.zeit.de/doc10'},
-                              {'uniqueId': 'http://xml.zeit.de/doc11'}])
+    set_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
+                 {'uniqueId': 'http://xml.zeit.de/doc2'},
+                 {'uniqueId': 'http://xml.zeit.de/doc3'},
+                 {'uniqueId': 'http://xml.zeit.de/doc4'},
+                 {'uniqueId': 'http://xml.zeit.de/doc5'},
+                 {'uniqueId': 'http://xml.zeit.de/doc6'},
+                 {'uniqueId': 'http://xml.zeit.de/doc7'},
+                 {'uniqueId': 'http://xml.zeit.de/doc8'},
+                 {'uniqueId': 'http://xml.zeit.de/doc9'},
+                 {'uniqueId': 'http://xml.zeit.de/doc10'},
+                 {'uniqueId': 'http://xml.zeit.de/doc11'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 6
 
@@ -72,7 +72,7 @@ def test_gsitemap_index_overview_stops_at_current_date(testbrowser, clock):
 
 
 def test_gsitemap_page_with_image_copyright(testbrowser):
-    set_sitemap_solr_results([{
+    set_results([{
         'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'}])
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
@@ -99,7 +99,7 @@ def test_gsitemap_page_without_image(testbrowser, monkeypatch, workingcopy):
     repository = zope.component.getUtility(
         zeit.cms.repository.interfaces.IRepository)
     repository['article'] = zeit.content.article.testing.create_article()
-    set_sitemap_solr_results([{
+    set_results([{
         'uniqueId': 'http://xml.zeit.de/article'}])
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
@@ -111,7 +111,7 @@ def test_gsitemap_page_without_image(testbrowser, monkeypatch, workingcopy):
 
 def test_gsitemap_page_does_not_break_without_image_caption(
         testbrowser, monkeypatch):
-    set_sitemap_solr_results([{
+    set_results([{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
                           'filmstill-hobbit-schlacht-fuenf-hee/'],
         'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
@@ -133,7 +133,7 @@ def test_gsitemap_rejects_invalid_page_parameter(testbrowser):
 
 def test_gsitemap_page_does_not_contain_invalid_lastmod_date(
         testbrowser, monkeypatch):
-    set_sitemap_solr_results([{
+    set_results([{
         'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
     monkeypatch.setattr(
         zeit.content.article.article.ArticleWorkflow, 'date_first_released',
@@ -145,7 +145,7 @@ def test_gsitemap_page_does_not_contain_invalid_lastmod_date(
 
 
 def test_gsitemap_newssite(testbrowser):
-    set_sitemap_solr_results([{
+    set_results([{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
                           'crystal-meth-nancy-schmidt/'],
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
@@ -200,7 +200,7 @@ def test_gsitemap_newssite(testbrowser):
 
 def test_gsitemap_news_does_not_contain_none_in_keywords(
         testbrowser, monkeypatch):
-    set_sitemap_solr_results([{
+    set_results([{
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
         'ressort': 'Digital',
         'keyword': ['Schwangerschaft', 'Konsumverhalten'],
@@ -220,7 +220,7 @@ def test_gsitemap_news_does_not_contain_none_in_keywords(
 
 
 def test_gsitemap_video(testbrowser):
-    set_sitemap_solr_results([{
+    set_results([{
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001',
         'title': u'Foto-Momente: Die stille Schönheit der Polarlichter',
         'subtitle': 'Sie sind eines der faszinierendsten Schauspiele, die '
@@ -264,7 +264,7 @@ def test_gsitemap_video(testbrowser):
 
 def test_gsitemap_video_creates_no_publication_date_field_if_no_date_is_set(
         testbrowser, monkeypatch):
-    set_sitemap_solr_results([{
+    set_results([{
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
     }])
     monkeypatch.setattr(
@@ -281,7 +281,7 @@ def test_gsitemap_video_creates_no_publication_date_field_if_no_date_is_set(
 
 def test_gsitemap_video_does_not_call_bc_api(testbrowser, monkeypatch):
     import zeit.brightcove.connection
-    set_sitemap_solr_results([{
+    set_results([{
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
     }])
     mocked_get_video = mock.Mock()
@@ -322,7 +322,7 @@ def test_gsitemap_themen_last_page(testbrowser, data_tms):
 
 
 def test_gsitemap_appcon(monkeypatch, testbrowser):
-    set_sitemap_solr_results([
+    set_results([
         {'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'},
         {'uniqueId': 'http://blog.zeit.de/blogs/nsu-blog-bouffier'}
     ])
@@ -344,7 +344,7 @@ def test_gsitemap_appcon(monkeypatch, testbrowser):
 
 
 def test_gsitemap_appcon_creates_https_urls(monkeypatch, testbrowser):
-    set_sitemap_solr_results([
+    set_results([
         {'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'},
         {'uniqueId': 'http://blog.zeit.de/blogs/nsu-blog-bouffier'}
     ])
@@ -386,7 +386,7 @@ def test_gsitemap_solr_uses_different_timeout_than_normal_solr(testbrowser):
 
 
 def test_sitemaps_support_link_objects(testbrowser):
-    set_sitemap_solr_results([{
+    set_results([{
         'uniqueId': 'http://xml.zeit.de/mylink',
         'doc_type': 'link',
         'url': 'http://example.com/link'
@@ -397,7 +397,7 @@ def test_sitemaps_support_link_objects(testbrowser):
 
 
 def test_sitemaps_treat_blogpost_as_link(testbrowser):
-    set_sitemap_solr_results([{
+    set_results([{
         'uniqueId': 'http://blog.zeit.de/meinblog/foo',
         'doc_type': 'blogpost',
     }])
