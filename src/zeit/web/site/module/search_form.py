@@ -49,7 +49,7 @@ class Form(zeit.web.core.centerpage.Module):
         'body',
         'payload.body.supertitle',
         'payload.body.subtitle',
-        'payload.body.byline',
+        'payload.body.authors.analyzed',
         'teaser_img_subline'
     ]
 
