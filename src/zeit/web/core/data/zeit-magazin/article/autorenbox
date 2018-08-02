@@ -49,9 +49,9 @@
                 </author>
             </reference>
         </references>
-        <image align="left" base-id="http://xml.zeit.de/digital/internet/2014-04/schwangere-big-data/" expires="2014-07-29T10:26:01+00:00" publication-date="" title="Schwangerschaft Big Data Schwangere" type="jpg">
-            <bu>Eine schwangere Frau sitzt in einem Wohnzimmer in einem Sessel und hält ein Ultraschallbild in den Händen.</bu>
-            <copyright>© Robert Schlesinger/dpa</copyright>
+        <image base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" alt="Crystal Meth: Nacy braucht was Schnelles" align="left" publication-date="" expires="2015-05-13T11:46:39+00:00">
+          <bu>Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen Gera und Jena</bu>
+          <copyright link="http://www.milosdjuric.com/">© Milos Djuric </copyright>
         </image>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
