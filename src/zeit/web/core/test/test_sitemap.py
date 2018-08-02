@@ -184,7 +184,8 @@ def test_gsitemap_newssite(testbrowser):
         'Big Data: Schwanger ohne digitale Spuren')
     assert (
         xml.xpath('//n:news/n:keywords', namespaces=ns)[0].text ==
-        u'Schwangerschaft, Konsumverhalten, Digital, Datenschutz')
+        u'Schwangerschaft, Konsumverhalten, Werbung, Tracking, Facebook, '
+        u'Behörde, Minnesota, USA, New York, Digital, Datenschutz')
     assert xml.xpath('//image:image', namespaces=ns)[0] is not None
     assert (
         xml.xpath(
@@ -220,7 +221,8 @@ def test_gsitemap_news_does_not_contain_none_in_keywords(
     ns = {'n': 'http://www.google.com/schemas/sitemap-news/0.9'}
     assert (
         xml.xpath('//n:news/n:keywords', namespaces=ns)[0].text ==
-        u'Schwangerschaft, Konsumverhalten, Digital')
+        u'Schwangerschaft, Konsumverhalten, Werbung, Tracking, Facebook, '
+        u'Behörde, Minnesota, USA, New York, Digital')
 
 
 def test_gsitemap_video(testbrowser):
