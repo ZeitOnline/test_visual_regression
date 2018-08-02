@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - ZON-4788: Use newly created analyzed author name field for fulltext search
 
+- BUG-973: Fix link to own profile inside leave comment box
+
 - FIX: Ignore operations on undefined template variables
 
 
