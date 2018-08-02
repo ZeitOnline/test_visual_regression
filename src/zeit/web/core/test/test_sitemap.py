@@ -112,9 +112,7 @@ def test_gsitemap_page_without_image(testbrowser, monkeypatch, workingcopy):
 def test_gsitemap_page_does_not_break_without_image_caption(
         testbrowser, monkeypatch):
     set_results([{
-        'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
-                          'filmstill-hobbit-schlacht-fuenf-hee/'],
-        'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
+        'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'}])
     monkeypatch.setattr(zeit.web.core.image.Image, 'caption', None)
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     xml = lxml.etree.fromstring(browser.contents)
