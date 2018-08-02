@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import zope.component
+
+import zeit.retresco.interfaces
 
 
 def test_article_contains_required_structured_data(testbrowser):
@@ -97,7 +100,17 @@ def test_free_article_contains_required_structured_data(testbrowser):
     assert 'hasPart' not in article
 
 
-def test_seriespage_contains_required_structured_data(testbrowser, data_solr):
+def test_seriespage_contains_required_structured_data(testbrowser):
+    elastic = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elastic.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/04'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/05'},
+    ]
+
     data = testbrowser('/serie/martenstein').structured_data()
 
     page = data['WebPage']

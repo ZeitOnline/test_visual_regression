@@ -383,6 +383,7 @@ def test_successful_solr_result_should_produce_nonzero_hit_counter(
 def test_successful_elasticsearch_result_should_produce_nonzero_hit_counter(
         elasticsearch_area):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
+    es.resolve_results = False
     es.results = [{'url': ('http://xml.zeit.de/article/0%s' % i)
                    } for i in range(1, 43)]
     assert elasticsearch_area.hits == 42
@@ -429,7 +430,10 @@ def test_successful_elasticsearch_result_should_produce_valid_resultset(
     assert zeit.cms.interfaces.ICMSContent.providedBy(iter(block).next())
 
 
-def test_successful_search_result_should_render_in_browser(
-        testbrowser, data_es):
+def test_successful_search_result_should_render_in_browser(testbrowser):
+    elastic = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elastic.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'}]
     browser = testbrowser('/suche/index')
     assert browser.cssselect('.cp-area--ranking .teaser-small')
