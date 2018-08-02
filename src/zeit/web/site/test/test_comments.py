@@ -516,4 +516,3 @@ def test_comment_form_contains_correct_profile_link_for_logged_in_user(
         view=view, request=dummy_request)
     link = browser.cssselect('.comment-form__username')[0].get('href')
     assert '{}/user'.format(settings['community_profile_url']) == link
-
