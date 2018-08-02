@@ -3,7 +3,9 @@ from StringIO import StringIO
 import exceptions
 import logging
 import sys
+import urllib2
 
+import mock
 import plone.testing.zca
 import pytest
 import venusian
@@ -11,6 +13,7 @@ import zope.browserpage.metaconfigure
 
 import zeit.cms.testcontenttype.testcontenttype
 
+import zeit.web.conftest
 import zeit.web.core.application
 import zeit.web.core.decorator
 import zeit.web.core.jinja
@@ -280,3 +283,18 @@ def test_integration_jinja_environment_is_configured_for_ignoring_errors(
     env = error_swallowing_application.zeit_app.jinja_env
     tpl = env.from_string(u'foo {{ 42 | bad }}')
     assert tpl.render().strip() == 'foo'
+
+
+def test_on_jinja_exception_sends_http_status_500(
+        error_swallowing_application):
+    testbrowser = zeit.web.conftest.WsgiBrowser(
+        wsgi_app=error_swallowing_application)
+    # It's not easy to make Jinja explode, with all our Undefined handling in
+    # place, but we cannot catch exceptions in function called from templates
+    # `{{something.myfunc()}}` yet (you'd have to wrap them in
+    # environment.getattr, as far as I can tell).
+    with mock.patch('zeit.content.cp.area.Area.values') as values:
+        values.side_effect = RuntimeError('provoked')
+        with pytest.raises(urllib2.HTTPError) as info:
+            testbrowser('/zeit-online/slenderized-index')
+    assert info.value.getcode() == 500
