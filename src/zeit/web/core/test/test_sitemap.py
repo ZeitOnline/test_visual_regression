@@ -238,7 +238,8 @@ def test_gsitemap_video(testbrowser):
     settings['image_prefix'] = 'http://img.example.com'
     browser = testbrowser('/gsitemaps/video.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
-            'http://localhost/video/2014-01/1953013471001')
+            'http://localhost/video/2014-01/1953013471001'
+            '/foto-momente-die-stille-schoenheit-der-polarlichter')
     xml = lxml.etree.fromstring(browser.contents)
     ns = {'video': 'http://www.google.com/schemas/sitemap-video/1.1'}
     assert xml.xpath('//video:video', namespaces=ns)[0] is not None
