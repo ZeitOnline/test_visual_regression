@@ -12,7 +12,7 @@
                     <span class="{{ self.layout() }}__link-text">{{ view.zplus_label.link_text }}</span>
                 </span>
                 {%  if view.context is zplus_abo_content -%}
-                    {{ lama.use_svg_icon('zplus', self.layout() ~ '__icon svg-symbol--hide-ie', view.package, a11y=False) }}
+                    {{ lama.use_svg_icon('zplus', self.layout() ~ '__icon', view.package, a11y=False) }}
                 {% endif -%}
                 {% if view.zplus_label.volume_exists -%}
                     {% set packshot = view.zplus_label.cover -%}

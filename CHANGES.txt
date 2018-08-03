@@ -23,6 +23,8 @@ POSTDEPLOY
 
 - FIX: Ignore operations on undefined template variables
 
+- FIX: Return HTTP 500 for empty pages due to jinja errors instead of 200
+
 
 3.174 (2018-08-01)
 ------------------

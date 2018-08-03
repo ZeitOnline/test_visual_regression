@@ -1,7 +1,7 @@
 {%- import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama with context %}
 <aside class="zplus-badge" data-ct-row="zplus-badge" data-ct-column="false">
     <a href="{{ view.zplus_label.link }}" class="zplus-badge__link" data-ct-label="Exklusiv für Abonnenten">
-        {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--s svg-symbol--hide-ie zplus-badge__logo', view.package, a11y=False) }}
+        {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--s zplus-badge__logo', view.package, a11y=False) }}
         <span class="zplus-badge__text">Exklusiv für Abonnenten</span>
     </a>
 </aside>

@@ -3,7 +3,9 @@ from StringIO import StringIO
 import exceptions
 import logging
 import sys
+import urllib2
 
+import mock
 import plone.testing.zca
 import pytest
 import venusian
@@ -11,6 +13,7 @@ import zope.browserpage.metaconfigure
 
 import zeit.cms.testcontenttype.testcontenttype
 
+import zeit.web.conftest
 import zeit.web.core.application
 import zeit.web.core.decorator
 import zeit.web.core.jinja
@@ -260,10 +263,9 @@ def test_undefined_error_logs_repr_for_cms_content(jinja_log):
         "attribute 'foo'" in jinja_log.getvalue())
 
 
-# XXX Is there an easier/faster way to set up an Application with different
-# settings than copying the application_session fixture wholesale?
 @pytest.fixture
-def error_swallowing_application(app_settings, request):
+def error_swallowing_application(application, app_settings, request):
+    old_env = application.zeit_app.jinja_env
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
@@ -272,6 +274,16 @@ def error_swallowing_application(app_settings, request):
     factory = zeit.web.core.application.Application()
     app = factory({}, **app_settings)
     app.zeit_app = factory
+    # XXX venusian is stateful: on first run it sets the "attached category" on
+    # decorated objects, when run again, only those without attachments are
+    # picked up. So to register the jinja things, we have to copy them from
+    # the first run (which ended up in the "normal" jinja environment).
+    new_env = app.zeit_app.jinja_env
+    for name in ['filters', 'globals', 'tests']:
+        old = getattr(old_env, name)
+        new = getattr(new_env, name)
+        for key, value in old.items():
+            new.setdefault(key, value)
     return app
 
 
@@ -280,3 +292,18 @@ def test_integration_jinja_environment_is_configured_for_ignoring_errors(
     env = error_swallowing_application.zeit_app.jinja_env
     tpl = env.from_string(u'foo {{ 42 | bad }}')
     assert tpl.render().strip() == 'foo'
+
+
+def test_on_jinja_exception_sends_http_status_500(
+        error_swallowing_application):
+    testbrowser = zeit.web.conftest.WsgiBrowser(
+        wsgi_app=error_swallowing_application)
+    # It's not easy to make Jinja explode, with all our Undefined handling in
+    # place, but we cannot catch exceptions in function called from templates
+    # `{{something.myfunc()}}` yet (you'd have to wrap them in
+    # environment.getattr, as far as I can tell).
+    with mock.patch('zeit.content.cp.area.Area.values') as values:
+        values.side_effect = RuntimeError('provoked')
+        with pytest.raises(urllib2.HTTPError) as info:
+            testbrowser('/zeit-online/slenderized-index')
+    assert info.value.getcode() == 500
