@@ -67,7 +67,6 @@ def test_newsfeed_should_concat_supertitle_and_title(testserver):
 
 def test_newsfeed_should_render_an_authorfeed(testserver):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
-    es.resolve_results = False
     es.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
          'doc_type': 'article',
