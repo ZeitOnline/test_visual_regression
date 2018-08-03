@@ -4,7 +4,6 @@ import urllib2
 
 import mock
 import pytest
-import pytz
 import lxml.etree
 import zope.component
 
@@ -97,7 +96,7 @@ def test_gsitemap_page_with_image_copyright(testbrowser):
         u'(©\xa0Warner Bros./dpa)')
 
 
-def test_gsitemap_page_without_image(testbrowser, monkeypatch, workingcopy):
+def test_gsitemap_page_without_image(testbrowser, workingcopy):
     repository = zope.component.getUtility(
         zeit.cms.repository.interfaces.IRepository)
     repository['article'] = zeit.content.article.testing.create_article()
@@ -129,8 +128,7 @@ def test_gsitemap_rejects_invalid_page_parameter(testbrowser):
     assert err.value.getcode() == 404
 
 
-def test_gsitemap_page_does_not_contain_invalid_lastmod_date(
-        testbrowser, monkeypatch):
+def test_gsitemap_page_does_not_contain_invalid_lastmod_date(testbrowser):
     (result,) = set_results(
         'http://xml.zeit.de/campus/article/01-countdown-studium')
     invalid = '1967-01-01T12:50:52.380804+00:00'
