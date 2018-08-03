@@ -223,6 +223,7 @@ def test_json_article_query_should_ignore_broken_hp_for_elasticsearch(
         'http://xml.zeit.de/zeit-online/cp-content/article-01']}
     elasticsearch = zope.component.getUtility(
         zeit.retresco.interfaces.IElasticsearch)
+    elasticsearch.resolve_results = False
     elasticsearch.results = [{
         'doc_id': '{urn:uuid:893eca9c-8a28-48e2-962b-96948577111d}',
         'url': '/zeit-online/cp-content/article-01'
@@ -347,6 +348,7 @@ def test_json_article_query_should_transform_elasticsearch(application):
         'http://xml.zeit.de/zeit-online/cp-content/article-05']}
     elasticsearch = zope.component.getUtility(
         zeit.retresco.interfaces.IElasticsearch)
+    elasticsearch.resolve_results = False
     elasticsearch.results = [{
         'doc_id': '{urn:uuid:893eca9c-8a28-48e2-962b-96948577111d}',
         'payload': {

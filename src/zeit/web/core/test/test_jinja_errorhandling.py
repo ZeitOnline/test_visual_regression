@@ -3,7 +3,9 @@ from StringIO import StringIO
 import exceptions
 import logging
 import sys
+import urllib2
 
+import mock
 import plone.testing.zca
 import pytest
 import venusian
@@ -11,6 +13,7 @@ import zope.browserpage.metaconfigure
 
 import zeit.cms.testcontenttype.testcontenttype
 
+import zeit.web.conftest
 import zeit.web.core.application
 import zeit.web.core.decorator
 import zeit.web.core.jinja
@@ -32,7 +35,7 @@ class Raiser(object):
         raise getattr(exceptions, cls)()
 
 
-faulty_templates = [
+undefined_templates = [
     ('{{ bad }}',
      'Unknown variables',
      {}),
@@ -44,6 +47,9 @@ faulty_templates = [
      {}),
     ('{{ bad.bad }}',
      'Accessing an attribute of an unknown variable',
+     {}),
+    ('{{ bad + "stuff" }}',
+     'Operators on an unknown variable',
      {}),
     ('{{ good.bad }}',
      'Accessing an unknown attribute of an object',
@@ -63,28 +69,28 @@ faulty_templates = [
     ('{{ good.bad.bad }}',
      'Accessing an attribute of an unknown attribute',
      {'good': object()}),
-    ('{% if good.bad %} foo {% endif %}',
+    ('{% if good.bad %}{% endif %}',
      'Conditionals on unknown attributes',
      {'good': object()}),
-    ('{% if good.bad() %} foo {% endif %}',
+    ('{% if good.bad() %}{% endif %}',
      'Conditionals on unknown methods',
      {'good': object()}),
-    ('{% if good.bad[0] %} foo {% endif %}',
+    ('{% if good.bad[0] %}{% endif %}',
      'Conditionals on unindexable attributes',
      {'good': object()}),
-    ('{% if good.bad.bad %} foo {% endif %}',
+    ('{% if good.bad.bad %}{% endif %}',
      'Conditionals on attributes of unknown attributes',
      {'good': object()}),
-    ('{% for item in bad %} foo {% endfor %}',
+    ('{% for item in bad %}{% endfor %}',
      'Looping over unknown variables',
      {}),
-    ('{% for item in bad() %} foo {% endfor %}',
+    ('{% for item in bad() %}{% endfor %}',
      'Looping over unknown callables',
      {}),
-    ('{% for item in bad[0] %} foo {% endfor %}',
+    ('{% for item in bad[0] %}{% endfor %}',
      'Looping over unindexable variables',
      {}),
-    ('{% for item in bad.bad %} foo {% endfor %}',
+    ('{% for item in bad.bad %}{% endfor %}',
      'Looping over attributes of unknown variables',
      {}),
     ('{{ bad | bad }}',
@@ -96,15 +102,36 @@ faulty_templates = [
     ('{{ good | bad | bad }}',
      'Chaining unknown filters',
      {'good': object()}),
-    ('{% if good is bad %} foo {% endif %}',
+    ('{% if good is bad %}{% endif %}',
      'Testing objects against unknown tests',
      {'good': object()}),
-    ('{% if bad is iterable %} foo {% endif %}',
+    ('{% if bad is iterable %}{% endif %}',
      'Testing unknown variables against builtin test',
      {}),
-    ('{% if bad is bad %} foo {% endif %}',
+    ('{% if bad is bad %}{% endif %}',
      'Testing unknown variables against unknown tests',
      {}),
+    ('{% set foo = good.bad %}',
+     'Setting a local scope variable to an unknown attribute',
+     {}),
+    ('{{ self.bad() }}',
+     'Referencing unknown parent template',
+     {})]
+
+message = '{} should still render'
+
+
+@pytest.mark.parametrize(
+    'markup,assertion,kw', undefined_templates,
+    ids=[message.format(i[1]) for i in undefined_templates])
+def test_failsafe_rendering(markup, assertion, kw):
+    env = zeit.web.core.jinja.Environment()
+    tpl = env.from_string('__result__' + markup)
+    result = tpl.render(**kw)
+    assert result == '__result__', message.format(assertion)
+
+
+faulty_templates = [
     ('{% extends "bad.html" %}',
      'Extending a missing template',
      {}),
@@ -113,12 +140,6 @@ faulty_templates = [
      {}),
     ('{% import "bad.html" as bad %}',
      'Importing a missing template',
-     {}),
-    ('{% set foo = good.bad %}',
-     'Setting a local scope variable to an unknown attribute',
-     {}),
-    ('{{ self.bad() }}',
-     'Referencing unknown parent template',
      {}),
     ('{{ lipsum(bad=True) }}',
      'Calling builtin function with wrong signature',
@@ -130,13 +151,14 @@ faulty_templates = [
 message = '{} should not bother friedbert'
 
 
-@pytest.mark.parametrize('markup,assertion,kw', faulty_templates,
-                         ids=[message.format(i[1]) for i in faulty_templates])
-def test_failsafe_rendering(markup, assertion, kw):
+@pytest.mark.parametrize(
+    'markup,assertion,kw', faulty_templates,
+    ids=[message.format(i[1]) for i in faulty_templates])
+def test_exception_prevention(markup, assertion, kw):
     env = zeit.web.core.jinja.Environment()
-    tpl = env.from_string(markup)
-    condition = isinstance(tpl.render(**kw), basestring)
-    assert condition, message.format(assertion)
+    tpl = env.from_string('__result__' + markup)
+    result = tpl.render(**kw)
+    assert result == '', message.format(assertion)
 
 
 @zeit.web.core.decorator.JinjaEnvRegistrator('filters', category='_c1')
@@ -241,10 +263,9 @@ def test_undefined_error_logs_repr_for_cms_content(jinja_log):
         "attribute 'foo'" in jinja_log.getvalue())
 
 
-# XXX Is there an easier/faster way to set up an Application with different
-# settings than copying the application_session fixture wholesale?
 @pytest.fixture
-def error_swallowing_application(app_settings, request):
+def error_swallowing_application(application, app_settings, request):
+    old_env = application.zeit_app.jinja_env
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
@@ -253,6 +274,16 @@ def error_swallowing_application(app_settings, request):
     factory = zeit.web.core.application.Application()
     app = factory({}, **app_settings)
     app.zeit_app = factory
+    # XXX venusian is stateful: on first run it sets the "attached category" on
+    # decorated objects, when run again, only those without attachments are
+    # picked up. So to register the jinja things, we have to copy them from
+    # the first run (which ended up in the "normal" jinja environment).
+    new_env = app.zeit_app.jinja_env
+    for name in ['filters', 'globals', 'tests']:
+        old = getattr(old_env, name)
+        new = getattr(new_env, name)
+        for key, value in old.items():
+            new.setdefault(key, value)
     return app
 
 
@@ -261,3 +292,18 @@ def test_integration_jinja_environment_is_configured_for_ignoring_errors(
     env = error_swallowing_application.zeit_app.jinja_env
     tpl = env.from_string(u'foo {{ 42 | bad }}')
     assert tpl.render().strip() == 'foo'
+
+
+def test_on_jinja_exception_sends_http_status_500(
+        error_swallowing_application):
+    testbrowser = zeit.web.conftest.WsgiBrowser(
+        wsgi_app=error_swallowing_application)
+    # It's not easy to make Jinja explode, with all our Undefined handling in
+    # place, but we cannot catch exceptions in function called from templates
+    # `{{something.myfunc()}}` yet (you'd have to wrap them in
+    # environment.getattr, as far as I can tell).
+    with mock.patch('zeit.content.cp.area.Area.values') as values:
+        values.side_effect = RuntimeError('provoked')
+        with pytest.raises(urllib2.HTTPError) as info:
+            testbrowser('/zeit-online/slenderized-index')
+    assert info.value.getcode() == 500
