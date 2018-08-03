@@ -269,6 +269,8 @@
 			display: list-item
 		.js &__ressorts-item--featured
 			margin-left: auto // align right @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
+		.js &__ressorts-item--d18
+			width: 100% // special style for d18 to fall into "more" dropdown menu
 
 		&__dropdown-item--has-label
 			background-color: #FAFAF3
@@ -373,10 +375,6 @@
 		&__date
 			float: right
 			padding-top: 5px
-
-		// special style for d18
-		&__dropdown-item--d18
-			width: 100%
 
 .nav__ressorts-item--icon-featured-d18
 	fill: #fb0
