@@ -1001,16 +1001,17 @@ class MockES(MockSearch):
 
         for idx, result in enumerate(value):
             if isinstance(result, dict):
-                if 'uniqueId' in result:
-                    uid = result.pop('uniqueId')
-                    if not result:      # BBB: resolve for dict with only uid
-                        result = uid
-                    else:
-                        # Tries to rewrite uniqueIds into tms-style url paths
-                        path = uid.replace(
-                            zeit.cms.interfaces.ID_NAMESPACE.rstrip('/'), '')
-                        result.setdefault('url', path)
-                continue
+                if 'uniqueId' not in result:
+                    continue
+                uid = result.pop('uniqueId')
+                if not result:      # BBB: resolve for dict with only uid
+                    result = uid
+                else:
+                    # Tries to rewrite uniqueIds into tms-style url paths
+                    path = uid.replace(
+                        zeit.cms.interfaces.ID_NAMESPACE.rstrip('/'), '')
+                    result.setdefault('url', path)
+                    continue
             content = zeit.cms.interfaces.ICMSContent(result)
             converter = zeit.retresco.interfaces.ITMSRepresentation(content)
             value[idx] = converter()
