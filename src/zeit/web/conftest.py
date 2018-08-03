@@ -988,6 +988,17 @@ class MockES(MockSearch):
 
     @MockSearch.results.setter
     def results(self, value):
+        """Set (mock) search results for searches via Elasticsearch.
+
+        The given values can either be strings[*], in which case they will
+        be interpreted as a `uniqueId`, resolved into a content object and
+        converted to an `ITMSRepresentation` (which is then used as the
+        search result) or else dictionaries already containing the "full"
+        mock search result (which will be returned as is).
+
+        [*] Note that for backward compatibility a dictionary with only a
+        `uniqueId` key will be resolved as well."""
+
         for idx, result in enumerate(value):
             if isinstance(result, dict):
                 if 'uniqueId' in result:
