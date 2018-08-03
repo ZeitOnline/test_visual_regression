@@ -2,8 +2,10 @@
 import re
 
 import mock
+import zope.component
 
 import zeit.cms.interfaces
+import zeit.retresco.interfaces
 
 import zeit.web.core.centerpage
 import zeit.web.core.template
@@ -468,7 +470,18 @@ def test_if_all_followbox_elements_present(testbrowser):
     assert len(buttons) == 3
 
 
-def test_seriespage_contains_required_elements(testbrowser, data_solr):
+def test_seriespage_contains_required_elements(testbrowser):
+    elastic = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elastic.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/04'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/05'},
+        # More content than fits on one page to trigger pagination
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/06'},
+    ]
     browser = testbrowser('/serie/martenstein')
     headline = browser.cssselect('h1')[0]
     select = browser.cssselect

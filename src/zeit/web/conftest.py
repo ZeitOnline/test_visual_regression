@@ -42,10 +42,10 @@ import zope.testbrowser.wsgi
 import zeit.cms.interfaces
 import zeit.content.image.interfaces
 import zeit.retresco.interfaces
-import zeit.retresco.connection
 import zeit.solr.interfaces
 
 import zeit.web.core.application
+import zeit.web.core.retresco
 import zeit.web.core.routing
 import zeit.web.core.solr
 import zeit.web.core.utils
@@ -981,8 +981,25 @@ class MockES(MockSearch):
 
     zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
 
+    resolve_results = True
+
+    def reset(self):
+        super(MockES, self).reset()
+        self.__dict__.pop('resolve_results', None)
+
     def search(self, query, order=None, rows=25, **kw):
-        result = zeit.cms.interfaces.Result(self.pop_results(rows))
+        result = self.pop_results(rows)
+        if self.resolve_results:
+            resolved = []
+            for item in result:
+                content = zeit.cms.interfaces.ICMSContent(
+                    zeit.cms.interfaces.ID_NAMESPACE.rstrip('/') +
+                    item.get('url', ''), None)
+                data = zeit.retresco.interfaces.ITMSRepresentation(content)()
+                if data is not None:
+                    resolved.append(data)
+            result = resolved
+        result = zeit.cms.interfaces.Result(result)
         result.hits = self._hits
         return result
 
@@ -1000,8 +1017,12 @@ class MockES(MockSearch):
         self._results = value
 
 
-class MockTMS(zeit.retresco.connection.TMS, MockSearch):
-    """Stub with empty results."""
+class MockTMS(zeit.web.core.retresco.DataTMS, MockSearch):
+    """Stub with empty results.
+
+    We inherit from DataTMS to get the core/data-based get_topicpages()
+    implementation.
+    """
 
     def __init__(self):
         pass
@@ -1012,9 +1033,6 @@ class MockTMS(zeit.retresco.connection.TMS, MockSearch):
     def _request(self, *args, **kw):
         # XXX unclear if this properly stubs out all remaining public functions
         return collections.defaultdict(lambda: None)
-
-    def get_topicpages(self, *args, **kw):
-        return zeit.cms.interfaces.Result()
 
     def get_topicpage_documents(self, id, start=0, rows=25, filter=None):
         result = zeit.cms.interfaces.Result(self.pop_results(rows))
@@ -1032,24 +1050,6 @@ def data_solr(request):
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
     zope.component.provideUtility(zeit.web.core.solr.DataSolr())
-
-
-@pytest.fixture
-def data_es(request):
-    previous = zope.component.queryUtility(
-        zeit.retresco.interfaces.IElasticsearch)
-    if previous is not None:
-        request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.retresco.DataES())
-
-
-@pytest.fixture
-def data_tms(request):
-    previous = zope.component.queryUtility(
-        zeit.retresco.interfaces.ITMS)
-    if previous is not None:
-        request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.retresco.DataTMS())
 
 
 @pytest.fixture(scope='session')

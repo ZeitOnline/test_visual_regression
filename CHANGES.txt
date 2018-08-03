@@ -17,7 +17,11 @@ POSTDEPLOY
 3.175 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4788: Use newly created analyzed author name field for fulltext search
+
+- BUG-973: Fix link to own profile inside leave comment box
+
+- FIX: Ignore operations on undefined template variables
 
 
 3.174 (2018-08-01)
