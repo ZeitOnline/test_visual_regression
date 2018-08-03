@@ -977,12 +977,35 @@ class MockSitemapSolr(MockSolr):
         pass
 
 
+def copy_dotted_keys(source, *keys):
+    """Return dictionary with only the given, potentially nested keys.
+    The target keys need to be specified in dot notation, e.g. `foo.bar`."""
+    dest = {}
+    for key in keys:
+        s = source
+        d = dest
+        levels = key.split('.')
+        last = levels.pop()
+        for level in levels:
+            if level not in s:
+                break
+            s = s[level]
+            d = d.setdefault(level, {})
+        if last in s:
+            d[last] = s[last]
+    return dest
+
+
 class MockES(MockSearch):
 
     zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
 
     def search(self, query, order=None, rows=25, **kw):
-        result = zeit.cms.interfaces.Result(self.pop_results(rows))
+        source = query.get('_source', ['url', 'doc_type', 'doc_id'])
+        if kw.get('include_payload'):
+            source.append('payload')
+        result = zeit.cms.interfaces.Result(
+            [copy_dotted_keys(r, *source) for r in self.pop_results(rows)])
         result.hits = self._hits
         return result
 
