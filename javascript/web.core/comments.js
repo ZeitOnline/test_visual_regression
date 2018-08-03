@@ -374,7 +374,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             input = this.elements;
 
         $form.find( '.comment-form__hint' ).removeClass( 'comment-form__hint--error' );
-        $form.find( '.comment-form__input' ).removeClass( 'error' );
+        $form.find( '.comment-form__error' ).remove();
+        $form.find( '.comment-form__input, .comment-form__textarea' ).removeClass( 'error' );
         $form.find( '.comment-form__error' ).removeClass( 'comment-form__error--visible' );
 
         if ( input.username && /^\s*$/.test( input.username.value ) ) {
@@ -405,20 +406,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             success: function( response ) {
                 if ( response ) {
                     if ( response.error === 'username_exists_or_invalid' ) {
-                        var input = $form.find( '.comment-form__input' ),
-                            error = $form.find( '.comment-form__error' );
-
-                        if ( error.length === 0 ) {
-                            error = $( '<div></div>' ).addClass( 'comment-form__error' )
-                                .text( 'Dieser Benutzername ist bereits vergeben oder enthält ungültige Zeichen.' )
-                                .insertAfter( input );
-                        }
-
-                        error.addClass( 'comment-form__error--visible' );
-                        input.addClass( 'error' );
-
-                        // enable submit button again
-                        $form.find( '.button' ).prop( 'disabled', false );
+                        var errorMessage = 'Dieser Benutzername ist bereits vergeben oder enthält ungültige Zeichen.',
+                            input = $form.find( '.comment-form__input' );
+                        addErrorToForm( $form, errorMessage, input, false );
                     } else if ( response.response.premoderation ) {
                         var premoderation = $( $( '#premoderation-template' ).html().replace( '${userName}', response.response.userName ) );
                         if ( response.response.setUser ) {
@@ -443,8 +433,36 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                         window.location.href = response.location;
                     }
                 }
+            },
+            error: function() {
+                // do we want special error message for status code 500?
+                // 1) insert response as function parameter
+                // 2) check for error.status === 500 and update errorMessage
+                var errorMessage = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.',
+                    textarea = $form.find( '.comment-form__textarea' );
+                addErrorToForm( $form, errorMessage, textarea, true );
             }
         });
+    }
+
+    function addErrorToForm( $form, errorMessage, input, wide ) {
+        var error = $form.find( '.comment-form__error' );
+
+        if ( error.length === 0 ) {
+            var classes = 'comment-form__error ';
+            classes += wide ? 'comment-form__error--fullwidth' : '';
+            error = $( '<div></div>' ).addClass( classes )
+                .text( errorMessage )
+                .insertAfter( input );
+        }
+
+        error.addClass( 'comment-form__error--visible' );
+        input.addClass( 'error' );
+
+        // enable submit button again
+        setTimeout( function() {
+            $form.find( '.button' ).prop( 'disabled', false );
+        }, 5000 );
     }
 
     function putRewrapperOnReplies( $firstReply ) {
