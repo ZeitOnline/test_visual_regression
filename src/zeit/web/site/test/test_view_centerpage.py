@@ -2309,7 +2309,6 @@ def test_teaser_link_title_should_match_kicker_and_headline(testbrowser):
 def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
     elastic = zope.component.getUtility(
         zeit.retresco.interfaces.IElasticsearch)
-    elastic.resolve_results = False
     elastic.results = [
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
          'doc_type': 'article',

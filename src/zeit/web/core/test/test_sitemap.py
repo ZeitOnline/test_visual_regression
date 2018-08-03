@@ -14,17 +14,9 @@ import zeit.cms.repository.interfaces
 import zeit.retresco.interfaces
 
 
-def convert_results(result):
-    if isinstance(result, dict):
-        return result
-    content = zeit.cms.interfaces.ICMSContent(result)
-    converter = zeit.retresco.interfaces.ITMSRepresentation(content)
-    return converter()
-
-
 def set_results(*results):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
-    es.results = map(convert_results, results)
+    es.results = list(results)
     return es.results
 
 

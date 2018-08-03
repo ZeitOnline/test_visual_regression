@@ -383,7 +383,6 @@ def test_successful_solr_result_should_produce_nonzero_hit_counter(
 def test_successful_elasticsearch_result_should_produce_nonzero_hit_counter(
         elasticsearch_area):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
-    es.resolve_results = False
     es.results = [{'url': ('http://xml.zeit.de/article/0%s' % i)
                    } for i in range(1, 43)]
     assert elasticsearch_area.hits == 42

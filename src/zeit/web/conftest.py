@@ -981,38 +981,28 @@ class MockES(MockSearch):
 
     zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
 
-    resolve_results = True
-
-    def reset(self):
-        super(MockES, self).reset()
-        self.__dict__.pop('resolve_results', None)
-
     def search(self, query, order=None, rows=25, **kw):
-        result = self.pop_results(rows)
-        if self.resolve_results:
-            resolved = []
-            for item in result:
-                content = zeit.cms.interfaces.ICMSContent(
-                    zeit.cms.interfaces.ID_NAMESPACE.rstrip('/') +
-                    item.get('url', ''), None)
-                data = zeit.retresco.interfaces.ITMSRepresentation(content)()
-                if data is not None:
-                    resolved.append(data)
-            result = resolved
-        result = zeit.cms.interfaces.Result(result)
+        result = zeit.cms.interfaces.Result(self.pop_results(rows))
         result.hits = self._hits
         return result
 
     @MockSearch.results.setter
     def results(self, value):
-        # Tries to rewrite uniqueIds into tms-style url paths
-        for result in value:
-            try:
-                path = result.pop('uniqueId').replace(
-                    zeit.cms.interfaces.ID_NAMESPACE.rstrip('/'), '')
-                result.setdefault('url', path)
-            except KeyError:
+        for idx, result in enumerate(value):
+            if isinstance(result, dict):
+                if 'uniqueId' in result:
+                    uid = result.pop('uniqueId')
+                    if not result:      # BBB: resolve for dict with only uid
+                        result = uid
+                    else:
+                        # Tries to rewrite uniqueIds into tms-style url paths
+                        path = uid.replace(
+                            zeit.cms.interfaces.ID_NAMESPACE.rstrip('/'), '')
+                        result.setdefault('url', path)
                 continue
+            content = zeit.cms.interfaces.ICMSContent(result)
+            converter = zeit.retresco.interfaces.ITMSRepresentation(content)
+            value[idx] = converter()
         self._hits = len(value)
         self._results = value
 
