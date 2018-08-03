@@ -40,7 +40,7 @@
     {% if toggles('nav_extraitem') -%}
     <li class="{{ class }}-item--featured">
         <a itemprop="url" title="exklusive Zeit Artikel" href="{{ request.route_url('home') }}exklusive-zeit-artikel">
-           {{ lama.use_svg_icon('zplus', 'svg-symbol', view.package, a11y=False) }}
+           {{ lama.use_svg_icon('zplus', 'nav__ressorts-icon--zplus', view.package, a11y=False) }}
         </a>
     </li>
     {% endif %}
