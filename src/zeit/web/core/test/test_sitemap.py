@@ -16,16 +16,14 @@ import zeit.retresco.interfaces
 
 
 def convert_results(result):
-    try:
-        content = zeit.cms.interfaces.ICMSContent(result['uniqueId'])
-    except TypeError:
+    if isinstance(result, dict):
         return result
-    else:
-        converter = zeit.retresco.interfaces.ITMSRepresentation(content)
-        return converter()
+    content = zeit.cms.interfaces.ICMSContent(result)
+    converter = zeit.retresco.interfaces.ITMSRepresentation(content)
+    return converter()
 
 
-def set_results(results):
+def set_results(*results):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
     es.results = map(convert_results, results)
     return es.results
@@ -38,31 +36,31 @@ def test_gsitemap_index_ranking_pagination(testbrowser, workingcopy):
         area = co.body.values()[0].values()[0]
         area.kind = 'ranking'
 
-    set_results([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}])
+    set_results('http://xml.zeit.de/zeit-magazin/article/01')
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 1
-    set_results([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'}])
+    set_results('http://xml.zeit.de/zeit-magazin/article/01',
+                'http://xml.zeit.de/zeit-magazin/article/02',
+                'http://xml.zeit.de/zeit-magazin/article/03')
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 2
-    set_results([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/04'}])
+    set_results('http://xml.zeit.de/zeit-magazin/article/01',
+                'http://xml.zeit.de/zeit-magazin/article/02',
+                'http://xml.zeit.de/zeit-magazin/article/03',
+                'http://xml.zeit.de/zeit-magazin/article/04')
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 2
-    set_results([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03a'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/04'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/05'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/06'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/07'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/08'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/09'},
-                 {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/10'}])
+    set_results('http://xml.zeit.de/zeit-magazin/article/01',
+                'http://xml.zeit.de/zeit-magazin/article/02',
+                'http://xml.zeit.de/zeit-magazin/article/03',
+                'http://xml.zeit.de/zeit-magazin/article/03a',
+                'http://xml.zeit.de/zeit-magazin/article/04',
+                'http://xml.zeit.de/zeit-magazin/article/05',
+                'http://xml.zeit.de/zeit-magazin/article/06',
+                'http://xml.zeit.de/zeit-magazin/article/07',
+                'http://xml.zeit.de/zeit-magazin/article/08',
+                'http://xml.zeit.de/zeit-magazin/article/09',
+                'http://xml.zeit.de/zeit-magazin/article/10')
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 6
 
@@ -77,8 +75,7 @@ def test_gsitemap_index_overview_stops_at_current_date(testbrowser, clock):
 
 
 def test_gsitemap_page_with_image_copyright(testbrowser):
-    set_results([{
-        'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'}])
+    set_results('http://xml.zeit.de/zeit-online/article/01')
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/zeit-online/article/01')
@@ -104,8 +101,7 @@ def test_gsitemap_page_without_image(testbrowser, monkeypatch, workingcopy):
     repository = zope.component.getUtility(
         zeit.cms.repository.interfaces.IRepository)
     repository['article'] = zeit.content.article.testing.create_article()
-    set_results([{
-        'uniqueId': 'http://xml.zeit.de/article'}])
+    set_results('http://xml.zeit.de/article')
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/article')
@@ -116,8 +112,7 @@ def test_gsitemap_page_without_image(testbrowser, monkeypatch, workingcopy):
 
 def test_gsitemap_page_does_not_break_without_image_caption(
         testbrowser, monkeypatch):
-    set_results([{
-        'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'}])
+    set_results('http://xml.zeit.de/zeit-online/article/01')
     monkeypatch.setattr(zeit.web.core.image.Image, 'caption', None)
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     xml = lxml.etree.fromstring(browser.contents)
@@ -136,8 +131,8 @@ def test_gsitemap_rejects_invalid_page_parameter(testbrowser):
 
 def test_gsitemap_page_does_not_contain_invalid_lastmod_date(
         testbrowser, monkeypatch):
-    (result,) = set_results([{
-        'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
+    (result,) = set_results(
+        'http://xml.zeit.de/campus/article/01-countdown-studium')
     invalid = '1967-01-01T12:50:52.380804+00:00'
     result['payload']['document']['date_first_released'] = invalid
     del result['date']
@@ -149,17 +144,7 @@ def test_gsitemap_page_does_not_contain_invalid_lastmod_date(
 
 
 def test_gsitemap_newssite(testbrowser):
-    set_results([{
-        'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
-                          'crystal-meth-nancy-schmidt/'],
-        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
-        'supertitle': 'Big Data',
-        'title': 'Schwanger ohne digitale Spuren',
-        'ressort': 'Digital',
-        'sub_ressort': 'Datenschutz',
-        'keyword': ['Schwangerschaft', 'Konsumverhalten'],
-        'keyword_id': ['schwangerschaft', 'konsumverhalten']},
-    ])
+    set_results('http://xml.zeit.de/zeit-magazin/article/autorenbox')
     browser = testbrowser('/gsitemaps/newsitemap.xml')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/zeit-magazin/article/autorenbox')
@@ -205,12 +190,7 @@ def test_gsitemap_newssite(testbrowser):
 
 def test_gsitemap_news_does_not_contain_none_in_keywords(
         testbrowser, monkeypatch):
-    set_results([{
-        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
-        'ressort': 'Digital',
-        'keyword': ['Schwangerschaft', 'Konsumverhalten'],
-        'keyword_id': ['schwangerschaft', 'konsumverhalten']},
-    ])
+    set_results('http://xml.zeit.de/zeit-magazin/article/autorenbox')
     # sub_ressort is added as keyword as well, set it to None here to check if
     # 'None' is added keyword list
     monkeypatch.setattr(
@@ -226,14 +206,7 @@ def test_gsitemap_news_does_not_contain_none_in_keywords(
 
 
 def test_gsitemap_video(testbrowser):
-    set_results([{
-        'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001',
-        'title': u'Foto-Momente: Die stille Schönheit der Polarlichter',
-        'subtitle': 'Sie sind eines der faszinierendsten Schauspiele, die '
-        'die Natur zu bieten hat: Polarlichter, auch als Aurora borealis '
-        'bekannt, illuminieren den Himmel in atemberaubenden Farben.',
-        'ressort': 'Wissen'
-    }])
+    set_results('http://xml.zeit.de/video/2014-01/1953013471001')
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     settings['image_prefix'] = 'http://img.example.com'
     browser = testbrowser('/gsitemaps/video.xml?date=2000-01-01')
@@ -271,9 +244,7 @@ def test_gsitemap_video(testbrowser):
 
 def test_gsitemap_video_creates_no_publication_date_field_if_no_date_is_set(
         testbrowser, monkeypatch):
-    set_results([{
-        'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
-    }])
+    set_results('http://xml.zeit.de/video/2014-01/1953013471001')
     monkeypatch.setattr(
         zeit.workflow.asset.AssetWorkflow,
         'date_last_published_semantic', None)
@@ -288,9 +259,7 @@ def test_gsitemap_video_creates_no_publication_date_field_if_no_date_is_set(
 
 def test_gsitemap_video_does_not_call_bc_api(testbrowser, monkeypatch):
     import zeit.brightcove.connection
-    set_results([{
-        'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
-    }])
+    set_results('http://xml.zeit.de/video/2014-01/1953013471001')
     mocked_get_video = mock.Mock()
     mocked_get_video.return_value = {
         'renditions': (),
@@ -329,10 +298,9 @@ def test_gsitemap_themen_last_page(testbrowser, data_tms):
 
 
 def test_gsitemap_appcon(monkeypatch, testbrowser):
-    set_results([
-        {'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'},
-        {'uniqueId': 'http://xml.zeit.de/blogs/nsu-blog-bouffier'},
-    ])
+    set_results(
+        'http://xml.zeit.de/campus/article/01-countdown-studium',
+        'http://xml.zeit.de/blogs/nsu-blog-bouffier')
     monkeypatch.setattr(zeit.web.core.interfaces, 'IImage', None)
     browser = testbrowser('/gsitemaps/appconsitemap.xml?date=2000-01-01')
     assert (
@@ -352,10 +320,9 @@ def test_gsitemap_appcon(monkeypatch, testbrowser):
 
 
 def test_gsitemap_appcon_creates_https_urls(monkeypatch, testbrowser):
-    set_results([
-        {'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'},
-        {'uniqueId': 'http://xml.zeit.de/blogs/nsu-blog-bouffier'}
-    ])
+    set_results(
+        'http://xml.zeit.de/campus/article/01-countdown-studium',
+        'http://xml.zeit.de/blogs/nsu-blog-bouffier')
     zeit.web.core.application.FEATURE_TOGGLES.set('https')
     monkeypatch.setattr(zeit.web.core.interfaces, 'IImage', None)
     browser = testbrowser('/gsitemaps/appconsitemap.xml?date=2000-01-01')
@@ -396,22 +363,22 @@ def test_gsitemap_solr_uses_different_timeout_than_normal_solr(testbrowser):
 
 
 def test_sitemaps_support_link_objects(testbrowser):
-    set_results([{
+    set_results({
         'uniqueId': 'http://xml.zeit.de/mylink',
         'doc_type': 'link',
         'payload': {'body': {'url': 'http://example.com/link'}},
-    }])
+    })
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://example.com/link')
 
 
 def test_sitemaps_treat_blogpost_as_link(testbrowser):
-    set_results([{
+    set_results({
         'uniqueId': 'http://blog.zeit.de/meinblog/foo',
         'doc_type': 'blogpost',
         'payload': {'body': {'url': 'http://blog.zeit.de/meinblog/foo'}},
-    }])
+    })
     browser = testbrowser('/gsitemaps/index.xml?date=2000-01-01')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'https://blog.zeit.de/meinblog/foo')
