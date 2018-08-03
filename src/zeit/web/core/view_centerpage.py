@@ -5,7 +5,6 @@ import datetime
 import urlparse
 
 import pyramid.httpexceptions
-import pytz
 import zope.component
 import babel.dates
 

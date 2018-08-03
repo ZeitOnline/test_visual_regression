@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 import pyramid.testing
 
-import mock
-
-import zope.component
-
 import zeit.cms.interfaces
 
 import zeit.web.core.application
