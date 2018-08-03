@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - BUG-973: Fix link to own profile inside leave comment box
 
+- BUG-975: Exchange absolute image paths for relative ones
+
 - FIX: Ignore operations on undefined template variables
 
 - FIX: Return HTTP 500 for empty pages due to jinja errors instead of 200
