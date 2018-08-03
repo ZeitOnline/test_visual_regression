@@ -25,6 +25,8 @@ POSTDEPLOY
 
 - FIX: Return HTTP 500 for empty pages due to jinja errors instead of 200
 
+- FIX: Add color for Z+ icon in framebuilder
+
 
 3.174 (2018-08-01)
 ------------------
