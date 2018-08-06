@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4788: Use newly created analyzed author name field for fulltext search
 
+- BUG-763: Show Error if Server Error occurred while commenting
+
 - BUG-973: Fix link to own profile inside leave comment box
 
 - BUG-975: Exchange absolute image paths for relative ones
