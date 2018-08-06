@@ -9,9 +9,7 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- remove feature toggle `<dtag_navigation>true</dtag_navigation>`
-
-- add feature toggle `<nav_extraitem>true</nav_extraitem>`
+- nothing
 
 
 3.175 (unreleased)
