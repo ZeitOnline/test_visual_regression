@@ -219,10 +219,14 @@ function wmTicker( element ) {
 
     /**
      * generate time String containing all needed words
+     * @param  {string}  amount amount of games today
      * @param  {string}  date string supplied by API
+     * @param  {string}  kickoff string supplied by API
+     * @param  {string}  period string supplied by API
+     * @param  {string}  status string supplied by API
      * @return {string}
      */
-    function timeString( date, kickoff, period, status ) {
+    function timeString( amount, date, kickoff, period, status ) {
         var begin = new Date( date ),
             dateString = addLeadingZero( begin.getDate() ) + '.' + addLeadingZero( ( begin.getMonth() + 1 ) );
         kickoff = new Date( kickoff );
@@ -251,6 +255,9 @@ function wmTicker( element ) {
                     return 'Elfmeterschießen';
 
                 case 'FULL':
+                    if ( amount === 1 ) {
+                        return 'beendet';
+                    }
                     return '';
 
                 default:
@@ -284,14 +291,13 @@ function wmTicker( element ) {
 
         data.forEach( function( game ) {
             var teams = this.mapCountryCodes( game.away_name, game.home_name );
-            var time = timeString( game.date, game.kickoff, game.period, game.status );
+            var time = timeString( data.length, game.date, game.kickoff, game.period, game.status );
             var minutesTillGameBegins = ( new Date( game.date ) - new Date() ) / 1000;
             var preGame = minutesTillGameBegins < 3600 && game.status === 'PRE-MATCH';
             var gameShallBeBig = preGame || game.running;
             // only one game. Which shall then be displayed big
             if ( data.length === 1 ) {
                 gameShallBeBig = true;
-                time = ( game.status === 'FULL' ) ? 'beendet' : time; // single game big and finished shall write 'beendet'
             }
 
             var gameData = {
@@ -355,7 +361,7 @@ function wmTicker( element ) {
         this.data.forEach( function( game ) {
             var elem = document.getElementById( 'time-' + game.id );
             if ( elem ) {
-                elem.innerText = timeString( game.date, game.kickoff, game.period, game.status );
+                elem.innerText = timeString( this.data.length, game.date, game.kickoff, game.period, game.status );
             }
         });
     };

@@ -108,7 +108,6 @@ def _inject_banner_code(pages, pubtype, ressort, sub_ressort):
     }
 
     # change place5 against ctm if configured
-    toggles = zeit.web.core.application.FEATURE_TOGGLES
     place5 = ({'tile': 5, 'paragraph': 6, 'type': 'desktop'},
               {'tile': 'content_ad', 'paragraph': 6, 'type': ''},)
 

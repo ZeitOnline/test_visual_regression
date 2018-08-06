@@ -1,4 +1,3 @@
-import collections
 import logging
 import os
 import os.path
@@ -33,6 +32,8 @@ def scrape_response_nonascii(self, headers, response):
     if isinstance(response, unicode):
         response = response.encode('ascii', errors='ignore')
     return original_scrape_response(self, headers, response)
+
+
 original_scrape_response = pysolr.Solr._scrape_response
 pysolr.Solr._scrape_response = scrape_response_nonascii
 
@@ -41,6 +42,8 @@ pysolr.Solr._scrape_response = scrape_response_nonascii
 def solr_timeout_from_settings(self):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('solr_timeout', 5)
+
+
 zeit.solr.connection.SolrConnection.timeout = property(
     solr_timeout_from_settings, lambda self, value: None)
 

@@ -9,9 +9,7 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- remove feature toggle `<dtag_navigation>true</dtag_navigation>`
-
-- add feature toggle `<nav_extraitem>true</nav_extraitem>`
+- nothing
 
 
 3.175 (unreleased)
@@ -21,10 +19,17 @@ POSTDEPLOY
 
 - BUG-973: Fix link to own profile inside leave comment box
 
+- BUG-975: Exchange absolute image paths for relative ones
+
+- BUG-963: Display playing time correctly for finished single game in WM-Ticker
+
 - FIX: Ignore operations on undefined template variables
 
 - FIX: Return HTTP 500 for empty pages due to jinja errors instead of 200
 
+- FIX: Add color for Z+ icon in framebuilder
+
+- MAINT: Pylakes code clean up
 
 3.174 (2018-08-01)
 ------------------

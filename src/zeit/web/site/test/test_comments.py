@@ -482,7 +482,7 @@ def test_comment_form_for_logged_in_user_contains_formchars_counter(
     dummy_request.user['name'] = 'Max'
 
     view = zeit.web.core.view_comment.CommentForm(article, dummy_request)
-    browser_comment_form = tplbrowser(
+    tplbrowser(
         'zeit.web.core:templates/inc/comments/comment-form.html',
         view=view, request=dummy_request)
     assert browser.cssselect('.js-count-formchars')

@@ -59,7 +59,7 @@ def test_author_has_no_feedback_view_if_feedback_disabled(testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set('author_feedback')
 
     with pytest.raises(urllib2.HTTPError):
-        browser = testbrowser('/autoren/F/Thomas_Fischer/index/feedback')
+        testbrowser('/autoren/F/Thomas_Fischer/index/feedback')
 
 
 def test_author_page_does_not_render_feedback_elements_if_disabled_for_author(
