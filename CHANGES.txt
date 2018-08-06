@@ -29,6 +29,7 @@ POSTDEPLOY
 
 - FIX: Add color for Z+ icon in framebuilder
 
+- MAINT: Pylakes code clean up
 
 3.174 (2018-08-01)
 ------------------

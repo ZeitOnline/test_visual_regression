@@ -1,7 +1,6 @@
 import mimetypes
 
 from pyramid.response import FileIter
-from pyramid.response import Response
 import magic
 import pyramid.httpexceptions
 
