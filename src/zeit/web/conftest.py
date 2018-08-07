@@ -1003,6 +1003,7 @@ class MockES(MockSearch):
     def search(self, query, order=None, rows=25, **kw):
         source = query.get('_source', ['url', 'doc_type', 'doc_id'])
         if kw.get('include_payload'):
+            assert '_source' not in query
             source.append('payload')
         result = zeit.cms.interfaces.Result(
             [copy_dotted_keys(r, *source) for r in self.pop_results(rows)])
