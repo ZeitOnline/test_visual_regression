@@ -15,8 +15,6 @@ POSTDEPLOY
 3.175 (unreleased)
 ------------------
 
-- OPS-896: Reduce payload used for sitemaps
-
 - ZON-4788: Use newly created analyzed author name field for fulltext search
 
 - BUG-763: Show Error if Server Error occurred while commenting
@@ -27,6 +25,8 @@ POSTDEPLOY
 
 - BUG-963: Display playing time correctly for finished single game in WM-Ticker
 
+- OPS-896: Reduce payload used for sitemaps
+
 - FIX: Ignore operations on undefined template variables
 
 - FIX: Return HTTP 500 for empty pages due to jinja errors instead of 200
@@ -34,6 +34,7 @@ POSTDEPLOY
 - FIX: Add color for Z+ icon in framebuilder
 
 - MAINT: Pylakes code clean up
+
 
 3.174 (2018-08-01)
 ------------------
