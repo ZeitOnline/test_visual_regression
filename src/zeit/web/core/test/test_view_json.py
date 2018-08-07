@@ -215,19 +215,17 @@ def test_json_article_query_should_ignore_broken_hp_for_solr(
 def test_json_article_query_should_ignore_broken_hp_for_elasticsearch(
         application, monkeypatch):
     zeit.web.core.application.FEATURE_TOGGLES.set('elasticsearch_zoca')
-    monkeypatch.setattr(zeit.cms.interfaces, 'ICMSContent',
-                        lambda _, default: default)
     request = mock.MagicMock()
     request.route_url = mock.MagicMock(return_value='/')
     request.json_body = {'uniqueIds': [
         'http://xml.zeit.de/zeit-online/cp-content/article-01']}
     elasticsearch = zope.component.getUtility(
         zeit.retresco.interfaces.IElasticsearch)
-    elasticsearch.results = [{
-        'doc_id': '{urn:uuid:893eca9c-8a28-48e2-962b-96948577111d}',
-        'url': '/zeit-online/cp-content/article-01'
-    }]
-    response = zeit.web.core.view_json.json_article_query(request)
+    elasticsearch.results = [
+        'http://xml.zeit.de/zeit-online/cp-content/article-01']
+    obj = 'zeit.web.core.view_json.zeit.cms.interfaces.ICMSContent'
+    with mock.patch(obj, return_value=None):
+        response = zeit.web.core.view_json.json_article_query(request)
     assert not response[0]['on_homepage']
 
 

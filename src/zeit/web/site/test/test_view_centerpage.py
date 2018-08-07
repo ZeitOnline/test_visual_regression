@@ -2310,25 +2310,14 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
     elastic = zope.component.getUtility(
         zeit.retresco.interfaces.IElasticsearch)
     elastic.results = [
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
-         'doc_type': 'article',
-         'payload': {'head': {
-             'teaser_image': ('http://xml.zeit.de/zeit-magazin/images'
-                              '/harald-martenstein-wideformat'),
-             'teaser_image_fill_color': 'A3E6BB',
-         }}},
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
-         'doc_type': 'article',
-         'payload': {'head': {
-             'teaser_image': ('http://xml.zeit.de/zeit-magazin/images'
-                              '/harald-martenstein-wideformat'),
-         }}}]
+        'http://xml.zeit.de/zeit-magazin/article/martenstein-portraitformat',
+        'http://xml.zeit.de/zeit-magazin/article/02']
 
     browser = testbrowser('/serie/martenstein')
     image1 = browser.cssselect('.cp-area--zmo-ranking article img')[0]
     image2 = browser.cssselect('.cp-area--zmo-ranking article img')[1]
 
-    assert image1.get('data-src').endswith('__A3E6BB')
+    assert image1.get('data-src').endswith('__ccddee')
     assert not image2.get('data-src').endswith('__')
 
 
