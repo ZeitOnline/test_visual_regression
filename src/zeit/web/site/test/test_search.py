@@ -179,6 +179,7 @@ def test_search_form_should_create_valid_fulltext_elasticsearch_query(
             u'must': [{
                 u'simple_query_string': {
                     u'query': u'pfannkuchen OR müsli',
+                    u'default_operator': u'AND',
                     u'fields': search_form.FIELDS}
             }, {
                 u'terms': {
@@ -293,6 +294,7 @@ def test_search_form_should_boost_elasticsearch_query_by_relevancy(
                     u'query': {
                         u'simple_query_string': {
                             u'query': u'beans AND toast',
+                            u'default_operator': u'AND',
                             u'fields': search_form.FIELDS}},
                     u'linear': {
                         u'payload.document.date-last-modified': {

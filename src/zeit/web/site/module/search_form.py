@@ -189,6 +189,7 @@ class Form(zeit.web.core.centerpage.Module):
             query = {
                 'simple_query_string': {
                     'query': self.search_term,
+                    'default_operator': 'AND',
                     'fields': self.FIELDS
                 }
             }

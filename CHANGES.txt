@@ -25,6 +25,8 @@ POSTDEPLOY
 
 - BUG-963: Display playing time correctly for finished single game in WM-Ticker
 
+- BUG-979: Search for "all" given terms by default
+
 - OPS-896: Reduce payload used for sitemaps
 
 - FIX: Ignore operations on undefined template variables
