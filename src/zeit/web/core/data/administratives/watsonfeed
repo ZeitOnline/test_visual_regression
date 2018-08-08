@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <head>
+        <header_image/>
+        <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+        <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:03.346120+00:00</attribute>
+        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:09:09.014473+00:00</attribute>
+        <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:08:09.170784+00:00</attribute>
+        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2015-03-24T17:09:09.014473+00:00</attribute>
+        <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+        <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:00.932648+00:00</attribute>
+        <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.bruenjes</attribute>
+        <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+        <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+        <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+        <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
+        <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
+        <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
+        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;CenterPage&quot; module=&quot;zeit.content.cp.centerpage&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;ICP2015&quot; module=&quot;zeit.content.cp.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+        <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noarchive</attribute>
+    </head>
+    <body>
+        <title>Watson RSS Feed</title>
+    <cluster area="feature" visible="True" visible_mobile="True">
+      <region area="lead" visible="True" visible_mobile="True" hide-dupes="True" count="20" automatic="True" automatic_type="query">
+        <raw_query>type:article product_id:ZEDE published:published -access:abo -access:registration -breaking_news -ressort:(Administratives OR News OR Aktuelles OR zeit-magazin OR Campus) -serie:("Fünf vor acht") </raw_query>
+        <raw_order>date-first-released desc</raw_order>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-2aa426fe-d0cd-4b37-a928-b828b7dd84d9"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-04371432-230d-4cab-bb64-73e82ee1c473"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-ffcc3a15-ffde-477f-960b-56d06aeb3e62"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-d467c8bf-8222-4b11-9215-efbe66de802e"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b21b2c59-c247-4b98-b744-fd787a4980cb"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-5444942d-8d65-4dad-9033-8fc282f2c41a"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-6a9b9828-6862-4f45-baf6-b259d935bafc"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-88ac0050-7767-493a-ab35-d179403633a2"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-d3e72681-02eb-47f5-8c7a-ec66c967378f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-73b25b86-1132-45ad-a33d-1a768e49b24c"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-7bbae1ee-48bf-4d29-8967-6f23cd90aaa1"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-d23ee42d-afbc-4af2-a580-c8cfe99c2303"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-af277d38-5631-4658-8dfd-f5e324120dfe"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-a7f9703d-0c20-41e3-aac2-137d4d56a5bb"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-34ea22a8-bf67-4d25-b428-cc8cb59be1ae"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e15"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e16"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e17"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e18"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e19"/>
+      </region>
+      <region area="informatives" visible="True" visible_mobile="True" hide-dupes="True"/>
+    </cluster>
+
+    </body>
+    <feed/>
+    <teaser>
+        <title>Watson RSS Feed</title>
+    </teaser>
+</centerpage>

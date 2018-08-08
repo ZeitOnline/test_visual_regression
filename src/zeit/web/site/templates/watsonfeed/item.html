@@ -1,0 +1,26 @@
+<p>{{ view.subtitle}}</p>
+
+{% require image = get_image(view.header_module, variant_id='wide', fallback=False) %}
+    {% set image_width = 1200 %}
+    {% set image_height = (image_width / image.ratio) | round | int %}
+    <figure>
+        <img
+            src="{{ (request.image_host) + image.path }}__{{ image_width }}x{{ image_height }}"
+            alt="{{ image.caption }}"
+            title="{{ image.caption }}"
+            data-has-syndication-rights="0"
+            {% if image.copyrights %}
+                data-portal-copyright="{{ image.copyrights[0].photographer }}"
+                data-license-id="{{ image.copyrights[0].external_id }}"
+                data-licensor-name="{{ image.copyrights[0].company }}"
+            {% endif %}
+            />
+    </figure>
+{% endrequire %}
+
+{% for page in view.pages %}
+    {% set page_loop = loop %}
+    {%- for block in page -%}
+        {% include "zeit.web.site:templates/watsonfeed/blocks/{}.html".format(block | block_type) ignore missing %}
+    {%- endfor -%}
+{% endfor %}
