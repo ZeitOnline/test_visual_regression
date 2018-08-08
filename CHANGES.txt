@@ -12,7 +12,7 @@ POSTDEPLOY
 - nothing
 
 
-3.175 (unreleased)
+3.175 (2018-08-08)
 ------------------
 
 - ZON-4788: Use newly created analyzed author name field for fulltext search
