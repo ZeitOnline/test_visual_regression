@@ -1,78 +1,93 @@
 {% if toggles('third_party_modules', 'tracking', 'optimize_ab_testing_to_webtrekk') %}
 <script type="text/javascript">
-(function(win){
-    {#/**
-    * ENTER DATA HERE
-    * property: Enter the Google Analytics PropertyID in Google Optimize
-    * containerId: Enter the Google Tag Manager Container ID
-    * dlName: Enter the Variable Name of the GTM dataLayer object
-    **/#}
-    var property = "UA-18122964-8";
-    var containerId = "GTM-MH96D5";
-    var dlName = "dataLayer";
+    (function (win, doc) {
+        var property = "UA-18122964-8";
+        var containerId = "GTM-PK8TC2W";
+        var dlName = "dataLayer";
 
-    {#/**
-    * format a given string to usage with webtrekk parameters naming style
-    * @param  str String
-    * @return String
-    *
-    * @notice by first changing case, we have don't have to search for upper case letters
-    **/#}
-    function formatStringForWebtrekk( str ) {
-        var regex = /[Ã¶Ã¤Ã¼Ã–Ã„ÃœÃŸ\s\;\#]/g,
-            translate = { 'Ã¤': 'ae', 'Ã¶': 'oe', 'Ã¼': 'ue', 'ÃŸ': 'ss', ' ': '_', ';': '_', '#': '_' };
-        return ( str.toLowerCase().replace( regex, function( match ) {
-            return translate[match];
-        }).replace(/[\_]{2,}/g,'_') );
-    }
+        function formatStringForWebtrekk(str) {
+            var regex = /[Ã¶Ã¤Ã¼Ã–Ã„ÃœÃŸ\s\;\#]/g,
+                translate = {
+                    'Ã¤': 'ae',
+                    'Ã¶': 'oe',
+                    'Ã¼': 'ue',
+                    'ÃŸ': 'ss',
+                    ' ': '_',
+                    ';': '_',
+                    '#': '_'
+                };
+            return (str.toLowerCase().replace(regex, function (match) {
+                return translate[match];
+            }).replace(/[\_]{2,}/g, '_'));
+        }
 
-    {#/**
-    * find the active google optimize experiment and log to webtrekk
-    **/
-    // variables always first#}
-    var  a = {};
-    a[containerId] = true;
-    a.start = 1*new Date;
-    a.end = function(){
-        var experiments,
-            expVarName,
-            data = win.gaData;
+        var a = {};
+        a[containerId] = true;
+        a.start = 1 * new Date;
+        a.end = function () {
+            var experiments, expVarName, data = win.gaData;
+            // check for optimizely object moved to top level
+            if (typeof data[property] !== 'undefined' && data[property].experiments !== 'undefined') {
+                experiments = data[property].experiments;
+                for (var key in experiments) {
+                    if (!experiments.hasOwnProperty(key)) continue;
+                    // one stop function incl. lowercase and repeating underscore prevention
+                    if (experiments[key] == "0") {
+                        expVarName = "original";
+                    } else {
+                        expVarName = "variation_" + experiments[key];
+                    }
+                    // track here
+                    function defer(method, i) {
+                        /*
+                         * defer(function () {}, 0);
+                         */
+                        if (typeof win['wt'] === 'object') {
+                            method();
+                        } else {
+                            if (i < 50) {
+                                setTimeout(function () {
+                                    defer(method, i + 1)
+                                }, 100);
+                            }
+                        }
+                    }
+                    //helper
+                    function getCookie(cname) {
+                        var name = cname + "=";
+                        var decodedCookie = decodeURIComponent(document.cookie);
+                        var ca = decodedCookie.split(';');
+                        for (var i = 0; i < ca.length; i++) {
+                            var c = ca[i];
+                            while (c.charAt(0) == ' ') {
+                                c = c.substring(1);
+                            }
+                            if (c.indexOf(name) == 0) {
+                                return c.substring(name.length, c.length);
+                            }
+                        }
+                        return "";
+                    }
 
-        // check for optimizely object moved to top level
-        if ( typeof data[property] !== 'undefined' && data[property].experiments !== 'undefined' ) {
-            experiments = data[property].experiments;
-            for (var key in experiments) {
-                if (!experiments.hasOwnProperty(key)) continue;
-                // one stop function incl. lowercase and repeating underscore prevention
-                if (experiments[key] == "0"){
-                    expVarName = "original";
-                } else {
-                    expVarName = "variation_" + experiments[key];
+                    if (getCookie("_wt_optimize") !== formatStringForWebtrekk(key)) {
+                        defer(function () {
+                            wt.sendinfo({
+                                linkId: '#google-optimize',
+                                customClickParameter: {
+                                    4: win.Zeit.breakpoint.getTrackingBreakpoint(),
+                                    5: formatStringForWebtrekk(key),
+                                    6: expVarName,
+                                    9: 'view'
+                                }
+                            });
+                            doc.cookie = "_wt_optimize=" + formatStringForWebtrekk(key) + ";path=/";
+                        }, 0);
+                    }
                 }
-                // track here
-                function defer(method, i) {
-					if (typeof win['wt'] === 'object') {
-                        method();
-					} else {
-						if (i < win.Zeit.view.get( 'optimize_wt_interval_script' ) ){
-                            setTimeout(function() { defer(method, i + 1) }, win.Zeit.view.get( 'optimize_wt_timeout_script' ) );
-						}
-					}
-				}
-                defer(function () {
-					wt.sendinfo({linkId:'#google-optimize', customClickParameter:{
-						4: win.Zeit.breakpoint.getTrackingBreakpoint() ,
-						5: formatStringForWebtrekk(key),
-						6: expVarName,
-						9: 'view'
-						}
-					});
-				},0);
             }
         }
-    }
-    win[dlName] = win[dlName] || []
-    win[dlName].hide = a;
-})(window);
+        win[dlName] = win[dlName] || []
+        win[dlName].hide = a;
+    })(window, document);
 </script>
 {% endif %}
