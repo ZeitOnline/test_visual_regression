@@ -1024,3 +1024,22 @@ def test_robots_txt_should_be_dispatched_according_to_host(testserver):
         headers={'Host': 'anything.zeit.de'})
     assert r.status_code == 200
     assert 'Sitemap' in r.content
+
+
+@pytest.mark.parametrize(
+    'vertical', [
+        '/zeit-online/index',
+        '/arbeit/index',
+        '/campus/index',
+        '/zeit-magazin/index',
+    ])
+def test_webtrekk_swiss_listens_for_feature_toggle(vertical, testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set(
+        'webtrekk_swiss')
+    browser = testbrowser(vertical)
+    assert len(browser.cssselect('#mct-config')) == 1
+
+    zeit.web.core.application.FEATURE_TOGGLES.unset(
+        'webtrekk_swiss')
+    browser = testbrowser(vertical)
+    assert not browser.cssselect('#mct-config')

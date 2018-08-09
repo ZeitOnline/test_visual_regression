@@ -88,6 +88,16 @@
         {%- include "zeit.web.core:templates/inc/tracking/adblocker_count.html" -%}
     {% endblock %}
 
+    {%- if toggles('webtrekk_swiss') %}
+        <div id="mct-config">
+            <script type="text/javascript">
+            window.mctConfig = {
+                'swiss': false
+            };
+            </script>
+        </div>
+    {% endif -%}
+
     <script src="{{ request.asset_host }}/js/site.js"></script>
 
     {% if toggles('third_party_modules') and view.vgwort_url -%}
