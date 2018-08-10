@@ -748,6 +748,7 @@ class Base(object):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('addefend_height', '')
 
+
 class CommentMixin(object):
 
     def __call__(self):

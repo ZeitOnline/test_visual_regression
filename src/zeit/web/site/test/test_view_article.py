@@ -2383,7 +2383,7 @@ def test_if_video_is_playable_on_page_with_embed(selenium_driver, testserver):
 
 def test_article_can_include_optimize(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
-    assert 'optimize' not in browser.contents
+    assert '_wt_optimize' not in browser.contents
 
     optimize_url = 'https://www.zeit.de/js/ga_optimize.js'
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
