@@ -1028,18 +1028,25 @@ def test_robots_txt_should_be_dispatched_according_to_host(testserver):
 
 @pytest.mark.parametrize(
     'vertical', [
-        '/zeit-online/index',
-        '/arbeit/index',
-        '/campus/index',
-        '/zeit-magazin/index',
+        ('/zeit-online/index', '/zeit-online/article/simple'),
+        ('/arbeit/index', '/arbeit/article/simple'),
+        ('/campus/index', '/campus/article/simple'),
+        ('/zeit-magazin/index', '/zeit-magazin/article/01'),
     ])
-def test_webtrekk_swiss_listens_for_feature_toggle(vertical, testbrowser):
+def test_webtrekk_swiss_should_only_be_added_on_articles(
+        vertical, testbrowser):
     zeit.web.core.application.FEATURE_TOGGLES.set(
         'webtrekk_swiss')
-    browser = testbrowser(vertical)
+    # index should not contain div
+    browser = testbrowser(vertical[0])
+    assert not browser.cssselect('#mct-config')
+
+    # article should contain div
+    browser = testbrowser(vertical[1])
     assert len(browser.cssselect('#mct-config')) == 1
 
+    # article should not contain div if toggle is unset
     zeit.web.core.application.FEATURE_TOGGLES.unset(
         'webtrekk_swiss')
-    browser = testbrowser(vertical)
+    browser = testbrowser(vertical[1])
     assert not browser.cssselect('#mct-config')
