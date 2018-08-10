@@ -45,10 +45,10 @@
                         if (typeof win['wt'] === 'object') {
                             method();
                         } else {
-                            if (i < 50) {
+                            if (i < win.Zeit.view.get( 'optimize_wt_interval_script' )) {
                                 setTimeout(function () {
                                     defer(method, i + 1)
-                                }, 100);
+                                }, win.Zeit.view.get( 'optimize_wt_timeout_script');
                             }
                         }
                     }
