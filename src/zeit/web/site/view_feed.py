@@ -634,7 +634,6 @@ class RelatedItem(object):
             image_host, image.path, image_width, image_height)
         return image_url
 
-
     def get_related_item(self, content):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
@@ -689,8 +688,10 @@ class MsnFeed(RSSBase, RelatedItem):
         super(MsnFeed, self).__init__(context, request)
         self.rss_title = 'ZEIT ONLINE Newsfeed for MSN'
 
-
     def build_feed(self):
+        E = ELEMENT_MAKER
+        EN = ELEMENT_NS_MAKER
+
         for content in self.items:
             try:
                 content_url = create_public_url(
@@ -771,6 +772,9 @@ class WatsonFeed(RSSBase, RelatedItem):
         self.rss_title = 'ZEIT ONLINE Newsfeed for Watson'
 
     def build_feed(self):
+        E = ELEMENT_MAKER
+        EN = ELEMENT_NS_MAKER
+
         for content in self.items:
             try:
                 content_url = create_public_url(
