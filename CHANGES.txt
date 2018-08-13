@@ -12,7 +12,7 @@ POSTDEPLOY
 - nothing
 
 
-3.176 (unreleased)
+3.176 (2018-08-13)
 ------------------
 
 - ZON-4847: Add global variable to mark users from Switzerland with Webtrekk
