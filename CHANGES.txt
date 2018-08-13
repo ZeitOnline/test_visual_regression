@@ -12,8 +12,8 @@ POSTDEPLOY
 - nothing
 
 
-3.177 (unreleased)
-------------------
+3.176.1 (2018-08-13)
+--------------------
 
 - HOTFIX: Fix test, when bumping requests module
 
