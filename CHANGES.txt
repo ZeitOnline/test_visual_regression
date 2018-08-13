@@ -15,7 +15,7 @@ POSTDEPLOY
 3.177 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- HOTFIX: Fix test, when bumping requests module
 
 
 3.176 (2018-08-13)

@@ -149,7 +149,7 @@ def test_xml_renders_centerpage_with_mobile_alternative(testserver):
         '%s/angebote/leseperlen' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
 
-    assert 'x-mobilealternative' in res.headers.keys()
+    assert 'X-Mobilealternative' in res.headers.keys()
     assert (res.headers['x-mobilealternative'] ==
             'http://marktplatz.zeit.de/advertorial/buchtipp/index')
 
