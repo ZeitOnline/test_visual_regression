@@ -12,10 +12,29 @@ POSTDEPLOY
 - nothing
 
 
-3.176 (unreleased)
+3.177 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+3.176.1 (2018-08-13)
+--------------------
+
+- HOTFIX: Fix test, when bumping requests module
+
+
+3.176 (2018-08-13)
+------------------
+
+- ZON-4847: Add global variable to mark users from Switzerland with Webtrekk
+  Marketing Automation for "My country talks"
+
+
+3.175.1 (2018-08-08)
+--------------------
+
+- FIX: Release with css
 
 
 3.175 (2018-08-08)
