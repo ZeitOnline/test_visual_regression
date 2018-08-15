@@ -12,7 +12,7 @@ POSTDEPLOY
 - nothing
 
 
-3.177 (unreleased)
+3.177 (2018-08-15)
 ------------------
 
 - ZON-4824: Provide RSS feed to Watson
