@@ -15,7 +15,7 @@ POSTDEPLOY
 3.177 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4824: Provide RSS feed to Watson
 
 
 3.176.1 (2018-08-13)
