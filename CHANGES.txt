@@ -15,7 +15,7 @@ POSTDEPLOY
 3.178 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4833: Update webtrekk script for google optimize
 
 
 3.177 (2018-08-15)
