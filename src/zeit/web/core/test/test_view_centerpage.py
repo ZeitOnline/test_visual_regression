@@ -344,7 +344,11 @@ def test_invisible_module_should_not_be_rendered(application, testbrowser):
 
 
 def test_centerpage_should_update_webtrekk_content_id_for_search_results(
-        application, dummy_request, data_es):
+        application, dummy_request):
+    elastic = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elastic.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'}]
     dummy_request.GET['q'] = 'test'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)

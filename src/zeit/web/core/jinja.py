@@ -67,7 +67,8 @@ class Environment(jinja2.environment.Environment):
             registry[key] = wrap_in_safeguard(value)
 
     def handle_exception(
-            self, exc_info=None, rendered=False, source_hint=None):
+            self, exc_info=None, rendered=False, source_hint=None,
+            send_http_error=True):
         if exc_info is None:
             exc_info = sys.exc_info()
         if issubclass(exc_info[0], pyramid.httpexceptions.HTTPException):
@@ -75,8 +76,20 @@ class Environment(jinja2.environment.Environment):
 
         traceback = make_jinja_traceback(exc_info, source_hint)
         exc_info = traceback.exc_info
-        path = get_current_request_path()
+
+        try:
+            request = pyramid.threadlocal.get_current_request()
+            path = request.path_info.encode('ascii', 'backslashreplace')
+        except Exception:
+            request = None
+            path = '<unknown>'
         log.error('Error while rendering %s', path, exc_info=exc_info)
+
+        if send_http_error and request is not None:
+            # Since we don't reraise the exception (as upstream does), we'll
+            # still render *some* result, but in most cases that means a
+            # totally blank page -- which definitely should not be cached.
+            request.response.status = 500
 
         group_by = None
         if exc_info[0] is jinja2.exceptions.UndefinedError:
@@ -93,7 +106,7 @@ class Environment(jinja2.environment.Environment):
         try:
             return getattr(super(Environment, self), func)(obj, name)
         except Exception:
-            self.handle_exception()
+            self.handle_exception(send_http_error=False)
             return self.undefined(obj=obj, name=name)
 
     def getitem(self, obj, argument):
@@ -150,7 +163,12 @@ class Undefined(jinja2.runtime.Undefined):
 
     # The superclass assigns these method by copying the function, too,
     # so they don't pick up our overriden method by themselves unfortunately.
-    __getattr__ = __getitem__ = __call__ = _fail_with_undefined_error
+    __add__ = __radd__ = __mul__ = __rmul__ = __div__ = __rdiv__ = \
+        __truediv__ = __rtruediv__ = __floordiv__ = __rfloordiv__ = \
+        __mod__ = __rmod__ = __pos__ = __neg__ = __call__ = \
+        __getitem__ = __lt__ = __le__ = __gt__ = __ge__ = __int__ = \
+        __float__ = __complex__ = __pow__ = __rpow__ = __sub__ = \
+        __rsub__ = __getattr__ = _fail_with_undefined_error
 
 
 def cmscontent_repr(content):

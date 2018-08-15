@@ -67,18 +67,14 @@ def test_newsfeed_should_concat_supertitle_and_title(testserver):
 
 def test_newsfeed_should_render_an_authorfeed(testserver):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
-    es.results = [
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
-         'doc_type': 'article',
-         'payload': {'body': {'title': 'Mei, is des traurig!'}}}
-    ]
+    es.results = ['http://xml.zeit.de/zeit-magazin/article/01']
     res = requests.get(
         '{}/autoren/author3'.format(testserver.url),
         headers={'Host': 'newsfeed.zeit.de'})
 
     xml = lxml.etree.fromstring(res.content)
     assert xml.xpath('//item/title/text()')[0].startswith(
-        'Mei, is des traurig!')
+        'Gentrifizierung: Mei, is des traurig!')
 
 
 def test_socialflow_feed_contains_social_fields(testserver):

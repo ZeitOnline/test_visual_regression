@@ -68,18 +68,21 @@
     <link href="http://xml.zeit.de/zeit-magazin/index" id="topnav.mainnav.11..zeitmagazin">ZEITmagazin</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/mobilitaet/index" id="topnav.mainnav.12..mobilitaet">Mobilität</link>
+    <link href="http://xml.zeit.de/thema/d18" id="topnav.mainnav.12..d18">#D18</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/hamburg/index" id="topnav.mainnav.13..hamburg">Hamburg</link>
+    <link href="http://xml.zeit.de/mobilitaet/index" id="topnav.mainnav.13..mobilitaet">Mobilität</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/spiele/index" id="topnav.mainnav.14..spiele">Spiele</link>
+    <link href="http://xml.zeit.de/hamburg/index" id="topnav.mainnav.14..hamburg">Hamburg</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/angebote/250-jahre-hennessy/index" id="topnav.mainnav.15..hennessy" label="Anzeigen">250 Jahre Hennessy</link>
+    <link href="http://xml.zeit.de/spiele/index" id="topnav.mainnav.15..spiele">Spiele</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/angebote/axa/index" id="topnav.mainnav.16..axa" label="Anzeige">Axa born to protect</link>
+    <link href="http://xml.zeit.de/angebote/250-jahre-hennessy/index" id="topnav.mainnav.16..hennessy" label="Anzeigen">250 Jahre Hennessy</link>
+  </section>
+  <section>
+    <link href="http://xml.zeit.de/angebote/axa/index" id="topnav.mainnav.17..axa" label="Anzeige">Axa born to protect</link>
   </section>
 </navigation>

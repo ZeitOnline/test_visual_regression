@@ -2254,7 +2254,7 @@ def test_faq_page_should_present_links_to_intertitles(testbrowser):
 
 def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
         monkeypatch, testbrowser):
-    context = zeit.cms.interfaces.ICMSContent(
+    zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/faq')
     intertitle = mock.Mock()
     monkeypatch.setattr(

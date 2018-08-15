@@ -49,9 +49,12 @@
 		// & + &:before
 		// 	content: none
 
-	&__ressorts-item--featured
-		svg
-			vertical-align: middle
+	&__ressorts-icon--zplus
+		background: $red
+		color: $white
+		height: remify(23px)
+		vertical-align: remify(-6px)
+		width: remify(28px)
 
 	// LOGIN
 	&__login-link
@@ -266,6 +269,8 @@
 			display: list-item
 		.js &__ressorts-item--featured
 			margin-left: auto // align right @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
+		.js &__ressorts-item--d18
+			width: 100% // special style for d18 to fall into "more" dropdown menu
 
 		&__dropdown-item--has-label
 			background-color: #FAFAF3
@@ -283,8 +288,6 @@
 				a
 					+on-interaction
 						box-shadow: none
-			&--icon-featured-d18
-				height: 100%
 
 		// dropdown menues
 		&__dropdown-list,
@@ -370,11 +373,6 @@
 		&__date
 			float: right
 			padding-top: 5px
-
-
-.nav__ressorts-item--icon-featured-d18
-	fill: #fb0
-	height: remify(28px)
 
 //*************
 // NO FLEXBOX *

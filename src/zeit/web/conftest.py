@@ -42,10 +42,10 @@ import zope.testbrowser.wsgi
 import zeit.cms.interfaces
 import zeit.content.image.interfaces
 import zeit.retresco.interfaces
-import zeit.retresco.connection
 import zeit.solr.interfaces
 
 import zeit.web.core.application
+import zeit.web.core.retresco
 import zeit.web.core.routing
 import zeit.web.core.solr
 import zeit.web.core.utils
@@ -977,31 +977,78 @@ class MockSitemapSolr(MockSolr):
         pass
 
 
+def copy_dotted_keys(source, *keys):
+    """Return dictionary with only the given, potentially nested keys.
+    The target keys need to be specified in dot notation, e.g. `foo.bar`."""
+    dest = {}
+    for key in keys:
+        s = source
+        d = dest
+        levels = key.split('.')
+        last = levels.pop()
+        for level in levels:
+            if level not in s:
+                break
+            s = s[level]
+            d = d.setdefault(level, {})
+        if last in s:
+            d[last] = s[last]
+    return dest
+
+
 class MockES(MockSearch):
 
     zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
 
     def search(self, query, order=None, rows=25, **kw):
-        result = zeit.cms.interfaces.Result(self.pop_results(rows))
+        source = query.get('_source', ['url', 'doc_type', 'doc_id'])
+        if kw.get('include_payload'):
+            assert '_source' not in query
+            source.append('payload')
+        result = zeit.cms.interfaces.Result(
+            [copy_dotted_keys(r, *source) for r in self.pop_results(rows)])
         result.hits = self._hits
         return result
 
     @MockSearch.results.setter
     def results(self, value):
-        # Tries to rewrite uniqueIds into tms-style url paths
-        for result in value:
-            try:
-                path = result.pop('uniqueId').replace(
-                    zeit.cms.interfaces.ID_NAMESPACE.rstrip('/'), '')
-                result.setdefault('url', path)
-            except KeyError:
-                continue
+        """Set (mock) search results for searches via Elasticsearch.
+
+        The given values can either be strings[*], in which case they will
+        be interpreted as a `uniqueId`, resolved into a content object and
+        converted to an `ITMSRepresentation` (which is then used as the
+        search result) or else dictionaries already containing the "full"
+        mock search result (which will be returned as is).
+
+        [*] Note that for backward compatibility a dictionary with only a
+        `uniqueId` key will be resolved as well."""
+
+        for idx, result in enumerate(value):
+            if isinstance(result, dict):
+                if 'uniqueId' not in result:
+                    continue
+                uid = result.pop('uniqueId')
+                if not result:      # BBB: resolve for dict with only uid
+                    result = uid
+                else:
+                    # Tries to rewrite uniqueIds into tms-style url paths
+                    path = uid.replace(
+                        zeit.cms.interfaces.ID_NAMESPACE.rstrip('/'), '')
+                    result.setdefault('url', path)
+                    continue
+            content = zeit.cms.interfaces.ICMSContent(result)
+            converter = zeit.retresco.interfaces.ITMSRepresentation(content)
+            value[idx] = converter()
         self._hits = len(value)
         self._results = value
 
 
-class MockTMS(zeit.retresco.connection.TMS, MockSearch):
-    """Stub with empty results."""
+class MockTMS(zeit.web.core.retresco.DataTMS, MockSearch):
+    """Stub with empty results.
+
+    We inherit from DataTMS to get the core/data-based get_topicpages()
+    implementation.
+    """
 
     def __init__(self):
         pass
@@ -1012,9 +1059,6 @@ class MockTMS(zeit.retresco.connection.TMS, MockSearch):
     def _request(self, *args, **kw):
         # XXX unclear if this properly stubs out all remaining public functions
         return collections.defaultdict(lambda: None)
-
-    def get_topicpages(self, *args, **kw):
-        return zeit.cms.interfaces.Result()
 
     def get_topicpage_documents(self, id, start=0, rows=25, filter=None):
         result = zeit.cms.interfaces.Result(self.pop_results(rows))
@@ -1032,24 +1076,6 @@ def data_solr(request):
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
     zope.component.provideUtility(zeit.web.core.solr.DataSolr())
-
-
-@pytest.fixture
-def data_es(request):
-    previous = zope.component.queryUtility(
-        zeit.retresco.interfaces.IElasticsearch)
-    if previous is not None:
-        request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.retresco.DataES())
-
-
-@pytest.fixture
-def data_tms(request):
-    previous = zope.component.queryUtility(
-        zeit.retresco.interfaces.ITMS)
-    if previous is not None:
-        request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.retresco.DataTMS())
 
 
 @pytest.fixture(scope='session')

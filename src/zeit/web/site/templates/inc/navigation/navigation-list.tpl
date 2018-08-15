@@ -10,8 +10,9 @@
         {% set link_css_class = '{}-link--current'.format(class) %}
     {% endif %}
 
-    <li {%- if item.label %} class="{{ class }}-item--has-label" data-label="{{ item.label }}"{% endif %}
-        {%- if item | length %} class="{{ class }}-item--has-dropdown"{% endif %}>
+    <li {%- if item.label %} class="{{ class }}-item--has-label" data-label="{{ item.label }}"
+        {%- elif item | length %} class="{{ class }}-item--has-dropdown"
+        {%- else %} class="{{ class }}-item--{{ item.text | format_webtrekk }}"{% endif %}>
         <a href="{{ item.href | create_url }}"
             {%- if link_css_class %} class="{{ link_css_class }}" {% endif -%}
             {%- if item | length %} role="button" aria-controls="{{ item.text | lower }}" data-follow-mobile="true"{% endif %}
@@ -37,10 +38,10 @@
         <ul class="nav__dropdown-list" id="more-ressorts" aria-hidden="true" data-ct-column>
         </ul>
     </li>
-    {% if toggles('dtag_navigation') -%}
+    {% if toggles('nav_extraitem') -%}
     <li class="{{ class }}-item--featured">
-        <a itemprop="url" href="{{ request.route_url('home') }}thema/d18">
-           {{ lama.use_svg_icon('logo-d18-yellow', 'nav__ressorts-item--icon-featured-d18', view.package) }}
+        <a itemprop="url" title="exklusive Zeit Artikel" href="{{ request.route_url('home') }}exklusive-zeit-artikel">
+           {{ lama.use_svg_icon('zplus', 'nav__ressorts-icon--zplus', view.package, a11y=False) }}
         </a>
     </li>
     {% endif %}

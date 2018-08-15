@@ -9,7 +9,6 @@ import selenium.webdriver
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -54,7 +53,7 @@ def test_nav_ressorts_should_produce_markup(
 
     # cowardish workaround, because tplbrowser cannot render macros,
     # which are needed for D18 tag (lama.render_svg)
-    zeit.web.core.application.FEATURE_TOGGLES.unset('dtag_navigation')
+    zeit.web.core.application.FEATURE_TOGGLES.unset('nav_extraitem')
 
     browser = tplbrowser(
         'zeit.web.site:templates/inc/navigation/navigation-list.tpl',
@@ -132,7 +131,7 @@ def test_nav_contains_essential_elements(tplbrowser, dummy_request):
 def test_nav_should_contain_schema_org_markup(testbrowser):
     # cowardish workaround, because tplbrowser cannot render macros,
     # which are needed for D18 tag (lama.render_svg)
-    zeit.web.core.application.FEATURE_TOGGLES.unset('dtag_navigation')
+    zeit.web.core.application.FEATURE_TOGGLES.unset('nav_extraitem')
 
     browser = testbrowser('/zeit-online/zeitonline')
     select = browser.cssselect
@@ -473,8 +472,6 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
     nav_ressort_links = '.nav__ressorts-list > li > a'
     chosen_nav_item = ressorts.find_elements_by_css_selector(
         nav_ressort_links)[9]
-    cloned_nav_item = more_dropdown.find_elements_by_css_selector(
-        '.nav__dropdown-list > li > a')[9]
     menu_link = driver.find_element_by_class_name('header__menu-link')
 
     assert chosen_nav_item.get_attribute('textContent') == 'Sport'
@@ -507,9 +504,6 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
     assert more_dropdown.is_displayed(), (
         '[on tablet] more dropdown should be visible')
     actions.move_to_element(more_dropdown).perform()
-    assert cloned_nav_item.is_displayed(), (
-        '[on tablet] chosen nav item should be visible'
-        ' in more-dropdown on :hover')
 
     # desktop
     driver.set_window_size(1000, 1024)
@@ -548,10 +542,10 @@ def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
     assert len(header_date) == 0
 
 
-def test_d18_link_exists(testbrowser):
-    zeit.web.core.application.FEATURE_TOGGLES.set('dtag_navigation')
+def test_zplus_link_exists(testbrowser):
+    zeit.web.core.application.FEATURE_TOGGLES.set('nav_extraitem')
     browser = testbrowser('/zeit-online/zeitonline')
     select = browser.cssselect
-    d18_navigation_badge = select('nav a[href$="thema/d18"]')
+    zplus_navigation_badge = select('nav a[href$="exklusive-zeit-artikel"]')
 
-    assert len(d18_navigation_badge) == 1
+    assert len(zplus_navigation_badge) == 1

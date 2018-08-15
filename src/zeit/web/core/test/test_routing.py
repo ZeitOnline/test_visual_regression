@@ -1,8 +1,5 @@
-import urllib2
-
 import pyramid.request
 import pytest
-import requests
 import zope.component
 
 from zeit.cms.checkout.helper import checked_out

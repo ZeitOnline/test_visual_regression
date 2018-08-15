@@ -376,7 +376,6 @@ class RSSBase(Base):
 
     def build_item(self, content, tracking_prefix="rss"):
         E = ELEMENT_MAKER
-        EN = ELEMENT_NS_MAKER
         try:
             normalized_title = zeit.cms.interfaces.normalize_filename(
                 content.title)

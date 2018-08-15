@@ -482,8 +482,37 @@ def test_comment_form_for_logged_in_user_contains_formchars_counter(
     dummy_request.user['name'] = 'Max'
 
     view = zeit.web.core.view_comment.CommentForm(article, dummy_request)
-    browser_comment_form = tplbrowser(
+    tplbrowser(
         'zeit.web.core:templates/inc/comments/comment-form.html',
         view=view, request=dummy_request)
     assert browser.cssselect('.js-count-formchars')
     assert browser.cssselect('.comment-form__username')
+
+
+def test_comment_form_contains_correct_profile_link_for_logged_in_user(
+        tplbrowser, dummy_request):
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    dummy_request.user = {
+        'ssoid': 123,
+        'blocked': False,
+        'premoderation': False,
+        'has_community_data': True,
+        'uid': 123,
+        'name': None
+    }
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.core.view_comment.CommentForm(article, dummy_request)
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/comments/comment-form.html',
+        view=view, request=dummy_request)
+
+    dummy_request.user['name'] = 'Max'
+
+    view = zeit.web.core.view_comment.CommentForm(article, dummy_request)
+    # add comment-form template to make sure we can check for contents of it
+    tplbrowser(
+        'zeit.web.core:templates/inc/comments/comment-form.html',
+        view=view, request=dummy_request)
+    link = browser.cssselect('.comment-form__username')[0].get('href')
+    assert '{}/user'.format(settings['community_profile_url']) == link

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
 
 
 def test_amp_view_should_have_expected_structure(testbrowser):

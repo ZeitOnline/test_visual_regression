@@ -7,7 +7,6 @@ import pyramid.httpexceptions
 import pyramid.interfaces
 import pyramid.traversal
 import pyramid.urldispatch
-import zc.sourcefactory.source
 import zope.component
 import zope.interface
 
