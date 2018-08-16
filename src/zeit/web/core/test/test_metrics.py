@@ -56,18 +56,16 @@ def test_status_codes_should_be_measured_correctly(request):
 class Requester(object):
     def test_200(self, m):
         m.get('http://test.com', status_code=200)
-        return requests.get('http://test.com') 
+        return requests.get('http://test.com')
 
     def test_404(self, m):
         m.get('http://test.com', status_code=404)
-        return requests.get('http://test.com') 
+        return requests.get('http://test.com')
 
     def test_503(self, m):
         m.get('http://test.com', status_code=503)
-        return requests.get('http://test.com') 
+        return requests.get('http://test.com')
 
     def test_timeout(self, m):
         m.get('http://test.com', exc=requests.exceptions.ConnectTimeout)
-        return requests.get('http://test.com') 
-
-
+        return requests.get('http://test.com')
