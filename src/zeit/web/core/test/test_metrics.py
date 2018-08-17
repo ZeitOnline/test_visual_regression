@@ -1,8 +1,7 @@
 import mock
-
-import zeit.web.core.metrics
 import requests
 import requests_mock
+import zeit.web.core.metrics
 
 
 def test_timer_still_measures_on_exception(request):
