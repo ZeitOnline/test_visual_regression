@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4833: Update webtrekk script for google optimize
 
+- BUG-983: Use teaser data as source for printbox
+
 
 3.177 (2018-08-15)
 ------------------
