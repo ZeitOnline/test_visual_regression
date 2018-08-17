@@ -183,6 +183,12 @@ define([ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
             _functions.handleSpecificPlugin.trackMeineZeitClickEvent( messageDataObject );
         }
 
+        if ( messageDataObject.sender === 'quiz' ) {
+            // we get complete tracking data from quiz.zeit.de
+            // no further specific plugin handling overhead is required
+            _functions.sendTracking.sendDataToWebrekk( messageDataObject.data );
+        }
+
     };
 
     _functions.dispatch.dispatchAllMessages = function( event ) {
@@ -207,8 +213,7 @@ define([ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
         // filter every event which is irrelevant to this script.
 
         if ( typeof messageDataObject.name !== 'string' ||
-            typeof messageDataObject.sender !== 'string' ||
-            typeof messageDataObject.event !== 'string' ) {
+            typeof messageDataObject.sender !== 'string' ) {
             return;
         }
 
