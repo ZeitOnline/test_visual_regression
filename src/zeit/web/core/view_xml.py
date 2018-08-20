@@ -113,8 +113,6 @@ class XMLArticle(XMLContent):
 
     # who needs this?
     def _include_liveblogs(self, xml):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-
         for liveblog in xml.xpath('/article/body/division/liveblog'):
             blog_id = liveblog.get('blogID', '')
             version = liveblog.get('version', '')
@@ -122,11 +120,9 @@ class XMLArticle(XMLContent):
                 liveblog, '{http://www.edge-delivery.org/esi/1.0}include',
                 nsmap={'esi': 'http://www.edge-delivery.org/esi/1.0'})
             if version == '3':
-                url = '{}/{}/index.html'.format(
-                    conf.get('liveblog_backend_url_v3', ''), blog_id)
+                url = '/{}/index.html'.format(blog_id)
             else:
-                url = '{}/{}.html'.format(
-                    conf.get('liveblog_backend_url', ''), blog_id)
+                url = '/{}.html'.format(blog_id)
             el.set('src', url)
             liveblog.set('data-type', 'esi-content')
             liveblog.attrib.pop('blogID')

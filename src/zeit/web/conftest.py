@@ -76,9 +76,7 @@ def app_settings(mockserver_session):
         # vivi config setup too, so we need to satisfy it.
         'vivi_zeit.cms_cache-expiration-config': '600',
         'session.reissue_time': '1',
-        'liveblog_backend_url': mockserver_session.url + '/liveblog/backend',
         'liveblog_status_url': mockserver_session.url + '/liveblog/status',
-        'liveblog_backend_url_v3': mockserver_session.url + '/liveblog/v3',
         'liveblog_amp_theme_v3': 'zon-amp',
         'liveblog_api_auth_url_v3': mockserver_session.url + (
             '/liveblog/v3/api/auth'),
@@ -115,7 +113,6 @@ def app_settings(mockserver_session):
         'zett_img_host': mockserver_session.url + '/zett',
         'academics_hp_feed': mockserver_session.url + '/academics/feed.xml',
         'academics_img_host': mockserver_session.url + '/academics',
-        'cardstack_backend': mockserver_session.url + '/cardstack',
         'connector_type': 'mock',
         'solr_timeout': 2,
         'solr_sitemap_timeout': 10,

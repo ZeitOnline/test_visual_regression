@@ -46,11 +46,3 @@ def test_ressort_literally_returns_correct_ressort(application):
         'http://xml.zeit.de/campus/article/simple')
     article_view = zeit.web.campus.view_article.Article(context, mock.Mock())
     assert article_view.ressort_literally == 'Campus'
-
-
-def test_url_encoding_in_login_state(testbrowser):
-    path = '/campus/article/simple?a=foo&b=<b>&c=u + i'
-    browser = testbrowser(path)
-    assert browser.document.xpath('body//header//include/@src')[0] == (
-        'http://localhost/login-state?for=campus&context-uri={}'.format(
-            urllib.quote_plus('http://localhost' + path)))

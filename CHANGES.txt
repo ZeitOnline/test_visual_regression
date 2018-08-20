@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - BUG-983: Use teaser data as source for printbox
 
+- MAINT: Use relative URLs for ESI includes
+
 
 3.177 (2018-08-15)
 ------------------

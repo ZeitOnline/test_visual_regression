@@ -1,5 +1,5 @@
 {% import "zeit.web.core:templates/macros/layout_macro.tpl" as lama %}
 
 {% set debug_param = view.request.GET.debug %}
-{% set esi_source = view.request | append_get_params(url=request.route_url('breaking_news'), debug=debug_param) %}
+{% set esi_source = view.request | append_get_params(url=request.route_path('breaking_news'), debug=debug_param) %}
 {{ lama.insert_esi(esi_source) }}

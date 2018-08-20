@@ -1027,9 +1027,3 @@ def get_image_path(image, width=480, device=None):
     # If a device is appended (__desktop/mobile), the image server would
     # deliver the mobile motif, if defined in Vivi.
     return "{}__{}x{}".format(image.path, width, height)
-
-
-@zeit.web.register_filter
-def replace_https_on_esi_include(url):
-    return urlparse.urlunsplit(
-        urlparse.urlsplit(url)._replace(scheme='http'))

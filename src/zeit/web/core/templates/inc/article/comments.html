@@ -3,15 +3,15 @@
 {% include "zeit.web.core:templates/inc/comments/premoderation.html" %}
 <section class="comment-section" id="comments">
     {% set query = '?' + request.query_string if request.query_string else '' %}
-    {{ lama.insert_esi('%s/comment-thread%s' | format(view.content_url, query), 'Ein technischer Fehler ist aufgetreten. Der Kommentarbereich konnte nicht geladen werden. Bitte entschuldigen Sie diese Störung.') }}
+    {{ lama.insert_esi('%s/comment-thread%s' | format(view.content_path, query), 'Ein technischer Fehler ist aufgetreten. Der Kommentarbereich konnte nicht geladen werden. Bitte entschuldigen Sie diese Störung.') }}
     {% set entry_service = 'kommentare-register' if view.paywall == 'register' else 'kommentare' %}
     {% if view.request.GET.action == 'report' %}
-        {% set esi_source = '%s/report-form?pid=%s&entry-service=%s' | format(view.content_url, view.request.GET.pid, entry_service)  %}
+        {% set esi_source = '%s/report-form?pid=%s&entry-service=%s' | format(view.content_path, view.request.GET.pid, entry_service)  %}
     {% else %}
         {% if view.request.GET.error %}
-            {% set esi_source = '%s/comment-form?error=%s&entry-service=%s' | format(view.content_url, view.request.GET.error, entry_service) %}
+            {% set esi_source = '%s/comment-form?error=%s&entry-service=%s' | format(view.content_path, view.request.GET.error, entry_service) %}
         {% else %}
-            {% set esi_source = '%s/comment-form?pid=%s&entry-service=%s' | format(view.content_url, view.request.GET.pid, entry_service) %}
+            {% set esi_source = '%s/comment-form?pid=%s&entry-service=%s' | format(view.content_path, view.request.GET.pid, entry_service) %}
         {% endif %}
     {% endif %}
     {{ lama.insert_esi(esi_source, 'Kommentarformular konnte nicht geladen werden') }}

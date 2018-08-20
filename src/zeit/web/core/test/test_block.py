@@ -529,7 +529,7 @@ def test_block_liveblog_version3_should_contain_expected_structure(tplbrowser):
     block.version = '3'
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/liveblog.html', block=block)
-    assert 'liveblog/v3' in browser.contents
+    assert '/liveblog-backend-v3' in browser.contents
 
 
 def test_block_orderedlist_should_contain_expected_structure(tplbrowser):
