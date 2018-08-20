@@ -41,6 +41,7 @@
   <track_gate_visibility>true</track_gate_visibility>
   <update_signals>true</update_signals>
   <volume_teaser>true</volume_teaser>
+  <webtrekk_swiss>true</webtrekk_swiss>
   <zon_admark>false</zon_admark>
   <zplus_badge_gray>true</zplus_badge_gray>
   <zplus_badge_on_registration_paywall>true</zplus_badge_on_registration_paywall>

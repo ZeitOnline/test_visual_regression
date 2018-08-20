@@ -22,7 +22,7 @@ def test_adblocker_header_should_be_false_when_disabled_via_property(
     monkeypatch.setattr(
         zeit.cms.content.metadata.CommonMetadata,
         'hide_adblocker_notification', True)
-    context = zeit.cms.interfaces.ICMSContent(
+    zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/simple')
 
     url = testserver.url + '/zeit-online/article/simple'

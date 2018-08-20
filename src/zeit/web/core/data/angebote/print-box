@@ -68,4 +68,9 @@
     <!-- use no byline for Printbox (this weeks issue) -->
     <byline></byline>
   </body>
+  <teaser>
+      <supertitle>Politik</supertitle>
+      <title>Leben mit dem Terror</title>
+      <text>Wie sich das Lebensgefühl der Menschen ändert. Und was an den Drohungen in Deutschland dran ist.</text>
+    </teaser>
 </link>

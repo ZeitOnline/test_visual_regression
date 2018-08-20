@@ -67,18 +67,14 @@ def test_newsfeed_should_concat_supertitle_and_title(testserver):
 
 def test_newsfeed_should_render_an_authorfeed(testserver):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
-    es.results = [
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
-         'doc_type': 'article',
-         'payload': {'body': {'title': 'Mei, is des traurig!'}}}
-    ]
+    es.results = ['http://xml.zeit.de/zeit-magazin/article/01']
     res = requests.get(
         '{}/autoren/author3'.format(testserver.url),
         headers={'Host': 'newsfeed.zeit.de'})
 
     xml = lxml.etree.fromstring(res.content)
     assert xml.xpath('//item/title/text()')[0].startswith(
-        'Mei, is des traurig!')
+        'Gentrifizierung: Mei, is des traurig!')
 
 
 def test_socialflow_feed_contains_social_fields(testserver):
@@ -317,3 +313,45 @@ def test_msn_feed_item_contains_copyright_information(testserver):
     assert 'data-portal-copyright="\xc2' in res.content
     assert ' Warner Bros."' in res.content
     assert 'data-licensor-name="dpa"' in res.content
+
+
+def test_watson_feed_contains_expected_fields(testserver):
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'type': 'article',
+         'title': 'Dummytitle'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
+         'type': 'article',
+         'title': 'Dummytitle'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit',
+         'type': 'article',
+         'title': 'Dummytitle'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/simple',
+         'type': 'article',
+         'title': 'Dummytitle'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/tags',
+         'type': 'article',
+         'title': 'Dummytitle'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/fischer',
+         'type': 'article',
+         'title': 'Dummytitle'}
+    ]
+
+    res = requests.get(
+        testserver.url + '/administratives/watsonfeed/rss-watson',
+        headers={'Host': 'newsfeed.zeit.de'})
+
+    xml = lxml.etree.fromstring(res.content)
+    assert len(xml.xpath('//item')) > 0
+    assert len(xml.xpath('//title')) > 0
+
+    assert len(xml.xpath('//item//title')) > 0
+    assert len(xml.xpath('//item//category')) > 0
+    assert len(xml.xpath('//item//pubDate')) > 0
+    assert len(xml.xpath('//item//guid')) > 0
+    assert len(xml.xpath('//item//link')) > 0
+    assert len(xml.xpath('//item//content:encoded', namespaces={
+        'content': 'http://purl.org/rss/1.0/modules/content/'
+    })) > 0

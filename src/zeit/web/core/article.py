@@ -108,7 +108,6 @@ def _inject_banner_code(pages, pubtype, ressort, sub_ressort):
     }
 
     # change place5 against ctm if configured
-    toggles = zeit.web.core.application.FEATURE_TOGGLES
     place5 = ({'tile': 5, 'paragraph': 6, 'type': 'desktop'},
               {'tile': 'content_ad', 'paragraph': 6, 'type': ''},)
 
@@ -207,7 +206,7 @@ def get_retresco_body(article):
             tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
             try:
                 body = tms.get_article_body(
-                    article, timeout=conf.get('retresco_timeout', 0.1))
+                    article, timeout=conf.get('retresco_body_timeout', 0.1))
                 xml = gocept.lxml.objectify.fromstring(body)
             except Exception:
                 log.warning(
@@ -500,7 +499,7 @@ def get_keywords(context):
             zeit.web.core.interfaces.ISettings)
         tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
         try:
-            timeout = conf.get('retresco_timeout', 0.1)
+            timeout = conf.get('retresco_body_timeout', 0.1)
             published_content = not (
                     conf.get('is_preview', False) and
                     zeit.web.core.application.FEATURE_TOGGLES.find(

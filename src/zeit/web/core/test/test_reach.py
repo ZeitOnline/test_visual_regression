@@ -75,12 +75,9 @@ def test_reach_should_return_none_on_timeout(application, mockserver):
 def test_reach_should_retrieve_metadata_from_elasticsearch(application):
     es = zope.component.getUtility(zeit.retresco.interfaces.IElasticsearch)
     es.results = [
-        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
-         'doc_type': 'article'},
-        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
-         'doc_type': 'article'},
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
-         'doc_type': 'article'},
+        'http://xml.zeit.de/zeit-online/article/01',
+        'http://xml.zeit.de/zeit-online/article/02',
+        'http://xml.zeit.de/zeit-magazin/article/01',
     ]
     # All other tests have patched this aspect away since it is irrelevant,
     # so we have to use a fresh instance for this test

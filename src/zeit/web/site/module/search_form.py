@@ -49,7 +49,7 @@ class Form(zeit.web.core.centerpage.Module):
         'body',
         'payload.body.supertitle',
         'payload.body.subtitle',
-        'payload.body.byline',
+        'payload.body.authors.analyzed',
         'teaser_img_subline'
     ]
 
@@ -189,6 +189,7 @@ class Form(zeit.web.core.centerpage.Module):
             query = {
                 'simple_query_string': {
                     'query': self.search_term,
+                    'default_operator': 'AND',
                     'fields': self.FIELDS
                 }
             }

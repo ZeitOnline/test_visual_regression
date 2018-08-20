@@ -782,11 +782,16 @@ def test_newsticker_should_have_expected_dom(testbrowser, data_solr):
         teaser[0].cssselect('a .newsteaser__text .newsteaser__product')) == 1
 
 
-def test_newspage_has_expected_elements(testbrowser, data_es):
+def test_newspage_has_expected_elements(testbrowser):
+    elastic = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elastic.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     browser = testbrowser('/news/index')
     area = browser.cssselect('.cp-area--overview')[0]
     assert len(area.cssselect('.pager--overview')) == 1
-    assert len(area.cssselect('.newsteaser')) > 1
+    assert len(area.cssselect('.newsteaser')) == 2
 
 
 def test_servicebox_present_in_wide_breakpoints(
@@ -2302,26 +2307,17 @@ def test_teaser_link_title_should_match_kicker_and_headline(testbrowser):
 
 
 def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{
-        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
-        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                           'harald-martenstein-wideformat')],
-        'image-fill-color': [u'A3E6BB'], 'teaserText': 'text',
-        'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
-        'date_first_released': '2012-02-22T14:36:32.452398+00:00'}, {
-            'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
-            'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                               'harald-martenstein-wideformat')],
-            'image-fill-color': [u''], 'teaserText': 'text',
-            'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
-            'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
+    elastic = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elastic.results = [
+        'http://xml.zeit.de/zeit-magazin/article/martenstein-portraitformat',
+        'http://xml.zeit.de/zeit-magazin/article/02']
 
     browser = testbrowser('/serie/martenstein')
     image1 = browser.cssselect('.cp-area--zmo-ranking article img')[0]
     image2 = browser.cssselect('.cp-area--zmo-ranking article img')[1]
 
-    assert image1.get('data-src').endswith('__A3E6BB')
+    assert image1.get('data-src').endswith('__ccddee')
     assert not image2.get('data-src').endswith('__')
 
 
@@ -3082,7 +3078,7 @@ def test_wm_ticker_is_not_empty(selenium_driver, testserver):
 
 def test_centerpage_can_include_optimize(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-centerpage')
-    assert 'optimize' not in browser.contents
+    assert '_wt_optimize' not in browser.contents
 
     optimize_url = 'https://www.zeit.de/js/ga_optimize.js'
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)

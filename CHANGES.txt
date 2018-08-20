@@ -9,12 +9,71 @@ PREDEPLOY
 POSTDEPLOY
 ----------
 
-- remove feature toggle `<dtag_navigation>true</dtag_navigation>`
-
-- add feature toggle `<nav_extraitem>true</nav_extraitem>`
+- nothing
 
 
-3.174 (unreleased)
+3.178 (unreleased)
+------------------
+
+- ZON-4833: Update webtrekk script for google optimize
+
+- BUG-825: Fix webtrekk for quiz
+
+- BUG-983: Use teaser data as source for printbox
+
+
+3.177 (2018-08-15)
+------------------
+
+- ZON-4824: Provide RSS feed to Watson
+
+
+3.176.1 (2018-08-13)
+--------------------
+
+- HOTFIX: Fix test, when bumping requests module
+
+
+3.176 (2018-08-13)
+------------------
+
+- ZON-4847: Add global variable to mark users from Switzerland with Webtrekk
+  Marketing Automation for "My country talks"
+
+
+3.175.1 (2018-08-08)
+--------------------
+
+- FIX: Release with css
+
+
+3.175 (2018-08-08)
+------------------
+
+- ZON-4788: Use newly created analyzed author name field for fulltext search
+
+- BUG-763: Show Error if Server Error occurred while commenting
+
+- BUG-973: Fix link to own profile inside leave comment box
+
+- BUG-975: Exchange absolute image paths for relative ones
+
+- BUG-963: Display playing time correctly for finished single game in WM-Ticker
+
+- BUG-979: Search for "all" given terms by default
+
+- OPS-896: Reduce payload used for sitemaps
+
+- FIX: Ignore operations on undefined template variables
+
+- FIX: Return HTTP 500 for empty pages due to jinja errors instead of 200
+
+- FIX: Add color for Z+ icon in framebuilder
+
+- MAINT: Pylakes code clean up
+
+
+3.174 (2018-08-01)
 ------------------
 
 - ZON-4809: Add Linktracking to Brandeins Parquet

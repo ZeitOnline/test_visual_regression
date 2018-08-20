@@ -148,6 +148,23 @@ class DateElasticsearchContentQuery(
 
     grokcore.component.context(Overview)
 
+    include_payload = False
+
+    def _build_query(self):
+        query = super(DateElasticsearchContentQuery, self)._build_query()
+        return dict(query, _source=[
+            'url', 'doc_type', 'doc_id',
+            'payload.body.supertitle',
+            'payload.body.title',
+            'payload.body.url',
+            'payload.teaser.text',
+            'payload.head.teaser_image',
+            'payload.head.teaser_image_fill_color',
+            'payload.workflow.date_last_published_semantic',
+            'payload.document.date_first_released',
+            'payload.document.ressort',
+        ])
+
     @property
     def _additional_clauses(self):
         start, finish = self._date_range()

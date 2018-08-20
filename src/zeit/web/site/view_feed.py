@@ -376,7 +376,6 @@ class RSSBase(Base):
 
     def build_item(self, content, tracking_prefix="rss"):
         E = ELEMENT_MAKER
-        EN = ELEMENT_NS_MAKER
         try:
             normalized_title = zeit.cms.interfaces.normalize_filename(
                 content.title)
@@ -626,27 +625,11 @@ class YahooFeed(Base):
         return root
 
 
-@zeit.web.view_config(
-    context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-msn',
-    host_restriction='newsfeed')
-class MsnFeed(Base):
-
-    def __call__(self):
-        if self.context.uniqueId != 'http://xml.zeit.de/'\
-                'administratives/msnfeed':
-            raise pyramid.httpexceptions.HTTPNotFound()
-
-        return super(MsnFeed, self).__call__()
+class RelatedItem(object):
 
     def make_image_url(self, image, image_width):
         image_height = int(image_width / image.ratio)
-        # XXX: remove as soon as we have SSL
-        # img.zeit.de is already ssl enabled and can be used here
-        # the replacement won't be neccessary, once we have a globally
-        # configured SSL.
-        image_host = self.request.image_host.replace(
-            'http://', 'https://')
+        image_host = self.request.image_host
         image_url = '{}{}__{}x{}__desktop'.format(
             image_host, image.path, image_width, image_height)
         return image_url
@@ -687,25 +670,27 @@ class MsnFeed(Base):
 
             return relateditem
 
+
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-msn',
+    host_restriction='newsfeed')
+class MsnFeed(RSSBase, RelatedItem):
+
+    def __call__(self):
+        if self.context.uniqueId != 'http://xml.zeit.de/'\
+                'administratives/msnfeed':
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+        return super(MsnFeed, self).__call__()
+
+    def __init__(self, context, request):
+        super(MsnFeed, self).__init__(context, request)
+        self.rss_title = 'ZEIT ONLINE Newsfeed for MSN'
+
     def build_feed(self):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
-        root = E('rss', version='2.0')
-        channel = E(
-            'channel',
-            E('title', 'ZEIT ONLINE Newsfeed for MSN'),
-            E('link', self.request.route_url('home')),
-            E('description'),
-            E('language', 'de-de'),
-            E(
-                'copyright',
-                'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
-            E('generator', 'zeit.web {}'.format(
-                self.request.registry.settings.version)),
-            EN('atom', 'link',
-               href=self.request.url, type=self.request.response.content_type)
-        )
-        root.append(channel)
 
         for content in self.items:
             try:
@@ -759,14 +744,98 @@ class MsnFeed(Base):
                         'Error adding related on %s at %s',
                         content, self.__class__.__name__, exc_info=True)
 
-                channel.append(item)
+                self.channel.append(item)
             except:
                 log.warning(
                     'Error adding %s to %s',
                     content, self.__class__.__name__, exc_info=True)
                 continue
 
-        return root
+        return self.root
+
+
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-watson',
+    host_restriction='newsfeed')
+class WatsonFeed(RSSBase, RelatedItem):
+
+    def __call__(self):
+        if self.context.uniqueId != 'http://xml.zeit.de/'\
+                'administratives/watsonfeed':
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+        return super(WatsonFeed, self).__call__()
+
+    def __init__(self, context, request):
+        super(WatsonFeed, self).__init__(context, request)
+        self.rss_title = 'ZEIT ONLINE Newsfeed for Watson'
+
+    def build_feed(self):
+        E = ELEMENT_MAKER
+        EN = ELEMENT_NS_MAKER
+
+        for content in self.items:
+            try:
+                content_url = create_public_url(
+                    zeit.web.core.template.create_url(
+                        None, content, self.request))
+
+                item_title = self.make_title(content)[0:150]
+
+                item_published_date = format_iso8601_date(
+                    first_released(content))
+                item_written_date = format_iso8601_date(
+                    first_released(content))
+                item_modified_date = format_iso8601_date(
+                    last_published_semantic(content))
+
+                item = E(
+                    'item',
+                    E('title', item_title),
+                    E('link', content_url),
+                    E('description', content.teaserText or content.subtitle),
+                    E('pubDate', item_published_date),
+                    E('guid', self.make_guid(content), isPermaLink='false'),
+                    E('publisher', 'ZEIT Online'),
+                    E('category', content.sub_ressort or content.ressort)
+                )
+
+                author = u', '.join(self.make_author_list(content))
+                if author:
+                    item.append(E('author', author))
+
+                item.append(EN('dc', 'modified', item_modified_date))
+                item.append(EN('mi', 'dateTimeWritten', item_written_date))
+
+                # This needs _any_ request object. It works even though
+                # it is not a request to an article URL
+                content_view = zeit.web.site.view_article.Article(
+                    content, self.request)
+                content_body = pyramid.renderers.render(
+                    'zeit.web.site:templates/watsonfeed/item.html', {
+                        'view': content_view,
+                        'request': self.request
+                    })
+                item.append(EN('content', 'encoded', content_body))
+
+                try:
+                    relateditem = self.get_related_item(content)
+                    if relateditem is not None:
+                        item.append(relateditem)
+                except:
+                    log.warning(
+                        'Error adding related on %s at %s',
+                        content, self.__class__.__name__, exc_info=True)
+
+                self.channel.append(item)
+            except:
+                log.warning(
+                    'Error adding %s to %s',
+                    content, self.__class__.__name__, exc_info=True)
+                continue
+
+        return self.root
 
 
 @zeit.web.view_config(

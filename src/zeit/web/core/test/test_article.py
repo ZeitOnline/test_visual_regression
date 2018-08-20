@@ -58,7 +58,7 @@ def test_retresco_body_should_replace_xml_body(application, monkeypatch):
     zeit.web.core.application.FEATURE_TOGGLES.set('enable_intext_links')
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['retresco_timeout'] = 0.42
+    conf['retresco_body_timeout'] = 0.42
 
     tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     get_article_body = mock.Mock(

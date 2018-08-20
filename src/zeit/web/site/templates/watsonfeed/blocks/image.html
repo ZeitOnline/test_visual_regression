@@ -1,0 +1,21 @@
+{# Image size is defined explicitly, because
+   (1) we want to crop it with our focus point ... and not hope for Watson to do good cropping.
+   (2) we do not want to provide the large original image
+   #}
+
+{% require image = get_image(block, variant_id='wide', fallback=False) %}
+    {% set image_width = 1440 %}
+    {% set image_height = (image_width / image.ratio) | round | int %}
+    <figure>
+        <img src="{{ (request.image_host) + image.path }}__{{ image_width }}x{{ image_height }}"
+            alt="{{ image.caption }}"
+            title="{{ image.caption }}"
+            data-has-syndication-rights="0"
+            {% if image.copyrights %}
+                data-portal-copyright="{{ image.copyrights[0].photographer }}"
+                data-license-id="{{ image.copyrights[0].external_id }}"
+                data-licensor-name="{{ image.copyrights[0].company }}"
+            {% endif %}
+            />
+    </figure>
+{% endrequire %}

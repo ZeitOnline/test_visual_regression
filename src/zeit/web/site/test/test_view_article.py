@@ -2254,7 +2254,7 @@ def test_faq_page_should_present_links_to_intertitles(testbrowser):
 
 def test_faq_page_should_hide_show_more_button_for_too_few_intertitles(
         monkeypatch, testbrowser):
-    context = zeit.cms.interfaces.ICMSContent(
+    zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/faq')
     intertitle = mock.Mock()
     monkeypatch.setattr(
@@ -2383,7 +2383,7 @@ def test_if_video_is_playable_on_page_with_embed(selenium_driver, testserver):
 
 def test_article_can_include_optimize(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
-    assert 'optimize' not in browser.contents
+    assert '_wt_optimize' not in browser.contents
 
     optimize_url = 'https://www.zeit.de/js/ga_optimize.js'
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)

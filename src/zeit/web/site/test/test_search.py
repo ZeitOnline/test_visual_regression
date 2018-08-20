@@ -179,6 +179,7 @@ def test_search_form_should_create_valid_fulltext_elasticsearch_query(
             u'must': [{
                 u'simple_query_string': {
                     u'query': u'pfannkuchen OR müsli',
+                    u'default_operator': u'AND',
                     u'fields': search_form.FIELDS}
             }, {
                 u'terms': {
@@ -293,6 +294,7 @@ def test_search_form_should_boost_elasticsearch_query_by_relevancy(
                     u'query': {
                         u'simple_query_string': {
                             u'query': u'beans AND toast',
+                            u'default_operator': u'AND',
                             u'fields': search_form.FIELDS}},
                     u'linear': {
                         u'payload.document.date-last-modified': {
@@ -429,7 +431,10 @@ def test_successful_elasticsearch_result_should_produce_valid_resultset(
     assert zeit.cms.interfaces.ICMSContent.providedBy(iter(block).next())
 
 
-def test_successful_search_result_should_render_in_browser(
-        testbrowser, data_es):
+def test_successful_search_result_should_render_in_browser(testbrowser):
+    elastic = zope.component.getUtility(
+        zeit.retresco.interfaces.IElasticsearch)
+    elastic.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'}]
     browser = testbrowser('/suche/index')
     assert browser.cssselect('.cp-area--ranking .teaser-small')
