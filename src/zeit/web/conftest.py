@@ -996,9 +996,12 @@ def copy_dotted_keys(source, *keys):
     return dest
 
 
-class MockES(MockSearch):
+class MockES(zeit.retresco.search.Elasticsearch, MockSearch):
 
     zope.interface.implements(zeit.retresco.interfaces.IElasticsearch)
+
+    def __init__(self):
+        pass
 
     def search(self, query, order=None, rows=25, **kw):
         source = query.get('_source', ['url', 'doc_type', 'doc_id'])
