@@ -33,7 +33,7 @@ def is_tms_healthy(self):
     unecessarily take time just to return erroneous, but also add to the load
     of an already down server."""
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    timeout = float(conf.get('tms_timeout', 0.5))
+    timeout = conf.get('retresco_body_timeout', 0.1)
     response = None
     try:
         with zeit.web.core.metrics.http(
@@ -61,6 +61,8 @@ def tms_request(self, *args, **kw):
     headers['User-Agent'] = requests.utils.default_user_agent(
         'zeit.web-%s/retresco/python-requests' % request.registry.settings.get(
             'version', 'unknown'))
+    kw.setdefault('timeout', request.registry.settings.get(
+        'retresco_timeout', 1))
     with zeit.web.core.metrics.timer(
             'zeit.retresco.connection.tms.response_time'):
         return original_request(self, *args, **kw)
@@ -87,13 +89,17 @@ zeit.retresco.connection.TMS._intextlink_data = TransactionBoundCache(
     '_v_intextlink_data', dict)
 
 
-def es_user_agent(self):
-    return 'zeit.web-%s/retresco/python-urllib3-%s' % (
-        pkg_resources.get_distribution('zeit.web').version,
-        urllib3.__version__)
+class ESConnection(zeit.retresco.search.Connection):
 
+    def _user_agent(self):
+        return requests.utils.default_user_agent(
+            'zeit.web-%s/retresco/python-requests' % (
+                pkg_resources.get_distribution('zeit.web').version))
 
-zeit.retresco.search.Connection._user_agent = es_user_agent
+    def perform_request(self, *args, **kw):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        kw['timeout'] = conf.get('elasticsearch_timeout', 2)
+        return super(ESConnection, self).perform_request(*args, **kw)
 
 
 @SHORT_TERM_CACHE.cache_on_arguments()
