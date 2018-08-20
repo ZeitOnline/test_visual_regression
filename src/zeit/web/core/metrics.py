@@ -129,7 +129,7 @@ class http(object):
 
     def __exit__(self, type, value, traceback):
         self.timer.stop('')
-        status = self.response.status_code if self.response else 599
+        status = getattr(self.response, "status_code", 599)
         self.metrics.increment('%s.status.%s' % (self.identifier, status))
 
 
