@@ -204,7 +204,7 @@ def test_search_form_should_create_valid_fulltext_elasticsearch_query(
 def test_search_form_should_create_valid_date_range_solr_query(
         dummy_request, search_form, clock, monkeypatch):
     clock.freeze(datetime.datetime(2010, 3, 2))
-    monkeypatch.setattr(zeit.find.daterange, 'datetime', clock)
+    monkeypatch.setattr(zeit.web.site.module.search_form, 'datetime', clock)
     dummy_request.GET['mode'] = '1y'
     assert search_form.raw_query == (
         'last-semantic-change:[2009-03-01T00:00:00Z TO 2010-03-02T00:00:00Z] '
