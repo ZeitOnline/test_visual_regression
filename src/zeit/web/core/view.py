@@ -1101,6 +1101,9 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             return True
         if getattr(self, 'is_advertorial', None):
             return True
+        # product_id is News for agency news
+        if getattr(self, 'product_id') == u'News':
+            return True
         # galleries or videos do not have pagination: so be defensive!
         if getattr(self, 'pagination', None):
             if getattr(self, 'is_all_pages_view', False):
