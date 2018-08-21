@@ -1,9 +1,9 @@
+from datetime import datetime, timedelta
 import json
 import collections
 import logging
 
 from zeit.solr import query as lq
-import zeit.find.daterange
 
 import zeit.web
 import zeit.web.core.centerpage
@@ -94,11 +94,11 @@ class Form(zeit.web.core.centerpage.Module):
     def raw_mode(self):
         """Time range in solr query usable format"""
         return {
-            'today': zeit.find.daterange.today_range(),
-            '24h': zeit.find.daterange.one_day_range(),
-            '7d': zeit.find.daterange.seven_day_range(),
-            '30d': zeit.find.daterange.month_range(),
-            '1y': zeit.find.daterange.year_range(),
+            'today': today_range(),
+            '24h': one_day_range(),
+            '7d': seven_day_range(),
+            '30d': month_range(),
+            '1y': year_range(),
         }.get(self.mode)
 
     @zeit.web.reify
@@ -235,3 +235,36 @@ class Form(zeit.web.core.centerpage.Module):
             }
         }}
         return json.dumps(query)
+
+
+def today_range():
+    start = datetime.now().replace(
+        hour=0, minute=0, second=0, microsecond=0)
+    end = start + timedelta(days=1)
+    return start, end
+
+
+def one_day_range():
+    end = datetime.now()
+    start = end - timedelta(days=1)
+    return start, end
+
+
+def seven_day_range():
+    end = datetime.now()
+    start = end - timedelta(days=7)
+    return start, end
+
+
+def month_range():
+    end = datetime.now()
+    # XXX last month period if 31 days?
+    start = end - timedelta(days=31)
+    return start, end
+
+
+def year_range():
+    end = datetime.now()
+    # last year, about 366 days (to be on the safe side)
+    start = end - timedelta(days=366)
+    return start, end
