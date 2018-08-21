@@ -185,8 +185,6 @@ def app_settings(mockserver_session):
             'egg://zeit.web.core/data/config/jobboxticker.xml'),
         'vivi_zeit.content.modules_subject-source': (
             'egg://zeit.web.core/data/config/mail-subjects.xml'),
-        'vivi_zeit.content.cp_cp-types-url': (
-            'egg://zeit.web.core/data/config/cp-types.xml'),
         'vivi_zeit.content.cp_cp-feed-max-items': '30',
         'vivi_zeit.content.image_viewport-source': (
             'egg://zeit.web.core/data/config/image-viewports.xml'),
