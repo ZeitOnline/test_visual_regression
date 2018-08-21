@@ -255,6 +255,8 @@ def app_settings(mockserver_session):
             '/brightcove'),
         'vivi_zeit.brightcove_playback-policy-key': 'None',
         'vivi_zeit.brightcove_playback-timeout': '2',
+        'vivi_zeit.find_elasticsearch-url': '',
+        'vivi_zeit.find_elasticsearch-index': '',
         'sso_activate': '',
         'sso_url': 'http://sso.example.org',
         'sso_cookie': 'my_sso_cookie',
