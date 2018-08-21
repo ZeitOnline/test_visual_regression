@@ -6,6 +6,7 @@
         jsconfHost: '{{ request.jsconf_host }}',
         cookieFallbackDomain: '{{ settings('cookie_fallback_domain', 'zeit.de') }}',
         moderationURL: '{{ view.moderation_url }}',
+        productId: '{{ view.product_id | lower }}',
         videoPlayers: {
             'cp': {
                 'withAds': '{{ settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') }}',

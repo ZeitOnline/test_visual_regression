@@ -54,7 +54,7 @@ What does this script do?
    tracking. This could be generalized in the future, if/as needed.
 
 ----------------------------------------------------------------------------- */
-define([ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
+define([ 'jquery', 'web.core/zeit', 'web.core/clicktracking' ], function( $, Zeit, Clicktracking ) {
 
     var EXPECTED_NAME = 'zonTriggeredEventTracking',
         debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1,
@@ -107,7 +107,7 @@ define([ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
             'video',
             videoSize,
             videoSeries,
-            videoProvider,
+            videoProvider + '|' + Zeit.productId,
             eventString,
             videoPageUrl
         ];
