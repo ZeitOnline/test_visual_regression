@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4833: Update webtrekk script for google optimize
 
+- ZON-4869: Enable podcast-markup for verticals
+
 - ZON-4870: Do not index News in Ligatus
 
 - BUG-825: Fix webtrekk for quiz

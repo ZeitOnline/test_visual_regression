@@ -85,6 +85,7 @@
     <series title="Freiheit in Gefahr" serienname="Freiheit in Gefahr" url="freiheit-in-gefahr" encoded="Freiheit%20in%20Gefahr" />
     <series title="Freunde von Freunden" serienname="Freunde von Freunden" url="freunde-von-freunden" encoded="Freunde%20von%20Freunden" />
     <series title="Freunde von AKG" serienname="Freunde von AKG" url="freunde-von-akg" encoded="Freunde%20von%20AKG" format-label="Kolumne" />
+    <series title="Frisch an die Arbeit" serienname="Frisch an die Arbeit" url="frisch-an-die-arbeit" encoded="frisch%an%20die%20arbeit" format-label="Podcast" kind="Podcast" fallback_image="yes" />
     <series title="Fünf vor 8:00" serienname="Fünf vor acht" url="fuenf-vor-acht" encoded="F%C3%BCnf%20vor%20acht" format-label="Kolumne" />
     <series title="Fußball-Presseschau" serienname="Fußball-Presseschau" url="fussball-presseschau" encoded="Fu%C3%9Fball-Presseschau" />
     <series title="Gartengeschichten" serienname="Gartengeschichten" url="gartengeschichten" />

@@ -5,7 +5,11 @@
 {% endblock css_link -%}
 
 {%- block head %}
-    <link rel="alternate" type="application/rss+xml" href="https://newsfeed.zeit.de/campus/index">
+    {% if view.is_podcastseries -%}
+        <link type="application/rss+xml" rel="alternate" title="{{ view.series_title }}" href="https://{{ view.podcastseries_feed }}.podigee.io/feed/mp3"/>
+    {% else -%}
+        <link rel="alternate" type="application/rss+xml" href="https://newsfeed.zeit.de/campus/index">
+    {% endif -%}
     {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
 {% endblock head %}
 
