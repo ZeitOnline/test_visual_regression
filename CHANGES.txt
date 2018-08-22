@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - ZON-4858: Track video-source in eventtracking
 
+- ZON-4870: Do not index News in Ligatus
+
 - BUG-825: Fix webtrekk for quiz
 
 - BUG-983: Use teaser data as source for printbox

@@ -192,6 +192,16 @@ def test_ligatus_do_not_index_advertorials(testbrowser, param):
     assert meta[0].get('content') == param[1]
 
 
+@pytest.mark.parametrize('param', [
+    ('zeit-online/article/simple', 'False'),
+    ('zeit-online/article/dpa', 'True')
+])
+def test_ligatus_do_not_index_news(testbrowser, param):
+    browser = testbrowser(param[0])
+    meta = browser.cssselect('meta[property="ligatus:do_not_index"]')
+    assert meta[0].get('content') == param[1]
+
+
 def test_ligatus_can_be_toggled_by_ressorts(monkeypatch, testbrowser):
 
     def mock_tree():
