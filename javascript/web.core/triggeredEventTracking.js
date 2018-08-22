@@ -103,11 +103,13 @@ define([ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
             videoPageUrl = videoData.videoPageUrl || window.location.host + window.location.pathname;
         }
 
+        // window.Zeit should be available here, but we cannot be sure
+        var productId = window.Zeit ? window.Zeit.productId : '';
         data = [
             'video',
             videoSize,
             videoSeries,
-            videoProvider,
+            videoProvider + '|' + productId,
             eventString,
             videoPageUrl
         ];

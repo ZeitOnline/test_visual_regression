@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-4833: Update webtrekk script for google optimize
 
+- ZON-4858: Track video-source in eventtracking
+
 - ZON-4869: Enable podcast-markup for verticals
 
 - ZON-4870: Do not index News in Ligatus
