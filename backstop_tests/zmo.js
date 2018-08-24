@@ -1,8 +1,5 @@
 let scenarios = []
-const urls = [
-  'http://localhost:9090/autoren/S/Thomas_Strothjohann/index/feedback',
-  'http://localhost:9090/zeit-online/article/feedback'
-];
+let urls = [ 'http://localhost:9090/zeit-magazin/index' ];
 
 urls.forEach( url => {
   scenarios.push({

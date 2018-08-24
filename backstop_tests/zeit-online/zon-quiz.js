@@ -1,14 +1,11 @@
-let scenarios = []
+let scenarios = [];
 const urls = [
-  'http://localhost:9070/emailadresseaendern',
-  'http://localhost:9070/registrieren',
-  'http://localhost:9070/anmelden',
-  'http://localhost:9070/opt-out'
-]
+    'http://localhost:9090/zeit-online/quiz/quiz-workaholic',
+];
 
 urls.forEach(url => {
   scenarios.push({
-    'label': url.replace('http://localhost:9070/', '').replace(/\//g, '_'),
+    'label': url.replace('http://localhost:9090/', '').replace(/\//g, '_'),
     'cookiePath': '',
     'url': url,
     'referenceUrl': '',
@@ -22,11 +19,11 @@ urls.forEach(url => {
     'hoverSelector': '',
     'clickSelector': '',
     'postInteractionWait': '',
-    'selectors': [],
+    'selectors': ['html'],
     'selectorExpansion': true,
     'misMatchThreshold': 0.1,
     'requireSameDimensions': true
-  })
-})
+  });
+});
 
 module.exports = scenarios;

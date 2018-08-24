@@ -1,9 +1,10 @@
 let scenarios = []
-let testUrls = [
+const urls = [
   'http://localhost:9090/zeit-online/article/podcast-header',
   'http://localhost:9090/arbeit/article/podcast'
 ]
-testUrls.forEach(url => {
+
+urls.forEach(url => {
   scenarios.push({
     'label': url.replace('http://localhost:9090/', '').replace(/\//g, '_'),
     'cookiePath': '',
@@ -26,41 +27,4 @@ testUrls.forEach(url => {
   })
 })
 
-module.exports =
-{
-  'id': 'podcast-header',
-  'viewports': [
-    {
-      'label': 'phone',
-      'width': 320,
-      'height': 480
-    },
-    {
-      'label': 'tablet',
-      'width': 768,
-      'height': 1024
-    },
-    {
-      'label': 'desktop',
-      'width': 1280,
-      'height': 800
-    }
-  ],
-  'onBeforeScript': '',
-  'onReadyScript': '',
-  'scenarios': scenarios,
-  'paths': {
-    'bitmaps_reference': 'backstop_data/bitmaps_reference/podcast_header',
-    'bitmaps_test': 'backstop_data/bitmaps_test/podcast_header',
-    'engine_scripts': 'backstop_data/engine_scripts/podcast_header',
-    'html_report': 'backstop_data/html_report/podcast_header',
-    'ci_report': 'backstop_data/ci_report/podcast_header'
-  },
-  'report': ['browser'],
-  'engine': 'chrome',
-  'engineFlags': [],
-  'asyncCaptureLimit': 5,
-  'asyncCompareLimit': 50,
-  'debug': false,
-  'debugWindow': false
-}
+module.exports = scenarios;

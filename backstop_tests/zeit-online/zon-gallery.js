@@ -1,10 +1,14 @@
-let scenarios = []
+let scenarios = [];
 const urls = [
-  'http://localhost:9090/zeit-online/centerpage/podcast-teaser',
-  'http://localhost:9090/arbeit/centerpage/teaser-podcast'
-]
+    'http://localhost:9090/zeit-online/gallery/biga_1',
+    'http://localhost:9090/zeit-online/gallery/england-meer-strand-menschen-fs',
+    'http://localhost:9090/zeit-online/gallery/google-neuronale-netzwerke-fs',
+    'http://localhost:9090/zeit-online/gallery/hitze-sommer-temperaturen-deutschland-fs',
+    'http://localhost:9090/zeit-online/gallery/schrebergarten-gemeinschaft-glueck-fs',
+    'http://localhost:9090/zeit-online/gallery/weltall',
+];
 
-urls.forEach( url => {
+urls.forEach(url => {
   scenarios.push({
     'label': url.replace('http://localhost:9090/', '').replace(/\//g, '_'),
     'cookiePath': '',
@@ -20,7 +24,7 @@ urls.forEach( url => {
     'hoverSelector': '',
     'clickSelector': '',
     'postInteractionWait': '',
-    'selectors': ['.teaser-podcast'],
+    'selectors': ['html'],
     'selectorExpansion': true,
     'misMatchThreshold': 0.1,
     'requireSameDimensions': true
