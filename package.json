@@ -1,30 +1,18 @@
 {
   "author": "Tobias Weiß, Hennes Römmer",
   "name": "test_visual_regression",
+  "license": "MIT",
   "version": "1.0.0",
   "description": "Testing visual regresion using PhantomCSS",
   "main": "",
-  "scripts": {
-    "test": "npm run test",
-    "lint": "eslint tests/**/*.js",
-    "lint-fix": "eslint --fix tests/**/*.js",
-    "reference:zar": "backstop --config ./backstop_tests/test_zar.js reference",
-    "test:zar": "backstop --config ./backstop_tests/test_zar.js test",
-    "test:zon-all": "npm run test:zon && test:zon-article && test:zon-centerpage && test:zon-cp-content && test:zon-gallery && test:zon-liveblog && test:zon-quiz && test:zon-storystream && test:zon-video",
-    "test:zon": "backstop --config ./backstop_tests/zeit-online/zon.js test",
-    "test:zon-article": "backstop --config ./backstop_tests/zeit-online/zon-article.js test",
-    "test:zon-centerpage": "backstop --config ./backstop_tests/zeit-online/zon-centerpage.js test",
-    "test:zon-cp-content": "backstop --config ./backstop_tests/zeit-online/zon-cp-content.js test",
-    "test:zon-gallery": "backstop --config ./backstop_tests/zeit-online/zon-gallery.js test",
-    "test:zon-liveblog": "backstop --config ./backstop_tests/zeit-online/zon-liveblog.js test",
-    "test:zon-quiz": "backstop --config ./backstop_tests/zeit-online/zon-quiz.js test",
-    "test:zon-storystream": "backstop --config ./backstop_tests/zeit-online/zon-storystream.js test",
-    "test:zon-video": "backstop --config ./backstop_tests/zeit-online/zon-video.js test"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZeitOnline/test_visual_regression.git"
   },
+  "bugs": {
+    "url": "https://github.com/ZeitOnline/test_visual_regression/issues"
+  },
+  "homepage": "https://github.com/ZeitOnline/test_visual_regression#readme",
   "keywords": [
     "testing",
     "visual",
@@ -32,16 +20,59 @@
     "css",
     "phantomjs"
   ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ZeitOnline/test_visual_regression/issues"
-  },
-  "homepage": "https://github.com/ZeitOnline/test_visual_regression#readme",
   "devDependencies": {
     "backdrop": "0.0.3",
+    "backstopjs": "^3.5.5",
     "eslint": "^5.4.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-promise": "^4.0.0",
     "eslint-plugin-standard": "^3.1.0"
+  },
+  "scripts": {
+    "lint": "eslint tests/**/*.js",
+    "lint-fix": "eslint --fix tests/**/*.js",
+    "reference": "backstop reference --configPath=backstop-settings.js",
+    "reference:zmo": "npm run reference -- --test=zmo",
+    "reference:feedback-form": "npm run reference -- --test=feedback-form/mail",
+    "reference:podcast-header": "npm run reference -- --test=podcasts/podcast-header",
+    "reference:podcast-teaser": "npm run reference -- --test=podcasts/podcast-teaser",
+    "reference:sso": "npm run reference -- --test=sso/test-sso",
+    "reference:sso-interaction": "npm run reference -- --test=sso/test-sso-interaction  --ready=sso/scripts/interactions",
+    "reference:zon": "npm run reference -- --test=zeit-online/zon",
+    "reference:zon-article": "npm run reference -- --test=zeit-online/zon-article",
+    "reference:zon-cp": "npm run reference -- --test=zeit-online/zon-centerpage",
+    "reference:zon-cp-content": "npm run reference -- --test=zeit-online/zon-cp-content",
+    "reference:zon-gallery": "npm run reference -- --test=zeit-online/zon-gallery",
+    "reference:zon-storystream": "npm run reference -- --test=zeit-online/zon-storystream",
+    "reference:zon-video": "npm run reference -- --test=zeit-online/zon-video",
+
+    "test": "backstop test --configPath=backstop-settings.js",
+    "test:zmo": "npm run test -- --test=zmo",
+    "test:feedback-form": "npm run test -- --test=feedback-form/mail",
+    "test:podcast-header": "npm run test -- --test=podcasts/podcast-header",
+    "test:podcast-teaser": "npm run test -- --test=podcasts/podcast-teaser",
+    "test:sso": "npm run test -- --test=sso/test-sso",
+    "test:sso-interaction": "npm run test -- --test=sso/test-sso-interaction  --ready=sso/scripts/interactions",
+    "test:zon": "npm run test -- --test=zeit-online/zon",
+    "test:zon-article": "npm run test -- --test=zeit-online/zon-article",
+    "test:zon-cp": "npm run test -- --test=zeit-online/zon-centerpage",
+    "test:zon-cp-content": "npm run test -- --test=zeit-online/zon-cp-content",
+    "test:zon-gallery": "npm run test -- --test=zeit-online/zon-gallery",
+    "test:zon-storystream": "npm run test -- --test=zeit-online/zon-storystream",
+    "test:zon-video": "npm run test -- --test=zeit-online/zon-video",
+
+    "approve": "backstop approve --configPath=backstop-settings.js",
+    "approve:zmo": "npm run approve -- --test=zmo",
+    "approve:feedback-form": "npm run approve -- --test=zmo",
+    "approve:podcast-header": "npm run approve -- --test=podcasts/podcast-header",
+    "approve:podcast-teaser": "npm run approve -- --test=podcasts/podcast-teaser",
+    "approve:sso-interaction": "npm run approve -- --test=sso/test-sso-interaction  --ready=sso/scripts/interactions",
+    "approve:zon": "npm run approve -- --test=zeit-online/zon",
+    "approve:zon-article": "npm run approve -- --test=zeit-online/zon-article",
+    "approve:zon-cp": "npm run approve -- --test=zeit-online/zon-centerpage",
+    "approve:zon-cp-content": "npm run approve -- --test=zeit-online/zon-cp-content",
+    "approve:zon-gallery": "npm run approve -- --test=zeit-online/zon-gallery",
+    "approve:zon-storystream": "npm run approve -- --test=zeit-online/zon-storystream",
+    "approve:zon-video": "npm run approve -- --test=zeit-online/zon-video"
   }
 }

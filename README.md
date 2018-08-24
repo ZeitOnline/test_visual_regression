@@ -1,6 +1,13 @@
 # Visual Regression Testing with BackstopJS
 
-This branch features a working example for visual regression testing using BackstopJS.
+## General
+The visual regression process contains three steps:
+- ### reference
+  - generate the ideal result (how it should look) in order to compare the test result to this one later on.
+- ### test
+  - generate the real result (how it actually looks) to compare this one to the reference.
+- ### approve
+  - when the test is fine and the references shall be updated, you may approve them.
 
 ## Prerequisites
 
@@ -12,8 +19,7 @@ This branch features a working example for visual regression testing using Backs
 
 1. `git clone git@github.com:ZeitOnline/test_visual_regression.git`
 2. `cd test_visual_regression`
-3. `git checkout backstop-js`
-3. `npm install`
+3. `npm i`
 
 Resulting in the following directory tree:
 
@@ -37,34 +43,37 @@ Resulting in the following directory tree:
 ├── package-lock.json
 └── package.json
 ```
-#### 3. Make sure your local servers are running (Friedbert, SSO, ...)
 
+#### 3. Make sure your (needed) local servers are running (Friedbert, SSO, ...)
 
 ## Running tests
+
 
 #### 1. If no reference screenshots are available
 
 Generate a reference you want to test against later on. This will create screenshots of all pages/elements that are defined in the config that is passed in as an argument.
 
-`backstop reference --config=<path/to/config.js>`
+`npm run reference`
 
-Example: `backstop reference --config='backstop_tests/test-zar.js'`
+Example: `npm run reference:zmo`
+
+for further examples take a look at the package.json. Any possible test should be listed there
 
 #### 2. Test against the reference
 
 After making some changes to your code, you might want to test if the pages still look the same or if they have been affected by your changes. After running the following command, a HTML report is generated and opened in your default browser.
 
-`backstop test --config=<path/to/config.js>`
+`npm run test`
 
-Example: `backstop test --config='backstop_tests/test-zar.js'`
+Example: `npm run test:zmo`
 
 #### 3. Approve changes
 
 If you are happy with the results after testing, you may promote the test screenshots to be the new reference screenshots.
 
-`backstop approve --config=<path/to/config.js>`
+`npm run approve`
 
-Example: `backstop approve --config='backstop_tests/test-zar.js'`
+Example: `npm run approve:zmo`
 
 ## Creating tests
 
