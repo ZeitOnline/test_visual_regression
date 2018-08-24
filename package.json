@@ -26,12 +26,14 @@
     "eslint": "^5.4.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-promise": "^4.0.0",
-    "eslint-plugin-standard": "^3.1.0"
+    "eslint-plugin-standard": "^3.1.0",
+    "npm-run-all": "^4.1.3"
   },
   "scripts": {
     "lint": "eslint tests/**/*.js",
     "lint-fix": "eslint --fix tests/**/*.js",
     "reference": "backstop reference --configPath=backstop-settings.js",
+    "reference:all": "npm-run-all --parallel reference:*",
     "reference:zmo": "npm run reference -- --test=zmo",
     "reference:feedback-form": "npm run reference -- --test=feedback-form/mail",
     "reference:podcast-header": "npm run reference -- --test=podcasts/podcast-header",
@@ -45,8 +47,8 @@
     "reference:zon-gallery": "npm run reference -- --test=zeit-online/zon-gallery",
     "reference:zon-storystream": "npm run reference -- --test=zeit-online/zon-storystream",
     "reference:zon-video": "npm run reference -- --test=zeit-online/zon-video",
-
     "test": "backstop test --configPath=backstop-settings.js",
+    "test:all": "npm-run-all --parallel test:*",
     "test:zmo": "npm run test -- --test=zmo",
     "test:feedback-form": "npm run test -- --test=feedback-form/mail",
     "test:podcast-header": "npm run test -- --test=podcasts/podcast-header",
@@ -60,8 +62,8 @@
     "test:zon-gallery": "npm run test -- --test=zeit-online/zon-gallery",
     "test:zon-storystream": "npm run test -- --test=zeit-online/zon-storystream",
     "test:zon-video": "npm run test -- --test=zeit-online/zon-video",
-
     "approve": "backstop approve --configPath=backstop-settings.js",
+    "approve:all": "npm-run-all --parallel approve:*",
     "approve:zmo": "npm run approve -- --test=zmo",
     "approve:feedback-form": "npm run approve -- --test=zmo",
     "approve:podcast-header": "npm run approve -- --test=podcasts/podcast-header",
