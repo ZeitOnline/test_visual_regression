@@ -1,14 +1,25 @@
 {
+  "author": "Tobias Weiß, Hennes Römmer",
   "name": "test_visual_regression",
   "version": "1.0.0",
   "description": "Testing visual regresion using PhantomCSS",
-  "main": "index.js",
+  "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run test",
     "lint": "eslint tests/**/*.js",
     "lint-fix": "eslint --fix tests/**/*.js",
     "reference:zar": "backstop --config ./backstop_tests/test_zar.js reference",
-    "test:zar": "backstop --config ./backstop_tests/test_zar.js test"
+    "test:zar": "backstop --config ./backstop_tests/test_zar.js test",
+    "test:zon-all": "npm run test:zon && test:zon-article && test:zon-centerpage && test:zon-cp-content && test:zon-gallery && test:zon-liveblog && test:zon-quiz && test:zon-storystream && test:zon-video",
+    "test:zon": "backstop --config ./backstop_tests/zeit-online/zon.js test",
+    "test:zon-article": "backstop --config ./backstop_tests/zeit-online/zon-article.js test",
+    "test:zon-centerpage": "backstop --config ./backstop_tests/zeit-online/zon-centerpage.js test",
+    "test:zon-cp-content": "backstop --config ./backstop_tests/zeit-online/zon-cp-content.js test",
+    "test:zon-gallery": "backstop --config ./backstop_tests/zeit-online/zon-gallery.js test",
+    "test:zon-liveblog": "backstop --config ./backstop_tests/zeit-online/zon-liveblog.js test",
+    "test:zon-quiz": "backstop --config ./backstop_tests/zeit-online/zon-quiz.js test",
+    "test:zon-storystream": "backstop --config ./backstop_tests/zeit-online/zon-storystream.js test",
+    "test:zon-video": "backstop --config ./backstop_tests/zeit-online/zon-video.js test"
   },
   "repository": {
     "type": "git",
@@ -21,7 +32,6 @@
     "css",
     "phantomjs"
   ],
-  "author": "Tobias Weiß",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ZeitOnline/test_visual_regression/issues"
@@ -29,9 +39,9 @@
   "homepage": "https://github.com/ZeitOnline/test_visual_regression#readme",
   "devDependencies": {
     "backdrop": "0.0.3",
-    "eslint": "^3.17.1",
-    "eslint-config-standard": "^7.0.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.1.1"
+    "eslint": "^5.4.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^3.1.0"
   }
 }
