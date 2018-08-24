@@ -13,6 +13,11 @@ module.exports = {
         },
         {
           "label": "tablet",
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "label": "desktop",
           "width": 1024,
           "height": 768
         }
@@ -21,8 +26,8 @@ module.exports = {
       "onReadyScript": "puppet/onReady.js" || readyScript,
       "scenarios": scenarios,
       "paths": {
-        "bitmaps_reference": "backstop_data/bitmaps_reference",
-        "bitmaps_test": "backstop_data/bitmaps_test",
+        "bitmaps_reference": "data/references",
+        "bitmaps_test": "data/tests",
         "engine_scripts": "backstop_data/engine_scripts",
         "html_report": "backstop_data/html_report",
         "ci_report": "backstop_data/ci_report"

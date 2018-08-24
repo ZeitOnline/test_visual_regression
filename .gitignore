@@ -1,10 +1,5 @@
 .DS_Store
-node_modules
-
-backstop_data
-
-# ignore master's (generated) directories
-PhantomCSS/
-failures/
+node_modules/
 backstop_data/
-screenshots/
+data/
+PhantomCSS/
