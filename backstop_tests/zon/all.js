@@ -2,6 +2,8 @@
 const article = require( `./article.js` );
 const centerpage = require( `./centerpage.js` );
 const cpContent = require( `./cp-content.js` );
+const feedback = require( `./feedback.js` );
+const parquetFeeds = require( `./parquet-feeds.js` )
 const gallery = require( `./gallery.js` );
 const liveblog = require( `./liveblog.js` );
 const quiz = require( `./quiz.js` );
@@ -14,6 +16,8 @@ module.exports = [].concat(
   article,
   centerpage,
   cpContent,
+  feedback,
+  parquetFeeds,
   gallery,
   liveblog,
   quiz,

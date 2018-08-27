@@ -1,6 +1,8 @@
 // import all zmo files
-const zar = require( `./test-zar.js` );
+const base = require( `./base.js` );
+const podcasts = require( `./podcasts.js` );
 
 module.exports = [].concat(
-  zar
+  base,
+  podcasts
 );

@@ -1,10 +1,10 @@
 let scenarios = []
 const urls = [
-  'http://localhost:9090/zeit-online/centerpage/podcast-teaser',
+  'http://localhost:9090/arbeit/article/podcast',
   'http://localhost:9090/arbeit/centerpage/teaser-podcast'
 ]
 
-urls.forEach( url => {
+urls.forEach(url => {
   scenarios.push({
     'label': url.replace('http://localhost:9090/', '').replace(/\//g, '_'),
     'cookiePath': '',
@@ -20,11 +20,11 @@ urls.forEach( url => {
     'hoverSelector': '',
     'clickSelector': '',
     'postInteractionWait': '',
-    'selectors': ['.teaser-podcast'],
+    'selectors': ['document'],
     'selectorExpansion': true,
     'misMatchThreshold': 0.1,
     'requireSameDimensions': true
-  });
-});
+  })
+})
 
 module.exports = scenarios;
