@@ -15,7 +15,8 @@ urls.forEach(url => {
     'delay': 100,
     'hideSelectors': [],
     'removeSelectors': [
-      '#pDebug'
+      '#pDebug',
+      '.article__main-video--longform'
     ],
     'hoverSelector': '',
     'clickSelector': '',

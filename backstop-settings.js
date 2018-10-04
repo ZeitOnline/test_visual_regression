@@ -21,24 +21,24 @@ module.exports = {
           "width": 1024,
           "height": 768
         }
-      ],
-      "onBeforeScript": "puppet/onBefore.js" || beforeScript,
-      "onReadyScript": "puppet/onReady.js" || readyScript,
-      "scenarios": scenarios,
-      "paths": {
-        "bitmaps_reference": "data/references",
-        "bitmaps_test": "data/tests",
-        "engine_scripts": "backstop_data/engine_scripts",
-        "html_report": "backstop_data/html_report",
-        "ci_report": "backstop_data/ci_report"
-      },
-      "report": ["browser"],
-      "engine": "puppeteer",
-      "engineOptions": {
-          "args": ["--no-sandbox"]
-      },
-      "asyncCaptureLimit": 5,
-      "asyncCompareLimit": 50,
-      "debug": false,
-      "debugWindow": false
+    ],
+    "onBeforeScript": "puppet/onBefore.js" || beforeScript,
+    "onReadyScript": "puppet/onReady.js" || readyScript,
+    "scenarios": scenarios,
+    "paths": {
+      "bitmaps_reference": "data/references",
+      "bitmaps_test": "data/tests",
+      "engine_scripts": "backstop_data/engine_scripts",
+      "html_report": "backstop_data/html_report",
+      "ci_report": "backstop_data/ci_report"
+    },
+    "report": ["browser"],
+    "engine": "puppeteer",
+    "engineOptions": {
+        "args": ["--no-sandbox"]
+    },
+    "asyncCaptureLimit": 5,
+    "asyncCompareLimit": 50,
+    "debug": false,
+    "debugWindow": false
 }
