@@ -57,6 +57,7 @@
     "reference:zon:storystream": "npm run reference -- --test=zon/storystream",
     "reference:zon:video": "npm run reference -- --test=zon/video",
     "reference:zon:teasers": "npm run reference -- --test=zon/teaser_gradients",
+    "reference:zon:zplus": "npm run reference -- --test=zon/zplus",
     "test": "backstop test --configPath=backstop-settings.js",
     "test:zar": "npm run test -- --test=zar/all",
     "test:zar:base": "npm run test -- --test=zar/base",
@@ -82,6 +83,7 @@
     "test:zon:storystream": "npm run test -- --test=zon/storystream",
     "test:zon:video": "npm run test -- --test=zon/video",
     "test:zon:teasers": "npm run test -- --test=zon/teaser_gradients",
+    "test:zon:zplus": "npm run test -- --test=zon/zplus",
     "approve": "backstop approve --configPath=backstop-settings.js",
     "approve:zar": "npm run approve -- --test=zar/all",
     "approve:zar:base": "npm run approve -- --test=zar/base",
@@ -106,6 +108,7 @@
     "approve:zon:parquet": "npm run approve -- --test=zon/parquet-feeds",
     "approve:zon:storystream": "npm run approve -- --test=zon/storystream",
     "approve:zon:video": "npm run approve -- --test=zon/video",
-    "approve:zon:teasers": "npm run approve -- --test=zon/teaser_gradients"
+    "approve:zon:teasers": "npm run approve -- --test=zon/teaser_gradients",
+    "approve:zon:zplus": "npm run approve -- --test=zon/zplus"
   }
 }
