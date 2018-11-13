@@ -23,7 +23,7 @@
   "dependencies": {},
   "devDependencies": {
     "backdrop": "0.0.3",
-    "backstopjs": "^3.5.5",
+    "backstopjs": "^3.8.4",
     "eslint": "^5.4.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-promise": "^4.0.0",
