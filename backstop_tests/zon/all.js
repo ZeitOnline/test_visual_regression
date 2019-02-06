@@ -10,6 +10,7 @@ const quiz = require( `./quiz.js` );
 const storystream = require( `./storystream.js` );
 const video = require( `./video.js` );
 const base = require( `./base.js` );
+const authorbox = require( `./authorbox.js` );
 
 module.exports = [].concat(
   base,
@@ -22,5 +23,6 @@ module.exports = [].concat(
   liveblog,
   quiz,
   storystream,
-  video
+  video,
+  authorbox
 );
