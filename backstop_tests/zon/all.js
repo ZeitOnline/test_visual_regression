@@ -11,6 +11,7 @@ const storystream = require( `./storystream.js` );
 const video = require( `./video.js` );
 const base = require( `./base.js` );
 const authorbox = require( `./authorbox.js` );
+const rebrush2019 = require( `./rebrush2019.js` );
 
 module.exports = [].concat(
   base,
@@ -24,5 +25,6 @@ module.exports = [].concat(
   quiz,
   storystream,
   video,
-  authorbox
+  authorbox,
+  rebrush2019
 );
