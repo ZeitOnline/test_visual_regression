@@ -20,6 +20,11 @@ module.exports = {
           "label": "desktop",
           "width": 1024,
           "height": 768
+        },
+        {
+          "label": "wide_desktop",
+          "width": 1600,
+          "height": 1200
         }
     ],
     "onBeforeScript": "puppet/onBefore.js" || beforeScript,
