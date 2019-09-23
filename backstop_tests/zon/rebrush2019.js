@@ -1,4 +1,4 @@
-let scenarios = [];
+const scenarios = []
 const urls = [
   'http://localhost:9090/zeit-online/hp-rebrush-2019/buzzboard',
   'http://localhost:9090/zeit-online/hp-rebrush-2019/index',
@@ -17,29 +17,29 @@ const urls = [
   'http://localhost:9090/zeit-online/hp-rebrush-2019/zon-teaser-standard',
   'http://localhost:9090/zeit-online/hp-rebrush-2019/zon-teaser-upright',
   'http://localhost:9090/zeit-online/hp-rebrush-2019/zon-teaser-wide'
-];
+]
 
 urls.forEach(url => {
   scenarios.push({
-    'label': url.replace('http://localhost:9090/', '').replace(/\//g, '_'),
-    'cookiePath': '',
-    'url': url,
-    'referenceUrl': '',
-    'readyEvent': '',
-    'readySelector': '',
-    'delay': 100,
-    'hideSelectors': [],
-    'removeSelectors': [
+    label: url.replace('http://localhost:9090/', '').replace(/\//g, '_'),
+    cookiePath: '',
+    url: url,
+    referenceUrl: '',
+    readyEvent: '',
+    readySelector: '',
+    delay: 100,
+    hideSelectors: [],
+    removeSelectors: [
       '#pDebug'
     ],
-    'hoverSelector': '',
-    'clickSelector': '',
-    'postInteractionWait': '',
-    'selectors': [],
-    'selectorExpansion': true,
-    'misMatchThreshold': 0.1,
-    'requireSameDimensions': true
-  });
-});
+    hoverSelector: '',
+    clickSelector: '',
+    postInteractionWait: '',
+    selectors: [],
+    selectorExpansion: true,
+    misMatchThreshold: 0.1,
+    requireSameDimensions: true
+  })
+})
 
-module.exports = scenarios;
+module.exports = scenarios

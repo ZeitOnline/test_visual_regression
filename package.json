@@ -23,15 +23,17 @@
   "dependencies": {},
   "devDependencies": {
     "backdrop": "0.0.3",
-    "backstopjs": "^4.1.12",
-    "eslint": "^6.1.0",
-    "eslint-config-standard": "^13.0.1",
+    "backstopjs": "^4.3.2",
+    "eslint": "^6.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.1"
   },
   "scripts": {
-    "lint": "eslint tests/**/*.js",
-    "lint-fix": "eslint --fix tests/**/*.js",
+    "lint": "eslint backstop_tests/**/*.js",
+    "lint-fix": "eslint --fix backstop_tests/**/*.js",
     "reference": "backstop reference --configPath=backstop-settings.js",
     "reference:zar": "npm run reference -- --test=zar/all",
     "reference:zar:base": "npm run reference -- --test=zar/base",

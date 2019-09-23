@@ -1,4 +1,4 @@
-let scenarios = [];
+const scenarios = []
 const urls = [
   'http://localhost:9090/arbeit/index',
   'http://localhost:9090/arbeit/article/01-digitale-nomaden',
@@ -32,29 +32,29 @@ const urls = [
   'http://localhost:9090/arbeit/centerpage/thema-opulent',
   'http://localhost:9090/arbeit/centerpage/tube',
   'http://localhost:9090/serie/das-anonyme-gehaltsprotokoll'
-];
+]
 
 urls.forEach(url => {
   scenarios.push({
-    'label': url.replace('http://localhost:9090/', '').replace(/\//g, '_'),
-    'cookiePath': '',
-    'url': url,
-    'referenceUrl': '',
-    'readyEvent': '',
-    'readySelector': '',
-    'delay': 100,
-    'hideSelectors': [],
-    'removeSelectors': [
+    label: url.replace('http://localhost:9090/', '').replace(/\//g, '_'),
+    cookiePath: '',
+    url: url,
+    referenceUrl: '',
+    readyEvent: '',
+    readySelector: '',
+    delay: 100,
+    hideSelectors: [],
+    removeSelectors: [
       '#pDebug'
     ],
-    'hoverSelector': '',
-    'clickSelector': '',
-    'postInteractionWait': '',
-    'selectors': [],
-    'selectorExpansion': true,
-    'misMatchThreshold': 0.1,
-    'requireSameDimensions': true
-  });
-});
+    hoverSelector: '',
+    clickSelector: '',
+    postInteractionWait: '',
+    selectors: [],
+    selectorExpansion: true,
+    misMatchThreshold: 0.1,
+    requireSameDimensions: true
+  })
+})
 
-module.exports = scenarios;
+module.exports = scenarios
