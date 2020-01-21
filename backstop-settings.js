@@ -20,15 +20,10 @@ module.exports = {
           "label": "desktop",
           "width": 1024,
           "height": 768
-        },
-        {
-          "label": "wide_desktop",
-          "width": 1600,
-          "height": 1200
         }
     ],
-    "onBeforeScript": "puppet/onBefore.js" || beforeScript,
-    "onReadyScript": "puppet/onReady.js" || readyScript,
+    "onBeforeScript": false,
+    "onReadyScript": false,
     "scenarios": scenarios,
     "paths": {
       "bitmaps_reference": "data/references",
@@ -42,7 +37,7 @@ module.exports = {
     "engineOptions": {
         "args": ["--no-sandbox"]
     },
-    "asyncCaptureLimit": 5,
+    "asyncCaptureLimit": 2,
     "asyncCompareLimit": 50,
     "debug": false,
     "debugWindow": false
