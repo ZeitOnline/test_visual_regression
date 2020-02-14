@@ -1,5 +1,6 @@
 const scenarios = []
 const host = 'http://localhost:9090'
+
 const urls = [
   '/zeit-magazin/buzz',
   '/zeit-magazin/index',
@@ -27,12 +28,18 @@ urls.forEach(url => {
     delay: 100,
     hideSelectors: [],
     removeSelectors: [
-      '#pDebug'
+      '#pDebug',
+      '.comment-section',
+      '.photocluster',
+      'video',
+      '.js-videoplayer',
+      '.js-liveblog',
+      '.image--processing'
     ],
     hoverSelector: '',
     clickSelector: '',
     postInteractionWait: '',
-    selectors: ['document'],
+    selectors: ['main'],
     selectorExpansion: true,
     misMatchThreshold: 0.1,
     requireSameDimensions: true

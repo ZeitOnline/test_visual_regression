@@ -15,7 +15,13 @@ urls.forEach(url => {
     delay: 100,
     hideSelectors: [],
     removeSelectors: [
-      '#pDebug'
+      '#pDebug',
+      '.comment-section',
+      '.photocluster',
+      'video',
+      '.js-videoplayer',
+      '.js-liveblog',
+      '.image--processing'
     ],
     hoverSelector: '',
     clickSelector: '',

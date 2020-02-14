@@ -16,12 +16,17 @@ urls.forEach(url => {
     hideSelectors: [],
     removeSelectors: [
       '#pDebug',
-      '.article__main-video--longform'
+      '.comment-section',
+      '.photocluster',
+      'video',
+      '.js-videoplayer',
+      '.js-liveblog',
+      '.image--processing'
     ],
     hoverSelector: '',
     clickSelector: '',
     postInteractionWait: '',
-    selectors: ['document'],
+    selectors: ['main'],
     selectorExpansion: true,
     misMatchThreshold: 0.1,
     requireSameDimensions: true

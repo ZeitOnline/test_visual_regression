@@ -18,12 +18,18 @@ urls.forEach(url => {
     delay: 100,
     hideSelectors: [],
     removeSelectors: [
-      '#pDebug'
+      '#pDebug',
+      '.comment-section',
+      '.photocluster',
+      'video',
+      '.js-videoplayer',
+      '.js-liveblog',
+      '.image--processing'
     ],
     hoverSelector: '',
     clickSelector: '',
     postInteractionWait: '',
-    selectors: ['document'],
+    selectors: ['main'],
     selectorExpansion: true,
     misMatchThreshold: 0.1,
     requireSameDimensions: true
