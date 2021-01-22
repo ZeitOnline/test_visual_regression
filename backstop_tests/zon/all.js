@@ -5,6 +5,7 @@ const cpContent = require('./cp-content.js')
 const feedback = require('./feedback.js')
 const parquetFeeds = require('./parquet-feeds.js')
 const gallery = require('./gallery.js')
+const newslettersignup = require('./newslettersignup.js')
 const liveblog = require('./liveblog.js')
 const quiz = require('./quiz.js')
 const storystream = require('./storystream.js')
@@ -21,6 +22,7 @@ module.exports = [].concat(
   feedback,
   parquetFeeds,
   gallery,
+  newslettersignup,
   liveblog,
   quiz,
   storystream,
