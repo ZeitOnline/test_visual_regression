@@ -7,7 +7,6 @@ const parquetFeeds = require('./parquet-feeds.js')
 const gallery = require('./gallery.js')
 const newslettersignup = require('./newslettersignup.js')
 const liveblog = require('./liveblog.js')
-const quiz = require('./quiz.js')
 const storystream = require('./storystream.js')
 const video = require('./video.js')
 const base = require('./base.js')
@@ -24,7 +23,6 @@ module.exports = [].concat(
   gallery,
   newslettersignup,
   liveblog,
-  quiz,
   storystream,
   video,
   authorbox,
