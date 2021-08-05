@@ -69,6 +69,7 @@
     "reference:zon:zplus": "npm run reference -- --test=zon/zplus",
     "reference:zon:authorbox": "npm run reference -- --test=zon/authorbox",
     "reference:zon:rebrush2019": "npm run reference -- --test=zon/rebrush2019",
+    "reference:zon:refactor2021": "npm run reference -- --test=zon/refactor2021",
     "test": "backstop test --configPath=backstop-settings.js",
     "test:zar": "npm run test -- --test=zar/all",
     "test:zar:base": "npm run test -- --test=zar/base",
@@ -104,6 +105,7 @@
     "test:zon:zplus": "npm run test -- --test=zon/zplus",
     "test:zon:authorbox": "npm run test -- --test=zon/authorbox",
     "test:zon:rebrush2019": "npm run test -- --test=zon/rebrush2019",
+    "test:zon:refactor2021": "npm run test -- --test=zon/refactor2021",
     "approve": "backstop approve --configPath=backstop-settings.js",
     "approve:zar": "npm run approve -- --test=zar/all",
     "approve:zar:base": "npm run approve -- --test=zar/base",
@@ -138,6 +140,7 @@
     "approve:zon:teasers": "npm run approve -- --test=zon/teaser_gradients",
     "approve:zon:zplus": "npm run approve -- --test=zon/zplus",
     "approve:zon:authorbox": "npm run approve -- --test=zon/authorbox",
-    "approve:zon:rebrush2019": "npm run approve -- --test=zon/rebrush2019"
+    "approve:zon:rebrush2019": "npm run approve -- --test=zon/rebrush2019",
+    "approve:zon:refactor2021": "npm run approve -- --test=zon/refactor2021"
   }
 }
