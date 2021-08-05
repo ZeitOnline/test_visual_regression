@@ -1,6 +1,6 @@
 const scenarios = []
 const urls = [
-  'http://localhost:9090/zeit-online/hp-rebrush-2019/buzzboard',
+  'http://localhost:9090/zeit-online/hp-rebrush-2019/kpi',
   'http://localhost:9090/zeit-online/hp-rebrush-2019/index',
   'http://localhost:9090/zeit-online/hp-rebrush-2019/parquet',
   'http://localhost:9090/zeit-online/hp-rebrush-2019/printbox',

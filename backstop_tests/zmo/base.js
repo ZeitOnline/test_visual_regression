@@ -2,7 +2,7 @@ const scenarios = []
 const host = 'http://localhost:9090'
 
 const urls = [
-  '/zeit-magazin/buzz',
+  '/zeit-magazin/kpi',
   '/zeit-magazin/index',
   '/zeit-magazin/misc',
   '/zeit-magazin/teaser-card',

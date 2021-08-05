@@ -4,7 +4,6 @@ const urls = [
   'http://localhost:9090/zeit-online/advertorial-index',
   'http://localhost:9090/zeit-online/author-teaser',
   'http://localhost:9090/zeit-online/basic-teasers-setup',
-  'http://localhost:9090/zeit-online/buzz-box',
   'http://localhost:9090/zeit-online/check_teaser_comment_count',
   'http://localhost:9090/zeit-online/classic-teaser',
   'http://localhost:9090/zeit-online/dossier-teaser',
