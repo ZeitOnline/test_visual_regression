@@ -20,7 +20,6 @@
     "css",
     "phantomjs"
   ],
-  "dependencies": {},
   "devDependencies": {
     "backdrop": "0.0.3",
     "backstopjs": "^5.3.7",
@@ -28,7 +27,9 @@
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0"
+    "eslint-plugin-promise": "^5.1.0",
+    "glob": "^7.1.7",
+    "prettier": "^2.3.2"
   },
   "scripts": {
     "lint": "eslint backstop_tests/**/*.js",
