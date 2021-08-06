@@ -32,8 +32,9 @@
     "prettier": "^2.3.2"
   },
   "scripts": {
-    "lint": "eslint backstop_tests/**/*.js",
-    "lint-fix": "eslint --fix backstop_tests/**/*.js",
+    "eslint": "eslint backstop-settings.js scenarios --fix",
+    "prettier": "prettier --write backstop-settings.js scenarios",
+    "lint": "npm run eslint && npm run prettier",
     "reference": "backstop reference --configPath=backstop-settings.js",
     "reference:zar": "npm run reference -- --test=zar/all",
     "reference:zar:base": "npm run reference -- --test=zar/base",
