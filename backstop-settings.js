@@ -23,6 +23,7 @@ const scenarios = configFiles.reduce((accumulator, filename) => {
 
 function mergeDefaults(scenario) {
   const defaults = {
+    readyTimeout: 8000, // Timeout for readyEvent and readySelector (default: 60000ms)
     removeSelectors: ['#pDebug'],
     selectors: ['main'],
   };
@@ -38,7 +39,6 @@ module.exports = {
   onBeforeScript: false,
   onReadyScript: false,
   scenarios: scenarios.map(mergeDefaults),
-  // scenarios: [],
   paths: {
     bitmaps_reference: 'data/references',
     bitmaps_test: 'data/tests',
@@ -51,8 +51,8 @@ module.exports = {
   engineOptions: {
     args: ['--no-sandbox'],
   },
-  asyncCaptureLimit: 2,
-  asyncCompareLimit: 50,
+  asyncCaptureLimit: 1, // default: 10
+  asyncCompareLimit: 50, // default: 50
   debug: false,
   debugWindow: false,
 };
