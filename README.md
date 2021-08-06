@@ -70,7 +70,7 @@ If you are happy with the results after testing, you may promote the test screen
 
 `npm run approve`
 
-Example: `npm run approve`
+Example: `npm run approve -- --filter=zon-teaser-podcast-lead`
 
 ## Creating tests
 
