@@ -1,6 +1,6 @@
 const scenarios = [
   {
-    url: '/zeit-magazin/article/01',
+    url: '/zeit-magazin/article/simple',
     selectors: ['footer.main-footer'],
   },
 ];
