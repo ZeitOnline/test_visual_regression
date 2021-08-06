@@ -31,7 +31,6 @@ const urls = [
   '/zeit-online/article/feedback-in-article',
   '/zeit-online/article/fischer',
   '/zeit-online/article/image-column-width',
-  '/zeit-online/article/info-bonobo',
   '/zeit-online/article/infoboxartikel',
   '/zeit-online/article/infografix',
   '/zeit-online/article/infographic',

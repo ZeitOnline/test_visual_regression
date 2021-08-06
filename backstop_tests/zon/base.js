@@ -39,7 +39,6 @@ const urls = [
   'http://localhost:9090/zeit-online/teaser-gallery-setup',
   'http://localhost:9090/zeit-online/teaser-inhouse-setup',
   'http://localhost:9090/zeit-online/teaser-serie-setup',
-  'http://localhost:9090/zeit-online/teaser-shop',
   'http://localhost:9090/zeit-online/teaser-square-setup',
   'http://localhost:9090/zeit-online/thema',
   'http://localhost:9090/zeit-online/topic-teaser',
