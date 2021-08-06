@@ -8,6 +8,7 @@ const scenarios = [
   {
     url: '/zeit-magazin/article/volumeteaser',
     selectors: ['.volume-teaser'],
+    scrollToSelector: '.volume-teaser',
   },
 ];
 
