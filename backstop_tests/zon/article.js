@@ -48,7 +48,7 @@ const urls = [
   '/zeit-online/article/podcast',
   '/zeit-online/article/podcast-header',
   '/zeit-online/article/podcast-header-serie',
-  '/zeit-online/article/portraitbox_inline',
+  '/zeit-online/article/portraitbox',
   '/zeit-online/article/portraitbox_invalid',
   '/zeit-online/article/quiz',
   '/zeit-online/article/quotes',

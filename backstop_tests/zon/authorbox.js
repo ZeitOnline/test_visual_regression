@@ -4,7 +4,7 @@ const urls = [
     url: 'http://localhost:9090/zeit-online/article/authorbox',
     selectors: ['.portraitbox', '.authorbox']
   }, {
-    url: 'http://localhost:9090/zeit-online/article/portraitbox_inline',
+    url: 'http://localhost:9090/zeit-online/article/portraitbox',
     selectors: ['.portraitbox', '.authorbox']
   }, {
     url: 'http://localhost:9090/zeit-online/printbox',
