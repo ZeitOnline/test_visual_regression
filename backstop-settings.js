@@ -3,6 +3,20 @@ const scenarios = require( `./backstop_tests/${arguments.test}.js` );
 const beforeScript = `${arguments.before}.js`;
 const readyScript = `${arguments.ready}.js`;
 
+function sanitize_url( url ) {
+  return url.replace('http://localhost:9090/', '').replace(/\//g, '_');
+}
+
+function merge_defaults( scenario ) {
+  return {
+    label: sanitize_url(scenario.url),
+    removeSelectors: [
+      '#pDebug'
+    ],
+    ...scenario
+  };
+}
+
 module.exports = {
     "id": "",
     "viewports": [
@@ -24,7 +38,7 @@ module.exports = {
     ],
     "onBeforeScript": false,
     "onReadyScript": false,
-    "scenarios": scenarios,
+    "scenarios": scenarios.map( merge_defaults ),
     "paths": {
       "bitmaps_reference": "data/references",
       "bitmaps_test": "data/tests",
