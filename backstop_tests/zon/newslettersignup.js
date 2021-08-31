@@ -1,7 +1,7 @@
 const scenarios = []
 const urls = [
   'http://localhost:9090/zeit-online/article/newslettersignup',
-  'http://localhost:9090/zeit-online/hp-rebrush-2019/newslettersignup'
+  'http://localhost:9090/zeit-online/centerpage/newslettersignup'
 ]
 
 urls.forEach(url => {
