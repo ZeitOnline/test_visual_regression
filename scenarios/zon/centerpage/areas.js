@@ -1,7 +1,7 @@
 const scenarios = [
   {
     label: 'buzzbox',
-    url: '/zeit-online/hp-rebrush-2019/kpi',
+    url: '/zeit-online/centerpage/kpi',
     readySelector: '.kpi-accordion__button[aria-expanded]',
     delay: 200,
     selectors: ['main'],
@@ -9,12 +9,12 @@ const scenarios = [
   },
   {
     label: 'buzzboard',
-    url: '/zeit-online/hp-rebrush-2019/kpi',
+    url: '/zeit-online/centerpage/kpi',
     selectors: ['main'],
     viewports: ['tablet', 'desktop'],
   },
   {
-    url: '/zeit-online/hp-rebrush-2019/zon-teaser-lead',
+    url: '/zeit-online/centerpage/zon-teaser-lead',
     selectors: ['.cp-area--lead'],
   },
 ];
