@@ -42,7 +42,7 @@ module.exports = {
   paths: {
     bitmaps_reference: 'data/references',
     bitmaps_test: 'data/tests',
-    engine_scripts: 'backstop_data/engine_scripts',
+    engine_scripts: 'engine_scripts',
     html_report: 'backstop_data/html_report',
     ci_report: 'backstop_data/ci_report',
   },
