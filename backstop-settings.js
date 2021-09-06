@@ -51,7 +51,7 @@ module.exports = {
   id: '',
   viewports: viewports,
   onBeforeScript: false,
-  onReadyScript: false,
+  onReadyScript: "puppet/onReady.js",
   scenarios: [...scenarios, ...darkModeScenarios].map(mergeDefaults),
   paths: {
     bitmaps_reference: 'data/references',
