@@ -31,6 +31,8 @@ Resulting in the following directory tree:
 │   │   └── [...] —> Generated reference screenshots (how it should look like)
 │   ├── tests
 │   └── [...] —> Generated screenshots after testing (how it actually looks like)
+├── engine_scripts
+│   └── [...] -> scripts for engine (e.g. puppeteer) control
 ├── scenarios
 │   └── [...] —> Backstop test scenarios
 ├── utils
@@ -75,6 +77,30 @@ Example: `npm run approve -- --filter=zon-teaser-podcast-lead`
 ## Creating tests
 
 Test configs for BackstopJS can be setup using JSON files or JS modules, see [BackstopJS Docs](https://github.com/garris/BackstopJS).
+
+### Creating test scenarios for dark mode
+
+To generate test scenarios testing the dark theme, you can add an engine script to your test scenario as an `onBeforeScript` property. To prevent duplicate testing, it is required that you also add the `label` of `darkmode` to the scenario. For example:
+
+```js
+{
+  label: 'darkmode',
+  onBeforeScript: 'prefers-color-scheme-dark.js',
+  url: '/zeit-online/article/simple',
+  readySelector: '.nav__ressorts--fitted',
+  selectors: ['header.header'],
+  viewports: ['tablet', 'desktop'],
+  },
+```
+
+### Run all given test scenarios in darkmode
+By toggling `enhanceWithDarkMode` in `backstop-settings.js` to `true` (default: `true`), you can switch on/off the duplication of all tests for darkmode. If switched on however, manually added darkmode szenarion like the one above are omitted to avoid duplication.
+
+If you want to run darkmode tests seperately use the `darkmode` key word as filter, e.g.
+
+```sh
+npm run reference -- --filter=darkmode
+```
 
 ## Further reading
 - [BackstopJS ReadMe](https://github.com/garris/BackstopJS)
