@@ -31,6 +31,8 @@ Resulting in the following directory tree:
 │   │   └── [...] —> Generated reference screenshots (how it should look like)
 │   ├── tests
 │   └── [...] —> Generated screenshots after testing (how it actually looks like)
+├── engine_scripts
+│   └── [...] -> scripts for engine (e.g. puppeteer) control
 ├── scenarios
 │   └── [...] —> Backstop test scenarios
 ├── utils
@@ -75,6 +77,59 @@ Example: `npm run approve -- --filter=zon-teaser-podcast-lead`
 ## Creating tests
 
 Test configs for BackstopJS can be setup using JSON files or JS modules, see [BackstopJS Docs](https://github.com/garris/BackstopJS).
+
+### Creating test scenarios for dark mode
+
+To generate test scenarios testing the dark theme, you can add an engine script to your test scenario as an `onBeforeScript` property. To prevent duplicate testing, it is required that you also add the `label` of `darkmode` to the scenario. For example:
+
+```js
+{
+  label: 'darkmode',
+  onBeforeScript: 'prefers-color-scheme-dark.js',
+  url: '/zeit-online/article/simple',
+  readySelector: '.nav__ressorts--fitted',
+  selectors: ['header.header'],
+  viewports: ['tablet', 'desktop'],
+  },
+```
+
+### Run all given test scenarios in darkmode
+By toggling `enhanceWithDarkMode` in `backstop-settings.js` to `true` (default: `true`), you can switch on/off the duplication of all tests for darkmode. If switched on however, manually added darkmode szenarion like the one above are omitted to avoid duplication.
+
+If you want to run darkmode tests seperately use the `darkmode` key word as filter, e.g.
+
+```sh
+npm run reference -- --filter=darkmode
+```
+
+### Creating tests for hover effects
+The requirements to make working screenshots of hover effects are a bit challenging and poorly documented. To make this work the engine script `clickAndHoverHelper.js` needs to be used as an `onReadyScript`, which we do by default in the global `onReady.js`. Additionally the shot cannot be made by selecting a dom node on the page rather the `selectors` property needs to be set to `document`. For example:
+
+```js
+{
+  url: '/zeit-online/centerpage/zon-teaser-lead',
+  hoverSelectors: ['.zon-teaser-leadtopiclink'],
+  selectors: ['document'],
+},
+```
+
+### Screenshotting click events
+Testing for click events also need the engine script `clickAndHoverHelper.js` (supplied by default configuration). You can configure a test with a given list of `clickSelectors`. The trick here is to chose the correct `selector` to see the resulting action on the screenshot. For instance a click on a bookmark icon (if the user is not logged in) will result in a dialog in the middle of the viewport thus using `selectors: ['viewport']` is mandatory to _see_ the result. E.g.:
+
+```js
+{
+  url: '/zeit-online/centerpage/zon-teaser-standard',
+  clickSelectors: ['.bookmark-icon'],
+  selectors: ['viewport'],
+},
+```
+
+## Adding cookies, localstorage et al
+**Cookies** are described by JSON files (see `engine_scripts/cookies.json`). There is a Chrome extension „[クッキーJSONファイル出力 for Puppeteer](https://chrome.google.com/webstore/detail/クッキーjsonファイル出力-for-puppet/nmckokihipjgplolmcmjakknndddifde)” with which cookies can be exported from the browser in the correct format. Cookies can be loaded with the helper script `loadCookies.js` that can be loaded as `onBeforeScript`.
+
+You can write to **localstorage** likewise. There is an example puppeteer script in `engine_scripts/localstorage-darkmode-on.js`.
+
+For further possibilities see the example scripts in `engine_scripts` and/or refer to the [docs on running scripts](https://github.com/garris/BackstopJS#running-custom-scripts) and [the puppeteer api documentation](https://github.com/puppeteer/puppeteer/blob/v10.2.0/docs/api.md).
 
 ## Further reading
 - [BackstopJS ReadMe](https://github.com/garris/BackstopJS)

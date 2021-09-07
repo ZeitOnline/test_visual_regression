@@ -6,6 +6,8 @@ const viewports = [
   { label: 'tablet', width: 768, height: 1024 },
   { label: 'desktop', width: 1024, height: 768 },
 ];
+const darkModeScenarios = [];
+const enhanceWithDarkMode = true;
 
 const scenarios = configFiles.reduce((accumulator, filename) => {
   const thisConfig = require(filename);
@@ -33,18 +35,30 @@ function mergeDefaults(scenario) {
   return Object.assign({}, defaults, scenario);
 }
 
+if (enhanceWithDarkMode) {
+  scenarios.forEach(scenario => {
+    if (scenario.label.indexOf('darkmode') === -1) {
+        // needs deep copy of scenario
+        const darkScenario = Object.assign({}, scenario);
+        darkScenario.label += ' darkmode';
+        darkScenario.onBeforeScript = 'prefers-color-scheme-dark.js';
+        darkModeScenarios.push(darkScenario);
+    }
+  });
+}
+
 module.exports = {
   id: '',
   viewports: viewports,
   onBeforeScript: false,
-  onReadyScript: false,
-  scenarios: scenarios.map(mergeDefaults),
+  onReadyScript: "puppet/onReady.js",
+  scenarios: [...scenarios, ...darkModeScenarios].map(mergeDefaults),
   paths: {
     bitmaps_reference: 'data/references',
     bitmaps_test: 'data/tests',
-    engine_scripts: 'backstop_data/engine_scripts',
-    html_report: 'backstop_data/html_report',
-    ci_report: 'backstop_data/ci_report',
+    engine_scripts: 'engine_scripts',
+    html_report: 'data/html_report',
+    ci_report: 'data/ci_report',
   },
   report: ['browser'],
   engine: 'puppeteer',
