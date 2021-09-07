@@ -102,5 +102,27 @@ If you want to run darkmode tests seperately use the `darkmode` key word as filt
 npm run reference -- --filter=darkmode
 ```
 
+### Creating tests for hover effects
+The requirements to make working screenshots of hover effects are a bit challenging and poorly documented. To make this work the engine script `clickAndHoverHelper.js` needs to be used as an `onReadyScript`, which we do by default in the global `onReady.js`. Additionally the shot cannot be made by selecting a dom node on the page rather the `selectors` property needs to be set to `document`. For example:
+
+```js
+{
+  url: '/zeit-online/centerpage/zon-teaser-lead',
+  hoverSelectors: ['.zon-teaser-leadtopiclink'],
+  selectors: ['document'],
+},
+```
+
+### Screenshotting click events
+Testing for click events also need the engine script `clickAndHoverHelper.js` (supplied by default configuration). You can configure a test with a given list of `clickSelectors`. The trick here is to chose the correct `selector` to see the resulting action on the screenshot. For instance a click on a bookmark icon (if the user is not logged in) will result in a dialog in the middle of the viewport thus using `selectors: ['viewport']` is mandatory to _see_ the result. E.g.:
+
+```js
+{
+  url: '/zeit-online/centerpage/zon-teaser-standard',
+  clickSelectors: ['.bookmark-icon'],
+  selectors: ['viewport'],
+},
+```
+
 ## Further reading
 - [BackstopJS ReadMe](https://github.com/garris/BackstopJS)
