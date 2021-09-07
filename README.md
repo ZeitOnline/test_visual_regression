@@ -124,5 +124,12 @@ Testing for click events also need the engine script `clickAndHoverHelper.js` (s
 },
 ```
 
+## Adding cookies, localstorage et al
+**Cookies** are described by JSON files (see `engine_scripts/cookies.json`). There is a Chrome extension „[クッキーJSONファイル出力 for Puppeteer](https://chrome.google.com/webstore/detail/クッキーjsonファイル出力-for-puppet/nmckokihipjgplolmcmjakknndddifde)” with which cookies can be exported from the browser in the correct format. Cookies can be loaded with the helper script `loadCookies.js` that can be loaded as `onBeforeScript`.
+
+You can write to **localstorage** likewise. There is an example puppeteer script in `engine_scripts/localstorage-darkmode-on.js`.
+
+For further possibilities see the example scripts in `engine_scripts` and/or refer to the [docs on running scripts](https://github.com/garris/BackstopJS#running-custom-scripts) and [the puppeteer api documentation](https://github.com/puppeteer/puppeteer/blob/v10.2.0/docs/api.md).
+
 ## Further reading
 - [BackstopJS ReadMe](https://github.com/garris/BackstopJS)
