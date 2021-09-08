@@ -26,7 +26,7 @@ const scenarios = configFiles.reduce((accumulator, filename) => {
 function mergeDefaults(scenario) {
   const defaults = {
     readyTimeout: 8000, // Timeout for readyEvent and readySelector (default: 60000ms)
-    removeSelectors: ['#pDebug'],
+    removeSelectors: ['#pDebug', '.sticky-nav'],
     selectors: ['main'],
   };
 
