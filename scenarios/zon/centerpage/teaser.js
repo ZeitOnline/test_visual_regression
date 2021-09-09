@@ -29,6 +29,10 @@ const scenarios = [
     selectorExpansion: true,
     expect: 12
   },
+  {
+    url: '/zeit-online/centerpage/zon-teaser-classic-video',
+    selectors: ['.zon-teaser-classic'],
+  },
 ];
 
 module.exports = scenarios;
