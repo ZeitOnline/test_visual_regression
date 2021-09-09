@@ -1,4 +1,3 @@
-const waitTime = 6500;
 const scenarios = [
   {
     url: '/zeit-online/article/inline-gallery',
@@ -10,11 +9,9 @@ const scenarios = [
   },
   {
     url: '/zeit-online/article/volumeteaser',
-    selectors: ['.volume-teaser'],
+    selectors: ['.article'],
     scrollToSelector: '.volume-teaser',
-    onBeforeScript: 'intercept-image.js',
-    interceptImagePath: 'printcover.webp',
-    postInteractionWait: waitTime,
+    postInteractionWait: 7000,
   },
 ];
 
