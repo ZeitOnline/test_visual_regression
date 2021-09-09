@@ -7,7 +7,7 @@ const viewports = [
   { label: 'desktop', width: 1024, height: 768 },
 ];
 const darkModeScenarios = [];
-const enhanceWithDarkMode = true;
+const enhanceWithDarkMode = false;
 
 const scenarios = configFiles.reduce((accumulator, filename) => {
   const thisConfig = require(filename);
