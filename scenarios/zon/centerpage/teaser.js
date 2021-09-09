@@ -19,6 +19,10 @@ const scenarios = [
     url: '/zeit-online/centerpage/zon-teaser-podcast-lead',
     selectors: ['.teaser-podcast-lead'],
   },
+  {
+    url: '/zeit-online/centerpage/index-with-classic',
+    selectors: ['.zon-teaser-classic'],
+  },
 ];
 
 module.exports = scenarios;
