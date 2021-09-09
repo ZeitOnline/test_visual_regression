@@ -1,9 +1,5 @@
 const scenarios = [
   {
-    url: '/zeit-online/centerpage/zon-teaser-standard',
-    selectors: ['.zon-teaser-standard'],
-  },
-  {
     url: '/zeit-online/centerpage/zon-teaser-wide',
     selectors: ['.zon-teaser-wide'],
   },
@@ -32,6 +28,20 @@ const scenarios = [
   {
     url: '/zeit-online/centerpage/zon-teaser-classic-video',
     selectors: ['.zon-teaser-classic'],
+  },
+  {
+    url: '/zeit-online/centerpage/zon-teaser-column',
+    selectors: ['.zon-teaser-classic'],
+    selectorExpansion: true,
+    expect: 12
+  },
+  {
+    url: '/zeit-online/centerpage/zon-teaser-standard',
+    selectors: ['.zon-teaser-standard'],
+    selectorExpansion: true,
+    expect: 26,
+    onBeforeScript: 'intercept-image.js',
+    interceptImagePath: 'imageStub.jpg',
   },
 ];
 
