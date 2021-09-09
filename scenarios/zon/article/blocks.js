@@ -5,13 +5,13 @@ const scenarios = [
     scrollToSelector: '.gallery',
     onBeforeScript: 'intercept-image.js',
     interceptImagePath: 'gallery-image.jpg',
-    postInteractionWait: 0,
   },
   {
     url: '/zeit-online/article/volumeteaser',
-    selectors: ['.article'],
+    selectors: ['.volume-teaser'],
     scrollToSelector: '.volume-teaser',
-    postInteractionWait: 7000,
+    onBeforeScript: 'intercept-image.js',
+    interceptImagePath: 'printcover.webp',
   },
 ];
 
