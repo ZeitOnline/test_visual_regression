@@ -23,6 +23,12 @@ const scenarios = [
     url: '/zeit-online/centerpage/index-with-classic',
     selectors: ['.zon-teaser-classic'],
   },
+  {
+    url: '/zeit-online/centerpage/zon-teaser-classic',
+    selectors: ['.zon-teaser-classic'],
+    selectorExpansion: true,
+    expect: 12
+  },
 ];
 
 module.exports = scenarios;
