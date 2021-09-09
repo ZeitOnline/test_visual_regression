@@ -9,7 +9,7 @@ module.exports = async (page, scenario) => {
   const IMAGE_DATA_BUFFER = fs.readFileSync(IMAGE_STUB_URL);
   console.log('intercept image', IMAGE_STUB_URL);
   const intercept = async request => {
-    if (IMAGE_URL_RE.test(request.url())) {
+    if (IMAGE_URL_RE.test(request.url()) || request.resourceType() === 'image') {
       await request.respond({
         body: IMAGE_DATA_BUFFER,
         headers: HEADERS_STUB,
