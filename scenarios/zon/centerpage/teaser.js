@@ -6,6 +6,8 @@ const scenarios = [
   {
     url: '/zeit-online/centerpage/zon-teaser-poster',
     selectors: ['.zon-teaser-poster'],
+    selectorExpansion: true,
+    expect: 4,
   },
   {
     label: 'podcast',
