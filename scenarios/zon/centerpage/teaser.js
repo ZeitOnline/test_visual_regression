@@ -43,6 +43,13 @@ const scenarios = [
     onBeforeScript: 'intercept-image.js',
     interceptImagePath: 'imageStub.jpg',
   },
+  {
+    url: '/zeit-online/centerpage/zon-teaser-flat',
+    selectors: ['article[class^="zon-teaser-flat"]'],
+    selectorExpansion: true,
+    expect: 10,
+    postInteractionWait: 1000,
+  },
 ];
 
 module.exports = scenarios;
