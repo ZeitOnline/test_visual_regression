@@ -91,6 +91,10 @@ const scenarios = [
     selectorExpansion: true,
     expect: 18,
   },
+  {
+    url: '/zeit-online/centerpage/joblisting',
+    selectors: ['.joblisting'],
+  },
 ];
 
 module.exports = scenarios;
