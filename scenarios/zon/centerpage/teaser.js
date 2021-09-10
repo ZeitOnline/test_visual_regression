@@ -103,7 +103,13 @@ const scenarios = [
   {
     url: '/zeit-online/centerpage/joblisting',
     selectors: ['.joblisting'],
-  }
+  },
+  {
+    url: '/zeit-online/centerpage/newslettersignup',
+    selectors: ['.newsletter-signup'],
+    selectorExpansion: true,
+    expect: 8,
+  },
 ];
 
 module.exports = scenarios;

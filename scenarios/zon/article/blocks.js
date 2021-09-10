@@ -13,6 +13,12 @@ const scenarios = [
     onBeforeScript: 'intercept-image.js',
     interceptImagePath: 'printcover.webp',
   },
+  {
+    url: '/zeit-online/article/newslettersignup',
+    selectors: ['.newsletter-signup'],
+    selectorExpansion: true,
+    expect: 3,
+  },
 ];
 
 module.exports = scenarios;
