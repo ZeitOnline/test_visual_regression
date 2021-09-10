@@ -20,6 +20,8 @@ const scenarios = [
     selectors: ['.teaser-quote'],
     selectorExpansion: true,
     expect: 4,
+    onBeforeScript: 'intercept-image.js',
+    interceptImagePath: 'images/julia-zange.webp',
   },
   {
     url: '/arbeit/centerpage/teasers',

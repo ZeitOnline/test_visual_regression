@@ -23,6 +23,12 @@ const scenarios = [
     url: '/campus/centerpage/teaser-debate',
     selectors: ['.teaser-debate'],
   },
+  {
+    url: '/campus/centerpage/teaser-follow-us',
+    selectors: ['.teaser-follow-us'],
+    onBeforeScript: 'intercept-image.js',
+    interceptImagePath: 'images/zco_cover.webp',
+  },
 ];
 
 module.exports = scenarios;
