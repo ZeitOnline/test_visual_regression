@@ -50,6 +50,14 @@ const scenarios = [
     expect: 10,
     postInteractionWait: 1000,
   },
+  {
+    url: '/zeit-online/centerpage/zon-teaser-gallery',
+    selectors: ['article'],
+    selectorExpansion: true,
+    expect: 6,
+    onBeforeScript: 'intercept-image.js',
+    interceptImagePath: 'imageStub.jpg',
+  },
 ];
 
 module.exports = scenarios;
