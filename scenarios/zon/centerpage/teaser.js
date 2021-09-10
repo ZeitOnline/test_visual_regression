@@ -82,6 +82,15 @@ const scenarios = [
     url: '/zeit-online/centerpage/zon-teaser-panorama',
     selectors: ['.zon-teaser-panorama'],
   },
+  {
+    url: '/zeit-online/centerpage/zon-teaser-snapshot',
+  },
+  {
+    url: '/zeit-online/centerpage/zon-teaser-square',
+    selectors: ['.zon-teaser-square'],
+    selectorExpansion: true,
+    expect: 18,
+  },
 ];
 
 module.exports = scenarios;
