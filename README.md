@@ -114,7 +114,7 @@ The requirements to make working screenshots of hover effects are a bit challeng
 ```
 
 ### Screenshotting click events
-Testing for click events also need the engine script `clickAndHoverHelper.js` (supplied by default configuration). You can configure a test with a given list of `clickSelectors`. The trick here is to chose the correct `selector` to see the resulting action on the screenshot. For instance a click on a bookmark icon (if the user is not logged in) will result in a dialog in the middle of the viewport thus using `selectors: ['viewport']` is mandatory to _see_ the result. E.g.:
+Testing for click events also need the engine script `clickAndHoverHelper.js` (supplied by default configuration). You can configure a test with a given list of `clickSelectors`. The trick here is to choose the correct `selector` to see the resulting action on the screenshot. For instance a click on a bookmark icon (if the user is not logged in) will result in a dialog in the middle of the viewport thus using `selectors: ['viewport']` is mandatory to _see_ the result. E.g.:
 
 ```js
 {
