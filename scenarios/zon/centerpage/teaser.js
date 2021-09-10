@@ -91,6 +91,13 @@ const scenarios = [
     selectorExpansion: true,
     expect: 18,
   },
+  {
+    url: '/zeit-online/centerpage/zon-teaser-upright',
+    selectors: ['.zon-teaser-upright'],
+    readySelector: '.zon-teaser-upright img',
+    selectorExpansion: true,
+    expect: 8,
+  },
 ];
 
 module.exports = scenarios;
