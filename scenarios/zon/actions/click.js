@@ -23,6 +23,16 @@ const scenarios = [
     selectors: ['viewport'],
     viewports: ['tablet', 'desktop'],
   },
+  {
+    label: 'click-fotostrecken',
+    url: '/zeit-online/centerpage/index',
+    postInteractionWait: 1000,
+    scrollToSelector: '.cp-area--headed-gallery',
+    readySelector: '.js-bar-teaser-paginate',
+    clickSelectors: ['.js-bar-teaser-paginate'],
+    selectors: ['viewport'],
+    viewports: ['tablet', 'desktop'],
+  }
 ];
 
 module.exports = scenarios;
