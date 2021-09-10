@@ -6,6 +6,14 @@ const scenarios = [
     selectors: ['viewport'],
   },
   {
+    label: 'click-hamburger',
+    url: '/zeit-online/centerpage/zon-teaser-snapshot',
+    clickSelectors: ['.header__menu-link'],
+    postInteractionWait: 2000,
+    selectors: ['viewport'],
+    viewports: ['mobile'],
+  },
+  {
     label: 'click-bildrechte',
     url: '/zeit-online/centerpage/zon-teaser-snapshot',
     scrollToSelector: '.footer',
