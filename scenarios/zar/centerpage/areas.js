@@ -8,6 +8,10 @@ const scenarios = [
     selectors: ['main'],
     hoverSelectors: ['.teaser-topiccluster__heading-link'],
   },
+  {
+    url: '/arbeit/centerpage/thema-automatic',
+    selectors: ['.cp-region--has-headerimage'],
+  },
 ];
 
 module.exports = scenarios;
