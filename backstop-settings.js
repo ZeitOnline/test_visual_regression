@@ -30,7 +30,7 @@ function mergeDefaults(scenario) {
     selectors: ['main'],
   };
 
-  scenario.url = 'http://localhost:9090/' + scenario.url;
+  scenario.url = 'http://localhost:9090' + scenario.url;
 
   return Object.assign({}, defaults, scenario);
 }
