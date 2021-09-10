@@ -9,7 +9,7 @@ const scenarios = [
     hoverSelectors: ['.teaser-topiccluster__heading-link'],
   },
   {
-    url: '/arbeit/centerpage/thema-automatic',
+    url: '/arbeit/centerpage/thema-minimal',
     selectors: ['.cp-region--has-headerimage'],
   },
 ];
