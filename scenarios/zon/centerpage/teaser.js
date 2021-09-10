@@ -67,6 +67,10 @@ const scenarios = [
     onBeforeScript: 'intercept-image.js',
     interceptImagePath: 'imageStub.jpg',
   },
+  {
+    url: '/zeit-online/centerpage/zon-teaser-panorama',
+    selectors: ['.zon-teaser-panorama'],
+  },
 ];
 
 module.exports = scenarios;
