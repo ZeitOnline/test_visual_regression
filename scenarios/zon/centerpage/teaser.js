@@ -8,12 +8,21 @@ const scenarios = [
     selectors: ['.zon-teaser-poster'],
   },
   {
+    label: 'podcast',
     url: '/zeit-online/centerpage/zon-teaser-podcast',
     selectors: ['.zon-teaser-standard--podcast'],
   },
   {
+    label: 'podcast',
     url: '/zeit-online/centerpage/zon-teaser-podcast-lead',
     selectors: ['.teaser-podcast-lead'],
+  },
+  {
+    label: 'podcast',
+    url: '/zeit-online/centerpage/zon-teaser-podcast-variants',
+    selectors: ['article[class*="podcast"]'],
+    selectorExpansion: true,
+    expect: 15
   },
   {
     url: '/zeit-online/centerpage/index-with-classic',
