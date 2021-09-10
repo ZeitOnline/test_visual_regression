@@ -58,6 +58,15 @@ const scenarios = [
     onBeforeScript: 'intercept-image.js',
     interceptImagePath: 'imageStub.jpg',
   },
+  {
+    label: 'region-lead',
+    url: '/zeit-online/centerpage/zon-teaser-lead',
+    selectors: ['.cp-region--lead'],
+    selectorExpansion: true,
+    expect: 5,
+    onBeforeScript: 'intercept-image.js',
+    interceptImagePath: 'imageStub.jpg',
+  },
 ];
 
 module.exports = scenarios;
