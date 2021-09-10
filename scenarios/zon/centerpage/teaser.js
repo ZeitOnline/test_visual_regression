@@ -2,6 +2,8 @@ const scenarios = [
   {
     url: '/zeit-online/centerpage/zon-teaser-wide',
     selectors: ['.zon-teaser-wide'],
+    selectorExpansion: true,
+    expect: 7
   },
   {
     url: '/zeit-online/centerpage/zon-teaser-poster',
