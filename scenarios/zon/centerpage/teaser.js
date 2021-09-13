@@ -44,9 +44,7 @@ const scenarios = [
   },
   {
     url: '/zeit-online/centerpage/zon-teaser-column',
-    selectors: ['.zon-teaser-classic'],
-    selectorExpansion: true,
-    expect: 12
+    selectors: ['.zon-teaser-poster', '.zon-teaser-classic', '.zon-teaser-lead', '.zon-teaser-leadduotext'],
   },
   {
     url: '/zeit-online/centerpage/zon-teaser-standard',
