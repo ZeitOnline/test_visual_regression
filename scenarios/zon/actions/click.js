@@ -14,6 +14,14 @@ const scenarios = [
     viewports: ['mobile'],
   },
   {
+    label: 'click-hamburger-sticky',
+    url: '/zeit-online/centerpage/index',
+    postInteractionWait: 2000,
+    selectors: ['viewport'],
+    viewports: ['mobile'],
+    onReadyScript: "openStickyMenu.js",
+  },
+  {
     label: 'click-bildrechte',
     url: '/zeit-online/centerpage/zon-teaser-snapshot',
     scrollToSelector: '.footer',
