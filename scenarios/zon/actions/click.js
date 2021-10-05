@@ -40,6 +40,15 @@ const scenarios = [
     clickSelectors: ['.js-bar-teaser-paginate'],
     selectors: ['viewport'],
     viewports: ['tablet', 'desktop'],
+  },
+  {
+    label: 'click-topicheader',
+    url: '/thema/manualtopic',
+    postInteractionWait: 1000,
+    scrollToSelector: '.markup',
+    readySelector: '.markup__more',
+    clickSelectors: ['.markup__more'],
+    selectors: ['document'],
   }
 ];
 
