@@ -12,6 +12,10 @@ const scenarios = [
     url: '/arbeit/centerpage/thema-minimal',
     selectors: ['.cp-region--has-headerimage'],
   },
+  {
+    url: '/arbeit/centerpage/advertorial',
+    selectors: ['.cp-region--has-headerimage'],
+  },
 ];
 
 module.exports = scenarios;
