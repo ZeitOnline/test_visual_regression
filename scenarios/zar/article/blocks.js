@@ -8,7 +8,7 @@ const scenarios = [
     selectors: ['.profilebox'],
   },
   {
-    url: '/arbeit/article/all-blocks',
+    url: '/arbeit/article/authorbox',
     selectors: ['.authorbox'],
   },
   {
@@ -16,19 +16,19 @@ const scenarios = [
     selectors: ['.infobox'],
   },
   {
-    url: '/arbeit/article/all-blocks',
+    url: '/arbeit/article/newslettersignup',
     selectors: ['.newsletter-signup'],
   },
   {
-    url: '/arbeit/article/all-blocks',
+    url: '/arbeit/article/inline-gallery',
     selectors: ['.gallery'],
   },
   {
-    url: '/arbeit/article/all-blocks',
+    url: '/arbeit/article/quotes',
     selectors: ['.quote'],
   },
   {
-    url: '/arbeit/article/all-blocks',
+    url: '/arbeit/article/authorbox',
     selectors: ['.portraitbox'],
   },
   {
