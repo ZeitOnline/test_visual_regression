@@ -69,4 +69,5 @@ module.exports = {
   asyncCompareLimit: 50, // default: 50
   debug: false,
   debugWindow: false,
+  misMatchThreshold: 0,
 };
