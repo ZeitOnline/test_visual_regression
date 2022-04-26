@@ -20,17 +20,6 @@
     "css",
     "phantomjs"
   ],
-  "devDependencies": {
-    "backdrop": "0.0.3",
-    "backstopjs": "^5.3.7",
-    "eslint": "^7.32.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
-    "glob": "^7.1.7",
-    "prettier": "^2.3.2"
-  },
   "scripts": {
     "eslint": "eslint backstop-settings.js scenarios --fix",
     "prettier": "prettier --write backstop-settings.js scenarios",
@@ -40,5 +29,16 @@
     "reference:zon": "npm run reference -- --filter=zon::",
     "test": "backstop test --configPath=backstop-settings.js",
     "approve": "backstop approve --configPath=backstop-settings.js"
+  },
+  "devDependencies": {
+    "backdrop": "^0.0.3",
+    "backstopjs": "^6.0.4",
+    "eslint": "^8.14.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "glob": "^8.0.1",
+    "prettier": "^2.6.2"
   }
 }
