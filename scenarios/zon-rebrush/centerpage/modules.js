@@ -12,13 +12,13 @@ const scenarios = [
   {
     label: 'joblisting',
     url: '/zeit-online/centerpage/index',
-    selctors: ['.joblisting'],
+    selectors: ['.joblisting'],
     selectorExpansion: true,
   },
   {
   label: 'carousel',
   url: '/zeit-online/centerpage/headed-carousel',
-  selctors: ['.cp-area--headed-carousel'],
+  selectors: ['.cp-area--headed-carousel'],
   selectorExpansion: true,
 },
 {
