@@ -24,21 +24,21 @@ const scenarios = [
 {
 label: 'authorpage',
 url: '/autoren/j_random',
+selectors: ['.author-header'],
 },
 {
   label: 'markdown-long',
   url: '/serie/die-schaulustigen',
+  selectors: ['.cp-region'],
 },
 {
   label: 'markdown-short',
   url: '/serie/rice-and-shine',
+  selectors: ['.cp-region'],
 },{
   label: 'markdown-with-list',
+  selectors: ['.cp-region'],
   url: '/thema/manualtopic',
 },
-
 ];
-
-http://localhost:9090/autoren/j_random
-
 module.exports = scenarios;
