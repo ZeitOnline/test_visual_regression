@@ -1,113 +1,77 @@
 const scenarios = [
-  {
-    url: '/zeit-online/centerpage/zon-teaser-wide',
-    selectors: ['.zon-teaser-wide'],
-    selectorExpansion: true,
-    expect: 7
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-poster',
-    selectors: ['.zon-teaser-poster'],
-    selectorExpansion: true,
-    expect: 4,
-  },
-  {
-    label: 'podcast',
-    url: '/zeit-online/centerpage/zon-teaser-podcast',
-    selectors: ['.zon-teaser-standard--podcast'],
-  },
-  {
-    label: 'podcast',
-    url: '/zeit-online/centerpage/zon-teaser-podcast-lead',
-    selectors: ['.teaser-podcast-lead'],
-  },
-  {
-    label: 'podcast',
-    url: '/zeit-online/centerpage/zon-teaser-podcast-variants',
-    selectors: ['article[class*="podcast"]'],
-    selectorExpansion: true,
-    expect: 15
-  },
-  {
-    url: '/zeit-online/centerpage/index-with-classic',
-    selectors: ['.zon-teaser-classic'],
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-classic',
-    selectors: ['.zon-teaser-classic'],
-    selectorExpansion: true,
-    expect: 12
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-classic-video',
-    selectors: ['.zon-teaser-classic'],
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-column',
-    selectors: ['.zon-teaser-poster', '.zon-teaser-classic', '.zon-teaser-lead', '.zon-teaser-leadduotext'],
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-standard',
-    selectors: ['.zon-teaser-standard'],
-    selectorExpansion: true,
-    expect: 26,
-    onBeforeScript: 'intercept-image.js',
-    interceptImagePath: 'imageStub.jpg',
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-flat',
-    selectors: ['article[class^="zon-teaser-flat"]'],
-    selectorExpansion: true,
-    expect: 10,
-    postInteractionWait: 1000,
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-gallery',
-    selectors: ['article'],
-    selectorExpansion: true,
-    expect: 6,
-    onBeforeScript: 'intercept-image.js',
-    interceptImagePath: 'imageStub.jpg',
-  },
-  {
-    label: 'region-lead',
-    url: '/zeit-online/centerpage/zon-teaser-lead',
-    selectors: ['.cp-region--lead'],
-    selectorExpansion: true,
-    expect: 5,
-    onBeforeScript: 'intercept-image.js',
-    interceptImagePath: 'imageStub.jpg',
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-panorama',
-    selectors: ['.zon-teaser-panorama'],
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-snapshot',
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-square',
-    selectors: ['.zon-teaser-square'],
-    selectorExpansion: true,
-    expect: 18,
-  },
-  {
-    url: '/zeit-online/centerpage/zon-teaser-upright',
-    selectors: ['.zon-teaser-upright'],
-    readySelector: '.zon-teaser-upright img',
-    selectorExpansion: true,
-    expect: 8,
-  },
-  {
-    url: '/zeit-online/centerpage/joblisting',
-    selectors: ['.joblisting'],
-  },
-  {
-    url: '/zeit-online/centerpage/newslettersignup',
-    selectors: ['.newsletter-signup'],
-    selectorExpansion: true,
-    expect: 8,
-  },
+{
+  label: 'teaser-classic-video',
+  url: '/zeit-online/centerpage/zon-teaser-classic-video',
+},
+{
+  label: 'teaser-column',
+  url: '/zeit-online/centerpage/zon-teaser-column',
+},
+
+{
+  label: 'teaser-standard',
+  selectors: ['.zon-teaser--standard'],
+  url: '/zeit-online/centerpage/zon-teaser-standard',
+  selectorExpansion: true,
+},
+{
+  label: 'teaser-wide',
+  url: '/zeit-online/centerpage/zon-teaser-wide',
+  selectors: ['.zon-teaser--wide'],
+  selectorExpansion: true,
+},
+{
+  label: 'teaser-wide-panorama',
+  url: '/zeit-online/centerpage/zon-teaser-wide-panorama',
+},
+{
+  label: 'teaser-upright',
+  url: '/zeit-online/centerpage/zon-teaser-upright',
+  selectors: ['.zon-teaser--upright'],
+  selectorExpansion: true,
+},
+{
+  label: 'teaser-square',
+  url: '/zeit-online/centerpage/zon-teaser-square',
+  selectors: ['.zon-teaser--square'],
+  selectorExpansion: true,
+},
+{
+  label: 'teaser-poster',
+  url: '/zeit-online/centerpage/zon-teaser-poster',
+  selectors: ['.zon-teaser--poster'],
+  selectorExpansion: true,
+},
+{
+  label: 'teaser-poster-panorama',
+  url: '/zeit-online/centerpage/zon-teaser-poster-panorama',
+},
+{
+  label: 'teaser-lead',
+  url: '/zeit-online/centerpage/zon-teaser-lead',
+  selectors: ['.zon-teaser--lead'],
+  selectorExpansion: true,
+},
+{
+  label: 'teaser-podcast',
+  url: '/zeit-online/centerpage/zon-teaser-podcast-variants',
+},
+{
+  label: 'teaser-video',
+  url: '/zeit-online/centerpage/zon-teaser-video',
+},
+{
+  label: 'teaser-duo',
+  url: '/zeit-online/centerpage/duo-teaser-mix',
+  selectors: ['.cp-region--duo'],
+  selectorExpansion: true,
+},
+{
+  label: 'teaser-author',
+  url: '/zeit-online/author-teaser',
+  selectors: ['.zon-teaser--is-author'],
+  selectorExpansion: true,
+},
 ];
 
 module.exports = scenarios;
