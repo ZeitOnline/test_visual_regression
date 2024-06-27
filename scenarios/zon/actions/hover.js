@@ -1,16 +1,9 @@
 const scenarios = [
   {
-    label: 'hover-nav-more',
-    url: '/zeit-online/centerpage/zon-teaser-snapshot',
-    hoverSelectors: ['.nav__ressorts-item--more', '#more-ressorts .nav__ressorts-item--zeitmagazin'],
-    selectors: ['document'],
-    viewports: ['tablet', 'desktop'],
-  },
-  {
-    label: 'hover-classified-more',
-    url: '/zeit-online/centerpage/zon-teaser-snapshot',
-    hoverSelectors: ['.nav__classifieds-item--has-dropdown', '#mehr .nav__dropdown-item--urlaubsziele'],
-    selectors: ['document'],
+    label: 'hover-nav-buttons',
+    url: '/zeit-online/article/simple',
+    hoverSelectors: ['.navigation__button--account', '.navigation__subscription-link'],
+    selectors: ['.navigation'],
     viewports: ['tablet', 'desktop'],
   },
 ];
