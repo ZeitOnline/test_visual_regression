@@ -22,8 +22,9 @@
   ],
   "scripts": {
     "eslint": "eslint backstop-settings.js scenarios --fix",
+    "format": "prettier --write .",
     "prettier": "prettier --write backstop-settings.js scenarios",
-    "lint": "npm run eslint && npm run prettier",
+    "lint": "eslint .",
     "reference": "backstop reference --configPath=backstop-settings.js",
     "reference:zar": "npm run reference -- --filter=zar::",
     "reference:zon": "npm run reference -- --filter=zon::",
@@ -31,6 +32,8 @@
     "approve": "backstop approve --configPath=backstop-settings.js"
   },
   "devDependencies": {
+    "@zeitonline/eslint-config": "^0.5.1",
+    "@zeitonline/prettier-config": "^0.5.1",
     "backdrop": "^0.0.3",
     "backstopjs": "^6.3.23",
     "glob": "^8.0.1"
