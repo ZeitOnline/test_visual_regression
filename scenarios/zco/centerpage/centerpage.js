@@ -1,4 +1,3 @@
-const scenarios = [
-];
+const scenarios = [];
 
 module.exports = scenarios;

@@ -1,41 +1,41 @@
 {
-  "author": "Tobias Weiß, Hennes Römmer, Anna Mockenhaupt, Thomas Puppe",
-  "name": "test_visual_regression",
-  "license": "MIT",
-  "version": "1.0.0",
-  "description": "Testing visual regresion using PhantomCSS",
-  "main": "",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ZeitOnline/test_visual_regression.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ZeitOnline/test_visual_regression/issues"
-  },
-  "homepage": "https://github.com/ZeitOnline/test_visual_regression#readme",
-  "keywords": [
-    "testing",
-    "visual",
-    "regression",
-    "css",
-    "phantomjs"
-  ],
-  "scripts": {
-    "eslint": "eslint backstop-settings.js scenarios --fix",
-    "format": "prettier --write .",
-    "prettier": "prettier --write backstop-settings.js scenarios",
-    "lint": "eslint .",
-    "reference": "backstop reference --configPath=backstop-settings.js",
-    "reference:zar": "npm run reference -- --filter=zar::",
-    "reference:zon": "npm run reference -- --filter=zon::",
-    "test": "backstop test --configPath=backstop-settings.js",
-    "approve": "backstop approve --configPath=backstop-settings.js"
-  },
-  "devDependencies": {
-    "@zeitonline/eslint-config": "^0.5.1",
-    "@zeitonline/prettier-config": "^0.5.1",
-    "backdrop": "^0.0.3",
-    "backstopjs": "^6.3.23",
-    "glob": "^8.0.1"
-  }
+	"author": "Tobias Weiß, Hennes Römmer, Anna Mockenhaupt, Thomas Puppe",
+	"name": "test_visual_regression",
+	"license": "MIT",
+	"version": "1.0.0",
+	"description": "Testing visual regresion using PhantomCSS",
+	"main": "",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ZeitOnline/test_visual_regression.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ZeitOnline/test_visual_regression/issues"
+	},
+	"homepage": "https://github.com/ZeitOnline/test_visual_regression#readme",
+	"keywords": [
+		"testing",
+		"visual",
+		"regression",
+		"css",
+		"phantomjs"
+	],
+	"scripts": {
+		"eslint": "eslint backstop-settings.js scenarios --fix",
+		"format": "prettier --write .",
+		"prettier": "prettier --write backstop-settings.js scenarios",
+		"lint": "eslint .",
+		"reference": "backstop reference --configPath=backstop-settings.js",
+		"reference:zar": "npm run reference -- --filter=zar::",
+		"reference:zon": "npm run reference -- --filter=zon::",
+		"test": "backstop test --configPath=backstop-settings.js",
+		"approve": "backstop approve --configPath=backstop-settings.js"
+	},
+	"devDependencies": {
+		"@zeitonline/eslint-config": "^0.5.1",
+		"@zeitonline/prettier-config": "^0.5.1",
+		"backdrop": "^0.0.3",
+		"backstopjs": "^6.3.23",
+		"glob": "^8.0.1"
+	}
 }

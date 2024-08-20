@@ -8,8 +8,5 @@
  */
 
 module.exports = async page => {
-  await page.emulateMediaFeatures([
-    { name: 'prefers-color-scheme', value: 'dark' },
-  ]);
-
+	await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
 };

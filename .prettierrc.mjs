@@ -1,5 +1,5 @@
-import zonPrettierConfig from "@zeitonline/prettier-config";
+import zonPrettierConfig from '@zeitonline/prettier-config';
 
 export default {
-    ...zonPrettierConfig,
+	...zonPrettierConfig,
 };

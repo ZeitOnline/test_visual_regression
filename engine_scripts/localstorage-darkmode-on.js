@@ -9,12 +9,11 @@
  */
 
 module.exports = async (page, scenario) => {
-  console.log('SCENARIO > ' + scenario.label);
+	console.log('SCENARIO > ' + scenario.label);
 
-  await page.evaluateOnNewDocument(() => {
-    /*eslint-env browser*/
-    console.log('setting localstorage theme to dark');
-    localStorage.setItem('theme', 'dark');
-  });
-
+	await page.evaluateOnNewDocument(() => {
+		/*eslint-env browser*/
+		console.log('setting localstorage theme to dark');
+		localStorage.setItem('theme', 'dark');
+	});
 };
