@@ -32,11 +32,6 @@ const scenarios = [
     selectors: ['.debatebox-on-cp'],
   },
   {
-    url: '/arbeit/centerpage/joblisting',
-    selectors: ['.joblisting'],
-    readySelector: '.joblisting__list[data-go="out"]',
-  },
-  {
     url: '/arbeit/centerpage/newslettersignup',
     selectors: ['.newsletter-signup'],
     expect: 4,
