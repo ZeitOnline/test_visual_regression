@@ -1,13 +1,25 @@
-# @see: http://EditorConfig.org
+# Maintained in https://github.com/ZeitOnline/frontend-code-style/
+# Consider adding any changes there first.
 
-# top-most EditorConfig file
 root = true
 
-# Global styles
 [*]
 charset = utf-8
 end_of_line = lf
-indent_size = 2
-indent_style = space
+indent_size = 4
+indent_style = tab
 insert_final_newline = true
 trim_trailing_whitespace = true
+quote_type = single
+max_line_length = 100
+
+[*.{sass,scss,css}]
+quote_type = double
+
+[*.md]
+indent_size = 2
+trim_trailing_whitespace = false
+
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 2
