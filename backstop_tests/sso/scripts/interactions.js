@@ -1,4 +1,4 @@
-module.exports = function (casper, scenario, vp) {
+module.exports = function (casper, _scenario, _vp) {
   // Submit form
   casper.echo('Clicking Submitbtn')
   casper.click('input[type="submit"]')
