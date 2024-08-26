@@ -21,9 +21,7 @@
 		"phantomjs"
 	],
 	"scripts": {
-		"eslint": "eslint backstop-settings.js scenarios --fix",
-		"format": "prettier --write .",
-		"prettier": "prettier --write backstop-settings.js scenarios",
+		"format": "prettier --write . --log-level warn",
 		"lint": "eslint .",
 		"reference": "backstop reference --configPath=backstop-settings.js",
 		"reference:zar": "npm run reference -- --filter=zar::",
