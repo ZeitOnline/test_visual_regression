@@ -1,3 +1,5 @@
+/*eslint camelcase: ["error", {properties: "never"}]*/
+
 const glob = require('glob');
 const pattern = './scenarios/**/*.js';
 const configFiles = glob.sync(pattern);
