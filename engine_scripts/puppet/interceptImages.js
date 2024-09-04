@@ -21,17 +21,17 @@ const IMAGE_DATA_BUFFER = fs.readFileSync(IMAGE_STUB_URL);
 const HEADERS_STUB = {};
 
 module.exports = async function (page) {
-  const intercept = async request => {
-    if (IMAGE_URL_RE.test(request.url())) {
-      await request.respond({
-        body: IMAGE_DATA_BUFFER,
-        headers: HEADERS_STUB,
-        status: 200
-      });
-    } else {
-      request.continue();
-    }
-  };
-  await page.setRequestInterception(true);
-  page.on('request', intercept);
+	const intercept = async request => {
+		if (IMAGE_URL_RE.test(request.url())) {
+			await request.respond({
+				body: IMAGE_DATA_BUFFER,
+				headers: HEADERS_STUB,
+				status: 200,
+			});
+		} else {
+			request.continue();
+		}
+	};
+	await page.setRequestInterception(true);
+	page.on('request', intercept);
 };

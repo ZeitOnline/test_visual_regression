@@ -1,13 +1,15 @@
 # Visual Regression Testing with [BackstopJS](https://github.com/garris/BackstopJS)
 
 ## General
+
 The visual regression process contains three steps:
-- ### reference
-  - generate the ideal result (how it should look) in order to compare the test result to this one later on.
-- ### test
-  - generate the real result (how it actually looks) to compare this one to the reference.
-- ### approve
-  - when the test is fine and the references shall be updated, you may approve them.
+
+-   ### reference
+    -   generate the ideal result (how it should look) in order to compare the test result to this one later on.
+-   ### test
+    -   generate the real result (how it actually looks) to compare this one to the reference.
+-   ### approve
+    -   when the test is fine and the references shall be updated, you may approve them.
 
 ## Prerequisites
 
@@ -47,10 +49,9 @@ Resulting in the following directory tree:
 
 ## Running tests
 
-
 #### 1. If no reference screenshots are available
 
-Generate a reference you want to test against later on. This will create screenshots of all pages/elements, optionally filtered by label. Pass a ``--filter=<scenarioLabelRegex>`` argument to just run scenarios matching your scenario label.
+Generate a reference you want to test against later on. This will create screenshots of all pages/elements, optionally filtered by label. Pass a `--filter=<scenarioLabelRegex>` argument to just run scenarios matching your scenario label.
 
 `npm run reference`
 
@@ -94,6 +95,7 @@ To generate test scenarios testing the dark theme, you can add an engine script 
 ```
 
 ### Run all given test scenarios in darkmode
+
 By toggling `enhanceWithDarkMode` in `backstop-settings.js` to `true` (default: `true`), you can switch on/off the duplication of all tests for darkmode. If switched on however, manually added darkmode szenarion like the one above are omitted to avoid duplication.
 
 If you want to run darkmode tests seperately use the `darkmode` key word as filter, e.g.
@@ -103,6 +105,7 @@ npm run reference -- --filter=darkmode
 ```
 
 ### Creating tests for hover effects
+
 The requirements to make working screenshots of hover effects are a bit challenging and poorly documented. To make this work the engine script `clickAndHoverHelper.js` needs to be used as an `onReadyScript`, which we do by default in the global `onReady.js`. Additionally the shot cannot be made by selecting a dom node on the page rather the `selectors` property needs to be set to `document`. For example:
 
 ```js
@@ -114,6 +117,7 @@ The requirements to make working screenshots of hover effects are a bit challeng
 ```
 
 ### Screenshotting click events
+
 Testing for click events also need the engine script `clickAndHoverHelper.js` (supplied by default configuration). You can configure a test with a given list of `clickSelectors`. The trick here is to choose the correct `selector` to see the resulting action on the screenshot. For instance a click on a bookmark icon (if the user is not logged in) will result in a dialog in the middle of the viewport thus using `selectors: ['viewport']` is mandatory to _see_ the result. E.g.:
 
 ```js
@@ -125,6 +129,7 @@ Testing for click events also need the engine script `clickAndHoverHelper.js` (s
 ```
 
 ## Adding cookies, localstorage et al
+
 **Cookies** are described by JSON files (see `engine_scripts/cookies.json`). There is a Chrome extension „[クッキーJSONファイル出力 for Puppeteer](https://chrome.google.com/webstore/detail/クッキーjsonファイル出力-for-puppet/nmckokihipjgplolmcmjakknndddifde)” with which cookies can be exported from the browser in the correct format. Cookies can be loaded with the helper script `loadCookies.js` that can be loaded as `onBeforeScript`.
 
 You can write to **localstorage** likewise. There is an example puppeteer script in `engine_scripts/localstorage-darkmode-on.js`.
@@ -132,4 +137,5 @@ You can write to **localstorage** likewise. There is an example puppeteer script
 For further possibilities see the example scripts in `engine_scripts` and/or refer to the [docs on running scripts](https://github.com/garris/BackstopJS#running-custom-scripts) and [the puppeteer api documentation](https://github.com/puppeteer/puppeteer/blob/v10.2.0/docs/api.md).
 
 ## Further reading
-- [BackstopJS ReadMe](https://github.com/garris/BackstopJS)
+
+-   [BackstopJS ReadMe](https://github.com/garris/BackstopJS)
