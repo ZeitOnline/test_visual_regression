@@ -24,7 +24,7 @@
 		"format": "prettier --write . --log-level warn",
 		"lint": "eslint .",
 		"reference": "backstop reference --configPath=backstop-settings.js",
-		"reference:zar": "npm run reference -- --filter=zar::",
+		"reference:zco": "npm run reference -- --filter=zco::",
 		"reference:zon": "npm run reference -- --filter=zon::",
 		"test": "backstop test --configPath=backstop-settings.js",
 		"approve": "backstop approve --configPath=backstop-settings.js"
