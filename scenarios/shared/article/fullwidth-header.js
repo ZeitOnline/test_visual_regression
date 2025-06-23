@@ -1,37 +1,5 @@
 const scenarios = [
 	{
-		url: '/arbeit/article/header-fullwidth-alternative',
-		selectors: ['viewport'],
-	},
-	{
-		url: '/arbeit/article/header-fullwidth-classic',
-		selectors: ['viewport'],
-	},
-	{
-		url: '/arbeit/article/header-fullwidth-no-image',
-		selectors: ['viewport'],
-	},
-	{
-		url: '/arbeit/article/header-fullwidth-split',
-		selectors: ['viewport'],
-	},
-	{
-		url: '/campus/article/header-fullwidth-alternative',
-		selectors: ['viewport'],
-	},
-	{
-		url: '/campus/article/header-fullwidth-classic',
-		selectors: ['viewport'],
-	},
-	{
-		url: '/campus/article/header-fullwidth-no-image',
-		selectors: ['viewport'],
-	},
-	{
-		url: '/campus/article/header-fullwidth-split',
-		selectors: ['viewport'],
-	},
-	{
 		url: '/zeit-magazin/article/header-fullwidth-alternative',
 		selectors: ['viewport'],
 	},

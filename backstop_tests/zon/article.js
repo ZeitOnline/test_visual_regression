@@ -66,7 +66,6 @@ const urls = [
 	'/zeit-online/article/simple-nextread-liveblog',
 	'/zeit-online/article/simple-nextread-register',
 	'/zeit-online/article/simple-nextread-taglogo',
-	'/zeit-online/article/simple-nextread-zco',
 	'/zeit-online/article/simple-nextread-zett',
 	'/zeit-online/article/simple-nextread-zmo',
 	'/zeit-online/article/simple-nextread-zplus',
