@@ -27,7 +27,8 @@ module.exports = async (page, scenario) => {
 	}
 
 	if (postInteractionWait) {
-		await page.waitForTimeout(postInteractionWait);
+		const sleep = ms => new Promise(res => setTimeout(res, ms));
+		await sleep(postInteractionWait);
 	}
 
 	if (scrollToSelector) {
