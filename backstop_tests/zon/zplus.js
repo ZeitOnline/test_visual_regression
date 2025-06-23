@@ -6,10 +6,6 @@ const urls = [
 	'http://localhost:9090/zeit-online/article/01?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous',
 	// core:zplus-badge
 	'http://localhost:9090/zeit-magazin/article/header-default',
-	'http://localhost:9090/campus/article/common',
-	'http://localhost:9090/arbeit/article/01-digitale-nomaden',
-	// amp:zplus-badge
-	'http://localhost:9090/amp/campus/article/common',
 	// teaser zplus-badge ( red and grey)
 	'http://localhost:9090/zeit-online/teaser-square-setup',
 	// default card

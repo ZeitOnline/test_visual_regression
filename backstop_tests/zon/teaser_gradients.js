@@ -1,16 +1,12 @@
 const scenarios = [];
 const urls = [
 	'http://localhost:9090/index',
-	'http://localhost:9090/amp/campus/article/common',
-	'http://localhost:9090/arbeit/centerpage/advertorial',
 	'http://localhost:9090/zeit-online/storystream/articles/syriza-tsipras-parlamentswahl',
 	'http://localhost:9090/zeit-online/storystream-teaser',
 	'http://localhost:9090/zeit-online/storystream/dummy',
 	'http://localhost:9090/zeit-online/article/01',
 	'http://localhost:9090/zeit-online/author-teaser',
 	'http://localhost:9090/zeit-online/teaser-gallery-setup',
-	'http://localhost:9090/campus/centerpage/advertorial',
-	'http://localhost:9090/campus/article/flexible-toc',
 	'http://localhost:9090/zeit-online/dossier-teaser',
 	'http://localhost:9090/zeit-magazin/teaser-square-large',
 	'http://localhost:9090/zeit-magazin/index',
