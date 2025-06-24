@@ -5,7 +5,7 @@ const scenarios = [
 	},
 	{
 		label: 'studylisting',
-		url: '/campus/centerpage/joblisting',
+		url: '/zeit-online/centerpage/joblisting',
 		selectors: ['.studylisting'],
 		selectorExpansion: true,
 	},
