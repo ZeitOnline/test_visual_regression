@@ -8,7 +8,6 @@ const urls = [
 	'/zeit-magazin/teaser-card',
 	'/zeit-magazin/teaser-fullwidth',
 	'/zeit-magazin/teaser-landscape-large',
-	'/zeit-magazin/teaser-landscape-large-photo',
 	'/zeit-magazin/teaser-landscape-small',
 	'/zeit-magazin/teaser-mtb-square',
 	'/zeit-magazin/teaser-print-cover',

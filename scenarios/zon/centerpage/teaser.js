@@ -38,24 +38,12 @@ const scenarios = [
 		url: '/zeit-online/centerpage/zon-teaser-poster-panorama',
 	},
 	{
-		label: 'teaser-lead',
-		url: '/zeit-online/centerpage/zon-teaser-lead',
-		selectors: ['.zon-teaser--lead'],
-		selectorExpansion: true,
-	},
-	{
 		label: 'teaser-podcast',
 		url: '/zeit-online/centerpage/zon-teaser-podcast-variants',
 	},
 	{
 		label: 'teaser-video',
 		url: '/zeit-online/centerpage/zon-teaser-video',
-	},
-	{
-		label: 'teaser-duo',
-		url: '/zeit-online/centerpage/duo-teaser-mix',
-		selectors: ['.cp-region--duo'],
-		selectorExpansion: true,
 	},
 	{
 		label: 'teaser-author',

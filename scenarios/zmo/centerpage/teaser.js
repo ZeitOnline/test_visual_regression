@@ -12,10 +12,6 @@ const scenarios = [
 		selectors: ['.teaser-landscape-large'],
 	},
 	{
-		url: '/zeit-magazin/teaser-landscape-large-photo',
-		selectors: ['.teaser-landscape-large-photo'],
-	},
-	{
 		url: '/zeit-magazin/teaser-landscape-small',
 		selectors: ['.teaser-landscape-small'],
 	},

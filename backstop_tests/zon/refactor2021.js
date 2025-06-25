@@ -3,7 +3,6 @@ const urls = [
 	'http://localhost:9090/zeit-online/centerpage/kpi',
 	'http://localhost:9090/zeit-online/centerpage/zon-teaser-gallery',
 	'http://localhost:9090/zeit-online/centerpage/zon-teaser-gallery-variants',
-	'http://localhost:9090/zeit-online/centerpage/zon-teaser-lead',
 	'http://localhost:9090/zeit-online/centerpage/zon-teaser-panorama',
 	'http://localhost:9090/zeit-online/centerpage/zon-teaser-podcast',
 	'http://localhost:9090/zeit-online/centerpage/zon-teaser-podcast-lead',
