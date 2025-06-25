@@ -1,9 +1,5 @@
 const scenarios = [
 	{
-		label: 'teaser-classic-video',
-		url: '/zeit-online/centerpage/zon-teaser-classic-video',
-	},
-	{
 		label: 'teaser-column',
 		url: '/zeit-online/centerpage/zon-teaser-column',
 	},

@@ -1,8 +1,6 @@
 const scenarios = [];
 const urls = [
 	'http://localhost:9090/zeit-online/centerpage/kpi',
-	'http://localhost:9090/zeit-online/centerpage/zon-teaser-classic',
-	'http://localhost:9090/zeit-online/centerpage/zon-teaser-classic-video',
 	'http://localhost:9090/zeit-online/centerpage/zon-teaser-column',
 	'http://localhost:9090/zeit-online/centerpage/zon-teaser-gallery',
 	'http://localhost:9090/zeit-online/centerpage/zon-teaser-gallery-variants',

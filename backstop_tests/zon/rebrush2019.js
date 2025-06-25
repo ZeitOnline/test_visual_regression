@@ -16,10 +16,6 @@ const scenarios = [
 		selectors: ['main'],
 	},
 	{
-		url: 'http://localhost:9090/zeit-online/centerpage/zon-teaser-classic',
-		selectors: ['main'],
-	},
-	{
 		url: 'http://localhost:9090/zeit-online/centerpage/zon-teaser-column',
 		selectors: ['main'],
 	},
