@@ -1,10 +1,5 @@
 const scenarios = [
 	{
-		label: 'teaser-column',
-		url: '/zeit-online/centerpage/zon-teaser-column',
-	},
-
-	{
 		label: 'teaser-standard',
 		selectors: ['.zon-teaser--standard'],
 		url: '/zeit-online/centerpage/zon-teaser-standard',
