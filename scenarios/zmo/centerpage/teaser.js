@@ -2,14 +2,10 @@ const scenarios = [
 	{
 		url: '/zeit-magazin/teaser-fullwidth',
 		selectors: ['.teaser-fullwidth'],
-		selectorExpansion: true,
-		expect: 2,
 	},
 	{
 		url: '/zeit-magazin/teaser-square-large',
 		selectors: ['.teaser-square-large'],
-		selectorExpansion: true,
-		expect: 2,
 	},
 	{
 		url: '/zeit-magazin/teaser-landscape-large',

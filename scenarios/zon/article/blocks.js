@@ -17,7 +17,7 @@ const scenarios = [
 		url: '/zeit-online/article/newslettersignup',
 		selectors: ['.newsletter-signup'],
 		selectorExpansion: true,
-		expect: 3,
+		expect: 4,
 	},
 ];
 
